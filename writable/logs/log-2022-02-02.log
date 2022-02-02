@@ -1,0 +1,12 @@
+CRITICAL - 2022-02-02 16:34:21 --> The framework needs the following extension(s) installed and loaded: intl.
+#0 /var/www/html/system/CodeIgniter.php(219): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 /var/www/html/system/CodeIgniter.php(177): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 /var/www/html/system/bootstrap.php(146): CodeIgniter\CodeIgniter->initialize()
+#3 /var/www/html/public/index.php(28): require('/var/www/html/s...')
+#4 {main}
+CRITICAL - 2022-02-02 16:34:26 --> The framework needs the following extension(s) installed and loaded: intl.
+#0 /var/www/html/system/CodeIgniter.php(219): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 /var/www/html/system/CodeIgniter.php(177): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 /var/www/html/system/bootstrap.php(146): CodeIgniter\CodeIgniter->initialize()
+#3 /var/www/html/public/index.php(28): require('/var/www/html/s...')
+#4 {main}

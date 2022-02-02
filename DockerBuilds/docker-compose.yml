@@ -1,0 +1,35 @@
+version: '2.1'
+
+services:
+
+  celerophp:
+    build: ./php
+    ports:
+      - "80:80"
+    links:
+      - celerodb
+    container_name: celerophp
+    volumes:
+      - /Users/tcg/Documents/celero/celero4/CELERO/public:/var/www/html
+
+  celerodb:  
+    build:
+      context: ./db
+      args:
+        PASSWORD: password
+        USER: postgres
+    ports:
+      - "5432:5432"
+    volumes_from:
+      - celerodbdata
+    container_name: celerodb
+    environment:
+      POSTGRES_PASSWORD: password
+  
+  #No Linux, only data container
+  celerodbdata:  
+    image: cogniteev/echo
+    command: echo 'Data Container for PostgreSQL'
+    volumes:
+      - /Users/tcg/Documents/celero/celero4/CELERO/public:/var/lib/postgresql/data
+    container_name: celerodbdata

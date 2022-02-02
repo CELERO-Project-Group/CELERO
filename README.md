@@ -1,2 +1,1 @@
-# CELERO
-CELERO Project with Setup Files
+Celero new CI 4 integration project.
