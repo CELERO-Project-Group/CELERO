@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CELERO</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <!-- Loading Bootstrap -->
+  <link href="<?= asset_url('bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
+
+  <!-- Loading Flat UI -->
+  <link href="<?= asset_url('css/flat-ui.css'); ?>" rel="stylesheet">
+  <link href="<?= asset_url('css/custom.css'); ?>" rel="stylesheet">
+  <link href="<?= asset_url('css/selectize.css'); ?>" rel="stylesheet">
+  <link rel="stylesheet" href="<?= asset_url('css/font-awesome.min.css'); ?>">
+    <!--<link href="<?php // echo asset_url('css/jquery-ui-1.10.4.custom.css'); ?>" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <![endif]-->
+
+      <script src="<?= asset_url('js/jquery-1.10.2.min.js'); ?>"></script>
+      <script src="<?= asset_url('js/bootstrap.min.js'); ?>"></script>
+      <script type="text/javascript" src="<?= asset_url('is/jquery.easyui.min.js'); ?>"></script>
+      <?php   if($this->session->get_userdata('language')==null || $this->session->get_userdata('language')=='') { ?>
+        <script type="text/javascript" src="<?= asset_url('is/locale/easyui-lang-en.js'); ?>"></script>
+      <?php  }else if($this->session->get_userdata('language')=='turkish'){ ?>
+            <script type="text/javascript" src="<?= asset_url('is/locale/easyui-lang-tr.js'); ?>"></script>
+      <?php  }else { ?>
+            <script type="text/javascript" src="<?= asset_url('is/locale/easyui-lang-en.js'); ?>"></script>
+      <?php  } ?>
+      <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
+      <?php if($this->uri->segment(1)!="isscoping" and $this->uri->segment(1)!="isscopingauto"
+        and $this->uri->segment(1)!="isScopingAutoPrjBase"
+        and $this->uri->segment(1)!="isScopingAutoPrjBaseMDF"
+        and $this->uri->segment(1)!="isScopingPrjBaseMDF"
+        and $this->uri->segment(1)!="isScopingPrjBase"
+        and $this->uri->segment(1)!="scenarios"
+        and $this->uri->segment(1)!="cost_benefit"
+        and $this->uri->segment(1)!="kpi_calculation"): ?>
+        <script src="<?= asset_url('js/selectize.min.js'); ?>"></script>
+        <script type="text/javascript">
+          $(function() {
+            $('#selectize').selectize({
+              create: true,
+              sortField: 'text'
+            });
+          //$( "select" ).selectize();
+        });
+      </script>
+    <?php endif ?>
+  </head>
+  <body <?php /*if($this->uri->segment(1)=="isscoping" or $this->uri->segment(1)=="isscopingauto"){echo 'class="easyui-layout"';}*/ ?>>
+
+    <nav class="navbar navbar-default navbar-lg" style="margin-bottom:0px;">
+      <a class="navbar-brand" href="<?= base_url(); ?>" style="color:white;">CELERO</a>
+      <?= lang("msg_first_name"); ?>
+
+      <form class="navbar-form navbar-right" action="<?= base_url('search'); ?>" method="post" role="search" style="display: table;">
+        <div class="form-group">
+          <div class="input-group" style="display:block;">
+            <input name="term" class="form-control" id="navbarInput-01" type="search" placeholder="<?= lang("search"); ?>">
+            
+              <button type="submit" class="btn"><span style="color:black;" class="fui-search"></span></button>
+            
+          </div>
+        </div>
+      </form>
+      <!-- language selection moved to the footer
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href='<?= base_url('language/switch/turkish'); ?>' style="padding-right: 0px; padding-bottom:25px; "><img src="<?= asset_url('images/Turkey.png'); ?>"></a></li>
+        <li><a href='<?= base_url('language/switch/english'); ?>' style="padding-bottom: 25px;"><img src="<?= asset_url('images/United-States.png'); ?>"></a></li>
+      </ul>
+      -->
+      <ul class="nav navbar-nav navbar-left ust-nav">
+        <li class="navtus" data-rel="profiles"><a id="l1" href="#" ><i class="fa fa-group"></i> <?= lang("profiles"); ?></a></li>
+        <li class="navtus" data-rel="companies"><a id="l2" href="#" ><i class="fa fa-building-o"></i> <?= lang("companies"); ?></a></li>
+        <li class="navtus" data-rel="projects"><a id="l3" href="#" ><i class="fa fa-globe"></i> <?= lang("projects"); ?></a></li>
+        <li class="navtus" data-rel="analysis"><a id="l4" href="#" ><i class="fa fa-recycle"></i> <?= lang("analysis"); ?></a></li>
+        <!-- reporting ".not-active" atm, ".navtus" removed -->
+        <li data-rel="reporting"><a id="l5" href="#" class="not-active" title="Not available yet"><i class="fa fa-pie-chart"></i> <?= lang("reporting"); ?></a></li>
+        <li data-rel="help"><a id="l6" href="<?= base_url('help'); ?>"><i class="fa fa-question-circle"></i> <?= lang("help"); ?></a></li>
+      </ul>
+    </nav>
+
+    <div class="content-container" style="margin-bottom: 20px;display: block;height: 52px;">
+
+      <ul id="homies" class="nav navbar-nav alt-nav" style="display:none;">
+        <li><a href="#" class="nav-info"></a></li>
+        <li><a href="<?= base_url('contactus'); ?>"><i class="fa fa-envelope"></i> <?= lang("whoarewe"); ?></a></li>
+        <li><a href="<?= base_url('whatwedo'); ?>"><i class="fa fa-question-circle"></i> <?= lang("whatwedo"); ?></a></li>
+        <li><a href="<?= base_url('functionalities'); ?>"><i class="fa fa-dashboard"></i> <?= lang("functionalities"); ?></a></li>
+      </ul>
+
+      <ul id="profiles" class="nav navbar-nav alt-nav" style="display:none;">
+         <li><a href="#" class="nav-info"></a></li>
+        <li><a href="<?= base_url('users'); ?>"><i class="fa fa-group"></i> <?= lang("consultants"); ?></a></li>
+        <?php
+              //print_r($this->session->userdata('user_in'));
+        if (isset($_SESSION['user_in'])):
+          $tmp = $this->session->userdata('user_in');
+        ?>
+        <li class="head-li"><a href="<?= base_url('user/'.$tmp['username']); ?>" style="text-transform: capitalize;"><i class="fa fa-user"></i> <?= $tmp['username']; ?></a></li>
+        <li class="head-li"><a href="<?= base_url('profile_update'); ?>" ><i class="fa fa-pencil-square-o"></i> <?= lang("updateprofile"); ?></a></li>
+        <li class="head-li"><a href="<?= base_url('logout'); ?>"><i class="fa fa-sign-out"></i> <?= lang("logout"); ?></a></li>
+      <?php else: ?>
+        <li class="head-li"><a href="<?= base_url('login'); ?>"><i class="fa fa-sign-in"></i> <?= lang("login"); ?></a></li>
+        <li class="head-li"><a href="<?= base_url('register'); ?>"><i class="fa fa-plus"></i> <?= lang("register"); ?></a></li>
+      <?php endif ?>
+    </ul>
+
+    <ul id="companies" class="nav navbar-nav alt-nav" style="display:none;">
+         <li><a href="#" class="nav-info"></a></li>
+      <?php if (isset($_SESSION['user_in'])): ?>
+        <li><a href="<?= base_url('mycompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("mycompanies"); ?></a></li>
+        <?php if(isset($_SESSION['project_id'])): ?>
+          <li><a href="<?= base_url('projectcompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("projectcompanies"); ?></a></li>
+        <?php endif ?>
+      <?php endif ?>
+        <li><a href="<?= base_url('companies'); ?>"><i class="fa fa-building-o"></i> <?= lang("allcompanies"); ?></a></li>
+      <?php if (isset($_SESSION['user_in'])): ?>
+        <li class="head-li"><a href="<?= base_url('newcompany'); ?>"><i class="fa fa-plus-square"></i> <?= lang("createcompany"); ?></a></li>
+      <?php endif ?>
+    </ul>
+
+    <ul id="projects" class="nav navbar-nav alt-nav" style="display:none;">
+         <li><a href="#" class="nav-info"></a></li>
+      <?php if (isset($_SESSION['user_in'])): ?>
+        <li><a href="<?= base_url('myprojects'); ?>"><i class="fa fa-globe"></i> <?= lang("myprojects"); ?></a></li>
+      <?php endif ?>
+      <li><a href="<?= base_url('projects'); ?>"><i class="fa fa-globe"></i> <?= lang("allprojects"); ?></a></li>
+      <?php if (isset($_SESSION['user_in'])): ?>
+        <li><a href="<?= base_url('newproject'); ?>"><i class="fa fa-plus-circle"></i> <?= lang("createproject"); ?></a></li>
+      <?php endif ?>
+      <?php if(isset($_SESSION['project_id'])): ?>
+        <li class="pull-right"><a href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> <?= lang("closeproject"); ?></a></li>
+        <li class="pull-right"><a href="<?= base_url('project/'.$this->session->userdata('project_id')); ?>"><?= $this->session->userdata('project_name'); ?></a></li>
+      <?php endif ?>
+    </ul>
+
+    <ul id="analysis" class="nav navbar-nav alt-nav" style="display:none;">
+         <li><a href="#" class="nav-info"></a></li>
+      <?php if (isset($_SESSION['user_in'])): ?>
+        <?php if(isset($_SESSION['project_id'])): ?>
+          <li><a href="<?= base_url('cpscoping'); ?>"><i class="fa fa-recycle"></i> <?= lang("cpidentification"); ?></a></li>
+          <li>
+            <div class="dropdown">
+              <button class="btn-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="padding: 12px 0px; color:white;">
+                <i class="fa fa-exchange"></i> <?= lang("isidentification"); ?>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-inverse" role="menu" aria-labelledby="dropdownMenu1">
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingPrjBase'); ?>">Manual IS</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingAutoPrjBase'); ?>">Automated IS</a></li>-->
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingPrjBaseMDF'); ?>">Manual IS</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingAutoPrjBaseMDF'); ?>">Automated IS</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isscenarios'); ?>">IS Scenarios(Supervisors)</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isscenariosCns'); ?>">IS Scenarios(Consultants)</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="<?= base_url('cost_benefit'); ?>"><i class="fa fa-eur"></i> <?= lang("costbenefitanalysis"); ?></a></li>
+          <!--link to the ecotracking is ".not-active" atm -->
+          <li><a class="not-active" title="Not available yet"><i class="fa fa-area-chart"></i> <?= lang("ecotracking"); ?></a></li>
+          <!--link to the gis panel move to the last position and is ".not-active" atm -->
+          <li><a class="not-active" title="Not available yet"><i class="fa fa-globe"></i> <?= lang("gis"); ?></a></li>
+        <?php else: ?>
+          <li><a href="#"><?= lang("analysisinfo"); ?></a></li>
+          <!--<ul class="list-inline" style="margin:0px;">
+            <li class="head-li"><a href="<?= base_url('openproject'); ?>"><i class="fa fa-plus-square-o"></i> Open Project</a></li>
+          </ul> -->
+        <?php endif ?>
+      <?php else: ?>
+      <li><a href="#"><?= lang("analysisinfo2"); ?></a></li>
+      <?php endif ?>
+    </ul>
+
+    <ul id="reporting" class="nav navbar-nav alt-nav" style="display:none;">
+      <li><a href="#" class="nav-info"></a></li>
+      <?php if (isset($_SESSION['user_in'])): ?>
+      <li><a href="<?= base_url('createreport'); ?>"><i class="fa fa-globe"></i> <?= lang("createreport"); ?></a></li>
+      <?php endif ?>
+      <li><a href="<?= base_url('allreports'); ?>"><i class="fa fa-globe"></i> <?= lang("allreports"); ?></a></li>
+    </ul>
+
+
+  </div>
+  <div class="clearfix" style="margin-bottom: 10px;"></div>
+  <!-- <p style="font-size:14px; margin:0px;">
+    To use the extended features of this web site, please register.
+  </p> -->
+  <script type="text/javascript">
+
+  var project_durum = <?php if($this->session->userdata('project_id')){echo "true";}else{ echo "false";} ?>
+
+    $( document ).ready(function() {
+      var pathname = window.location.pathname;
+      console.log(pathname);
+      //alert(pathname);
+      if ((pathname.toLowerCase().indexOf("user") >= 0) || (pathname.toLowerCase().indexOf("profile") >= 0) || (pathname.toLowerCase().indexOf("login") >= 0) || (pathname.toLowerCase().indexOf("register") >= 0)){
+        $('#l1').css('background-color', '#C85A1F');
+        $('.content-container ul.nav').hide();
+        $('#profiles').fadeIn('slow');
+      }
+      else if ((pathname.toLowerCase().indexOf("company") >= 0) || (pathname.toLowerCase().indexOf("companies") >= 0) || (pathname.toLowerCase().indexOf("product") >= 0) || (pathname.toLowerCase().indexOf("flow") >= 0) || (pathname.toLowerCase().indexOf("component") >= 0) || (pathname.toLowerCase().indexOf("process") >= 0) || (pathname.toLowerCase().indexOf("equipment") >= 0)){
+        $('#l2').css('background-color', '#901F0F');
+        $('.content-container ul.nav').hide();
+        $('#companies').fadeIn('slow');
+      }
+      else if ((pathname.toLowerCase().indexOf("project") >= 0) && (project_durum==false)){
+        $('#l3').css('background-color', '#15474A');
+        $('.content-container ul.nav').hide();
+        $('#projects').fadeIn('slow');
+      }
+      else if ((pathname.toLowerCase().indexOf("myproject") >= 0) || (pathname.toLowerCase().indexOf("newproject") >= 0)|| (pathname.toLowerCase().indexOf("projects") >= 0)){
+        $('#l3').css('background-color', '#15474A');
+        $('.content-container ul.nav').hide();
+        $('#projects').fadeIn('slow');
+      }
+      else if ((pathname.toLowerCase().indexOf("report") >= 0) || (pathname.toLowerCase().indexOf("allreports") >= 0) ){
+        $('#l5').css('background-color', '#AE573E');
+        $('.content-container ul.nav').hide();
+        $('#reporting').fadeIn('slow');
+      }
+      else if ((pathname.toLowerCase().indexOf("cpscoping") >= 0) || (pathname.toLowerCase().indexOf("isscoping") >= 0) || (pathname.toLowerCase().indexOf("cost_benefit") >= 0) || (pathname.toLowerCase().indexOf("kpi_calculation") >= 0) || (pathname.toLowerCase().indexOf("ecotracking") >= 0) || (project_durum==true)){
+        $('#l4').css('background-color', '#84BFC3');
+        $('.content-container ul.nav').hide();
+        $('#analysis').fadeIn('slow');
+      }
+      else if ((pathname.toLowerCase().indexOf("help") >= 0)){
+        $('.content-container ul.nav').hide();
+        $('#homies').fadeIn('slow');
+      }
+      else {
+        $('.content-container ul.nav').hide();
+        $('#homies').fadeIn('slow');
+      }
+    });
+
+    $(".navtus").click(function(e) {
+      e.preventDefault();
+      $('.content-container ul.nav').hide();
+      $('#' + $(this).data('rel')).fadeIn('slow');
+      if($(this).data('rel') == "profiles"){
+        $('#l1').css('background-color', '#C85A1F');
+      }
+      else if($(this).data('rel') == "companies"){
+        $('#l2').css('background-color', '#901F0F');
+      }
+      else if($(this).data('rel') == "projects"){
+        $('#l3').css('background-color', '#15474A');
+      }
+      else if($(this).data('rel') == "analysis"){
+        $('#l4').css('background-color', '#84BFC3');
+      }
+      /* inactive atm
+      else if($(this).data('rel') == "reporting"){
+        $('#l5').css('background-color', '#AE573E');
+      }*/
+      $(this).siblings().find("a").css( "background-color", "#2D8B42" );
+    });
+  </script>
