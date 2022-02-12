@@ -154,7 +154,7 @@ class Cpscoping extends BaseController {
 			);
 			$this->cpscoping_model->set_cp_allocation($array_allocation);
 			$allocation_array = array(
-				'allocation_id' => $this->db->insert_id(),
+				'allocation_id' => $db->insert_id(),
 				'prjct_id' => $project_id,
 				'cmpny_id' => $company_id
 			);

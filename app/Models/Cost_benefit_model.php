@@ -8,25 +8,25 @@ class Cost_benefit_model extends Model
 
     public function __construct()
     {
-        $this->load->database();
+        $db = db_connect();
     }
 
     public function get_is_candidates()
     {
-        $this->db->select('allocation_id');
-        $this->db->from('t_cp_is_candidate');
-        $this->db->where('active', '1');
-        return $this->db->get()->result_array();
+        $db->select('allocation_id');
+        $db->from('t_cp_is_candidate');
+        $db->where('active', '1');
+        return $db->get()->result_array();
     }
 
     public function get_allocation_ids($allocation_id, $prjct_id, $cmpny_id)
     {
-        $this->db->select('id');
-        $this->db->from('t_cp_company_project');
-        $this->db->where('allocation_id', $allocation_id);
-        $this->db->where('prjct_id', $prjct_id);
-        $this->db->where('cmpny_id', $cmpny_id);
-        $query = $this->db->get()->row_array();
+        $db->select('id');
+        $db->from('t_cp_company_project');
+        $db->where('allocation_id', $allocation_id);
+        $db->where('prjct_id', $prjct_id);
+        $db->where('cmpny_id', $cmpny_id);
+        $query = $db->get()->row_array();
         if (!empty($query)) {
             return true;
         } else {
@@ -307,10 +307,10 @@ class Cost_benefit_model extends Model
 
             if ($flag) {
                 #from 't_costbenefit_temp'
-                $this->db->where('is_id', $id);
-                $this->db->update('t_costbenefit_temp', $data);
+                $db->where('is_id', $id);
+                $db->update('t_costbenefit_temp', $data);
             } else {
-                $this->db->insert('t_costbenefit_temp', $data);
+                $db->insert('t_costbenefit_temp', $data);
             }
         } else {
             $data = array(
@@ -450,10 +450,10 @@ class Cost_benefit_model extends Model
             );
             if ($flag) {
                 #from 't_costbenefit_temp'
-                $this->db->where('cp_id', $id);
-                $this->db->update('t_costbenefit_temp', $data);
+                $db->where('cp_id', $id);
+                $db->update('t_costbenefit_temp', $data);
             } else {
-                $this->db->insert('t_costbenefit_temp', $data);
+                $db->insert('t_costbenefit_temp', $data);
             }
         }
     }
@@ -461,10 +461,10 @@ class Cost_benefit_model extends Model
     public function is_cb_exist($id)
     {
         $where = "(t_costbenefit_temp.is_id='" . $id . "' or t_costbenefit_temp.cp_id='" . $id . "') ";
-        $this->db->select('*');
-        $this->db->from('t_costbenefit_temp');
-        $this->db->where($where);
-        $query = $this->db->get()->row_array();
+        $db->select('*');
+        $db->from('t_costbenefit_temp');
+        $db->where($where);
+        $query = $db->get()->row_array();
         if (!empty($query)) {
             return true;
         } else {

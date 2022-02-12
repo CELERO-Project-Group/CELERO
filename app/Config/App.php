@@ -36,7 +36,8 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $indexPage = 'index.php';
+    // tuna: removed because we are using mod_rewrite
+    public $indexPage = '';
 
     /**
      * --------------------------------------------------------------------------

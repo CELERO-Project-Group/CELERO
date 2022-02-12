@@ -7,25 +7,25 @@ class Search_model extends Model {
 
 	public function __construct()
 	{
-		$this->load->database();
+		$db = db_connect();
 	}
 
 	public function search_company($term){
-		$this->db->select('*');
-		$this->db->from('t_cmpny');
-		$this->db->like('name', $term); 
-		$this->db->or_like('description', $term);
-		$query = $this->db->get();
-		return $query->result_array();
+		$db->select('*');
+		$db->from('t_cmpny');
+		$db->like('name', $term); 
+		$db->or_like('description', $term);
+		$query = $db->get();
+		return $$query->getResultArray();
 	}
 
 	public function search_project($term){
-		$this->db->select('*');
-		$this->db->from('t_prj');
-		$this->db->like('name', $term); 
-		$this->db->or_like('description', $term);
-		$query = $this->db->get();
-		return $query->result_array();
+		$db->select('*');
+		$db->from('t_prj');
+		$db->like('name', $term); 
+		$db->or_like('description', $term);
+		$query = $db->get();
+		return $$query->getResultArray();
 	}
 
 }
