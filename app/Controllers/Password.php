@@ -182,23 +182,21 @@ class Password extends BaseController {
 		  'wordwrap' => TRUE
 		);
 
-		$message = '';
-        $this->load->library('email', $config);
-		$this->email->set_newline("\r\n");
-		$this->email->from('celero.info@gmail.com'); // change it to yours
-		$this->email->to($data['email']);// change it to yours
-		$this->email->subject('About your ecoman account');
-		$this->email->message($data['message']);
-		if($this->email->send())
+		//config should be set.
+		$email = service('email');
+		$email->setFrom('celero.info@gmail.com', 'Celero Project');
+		$email->setTo($data['email']);
+		$email->setSubject('About your ecoman account');
+		$email->setMessage($data['message']);
+		if($email->send())
 		{
-			//echo 'Email sent.';
-                    return true;
+            return true;
 		}
 		else
 		{
 			echo 'error sending email. please report to celero.info@gmail.com';
-			exit();
-                    return false;
+			//exit();
+            return false;
 		}
 	}
 
