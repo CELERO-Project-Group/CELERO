@@ -96,9 +96,9 @@
          <li><a href="#" class="nav-info"></a></li>
         <li><a href="<?= base_url('users'); ?>"><i class="fa fa-group"></i> <?= lang("Validation.consultants"); ?></a></li>
         <?php
-              //print_r($this->session->userdata('user_in'));
+              //print_r($session->get('user_in'));
         if (isset($_SESSION['user_in'])):
-          $tmp = $this->session->userdata('user_in');
+          $tmp = $session->get('user_in');
         ?>
         <li class="head-li"><a href="<?= base_url('user/'.$tmp['username']); ?>" style="text-transform: capitalize;"><i class="fa fa-user"></i> <?= $tmp['username']; ?></a></li>
         <li class="head-li"><a href="<?= base_url('profile_update'); ?>" ><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.updateprofile"); ?></a></li>
@@ -134,7 +134,7 @@
       <?php endif ?>
       <?php if(isset($_SESSION['project_id'])): ?>
         <li class="pull-right"><a href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> <?= lang("Validation.closeproject"); ?></a></li>
-        <li class="pull-right"><a href="<?= base_url('project/'.$this->session->userdata('project_id')); ?>"><?= $this->session->userdata('project_name'); ?></a></li>
+        <li class="pull-right"><a href="<?= base_url('project/'.$session->get('project_id')); ?>"><?= $session->get('project_name'); ?></a></li>
       <?php endif ?>
     </ul>
 
@@ -191,7 +191,7 @@
   </p> -->
   <script type="text/javascript">
 
-  var project_durum = <?php if($this->session->userdata('project_id')){echo "true";}else{ echo "false";} ?>
+  var project_durum = <?php if($session->get('project_id')){echo "true";}else{ echo "false";} ?>
 
     $( document ).ready(function() {
       var pathname = window.location.pathname;

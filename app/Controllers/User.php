@@ -10,7 +10,7 @@ class User extends BaseController {
         $this->load->model('company_model');
         $this->load->model('flow_model');
 		$this->load->library('form_validation');
-		$this->config->set_item('language', $this->session->userdata('site_lang'));
+		$this->config->set_item('language', $session->get('site_lang'));
 	}
 
     function sifirla($data){
@@ -23,7 +23,7 @@ class User extends BaseController {
         $this->form_validation->set_rules('epvalue', 'EP Value', 
         	"trim|required|xss_clean|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]");
         $this->form_validation->set_rules('epQuantityUnit', 'EP Quantity Value', 'trim|required|xss_clean');
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		
 		//formats number correctly
 		$quantity = str_replace(',', '.', $this->input->post('epvalue'));
@@ -89,7 +89,7 @@ class User extends BaseController {
 	}
 	
 	public function deleteUserEp($flow_name,$ep_value){
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		$flow_name = urldecode($flow_name);
 		$this->flow_model->delete_userep($flow_name,$ep_value,$kullanici['id']);
 		redirect('datasetexcel', 'refresh');
@@ -97,7 +97,7 @@ class User extends BaseController {
 
     public function uploadExcel(){
 
-        $user = $this->session->userdata('user_in');
+        $user = $session->get('user_in');
         $config['upload_path']          = './assets/excels/';
         $config['allowed_types']        = 'xlsx|xls';
         $config['max_size']             = 100;
@@ -127,7 +127,7 @@ class User extends BaseController {
 
 	public function user_register(){
 
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		if(!empty($kullanici)){
 			redirect('', 'refresh');
 		}
@@ -143,7 +143,7 @@ class User extends BaseController {
 			'img_height' => 42,
 	    'expiration' => 1024
     	);
-		if(strtolower($this->input->post('captcha')) == strtolower($this->session->userdata('word'))){
+		if(strtolower($this->input->post('captcha')) == strtolower($session->get('word'))){
 			$captcha_control = true;
 		}
 		else{
@@ -153,7 +153,7 @@ class User extends BaseController {
 		$cap = create_captcha($vals);
 		//print_r($cap);
 		$data['image'] = $cap['image'];
-		$this->session->set_userdata('word', $cap['word']);*/
+		$session->set('word', $cap['word']);*/
 
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|mb_strtolower|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_user.user_name]');
 		$this->form_validation->set_rules('name','Name','required|trim|xss_clean|max_length[50]');
@@ -245,7 +245,7 @@ class User extends BaseController {
 	}
 
 	public function user_login(){
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		if(!empty($kullanici)){
 			redirect('', 'refresh');
 		}
@@ -266,7 +266,7 @@ class User extends BaseController {
 				'email' => $userInfo['email'],
                 'role_id' => $userInfo['role_id']
 				);
-			$this->session->set_userdata('user_in',$session_array);
+			$session->set('user_in',$session_array);
 
 			//Redirect after login
 			redirect('user/'.$username, 'refresh');
@@ -292,7 +292,7 @@ class User extends BaseController {
 
 	public function user_profile($username){
 		//permission site /user/'username' only for logged in users viewable
-		$user = $this->session->userdata('user_in');
+		$user = $session->get('user_in');
 		if(empty($user)){
 			redirect('', 'refresh');
 		}
@@ -315,7 +315,7 @@ class User extends BaseController {
 	public function user_profile_update(){
 		$data = $this->user_model->get_session_user();
 
-		$user = $this->session->userdata('user_in');
+		$user = $session->get('user_in');
 		if(empty($user)){
 			redirect('', 'refresh');
 		}
@@ -395,9 +395,9 @@ class User extends BaseController {
 				'email' => $update['email'],
 				'role_id' => $data['role_id']
 				);
-			$this->session->set_userdata('user_in',$session_array);
+			$session->set('user_in',$session_array);
 
-			$user_id = $this->session->userdata('user_in')['id'];
+			$user_id = $session->get('user_in')['id'];
 			//echo $userbilgisi['cmpny_id'];
 			//echo $this->input->post('company');
 			/*if($userbilgisi['cmpny_id']!==$this->input->post('company')){
@@ -422,7 +422,7 @@ class User extends BaseController {
 	function email_check(){
 		$emailForm = $this->input->post('email'); // formdan gelen yeni girilen email
 
-		$tmp = $this->session->userdata('user_in');
+		$tmp = $session->get('user_in');
 		$emailSession = $tmp['email']; // session'da tutulan önceki email, şuan database'de de bu var.
 		$check_user_email = $this->user_model->check_user_email($emailForm);  // email varsa true , yoksa false
 		if(($emailForm == $emailSession) || !$check_user_email ){
@@ -439,7 +439,7 @@ class User extends BaseController {
 	function username_check(){
 		$usernameForm = $this->input->post('username'); // formdan gelen yeni girilen username
 
-		$tmp = $this->session->userdata('user_in');
+		$tmp = $session->get('user_in');
 		$usernameSession = $tmp['username']; // session'da tutulan önceki username, şuan database'de de bu var.
 		$check_username = $this->user_model->check_username($usernameForm);  // username varsa true , yoksa false
 		if(($usernameForm == $usernameSession) || !$check_username ){
@@ -453,7 +453,7 @@ class User extends BaseController {
 
 
 	public function become_consultant(){
-		$tmp = $this->session->userdata('user_in');
+		$tmp = $session->get('user_in');
 		if(empty($tmp) || $this->user_model->is_user_consultant($tmp['id'])){
 			redirect('', 'refresh');
 		}
@@ -465,7 +465,7 @@ class User extends BaseController {
 
 	public function show_all_users(){
 		//permission: site /user only for logged in users viewable
-		$user = $this->session->userdata('user_in');
+		$user = $session->get('user_in');
 		if(empty($user)){
 			redirect('', 'refresh');
 		}

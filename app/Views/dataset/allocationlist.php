@@ -5,7 +5,7 @@ if(empty($allocationlar)):
 else:
 ?>
 <p class="lead pull-left"><?= lang("Validation.cpheading2"); ?></p>
-<div class="pull-right"><a href="<?= base_url('cpscoping/'.$this->session->userdata('project_id').'/'.$companyID.'/allocation'); ?>/" class="btn btn-info" id="cpscopinga"><?= lang("Validation.createallocation"); ?></a>
+<div class="pull-right"><a href="<?= base_url('cpscoping/'.$session->get('project_id').'/'.$companyID.'/allocation'); ?>/" class="btn btn-info" id="cpscopinga"><?= lang("Validation.createallocation"); ?></a>
 </div>
 <table class="table table-striped" style="font-size:13px;">
     <tr>

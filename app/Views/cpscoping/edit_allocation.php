@@ -6,7 +6,7 @@
 	//$( "#atype" ).text($('#flow_type_name').val());
 
 		//define variables
- 		var project_id = "<?= $this->session->userdata('project_id'); ?>";
+ 		var project_id = "<?= $session->get('project_id'); ?>";
  		var process_id = "<?= $allocation['prcss_id']; ?>";
  		var flow_id = "<?= $allocation['flow_id']; ?>";
  		var flow_type_id = "<?= $allocation['flow_type_id']; ?>";

@@ -1,4 +1,4 @@
-<?php $project_id = $this->session->userdata('project_id');
+<?php $project_id = $session->get('project_id');
 	if(empty($project_id)){
 		$project_id = 0;
 	}

@@ -18,7 +18,7 @@ class Cost_benefit extends BaseController
         if ($this->cpscoping_model->can_consultant_prjct($c_user['id']) == false) {
             redirect('', 'refresh');
         }
-        $this->config->set_item('language', $this->session->userdata('site_lang'));
+        $this->config->set_item('language', $session->get('site_lang'));
 
     }
 
@@ -40,7 +40,7 @@ class Cost_benefit extends BaseController
 
     public function index()
     {
-        $data['com_pro'] = $this->project_model->get_prj_companies($this->session->userdata('project_id'));
+        $data['com_pro'] = $this->project_model->get_prj_companies($session->get('project_id'));
 
         $this->load->view('template/header');
         $this->load->view('cost_benefit/list', $data);

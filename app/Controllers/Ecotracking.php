@@ -9,7 +9,7 @@ class Ecotracking extends BaseController {
 		$this->load->model('ecotracking_model');
 		$this->load->model('company_model');
 		$this->load->model('equipment_model');
-				$this->config->set_item('language', $this->session->userdata('site_lang'));
+				$this->config->set_item('language', $session->get('site_lang'));
 
 	}
 
@@ -27,7 +27,7 @@ class Ecotracking extends BaseController {
 	}
 
 	public function index(){
-		$project_id = $this->session->userdata('project_id');
+		$project_id = $session->get('project_id');
 		$data['companies'] = $this->company_model->get_project_companies($project_id);
 		//print_r($data['companies']);
 		foreach ($data['companies'] as $company) {

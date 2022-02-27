@@ -2,11 +2,11 @@
     <div class="footer">© 2013-2020 CELERO - This site is optimized for <a href="https://www.google.com/chrome/" > Chrome </a> 
       <div class="footer-right">
         <!-- Language selection, underlines the selected language-->
-        <?php if($this->session->userdata('site_lang')==null || $this->session->userdata('site_lang')=='') { ?>
+        <?php if($session->get('site_lang')==null || $session->get('site_lang')=='') { ?>
                 <a href='<?= base_url('language/switch/english'); ?>' style="text-decoration: underline;">English</a>
                 /
                 <a href='<?= base_url('language/switch/turkish'); ?>'>Turkish</a>
-        <?php }else if($this->session->userdata('site_lang')=='turkish'){ ?>
+        <?php }else if($session->get('site_lang')=='turkish'){ ?>
                 <a href='<?= base_url('language/switch/english'); ?>'>English</a>
                  /
                 <a href='<?= base_url('language/switch/turkish'); ?>' style="text-decoration: underline;">Turkish</a>

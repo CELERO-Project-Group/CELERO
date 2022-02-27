@@ -10,16 +10,16 @@ class Project extends BaseController{
 		$this->load->model('company_model');
 		$this->load->model('user_model');
 		$this->load->library('form_validation');
-		$temp = $this->session->userdata('user_in');
+		$temp = $session->get('user_in');
 		if(empty($temp)){
 			redirect(base_url('login'),'refresh');
 		}		
-				$this->config->set_item('language', $this->session->userdata('site_lang'));
+				$this->config->set_item('language', $session->get('site_lang'));
 
 	}
 
 	public function open_project(){
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		$is_consultant = $this->user_model->is_user_consultant($kullanici['id']);
 		if(!$is_consultant){
 			$this->session->set_flashdata('project_error', '<i class="fa fa-exclamation-circle"></i> Sorry, you dont have permission to open this project.');
@@ -30,11 +30,11 @@ class Project extends BaseController{
 		$this->form_validation->set_rules('projectid', 'Project ID', 'trim|required|xss_clean');
 		if ($this->form_validation->run() !== FALSE)
 		{
-			$this->session->unset_userdata('project_id');
+			$session->remove('project_id');
 			$id = $this->input->post('projectid');
-			$this->session->set_userdata('project_id', $id);
+			$session->set('project_id', $id);
 			$prj = $this->project_model->get_project($id);
-			$this->session->set_userdata('project_name', $prj['name']);
+			$session->set('project_name', $prj['name']);
 			redirect('project/'.$id, 'refresh');
 		}
 		$data['projects'] = $this->project_model->get_consultant_projects($kullanici['id']);
@@ -44,13 +44,13 @@ class Project extends BaseController{
 	}
 
 	public function close_project(){
-		$this->session->unset_userdata('project_id');
+		$session->remove('project_id');
 		redirect('myprojects', 'refresh');
 	}
 
 	public function new_project(){
 		$this->load->library('googlemaps');
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		$is_consultant = $this->user_model->is_user_consultant($kullanici['id']);
 
 		if(!$is_consultant){
@@ -131,11 +131,11 @@ class Project extends BaseController{
 
 			$this->project_model->insert_project_contact_person($prj_cntct_prsnl);
 
-			$this->session->unset_userdata('project_id');
+			$session->remove('project_id');
 			$id = $this->input->post('projectid');
-			$this->session->set_userdata('project_id', $last_inserted_project_id);
+			$session->set('project_id', $last_inserted_project_id);
 			$prj = $this->project_model->get_project($last_inserted_project_id);
-			$this->session->set_userdata('project_name', $prj['name']);
+			$session->set('project_name', $prj['name']);
 			redirect('project/'.$last_inserted_project_id, 'refresh');
 		}
 
@@ -182,7 +182,7 @@ class Project extends BaseController{
 	public function show_all_project(){
 		$data['projects'] = $this->project_model->get_projects();
 
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		if($kullanici['id']!=null){
 			$data['is_consultant'] = $this->user_model->is_user_consultant($kullanici['id']);
 			foreach ($data['projects'] as $key => $d) {
@@ -203,7 +203,7 @@ class Project extends BaseController{
 	}
 
 	public function show_my_project(){
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		if($kullanici['id']!=null)
 			$data['is_consultant'] = $this->user_model->is_user_consultant($kullanici['id']);
 		else
@@ -217,7 +217,7 @@ class Project extends BaseController{
 
 	public function view_project($prj_id){
 
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		$is_consultant_of_project = $this->user_model->is_consultant_of_project_by_user_id($kullanici['id'],$prj_id);
 		$is_contactperson_of_project = $this->user_model->is_contactperson_of_project_by_user_id($kullanici['id'],$prj_id);
 
@@ -259,7 +259,7 @@ class Project extends BaseController{
 		// $this->googlemaps->initialize($config);
   		// $data['map'] = $this->googlemaps->create_map();
 
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		$data['is_consultant_of_project'] = $is_consultant_of_project;
 		$data['is_contactperson_of_project'] = $is_contactperson_of_project;
 
@@ -271,7 +271,7 @@ class Project extends BaseController{
 
 
 	public function update_project($prjct_id){
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		if(!$this->user_model->is_consultant_of_project_by_user_id($kullanici['id'],$prjct_id) and !$this->user_model->is_contactperson_of_project_by_user_id($kullanici['id'],$prjct_id)){
 			redirect('','refresh');
 		}
@@ -395,7 +395,7 @@ class Project extends BaseController{
 	public function delete_project($project_id){
 		$c_user = $this->user_model->get_session_user();
 		if($this->project_model->can_update_project_information($c_user['id'], $project_id) == true && $this->user_model->is_user_consultant($c_user['id']) == true){
-			$this->session->unset_userdata('project_id');
+			$session->remove('project_id');
 			$this->project_model->delete_project($project_id);
 			redirect(base_url('myprojects'),'refresh');
 		}else{
@@ -405,7 +405,7 @@ class Project extends BaseController{
 
 	public function addConsultantToProject($term){
 		// check if user has a permission to edit company info
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		if(!$this->project_model->can_update_project_information($kullanici['id'],$term)){
 			redirect(base_url(),'refresh');
 		}

@@ -108,7 +108,7 @@
 						<?php endforeach ?>
 					</select>
 	 			</div>
-        		<?php $mevcut = $this->session->userdata('user_in'); ?>
+        		<?php $mevcut = $session->get('user_in'); ?>
 	 			<div class="form-group">
     				<label for="assignContactPerson"><?= lang("Validation.assigncontact"); ?> <span class="small" style="color:red;">*Required</span></label>
     				<select  class="select-block" id="assignContactPerson" name="assignContactPerson">

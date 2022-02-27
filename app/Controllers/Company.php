@@ -15,12 +15,12 @@ class Company extends BaseController{
 		$this->load->model('equipment_model');
 		$this->load->model('product_model');
 		$this->load->library('form_validation');
-		$this->config->set_item('language', $this->session->userdata('site_lang'));
+		$this->config->set_item('language', $session->get('site_lang'));
 
 	}
 
 	public function new_company(){
-		$temp = $this->session->userdata('user_in');
+		$temp = $session->get('user_in');
 		if($temp['id'] == null){
 			redirect('', 'refresh');
 		}
@@ -167,7 +167,7 @@ class Company extends BaseController{
 
 	public function show_all_companies(){
 		//permission site /companies only for logged in users viewable
-		$user = $this->session->userdata('user_in');
+		$user = $session->get('user_in');
 		if(empty($user)){
 			redirect('', 'refresh');
 		}
@@ -190,7 +190,7 @@ class Company extends BaseController{
 		}
 		$data['clusters'] = $this->cluster_model->get_clusters();
 		//permission control
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		foreach ($data['companies'] as $key => $d) {
 			$data['companies'][$key]['have_permission'] = $this->user_model->can_edit_company($kullanici['id'],$d['id']);
 		}
@@ -219,7 +219,7 @@ class Company extends BaseController{
 		}
 		$data['clusters'] = $this->cluster_model->get_clusters();
 		//permission control
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		// foreach ($data['companies'] as $key => $d) {
 		// 	$data['companies'][$key]['have_permission'] = $this->user_model->can_edit_company($kullanici['id'],$d['id']);
 		// }
@@ -230,7 +230,7 @@ class Company extends BaseController{
 	}
 
 	public function show_my_companies(){
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 
 		if(empty($kullanici)){
 			redirect('', 'refresh');
@@ -244,7 +244,7 @@ class Company extends BaseController{
 	}
 
 	public function show_project_companies(){
-		$project_id = $this->session->userdata('project_id');
+		$project_id = $session->get('project_id');
 		$data['companies'] = $this->company_model->get_project_companies($project_id);
 
 		//print_r($data['companies']);
@@ -256,7 +256,7 @@ class Company extends BaseController{
 	public function companies($term){
 		$this->load->library('googlemaps');
 
-		$temp = $this->session->userdata('user_in');
+		$temp = $session->get('user_in');
 		if($temp['id'] == null){
 			$data['valid'] = "0";
 		}else{
@@ -286,7 +286,7 @@ class Company extends BaseController{
 		if(empty($data['nacecode'])){$data['nacecode']['code']="";}
 
 		//kullanıcının company'i editleme hakkı varmı kontrolü
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		$data['have_permission'] = $this->user_model->can_edit_company($kullanici['id'],$term);
 
 		//checks if the company is created/owned by this user, only users that created the company can see the delete button
@@ -321,7 +321,7 @@ class Company extends BaseController{
 
 	public function addUsertoCompany($term){
 		// check if user has a permission to edit company info
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		if(!$this->user_model->can_edit_company($kullanici['id'],$term)){
 			redirect(base_url(),'refresh');
 		}
@@ -347,7 +347,7 @@ class Company extends BaseController{
 
 	public function removeUserfromCompany($term,$selected_user_id){
 		// check if user has a permission to edit company info, if not redirects to main page.
-		$user = $this->session->userdata('user_in');
+		$user = $session->get('user_in');
 		if(!$this->user_model->can_edit_company($user['id'],$term)){
 			redirect(base_url(),'refresh');
 		}
@@ -365,7 +365,7 @@ class Company extends BaseController{
 	public function update_company($term){
 
 		//kullanýcýnýn company'i editleme hakký varmý kontrolü
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		if(!$this->user_model->can_edit_company($kullanici['id'],$term)){
 			redirect(base_url(),'refresh');
 		}
@@ -479,7 +479,7 @@ class Company extends BaseController{
 	}
 
 	public function create_company_control(){
-		$temp = $this->session->userdata('user_in');
+		$temp = $session->get('user_in');
 		$cmpny = $this->user_model->cmpny_prsnl($temp['id']);
 
 		if(empty($cmpny)){
@@ -504,7 +504,7 @@ class Company extends BaseController{
 
 	//delet company (if user is owner/creator of company)
 	public function delete_company($cmpny_id){
-		$temp = $this->session->userdata('user_in');
+		$temp = $session->get('user_in');
 		$owned_cmpnys = array_column($this->company_model->get_my_companies($temp['id']), 'cmpny_id');
 		if(in_array($cmpny_id, $owned_cmpnys)){
 			$this->company_model->delete_company($cmpny_id);

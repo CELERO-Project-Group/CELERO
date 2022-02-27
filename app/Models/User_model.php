@@ -76,7 +76,7 @@ class User_model extends Model {
   // kisinin butun bilgileri controller a return ediliyor.
   public function get_session_user(){
     if (isset($_SESSION['user_in'])){
-      $tmp = $this->session->userdata('user_in');
+      $tmp = $session->get('user_in');
 
       $db->from('t_user');
       $db->where('id',$tmp['id']);
@@ -142,7 +142,7 @@ class User_model extends Model {
 
   public function update_user($update){
     if (isset($_SESSION['user_in'])){
-      $tmp = $this->session->userdata('user_in');
+      $tmp = $session->get('user_in');
       $db->where('id', $tmp['id']);
       $db->update('t_user', $update);
     }

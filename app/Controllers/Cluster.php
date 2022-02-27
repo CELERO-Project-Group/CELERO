@@ -9,7 +9,7 @@ class Cluster extends BaseController{
 		$this->load->model('cluster_model');
 		$this->load->model('company_model');
 		$this->load->library('form_validation');
-				$this->config->set_item('language', $this->session->userdata('site_lang'));
+				$this->config->set_item('language', $session->get('site_lang'));
 
 	}
 

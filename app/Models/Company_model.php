@@ -213,7 +213,7 @@ class Company_model extends Model
 
     public function insert_cmpny_prsnl($cmpny_id)
     {
-        $tmp  = $this->session->userdata('user_in');
+        $tmp  = $session->get('user_in');
         $data = array(
             'user_id'    => $tmp['id'],
             'cmpny_id'   => $cmpny_id,

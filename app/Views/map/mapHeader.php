@@ -52,7 +52,7 @@
              <li class="head-li">
                  <a href="<?= base_url('isScopingPrjBaseMDF'); ?>"><i class="fa fa-sitemap"></i><?= lang("Validation.industrialsimbiosis"); ?></a>
              </li>
-                <li class="head-li"><?= lang("Validation.workingon"); ?>: <a href="<?= base_url('project/'.$this->session->userdata('project_id')); ?>"><?= $this->session->userdata('project_name'); ?></a>
+                <li class="head-li"><?= lang("Validation.workingon"); ?>: <a href="<?= base_url('project/'.$session->get('project_id')); ?>"><?= $session->get('project_name'); ?></a>
              </li>
             
       </ul>
@@ -61,9 +61,9 @@
         <li><a href="<?= base_url('functionalities'); ?>"><i class="fa fa-dashboard"></i><?= lang("Validation.functionalities"); ?> </a></li>
         <li><a href="<?= base_url('contactus'); ?>"><i class="fa fa-envelope"></i><?= lang("Validation.contactus"); ?> </a></li>
         <?php
-          //print_r($this->session->userdata('user_in'));
+          //print_r($session->get('user_in'));
           if (isset($_SESSION['user_in'])):
-            $tmp = $this->session->userdata('user_in');
+            $tmp = $session->get('user_in');
         ?>
           <li class="head-li"><a href="<?= base_url('user/'.$tmp['username']); ?>" style="text-transform: capitalize;"><i class="fa fa-user"></i>
  <?= $tmp['username']; ?></a></li>

@@ -12,7 +12,7 @@
 				<?php endif ?>
 			</div>
 
-			<?php if($this->session->userdata('user_in')['id']): ?>
+			<?php if($session->get('user_in')['id']): ?>
 				<?php if($canEdit=='1'): ?>
 					<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("new_flow/".$companies['id']) ?>"><i class="fa fa-database"></i> <?= lang("Validation.editcompanydata") ?></a>
 					<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("update_company/".$companies['id']) ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.editcompanyinfo") ?></a>

@@ -14,11 +14,11 @@ class Cpscoping extends BaseController {
 		$this->load->model('cpscoping_model');
 		$this->load->model('flow_model');
 		$this->load->library('form_validation');
-		$temp = $this->session->userdata('user_in');
+		$temp = $session->get('user_in');
 		if(empty($temp)){
 			redirect(base_url('login'),'refresh');
 		}
-				$this->config->set_item('language', $this->session->userdata('site_lang'));
+				$this->config->set_item('language', $session->get('site_lang'));
 
 	}
 
@@ -32,12 +32,12 @@ class Cpscoping extends BaseController {
 			$com_array = array();
 			$i = 0;
 			//foreach ($data['c_projects'] as $project_name) {
-				$com_array = $this->project_model->get_prj_companies($this->session->userdata('project_id'));
+				$com_array = $this->project_model->get_prj_companies($session->get('project_id'));
 				foreach ($com_array as $c) {
 					$com_pro = array(
-						"project_name" => $this->session->userdata('project_name'),
+						"project_name" => $session->get('project_name'),
 						"company_name" => $c['name'],
-						"project_id" => $this->session->userdata('project_id'),
+						"project_id" => $session->get('project_id'),
 						"company_id" => $c['id']
 					);
 					$result[$i] = $com_pro;
@@ -47,7 +47,7 @@ class Cpscoping extends BaseController {
 			$deneme = array(array());
 			$j = 0;
 			foreach ($result as $r) {
-				$flow_prcss = $this->cpscoping_model->get_allocation_values($r['company_id'],$this->session->userdata('project_id'));
+				$flow_prcss = $this->cpscoping_model->get_allocation_values($r['company_id'],$session->get('project_id'));
 				$deneme[$j] = $flow_prcss;
 				$j++;
 			}
@@ -256,7 +256,7 @@ class Cpscoping extends BaseController {
 		// check if allocation is not set or deleted
 		if(empty($data['allocation'])) { redirect(site_url()); }
 		//check if user has permission to edit
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		$permission= $this->user_model->can_edit_company($kullanici['id'],$data['allocation']['cmpny_id']);
 		if($permission==FALSE){redirect(site_url());}
 

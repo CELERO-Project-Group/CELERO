@@ -24,9 +24,9 @@ class Dataset extends BaseController {
 	    }
 
 
-		$this->config->set_item('language', $this->session->userdata('site_lang'));
+		$this->config->set_item('language', $session->get('site_lang'));
 
-		$kullanici = $this->session->userdata('user_in');
+		$kullanici = $session->get('user_in');
 		//TO-DO: blocking ajax to work.
 		/*if($this->user_model->can_edit_company($kullanici['id'],$this->uri->segment(2)) == FALSE && $this->uri->segment(1) != "get_equipment_type" && $this->uri->segment(1) != "get_equipment_attribute"&& $this->uri->segment(1) != "get_sub_process"){
 			redirect(base_url(''), 'refresh');
@@ -108,7 +108,7 @@ class Dataset extends BaseController {
 	public function new_flow($companyID)
 	{
 		//checks permissions, if not loged in a redirect happens
-		$user = $this->session->userdata('user_in');
+		$user = $session->get('user_in');
 		if(empty($user)){
 			redirect('', 'refresh');
 		}
@@ -258,7 +258,7 @@ class Dataset extends BaseController {
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $this->company_model->get_company($companyID);
 		
-		$data['user'] = $this->session->userdata('user_in');
+		$data['user'] = $session->get('user_in');
 
 		$this->load->view('template/header');
 		$this->load->view('dataset/dataSetLeftSide',$data);
@@ -687,7 +687,7 @@ class Dataset extends BaseController {
 		//todo only users with permission/licenese should be able to get the UBP value
 
 		//checks permissions, if not loged in a redirect happens
-		$user = $this->session->userdata('user_in');
+		$user = $session->get('user_in');
 		if(empty($user)){
 			redirect('', 'refresh');
 		}

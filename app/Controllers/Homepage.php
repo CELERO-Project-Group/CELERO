@@ -6,7 +6,7 @@ class Homepage extends BaseController {
 
 	function __construct(){
 		parent::__construct();
-				$this->config->set_item('language', $this->session->userdata('site_lang'));
+				$this->config->set_item('language', $session->get('site_lang'));
 
 	}
 

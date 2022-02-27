@@ -7,7 +7,7 @@ class Search extends BaseController {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('search_model','',TRUE);
-				$this->config->set_item('language', $this->session->userdata('site_lang'));
+				$this->config->set_item('language', $session->get('site_lang'));
 
 	}
 

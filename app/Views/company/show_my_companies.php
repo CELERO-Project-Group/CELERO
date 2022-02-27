@@ -39,7 +39,7 @@
 			</script>
 			<!-- harita bitti -->
 			<?php
-			$temp = $this->session->userdata('user_in');
+			$temp = $session->get('user_in');
 			if($temp['id'] != null): ?>
 <!-- 			<a class="pull-right  btn btn-info btn-sm" href="<?= base_url("newcompany"); ?>">Create a Company</a> -->
 				<table class="table-hover" style="clear:both; width: 100%;">

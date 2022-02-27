@@ -102,7 +102,7 @@ function aatf() {
 		$( "#atype" ).text($('#flow_type_name').val());*/
 
 		//define variables
- 		var project_id = "<?= $this->session->userdata('project_id'); ?>";
+ 		var project_id = "<?= $session->get('project_id'); ?>";
  		var process_id = $('#prcss_name').val();
  		var flow_id = $('#flow_name').val();
  		var flow_type_id = $('#flow_type_name').val();

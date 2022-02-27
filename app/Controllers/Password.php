@@ -8,7 +8,7 @@ class Password extends BaseController {
 		parent::__construct();
 		$this->load->model('password_model');
 		$this->load->library('form_validation');
-				$this->config->set_item('language', $this->session->userdata('site_lang'));
+				$this->config->set_item('language', $session->get('site_lang'));
 
 	}
 
@@ -18,7 +18,7 @@ class Password extends BaseController {
 		$this->form_validation->set_rules('new_pass', 'New Password', 'trim|xss_clean|required|callback_password_check');
 		$this->form_validation->set_rules('new_pass_again', 'New Password(Again)', 'trim|xss_clean|required');
 		if ($this->form_validation->run() !== FALSE){
-			$user = $this->session->userdata('user_in');
+			$user = $session->get('user_in');
 			$pass = md5($this->input->post('old_pass'));
 			if($this->password_model->do_similar_pass($user['id'],$pass)){
 				$data = array(

@@ -88,7 +88,7 @@
             <div class="col-md-3">
               <?php if($pro['have_permission']==1): ?>
               <div style="overflow:hidden;">
-                <?php if($this->session->userdata('project_id')==$pro['id']): ?>
+                <?php if($session->get('project_id')==$pro['id']): ?>
                   <a class="btn btn-tuna" href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> Close This Project</a>
                 <?php else: ?>
                   <?= form_open('openproject'); ?>
