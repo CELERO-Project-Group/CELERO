@@ -50,8 +50,8 @@
 							</div>
 							<div class="col-md-3">
 								<?php if($com['have_permission']==1): ?>
-										<a class="btn btn-tuna" href="<?= base_url("new_flow/".$com['id']); ?>"><i class="fa fa-database"></i> <?= lang("editcompanydata"); ?></a>
-										<a class="btn btn-tuna" href="<?= base_url("update_company/".$com['id']); ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("editcompanyinfo"); ?></a>
+										<a class="btn btn-tuna" href="<?= base_url("new_flow/".$com['id']); ?>"><i class="fa fa-database"></i> <?= lang("Validation.editcompanydata"); ?></a>
+										<a class="btn btn-tuna" href="<?= base_url("update_company/".$com['id']); ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.editcompanyinfo"); ?></a>
 								<?php endif ?>
 							</div>
 						</div>
@@ -63,22 +63,22 @@
 		</div>
 		<div class="col-md-4">
 
-			<div class="well"><?= lang("allcompaniesdesc"); ?></div>
+			<div class="well"><?= lang("Validation.allcompaniesdesc"); ?></div>
 
 			<!-- Cluster functionality currently deactivated
 			<?= form_open_multipart('companies'); ?>
 			<div class="well" style="margin-top: 20px;">
-				<label for="cluster"><?= lang("selectcluster"); ?></label>
+				<label for="cluster"><?= lang("Validation.selectcluster"); ?></label>
 				<select title="Choose at least one" class="select-block" id="cluster" name="cluster">
-					<option value="0"><?= lang("allcompanies"); ?></option>
+					<option value="0"><?= lang("Validation.allcompanies"); ?></option>
 					<?php foreach ($clusters as $cluster): ?>
 						<option value="<?= $cluster['id']; ?>"><?= $cluster['name']; ?></option>
 					<?php endforeach ?>
 				</select>
-				<button type="submit" class="btn btn-primary btn-sm"><?= lang("filter"); ?></button>
+				<button type="submit" class="btn btn-primary btn-sm"><?= lang("Validation.filter"); ?></button>
 			</div>
 			</form>
-			<a class="btn btn-default btn-sm" href="<?= base_url('cluster'); ?>"><?= lang("addtocluster"); ?></a> -->
+			<a class="btn btn-default btn-sm" href="<?= base_url('cluster'); ?>"><?= lang("Validation.addtocluster"); ?></a> -->
 
 		</div>
 	</div>

@@ -8,14 +8,14 @@
 			<?php endif ?>
 			<div style="margin-top: 10px;">
 				<?php  if($userInfo['id']==$this->session->userdata('user_in')['id']): ?>
-		  	<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("profile_update"); ?>"><?= lang("updateprofile"); ?></a>
-		  	<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url('send_email_for_change_pass'); ?>" style="text-transform: capitalize;"><?= lang("changepassword"); ?></a>
+		  	<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("profile_update"); ?>"><?= lang("Validation.updateprofile"); ?></a>
+		  	<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url('send_email_for_change_pass'); ?>" style="text-transform: capitalize;"><?= lang("Validation.changepassword"); ?></a>
 		  	<?php endif ?>
 		  	<?php if(($userInfo['role_id']=='2') && $this->session->userdata('user_in')['id'] == $userInfo['id']): ?>
-		  		<a class="btn btn-success btn-block consultant" title="If you apply for consultant, the administrator has to approve it." data-placement='bottom' href="<?= base_url("become_consultant"); ?>"><?= lang("becomeconsultant"); ?></a>
+		  		<a class="btn btn-success btn-block consultant" title="If you apply for consultant, the administrator has to approve it." data-placement='bottom' href="<?= base_url("become_consultant"); ?>"><?= lang("Validation.becomeconsultant"); ?></a>
 		  	<?php endif ?>
 		  	<?php if($userInfo['role_id']=="1"): ?>
-		  		<div class="btn btn-success btn-block consultant" title="Consultants have full access to all functionalities of the Platform." data-placement='bottom' style="cursor: default;"><?= lang("thisisconsultant"); ?></div>
+		  		<div class="btn btn-success btn-block consultant" title="Consultants have full access to all functionalities of the Platform." data-placement='bottom' style="cursor: default;"><?= lang("Validation.thisisconsultant"); ?></div>
 		  	<?php endif ?>
 		  </div>
 		</div>
@@ -24,7 +24,7 @@
 			<table class="table table-striped table-bordered">
 				<tr>
 					<td style="width:120px;">
-					<?= lang("description"); ?>
+					<?= lang("Validation.description"); ?>
 					</td>
 					<td>
 						<div><?= $userInfo['title']; ?></div>
@@ -33,7 +33,7 @@
 				</tr>
 				<tr>
 					<td>
-					<?= lang("email"); ?>
+					<?= lang("Validation.email"); ?>
 					</td>
 					<td>
 					<?= $userInfo['email']; ?>
@@ -41,7 +41,7 @@
 				</tr>
 				<tr>
 					<td>
-					<?= lang("cellphone"); ?>
+					<?= lang("Validation.cellphone"); ?>
 					</td>
 					<td>
 					<?= $userInfo['phone_num_1']; ?>
@@ -49,7 +49,7 @@
 				</tr>
 				<tr>
 					<td>
-					<?= lang("workphone"); ?>
+					<?= lang("Validation.workphone"); ?>
 					</td>
 					<td>
 					<?= $userInfo['phone_num_2']; ?>
@@ -57,7 +57,7 @@
 				</tr>
 				<tr>
 					<td>
-					<?= lang("faxnumber"); ?>
+					<?= lang("Validation.faxnumber"); ?>
 					</td>
 					<td>
 					<?= $userInfo['fax_num']; ?>
@@ -67,7 +67,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<?php if($userInfo['role_id']==1): ?>
-					<div class="swissheader" style="font-size:15px;"><?= lang("projectsasconsultant"); ?></div>
+					<div class="swissheader" style="font-size:15px;"><?= lang("Validation.projectsasconsultant"); ?></div>
 					<ul class="nav nav-list">
 					<?php foreach ($projectsAsConsultant as $prj): ?>
 							<li><a style="text-transform:capitalize;" href="<?= base_url('project/'.$prj["proje_id"]) ?>"><?= $prj["name"] ?></a></li>
@@ -76,7 +76,7 @@
 					<?php endif ?>
 				</div>
 				<div class="col-md-6">
-					<div class="swissheader" style="font-size:15px;"><?= lang("projectsasuser"); ?></div>
+					<div class="swissheader" style="font-size:15px;"><?= lang("Validation.projectsasuser"); ?></div>
 					<ul class="nav nav-list">
 						<?php foreach ($projectsAsWorker as $prj): ?>
 						<li><a style="text-transform:capitalize;" href="<?= base_url('project/'.$prj["proje_id"]) ?>"><?= $prj["name"] ?></a></li>

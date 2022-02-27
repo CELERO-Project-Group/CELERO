@@ -6,7 +6,7 @@
         <div>Select Flows to Filter. You can select multiple flows</div>
         <small>When flows selected, system will only show companies which have selected flows in its dataset.</small>
         <select id="selectize-units" class="info select-block" name="selectedFlows" multiple>
-            <option value="" disabled selected><?= lang("pleaseselect"); ?></option>
+            <option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>
             <?php foreach ($flowlist as $flow): ?>
                 <option value="<?= $flow['id']; ?>"><?= $flow['name']; ?></option>
             <?php endforeach ?>

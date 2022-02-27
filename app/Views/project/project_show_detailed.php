@@ -33,14 +33,14 @@
 					<?php if($is_consultant_of_project or $is_contactperson_of_project): ?>
 			<div style="margin-bottom:20px; overflow:hidden;">
 				<?php if($this->session->userdata('project_id')==$projects['id']): ?>
-					<a class="btn btn-inverse btn-block" href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> <?= lang("closeproject"); ?></a>
+					<a class="btn btn-inverse btn-block" href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> <?= lang("Validation.closeproject"); ?></a>
 				<?php else: ?>
 					<?= form_open('openproject'); ?>
 						<input type="hidden" name="projectid" value="<?= $projects['id']; ?>">
-						<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-plus-square-o"></i> <?= lang("openproject"); ?></button>
+						<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-plus-square-o"></i> <?= lang("Validation.openproject"); ?></button>
 					</form>
 				<?php endif ?>
-				<a style="margin-top: 10px;" class="btn btn-inverse btn-block" href="<?= base_url("update_project/".$projects['id']); ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("editprojectinfo"); ?></a>
+				<a style="margin-top: 10px;" class="btn btn-inverse btn-block" href="<?= base_url("update_project/".$projects['id']); ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.editprojectinfo"); ?></a>
 			    <!--<a onclick="event.preventDefault();window.open('../../IS_OpenLayers/map_prj.php?cmpny=<?= $company_ids; ?>','mywindow','width=900,height=900');" style = 'margin-right: 20px;' class="btn btn-info btn-sm pull-right" >See Project Companies On map</a>-->
 					<!--<a onclick="showMapPanelExpand();document.getElementById('myFrame').setAttribute('src','../../IS_OpenLayers/map_prj_prj.php?prj_id=<?= $prj_id; ?>');event.preventDefault();"  class="btn btn-inverse btn-sm" >See Project Companies On map</a>
 			    <a class="btn btn-inverse btn-sm" href="#" onclick="showMapPanelCollapse();event.preventDefault();">Close Companies Map</a> -->
@@ -65,7 +65,7 @@
 			<div class="clearfix"></div>
 
 			<div class="form-group">
-				<div class="swissheader" style="font-size:15px;"><i class="fa fa-phone"></i> <?= lang("projectcontact"); ?></div>
+				<div class="swissheader" style="font-size:15px;"><i class="fa fa-phone"></i> <?= lang("Validation.projectcontact"); ?></div>
 					<ul class="nav nav-list">
 				<?php foreach ($contact as $con): ?>
 					<li><a style="text-transform:capitalize;" href="<?= base_url('user/'.$con['user_name']); ?>"> <?= $con['name'].' '.$con['surname'];?></a></li>
@@ -73,7 +73,7 @@
 				</ul>
 			</div>
 			<?php if($this->session->userdata('user_in')['role_id']=='1'): ?>
-				<a style="margin-top: 10px;" class="btn btn-danger btn-block" href="<?= base_url("deleteproject/".$projects['id']); ?>" onclick="return confirm('Are you sure you want to delete the project <?= $projects['name']; ?>? \r\n \r\nWarning: The project will be deleted permanently and cannot be restored!');"><i class="fa fa-trash" ></i> <?= lang("deleteproject"); ?></a>
+				<a style="margin-top: 10px;" class="btn btn-danger btn-block" href="<?= base_url("deleteproject/".$projects['id']); ?>" onclick="return confirm('Are you sure you want to delete the project <?= $projects['name']; ?>? \r\n \r\nWarning: The project will be deleted permanently and cannot be restored!');"><i class="fa fa-trash" ></i> <?= lang("Validation.deleteproject"); ?></a>
 			<?php endif ?>
 		</div>
 
@@ -81,14 +81,14 @@
 			<div class="swissheader">
 			<?= $projects['name']; ?>
 				<?php if($this->session->userdata('project_id')==$projects['id']): ?>
-					<small class="pull-right" style="font-size:10px;"><?= lang("alreadyopenproject"); ?></small>
+					<small class="pull-right" style="font-size:10px;"><?= lang("Validation.alreadyopenproject"); ?></small>
 				<?php endif ?>
 			</div>
 			<div class="clearfix"></div>
 			<table class="table table-bordered" style="font-size:14px; margin-bottom:10px;">
 				<tr>
 					<td style="width:100px;">
-					<?= lang("startdate"); ?>
+					<?= lang("Validation.startdate"); ?>
 					</td>
 					<td>
 					<?= $projects['start_date']; ?>
@@ -96,7 +96,7 @@
 				</tr>
 				<tr>
 					<td>
-					<?= lang("status"); ?>
+					<?= lang("Validation.status"); ?>
 					</td>
 					<td>
 					<?= $status['name']; ?>
@@ -104,7 +104,7 @@
 				</tr>
 				<tr>
 					<td>
-					<?= lang("description"); ?>
+					<?= lang("Validation.description"); ?>
 					</td>
 					<td>
 					<?= $projects['description']; ?>
@@ -112,7 +112,7 @@
 				</tr>
 			</table>
 			<div class="swissheader">
-				<i class="fa fa-map-marker"></i> <?= lang("projectonmap"); ?>
+				<i class="fa fa-map-marker"></i> <?= lang("Validation.projectonmap"); ?>
 			</div>
                         
                         <!-- harita -->
@@ -168,7 +168,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<div class="swissheader" style="font-size:15px;"><i class="fa fa-users"></i> <?= lang("projectconsultants"); ?></div>
+						<div class="swissheader" style="font-size:15px;"><i class="fa fa-users"></i> <?= lang("Validation.projectconsultants"); ?></div>
 							<ul class="nav nav-list">
 						<?php foreach ($constant as $cons): ?>
 							<li><a style="text-transform:capitalize;" href="<?= base_url('user/'.$cons['user_name']); ?>"> <?= $cons['name'].' '.$cons['surname']; ?></a></li>
@@ -178,7 +178,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
-						<div class="swissheader" style="font-size:15px;"><i class="fa fa-building"></i> <?= lang("projectcompanies"); ?></div>
+						<div class="swissheader" style="font-size:15px;"><i class="fa fa-building"></i> <?= lang("Validation.projectcompanies"); ?></div>
 							<ul class="nav nav-list">
 						<?php foreach ($companies as $company): ?>
 							<li><a style="text-transform:capitalize;" href="<?= base_url('company/'.$company['id']); ?>"> <?= $company['name'];?></a></li>

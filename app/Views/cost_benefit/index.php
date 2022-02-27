@@ -14,7 +14,7 @@
 .dropdowni {overflow:visible; position:relative;}
 </style>
 <?php  $allocation = array_merge($allocation, $is); ?>
-	<p><?= lang("cbaheading"); ?></p>
+	<p><?= lang("Validation.cbaheading"); ?></p>
 	<?php if (!empty($allocation)): ?>
 	<?php $i=1; ?>
 	<?php foreach ($allocation as $a): ?>
@@ -533,14 +533,14 @@
 
 <!-- bottom part of the page with summary table starts here-->
 <div class="col-md-6">
-    <p><?= lang("cbaheading2"); ?></p>
+    <p><?= lang("Validation.cbaheading2"); ?></p>
         <?php if (!empty($allocation)): ?>
             <?php if(empty($allocation[0]['unit_cost'])){$allocation[0]['unit_cost']="-";} ?>
             <table class="table" style="font-size:12px;">
                 <tr>
-                    <th><?= lang("optionandprocess"); ?></th>
-                   <th style="text-align: right;"><?= lang("marginalcost"); ?> (<?= $allocation[0]['unit_cost']; ?>/EP)</th>
-                    <th style="text-align: right;"><?= lang("ecologicalbenefit"); ?> (EP)</th>
+                    <th><?= lang("Validation.optionandprocess"); ?></th>
+                   <th style="text-align: right;"><?= lang("Validation.marginalcost"); ?> (<?= $allocation[0]['unit_cost']; ?>/EP)</th>
+                    <th style="text-align: right;"><?= lang("Validation.ecologicalbenefit"); ?> (EP)</th>
                 </tr>
             <?php foreach ($allocation as $a): ?>
                 <tr>
@@ -572,7 +572,7 @@
 						<td>#</td><td><?= $i; ?></td>
 					</tr>
 					<tr>
-						<td width="250"><?= lang("option"); ?></td>
+						<td width="250"><?= lang("Validation.option"); ?></td>
 						<td width="75%">
 						<?php //print_r($a); ?>
 							<b><?php if(!empty($a['prcss_name'])) {echo $a['prcss_name'];} else {echo "IS potential"; } ?></b> 
@@ -583,90 +583,90 @@
 						</td>
 					</tr>
 					<tr>
-						<td><?= lang("discountrate"); ?> (%)</td>
+						<td><?= lang("Validation.discountrate"); ?> (%)</td>
 						<td><div class="  "><input type="text" name="disrate" id="disrate-<?= $i; ?>"  value="<?= $a['disrate']; ?>" class="form-control" placeholder="You should fill this field."></div></td>
 					</tr>
-						<tr><td><?= lang("capexold"); ?> (<?= $a['unit_cost']; ?>/<?= lang("year"); ?>)</td>								
+						<tr><td><?= lang("Validation.capexold"); ?> (<?= $a['unit_cost']; ?>/<?= lang("Validation.year"); ?>)</td>								
 						<td><div class="  "><input type="text" name="capexold" id="capexold-<?= $i; ?>" class="form-control  " value="<?= $a['capexold']; ?>" placeholder="You should fill this field."></div></td>
 					</tr>
 					<tr>
-						<td><?= lang("opexold"); ?> (<?= $a['unit_cost']; ?>/<?= lang("year"); ?>)</td>
+						<td><?= lang("Validation.opexold"); ?> (<?= $a['unit_cost']; ?>/<?= lang("Validation.year"); ?>)</td>
 						<td><input type="text" name="opexold" id="opexold-<?= $i; ?>" class="form-control"></td>
 					</tr>
 					<tr>
-						<td><?= lang("lifetimeold"); ?> (<?= lang("year"); ?>)</td>
+						<td><?= lang("Validation.lifetimeold"); ?> (<?= lang("Validation.year"); ?>)</td>
 						<td><div class="  "><input type="text" name="ltold" id="ltold-<?= $i; ?>" value="<?= $a['ltold']; ?>" class="form-control" placeholder="You should fill this field."></div></td>
 					</tr>
 					<tr>
-						<td><?= lang("capexnew"); ?> (<?= $a['unit_cost']; ?>/<?= lang("year"); ?>)</td>
+						<td><?= lang("Validation.capexnew"); ?> (<?= $a['unit_cost']; ?>/<?= lang("Validation.year"); ?>)</td>
 						<td><div class="  "><input type="text" name="capexnew" id="capexnew-<?= $i; ?>" value="<?= $a['capexnew']; ?>" class="form-control" placeholder="You should fill this field."></div></td>
 					</tr>
 					<tr>
-						<td><?= lang("opexnew"); ?> (<?= $a['unit_cost']; ?>/<?= lang("year"); ?>)</td>
+						<td><?= lang("Validation.opexnew"); ?> (<?= $a['unit_cost']; ?>/<?= lang("Validation.year"); ?>)</td>
 						<td><input type="text" name="opexnew" id="opexnew-<?= $i; ?>" class="form-control"></td>
 					</tr>
 					<tr>
-						<td><?= lang("lifetimenew"); ?> (<?= lang("year"); ?>)</td>
+						<td><?= lang("Validation.lifetimenew"); ?> (<?= lang("Validation.year"); ?>)</td>
 						<td><div class="  "><input type="text" name="ltnew" id="ltnew-<?= $i; ?>" value="<?= $a['ltnew']; ?>" class="form-control" placeholder="You should fill this field."></div></td>
 					</tr>
 					<tr>
-						<td><?= lang("anncostold"); ?></td>
+						<td><?= lang("Validation.anncostold"); ?></td>
 						<td><input type="text" name="acold" id="acold-<?= $i; ?>" class="form-control"></td>
 					</tr>
 					<tr>
-						<td><?= lang("anncostnew"); ?></td>
+						<td><?= lang("Validation.anncostnew"); ?></td>
 						<td><input type="text" name="acnew" id="acnew-<?= $i; ?>" class="form-control"></td>
 					</tr>
 					<tr>
-						<td><?= lang("economiccostbenefit"); ?></td>
+						<td><?= lang("Validation.economiccostbenefit"); ?></td>
 						<td><input type="text" name="eco" id="eco-<?= $i; ?>" class="form-control"></td>
 					</tr>
 					<tr>
-						<td><?= lang("unit"); ?></td>
-						<td>Euro/<?= lang("year"); ?></td>
+						<td><?= lang("Validation.unit"); ?></td>
+						<td>Euro/<?= lang("Validation.year"); ?></td>
 					</tr>
 					<tr>
-						<td><?= lang("oldcons"); ?></td><td><input type="text" name="oldcons" id="oldcons-<?= $i; ?>" class="form-control" value="<?= $a['qntty']; ?>"></td>
+						<td><?= lang("Validation.oldcons"); ?></td><td><input type="text" name="oldcons" id="oldcons-<?= $i; ?>" class="form-control" value="<?= $a['qntty']; ?>"></td>
 					</tr>
 					<tr>
-						<td><?= lang("oldcost"); ?></td><td><input type="text" name="oldcost" id="oldcost-<?= $i; ?>" class="form-control" value="<?= $a['cost']; ?>"></td>
+						<td><?= lang("Validation.oldcost"); ?></td><td><input type="text" name="oldcost" id="oldcost-<?= $i; ?>" class="form-control" value="<?= $a['cost']; ?>"></td>
 					</tr>
 					<tr>
-						<td><?= lang("oldep"); ?></td><td><input type="text" name="oldep" id="oldep-<?= $i; ?>" class="form-control" value="<?= $a['ep']; ?>"></td>
+						<td><?= lang("Validation.oldep"); ?></td><td><input type="text" name="oldep" id="oldep-<?= $i; ?>" class="form-control" value="<?= $a['ep']; ?>"></td>
 					</tr>
 					<tr>
-						<td><?= lang("newcons"); ?></td>
+						<td><?= lang("Validation.newcons"); ?></td>
 						<td><div class="  "><input type="text" name="newcons" id="newcons-<?= $i; ?>" value="<?= $a['newcons']; ?>" class="form-control" placeholder="You should fill this field."></div></td>
 					</tr>
 					<tr>
-						<td><?= lang("unit"); ?></td>
-						<td><input type="hidden" name="unit2" value="<?= $a['qntty_unit']; ?>/<?= lang('year'); ?>" > <?= $a['qntty_unit']; ?>/<?= lang("year"); ?></td>
+						<td><?= lang("Validation.unit"); ?></td>
+						<td><input type="hidden" name="unit2" value="<?= $a['qntty_unit']; ?>/<?= lang('year'); ?>" > <?= $a['qntty_unit']; ?>/<?= lang("Validation.year"); ?></td>
 					</tr>
 					<tr>
-						<td><?= $a['unit_cost']; ?>/ <?= lang("unit"); ?></td>
+						<td><?= $a['unit_cost']; ?>/ <?= lang("Validation.unit"); ?></td>
 						<td><input type="text" name="euunit" id="euunit-<?= $i; ?>" class="form-control" value="<?= ($a['cost']/$a['qntty']); ?>" ></td>
 					</tr>
 					<tr>
-						<td>EP/ <?= lang("unit"); ?></td>
+						<td>EP/ <?= lang("Validation.unit"); ?></td>
 						<td><input type="text" name="eipunit" id="eipunit-<?= $i; ?>" class="form-control" value="<?= ($a['ep']/$a['qntty']); ?>" ></td>
 					</tr>
 					<tr>
-						<td><?= lang("ecologicalbenefit"); ?></td>
+						<td><?= lang("Validation.ecologicalbenefit"); ?></td>
 						<td><input type="text" name="ecoben" id="ecoben-<?= $i; ?>" class="form-control"></td>
 					</tr>
 					<tr>
-						<td><?= lang("unit"); ?></td>
-						<td>EP/<?= lang("year"); ?></td>
+						<td><?= lang("Validation.unit"); ?></td>
+						<td>EP/<?= lang("Validation.year"); ?></td>
 					</tr>
 					<tr>
-						<td><?= lang("marginalcost"); ?></td>
+						<td><?= lang("Validation.marginalcost"); ?></td>
 						<td><input type="text" name="marcos" id="marcos-<?= $i; ?>" class="form-control"></td>	
 					</tr>
 					<tr>
-						<td><?= lang("unit"); ?></td><td>$/EP</td>
+						<td><?= lang("Validation.unit"); ?></td><td>$/EP</td>
 					</tr>
 				</table>
-				<input type="submit" value="<?= lang("save"); ?>" class="btn btn-block btn-info" style="margin-top:20px;"/> -->
+				<input type="submit" value="<?= lang("Validation.save"); ?>" class="btn btn-block btn-info" style="margin-top:20px;"/> -->
 				<script type="text/javascript">
                     
 				/*	$('#form-<?= $i; ?> input').keydown(function(e){
@@ -911,7 +911,7 @@
 		<?php endif ?>
 </div>
 <div class="col-md-6" id="sag4">
-	<p><?= lang("cbaheading3"); ?></p>
+	<p><?= lang("Validation.cbaheading3"); ?></p>
 	<div id="rect-demo-ana" style="border:2px solid #f0f0f0;">
     <div id="rect-demo"></div>
   </div>
@@ -1170,7 +1170,7 @@ function insertFlowRow(selectedObject) {
 //tooltip unit column (option side)
 $('.tooltip-unit').tooltip({
     position: 'top',
-    content: '<span style="color:#fff"><?= lang("unit-ttip"); ?></span>',
+    content: '<span style="color:#fff"><?= lang("Validation.unit-ttip"); ?></span>',
     onShow: function(){
         $(this).tooltip('tip').css({
             backgroundColor: '#999',

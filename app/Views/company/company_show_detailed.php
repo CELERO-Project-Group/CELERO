@@ -14,8 +14,8 @@
 
 			<?php if($this->session->userdata('user_in')['id']): ?>
 				<?php if($canEdit=='1'): ?>
-					<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("new_flow/".$companies['id']) ?>"><i class="fa fa-database"></i> <?= lang("editcompanydata") ?></a>
-					<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("update_company/".$companies['id']) ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("editcompanyinfo") ?></a>
+					<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("new_flow/".$companies['id']) ?>"><i class="fa fa-database"></i> <?= lang("Validation.editcompanydata") ?></a>
+					<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("update_company/".$companies['id']) ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.editcompanyinfo") ?></a>
 					<button class="btn btn-block btn-inverse" style="width:100%; margin-bottom: 10px;" onclick="$('#target').toggle();">Add New User</button>
 
 					<div id="target" class="well" style="display: none">
@@ -38,7 +38,7 @@
 				<?php endif ?>
 			<?php endif ?>
 			<div class="form-group" style="margin-bottom:20px;">
-				<div class="swissheader" style="font-size:15px;"><?= lang("companyprojects") ?></div>
+				<div class="swissheader" style="font-size:15px;"><?= lang("Validation.companyprojects") ?></div>
 				<ul class="nav nav-list">
 				<?php foreach ($prjname as $prj): ?>
 					<li><a style="text-transform:capitalize;" href="<?= base_url('project/'.$prj['proje_id']) ?>"> <?= $prj["name"] ?></a></li>
@@ -47,7 +47,7 @@
 			</div>
 
 			<div class="form-group">
-				<div class="swissheader" style="font-size:15px;"><?= lang("companyusers") ?></div>
+				<div class="swissheader" style="font-size:15px;"><?= lang("Validation.companyusers") ?></div>
 				<ul class="nav nav-list">
 				<?php foreach ($cmpnyperson as $cmpprsn): ?>
 					<li><a style="text-transform:capitalize;" href="<?= base_url('user/'.$cmpprsn["user_name"]); ?>"> <?= $cmpprsn["name"].' '.$cmpprsn["surname"] ?></a></li>
@@ -56,7 +56,7 @@
 				</ul>
 			</div>
 			<?php if($canDelete=='1'): ?>
-				<a style="margin-top: 10px;" class="btn btn-danger btn-block" href="<?= base_url("deletecompany/".$companies['id']) ?>" onclick="return confirm('Are you sure you want to delete the company <?= $companies['name'] ?>? \r\n \r\nWarning: The company will be deleted permanently and cannot be restored!');"><i class="fa fa-trash" ></i> <?= lang("deletecompany") ?></a>
+				<a style="margin-top: 10px;" class="btn btn-danger btn-block" href="<?= base_url("deletecompany/".$companies['id']) ?>" onclick="return confirm('Are you sure you want to delete the company <?= $companies['name'] ?>? \r\n \r\nWarning: The company will be deleted permanently and cannot be restored!');"><i class="fa fa-trash" ></i> <?= lang("Validation.deletecompany") ?></a>
 			<?php endif ?>
 		</div>
 		<div class="col-md-8">
@@ -65,7 +65,7 @@
 			<table class="table table-bordered">
 				<tr>
 					<td style="width:150px;">
-					<?= lang("description") ?>
+					<?= lang("Validation.description") ?>
 					</td>
 					<td>
 					<?= $companies['description'] ?>
@@ -73,7 +73,7 @@
 				</tr>
 				<tr>
 					<td>
-					<?= lang("email") ?>
+					<?= lang("Validation.email") ?>
 					</td>
 					<td>
 					<?= $companies['email'] ?>
@@ -81,7 +81,7 @@
 				</tr>
 				<tr>
 					<td>
-					<?= lang("workphone") ?>
+					<?= lang("Validation.workphone") ?>
 					</td>
 					<td>
 					<?= $companies['phone_num_2'] ?>
@@ -89,7 +89,7 @@
 				</tr>
 				<tr>
 					<td>
-					<?= lang("faxnumber") ?>
+					<?= lang("Validation.faxnumber") ?>
 					</td>
 					<td>
 					<?= $companies['fax_num'] ?>
@@ -107,7 +107,7 @@
 				</tr>
 				<tr>
 					<td>
-					<?= lang("address") ?>
+					<?= lang("Validation.address") ?>
 					</td>
 					<td>
 					<?= $companies['address'] ?>
@@ -115,7 +115,7 @@
 				</tr>
 				<tr>
 					<td>
-					<?= lang("seeonmap") ?>
+					<?= lang("Validation.seeonmap") ?>
 					</td>
 					<td>
 					<?= $map['html'] ?>
@@ -127,14 +127,14 @@
 
 				<table class="table table-bordered">
 					<tr class="success">
-						<th colspan="7"><?= lang("companyflows") ?></th>
+						<th colspan="7"><?= lang("Validation.companyflows") ?></th>
 					</tr>
 					<tr>
-						<th><?= lang("name") ?></th>
-						<th><?= lang("flowtype") ?></th>
-						<th colspan="2" style="text-align: center;"><?= lang("quantity") ?></th>
-						<th colspan="2" style="text-align: center;"><?= lang("cost") ?></th>
-						<th style="text-align: center;"><?= lang("ep") ?></th>
+						<th><?= lang("Validation.name") ?></th>
+						<th><?= lang("Validation.flowtype") ?></th>
+						<th colspan="2" style="text-align: center;"><?= lang("Validation.quantity") ?></th>
+						<th colspan="2" style="text-align: center;"><?= lang("Validation.cost") ?></th>
+						<th style="text-align: center;"><?= lang("Validation.ep") ?></th>
 					</tr>
 					<?php foreach ($company_flows as $flows): ?>
 						<tr>
@@ -151,12 +151,12 @@
 
 				<table class="table table-bordered">
 					<tr class="success">
-						<th colspan="3"><?= lang("companyprocess") ?></th>
+						<th colspan="3"><?= lang("Validation.companyprocess") ?></th>
 					</tr>
 					<tr>
-						<th><?= lang("name") ?></th>
-						<th><?= lang("flowname") ?></th>
-						<th><?= lang("flowtype") ?></th>
+						<th><?= lang("Validation.name") ?></th>
+						<th><?= lang("Validation.flowname") ?></th>
+						<th><?= lang("Validation.flowtype") ?></th>
 					</tr>
 					<?php foreach ($company_prcss as $prcss): ?>
 						<tr>
@@ -169,11 +169,11 @@
 
 				<table class="table table-bordered">
 					<tr class="success">
-						<th colspan="2"><?= lang("companycomponents") ?></th>
+						<th colspan="2"><?= lang("Validation.companycomponents") ?></th>
 					</tr>
 					<tr>
-						<th><?= lang("flowname") ?></th>
-						<th><?= lang("name") ?></th>
+						<th><?= lang("Validation.flowname") ?></th>
+						<th><?= lang("Validation.name") ?></th>
 					</tr>
 					<?php foreach ($company_component as $cmpnnt): ?>
 						<tr>
@@ -185,10 +185,10 @@
 
 				<table class="table table-bordered">
 					<tr class="success">
-						<th><?= lang("companyproducts") ?></th>
+						<th><?= lang("Validation.companyproducts") ?></th>
 					</tr>
 					<tr>
-						<th><?= lang("name") ?></th>
+						<th><?= lang("Validation.name") ?></th>
 					</tr>
 					<?php foreach ($company_product as $prdct): ?>
 						<tr>

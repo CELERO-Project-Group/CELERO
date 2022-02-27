@@ -1,5 +1,5 @@
 <div class="container">
-	<p class="lead"><?= lang("editprojectinfo"); ?></p>
+	<p class="lead"><?= lang("Validation.editprojectinfo"); ?></p>
 
 	<!-- for Datepicker -->
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -15,11 +15,11 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div class="form-group">
-	    			<label for="projectName"><?= lang("name"); ?></label>
-	    			<input type="text" class="form-control" id="projectName" placeholder="<?= lang("name"); ?>" value="<?= set_value('projectName',$projects['name']); ?>" name="projectName">
+	    			<label for="projectName"><?= lang("Validation.name"); ?></label>
+	    			<input type="text" class="form-control" id="projectName" placeholder="<?= lang("Validation.name"); ?>" value="<?= set_value('projectName',$projects['name']); ?>" name="projectName">
 	 			</div>
 	 			<div class="form-group">
-	 				<label for="datePicker"><?= lang("startdate"); ?></label>
+	 				<label for="datePicker"><?= lang("Validation.startdate"); ?></label>
 	    			<div class="input-group">
 				    	<span class="input-group-btn">
 				      		<button class="btn" type="button" style="height: 38px; border: 1px solid;"><span class="fui-calendar"></span></button>
@@ -28,7 +28,7 @@
 				  	</div>
 	 			</div>
 	 			<div class="form-group">
-	    			<label for="status"><?= lang("status"); ?></label>
+	    			<label for="status"><?= lang("Validation.status"); ?></label>
 	    			<div>
 		    			<select id="status" class="info select-block" name="status">
 		  					<?php foreach ($project_status as $status): ?>
@@ -38,11 +38,11 @@
 					</div>
 	 			</div>
 	 			<div class="form-group">
-	    			<label for="description"><?= lang("description"); ?></label>
+	    			<label for="description"><?= lang("Validation.description"); ?></label>
 	    			<textarea class="form-control" rows="3" name="description" id="description" placeholder="Description" value=""><?= set_value('description',$projects['description']); ?></textarea>
 	 			</div>
 	 			<div class="form-group">
-	    			<label for="assignedCompanies"><?= lang("assigncompany"); ?></label>
+	    			<label for="assignedCompanies"><?= lang("Validation.assigncompany"); ?></label>
 	    			<!--  <input type="text" id="companySearch" />	-->
 
 	    			<select multiple="multiple"  class="select-block" id="assignCompany" name="assignCompany[]">
@@ -53,7 +53,7 @@
 					</select>
 	 			</div>
 	 			<div class="form-group">
-	    			<label for="assignedConsultant"><?= lang("assignconsultant"); ?></label>
+	    			<label for="assignedConsultant"><?= lang("Validation.assignconsultant"); ?></label>
 	    			<select multiple="multiple" class="select-block" id="assignConsultant" name="assignConsultant[]">
 
 						<?php foreach ($consultants as $consultant): ?>
@@ -62,7 +62,7 @@
 					</select>
 	 			</div>
 	 			<div class="form-group">
-	    			<label for="assignContactPerson"><?= lang("assigncontact"); ?></label>
+	    			<label for="assignContactPerson"><?= lang("Validation.assigncontact"); ?></label>
 	    			<select  class="select-block" id="assignContactPerson" name="assignContactPerson">
 	    			<?php foreach ($contactusers as $contacts): ?>
 	    			<?php foreach ($contacts as $contactuser): ?>
@@ -72,8 +72,8 @@
 					</select>
 	 			</div>
 	 			<br>
-				<button type="submit" class="btn btn-inverse col-md-9"><?= lang("save"); ?></button>
-    			<a href="<?= base_url('project/'.$projects['id']); ?>" class="btn btn-warning col-md-2 col-md-offset-1"><?= lang("cancel"); ?></a>
+				<button type="submit" class="btn btn-inverse col-md-9"><?= lang("Validation.save"); ?></button>
+    			<a href="<?= base_url('project/'.$projects['id']); ?>" class="btn btn-warning col-md-2 col-md-offset-1"><?= lang("Validation.cancel"); ?></a>
 			</div>
 			<div class="col-md-4">
 

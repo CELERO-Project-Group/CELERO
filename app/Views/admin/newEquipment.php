@@ -17,21 +17,21 @@
                   if(data["found"]==true) {
                       //$.messager.alert('Success','Success inserted Flow family!','info');
                       if(data["id"]>0) {
-                          noty({text: '<?php echo lang("notyequipmentinserted"); ?>', type: 'success'});
+                          noty({text: '<?php echo lang("Validation.notyequipmentinserted"); ?>', type: 'success'});
                           $('#tt_tree_equipment').tree('reload');
                       } else {
-                          noty({text: '<?php echo lang("notyequipmentinsertedbefore"); ?>', type: 'warning'});
+                          noty({text: '<?php echo lang("Validation.notyequipmentinsertedbefore"); ?>', type: 'warning'});
                           $('#tt_tree_equipment').tree('reload');
                       }
                   } else if(data["found"]==false) {         
                       //$.messager.alert('Insert failed','Failed to insert Equipment !','error');
-                      noty({text: '<?php echo lang("notyequipmentnotinserted"); ?>', type: 'error'});  
+                      noty({text: '<?php echo lang("Validation.notyequipmentnotinserted"); ?>', type: 'error'});  
                       $('#tt_tree_equipment').tree('reload');
                   }   
                 },
                 error: function(jqXHR , textStatus, errorThrown) {
                   //console.warn('error text status-->'+textStatus);
-                  noty({text: '<?php echo lang("notyequipmentnotinserted"); ?>', type: 'error'});  
+                  noty({text: '<?php echo lang("Validation.notyequipmentnotinserted"); ?>', type: 'error'});  
                 }
             });
         }
@@ -161,7 +161,7 @@
                                             <li><a href='<?php echo base_url('language/switch/english'); ?>' style="border-right: 0px;border-left: 0px;"><img src="<?php echo asset_url('images/United-States.png'); ?>"></a></li>
                                         </ul>
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="icon-tint"></i><span class="hidden-phone"><?php echo lang("changeskin"); ?> </span>
+						<i class="icon-tint"></i><span class="hidden-phone"><?php echo lang("Validation.changeskin"); ?> </span>
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" id="themes"> 
@@ -185,19 +185,19 @@
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><?php echo lang("myprofile"); ?></a></li>
+						<li><a href="#"><?php echo lang("Validation.myprofile"); ?></a></li>
 						<li class="divider"></li>
-						<li><a href="../logout"><?php echo lang("logout"); ?></a></li>
+						<li><a href="../logout"><?php echo lang("Validation.logout"); ?></a></li>
 					</ul>
 				</div>
 				<!-- user dropdown ends -->
 				
 				<div class="top-nav nav-collapse">
 					<ul class="nav">
-						<li><a href="../../ecoman"><?php echo lang("mainpage"); ?></a></li>
+						<li><a href="../../ecoman"><?php echo lang("Validation.mainpage"); ?></a></li>
 						<li>
 							<!--<form class="navbar-search pull-left">-->
-								<input placeholder="<?php echo lang("search"); ?>" class="search-query span2" name="query" type="text">
+								<input placeholder="<?php echo lang("Validation.search"); ?>" class="search-query span2" name="query" type="text">
 							<!--</form>-->
 						</li>
 					</ul>
@@ -213,47 +213,47 @@
 			<div class="span2 main-menu-span">
 				<div class="well nav-collapse sidebar-nav">
 					 <ul class="nav nav-tabs nav-stacked main-menu">
-                                            <li class="nav-header hidden-tablet"><?php echo lang("adminmenu"); ?></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newFlow'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("flowslink"); ?></span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newProcess'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("processlink"); ?></span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newEquipment'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("equipmentslink"); ?></span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/industrialZones'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("zoneslink"); ?> </span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/clusters'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("clusterslink"); ?></span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/employees'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("clusteremplink"); ?> </span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/consultants'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("zoneconsultantslink"); ?>  </span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/reports'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("reportslink"); ?></span></a></li>
+                                            <li class="nav-header hidden-tablet"><?php echo lang("Validation.adminmenu"); ?></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newFlow'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.flowslink"); ?></span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newProcess'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.processlink"); ?></span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newEquipment'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.equipmentslink"); ?></span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/industrialZones'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.zoneslink"); ?> </span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/clusters'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.clusterslink"); ?></span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/employees'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.clusteremplink"); ?> </span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/consultants'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.zoneconsultantslink"); ?>  </span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/reports'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.reportslink"); ?></span></a></li>
 
                                     </ul>
                                     
                                     
                                     <ul class="nav nav-tabs nav-stacked main-menu">
-                                            <li class="nav-header hidden-tablet"><?php echo lang("mainmenu"); ?></li>
-						<li><a class="ajax-link" href="<?php echo base_url(); ?>"><i class="icon-home"></i><span class="hidden-tablet"> <?php echo lang("mainpage"); ?></span></a></li>
+                                            <li class="nav-header hidden-tablet"><?php echo lang("Validation.mainmenu"); ?></li>
+						<li><a class="ajax-link" href="<?php echo base_url(); ?>"><i class="icon-home"></i><span class="hidden-tablet"> <?php echo lang("Validation.mainpage"); ?></span></a></li>
                                                 
-                                                <li><a class="ajax-link" href="<?php echo base_url('users'); ?>"><i class="icon-user"></i><span class="hidden-tablet"><?php echo lang("consultants"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('user'); ?>/<?php echo $userName; ?>"><i class="icon-user"></i><span class="hidden-tablet"><?php echo lang("myprofile"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('profile_update'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("updateprofile"); ?></span></a></li>
-                                                
-                                                
-						<li><a class="ajax-link" href="<?php echo base_url('mycompanies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("mycompanies"); ?></span></a></li>
-                                                <!--<li><a class="ajax-link" href="<?php echo base_url('projectcompanies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("myprofile"); ?>Project Companies</span></a></li>-->
-                                                <li><a class="ajax-link" href="<?php echo base_url('companies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("allcompanies"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('newcompany'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("createcompany"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('users'); ?>"><i class="icon-user"></i><span class="hidden-tablet"><?php echo lang("Validation.consultants"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('user'); ?>/<?php echo $userName; ?>"><i class="icon-user"></i><span class="hidden-tablet"><?php echo lang("Validation.myprofile"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('profile_update'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.updateprofile"); ?></span></a></li>
                                                 
                                                 
-                                                <li><a class="ajax-link" href="<?php echo base_url('myprojects'); ?>"><i class="icon-globe"></i><span class="hidden-tablet"><?php echo lang("myprojects"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('projects'); ?>"><i class="icon-globe"></i><span class="hidden-tablet"><?php echo lang("allprojects"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('newproject'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("createproject"); ?></span></a></li>
+						<li><a class="ajax-link" href="<?php echo base_url('mycompanies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("Validation.mycompanies"); ?></span></a></li>
+                                                <!--<li><a class="ajax-link" href="<?php echo base_url('projectcompanies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("Validation.myprofile"); ?>Project Companies</span></a></li>-->
+                                                <li><a class="ajax-link" href="<?php echo base_url('companies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("Validation.allcompanies"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('newcompany'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.createcompany"); ?></span></a></li>
                                                 
                                                 
-						<li><a class="ajax-link" href="<?php echo base_url('cpscoping'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("cpidentification"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('cost_benefit'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("costbenefitanalysis"); ?> </span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('ecotracking'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("ecotracking"); ?> </span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('myprojects'); ?>"><i class="icon-globe"></i><span class="hidden-tablet"><?php echo lang("Validation.myprojects"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('projects'); ?>"><i class="icon-globe"></i><span class="hidden-tablet"><?php echo lang("Validation.allprojects"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('newproject'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.createproject"); ?></span></a></li>
                                                 
-                                                <li><a class="ajax-link" href="<?php echo base_url('isScopingPrjBaseMDF'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("industrialsimbiosis"); ?> </span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('map'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("gis"); ?> </span></a></li>
+                                                
+						<li><a class="ajax-link" href="<?php echo base_url('cpscoping'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("Validation.cpidentification"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('cost_benefit'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("Validation.costbenefitanalysis"); ?> </span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('ecotracking'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("Validation.ecotracking"); ?> </span></a></li>
+                                                
+                                                <li><a class="ajax-link" href="<?php echo base_url('isScopingPrjBaseMDF'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("Validation.industrialsimbiosis"); ?> </span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('map'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("Validation.gis"); ?> </span></a></li>
                            
-						<li><a class="ajax-link" href="<?php echo base_url('logout'); ?>"><i class="icon-ban-circle"></i><span class="hidden-tablet"><?php echo lang("logout"); ?> </span></a></li>
+						<li><a class="ajax-link" href="<?php echo base_url('logout'); ?>"><i class="icon-ban-circle"></i><span class="hidden-tablet"><?php echo lang("Validation.logout"); ?> </span></a></li>
 						<!--<li><a class="ajax-link" href="#"><i class="icon-font"></i><span class="hidden-tablet">Logs</span></a></li>
 						<li><a class="ajax-link" href="#"><i class="icon-picture"></i><span class="hidden-tablet"> Admin Reports</span></a></li>
 						<li class="nav-header hidden-tablet">Secondary Menu</li>
@@ -284,10 +284,10 @@
 			<div>
 				<ul class="breadcrumb">
 					<li>
-						<a href="<?php echo base_url(''); ?>"><?php echo lang("mainpage"); ?></a> <span class="divider">/</span>
+						<a href="<?php echo base_url(''); ?>"><?php echo lang("Validation.mainpage"); ?></a> <span class="divider">/</span>
 					</li>
 					<li>
-						<a href="<?php echo base_url('admin/newEquipment'); ?>"><?php echo lang("equipmentslink"); ?></a>
+						<a href="<?php echo base_url('admin/newEquipment'); ?>"><?php echo lang("Validation.equipmentslink"); ?></a>
 					</li>
 				</ul>
 			</div>
@@ -299,28 +299,28 @@
 			<div class="sortable row-fluid">
                             <a  id='toplam_anket_link' data-rel="" title="" class="well span3 top-block" href="#">
 					<span class="icon32 icon-red icon-user"></span>
-					<div><?php echo lang("totaluserscount"); ?></div>
+					<div><?php echo lang("Validation.totaluserscount"); ?></div>
 					<div id='totalUsers'></div>
 					<span id ='totalUsers_by_today' class="notification"></span>
 				</a>
  
 				<a data-rel="tooltip" title="" class="well span3 top-block" href="#">
 					<span class="icon32 icon-color icon-inbox"></span>
-					<div><?php echo lang("totalprojectscount"); ?></div>
+					<div><?php echo lang("Validation.totalprojectscount"); ?></div>
 					<div id='totalProjects'></div>
 					<span id='totalProjects_by_today' class="notification green"></span>
 				</a>
 
 				<a data-rel="tooltip" title="" class="well span3 top-block" href="#">
 					<span class="icon32 icon-color icon-cart"></span>
-					<div><?php echo lang("totalisprojectscount"); ?></div>
+					<div><?php echo lang("Validation.totalisprojectscount"); ?></div>
 					<div id="totalISProjects"></div>
 					<span class="notification yellow"></span>
 				</a>
 				
 				<a data-rel="tooltip" title="" class="well span3 top-block" href="#">
 					<span class="icon32 icon-color icon-wrench"></span>
-					<div><?php echo lang("totalproducts"); ?></div>
+					<div><?php echo lang("Validation.totalproducts"); ?></div>
 					<div id="totalProducts"></div>
 					<span class="notification red"></span>
 				</a>
@@ -330,7 +330,7 @@
                         <div class="row-fluid sortable">
                             <div class="box span12">
                                     <div class="box-header well" data-original-title>
-                                            <h2><i class="icon-th"></i><?php echo lang("insertequip"); ?>  </h2>
+                                            <h2><i class="icon-th"></i><?php echo lang("Validation.insertequip"); ?>  </h2>
                                             <div class="box-icon">
                                                     <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
                                                     <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -340,7 +340,7 @@
                                     <div class="box-content">
                                         <div class="row-fluid">
                                             <div class="span4">
-                                                <div class="easyui-panel" title="<?php echo lang("equip"); ?>" style="width:400px;height:auto;" data-options="">
+                                                <div class="easyui-panel" title="<?php echo lang("Validation.equip"); ?>" style="width:400px;height:auto;" data-options="">
                                                         <ul id="tt_tree_equipment" class="easyui-tree" ></ul>
                                                 </div>
                                                 <!--<div id="ft" style="padding:5px;">
@@ -351,10 +351,10 @@
                                             <div class="span6">
                                                 <form class="form-horizontal" style='padding-left:82px;'>
 						  <fieldset>
-							<legend><?php echo lang("insertequip"); ?></legend>
+							<legend><?php echo lang("Validation.insertequip"); ?></legend>
                                                         <legend id='infoLegend' name='infoLegend' style='border-bottom:0px;'></legend>
 							<div class="control-group">
-							  <label class="control-label" for="typeahead"><?php echo lang("insertequip"); ?> </label>
+							  <label class="control-label" for="typeahead"><?php echo lang("Validation.insertequip"); ?> </label>
 							  <div class="controls">
 								<input type="text" id='equipmentFamily' name='equipmentFamily' class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Woods","Solvents","Metals","Other"]'>
 								
@@ -364,8 +364,8 @@
           
 							
 							<div class="form-actions">
-							  <button type="submit" onclick='event.preventDefault();submitFormEquipment();' class="btn btn-primary"><?php echo lang("savedata"); ?></button>
-							  <button type="reset" class="btn"><?php echo lang("resetform"); ?></button>
+							  <button type="submit" onclick='event.preventDefault();submitFormEquipment();' class="btn btn-primary"><?php echo lang("Validation.savedata"); ?></button>
+							  <button type="reset" class="btn"><?php echo lang("Validation.resetform"); ?></button>
 							</div>
 						  </fieldset>
 						</form> 

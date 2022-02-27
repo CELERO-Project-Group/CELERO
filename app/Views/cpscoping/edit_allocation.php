@@ -22,7 +22,7 @@
 				var vPool="";
 				for (var i = 0; i < data.length; i++) {
 					
-					vPool += '<div class="col-md-4"><table style="width:100%;"><tr><td colspan="3" style="height:60px;"><?= lang("process"); ?>: ' + data[i].prcss_name + '</td></tr><tr><td><?= lang("amount"); ?></td><td>' + data[i].amount + ' ' + data[i].unit_amount + ' <span class="label label-info">' + data[i].error_amount + '%</span></td><td style="width:70px;"><?= lang("accuracyrate"); ?>: '+data[i].allocation_amount+'%</td></tr><tr><td><?= lang("cost"); ?></td><td>' + data[i].cost + ' ' + data[i].unit_cost + ' <span class="label label-info">' + data[i].error_cost + '%</span></td><td style="width:70px;"><?= lang("accuracyrate"); ?>: '+data[i].allocation_cost+'%</td></tr><tr><td><?= lang("ep"); ?></td><td>' + data[i].env_impact + ' ' + data[i].unit_env_impact + ' <span class="label label-info">' + data[i].error_ep + '%</span></td><td style="width:70px;"><?= lang("accuracyrate"); ?>: '+data[i].allocation_env_impact+'%</td></tr></table></div>';
+					vPool += '<div class="col-md-4"><table style="width:100%;"><tr><td colspan="3" style="height:60px;"><?= lang("Validation.process"); ?>: ' + data[i].prcss_name + '</td></tr><tr><td><?= lang("Validation.amount"); ?></td><td>' + data[i].amount + ' ' + data[i].unit_amount + ' <span class="label label-info">' + data[i].error_amount + '%</span></td><td style="width:70px;"><?= lang("Validation.accuracyrate"); ?>: '+data[i].allocation_amount+'%</td></tr><tr><td><?= lang("Validation.cost"); ?></td><td>' + data[i].cost + ' ' + data[i].unit_cost + ' <span class="label label-info">' + data[i].error_cost + '%</span></td><td style="width:70px;"><?= lang("Validation.accuracyrate"); ?>: '+data[i].allocation_cost+'%</td></tr><tr><td><?= lang("Validation.ep"); ?></td><td>' + data[i].env_impact + ' ' + data[i].unit_env_impact + ' <span class="label label-info">' + data[i].error_ep + '%</span></td><td style="width:70px;"><?= lang("Validation.accuracyrate"); ?>: '+data[i].allocation_env_impact+'%</td></tr></table></div>';
 					//alert(data);
 
 				}
@@ -45,27 +45,27 @@
 <?= form_open_multipart('cpscoping/edit_allocation/'.$allocation['allocation_id']); ?>
 	<div>
 		<div class="col-md-3">
-			<div><?= lang("allocation"); ?></div>
+			<div><?= lang("Validation.allocation"); ?></div>
 			<hr>
-			<div><?= lang("process"); ?>: <?= $allocation['prcss_name']; ?></div>
-			<div><?= lang("flowname"); ?>: <?= $allocation['flow_name']; ?></div>
-			<div><?= lang("flowtype"); ?>: <?= $allocation['flow_type_name']; ?></div>
+			<div><?= lang("Validation.process"); ?>: <?= $allocation['prcss_name']; ?></div>
+			<div><?= lang("Validation.flowname"); ?>: <?= $allocation['flow_name']; ?></div>
+			<div><?= lang("Validation.flowtype"); ?>: <?= $allocation['flow_type_name']; ?></div>
 		</div>
 		<div class="col-md-9">
-			<div><?= lang("editallocation"); ?></div>
+			<div><?= lang("Validation.editallocation"); ?></div>
 			<hr>
 			<div class="form-group clearfix row">
 				<label class="control-label col-md-3 tooltip-amo" data-toggle="tooltip">
-					<?= lang("amount"); ?> <i style="color:red;" class="fa fa-question-circle"></i></label>
-				<label class="control-label col-md-3"><?= lang("amountunit"); ?></label>
+					<?= lang("Validation.amount"); ?> <i style="color:red;" class="fa fa-question-circle"></i></label>
+				<label class="control-label col-md-3"><?= lang("Validation.amountunit"); ?></label>
 				<label class="control-label col-md-3 tooltip-allo" data-toggle="tooltip">
-					<?= lang("allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>				<label class="control-label col-md-3 tooltip-acc"  data-toggle="tooltip"><?= lang("accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
+					<?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>				<label class="control-label col-md-3 tooltip-acc"  data-toggle="tooltip"><?= lang("Validation.accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('amount',$allocation['amount']); ?>" id="amount" placeholder="<?= lang("number"); ?>" name="amount">
+					<input type="text" class="form-control" value="<?= set_value('amount',$allocation['amount']); ?>" id="amount" placeholder="<?= lang("Validation.number"); ?>" name="amount">
 				</div>
 				<div class="col-md-3">
 					<select name="unit_amount" id="unit_amount" class="btn-group select select-block">
-						<option value=""><?= lang("pleaseselect"); ?></option>
+						<option value=""><?= lang("Validation.pleaseselect"); ?></option>
 						<?php foreach ($unit_list as $u): ?>
 							<?php $deger = FALSE; ?>
 							<?php if($allocation['unit_amount']==$u['name']) {$deger = TRUE;} ?>
@@ -74,26 +74,26 @@
 					</select>
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('allocation_amount',$allocation['allocation_amount']); ?>" id="allocation_amount" placeholder="<?= lang("percentage"); ?>" name="allocation_amount">
+					<input type="text" class="form-control" value="<?= set_value('allocation_amount',$allocation['allocation_amount']); ?>" id="allocation_amount" placeholder="<?= lang("Validation.percentage"); ?>" name="allocation_amount">
 				</div>
 
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('error_amount',$allocation['error_amount']); ?>" id="error_amount" placeholder="<?= lang("percentage"); ?>" name="error_amount">
+					<input type="text" class="form-control" value="<?= set_value('error_amount',$allocation['error_amount']); ?>" id="error_amount" placeholder="<?= lang("Validation.percentage"); ?>" name="error_amount">
 				</div>
 			</div>
 			<hr>
 			<div class="form-group clearfix row">
-				<label class="control-label col-md-3"><?= lang("cost"); ?></label>
-				<label class="control-label col-md-3"><?= lang("costunit"); ?></label>
+				<label class="control-label col-md-3"><?= lang("Validation.cost"); ?></label>
+				<label class="control-label col-md-3"><?= lang("Validation.costunit"); ?></label>
 				<label class="control-label col-md-3 tooltip-allo" data-toggle="tooltip">
-					<?= lang("allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
-				<label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip"><?= lang("accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
+					<?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
+				<label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip"><?= lang("Validation.accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('cost',$allocation['cost']); ?>" id="cost" placeholder="<?= lang("number"); ?>" name="cost">
+					<input type="text" class="form-control" value="<?= set_value('cost',$allocation['cost']); ?>" id="cost" placeholder="<?= lang("Validation.number"); ?>" name="cost">
 				</div>
 				<div class="col-md-3">
 					<select name="unit_cost" id="unit_cost" class="btn-group select select-block">
-						<option value=""><?= lang("pleaseselect"); ?></option>
+						<option value=""><?= lang("Validation.pleaseselect"); ?></option>
 						<?php $edeger = FALSE; ?>
 						<?php $ddeger = FALSE; ?>
 						<?php $tdeger = FALSE; ?>
@@ -109,43 +109,43 @@
 					</select>
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('allocation_cost',$allocation['allocation_cost']); ?>" id="allocation_cost" placeholder="<?= lang("percentage"); ?>" name="allocation_cost">
+					<input type="text" class="form-control" value="<?= set_value('allocation_cost',$allocation['allocation_cost']); ?>" id="allocation_cost" placeholder="<?= lang("Validation.percentage"); ?>" name="allocation_cost">
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('error_cost',$allocation['error_cost']); ?>" id="error_cost" placeholder="<?= lang("percentage"); ?>" name="error_cost">
+					<input type="text" class="form-control" value="<?= set_value('error_cost',$allocation['error_cost']); ?>" id="error_cost" placeholder="<?= lang("Validation.percentage"); ?>" name="error_cost">
 				</div>
 			</div>
 			<hr>
 			<div class="form-group clearfix row">
-				<label class="control-label col-md-3"><?= lang("environmentalimpact"); ?></label>
+				<label class="control-label col-md-3"><?= lang("Validation.environmentalimpact"); ?></label>
 				<label class="control-label col-md-3">EP</label>
 				<label class="control-label col-md-3 tooltip-allo" data-toggle="tooltip">
-					<?= lang("allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
-				<label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip"><?= lang("accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
+					<?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
+				<label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip"><?= lang("Validation.accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('env_impact',$allocation['env_impact']); ?>" id="env_impact" placeholder="<?= lang("number"); ?>" name="env_impact">
+					<input type="text" class="form-control" value="<?= set_value('env_impact',$allocation['env_impact']); ?>" id="env_impact" placeholder="<?= lang("Validation.number"); ?>" name="env_impact">
 				</div>
 				<div class="col-md-3">
 					<input class="form-control" id="unit_env_impact" value="EP" name="unit_env_impact" readonly>
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('allocation_env_impact',$allocation['allocation_env_impact']); ?>" id="allocation_env_impact" placeholder="<?= lang("percentage"); ?>" name="allocation_env_impact">
+					<input type="text" class="form-control" value="<?= set_value('allocation_env_impact',$allocation['allocation_env_impact']); ?>" id="allocation_env_impact" placeholder="<?= lang("Validation.percentage"); ?>" name="allocation_env_impact">
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('error_ep',$allocation['error_ep']); ?>" id="error_ep" placeholder="<?= lang("percentage"); ?>" name="error_ep">
+					<input type="text" class="form-control" value="<?= set_value('error_ep',$allocation['error_ep']); ?>" id="error_ep" placeholder="<?= lang("Validation.percentage"); ?>" name="error_ep">
 				</div>
 			</div>
 			<hr>
 			<div class="form-group clearfix row">
-				<label class="control-label col-md-3 tooltip-ref" data-toggle="tooltip"><?= lang("reference"); ?> <i style="color:red;" class="fa fa-question-circle"></i></label>
-				<label class="control-label col-md-3"><?= lang("unit"); ?></label>
-				<label class="control-label col-md-6"><?= lang("nameofref"); ?></label>
+				<label class="control-label col-md-3 tooltip-ref" data-toggle="tooltip"><?= lang("Validation.reference"); ?> <i style="color:red;" class="fa fa-question-circle"></i></label>
+				<label class="control-label col-md-3"><?= lang("Validation.unit"); ?></label>
+				<label class="control-label col-md-6"><?= lang("Validation.nameofref"); ?></label>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('reference',$allocation['reference']); ?>" id="reference" placeholder="<?= lang("number"); ?>" name="reference">
+					<input type="text" class="form-control" value="<?= set_value('reference',$allocation['reference']); ?>" id="reference" placeholder="<?= lang("Validation.number"); ?>" name="reference">
 				</div>
 				<div class="col-md-3">
 					<select name="unit_reference" id="unit_reference" class="btn-group select select-block">
-						<option value=""><?= lang("pleaseselect"); ?></option>
+						<option value=""><?= lang("Validation.pleaseselect"); ?></option>
 						<?php foreach ($unit_list as $u2): ?>
 							<?php $deger2 = FALSE; ?>
 							<?php if($allocation['unit_reference']==$u2['name']) {$deger2 = TRUE;} ?>
@@ -154,14 +154,14 @@
 					</select>
 				</div>
 				<div class="col-md-6">
-					<input type="text" class="form-control" value="<?= set_value('nameofref',$allocation['nameofref']); ?>" id="nameofref" placeholder="<?= lang("nameofref"); ?>" name="nameofref">
+					<input type="text" class="form-control" value="<?= set_value('nameofref',$allocation['nameofref']); ?>" id="nameofref" placeholder="<?= lang("Validation.nameofref"); ?>" name="nameofref">
 				</div>
 			</div>
 			<hr>
 			<div class="form-group clearfix row">
 				<label class="control-label col-md-3">KPI</label>
-				<label class="control-label col-md-3">KPI <?= lang("unit"); ?></label>
-				<label class="control-label col-md-6"><?= lang("kpidef"); ?></label>
+				<label class="control-label col-md-3">KPI <?= lang("Validation.unit"); ?></label>
+				<label class="control-label col-md-6"><?= lang("Validation.kpidef"); ?></label>
 				<div class="col-md-3">
 					<input class="form-control" id="kpi" placeholder="" name="kpi" readonly>
 				</div>
@@ -169,15 +169,15 @@
 					<input class="form-control" id="unit_kpi" placeholder="" name="unit_kpi" readonly>
 				</div>
 				<div class="col-md-6">
-					<input type="text" value="<?= set_value('kpidef',$allocation['kpidef']); ?>" class="form-control" id="kpidef" placeholder="<?= lang("kpidef"); ?>" name="kpidef">
+					<input type="text" value="<?= set_value('kpidef',$allocation['kpidef']); ?>" class="form-control" id="kpidef" placeholder="<?= lang("Validation.kpidef"); ?>" name="kpidef">
 				</div>
 				
 			</div>
 			<div>
-				<button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> <?= lang("savedata"); ?></button>
-				<a href="<?= base_url('cpscoping'); ?>" class="btn btn-default" style="float: right;"><i class="fa fa-ban" ></i> <?= lang("cancel"); ?></a>
+				<button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> <?= lang("Validation.savedata"); ?></button>
+				<a href="<?= base_url('cpscoping'); ?>" class="btn btn-default" style="float: right;"><i class="fa fa-ban" ></i> <?= lang("Validation.cancel"); ?></a>
 			</div>
-			<div style="margin-top:30px;"><?= lang("alloheading5"); ?></div>
+			<div style="margin-top:30px;"><?= lang("Validation.alloheading5"); ?></div>
 			<hr>
 			<div id="aallocated" class="row">
 <!-- 				<span id="aprocess"></span>
@@ -205,7 +205,7 @@
 //tooltip accuracy field
 $('.tooltip-acc').tooltip({
     position: 'top',
-    content: '<span style="color:#fff"><?= lang("accuratei"); ?></span>',
+    content: '<span style="color:#fff"><?= lang("Validation.accuratei"); ?></span>',
     onShow: function(){
         $(this).tooltip('tip').css({
             backgroundColor: '#999',
@@ -216,7 +216,7 @@ $('.tooltip-acc').tooltip({
 //tooltip reference field
 $('.tooltip-ref').tooltip({
     position: 'top',
-    content: '<span style="color:#fff"><?= lang("reference-ttip"); ?></span>',
+    content: '<span style="color:#fff"><?= lang("Validation.reference-ttip"); ?></span>',
     onShow: function(){
         $(this).tooltip('tip').css({
             backgroundColor: '#999',
@@ -227,7 +227,7 @@ $('.tooltip-ref').tooltip({
 //tooltip amount field
 $('.tooltip-amo').tooltip({
     position: 'top',
-    content: '<span style="color:#fff"><?= lang("amount-ttip"); ?></span>',
+    content: '<span style="color:#fff"><?= lang("Validation.amount-ttip"); ?></span>',
     onShow: function(){
         $(this).tooltip('tip').css({
             backgroundColor: '#999',
@@ -238,7 +238,7 @@ $('.tooltip-amo').tooltip({
 //tooltip allocation field
 $('.tooltip-allo').tooltip({
     position: 'top',
-    content: '<span style="color:#fff"><?= lang("allocation-ttip"); ?></span>',
+    content: '<span style="color:#fff"><?= lang("Validation.allocation-ttip"); ?></span>',
     onShow: function(){
         $(this).tooltip('tip').css({
             backgroundColor: '#999',

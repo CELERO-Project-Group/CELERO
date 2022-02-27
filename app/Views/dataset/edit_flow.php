@@ -9,26 +9,26 @@
 	    </div>
 	<?php endif ?>
 		<?= form_open_multipart('edit_flow/'.$companyID.'/'.$flow['flow_id'].'/'.$flow['flow_type_id']); ?>
-			<p class="lead"><?= lang("editflow"); ?></p>
+			<p class="lead"><?= lang("Validation.editflow"); ?></p>
 			<div class="well">
-				<div><?= lang("flowname"); ?>: <?= $flow['flowname']; ?></div>
-				<div><?= lang("flowtype"); ?>: <?= $flow['flowtype']; ?></div>
-				<div><?= lang("flowfamily"); ?>: <?= $flow['flowfamily']; ?></div>
+				<div><?= lang("Validation.flowname"); ?>: <?= $flow['flowname']; ?></div>
+				<div><?= lang("Validation.flowtype"); ?>: <?= $flow['flowtype']; ?></div>
+				<div><?= lang("Validation.flowfamily"); ?>: <?= $flow['flowfamily']; ?></div>
 			</div>
 			<div class="form-group">
 				<div class="row">
 					<div class="col-md-8">
-						<label for="quantity"><?= lang("quantity"); ?> (<?= lang("annual"); ?>) 
+						<label for="quantity"><?= lang("Validation.quantity"); ?> (<?= lang("Validation.annual"); ?>) 
 							<span style="color:red;">*
-								<small><?= lang("mandatory"); ?></small>
+								<small><?= lang("Validation.mandatory"); ?></small>
 							</span>
 						</label>
-						<input class="form-control" id="quantity" name="quantity" placeholder="<?= lang("quantity"); ?>" value="<?= set_value('quantity',$flow['qntty']); ?>">
+						<input class="form-control" id="quantity" name="quantity" placeholder="<?= lang("Validation.quantity"); ?>" value="<?= set_value('quantity',$flow['qntty']); ?>">
 					</div>
 					<div class="col-md-4">
-						<label for="quantityUnit"><?= lang("quantity"); ?> <?= lang("unit"); ?> <span style="color:red;">*</span></label>
+						<label for="quantityUnit"><?= lang("Validation.quantity"); ?> <?= lang("Validation.unit"); ?> <span style="color:red;">*</span></label>
 					    <select id="selectize-units" class="info select-block" name="quantityUnit"> 
-		                    <option value="" disabled selected><?= lang("pleaseselect"); ?></option>
+		                    <option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>
 		                    <?php foreach ($units as $unit): ?>
 		                    	<!-- sets the "qntty unit" in the dropdown by setting set_flow_unit to TRUE if id equals -->
 		                    	<?php 
@@ -46,11 +46,11 @@
 		  	<div class="form-group">
 		    	<div class="row">
 						<div class="col-md-8">
-							<label for="cost"><?= lang("cost"); ?> (<?= lang("annual"); ?>) <span style="color:red;">*</span></label>
-		    			<input class="form-control" id="cost" name="cost" placeholder="<?= lang("cost"); ?>" value="<?= set_value('cost',$flow['cost']); ?>">
+							<label for="cost"><?= lang("Validation.cost"); ?> (<?= lang("Validation.annual"); ?>) <span style="color:red;">*</span></label>
+		    			<input class="form-control" id="cost" name="cost" placeholder="<?= lang("Validation.cost"); ?>" value="<?= set_value('cost',$flow['cost']); ?>">
 			    	</div>
 						<div class="col-md-4">
-							<label for="cost"><?= lang("costunit"); ?> <span style="color:red;">*</span></label>
+							<label for="cost"><?= lang("Validation.costunit"); ?> <span style="color:red;">*</span></label>
 							<select id="costUnit" class="info select-block" name="costUnit">
 								<?php $edeger = FALSE; ?>
 								<?php $ddeger = FALSE; ?>
@@ -71,11 +71,11 @@
 		  	<div class="form-group">
 		  		<div class="row">
 						<div class="col-md-8">
-				  		<label for="ep">EP (<?= lang("annual"); ?>)</label>
+				  		<label for="ep">EP (<?= lang("Validation.annual"); ?>)</label>
 				    	<input class="form-control" id="ep" name="ep" placeholder="EP" value="<?= set_value('ep',$flow['ep']); ?>">
 				    </div>
 						<div class="col-md-4">
-							<label for="epUnit"><?= lang("epunit"); ?></label>
+							<label for="epUnit"><?= lang("Validation.epunit"); ?></label>
 							<input type="text" class="form-control" id="epUnit" value="EP" name="epUnit" readonly>
 						</div>
 		  		</div>
@@ -87,7 +87,7 @@
 			</div>					
 
 			<div class="form-group">
-				<label for="state"><?= lang("state"); ?></label>
+				<label for="state"><?= lang("Validation.state"); ?></label>
 				<select id="state" class="info select-block" name="state">
 					<?php $x = FALSE; ?>
 					<?php $y = FALSE; ?>
@@ -105,13 +105,13 @@
 			</div>
 
 			<div class="form-group">
-				<label for="desc"><?= lang("description"); ?></label>
-					<textarea class="form-control" rows="5" id="desc" name="desc" placeholder="<?= lang("description"); ?>"><?= set_value('description',$flow['description']); ?></textarea>
+				<label for="desc"><?= lang("Validation.description"); ?></label>
+					<textarea class="form-control" rows="5" id="desc" name="desc" placeholder="<?= lang("Validation.description"); ?>"><?= set_value('description',$flow['description']); ?></textarea>
 			</div>
 
-		  	<button type="submit" class="btn btn-info"><?= lang("savedata"); ?></button>
+		  	<button type="submit" class="btn btn-info"><?= lang("Validation.savedata"); ?></button>
 		</form>
-		<span class="label label-default"><span style="color:red;">*</span> <?= lang("labelarereq"); ?>.</span>
+		<span class="label label-default"><span style="color:red;">*</span> <?= lang("Validation.labelarereq"); ?>.</span>
 		</div>
 <script type="text/javascript">
     $('#selectize-units').selectize({

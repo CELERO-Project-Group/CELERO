@@ -61,12 +61,12 @@
 
         <div id="p2" class="easyui-panel" style="margin: auto 0;height:480px;"
              data-options="iconCls:'icon-save',collapsible:true,closable:true">
-               <table id="tt_grid_scenarios" data-options="fit:true"  title="<?= lang("isscenarioscns"); ?>" style="">
+               <table id="tt_grid_scenarios" data-options="fit:true"  title="<?= lang("Validation.isscenarioscns"); ?>" style="">
             </table>
 
         </div>
 
-        <div id="p" class="easyui-panel" title="<?= lang("isscompanieslocation"); ?>"
+        <div id="p" class="easyui-panel" title="<?= lang("Validation.isscompanieslocation"); ?>"
              data-options="collapsed:true,collapsible:true"
              style="margin: auto 0;height:400px">
 
@@ -107,14 +107,14 @@
 
         <div id="p3" class="easyui-panel" style="margin: auto 0;height:300px;"
              data-options="iconCls:'icon-save',collapsible:true,closable:true">
-               <table id="tt_grid_scenarios_details" data-options="fit:true"   title="<?= lang("isscenariodetails"); ?>" style="">
+               <table id="tt_grid_scenarios_details" data-options="fit:true"   title="<?= lang("Validation.isscenariodetails"); ?>" style="">
             </table>
 
         </div>
 
-        <!-- <div id="p4" class="easyui-panel" title="<?= lang("isprojecteditdetails"); ?>" style="margin: auto 0;height:200px;"
+        <!-- <div id="p4" class="easyui-panel" title="<?= lang("Validation.isprojecteditdetails"); ?>" style="margin: auto 0;height:200px;"
              data-options="iconCls:'icon-save',collapsible:true,closable:true">
-               <table id="tt_grid_scenarios_details_edit" data-options="fit:true"   title="<?= lang("isscenariodetails"); ?>" style="">
+               <table id="tt_grid_scenarios_details_edit" data-options="fit:true"   title="<?= lang("Validation.isscenariodetails"); ?>" style="">
             </table>
 
         </div> -->
@@ -125,10 +125,10 @@
          <div id="tb" style="padding:5px;height:auto">
             <div style="margin-bottom:5px">
                 <!--<a href="#" onclick="loadData();" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>-->
-                <a href="#" name="del" onclick="showScnDetailsButton();" class="easyui-linkbutton" iconCls="icon-edit" plain="true"><?= lang("isscenariodetails"); ?></a>
-                <a href="<?= base_url('isScopingPrjBaseMDF'); ?>" onclick="" class="easyui-linkbutton" iconCls="icon-back" plain="true"><?= lang("gotoismanualpage"); ?></a>
-                <a href="<?= base_url('isScopingAutoPrjBaseMDF'); ?>" onclick="" class="easyui-linkbutton" iconCls="icon-back" plain="true"><?= lang("gotoisautopage"); ?></a>
-                <a href="#" onclick="closeMapPanel();event.preventDefault();" class="easyui-linkbutton" iconCls="icon-remove" plain="true"><?= lang("closemap"); ?></a>
+                <a href="#" name="del" onclick="showScnDetailsButton();" class="easyui-linkbutton" iconCls="icon-edit" plain="true"><?= lang("Validation.isscenariodetails"); ?></a>
+                <a href="<?= base_url('isScopingPrjBaseMDF'); ?>" onclick="" class="easyui-linkbutton" iconCls="icon-back" plain="true"><?= lang("Validation.gotoismanualpage"); ?></a>
+                <a href="<?= base_url('isScopingAutoPrjBaseMDF'); ?>" onclick="" class="easyui-linkbutton" iconCls="icon-back" plain="true"><?= lang("Validation.gotoisautopage"); ?></a>
+                <a href="#" onclick="closeMapPanel();event.preventDefault();" class="easyui-linkbutton" iconCls="icon-remove" plain="true"><?= lang("Validation.closemap"); ?></a>
                 <!--<a href="#" onclick="saveAutoPotentials();" class="easyui-linkbutton" iconCls="icon-save" plain="true">Save a table with relevant IS potentials</a>
                 <a href="#" onclick="selectAllCompanies();" class="easyui-linkbutton" iconCls="icon-edit" plain="true">Select all companies</a>
                 <a href="#" onclick="openIsScenarios();" class="easyui-linkbutton" iconCls="icon-edit" plain="true">IS Table management</a>

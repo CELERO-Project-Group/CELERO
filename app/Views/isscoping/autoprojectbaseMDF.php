@@ -87,8 +87,8 @@
                     <div style="margin-bottom:5px">
                         <!--<a href="#" onclick="deleteISPotential();" class="easyui-linkbutton" iconCls="icon-cut" plain="true">Remove row</a>-->
                         
-                        <a href="#" onclick="closeMapPanel();event.preventDefault();" class="easyui-linkbutton" iconCls="icon-remove" plain="true"><?= lang("closemap"); ?></a>
-                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'"><?= lang("save"); ?></a>
+                        <a href="#" onclick="closeMapPanel();event.preventDefault();" class="easyui-linkbutton" iconCls="icon-remove" plain="true"><?= lang("Validation.closemap"); ?></a>
+                        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'"><?= lang("Validation.save"); ?></a>
                         
                     </div>
                 </div>
@@ -108,14 +108,14 @@
                 <!--<div data-options="region:'north',split:true,border:false" style="height:50px"></div>-->
                 <div data-options="region:'west',split:true,border:true" style="width:50%;height:300px">
                     <!--<div id="ccTable" class="easyui-layout" data-options="fit:true">-->
-                        <table  id="tt_grid_dynamic"  title="Step 3: <?= lang("ispotentials"); ?> " style="height:300px">
+                        <table  id="tt_grid_dynamic"  title="Step 3: <?= lang("Validation.ispotentials"); ?> " style="height:300px">
                         
                         </table>
                     <!--</div>-->
                 </div>
                 <!--<div data-options="region:'east',split:true,border:false" style="width:50%"></div>-->
                 <div data-options="region:'center',border:true,split:true" style="width:50%;height:300px">
-                    <table id="tt_grid_dynamic5" class="easyui-datagrid" title="Step 4: <?= lang("savetable"); ?>" style="height:300px"
+                    <table id="tt_grid_dynamic5" class="easyui-datagrid" title="Step 4: <?= lang("Validation.savetable"); ?>" style="height:300px"
                         data-options="singleSelect:false,
                                     collapsible:true,
                                     /*url:'datagrid_data1.json',*/
@@ -132,15 +132,15 @@
             
         </div>
         <!--<div data-options="region:'east',split:true" title="East" style="width:100px;"></div>-->
-        <div data-options="region:'west',split:true" title="<span title='Start here by selecting a flow category or at least one single flow' >Step 1: <?= lang("flows"); ?></span>" style="width:150px;">
+        <div data-options="region:'west',split:true" title="<span title='Start here by selecting a flow category or at least one single flow' >Step 1: <?= lang("Validation.flows"); ?></span>" style="width:150px;">
             <ul id="tt_tree" class="easyui-tree" ></ul>
             
         </div>
-        <!-- <div data-options="region:'center',title:'<?= lang("ispotentialssettings"); ?>',iconCls:'icon-ok'"> -->
+        <!-- <div data-options="region:'center',title:'<?= lang("Validation.ispotentialssettings"); ?>',iconCls:'icon-ok'"> -->
             
-            <div id="p" class="easyui-panel" title="<?= lang("companyflowpanel"); ?>" style="margin: auto 0;"
+            <div id="p" class="easyui-panel" title="<?= lang("Validation.companyflowpanel"); ?>" style="margin: auto 0;"
                  data-options="region:'center', iconCls:'icon-tip',collapsible:true,closable:false">
-                     <table id="tt_grid" data-options="fit:true" class="easyui-datagrid" title="Step 2: <?= lang("selectcompanycalculate"); ?>" 
+                     <table id="tt_grid" data-options="fit:true" class="easyui-datagrid" title="Step 2: <?= lang("Validation.selectcompanycalculate"); ?>" 
                             style="height:440px" 
                            accesskey=""></table>
                 
@@ -154,16 +154,16 @@
     <div id="tb" style="padding:5px;height:auto">                   
                 <div style="margin-bottom:5px">
                     <!--<a href="#" onclick="loadData();" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>-->
-                    <a href="#" id="matchbutton" onclick="getColumnsDynamic();getCompaniesISPotentials();" class="easyui-linkbutton" iconCls="icon-edit" plain="true" title="Click on this button to start the matching after you have selected at least one company and a flow on the left"><?= lang("calculateispotentials"); ?></a>
-                    <!--<a href="#" onclick="event.preventDefault();saveAutoPotentials();" class="easyui-linkbutton" iconCls="icon-save" plain="true"><?= lang("savetable"); ?></a>-->
+                    <a href="#" id="matchbutton" onclick="getColumnsDynamic();getCompaniesISPotentials();" class="easyui-linkbutton" iconCls="icon-edit" plain="true" title="Click on this button to start the matching after you have selected at least one company and a flow on the left"><?= lang("Validation.calculateispotentials"); ?></a>
+                    <!--<a href="#" onclick="event.preventDefault();saveAutoPotentials();" class="easyui-linkbutton" iconCls="icon-save" plain="true"><?= lang("Validation.savetable"); ?></a>-->
                     
-                    <a href="#" onclick="event.preventDefault();selectAllCompanies();" class="easyui-linkbutton" iconCls="icon-edit" plain="true" title="Select all companies visible in the list below"><?= lang("selectallcompanies"); ?></a>
-                    <a href="#" onclick="event.preventDefault();unselectAllCompanies();" class="easyui-linkbutton" iconCls="icon-edit" plain="true" title="Unselect all companies"><?= lang("unselectallcompanies"); ?></a>
+                    <a href="#" onclick="event.preventDefault();selectAllCompanies();" class="easyui-linkbutton" iconCls="icon-edit" plain="true" title="Select all companies visible in the list below"><?= lang("Validation.selectallcompanies"); ?></a>
+                    <a href="#" onclick="event.preventDefault();unselectAllCompanies();" class="easyui-linkbutton" iconCls="icon-edit" plain="true" title="Unselect all companies"><?= lang("Validation.unselectallcompanies"); ?></a>
                 </div>     
                     
                  
                  <div>
-                    <label style="margin-right:7px;font-size:13px;" title="<?= lang("isscenariotooltip"); ?>"><?= lang("isscenariotype"); ?>:</label>
+                    <label style="margin-right:7px;font-size:13px;" title="<?= lang("Validation.isscenariotooltip"); ?>"><?= lang("Validation.isscenariotype"); ?>:</label>
                     <input class="easyui-combobox" 
                        name="IS_search" id="IS_search"
                        data-options="
@@ -199,13 +199,13 @@
     <div id="tb5" style="padding:5px;height:auto">
         <div  style="margin-bottom:5px">
 
-            <a href="#" name="add" onclick="event.preventDefault();addRowAuto();" class="easyui-linkbutton" iconCls="icon-add" plain="true"><?= lang("addpotentialis"); ?></a>
-            <a href="#" onclick="event.preventDefault();deleteAllAutoPotential();" class="easyui-linkbutton" iconCls="icon-remove" plain="true"><?= lang("clearall"); ?></a>
+            <a href="#" name="add" onclick="event.preventDefault();addRowAuto();" class="easyui-linkbutton" iconCls="icon-add" plain="true"><?= lang("Validation.addpotentialis"); ?></a>
+            <a href="#" onclick="event.preventDefault();deleteAllAutoPotential();" class="easyui-linkbutton" iconCls="icon-remove" plain="true"><?= lang("Validation.clearall"); ?></a>
         </div>
     </div>
     
     
-    <div id="saveWindowAuto" class="easyui-window" IS_synergy ="test" title="<?= lang("savetable"); ?>" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:500px;height:300px;padding:10px;">
+    <div id="saveWindowAuto" class="easyui-window" IS_synergy ="test" title="<?= lang("Validation.savetable"); ?>" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:500px;height:300px;padding:10px;">
         <div class="easyui-layout" data-options="fit:true">
             <!--<div data-options="region:'east',split:true" style="width:100px"></div>-->
             <div data-options="region:'center'" style="padding:10px;">
@@ -219,11 +219,11 @@
                 <form id="ff" method="post">
                 <div style="padding:10px 60px 20px 60px">
                     <div style="margin-bottom: 4px;margin-left: -8px;">
-                        <label style="margin-right:18px;"><?= lang("isscenarioname"); ?>:</label>
+                        <label style="margin-right:18px;"><?= lang("Validation.isscenarioname"); ?>:</label>
                         <input id="tt_textAuto" class="easyui-textbox" type="text" name="name" data-options="required:true"></input>
                     </div>
                     <div style="margin-left:-8px;">
-                        <label style="margin-right:27px;"><?= lang("isscenariotype"); ?>:</label>
+                        <label style="margin-right:27px;"><?= lang("Validation.isscenariotype"); ?>:</label>
                         <input class="easyui-combobox" 
                             name="IS" id="IS"
                             data-options="
@@ -236,7 +236,7 @@
                     </div>
                     <div style="margin-left:-8px;">
                         <label style="margin-right: 17px;
-                                        padding-bottom: 3px;"><?= lang("isscenariostatus"); ?>:</label>
+                                        padding-bottom: 3px;"><?= lang("Validation.isscenariostatus"); ?>:</label>
                         <input class="easyui-combobox" 
                             name="IS_status" id="IS_status"
                             data-options="
@@ -257,9 +257,9 @@
             </div>
             <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
                 <!--<input type="submit" value="Save IS potentials table">-->
-                <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="saveISScenarioAuto();" style=""><?= lang("addpotentialis"); ?></a>
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="saveISScenarioAuto();" style=""><?= lang("Validation.addpotentialis"); ?></a>
                 <!--<a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="submitForm();" style="">Save IS potentials table</a>-->
-                <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="windowManualISQuitWithoutSaving();" style=""><?= lang("quit"); ?></a>
+                <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="windowManualISQuitWithoutSaving();" style=""><?= lang("Validation.quit"); ?></a>
             </div>
             </form>
         </div>
@@ -270,9 +270,9 @@
     
     <div id="tb6" style="padding:5px;height:auto">
         <div style="margin-bottom:5px">
-            <a href="#" onclick="event.preventDefault();saveAutoPotentials();" class="easyui-linkbutton" iconCls="icon-save" plain="true"><?= lang("savetable"); ?></a>
-            <a href="#" onclick="closeMapPanel();event.preventDefault();" class="easyui-linkbutton" iconCls="icon-remove" plain="true"><?= lang("closemap"); ?></a>
-            <a href="#" onclick="event.preventDefault();deleteAllISPotentialAuto();" class="easyui-linkbutton" iconCls="icon-remove" plain="true"><?= lang("clearall"); ?></a>
+            <a href="#" onclick="event.preventDefault();saveAutoPotentials();" class="easyui-linkbutton" iconCls="icon-save" plain="true"><?= lang("Validation.savetable"); ?></a>
+            <a href="#" onclick="closeMapPanel();event.preventDefault();" class="easyui-linkbutton" iconCls="icon-remove" plain="true"><?= lang("Validation.closemap"); ?></a>
+            <a href="#" onclick="event.preventDefault();deleteAllISPotentialAuto();" class="easyui-linkbutton" iconCls="icon-remove" plain="true"><?= lang("Validation.clearall"); ?></a>
         </div>
     </div>
 

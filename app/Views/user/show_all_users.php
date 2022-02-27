@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8">
-				<div class="swissheader"><?= lang("consultants"); ?></div>
+				<div class="swissheader"><?= lang("Validation.consultants"); ?></div>
 				<table class="table-hover" style="clear:both; width: 100%;">
 				<?php foreach ($users as $com): ?>
 					<tr>
@@ -19,7 +19,7 @@
 		</div>
 		<div class="col-md-4">
 			<div class="well">
-				<?= lang("consultantsdesc"); ?>
+				<?= lang("Validation.consultantsdesc"); ?>
 			</div>
 		</div>
 	</div>

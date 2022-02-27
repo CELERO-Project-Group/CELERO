@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8">
-				<div class="swissheader"><?= lang("projectcompanies"); ?></div>
+				<div class="swissheader"><?= lang("Validation.projectcompanies"); ?></div>
 				<!-- harita -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
             <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
@@ -49,8 +49,8 @@
 									<div><span style="color:#999999; font-size:12px;"><?= $com['description']; ?></span></div>
 								</div>
 								<div class="col-md-3">
-									<a class="btn btn-tuna" href="<?= base_url("new_flow/".$com['id']); ?>"><i class="fa fa-database"></i> <?= lang("editcompanydata"); ?></a>
-									<a class="btn btn-tuna" href="<?= base_url("update_company/".$com['id']); ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("editcompanyinfo"); ?></a>
+									<a class="btn btn-tuna" href="<?= base_url("new_flow/".$com['id']); ?>"><i class="fa fa-database"></i> <?= lang("Validation.editcompanydata"); ?></a>
+									<a class="btn btn-tuna" href="<?= base_url("update_company/".$com['id']); ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.editcompanyinfo"); ?></a>
 								</div>
 							</div>
 							</a>

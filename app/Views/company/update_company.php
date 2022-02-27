@@ -1,6 +1,6 @@
 <?= $map['js']; ?>
 <div class="container">
-	<p class="lead"><?= lang("editcompanyinfo"); ?></p>
+	<p class="lead"><?= lang("Validation.editcompanyinfo"); ?></p>
 
 	<?php if(validation_errors() != NULL ): ?>
     <div class="alert">
@@ -21,32 +21,32 @@
     				</div>
     				<div class="fileinput-preview fileinput-exists thumbnail" ></div>
     				<div>
-    					<small><? echo lang("imageinfo"); ?></small><br>
+    					<small><? echo lang("Validation.imageinfo"); ?></small><br>
       					<span class="btn btn-primary btn-file btn-block">
-					        <span class="fileinput-new"><span class="fui-image"></span> <?= lang("selectimage"); ?></span>
-					        <span class="fileinput-exists"><span class="fui-gear"></span> <?= lang("change"); ?></span>
+					        <span class="fileinput-new"><span class="fui-image"></span> <?= lang("Validation.selectimage"); ?></span>
+					        <span class="fileinput-exists"><span class="fui-gear"></span> <?= lang("Validation.change"); ?></span>
 					        <input type="file" name="userfile">
       					</span>
-      					<a href="#" class="btn btn-primary fileinput-exists" data-dismiss="fileinput"><span class="fui-trash"></span> <?= lang("remove"); ?></a>
+      					<a href="#" class="btn btn-primary fileinput-exists" data-dismiss="fileinput"><span class="fui-trash"></span> <?= lang("Validation.remove"); ?></a>
     				</div>
   				</div>
 			</div>
       	</div>
      	<div class="col-md-8">
 			<div class="form-group">
-    			<label for="companyName"><?= lang("companyname"); ?></label>
-    			<input type="text" class="form-control" id="companyName" placeholder="<?= lang("companyname"); ?>" value="<?= set_value('companyName',$companies['name']); ?>" name="companyName">
+    			<label for="companyName"><?= lang("Validation.companyname"); ?></label>
+    			<input type="text" class="form-control" id="companyName" placeholder="<?= lang("Validation.companyname"); ?>" value="<?= set_value('companyName',$companies['name']); ?>" name="companyName">
  			</div>
  			<div class="form-group">
-	 			<label for="naceCode"><?= lang("nacecode"); ?></label>
-		    	<button type="button" data-toggle="modal" data-target="#myModalNACE" class="btn btn-block btn-primary" id="nacecode-button"><?= lang("selectnace"); ?></button><br>
+	 			<label for="naceCode"><?= lang("Validation.nacecode"); ?></label>
+		    	<button type="button" data-toggle="modal" data-target="#myModalNACE" class="btn btn-block btn-primary" id="nacecode-button"><?= lang("Validation.selectnace"); ?></button><br>
 	    		<div class="row">
 		    		<div class="col-md-12">
 		    			<input type="text" class="form-control" placeholder="NACE Code" id="naceCode" name="naceCode" style="color:#333333;" value="<?= set_value('naceCode',$nace_code['code']); ?>" readonly/>
 		    		</div>
 		    	</div>
 
-				<!--<label for="naceCode"><?= lang("nacecode"); ?></label>
+				<!--<label for="naceCode"><?= lang("Validation.nacecode"); ?></label>
 				<select id="selectize" name="naceCode">
 					<?php foreach ($all_nace_codes as $anc): ?>
 						<?php if($nace_code['code']==$anc['code']) {$d=TRUE;} else {$d=FALSE;} ?>
@@ -55,43 +55,43 @@
 				</select>-->
  			</div>
 			<div class="form-group">
-    			<label for="email"><?= lang("email"); ?></label>
-    			<input type="text" class="form-control" id="email" placeholder="<?= lang("email"); ?>" value="<?= set_value('email',$companies['email']); ?>"  name="email">
+    			<label for="email"><?= lang("Validation.email"); ?></label>
+    			<input type="text" class="form-control" id="email" placeholder="<?= lang("Validation.email"); ?>" value="<?= set_value('email',$companies['email']); ?>"  name="email">
  			</div>
 			<!-- <div class="form-group">
     			<label for="cellPhone">Cell Phone</label>
     			<input type="text" class="form-control" id="cellPhone" placeholder="Cell Phone" value="<?= set_value('cellPhone',$companies['phone_num_1']); ?>" name="cellPhone">
  			</div>  -->
  			<div class="form-group">
-    			<label for="workPhone"><?= lang("workphone"); ?></label>
-    			<input type="text" class="form-control" id="workPhone" placeholder="<?= lang("workphone"); ?>" value="<?= set_value('workPhone',$companies['phone_num_2']); ?>" name="workPhone">
+    			<label for="workPhone"><?= lang("Validation.workphone"); ?></label>
+    			<input type="text" class="form-control" id="workPhone" placeholder="<?= lang("Validation.workphone"); ?>" value="<?= set_value('workPhone',$companies['phone_num_2']); ?>" name="workPhone">
  			</div>
  			<div class="form-group">
-    			<label for="fax"><?= lang("faxnumber"); ?></label>
-    			<input type="text" class="form-control" id="fax" placeholder="<?= lang("faxnumber"); ?>" value="<?= set_value('fax',$companies['fax_num']); ?>" name="fax">
+    			<label for="fax"><?= lang("Validation.faxnumber"); ?></label>
+    			<input type="text" class="form-control" id="fax" placeholder="<?= lang("Validation.faxnumber"); ?>" value="<?= set_value('fax',$companies['fax_num']); ?>" name="fax">
  			</div>
 			<div class="form-group">
-    			<label for="coordinates"><?= lang("coordinates"); ?></label><br>
-    			<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-block" id="coordinates" ><?= lang("selectonmap"); ?></button>
+    			<label for="coordinates"><?= lang("Validation.coordinates"); ?></label><br>
+    			<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-block" id="coordinates" ><?= lang("Validation.selectonmap"); ?></button>
     			<div class="row" style="margin-top: 10px;">
 	    			<div class="col-md-6">
-	    				<input type="text" class="form-control" id="lat" placeholder="<?= lang("lat"); ?>" name="lat" style="color:#333333;" value="<?= set_value('lat',$companies['latitude']); ?>" readonly/>
+	    				<input type="text" class="form-control" id="lat" placeholder="<?= lang("Validation.lat"); ?>" name="lat" style="color:#333333;" value="<?= set_value('lat',$companies['latitude']); ?>" readonly/>
 	    			</div>
 	    			<div class="col-md-6">
-	    				<input type="text" class="form-control" id="long" placeholder="<?= lang("long"); ?>" name="long" style="color:#333333;" value="<?= set_value('long',$companies['longitude']); ?>" readonly/>
+	    				<input type="text" class="form-control" id="long" placeholder="<?= lang("Validation.long"); ?>" name="long" style="color:#333333;" value="<?= set_value('long',$companies['longitude']); ?>" readonly/>
 	    			</div>
     			</div>
  			</div>
  			<div class="form-group">
-    			<label for="address"><?= lang("address"); ?></label>
-    			<textarea class="form-control" rows="3" name="address" id="address" placeholder="<?= lang("address"); ?>"><?= set_value('address',$companies['address']); ?></textarea>
+    			<label for="address"><?= lang("Validation.address"); ?></label>
+    			<textarea class="form-control" rows="3" name="address" id="address" placeholder="<?= lang("Validation.address"); ?>"><?= set_value('address',$companies['address']); ?></textarea>
  			</div>
  			<div class="form-group">
-    			<label for="companyDescription"><?= lang("description"); ?></label>
-    			<textarea class="form-control" rows="3" name="companyDescription" id="companyDescription" placeholder="<?= lang("description"); ?>"><?= set_value('companyDescription',$companies['description']); ?></textarea>
+    			<label for="companyDescription"><?= lang("Validation.description"); ?></label>
+    			<textarea class="form-control" rows="3" name="companyDescription" id="companyDescription" placeholder="<?= lang("Validation.description"); ?>"><?= set_value('companyDescription',$companies['description']); ?></textarea>
  			</div>
-        <button type="submit" class="btn btn-inverse col-md-9"><?= lang("save"); ?></button>
-        <a href="<?= base_url('company/'.$companies['id']); ?>" class="btn btn-warning col-md-2 col-md-offset-1"><?= lang("cancel"); ?></a>
+        <button type="submit" class="btn btn-inverse col-md-9"><?= lang("Validation.save"); ?></button>
+        <a href="<?= base_url('company/'.$companies['id']); ?>" class="btn btn-warning col-md-2 col-md-offset-1"><?= lang("Validation.cancel"); ?></a>
 			</div>
 		</div>
 	</form>
@@ -114,7 +114,7 @@
 			    <div class="modal-body">
 			      	<?= $map['html']; ?>
 			      	<br>
-			      	<button type="button" onclick="getCountryIdName();" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true"><?= lang("done"); ?></button>
+			      	<button type="button" onclick="getCountryIdName();" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true"><?= lang("Validation.done"); ?></button>
 			    </div>
 				<div class="modal-footer"></div>
 			</div>
@@ -125,7 +125,7 @@
 		    <div class="modal-content">
 			    <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			        <h4 class="modal-title" id="myModalLabel"><?= lang("selectlevel4nace"); ?></h4>
+			        <h4 class="modal-title" id="myModalLabel"><?= lang("Validation.selectlevel4nace"); ?></h4>
 			        <hr>
 			        <div class="row">
 			        	<div class="col-md-12">
@@ -138,7 +138,7 @@
 			    	<!-- Miller column NACE Code selector -->
 					<div id="miller_col"></div>
 			      	<br>
-		      		<button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true"><?= lang("done"); ?></button>
+		      		<button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true"><?= lang("Validation.done"); ?></button>
 			    </div>
 			    <div class="modal-footer"></div>
 		    </div>

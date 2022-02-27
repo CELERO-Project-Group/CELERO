@@ -1,5 +1,5 @@
 <div class="col-md-4 col-md-offset-4">
-	<p><?= lang("ecoheading"); ?></p>
+	<p><?= lang("Validation.ecoheading"); ?></p>
 	<?php //print_r($informations); ?>
 	<?php 
 	$flag=1;

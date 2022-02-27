@@ -12,7 +12,7 @@
                 name : report_name},
                 success: function(data, textStatus, jqXHR) {
                     
-                             noty({text: '<?php echo lang("notyclusterdeleted"); ?>', type: 'success'});
+                             noty({text: '<?php echo lang("Validation.notyclusterdeleted"); ?>', type: 'success'});
                              $('#tt_grid').datagrid('reload');
                              $.messager.progress('close');
                          
@@ -54,7 +54,7 @@
                 return isValid;	// return false will stop the form submission
             },
             success:function(data){
-                noty({text: '<?php echo lang("notyclusterupdated"); ?>', type: 'success'});
+                noty({text: '<?php echo lang("Validation.notyclusterupdated"); ?>', type: 'success'});
                          $('#tt_grid').datagrid('reload');
                          $.messager.progress('close');
 
@@ -118,7 +118,7 @@
                 },
                 success:function(data){
                    
-                             noty({text: '<?php echo lang("notyclusterinserted"); ?>', type: 'success'});
+                             noty({text: '<?php echo lang("Validation.notyclusterinserted"); ?>', type: 'success'});
                              $('#tt_grid').datagrid('reload');
                              $.messager.progress('close');
                          
@@ -145,20 +145,20 @@
                   if(data["found"]==true) {
                       //$.messager.alert('Success','Success inserted Flow family!','info');
                       if(data["id"]>0) {
-                          noty({text: '<?php echo lang("notyclusterinserted"); ?>', type: 'success'});
+                          noty({text: '<?php echo lang("Validation.notyclusterinserted"); ?>', type: 'success'});
                       } else {
-                          noty({text: '<?php echo lang("notyclusterinsertedbefore"); ?>', type: 'warning'});
+                          noty({text: '<?php echo lang("Validation.notyclusterinsertedbefore"); ?>', type: 'warning'});
                           $('#tt_tree').tree('reload');
                       }
                       
                   } else if(data["found"]==false) {         
                       //$.messager.alert('Insert failed','Failed to insert Flow Family !','error');
-                      noty({text: '<?php echo lang("notyclusternotinserted"); ?>', type: 'error'});  
+                      noty({text: '<?php echo lang("Validation.notyclusternotinserted"); ?>', type: 'error'});  
                   }   
                 },
                 error: function(jqXHR , textStatus, errorThrown) {
                   //console.warn('error text status-->'+textStatus);
-                  noty({text: '<?php echo lang("notyclusternotinserted"); ?>', type: 'error'});  
+                  noty({text: '<?php echo lang("Validation.notyclusternotinserted"); ?>', type: 'error'});  
                 }
             });
         }
@@ -184,29 +184,29 @@
             singleSelect : true,
             scroll : true,
             columns:[[
-                  {field:'cluster_name',title:'<?php echo lang("clusterslink"); ?>',width:200,sortable:true},
-                  {field:'industrial_zone_name',title:'<?php echo lang("zoneslink"); ?>',width:300,sortable:true},
+                  {field:'cluster_name',title:'<?php echo lang("Validation.clusterslink"); ?>',width:200,sortable:true},
+                  {field:'industrial_zone_name',title:'<?php echo lang("Validation.zoneslink"); ?>',width:300,sortable:true},
                 
-                {field:'edit',title:'<?php echo lang("edit"); ?>',width:50,align:'center',
+                {field:'edit',title:'<?php echo lang("Validation.edit"); ?>',width:50,align:'center',
                     formatter:function(value,row,index){
                         //console.log('row satır id bilgileri'+row.id);
                         //console.log('row satır name bilgileri'+row.report_name);
                         var x = '<a href="" class="easyui-linkbutton" \n\
                                     iconCls="icon-save" \n\
-                                    onclick="reportEditView(\''+row.cluster_name+'\','+row.id+', \''+row.industrial_zone_name+'\', '+row.industrial_zone_id+' );event.preventDefault();"><?php echo lang("edit"); ?> </a>';
+                                    onclick="reportEditView(\''+row.cluster_name+'\','+row.id+', \''+row.industrial_zone_name+'\', '+row.industrial_zone_id+' );event.preventDefault();"><?php echo lang("Validation.edit"); ?> </a>';
                         //return e+d;
                         return x;
                         
                     }
                 },
                 
-                {field:'delete',title:'<?php echo lang("delete"); ?>',width:50,align:'center',
+                {field:'delete',title:'<?php echo lang("Validation.delete"); ?>',width:50,align:'center',
                     formatter:function(value,row,index){
                         //console.log('row satır id bilgileri'+row.id);
                         //console.log('row satır name bilgileri'+row.report_name);
                         var x = '<a href="" class="easyui-linkbutton" \n\
                                     iconCls="icon-save" \n\
-                                    onclick="deleteEditView(\''+row.cluster_name+'\','+row.id+', \''+row.industrial_zone_name+'\', '+row.industrial_zone_id+' );event.preventDefault();"><?php echo lang("delete"); ?> </a>';
+                                    onclick="deleteEditView(\''+row.cluster_name+'\','+row.id+', \''+row.industrial_zone_name+'\', '+row.industrial_zone_id+' );event.preventDefault();"><?php echo lang("Validation.delete"); ?> </a>';
                         //return e+d;
                         return x;
                         
@@ -299,7 +299,7 @@
                                             <li><a href='<?php echo base_url('language/switch/english'); ?>' style="border-right: 0px;border-left: 0px;"><img src="<?php echo asset_url('images/United-States.png'); ?>"></a></li>
                                         </ul> 
 					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="icon-tint"></i><span class="hidden-phone"><?php echo lang("changeskin"); ?> </span>
+						<i class="icon-tint"></i><span class="hidden-phone"><?php echo lang("Validation.changeskin"); ?> </span>
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" id="themes"> 
@@ -323,19 +323,19 @@
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><?php echo lang("myprofile"); ?></a></li>
+						<li><a href="#"><?php echo lang("Validation.myprofile"); ?></a></li>
 						<li class="divider"></li>
-						<li><a href="../logout"><?php echo lang("logout"); ?></a></li>
+						<li><a href="../logout"><?php echo lang("Validation.logout"); ?></a></li>
 					</ul>
 				</div>
 				<!-- user dropdown ends -->
 				
 				<div class="top-nav nav-collapse">
 					<ul class="nav">
-						<li><a href="../../ecoman"><?php echo lang("mainpage"); ?></a></li>
+						<li><a href="../../ecoman"><?php echo lang("Validation.mainpage"); ?></a></li>
 						<li>
 							<!--<form class="navbar-search pull-left">-->
-								<input placeholder="<?php echo lang("search"); ?>" class="search-query span2" name="query" type="text">
+								<input placeholder="<?php echo lang("Validation.search"); ?>" class="search-query span2" name="query" type="text">
 							<!--</form>-->
 						</li>
 					</ul>
@@ -353,46 +353,46 @@
 				<div class="well nav-collapse sidebar-nav">
                                     
                                           <ul class="nav nav-tabs nav-stacked main-menu">
-                                                <li class="nav-header hidden-tablet"><?php echo lang("adminmenu"); ?></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newFlow'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("flowslink"); ?></span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newProcess'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("processlink"); ?></span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newEquipment'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("equipmentslink"); ?></span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/industrialZones'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("zoneslink"); ?> </span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/clusters'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("clusterslink"); ?></span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/employees'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("clusteremplink"); ?> </span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/consultants'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("zoneconsultantslink"); ?>  </span></a></li>
-                                            <li><a class="ajax-link" href="<?php echo base_url('admin/reports'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("reportslink"); ?></span></a></li>
+                                                <li class="nav-header hidden-tablet"><?php echo lang("Validation.adminmenu"); ?></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newFlow'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.flowslink"); ?></span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newProcess'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.processlink"); ?></span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/newEquipment'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.equipmentslink"); ?></span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/industrialZones'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.zoneslink"); ?> </span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/clusters'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.clusterslink"); ?></span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/employees'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.clusteremplink"); ?> </span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/consultants'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.zoneconsultantslink"); ?>  </span></a></li>
+                                            <li><a class="ajax-link" href="<?php echo base_url('admin/reports'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.reportslink"); ?></span></a></li>
 
                                         </ul>
                                     
 					<ul class="nav nav-tabs nav-stacked main-menu">
-						<li class="nav-header hidden-tablet"><?php echo lang("mainmenu"); ?></li>
-						<li><a class="ajax-link" href="<?php echo base_url(); ?>"><i class="icon-home"></i><span class="hidden-tablet"> <?php echo lang("mainpage"); ?></span></a></li>
+						<li class="nav-header hidden-tablet"><?php echo lang("Validation.mainmenu"); ?></li>
+						<li><a class="ajax-link" href="<?php echo base_url(); ?>"><i class="icon-home"></i><span class="hidden-tablet"> <?php echo lang("Validation.mainpage"); ?></span></a></li>
                                                 
-                                                <li><a class="ajax-link" href="<?php echo base_url('users'); ?>"><i class="icon-user"></i><span class="hidden-tablet"><?php echo lang("consultants"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('user'); ?>/<?php echo $userName; ?>"><i class="icon-user"></i><span class="hidden-tablet"><?php echo lang("myprofile"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('profile_update'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("updateprofile"); ?></span></a></li>
-                                                
-                                                
-						<li><a class="ajax-link" href="<?php echo base_url('mycompanies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("mycompanies"); ?></span></a></li>
-                                                <!--<li><a class="ajax-link" href="<?php echo base_url('projectcompanies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("myprofile"); ?>Project Companies</span></a></li>-->
-                                                <li><a class="ajax-link" href="<?php echo base_url('companies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("allcompanies"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('newcompany'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("createcompany"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('users'); ?>"><i class="icon-user"></i><span class="hidden-tablet"><?php echo lang("Validation.consultants"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('user'); ?>/<?php echo $userName; ?>"><i class="icon-user"></i><span class="hidden-tablet"><?php echo lang("Validation.myprofile"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('profile_update'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.updateprofile"); ?></span></a></li>
                                                 
                                                 
-                                                <li><a class="ajax-link" href="<?php echo base_url('myprojects'); ?>"><i class="icon-globe"></i><span class="hidden-tablet"><?php echo lang("myprojects"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('projects'); ?>"><i class="icon-globe"></i><span class="hidden-tablet"><?php echo lang("allprojects"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('newproject'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("createproject"); ?></span></a></li>
+						<li><a class="ajax-link" href="<?php echo base_url('mycompanies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("Validation.mycompanies"); ?></span></a></li>
+                                                <!--<li><a class="ajax-link" href="<?php echo base_url('projectcompanies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("Validation.myprofile"); ?>Project Companies</span></a></li>-->
+                                                <li><a class="ajax-link" href="<?php echo base_url('companies'); ?>"><i class="icon-calendar"></i><span class="hidden-tablet"><?php echo lang("Validation.allcompanies"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('newcompany'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.createcompany"); ?></span></a></li>
                                                 
                                                 
-						<li><a class="ajax-link" href="<?php echo base_url('cpscoping'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("cpidentification"); ?></span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('cost_benefit'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("costbenefitanalysis"); ?> </span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('ecotracking'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("ecotracking"); ?> </span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('myprojects'); ?>"><i class="icon-globe"></i><span class="hidden-tablet"><?php echo lang("Validation.myprojects"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('projects'); ?>"><i class="icon-globe"></i><span class="hidden-tablet"><?php echo lang("Validation.allprojects"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('newproject'); ?>"><i class="icon-edit"></i><span class="hidden-tablet"><?php echo lang("Validation.createproject"); ?></span></a></li>
                                                 
-                                                <li><a class="ajax-link" href="<?php echo base_url('isScopingPrjBaseMDF'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("industrialsimbiosis"); ?> </span></a></li>
-                                                <li><a class="ajax-link" href="<?php echo base_url('map'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("gis"); ?> </span></a></li>
+                                                
+						<li><a class="ajax-link" href="<?php echo base_url('cpscoping'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("Validation.cpidentification"); ?></span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('cost_benefit'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("Validation.costbenefitanalysis"); ?> </span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('ecotracking'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("Validation.ecotracking"); ?> </span></a></li>
+                                                
+                                                <li><a class="ajax-link" href="<?php echo base_url('isScopingPrjBaseMDF'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("Validation.industrialsimbiosis"); ?> </span></a></li>
+                                                <li><a class="ajax-link" href="<?php echo base_url('map'); ?>"><i class="icon-th"></i><span class="hidden-tablet"><?php echo lang("Validation.gis"); ?> </span></a></li>
                            
-						<li><a class="ajax-link" href="<?php echo base_url('logout'); ?>"><i class="icon-ban-circle"></i><span class="hidden-tablet"><?php echo lang("logout"); ?> </span></a></li>
+						<li><a class="ajax-link" href="<?php echo base_url('logout'); ?>"><i class="icon-ban-circle"></i><span class="hidden-tablet"><?php echo lang("Validation.logout"); ?> </span></a></li>
 						<!--<li><a class="ajax-link" href="#"><i class="icon-font"></i><span class="hidden-tablet">Logs</span></a></li>
 						<li><a class="ajax-link" href="#"><i class="icon-picture"></i><span class="hidden-tablet"> Admin Reports</span></a></li>
 						<li class="nav-header hidden-tablet">Secondary Menu</li>
@@ -423,10 +423,10 @@
 			<div>
 				<ul class="breadcrumb">
 					<li>
-						<a href="<?php echo base_url(''); ?>"><?php echo lang("mainpage"); ?></a> <span class="divider">/</span>
+						<a href="<?php echo base_url(''); ?>"><?php echo lang("Validation.mainpage"); ?></a> <span class="divider">/</span>
 					</li>
 					<li>
-						<a href="<?php echo base_url('admin/clusters'); ?>"><?php echo lang("clusterslink"); ?></a>
+						<a href="<?php echo base_url('admin/clusters'); ?>"><?php echo lang("Validation.clusterslink"); ?></a>
 					</li>
 				</ul>
 			</div>
@@ -438,28 +438,28 @@
 			<div class="sortable row-fluid">
                             <a  id='toplam_anket_link' data-rel="" title="" class="well span3 top-block" href="#">
 					<span class="icon32 icon-red icon-user"></span>
-					<div><?php echo lang("totaluserscount"); ?></div>
+					<div><?php echo lang("Validation.totaluserscount"); ?></div>
 					<div id='totalUsers'></div>
 					<span id ='totalUsers_by_today' class="notification"></span>
 				</a>
  
 				<a data-rel="tooltip" title="" class="well span3 top-block" href="#">
 					<span class="icon32 icon-color icon-inbox"></span>
-					<div><?php echo lang("totalprojectscount"); ?></div>
+					<div><?php echo lang("Validation.totalprojectscount"); ?></div>
 					<div id='totalProjects'></div>
 					<span id='totalProjects_by_today' class="notification green"></span>
 				</a>
 
 				<a data-rel="tooltip" title="" class="well span3 top-block" href="#">
 					<span class="icon32 icon-color icon-cart"></span>
-					<div><?php echo lang("totalisprojectscount"); ?></div>
+					<div><?php echo lang("Validation.totalisprojectscount"); ?></div>
 					<div id="totalISProjects"></div>
 					<span class="notification yellow"></span>
 				</a>
 				
 				<a data-rel="tooltip" title="" class="well span3 top-block" href="#">
 					<span class="icon32 icon-color icon-wrench"></span>
-					<div><?php echo lang("totalproducts"); ?></div>
+					<div><?php echo lang("Validation.totalproducts"); ?></div>
 					<div id="totalProducts"></div>
 					<span class="notification red"></span>
 				</a>
@@ -486,7 +486,7 @@
                                 
                                 <div class="box span12">
 					<div class="box-header well" data-original-title>
-						<h2><i class="icon-user"></i><?php echo lang("insertcluster"); ?> </h2>
+						<h2><i class="icon-user"></i><?php echo lang("Validation.insertcluster"); ?> </h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
 							<!--<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>-->
@@ -494,19 +494,19 @@
 					</div>
 					
                                         <div class="box-content" style='padding: 0px;'>
-                                                <div id="p2" class="easyui-panel" style="height:250px;" title="<?php echo lang("clusterinfo"); ?>" 
+                                                <div id="p2" class="easyui-panel" style="height:250px;" title="<?php echo lang("Validation.clusterinfo"); ?>" 
                                                      style="margin: auto 0;height:480px;"
                                                     data-options="iconCls:'icon-save',collapsible:true,closable:true">
                                                       <form id="ff" method="post">
                                                         <div style="padding:10px 60px 20px 60px">
                                                             <div style="margin-bottom: 4px;margin-left: -8px;">
-                                                                <label style="margin-right:18px;"><?php echo lang("cluster"); ?>:</label>
+                                                                <label style="margin-right:18px;"><?php echo lang("Validation.cluster"); ?>:</label>
                                                                 <input id="tt_textReportName" class="easyui-textbox" type="text" name="name" data-options="required:true"></input>
                                                             </div>
                                                             
                                                             <div style="margin-left:-8px;">
                                                                 <label style="margin-right: 17px;
-                                                                                padding-bottom: 3px;"><?php echo lang("zoneslink"); ?>:</label>
+                                                                                padding-bottom: 3px;"><?php echo lang("Validation.zoneslink"); ?>:</label>
                                                                 <input class="easyui-combobox" 
                                                                     name="company_dropdown" id="company_dropdown"
                                                                     data-options="
@@ -534,17 +534,17 @@
                                                            style='margin-left: 50px;'
                                                            data-options="iconCls:'icon-ok'" 
                                                            href="javascript:void(0)" 
-                                                           onclick="saveReport();" style=""><?php echo lang("savedata"); ?></a>
+                                                           onclick="saveReport();" style=""><?php echo lang("Validation.savedata"); ?></a>
                                                         <a class="easyui-linkbutton" id="updateReport" name="updateReport"
                                                            style='margin-left: 7px;'
                                                            data-options="iconCls:'icon-ok',disabled:true" 
                                                            href="javascript:void(0)" 
-                                                           onclick="updateReport();" style=""><?php echo lang("update"); ?></a>
+                                                           onclick="updateReport();" style=""><?php echo lang("Validation.update"); ?></a>
                                                         <a class="easyui-linkbutton" 
                                                            style='margin-left: 7px;'
                                                            data-options="iconCls:'icon-ok'" 
                                                            href="javascript:void(0)" 
-                                                           onclick="resetFormReport();" style=""><?php echo lang("resetform"); ?></a>
+                                                           onclick="resetFormReport();" style=""><?php echo lang("Validation.resetform"); ?></a>
                                                         <!--<a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)" onclick="submitForm();" style="">Save IS potentials table</a>-->
                                                         <!--<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="windowManualISQuitWithoutSaving();" style="">Quit without saving</a>-->
                                                     </div>
@@ -562,7 +562,7 @@
                         <div class="row-fluid sortable">
                             <div class="box span12">
                                     <div class="box-header well" data-original-title>
-                                            <h2><i class="icon-th"></i><?php echo lang("clusterslink"); ?> </h2>
+                                            <h2><i class="icon-th"></i><?php echo lang("Validation.clusterslink"); ?> </h2>
                                             <div class="box-icon">
                                                     <!--<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>-->
                                                     <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
@@ -574,11 +574,11 @@
                                             
                                             <div class="span12">
                                                 <div id="p2" class="easyui-panel"  
-                                                     title="<?php echo lang("clusterslink"); ?>" 
+                                                     title="<?php echo lang("Validation.clusterslink"); ?>" 
                                                      style="margin: auto 0;height:350px;"
                                                     data-options="iconCls:'icon-save',collapsible:true,closable:true">
                                                     <table id="tt_grid" data-options="" 
-                                                           title="<?php echo lang("clusterslink"); ?>" 
+                                                           title="<?php echo lang("Validation.clusterslink"); ?>" 
                                                                contenteditable="" style="height:440px;" 
                                                       accesskey="">
                                                     </table>

@@ -10,7 +10,7 @@
 <?= $map['js']; ?>
 
 <div class="container">
-	<p class="lead"><?= lang("createproject"); ?></p>
+	<p class="lead"><?= lang("Validation.createproject"); ?></p>
 
 	<?php if(validation_errors() != NULL ): ?>
 	    <div class="alert">
@@ -24,12 +24,12 @@
 			<div class="col-md-8">
 
 				<div class="form-group">
-	    			<label for="projectName"><?= lang("name"); ?> <span class="small" style="color:red;">*Required</span></label>
-	    			<input type="text" class="form-control" id="projectName" placeholder="<?= lang("name"); ?>" value="<?= set_value('projectName'); ?>" name="projectName">
+	    			<label for="projectName"><?= lang("Validation.name"); ?> <span class="small" style="color:red;">*Required</span></label>
+	    			<input type="text" class="form-control" id="projectName" placeholder="<?= lang("Validation.name"); ?>" value="<?= set_value('projectName'); ?>" name="projectName">
 	 			</div>
 
 	 			<div class="form-group">
-	 				<label for="datePicker"><?= lang("startdate"); ?> <span class="small" style="color:gray;">Optional</span></label>
+	 				<label for="datePicker"><?= lang("Validation.startdate"); ?> <span class="small" style="color:gray;">Optional</span></label>
 	    			<div class="input-group">
 				    	<span class="input-group-btn">
 				      		<button class="btn" type="button" style="height: 38px; border: 1px solid;"><span class="fui-calendar"></span></button>
@@ -39,7 +39,7 @@
 	 			</div>
 
 	 			<div class="form-group">
-	    			<label for="status"><?= lang("status"); ?></label>
+	    			<label for="status"><?= lang("Validation.status"); ?></label>
                     <i class="fa fa-info-circle" title="Give your Projects a status to keep track of them."></i>
 	    			<div>
 		    			<select id="status" class="info select-block" name="status">
@@ -55,21 +55,21 @@
 	 			</div>
 
 	 			<div class="form-group">
-	    			<label for="description"><?= lang("description"); ?> <span class="small" style="color:red;">*Required</span></label>
-	    			<textarea class="form-control" rows="3" name="description" id="description" placeholder="<?= lang("description"); ?>" ><?= set_value('description'); ?></textarea>
+	    			<label for="description"><?= lang("Validation.description"); ?> <span class="small" style="color:red;">*Required</span></label>
+	    			<textarea class="form-control" rows="3" name="description" id="description" placeholder="<?= lang("Validation.description"); ?>" ><?= set_value('description'); ?></textarea>
 	 			</div>
 
 				<div class="form-group">
-					<label for="coordinates"><?= lang("coordinates"); ?></label>
-					<button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-block btn-inverse" id="coordinates" ><?= lang("selectonmap"); ?></button><br>
+					<label for="coordinates"><?= lang("Validation.coordinates"); ?></label>
+					<button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-block btn-inverse" id="coordinates" ><?= lang("Validation.selectonmap"); ?></button><br>
 					<div class="row">
 						<div class="col-md-4">
 							<span class="small" style="color:red;">*Required</span>
-							<input type="text" class="form-control" id="lat" placeholder="<?= lang("lat"); ?>" name="lat" style="color:#333333;" value="<?= set_value('lat'); ?>" readonly/>
+							<input type="text" class="form-control" id="lat" placeholder="<?= lang("Validation.lat"); ?>" name="lat" style="color:#333333;" value="<?= set_value('lat'); ?>" readonly/>
 						</div>
 						<div class="col-md-4">
 							<span class="small" style="color:red;">*Required</span>
-							<input type="text" class="form-control" id="long" placeholder="<?= lang("long"); ?>" name="long" style="color:#333333;" value="<?= set_value('long'); ?>" readonly/>
+							<input type="text" class="form-control" id="long" placeholder="<?= lang("Validation.long"); ?>" name="long" style="color:#333333;" value="<?= set_value('long'); ?>" readonly/>
 						</div>
 						<div class="col-md-4">
 							<span class="small" style="color:gray;">Optional</span>
@@ -79,7 +79,7 @@
  				</div>
 
 	 			<div class="form-group">
-	    			<label for="assignedCompanies"><?= lang("assigncompany"); ?> <span class="small" style="color:red;">*Required</span></label>
+	    			<label for="assignedCompanies"><?= lang("Validation.assigncompany"); ?> <span class="small" style="color:red;">*Required</span></label>
 	    			<!--  <input type="text" id="companySearch" />	-->
                     <i class="fa fa-info-circle" title="Choose the Companies you want to analyse in this Project."></i>
 
@@ -95,7 +95,7 @@
 					</select>
 	 			</div>
 	 			<div class="form-group">
-	    			<label for="assignedConsultant"><?= lang("assignconsultant"); ?> <span class="small" style="color:red;">*Required</span></label>
+	    			<label for="assignedConsultant"><?= lang("Validation.assignconsultant"); ?> <span class="small" style="color:red;">*Required</span></label>
                     <i class="fa fa-info-circle" title="Choose the corresponding consultants to the Project. They will have full access to this project."></i>
 
                     <select multiple="multiple"  title="Choose at least one" class="select-block" id="assignConsultant" name="assignConsultant[]">
@@ -110,12 +110,12 @@
 	 			</div>
         		<?php $mevcut = $this->session->userdata('user_in'); ?>
 	 			<div class="form-group">
-    				<label for="assignContactPerson"><?= lang("assigncontact"); ?> <span class="small" style="color:red;">*Required</span></label>
+    				<label for="assignContactPerson"><?= lang("Validation.assigncontact"); ?> <span class="small" style="color:red;">*Required</span></label>
     				<select  class="select-block" id="assignContactPerson" name="assignContactPerson">
             			<option value="<?= $mevcut['id']; ?>">Creator of the project (<?= $mevcut['username']; ?>)</option>
 					</select>
 	 			</div>
-        		<button type="submit" class="btn btn-block btn-primary"><?= lang("createproject"); ?></button>
+        		<button type="submit" class="btn btn-block btn-primary"><?= lang("Validation.createproject"); ?></button>
 
 			</div>
 			<div class="col-md-4">
@@ -143,7 +143,7 @@
 			    <div class="modal-body">
 			       <?= $map['html']; ?>
 			       <br>
-			       <button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true"><?= lang("done"); ?></button>
+			       <button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true"><?= lang("Validation.done"); ?></button>
 			    </div>
 		    	<div class="modal-footer"></div>
 			</div>

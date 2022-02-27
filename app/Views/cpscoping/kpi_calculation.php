@@ -1,8 +1,8 @@
 <script type="text/javascript" src="<?= asset_url('js/easy-ui-1.4.2.js'); ?>"></script>
 <?php if (!empty($kpi_values)): ?>
 	<div class="col-md-12" style="margin-bottom: 10px;">
-		<a class="btn btn-inverse btn-sm" href="<?= base_url('cpscoping/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/show'); ?>"><?= lang("gotocp"); ?></a>
-		<a href="<?= base_url('new_flow/'.$this->uri->segment(3)); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("gotodataset"); ?></a>
+		<a class="btn btn-inverse btn-sm" href="<?= base_url('cpscoping/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/show'); ?>"><?= lang("Validation.gotocp"); ?></a>
+		<a href="<?= base_url('new_flow/'.$this->uri->segment(3)); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("Validation.gotodataset"); ?></a>
 	</div>
 	<div class="col-md-12" id="8lik">
 			<table id="dg" class="easyui-datagrid"
@@ -20,14 +20,14 @@
 			    ">
 				<thead>
 				    <tr>
-				        <th data-options="field:'allocation_name',align:'left',width:200"><?= lang("allocation"); ?></th>
+				        <th data-options="field:'allocation_name',align:'left',width:200"><?= lang("Validation.allocation"); ?></th>
 <!-- 				    <th data-options="field:'flow_name',align:'center',width:110">Flow</th>
 				        <th data-options="field:'flow_type_name',align:'center',width:80">Flow Type</th> -->
 				        <th data-options="field:'kpi',align:'right',width:100">KPI</th>
-				        <th data-options="field:'benchmark_kpi',width:100,align:'right',editor:{type:'numberbox',options:{precision:2}}"><?= lang("benchmark"); ?><span style="color:red;">*</th>
-				        <th data-options="field:'unit_kpi',align:'right',width:50"><?= lang("kpiunit"); ?></th>
-				        <th data-options="field:'kpidef',align:'center',width:130"><?= lang("kpidef"); ?></th>
-				        <th data-options="field:'best_practice',width:200,align:'center',editor:'text'"><?= lang("CBoptionname"); ?> <span style="color:red;">*</th>				        
+				        <th data-options="field:'benchmark_kpi',width:100,align:'right',editor:{type:'numberbox',options:{precision:2}}"><?= lang("Validation.benchmark"); ?><span style="color:red;">*</th>
+				        <th data-options="field:'unit_kpi',align:'right',width:50"><?= lang("Validation.kpiunit"); ?></th>
+				        <th data-options="field:'kpidef',align:'center',width:130"><?= lang("Validation.kpidef"); ?></th>
+				        <th data-options="field:'best_practice',width:200,align:'center',editor:'text'"><?= lang("Validation.CBoptionname"); ?> <span style="color:red;">*</th>				        
 				        <th data-options="field:'description',width:300,align:'left',
 				        editor:{
 							    type:'textbox',
@@ -37,21 +37,21 @@
 							        height:100
 							    }
 							}"
-							><?= lang("description"); ?></th>
-				        <th data-options="field:'option',width:80,align:'center',editor:{type:'checkbox',options:{on:'Option',off:'Not An Option'}}" formatter="formatOption"><?= lang("isoption"); ?>?</th>
-				        <th data-options="field:'allocation_id',width:100,align:'center'" formatter="formatDetail"><?= lang("editallocation"); ?></th>
+							><?= lang("Validation.description"); ?></th>
+				        <th data-options="field:'option',width:80,align:'center',editor:{type:'checkbox',options:{on:'Option',off:'Not An Option'}}" formatter="formatOption"><?= lang("Validation.isoption"); ?>?</th>
+				        <th data-options="field:'allocation_id',width:100,align:'center'" formatter="formatDetail"><?= lang("Validation.editallocation"); ?></th>
 				    </tr>
 				</thead>
 			</table>
     <div id="tb">
-    		<p style="float:left;"><?= lang("kpiheading1"); ?></p>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()"><?= lang("saveallchanges"); ?></a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()"><?= lang("cancelallchanges"); ?></a>
+    		<p style="float:left;"><?= lang("Validation.kpiheading1"); ?></p>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()"><?= lang("Validation.saveallchanges"); ?></a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()"><?= lang("Validation.cancelallchanges"); ?></a>
     </div>
     <script>
 			function formatDetail(value,row){
 				var href = 'cpscoping/edit_allocation/'+value;
-				return '<a class="label label-info" href="<?= base_url("' + href + '"); ?>"><?= lang("edit"); ?></a>';
+				return '<a class="label label-info" href="<?= base_url("' + href + '"); ?>"><?= lang("Validation.edit"); ?></a>';
 			}
 			function formatOption(val,row){
 			    if (val == "Option"){
@@ -161,17 +161,17 @@
     </script>
     <hr>
 <div class="col-md-6">
-		<p><?= lang("kpiheading2"); ?></p>
+		<p><?= lang("Validation.kpiheading2"); ?></p>
 <!-- 		<div class="label label-danger">After a save, you should reload the page to see updated graph.</div> -->		
 		<div id="chart_div" style="border:2px solid #f0f0f0;"></div>
 </div>
 <div class="col-md-6">
-		<p><b><?= lang("searchdocument"); ?></b></p>
+		<p><b><?= lang("Validation.searchdocument"); ?></b></p>
 			<?= form_open_multipart('search_result/'.$this->uri->segment(2).'/'.$this->uri->segment(3)); ?>
 			 	<input style="margin-bottom:10px;" type="text" class="form-control" id="search" placeholder="" name="search">
 		  	</form>
 		<hr>
-	 	<p><b><?= lang("documentupload"); ?></b> <small>(<?= lang("allowedfiletypes") ?>)</small></p>
+	 	<p><b><?= lang("Validation.documentupload"); ?></b> <small>(<?= lang("Validation.allowedfiletypes") ?>)</small></p>
 	 	 	<div class="form-group">
 	 	 		<?php
 		 	 		if(isset($error)) {
@@ -183,16 +183,16 @@
                 ?>
 				<?= form_open_multipart('cpscoping/file_upload/'.$this->uri->segment('2').'/'.$this->uri->segment('3')); ?>
 				    <input type="file" name="docuFile" id="docuFile"> <br/>
-				    <input type="submit" class="btn btn-info btn-sm" value="<?= lang("savefile"); ?>">
+				    <input type="submit" class="btn btn-info btn-sm" value="<?= lang("Validation.savefile"); ?>">
 		   		</form>
 		   	</div>
 		    <hr>
-		    <p><?= lang("uploadeddocument"); ?></p>
+		    <p><?= lang("Validation.uploadeddocument"); ?></p>
 		    <table class="table table-bordered">
 		    	<tr>
 		    		<th>Index</th>
-		    		<th><?= lang("filename"); ?></th>
-		    		<th><?= lang("manage"); ?></th>
+		    		<th><?= lang("Validation.filename"); ?></th>
+		    		<th><?= lang("Validation.manage"); ?></th>
 		    	</tr>
 			    <?php $sayac = 1;foreach ($cp_files as $file): ?>
 			    	<tr>
@@ -211,7 +211,7 @@
 							</a>
 			    		</td>
 			    		<td>
-			    			<a onclick="return confirm('Are you sure?')" href="<?= base_url("cpscoping/file_delete/".$file['file_name']."/".$this->uri->segment(2)."/".$this->uri->segment(3)); ?>"><?= lang("delete"); ?></a>
+			    			<a onclick="return confirm('Are you sure?')" href="<?= base_url("cpscoping/file_delete/".$file['file_name']."/".$this->uri->segment(2)."/".$this->uri->segment(3)); ?>"><?= lang("Validation.delete"); ?></a>
 			    		</td>
 			    	</tr>
 			    <?php endforeach ?>
@@ -235,12 +235,12 @@
 	    <div class="modal-content">
 		    <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="modal-title" id="myModalLabel"><?= lang("savekpi") ?></h4>
+		        <h4 class="modal-title" id="myModalLabel"><?= lang("Validation.savekpi") ?></h4>
 		    </div>
 		    <div class="modal-body">
 		      	<div id="alerts" style="margin-top: 20px;font-size: 13px;color: darkgrey;"></div>
 		      	<br>
-	      		<button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true" disabled><?= lang("saving"); ?></button>
+	      		<button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true" disabled><?= lang("Validation.saving"); ?></button>
 		    </div>
 		    <div class="modal-footer"></div>
 	    </div>

@@ -11,7 +11,7 @@ load->view('template/header'); ?>
         <br> <!-- file name for the user manual is case sensitive on the server! -->
         <a href="<?php echo asset_url('28_8_20_Celero_User_Manual_prnt.pdf'); ?>">
             <div style="background-color:#2D8B42; color:white; text-align: center;">
-                <?php echo lang("usermanual"); ?>
+                <?php echo lang("Validation.usermanual"); ?>
                 <span class="glyphicon glyphicon-book">
                 </span>
             </div>
@@ -28,7 +28,7 @@ load->view('template/header'); ?>
                         <div class="col-md-10">
                         	<!-- Turkish FAQ -->
                             <div class="swissheader">
-                                <?php echo lang("faq"); ?>
+                                <?php echo lang("Validation.faq"); ?>
                             </div>
                             <div class="helpheader">
                                 Bir akış nasıl eklenir?
@@ -239,7 +239,7 @@ Kullanıcı manuel olarak eşleşme gerçekleştirebilmektedir.
                         <!-- English FAQ -->
                         <div class="col-md-10">
                             <div class="swissheader">
-                                <?php echo lang("faq"); ?>
+                                <?php echo lang("Validation.faq"); ?>
                             </div>
                             <div class="helpheader">
                                 What is difference between a user and a consultant? 

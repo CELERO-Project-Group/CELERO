@@ -92,12 +92,22 @@ class Company extends BaseController{
 		    $this->company_model->insert_cmpny_prsnl($last_id);
 		    $this->company_model->insert_cmpny_nace_code($cmpny_nace_code);
 
-		    $config['upload_path'] = './assets/company_pictures/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '5000';
-			$config['file_name'] = $last_id.'.jpg';
-			$this->load->library('upload', $config);
+			$this->validate([
+				'userfile' => 'uploaded[userfile]|max_size[userfile,5000]'
+							   . '|mime_in[userfile,image/png,image/jpg,image/gif]'
+							   . '|ext_in[userfile,png,jpg,gif]|max_dims[userfile,1024,768]'
+			]);
+		    $file = $this->request->getFile('userfile');
 
+			if (! $path = $file->store()) {
+				echo view('upload_form', ['error' => "upload failed"]);
+			} else {
+				$data = ['upload_file_path' => $path];
+
+				echo view('upload_success', $data);
+			}
+
+			/* we need to fix this
 			if (!$this->upload->do_upload())
 			{
 				$logo = array(
@@ -118,7 +128,7 @@ class Company extends BaseController{
 					'logo'=>$last_id.'.jpg'
 				);
 				$this->company_model->set_company_image($last_id,$logo);
-			}
+			}*/
 			redirect('company/'.$last_id, 'refresh');
 		}
 		$data['all_nace_codes'] = $this->company_model->get_all_nace_codes();
@@ -171,7 +181,7 @@ class Company extends BaseController{
 		}
 
 		if($cluster_id == null || $cluster_id == 0){
-			$data['cluster_name']['name'] = lang("allcompanies");
+			$data['cluster_name']['name'] = lang("Validation.allcompanies");
 			$data['companies'] = $this->company_model->get_companies();
 		}
 		else{

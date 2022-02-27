@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8">
-			<div class="swissheader"><?= lang("mycompanies"); ?></div>
+			<div class="swissheader"><?= lang("Validation.mycompanies"); ?></div>
 			<!-- harita -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
             <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
@@ -54,8 +54,8 @@
 										<div><span style="color:#999999; font-size:12px;"><?= $com['description']; ?></span></div>
 									</div>
 									<div class="col-md-3">
-										<a class="btn btn-tuna" href="<?= base_url("new_flow/".$com['id']); ?>"><i class="fa fa-database"></i> <?= lang("editcompanydata"); ?></a>
-										<a class="btn btn-tuna" href="<?= base_url("update_company/".$com['id']); ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("editcompanyinfo"); ?></a>
+										<a class="btn btn-tuna" href="<?= base_url("new_flow/".$com['id']); ?>"><i class="fa fa-database"></i> <?= lang("Validation.editcompanydata"); ?></a>
+										<a class="btn btn-tuna" href="<?= base_url("update_company/".$com['id']); ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.editcompanyinfo"); ?></a>
 									</div>
 								</div>
 								</a>
@@ -63,14 +63,14 @@
 							</tr>
 						<?php endforeach ?>	
 					<?php else: ?>
-						<?= lang("nocompany"); ?>
+						<?= lang("Validation.nocompany"); ?>
 						<a class="btn btn-info btn-sm" href="<?= base_url("newcompany"); ?>">Create a Company</a>
 					<?php endif ?>			
 				</table>
 			<?php endif	?>
 		</div>
 		<div class="col-md-4">
-			<div class="well"><?= lang("mycompanydesc"); ?></div>
+			<div class="well"><?= lang("Validation.mycompanydesc"); ?></div>
 		</div>
 	</div>
 </div>

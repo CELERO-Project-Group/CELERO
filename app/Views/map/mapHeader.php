@@ -44,22 +44,22 @@
       <!--<ul class="nav navbar-nav navbar-left">-->
       <ul class="list-inline pull-left">
              <li class="head-li">
-                 <a href="<?= base_url('projects'); ?>"><i class="fa fa-globe"></i><?= lang("projects"); ?> </a>
+                 <a href="<?= base_url('projects'); ?>"><i class="fa fa-globe"></i><?= lang("Validation.projects"); ?> </a>
              </li>
              <li class="head-li">
-                 <a href="<?= base_url('cpscoping'); ?>"><i class="fa fa-bar-chart"></i><?= lang("cleanerproduction"); ?> </a>
+                 <a href="<?= base_url('cpscoping'); ?>"><i class="fa fa-bar-chart"></i><?= lang("Validation.cleanerproduction"); ?> </a>
              </li>
              <li class="head-li">
-                 <a href="<?= base_url('isScopingPrjBaseMDF'); ?>"><i class="fa fa-sitemap"></i><?= lang("industrialsimbiosis"); ?></a>
+                 <a href="<?= base_url('isScopingPrjBaseMDF'); ?>"><i class="fa fa-sitemap"></i><?= lang("Validation.industrialsimbiosis"); ?></a>
              </li>
-                <li class="head-li"><?= lang("workingon"); ?>: <a href="<?= base_url('project/'.$this->session->userdata('project_id')); ?>"><?= $this->session->userdata('project_name'); ?></a>
+                <li class="head-li"><?= lang("Validation.workingon"); ?>: <a href="<?= base_url('project/'.$this->session->userdata('project_id')); ?>"><?= $this->session->userdata('project_name'); ?></a>
              </li>
             
       </ul>
       <ul class="list-inline pull-right">
-        <li><a href="<?= base_url('whatwedo'); ?>"><i class="fa fa-question-circle"></i><?= lang("whatwedo"); ?> </a></li>
-        <li><a href="<?= base_url('functionalities'); ?>"><i class="fa fa-dashboard"></i><?= lang("functionalities"); ?> </a></li>
-        <li><a href="<?= base_url('contactus'); ?>"><i class="fa fa-envelope"></i><?= lang("contactus"); ?> </a></li>
+        <li><a href="<?= base_url('whatwedo'); ?>"><i class="fa fa-question-circle"></i><?= lang("Validation.whatwedo"); ?> </a></li>
+        <li><a href="<?= base_url('functionalities'); ?>"><i class="fa fa-dashboard"></i><?= lang("Validation.functionalities"); ?> </a></li>
+        <li><a href="<?= base_url('contactus'); ?>"><i class="fa fa-envelope"></i><?= lang("Validation.contactus"); ?> </a></li>
         <?php
           //print_r($this->session->userdata('user_in'));
           if (isset($_SESSION['user_in'])):
@@ -68,7 +68,7 @@
           <li class="head-li"><a href="<?= base_url('user/'.$tmp['username']); ?>" style="text-transform: capitalize;"><i class="fa fa-user"></i>
  <?= $tmp['username']; ?></a></li>
           <li class="head-li"><a href="<?= base_url('logout'); ?>"><i class="fa fa-sign-out"></i>
- <?= lang("logout"); ?></a></li>
+ <?= lang("Validation.logout"); ?></a></li>
         <?php else: ?>
           <li class="head-li"><a href="<?= base_url('login'); ?>"><i class="fa fa-sign-in"></i>
  Login</a></li>

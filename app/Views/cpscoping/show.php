@@ -78,11 +78,11 @@
 	};
 </script>
 		<div class="col-md-12" style="margin-bottom: 10px;">
-			<a class="btn btn-inverse btn-sm" href="<?= base_url('kpi_calculation/'.$this->uri->segment(2).'/'.$this->uri->segment(3)); ?>"><?= lang("gotokpi"); ?></a>
-			<a href="<?= base_url('new_flow/'.$this->uri->segment(3)); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("gotodataset"); ?></a>
+			<a class="btn btn-inverse btn-sm" href="<?= base_url('kpi_calculation/'.$this->uri->segment(2).'/'.$this->uri->segment(3)); ?>"><?= lang("Validation.gotokpi"); ?></a>
+			<a href="<?= base_url('new_flow/'.$this->uri->segment(3)); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("Validation.gotodataset"); ?></a>
 		</div>
 		<div class="col-md-12" id="sol4">
-			<p><?= lang("cpscopingheading1"); ?></p>
+			<p><?= lang("Validation.cpscopingheading1"); ?></p>
 			<div class="label label-info" id="graph_text"></div>
 		  	<div id="rect-demo-ana" style="border:2px solid #f0f0f0;">
 		    	<div id="rect-demo"></div>
@@ -90,11 +90,11 @@
 		</div>
 		<div class="col-md-12">
 			<hr>
-			<p><?= lang("cpscopingheading2"); ?></p>
+			<p><?= lang("Validation.cpscopingheading2"); ?></p>
 			<table class="table table-bordered">
 			<tr>
-			<th style="width:150px;"><?= lang("inputflows"); ?></th>
-			<th style="width:150px;text-align:center;"><?= lang("total"); ?></th>
+			<th style="width:150px;"><?= lang("Validation.inputflows"); ?></th>
+			<th style="width:150px;text-align:center;"><?= lang("Validation.total"); ?></th>
 			<?php $deneme_arrayi = array(); $tekrarsiz = array(); $tekrarsiz[-1] = "0"; $count = 0; $process_adet=0; ?>
 			<?php foreach ($allocation as $a): ?>
 			<?php
@@ -138,10 +138,10 @@
 							<b><?= $a['flow_name']; ?></b>
 							<?php if ($active[$a['allocation_id']] == 0): ?>
 								<button class="btn btn-default btn-xs pull-right" id="<?= $a['allocation_id']; ?>" onclick="is_candidate(<?= $a['allocation_id'];?>)">
-									<?= lang("selectascandidate"); ?>
+									<?= lang("Validation.selectascandidate"); ?>
 								</button>
 							<?php else: ?>
-								<button class="btn btn-success btn-xs pull-right" id="<?= $a['allocation_id']; ?>" onclick="is_candidate(<?= $a['allocation_id'];?>)"><?= lang("selectedcandidate"); ?>
+								<button class="btn btn-success btn-xs pull-right" id="<?= $a['allocation_id']; ?>" onclick="is_candidate(<?= $a['allocation_id'];?>)"><?= lang("Validation.selectedcandidate"); ?>
 								</button>
 							<?php endif ?>
 
@@ -201,8 +201,8 @@
 			<!-- Output Table -->
 			<table class="table table-bordered">
 			<tr>
-			<th style="width:150px;"><?= lang("outputflows"); ?></th>
-			<th style="width:150px;text-align: center;"><?= lang("total"); ?></th>
+			<th style="width:150px;"><?= lang("Validation.outputflows"); ?></th>
+			<th style="width:150px;text-align: center;"><?= lang("Validation.total"); ?></th>
 			<?php $deneme_arrayi = array(); $tekrarsiz = array(); $tekrarsiz[-1] = "0"; $count = 0; $process_adet=0; ?>
 			<?php foreach ($allocation as $a): ?>
 			<?php
@@ -256,10 +256,10 @@
 							<?php
 							if($id != 0){
 							if ($active[$id] == 0): ?>
-								<button class="btn btn-default btn-xs pull-right" id="<?= $id; ?>" onclick="is_candidate(<?= $id;?>)"><?= lang("selectascandidate"); ?>
+								<button class="btn btn-default btn-xs pull-right" id="<?= $id; ?>" onclick="is_candidate(<?= $id;?>)"><?= lang("Validation.selectascandidate"); ?>
 								</button>
 							<?php else: ?>
-								<button class="btn btn-success btn-xs pull-right" id="<?= $id; ?>" onclick="is_candidate(<?= $id;?>)"><?= lang("selectedcandidate"); ?>
+								<button class="btn btn-success btn-xs pull-right" id="<?= $id; ?>" onclick="is_candidate(<?= $id;?>)"><?= lang("Validation.selectedcandidate"); ?>
 								</button>
 							<?php endif ?>
 
@@ -331,21 +331,21 @@
 			    ">
 				<thead>
 				    <tr>
-				        <th data-options="field:'prcss_name',align:'center',width:150"><?= lang("process"); ?></th>
-				        <th data-options="field:'ep_def_value',align:'right',width:80" formatter="formatPrice"><?= lang("ep"); ?></th>
-				        <th data-options="field:'ep_value_alt',align:'right',width:100" formatter="formatPrice"><?= lang("lowerepvalue"); ?></th>
-				        <th data-options="field:'ep_value_ust',align:'right',width:100" formatter="formatPrice"><?= lang("upperepvalue"); ?></th>
-				        <th data-options="field:'cost_def_value',align:'right',width:100" formatter="formatPrice"><?= lang("cost"); ?></th>
-				        <th data-options="field:'cost_value_alt',align:'right',width:110" formatter="formatPrice"><?= lang("lowercostvalue"); ?></th>
-				        <th data-options="field:'cost_value_ust',align:'right',width:110" formatter="formatPrice"><?= lang("uppercostvalue"); ?></th>
-				        <th data-options="field:'comment',width:200,align:'center',editor:'text'"><?= lang("comments"); ?></th>
+				        <th data-options="field:'prcss_name',align:'center',width:150"><?= lang("Validation.process"); ?></th>
+				        <th data-options="field:'ep_def_value',align:'right',width:80" formatter="formatPrice"><?= lang("Validation.ep"); ?></th>
+				        <th data-options="field:'ep_value_alt',align:'right',width:100" formatter="formatPrice"><?= lang("Validation.lowerepvalue"); ?></th>
+				        <th data-options="field:'ep_value_ust',align:'right',width:100" formatter="formatPrice"><?= lang("Validation.upperepvalue"); ?></th>
+				        <th data-options="field:'cost_def_value',align:'right',width:100" formatter="formatPrice"><?= lang("Validation.cost"); ?></th>
+				        <th data-options="field:'cost_value_alt',align:'right',width:110" formatter="formatPrice"><?= lang("Validation.lowercostvalue"); ?></th>
+				        <th data-options="field:'cost_value_ust',align:'right',width:110" formatter="formatPrice"><?= lang("Validation.uppercostvalue"); ?></th>
+				        <th data-options="field:'comment',width:200,align:'center',editor:'text'"><?= lang("Validation.comments"); ?></th>
 				    </tr>
 				</thead>
 			</table>
     <div id="tb">
-    		<p style="float:left;"><?= lang("cpscopingheading3"); ?></p>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()"><?= lang("saveallchanges"); ?></a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()"><?= lang("cancelallchanges"); ?></a>
+    		<p style="float:left;"><?= lang("Validation.cpscopingheading3"); ?></p>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()"><?= lang("Validation.saveallchanges"); ?></a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject()"><?= lang("Validation.cancelallchanges"); ?></a>
     </div>
     <script type="text/javascript">
     function formatPrice(input){

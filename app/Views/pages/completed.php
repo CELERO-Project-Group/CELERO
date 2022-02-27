@@ -5,7 +5,7 @@
 	Your request has been completed.
 	<br>
 	<?php if(!isset($_SESSION['user_in'])): ?>
-	     <a href="<?= base_url('login'); ?>"><i class="fa fa-sign-in"></i> <?= lang("login"); ?></a>
+	     <a href="<?= base_url('login'); ?>"><i class="fa fa-sign-in"></i> <?= lang("Validation.login"); ?></a>
 	<?php endif ?>
 </div>
 <?php

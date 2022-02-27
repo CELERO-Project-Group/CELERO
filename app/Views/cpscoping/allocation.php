@@ -17,13 +17,13 @@ $(document).ready(function() {
             url: '<?= base_url('cp_allocation_array'); ?>/'+cmpny_id,
             success: function(data)
             {
-            	$('#flow_name').append('<option value="" disabled selected><?= lang("pleaseselect"); ?></option>');
+            	$('#flow_name').append('<option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>');
            		for(var k = 0 ; k < data.length ; k++){
            			if(data[k].company_process_id == prcss_id){
                     	$('#flow_name').append('<option value="'+data[k].flow_id+'">'+data[k].flowname+" ("+data[k].flow_type_name+')</option>');
                     }
                 }
-                $('#flow_type_name').append('<option value="0" disabled selected><?= lang("pleaseselect"); ?></option>');
+                $('#flow_type_name').append('<option value="0" disabled selected><?= lang("Validation.pleaseselect"); ?></option>');
            		for(var k = 0 ; k < data.length ; k++){
            			if(data[k].company_process_id == prcss_id){
        					if(!optionExists(data[k].flow_type_id)){
@@ -56,7 +56,7 @@ $(document).ready(function() {
            				}
                     }
                 }
-                $('#flow_type_name').append('<option value="0" disabled selected><?= lang("pleaseselect"); ?></option>');
+                $('#flow_type_name').append('<option value="0" disabled selected><?= lang("Validation.pleaseselect"); ?></option>');
            		for(var k = 0 ; k < data.length ; k++){
            			if(data[k].company_process_id == prcss_id){
        					if(!optionExists(data[k].flow_type_id)){
@@ -118,7 +118,7 @@ function aatf() {
 				var vPool="";
 				for (var i = 0; i < data.length; i++) {
 
-					vPool += '<div class="col-md-4"><table style="width:100%;"><tr><td colspan="3" style="height:60px;"><?= lang("process"); ?>: ' + data[i].prcss_name + '</td></tr><tr><td><?= lang("amount"); ?></td><td>' + data[i].amount + ' ' + data[i].unit_amount + ' <span class="label label-default">Accuracy: ' + data[i].error_amount + '%</span></td><td style="width:70px;"><?= lang("allocated"); ?>: '+data[i].allocation_amount+'%</td></tr><tr><td><?= lang("cost"); ?></td><td>' + data[i].cost + ' ' + data[i].unit_cost + ' <span class="label label-default">Accuracy: ' + data[i].error_cost + '%</span></td><td style="width:70px;"><?= lang("allocated"); ?>: '+data[i].allocation_cost+'%</td></tr><tr><td><?= lang("ep"); ?></td><td>' + data[i].env_impact + ' ' + data[i].unit_env_impact + ' <span class="label label-default">Accuracy: ' + data[i].error_ep + '%</span></td><td style="width:70px;"><?= lang("allocated"); ?>: '+data[i].allocation_env_impact+'%</td></tr></table><br></div>';
+					vPool += '<div class="col-md-4"><table style="width:100%;"><tr><td colspan="3" style="height:60px;"><?= lang("Validation.process"); ?>: ' + data[i].prcss_name + '</td></tr><tr><td><?= lang("Validation.amount"); ?></td><td>' + data[i].amount + ' ' + data[i].unit_amount + ' <span class="label label-default">Accuracy: ' + data[i].error_amount + '%</span></td><td style="width:70px;"><?= lang("Validation.allocated"); ?>: '+data[i].allocation_amount+'%</td></tr><tr><td><?= lang("Validation.cost"); ?></td><td>' + data[i].cost + ' ' + data[i].unit_cost + ' <span class="label label-default">Accuracy: ' + data[i].error_cost + '%</span></td><td style="width:70px;"><?= lang("Validation.allocated"); ?>: '+data[i].allocation_cost+'%</td></tr><tr><td><?= lang("Validation.ep"); ?></td><td>' + data[i].env_impact + ' ' + data[i].unit_env_impact + ' <span class="label label-default">Accuracy: ' + data[i].error_ep + '%</span></td><td style="width:70px;"><?= lang("Validation.allocated"); ?>: '+data[i].allocation_env_impact+'%</td></tr></table><br></div>';
 					//alert(data);
 
 				}
@@ -140,13 +140,13 @@ function aatf() {
 <?= form_open_multipart('cpscoping/' . $project_id . '/' . $company_id . '/allocation'); ?>
 	<div>
 		<div class="col-md-3">
-			<div><span class="badge">1</span> <?= lang("alloheading1"); ?></div>
+			<div><span class="badge">1</span> <?= lang("Validation.alloheading1"); ?></div>
 			<hr>
 			<div class="form-group row">
-				<label for="prcss_name" class="control-label col-md-12"><?= lang("selectprocess"); ?></label>
+				<label for="prcss_name" class="control-label col-md-12"><?= lang("Validation.selectprocess"); ?></label>
 				<div class="col-md-12">
 					<select name="prcss_name" id="prcss_name" onchange="aatf()" value="<?= set_value('prcss_name'); ?>" class="btn-group select select-block">
-						<option value=""><?= lang("pleaseselect"); ?></option>
+						<option value=""><?= lang("Validation.pleaseselect"); ?></option>
 						<?php
 $kontrol = array();
 $index   = 0;
@@ -165,31 +165,31 @@ if ($prcss_info[$i]['company_process_id'] == set_value('prcss_name')) {
 			</div>
 
 			<div class="form-group row">
-				<label for="flow_name" class="control-label col-md-12"><?= lang("selectflow"); ?></label>
+				<label for="flow_name" class="control-label col-md-12"><?= lang("Validation.selectflow"); ?></label>
 				<div class="col-md-12">
 					<select name="flow_name" id="flow_name" onchange="aatf()" class="btn-group select select-block">
-						<option value=""><?= lang("pleaseselect"); ?></option>
+						<option value=""><?= lang("Validation.pleaseselect"); ?></option>
 					</select>
 				</div>
 			</div>
 
 			<div class="form-group clearfix row">
-				<label for="flow_type_name" class="control-label col-md-12"><?= lang("selectflowtype"); ?></label>
+				<label for="flow_type_name" class="control-label col-md-12"><?= lang("Validation.selectflowtype"); ?></label>
 				<div class="col-md-12">
 					<select name="flow_type_name" id="flow_type_name" onchange="aatf()" class="btn-group select select-block" disabled="true">
-						<option><?= lang("pleaseselect"); ?></option>
+						<option><?= lang("Validation.pleaseselect"); ?></option>
 					</select>
 				</div>
 			</div>
 			<?php //print_r($company_flows); ?>
-			<div><?= lang("companyflows"); ?></div>
+			<div><?= lang("Validation.companyflows"); ?></div>
 			<hr>
 			<?php if (!empty($company_flows)): ?>
 				<table class="table" style="font-size:12px;">
 					<tr>
-						<th><?= lang("name"); ?></th>
-						<th colspan="2" style="text-align: center;"><?= lang("amount"); ?></th>
-						<th colspan="2" style="text-align: center;"><?= lang("cost"); ?></th>
+						<th><?= lang("Validation.name"); ?></th>
+						<th colspan="2" style="text-align: center;"><?= lang("Validation.amount"); ?></th>
+						<th colspan="2" style="text-align: center;"><?= lang("Validation.cost"); ?></th>
 					</tr>
 				<?php foreach ($company_flows as $f): ?>
 					<tr>
@@ -202,17 +202,17 @@ if ($prcss_info[$i]['company_process_id'] == set_value('prcss_name')) {
 				<?php endforeach?>
 				</table>
 			<?php else: ?>
-				<?= lang("alloheading2"); ?>
+				<?= lang("Validation.alloheading2"); ?>
 			<?php endif?>
-			<div><?= lang("companyproducts"); ?></div>
+			<div><?= lang("Validation.companyproducts"); ?></div>
 			<hr>
 			<?php if (!empty($product)): ?>
 				<table class="table" style="font-size:12px;">
 					<tr>
-						<th><?= lang("name"); ?></th>
-						<th colspan="2" style="text-align: center"><?= lang("quantity"); ?></th>
-						<th colspan="2" style="text-align: center"><?= lang("cost"); ?></th>
-						<th><?= lang("period"); ?></th>
+						<th><?= lang("Validation.name"); ?></th>
+						<th colspan="2" style="text-align: center"><?= lang("Validation.quantity"); ?></th>
+						<th colspan="2" style="text-align: center"><?= lang("Validation.cost"); ?></th>
+						<th><?= lang("Validation.period"); ?></th>
 					</tr>
 				<?php foreach ($product as $p): ?>
 					<tr>
@@ -226,49 +226,49 @@ if ($prcss_info[$i]['company_process_id'] == set_value('prcss_name')) {
 				<?php endforeach?>
 				</table>
 			<?php else: ?>
-				<?= lang("alloheading3"); ?>
+				<?= lang("Validation.alloheading3"); ?>
 			<?php endif?>
 		</div>
 		<div class="col-md-9" id="allocation_fields">
-			<div><span class="badge">2</span> <?= lang("alloheading4"); ?></div>
+			<div><span class="badge">2</span> <?= lang("Validation.alloheading4"); ?></div>
 			<hr>
 			<div class="form-group clearfix row">
 				<label class="control-label col-md-3 tooltip-amo" data-toggle="tooltip">
-					<?= lang("amount"); ?>  <i style="color:red;" class="fa fa-question-circle"></i></label>
-				<label class="control-label col-md-3"><?= lang("amountunit"); ?></label>
-				<label class="control-label col-md-3 tooltip-allo" data-toggle="tooltip"><?= lang("allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
-				<label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip"><?= lang("accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
+					<?= lang("Validation.amount"); ?>  <i style="color:red;" class="fa fa-question-circle"></i></label>
+				<label class="control-label col-md-3"><?= lang("Validation.amountunit"); ?></label>
+				<label class="control-label col-md-3 tooltip-allo" data-toggle="tooltip"><?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
+				<label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip"><?= lang("Validation.accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('amount'); ?>" id="amount" placeholder="<?= lang("number"); ?>" name="amount">
+					<input type="text" class="form-control" value="<?= set_value('amount'); ?>" id="amount" placeholder="<?= lang("Validation.number"); ?>" name="amount">
 				</div>
 				<div class="col-md-3">
 					<select name="unit_amount" id="unit_amount" class="btn-group select select-block">
-						<option value=""><?= lang("pleaseselect"); ?></option>
+						<option value=""><?= lang("Validation.pleaseselect"); ?></option>
 						<?php foreach ($unit_list as $u): ?>
 							<option value="<?= $u['name']; ?>" <?= set_select('unit_amount', $u['name']); ?>><?= $u['name']; ?></option>
 						<?php endforeach?>
 					</select>
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('allocation_amount'); ?>" id="allocation_amount" placeholder="<?= lang("percentage"); ?>" name="allocation_amount">
+					<input type="text" class="form-control" value="<?= set_value('allocation_amount'); ?>" id="allocation_amount" placeholder="<?= lang("Validation.percentage"); ?>" name="allocation_amount">
 				</div>
 
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('error_amount', 80); ?>" id="error_amount" placeholder="<?= lang("percentage"); ?>" name="error_amount">
+					<input type="text" class="form-control" value="<?= set_value('error_amount', 80); ?>" id="error_amount" placeholder="<?= lang("Validation.percentage"); ?>" name="error_amount">
 				</div>
 			</div>
 			<hr>
 			<div class="form-group clearfix row">
-				<label class="control-label col-md-3"><?= lang("cost"); ?></label>
-				<label class="control-label col-md-3"><?= lang("costunit"); ?></label>
-				<label class="control-label col-md-3 tooltip-allo" data-toggle="tooltip"><?= lang("allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
-				<label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip"><?= lang("accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
+				<label class="control-label col-md-3"><?= lang("Validation.cost"); ?></label>
+				<label class="control-label col-md-3"><?= lang("Validation.costunit"); ?></label>
+				<label class="control-label col-md-3 tooltip-allo" data-toggle="tooltip"><?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
+				<label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip"><?= lang("Validation.accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('cost'); ?>" id="cost" placeholder="<?= lang("number"); ?>" name="cost">
+					<input type="text" class="form-control" value="<?= set_value('cost'); ?>" id="cost" placeholder="<?= lang("Validation.number"); ?>" name="cost">
 				</div>
 				<div class="col-md-3">
 					<select name="unit_cost" id="unit_cost" class="btn-group select select-block">
-						<option value=""><?= lang("pleaseselect"); ?></option>
+						<option value=""><?= lang("Validation.pleaseselect"); ?></option>
 						<option value="Euro" <?= set_select('unit_cost', 'Euro'); ?>>Euro</option>
 						<option value="Dollar" <?= set_select('unit_cost', 'Dolar'); ?>>Dollar</option>
 						<option value="TL" <?= set_select('unit_cost', 'TL'); ?>>TL</option>
@@ -276,59 +276,59 @@ if ($prcss_info[$i]['company_process_id'] == set_value('prcss_name')) {
 					</select>
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('allocation_cost'); ?>" id="allocation_cost" placeholder="<?= lang("percentage"); ?>" name="allocation_cost">
+					<input type="text" class="form-control" value="<?= set_value('allocation_cost'); ?>" id="allocation_cost" placeholder="<?= lang("Validation.percentage"); ?>" name="allocation_cost">
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('error_cost', 80); ?>" id="error_cost" placeholder="<?= lang("percentage"); ?>" name="error_cost">
+					<input type="text" class="form-control" value="<?= set_value('error_cost', 80); ?>" id="error_cost" placeholder="<?= lang("Validation.percentage"); ?>" name="error_cost">
 				</div>
 			</div>
 			<hr>
 			<div class="form-group clearfix row">
-				<label class="control-label col-md-3"><?= lang("environmentalimpact"); ?></label>
-				<label class="control-label col-md-3"><?= lang("ep"); ?></label>
-				<label class="control-label col-md-3 tooltip-allo" data-toggle="tooltip"><?= lang("allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
-				<label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip"><?= lang("accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
+				<label class="control-label col-md-3"><?= lang("Validation.environmentalimpact"); ?></label>
+				<label class="control-label col-md-3"><?= lang("Validation.ep"); ?></label>
+				<label class="control-label col-md-3 tooltip-allo" data-toggle="tooltip"><?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
+				<label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip"><?= lang("Validation.accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i></label>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('env_impact'); ?>" id="env_impact" placeholder="<?= lang("number"); ?>" name="env_impact">
+					<input type="text" class="form-control" value="<?= set_value('env_impact'); ?>" id="env_impact" placeholder="<?= lang("Validation.number"); ?>" name="env_impact">
 				</div>
 				<div class="col-md-3">
 					<input class="form-control" id="unit_env_impact" placeholder="EP" value="EP" name="unit_env_impact" readonly>
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('allocation_env_impact'); ?>" id="allocation_env_impact" placeholder="<?= lang("percentage"); ?>" name="allocation_env_impact">
+					<input type="text" class="form-control" value="<?= set_value('allocation_env_impact'); ?>" id="allocation_env_impact" placeholder="<?= lang("Validation.percentage"); ?>" name="allocation_env_impact">
 				</div>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('error_ep', 80); ?>" id="error_ep" placeholder="<?= lang("percentage"); ?>" name="error_ep">
+					<input type="text" class="form-control" value="<?= set_value('error_ep', 80); ?>" id="error_ep" placeholder="<?= lang("Validation.percentage"); ?>" name="error_ep">
 				</div>
 			</div>
 			<hr>
 			<div class="form-group clearfix row">
 				<label class="control-label col-md-3 tooltip-ref" data-toggle="tooltip">
-					<?= lang("reference"); ?> <i style="color:red;" class="fa fa-question-circle"></i></label>
-				<label class="control-label col-md-3"><?= lang("unit"); ?></label>
-				<label class="control-label col-md-6"><?= lang("nameofref"); ?></label>
+					<?= lang("Validation.reference"); ?> <i style="color:red;" class="fa fa-question-circle"></i></label>
+				<label class="control-label col-md-3"><?= lang("Validation.unit"); ?></label>
+				<label class="control-label col-md-6"><?= lang("Validation.nameofref"); ?></label>
 				<div class="col-md-3">
-					<input type="text" class="form-control" value="<?= set_value('reference'); ?>" id="reference" placeholder="<?= lang("number"); ?>" name="reference">
+					<input type="text" class="form-control" value="<?= set_value('reference'); ?>" id="reference" placeholder="<?= lang("Validation.number"); ?>" name="reference">
 				</div>
 				<div class="col-md-3">
 					<select name="unit_reference" id="unit_reference" class="btn-group select select-block">
-						<option value=""><?= lang("pleaseselect"); ?></option>
+						<option value=""><?= lang("Validation.pleaseselect"); ?></option>
 						<?php foreach ($unit_list as $u): ?>
 							<option value="<?= $u['name']; ?>" <?= set_select('unit_reference', $u['name']); ?>><?= $u['name']; ?></option>
 						<?php endforeach?>
 					</select>
 				</div>
 				<div class="col-md-6">
-					<input type="text" class="form-control" value="<?= set_value('nameofref'); ?>" id="nameofref" placeholder="<?= lang("nameofref"); ?>" name="nameofref">
+					<input type="text" class="form-control" value="<?= set_value('nameofref'); ?>" id="nameofref" placeholder="<?= lang("Validation.nameofref"); ?>" name="nameofref">
 				</div>
 			</div>
 			<hr>
 			<div class="form-group clearfix row">
 				<label class="control-label col-md-3">
-                    <?= lang("kpi"); ?>
+                    <?= lang("Validation.kpi"); ?>
                 </label>
-				<label class="control-label col-md-3"><?= lang("kpiunit"); ?></label>
-				<label class="control-label col-md-6"><?= lang("kpidef"); ?></label>
+				<label class="control-label col-md-3"><?= lang("Validation.kpiunit"); ?></label>
+				<label class="control-label col-md-6"><?= lang("Validation.kpidef"); ?></label>
 				<div class="col-md-3">
 					<input class="form-control" id="kpi" placeholder="" name="kpi" readonly>
 				</div>
@@ -336,21 +336,21 @@ if ($prcss_info[$i]['company_process_id'] == set_value('prcss_name')) {
 					<input class="form-control" id="unit_kpi" placeholder="" name="unit_kpi" readonly>
 				</div>
 				<div class="col-md-6">
-					<input type="text" class="form-control" id="kpidef" value="<?= set_value('kpidef'); ?>" placeholder="<?= lang("kpidef"); ?>" name="kpidef">
+					<input type="text" class="form-control" id="kpidef" value="<?= set_value('kpidef'); ?>" placeholder="<?= lang("Validation.kpidef"); ?>" name="kpidef">
 				</div>
 
 			</div>
 			<div>
-				<button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> <?= lang("savedata"); ?></button>
-				<a href="<?= base_url('cpscoping'); ?>" class="btn btn-default" style="float: right;"><i class="fa fa-ban" ></i> <?= lang("cancel"); ?></a>
+				<button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> <?= lang("Validation.savedata"); ?></button>
+				<a href="<?= base_url('cpscoping'); ?>" class="btn btn-default" style="float: right;"><i class="fa fa-ban" ></i> <?= lang("Validation.cancel"); ?></a>
 			</div>
-			<div style="margin-top:30px;"><span class="badge">3</span> <?= lang("alloheading5"); ?></div>
+			<div style="margin-top:30px;"><span class="badge">3</span> <?= lang("Validation.alloheading5"); ?></div>
 			<hr>
 			<div id="aallocated" class="row">
 <!-- 				<span id="aprocess"></span>
 				<span id="aflow"></span>
 				<span id="atype"></span> -->
-				<div class="col-md-12"><?= lang("alloheading6"); ?></div>
+				<div class="col-md-12"><?= lang("Validation.alloheading6"); ?></div>
 			</div>
 		</div>
 	</div>
@@ -372,7 +372,7 @@ if ($prcss_info[$i]['company_process_id'] == set_value('prcss_name')) {
 //tooltip accuracy field
 $('.tooltip-acc').tooltip({
     position: 'top',
-    content: '<span style="color:#fff"><?= lang("accuratei"); ?></span>',
+    content: '<span style="color:#fff"><?= lang("Validation.accuratei"); ?></span>',
     onShow: function(){
         $(this).tooltip('tip').css({
             backgroundColor: '#999',
@@ -383,7 +383,7 @@ $('.tooltip-acc').tooltip({
 //tooltip reference field
 $('.tooltip-ref').tooltip({
     position: 'top',
-    content: '<span style="color:#fff"><?= lang("reference-ttip"); ?></span>',
+    content: '<span style="color:#fff"><?= lang("Validation.reference-ttip"); ?></span>',
     onShow: function(){
         $(this).tooltip('tip').css({
             backgroundColor: '#999',
@@ -394,7 +394,7 @@ $('.tooltip-ref').tooltip({
 //tooltip amount field
 $('.tooltip-amo').tooltip({
     position: 'top',
-    content: '<span style="color:#fff"><?= lang("amount-ttip"); ?></span>',
+    content: '<span style="color:#fff"><?= lang("Validation.amount-ttip"); ?></span>',
     onShow: function(){
         $(this).tooltip('tip').css({
             backgroundColor: '#999',
@@ -405,7 +405,7 @@ $('.tooltip-amo').tooltip({
 //tooltip allocation field
 $('.tooltip-allo').tooltip({
     position: 'top',
-    content: '<span style="color:#fff"><?= lang("allocation-ttip"); ?></span>',
+    content: '<span style="color:#fff"><?= lang("Validation.allocation-ttip"); ?></span>',
     onShow: function(){
         $(this).tooltip('tip').css({
             backgroundColor: '#999',

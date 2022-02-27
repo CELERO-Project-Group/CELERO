@@ -54,12 +54,12 @@
 
     <nav class="navbar navbar-default navbar-lg" style="margin-bottom:0px;">
       <a class="navbar-brand" href="<?= base_url(); ?>" style="color:white;">CELERO</a>
-      <?= lang("msg_first_name"); ?>
+      <?= lang("Validation.msg_first_name"); ?>
 
       <form class="navbar-form navbar-right" action="<?= base_url('search'); ?>" method="post" role="search" style="display: table;">
         <div class="form-group">
           <div class="input-group" style="display:block;">
-            <input name="term" class="form-control" id="navbarInput-01" type="search" placeholder="<?= lang("search"); ?>">
+            <input name="term" class="form-control" id="navbarInput-01" type="search" placeholder="<?= lang("Validation.search"); ?>">
             
               <button type="submit" class="btn"><span style="color:black;" class="fui-search"></span></button>
             
@@ -73,13 +73,13 @@
       </ul>
       -->
       <ul class="nav navbar-nav navbar-left ust-nav">
-        <li class="navtus" data-rel="profiles"><a id="l1" href="#" ><i class="fa fa-group"></i> <?= lang("profiles"); ?></a></li>
-        <li class="navtus" data-rel="companies"><a id="l2" href="#" ><i class="fa fa-building-o"></i> <?= lang("companies"); ?></a></li>
-        <li class="navtus" data-rel="projects"><a id="l3" href="#" ><i class="fa fa-globe"></i> <?= lang("projects"); ?></a></li>
-        <li class="navtus" data-rel="analysis"><a id="l4" href="#" ><i class="fa fa-recycle"></i> <?= lang("analysis"); ?></a></li>
+        <li class="navtus" data-rel="profiles"><a id="l1" href="#" ><i class="fa fa-group"></i> <?= lang("Validation.profiles"); ?></a></li>
+        <li class="navtus" data-rel="companies"><a id="l2" href="#" ><i class="fa fa-building-o"></i> <?= lang("Validation.companies"); ?></a></li>
+        <li class="navtus" data-rel="projects"><a id="l3" href="#" ><i class="fa fa-globe"></i> <?= lang("Validation.projects"); ?></a></li>
+        <li class="navtus" data-rel="analysis"><a id="l4" href="#" ><i class="fa fa-recycle"></i> <?= lang("Validation.analysis"); ?></a></li>
         <!-- reporting ".not-active" atm, ".navtus" removed -->
-        <li data-rel="reporting"><a id="l5" href="#" class="not-active" title="Not available yet"><i class="fa fa-pie-chart"></i> <?= lang("reporting"); ?></a></li>
-        <li data-rel="help"><a id="l6" href="<?= base_url('help'); ?>"><i class="fa fa-question-circle"></i> <?= lang("help"); ?></a></li>
+        <li data-rel="reporting"><a id="l5" href="#" class="not-active" title="Not available yet"><i class="fa fa-pie-chart"></i> <?= lang("Validation.reporting"); ?></a></li>
+        <li data-rel="help"><a id="l6" href="<?= base_url('help'); ?>"><i class="fa fa-question-circle"></i> <?= lang("Validation.help"); ?></a></li>
       </ul>
     </nav>
 
@@ -87,53 +87,53 @@
 
       <ul id="homies" class="nav navbar-nav alt-nav" style="display:none;">
         <li><a href="#" class="nav-info"></a></li>
-        <li><a href="<?= base_url('contactus'); ?>"><i class="fa fa-envelope"></i> <?= lang("whoarewe"); ?></a></li>
-        <li><a href="<?= base_url('whatwedo'); ?>"><i class="fa fa-question-circle"></i> <?= lang("whatwedo"); ?></a></li>
-        <li><a href="<?= base_url('functionalities'); ?>"><i class="fa fa-dashboard"></i> <?= lang("functionalities"); ?></a></li>
+        <li><a href="<?= base_url('contactus'); ?>"><i class="fa fa-envelope"></i> <?= lang("Validation.whoarewe"); ?></a></li>
+        <li><a href="<?= base_url('whatwedo'); ?>"><i class="fa fa-question-circle"></i> <?= lang("Validation.whatwedo"); ?></a></li>
+        <li><a href="<?= base_url('functionalities'); ?>"><i class="fa fa-dashboard"></i> <?= lang("Validation.functionalities"); ?></a></li>
       </ul>
 
       <ul id="profiles" class="nav navbar-nav alt-nav" style="display:none;">
          <li><a href="#" class="nav-info"></a></li>
-        <li><a href="<?= base_url('users'); ?>"><i class="fa fa-group"></i> <?= lang("consultants"); ?></a></li>
+        <li><a href="<?= base_url('users'); ?>"><i class="fa fa-group"></i> <?= lang("Validation.consultants"); ?></a></li>
         <?php
               //print_r($this->session->userdata('user_in'));
         if (isset($_SESSION['user_in'])):
           $tmp = $this->session->userdata('user_in');
         ?>
         <li class="head-li"><a href="<?= base_url('user/'.$tmp['username']); ?>" style="text-transform: capitalize;"><i class="fa fa-user"></i> <?= $tmp['username']; ?></a></li>
-        <li class="head-li"><a href="<?= base_url('profile_update'); ?>" ><i class="fa fa-pencil-square-o"></i> <?= lang("updateprofile"); ?></a></li>
-        <li class="head-li"><a href="<?= base_url('logout'); ?>"><i class="fa fa-sign-out"></i> <?= lang("logout"); ?></a></li>
+        <li class="head-li"><a href="<?= base_url('profile_update'); ?>" ><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.updateprofile"); ?></a></li>
+        <li class="head-li"><a href="<?= base_url('logout'); ?>"><i class="fa fa-sign-out"></i> <?= lang("Validation.logout"); ?></a></li>
       <?php else: ?>
-        <li class="head-li"><a href="<?= base_url('login'); ?>"><i class="fa fa-sign-in"></i> <?= lang("login"); ?></a></li>
-        <li class="head-li"><a href="<?= base_url('register'); ?>"><i class="fa fa-plus"></i> <?= lang("register"); ?></a></li>
+        <li class="head-li"><a href="<?= base_url('login'); ?>"><i class="fa fa-sign-in"></i> <?= lang("Validation.login"); ?></a></li>
+        <li class="head-li"><a href="<?= base_url('register'); ?>"><i class="fa fa-plus"></i> <?= lang("Validation.register"); ?></a></li>
       <?php endif ?>
     </ul>
 
     <ul id="companies" class="nav navbar-nav alt-nav" style="display:none;">
          <li><a href="#" class="nav-info"></a></li>
       <?php if (isset($_SESSION['user_in'])): ?>
-        <li><a href="<?= base_url('mycompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("mycompanies"); ?></a></li>
+        <li><a href="<?= base_url('mycompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.mycompanies"); ?></a></li>
         <?php if(isset($_SESSION['project_id'])): ?>
-          <li><a href="<?= base_url('projectcompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("projectcompanies"); ?></a></li>
+          <li><a href="<?= base_url('projectcompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.projectcompanies"); ?></a></li>
         <?php endif ?>
       <?php endif ?>
-        <li><a href="<?= base_url('companies'); ?>"><i class="fa fa-building-o"></i> <?= lang("allcompanies"); ?></a></li>
+        <li><a href="<?= base_url('companies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.allcompanies"); ?></a></li>
       <?php if (isset($_SESSION['user_in'])): ?>
-        <li class="head-li"><a href="<?= base_url('newcompany'); ?>"><i class="fa fa-plus-square"></i> <?= lang("createcompany"); ?></a></li>
+        <li class="head-li"><a href="<?= base_url('newcompany'); ?>"><i class="fa fa-plus-square"></i> <?= lang("Validation.createcompany"); ?></a></li>
       <?php endif ?>
     </ul>
 
     <ul id="projects" class="nav navbar-nav alt-nav" style="display:none;">
          <li><a href="#" class="nav-info"></a></li>
       <?php if (isset($_SESSION['user_in'])): ?>
-        <li><a href="<?= base_url('myprojects'); ?>"><i class="fa fa-globe"></i> <?= lang("myprojects"); ?></a></li>
+        <li><a href="<?= base_url('myprojects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.myprojects"); ?></a></li>
       <?php endif ?>
-      <li><a href="<?= base_url('projects'); ?>"><i class="fa fa-globe"></i> <?= lang("allprojects"); ?></a></li>
+      <li><a href="<?= base_url('projects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.allprojects"); ?></a></li>
       <?php if (isset($_SESSION['user_in'])): ?>
-        <li><a href="<?= base_url('newproject'); ?>"><i class="fa fa-plus-circle"></i> <?= lang("createproject"); ?></a></li>
+        <li><a href="<?= base_url('newproject'); ?>"><i class="fa fa-plus-circle"></i> <?= lang("Validation.createproject"); ?></a></li>
       <?php endif ?>
       <?php if(isset($_SESSION['project_id'])): ?>
-        <li class="pull-right"><a href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> <?= lang("closeproject"); ?></a></li>
+        <li class="pull-right"><a href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> <?= lang("Validation.closeproject"); ?></a></li>
         <li class="pull-right"><a href="<?= base_url('project/'.$this->session->userdata('project_id')); ?>"><?= $this->session->userdata('project_name'); ?></a></li>
       <?php endif ?>
     </ul>
@@ -142,11 +142,11 @@
          <li><a href="#" class="nav-info"></a></li>
       <?php if (isset($_SESSION['user_in'])): ?>
         <?php if(isset($_SESSION['project_id'])): ?>
-          <li><a href="<?= base_url('cpscoping'); ?>"><i class="fa fa-recycle"></i> <?= lang("cpidentification"); ?></a></li>
+          <li><a href="<?= base_url('cpscoping'); ?>"><i class="fa fa-recycle"></i> <?= lang("Validation.cpidentification"); ?></a></li>
           <li>
             <div class="dropdown">
               <button class="btn-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="padding: 12px 0px; color:white;">
-                <i class="fa fa-exchange"></i> <?= lang("isidentification"); ?>
+                <i class="fa fa-exchange"></i> <?= lang("Validation.isidentification"); ?>
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu dropdown-inverse" role="menu" aria-labelledby="dropdownMenu1">
@@ -159,28 +159,28 @@
               </ul>
             </div>
           </li>
-          <li><a href="<?= base_url('cost_benefit'); ?>"><i class="fa fa-eur"></i> <?= lang("costbenefitanalysis"); ?></a></li>
+          <li><a href="<?= base_url('cost_benefit'); ?>"><i class="fa fa-eur"></i> <?= lang("Validation.costbenefitanalysis"); ?></a></li>
           <!--link to the ecotracking is ".not-active" atm -->
-          <li><a class="not-active" title="Not available yet"><i class="fa fa-area-chart"></i> <?= lang("ecotracking"); ?></a></li>
+          <li><a class="not-active" title="Not available yet"><i class="fa fa-area-chart"></i> <?= lang("Validation.ecotracking"); ?></a></li>
           <!--link to the gis panel move to the last position and is ".not-active" atm -->
-          <li><a class="not-active" title="Not available yet"><i class="fa fa-globe"></i> <?= lang("gis"); ?></a></li>
+          <li><a class="not-active" title="Not available yet"><i class="fa fa-globe"></i> <?= lang("Validation.gis"); ?></a></li>
         <?php else: ?>
-          <li><a href="#"><?= lang("analysisinfo"); ?></a></li>
+          <li><a href="#"><?= lang("Validation.analysisinfo"); ?></a></li>
           <!--<ul class="list-inline" style="margin:0px;">
             <li class="head-li"><a href="<?= base_url('openproject'); ?>"><i class="fa fa-plus-square-o"></i> Open Project</a></li>
           </ul> -->
         <?php endif ?>
       <?php else: ?>
-      <li><a href="#"><?= lang("analysisinfo2"); ?></a></li>
+      <li><a href="#"><?= lang("Validation.analysisinfo2"); ?></a></li>
       <?php endif ?>
     </ul>
 
     <ul id="reporting" class="nav navbar-nav alt-nav" style="display:none;">
       <li><a href="#" class="nav-info"></a></li>
       <?php if (isset($_SESSION['user_in'])): ?>
-      <li><a href="<?= base_url('createreport'); ?>"><i class="fa fa-globe"></i> <?= lang("createreport"); ?></a></li>
+      <li><a href="<?= base_url('createreport'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.createreport"); ?></a></li>
       <?php endif ?>
-      <li><a href="<?= base_url('allreports'); ?>"><i class="fa fa-globe"></i> <?= lang("allreports"); ?></a></li>
+      <li><a href="<?= base_url('allreports'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.allreports"); ?></a></li>
     </ul>
 
 

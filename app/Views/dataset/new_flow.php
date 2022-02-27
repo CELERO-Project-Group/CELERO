@@ -33,22 +33,22 @@
     <?php if (validation_errors() == NULL): ?>
         <button id="ac-hide" type="button" class="close" aria-hidden="true">&times;</button>
     <?php endif ?>
-    <p class="lead"><?= lang("addflow"); ?></p>
+    <p class="lead"><?= lang("Validation.addflow"); ?></p>
     <!-- this is the new automatic Flow selector and EP calculator -->
     <div class="form-group">
-        <label for="epcalc"><?= lang("epcalc"); ?></label>
-        <button type="button" data-toggle="modal" data-target="#myModalEPcalc" class="btn btn-block btn-primary" id="UBP-button"><?= lang("epbutton"); ?></button>
+        <label for="epcalc"><?= lang("Validation.epcalc"); ?></label>
+        <button type="button" data-toggle="modal" data-target="#myModalEPcalc" class="btn btn-block btn-primary" id="UBP-button"><?= lang("Validation.epbutton"); ?></button>
         <span class="small">Environmental Impact Calculator is based on the UBP-Values of "Licence" or the data you added under "Import UBP values" page.</span>
         <span class="small">To add a flow which is not in the calculator, you have to define it (and its' UBP) under <a href="<?= base_url('datasetexcel'); ?>"><i class="fa fa-globe"></i> Import UBP values</a> page.</span>
     </div>
     <div class="form-group">
         <div class="row">
             <div class="col-md-8">
-                <label for="quantity"><?= lang("quantity"); ?>/a <span style="color:red;">* </span></label>
+                <label for="quantity"><?= lang("Validation.quantity"); ?>/a <span style="color:red;">* </span></label>
                 <input type="text" class="form-control" id="quantity" name="quantity" style="color:#333333;" value="<?= set_value('quantity'); ?>" readonly/>
             </div>
             <div class="col-md-4">
-                <label for="quantityUnit"><?= lang("quantityunit"); ?> <span style="color:red;">* </span> </label>
+                <label for="quantityUnit"><?= lang("Validation.quantityunit"); ?> <span style="color:red;">* </span> </label>
                 <input type="text" class="form-control" id="quantityUnit" name="quantityUnit" style="color:#333333;" value="<?= set_value('quantityUnit'); ?>" readonly/>
             </div>
         </div>
@@ -56,7 +56,7 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-12">
-                <label for="ep"><?= lang("flowname"); ?> <span style="color:red;">* </span></label>
+                <label for="ep"><?= lang("Validation.flowname"); ?> <span style="color:red;">* </span></label>
                 <input type="text" class="form-control" placeholder="Flow name" id="flowname" name="flowname" style="color:#333333;" value="<?= set_value('flowname'); ?>" readonly/>
             </div>
         </div>
@@ -64,7 +64,7 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-12">
-                <label for="ep"><strong><?= lang("total"); ?> <?= lang("ep"); ?> </strong> <span style="color:red;">* </span></label>
+                <label for="ep"><strong><?= lang("Validation.total"); ?> <?= lang("Validation.ep"); ?> </strong> <span style="color:red;">* </span></label>
                 <input type="text" class="form-control" placeholder="EP value" id="ep" name="ep" style="color:#333333;" value="<?= set_value('ep'); ?>" readonly/>
             </div>
         </div>
@@ -80,16 +80,16 @@
     <!-- this allows to enter flows calculate EP values manualy 
     <div id="manualep" style="display: none;">
         <div class="form-group">
-            <label for="selectize"><?= lang("flowname"); ?> <span style="color:red;">* <?= lang("notchangable"); ?></span></label>
+            <label for="selectize"><?= lang("Validation.flowname"); ?> <span style="color:red;">* <?= lang("Validation.notchangable"); ?></span></label>
             <select id="selectize" onchange="getFlowId('<?= $user['id']; ?>')" class="info select-block" name="flowname">
-                <option value=""><?= lang("pleaseselect"); ?></option>
+                <option value=""><?= lang("Validation.pleaseselect"); ?></option>
                 <?php foreach ($flownames as $flowname): ?>
                     <option value="<?= $flowname['id']; ?>" <?= set_select('flowname', $flowname['id']); ?>><?= $flowname['name']; ?></option>
                 <?php endforeach ?>
             </select>
         </div>
         <div class="form-group">
-            <label for="flowtype"><?= lang("flowtype"); ?> <span style="color:red;">* <?= lang("notchangable"); ?></span></label>
+            <label for="flowtype"><?= lang("Validation.flowtype"); ?> <span style="color:red;">* <?= lang("Validation.notchangable"); ?></span></label>
             <select id="flowtype" class="info select-block" name="flowtype">
                 <?php foreach ($flowtypes as $flowtype): ?>
                     <option value="<?= $flowtype['id']; ?>" <?= set_select('flowtype', $flowtype['id']); ?>><?= $flowtype['name']; ?></option>
@@ -97,7 +97,7 @@
             </select>
         </div> -->
         <div class="form-group" id="flow-family" style="display:none;">
-            <label for="flowfamily"><?= lang("flowfamily"); ?> <span style="color:red;">* <?= lang("notchangable"); ?></span></label>
+            <label for="flowfamily"><?= lang("Validation.flowfamily"); ?> <span style="color:red;">* <?= lang("Validation.notchangable"); ?></span></label>
             <select id="flowfamily" class="info select-block" name="flowfamily">
                 <option value="">Nothing Selected</option>
                 <?php foreach ($flowfamilys as $flowfamily): ?>
@@ -109,16 +109,16 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-8">
-                    <label for="quantity"><?= lang("quantity"); ?> (<?= lang("annual"); ?>) <span
+                    <label for="quantity"><?= lang("Validation.quantity"); ?> (<?= lang("Validation.annual"); ?>) <span
                                 style="color:red;">*</span></label>
                     <input class="form-control" onchange="getFlowId('<?= $user['id']; ?>')" id="quantity" name="quantity" placeholder="e.g. 12'123'000.00"
                            value="<?= set_value('quantity'); ?>">
                 </div>
                 <div class="col-md-4">
-                    <label for="quantityUnit"><?= lang("quantity"); ?> <?= lang("unit"); ?> <span
+                    <label for="quantityUnit"><?= lang("Validation.quantity"); ?> <?= lang("Validation.unit"); ?> <span
                                 style="color:red;">*</span></label>
                     <select id="selectize-units" class="info select-block" name="quantityUnit"> 
-                        <option value="" disabled selected><?= lang("pleaseselect"); ?></option>
+                        <option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>
                         <?php foreach ($units as $unit): ?>
                             <option value="<?= $unit['id']; ?>" <?= set_select('quantityUnit', $unit['id']); ?>><?= $unit['name']; ?></option>
                         <?php endforeach ?>
@@ -129,12 +129,12 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-8">
-                    <label for="ep">EP (<?= lang("annual"); ?>)</label>
+                    <label for="ep">EP (<?= lang("Validation.annual"); ?>)</label>
                     <input class="form-control" id="ep" name="ep" placeholder="e.g. 12'123'000.00"
                            value="<?= set_value('ep'); ?>">
                 </div>
                 <div class="col-md-4">
-                    <label for="epUnit"><?= lang("epunit"); ?></label>
+                    <label for="epUnit"><?= lang("Validation.epunit"); ?></label>
                     <input type="text" class="form-control" id="epUnit" value="EP" name="epUnit" readonly>
                 </div>
             </div>
@@ -149,11 +149,11 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-8">
-                <label for="cost"><?= lang("cost"); ?>/a <span style="color:red;">*</span></label>
+                <label for="cost"><?= lang("Validation.cost"); ?>/a <span style="color:red;">*</span></label>
                 <input class="form-control" id="cost" name="cost" placeholder="e.g. 12'123'000.00" value="<?= set_value('cost'); ?>" >
             </div>
             <div class="col-md-4">
-                <label for="cost"><?= lang("costunit"); ?> <span style="color:red;">*</span></label>
+                <label for="cost"><?= lang("Validation.costunit"); ?> <span style="color:red;">*</span></label>
                 <select id="costUnit" class="info select-block" name="costUnit">
                     <option value="CHF" <?= set_select('costUnit', 'CHF'); ?>>CHF</option>
                     <option value="Euro" <?= set_select('costUnit', 'Euro'); ?>>Euro</option>
@@ -165,8 +165,8 @@
     </div>
 
     <div class="form-group">
-        <label for="flowtype"><?= lang("flowtype"); ?> 
-            <span style="color:red;">* <small><?= lang("notchangable"); ?></small></span></label>
+        <label for="flowtype"><?= lang("Validation.flowtype"); ?> 
+            <span style="color:red;">* <small><?= lang("Validation.notchangable"); ?></small></span></label>
         <select id="flowtype" class="info select-block" name="flowtype">
             <?php foreach ($flowtypes as $flowtype): ?>
                 <option value="<?= $flowtype['id']; ?>" <?= set_select('flowtype', $flowtype['id']); ?>><?= $flowtype['name']; ?></option>
@@ -175,7 +175,7 @@
     </div>
 
     <div class="form-group">
-        <label for="state"><?= lang("state"); ?></label>
+        <label for="state"><?= lang("Validation.state"); ?></label>
         <select id="state" class="info select-block" name="state">
             <option value="1" <?= set_select('state', '1'); ?>>Solid</option>
             <option value="2" <?= set_select('state', '2'); ?>>Liquid</option>
@@ -185,48 +185,48 @@
     </div>
 
     <div class="form-group">
-        <input class="form-control" id="quality" name="quality" type="hidden" placeholder="<?= lang("quality"); ?>"
+        <input class="form-control" id="quality" name="quality" type="hidden" placeholder="<?= lang("Validation.quality"); ?>"
                value="<?= set_value('quality', 'true'); ?>">
     </div>
 
     <div class="form-group">
         <input class="form-control" id="spot" name="spot" value="<?= set_value('spot', 'true'); ?>"
-               type="hidden" placeholder="<?= lang("substitute_potential"); ?>">
+               type="hidden" placeholder="<?= lang("Validation.substitute_potential"); ?>">
     </div>
 
     <div class="form-group">
-        <label for="desc"><?= lang("description"); ?></label>
-            <textarea class="form-control" rows="5" id="desc" name="desc" placeholder="<?= lang("description"); ?>"></textarea>
+        <label for="desc"><?= lang("Validation.description"); ?></label>
+            <textarea class="form-control" rows="5" id="desc" name="desc" placeholder="<?= lang("Validation.description"); ?>"></textarea>
     </div>
 
-    <button type="submit" class="btn btn-info"><?= lang("addflow"); ?></button>
+    <button type="submit" class="btn btn-info"><?= lang("Validation.addflow"); ?></button>
     </form>
-    <span class="label label-default"><span style="color:red;">*</span> <?= lang("labelarereq"); ?></span>
+    <span class="label label-default"><span style="color:red;">*</span> <?= lang("Validation.labelarereq"); ?></span>
 
     <div class="modal fade" id="myModalEPcalc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog-nace">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel"><?= lang("selectflowsforep"); ?></h4>
+                    <h4 class="modal-title" id="myModalLabel"><?= lang("Validation.selectflowsforep"); ?></h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-3">
-                                <label for="flowname"><?= lang("flowname"); ?></label>
+                                <label for="flowname"><?= lang("Validation.flowname"); ?></label>
                                 <input type="text" class="form-control" id="flowname" name="flowname" style="color:#333333;" readonly/>
                             </div>
                             <div class="col-md-3">
-                                <label for="quantity"><?= lang("quantity"); ?>/a <span style="color:red;">* </span></label>
+                                <label for="quantity"><?= lang("Validation.quantity"); ?>/a <span style="color:red;">* </span></label>
                                 <input type="text" class="form-control" id="quantity" name="quantity" style="color:#333333;" />
                             </div>
                             <div class="col-md-3">
-                                <label for="UBPval"><?= lang("UBPperunit"); ?></label>
+                                <label for="UBPval"><?= lang("Validation.UBPperunit"); ?></label>
                                 <input type="text" class="form-control" id="UBPval" name="UBPval" style="color:#333333;" readonly/>
                             </div>
                             <div class="col-md-3">
-                                <label for="ep"><?= lang("total"); ?> <?= lang("ep"); ?>/a</label>
+                                <label for="ep"><?= lang("Validation.total"); ?> <?= lang("Validation.ep"); ?>/a</label>
                                 <input type="text" class="form-control" id="eptotal" name="eptotal" style="color:#333333;" readonly/>
                             </div>
                         </div>
@@ -234,7 +234,7 @@
                     <!-- Miller column UBP calculator -->
                     <div id="miller_col"></div>
                     <br>
-                    <button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true"><?= lang("done"); ?></button>
+                    <button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true"><?= lang("Validation.done"); ?></button>
                 </div>
                 <div class="modal-footer"></div>
             </div>
@@ -258,33 +258,33 @@
     <?php else: ?>
     <div class="col-md-8" id="buyukbas">
         <?php endif ?>
-        <p class="lead pull-left"><?= lang("companyflows"); ?>
+        <p class="lead pull-left"><?= lang("Validation.companyflows"); ?>
             <i class="fa fa-info-circle" title="Flows describe the total flow of Materials, Water and Energy
             of a company in order to generate products."></i>
         </p>
         <?php if (validation_errors() == NULL): ?>
-            <button id="ac" class="btn btn-warning" style="margin-left: 20px;"> <?= lang("addflow"); ?></button>
+            <button id="ac" class="btn btn-warning" style="margin-left: 20px;"> <?= lang("Validation.addflow"); ?></button>
         <?php endif ?>
 
         <table class="table table-bordered" style="font-size:12px;">
             <tr>
-                <th><?= lang("flowname"); ?></th>
-                <th><?= lang("flowtype"); ?></th>
+                <th><?= lang("Validation.flowname"); ?></th>
+                <th><?= lang("Validation.flowtype"); ?></th>
                 
-                <th colspan="2"><?= lang("quantity"); ?></th>
+                <th colspan="2"><?= lang("Validation.quantity"); ?></th>
                 <th><?php
                     if (empty($company_flows)) {
-                        echo lang("cost");
+                        echo lang("Validation.cost");
                     } else {
-                        echo lang("cost") . " " . $company_flows[0]['cost_unit'];
+                        echo lang("Validation.cost") . " " . $company_flows[0]['cost_unit'];
                     }?>
                 </th>
-                <th><?= lang("ep") . " UBP"; ?>
+                <th><?= lang("Validation.ep") . " UBP"; ?>
                     <button id="prefix" class="btn btn-default btn-sm"> pts</button>
                 </th>
-                <th><?= lang("state"); ?></th>
-                <th><?= lang("description"); ?></th>
-                <th style="width:100px;"><?= lang("manage"); ?></th>
+                <th><?= lang("Validation.state"); ?></th>
+                <th><?= lang("Validation.description"); ?></th>
+                <th style="width:100px;"><?= lang("Validation.manage"); ?></th>
             </tr>
             <?php foreach ($company_flows as $key => $flow): ?>
                 <tr>
@@ -315,11 +315,11 @@
                     <td>
                         <a href="<?= base_url('edit_flow/' . $companyID . '/' . $flow['flow_id'] . '/' . $flow['flow_type_id']); ?>"
                            class="label label-warning"><span
-                                    class="fa fa-edit"></span> <?= lang("edit"); ?></button>
+                                    class="fa fa-edit"></span> <?= lang("Validation.edit"); ?></button>
                             <a href="<?= base_url('delete_flow/' . $companyID . '/' . $flow['id']); ?>"
                                class="label label-danger"
                                onclick="return confirm('Are you sure you want to delete this flow?');"><span
-                                        class="fa fa-times"></span> <?= lang("delete"); ?></button>
+                                        class="fa fa-times"></span> <?= lang("Validation.delete"); ?></button>
                     </td>
 
                 </tr>

@@ -4,7 +4,7 @@
 	<?php endif ?>
 	<div class="row">
 		<div class="col-md-8">
-				<div class="swissheader"><?= lang("allprojects"); ?></div>
+				<div class="swissheader"><?= lang("Validation.allprojects"); ?></div>
 						<!-- harita -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
             <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
@@ -93,10 +93,10 @@
                 <?php else: ?>
                   <?= form_open('openproject'); ?>
                     <input type="hidden" name="projectid" value="<?= $pro['id']; ?>">
-                    <button type="submit" class="btn btn-tuna"><i class="fa fa-plus-square-o"></i> <?= lang("openproject"); ?></button>
+                    <button type="submit" class="btn btn-tuna"><i class="fa fa-plus-square-o"></i> <?= lang("Validation.openproject"); ?></button>
                   </form>
                 <?php endif ?>
-              <a class="btn btn-tuna" href="<?= base_url("update_project/".$pro['id']); ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("editprojectinfo"); ?></a>
+              <a class="btn btn-tuna" href="<?= base_url("update_project/".$pro['id']); ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.editprojectinfo"); ?></a>
             <?php endif ?>
             </div>
           </div>
@@ -108,7 +108,7 @@
 		</div>
 		<div class="col-md-4">
 			<div class="well">
-        <?= lang("allprojectsinfo"); ?>
+        <?= lang("Validation.allprojectsinfo"); ?>
 			</div>
 		</div>
 	</div>
