@@ -21,7 +21,7 @@ RUN rm -rf /var/lib/apt/lists/*
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer self-update --2
 
-COPY config/apache.conf /etc/apache2/sites-available/celero.conf
+COPY config/apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Codeigniter needs to rewrite urls
 RUN a2enmod rewrite

@@ -1,0 +1,501 @@
+body {
+    font-size: 14px;
+    font-family: 'Helvetica Neue', Helvetica, arial, sans-serif;
+}
+
+.altbaslik {
+    font-size: 24px;
+}
+
+.head-li {
+    font-size: 14px;
+}
+
+.form-control {
+    border: 1px solid #bdc3c7;
+    font-size: 13px;
+    height: 38px;
+    border-radius: 4px !important;
+}
+/* bootstrap üstüne */
+
+.navbar-default {
+    border-radius: 0px;
+    color: #f0f0f0;
+    background-color: #2D8B42;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #f0f0f0;
+    text-decoration: underline;
+}
+
+.navbar-default a {
+    color: #fff;
+}
+
+.navbar-default a:hover {
+    color: #f0f0f0;
+    text-decoration: underline;
+}
+
+.lead {
+    font-size: 22px;
+    color: #CF324C;
+}
+/*auto complete  */
+
+.wrapper {
+    margin: 20px auto;
+    width: 400px;
+}
+
+#companySearch {
+    width: 100%;
+}
+
+.ui-autocomplete-multiselect.ui-state-default {
+    display: block;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 3px 3px;
+    padding-bottom: 0px;
+    overflow: hidden;
+    cursor: text;
+}
+
+.ui-autocomplete-multiselect .ui-autocomplete-multiselect-item .ui-icon {
+    float: right;
+    cursor: pointer;
+}
+
+.ui-autocomplete-multiselect .ui-autocomplete-multiselect-item {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 1px 3px;
+    margin-right: 2px;
+    margin-bottom: 3px;
+    color: #333;
+    background-color: #f6f6f6;
+}
+
+.ui-autocomplete-multiselect input {
+    display: inline-block;
+    border: none;
+    outline: none;
+    height: auto;
+    margin: 2px;
+    overflow: visible;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.ui-autocomplete-multiselect.ui-state-active {
+    outline: none;
+    border: 1px solid #7ea4c7;
+    -khtml-box-shadow: 0 0 5px rgba(50, 150, 255, 0.5);
+    box-shadow: 0 0 5px rgba(50, 150, 255, 0.5);
+}
+
+.ui-autocomplete {
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.cp-heading {
+    background: #f0f0f0;
+    padding: 10px;
+    /*border-radius: 4px 4px;*/
+
+    font-size: 14px;
+}
+
+.cp-bar {
+    padding: 10px;
+    border: 2px solid #f0f0f0;
+}
+
+.btn-sm {
+    font-size: 12px !important;
+    padding: 6px !important;
+}
+
+.btn-inverse {
+    color: black;
+    background: rgb(227, 234, 239);
+    /* Old browsers */
+    /* FF3.6+ */
+    /* Chrome,Safari4+ */
+    /* Chrome10+,Safari5.1+ */
+    /* Opera 11.10+ */
+    /* IE10+ */
+
+    background: linear-gradient(to bottom, rgba(227, 234, 239, 1) 0%, rgba(199, 213, 224, 1) 100%);
+    /* W3C */
+
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#e3eaef', endColorstr='#c7d5e0', GradientType=0);
+    /* IE6-9 */
+}
+
+.alert-danger {
+    margin: 20px;
+    padding: 18px 45px 14px 30px;
+    border-radius: 4px 4px 4px 4px;
+    background-color: rgb(255, 236, 241);
+    border: none;
+}
+
+.cp-heading-kpi {
+    background: #6D6D6D;
+    padding: 10px 27px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px 4px 0 0;
+}
+/* @media screen and (min-width: 1200px) {
+.navbar-brand
+{
+position: absolute;
+width: 100%;
+left: 0;
+top: 0;
+text-align: center;
+margin: auto;
+font-family: 'Roboto', cursive;
+}
+}*/
+
+.navbar-nav.navbar-right:last-child {
+    margin-right: 0px !important;
+}
+
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    color: #34495E;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.borderli {
+    border-right: 1px solid #d0d0d0;
+}
+
+label {
+    line-height: 1.5;
+}
+
+.btn {
+    font-size: 13px;
+}
+
+.ultab {
+    border-bottom: 2px solid #d0d0d0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.ultab li {
+    border: 2px solid #f0f0f0;
+    border-bottom: 0px;
+    background-color: #f0f0f0;
+}
+
+.ultab > li:first-child {
+    padding-left: 5px;
+}
+
+.ultab li.active {
+    border: 2px solid #d0d0d0;
+    background-color: #d0d0d0;
+}
+
+.ultab li a {
+    color: rgb(52, 73, 94) !important;
+}
+
+.form-control {
+    min-width: 100px;
+}
+
+.costtable table,
+th,
+td {
+    border: 2px solid #f0f0f0;
+    padding: 3px 10px;
+}
+
+.costtable input {
+    border: none !important;
+    margin: -5px -10px;
+}
+/*d3.js styling*/
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis line,
+.axis path {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.boxhead {
+    padding: 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px 4px 0 0;
+    background-color: ghostwhite;
+}
+
+.boxcontent {
+    border: 1px solid #d0d0d0;
+    padding: 10px;
+    border-radius: 0 0 4px 4px;
+    margin-bottom: 15px;
+    border-top: none;
+}
+
+.table-bordered {
+    font-size: 13px;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    padding: 8px;
+}
+
+.homemain {
+    background: url('../images/home.jpg');
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin-top: -20px;
+}
+
+.footer {
+    padding: 25px;
+    background-color: #f0f0f0;
+    margin-top: 100px;
+}
+
+.footer-right {
+    float: right !important;
+    color: #16a085;
+}
+
+.navbar-nav > li > a {
+    font-weight: 400;
+}
+
+.label {
+    font-size: 85%;
+}
+
+#map {
+    height: 380px;
+    margin-bottom: 10px;
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid #d0d0d0;
+}
+
+.kutua {
+    border: 1px solid white;
+    margin: 20px !important;
+    padding: 5px !important;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.kutua:hover {
+    text-decoration: none !important;
+    background-color: white !important;
+    color: green !important;
+}
+
+.swissbox {
+    padding: 20px;
+    border: 1px solid #CF324C;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.swissheader {
+    color: white;
+    font-size: 15px;
+    background-color: #787878;
+    padding: 5px 15px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.alert {
+    color: #FF3737 !important;
+    border-radius: 0px;
+    font-size:14px;
+}
+
+.alt-nav li>a {
+    font-size: 14px;
+}
+
+.ust-nav li>a {
+    font-weight: bold;
+}
+
+.nav-info {
+    width: 150px;
+    color: rgb(201, 201, 201);
+    text-align: right;
+}
+
+.nav-info:hover {
+    width: 142px;
+    color: rgb(201, 201, 201);
+    text-align: right;
+    cursor: default;
+}
+
+#l0,#l1,#l2,#l3,#l4,#l5,#l6{
+    color: white;
+    text-decoration: none;
+}
+#profiles{
+    background-color: #901F0F;
+    color:white;
+    width: 100%;
+}
+#profiles a{
+    color:white;
+}
+#companies{
+    background-color: #901F0F;
+    color:white;
+    width: 100%;
+}
+#companies a{
+    color:white;
+}
+#projects{
+    background-color: #15474A;
+    color:white;
+    width: 100%;
+}
+#projects a{
+    color:white;
+}
+#cases{
+    background-color: #15474A;
+    color:white;
+    width: 100%;
+}
+#cases a{
+    color:white;
+}
+#reporting{
+    background-color: #AE573E;
+    color:white;
+    width: 100%;
+}
+#reporting a{
+    color:white;
+}
+#analysis{
+    background-color: #84BFC3;
+    color:white;
+    width: 100%;
+}
+#analysis a{
+    color:white;
+}
+.well{
+    min-height: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    box-shadow: none;
+    border-radius: 0px;
+}
+.gribar{
+    border-top: 1px dashed #d0d0d0;
+}
+.btn-tuna{
+    padding: 0px;
+    color: #b8b7d1;
+    margin-right: 10px;
+    font-size:12px;
+    background: none;
+}
+.btn-tuna:hover{
+    color:#0099ff;
+}
+
+.heightlimit { max-height:650px; border:1px solid d0d0d0; overflow:auto; }
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+#gizle{
+    display: none;
+}
+
+pre p{
+    font-size:12px;
+}
+
+.helpheader{
+    padding: 10px;
+    font-weight: 600;
+    color: #009688;
+}
+
+.helpbody{
+    padding: 10px;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+/*for deactivated features*/
+.not-active {
+   cursor: default;
+   opacity: 0.4;
+}
+
+/*special formating for numbers (with separate unit) in tables*/
+.table-numbers {
+    text-align: right; 
+    border-right-style: hidden !important; 
+    padding-right: 0px !important;
+}
+
+/*special formating for units left from numbers in tables*/
+.table-units {
+    text-align: right; 
+    padding-left: 2px !important;
+}
+
+#subtitle {
+    color: white;
+    font-size: 12px;
+}
+
+.indented {
+    padding-left: 50pt;
+    padding-right: 0pt;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

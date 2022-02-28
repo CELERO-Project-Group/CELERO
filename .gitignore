@@ -23,6 +23,7 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+.DS_Store
 
 # Windows shortcuts
 *.lnk

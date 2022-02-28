@@ -1,0 +1,58 @@
+.textbox .textbox-text{
+	color:black;
+}
+.datagrid-view .datagrid-editable-input{
+	color:black;
+}
+.datagrid-header td, .datagrid-body td, .datagrid-footer td{
+	padding: 10px 8px;
+	border-style: solid;
+	border-color: #DDDDE4;
+	border-left: 0px;
+	border-right:0px;
+}
+.panel{
+	border-radius: 0px 0px 0px 0px;
+	box-shadow: none !important;
+}
+.l-btn-plain{
+	float: right;
+}
+.panel-header, .panel-body{
+	border:none;
+}
+#tb{
+	height:auto; 
+	overflow:hidden; 
+	padding:10px 8px;
+}
+.datagrid-header, .datagrid-td-rownumber{
+	font-weight: bold;
+  background: white;
+}
+.l-btn-text{
+	color:rgb(113, 113, 113);
+	font-size:14px;
+}
+.datagrid-toolbar, .datagrid-pager{
+	background-color: white;
+}
+.l-btn-plain:hover {
+  background: transparent;
+  color: #00438a;
+  border-radius: 4px;
+  margin: 0 5px;
+  padding: 6px;
+  border:1px solid #0099ff;
+}
+.l-btn-plain {
+  background: transparent;
+  border: 1px solid #d0d0d0;
+  filter: none;
+  border-radius: 4px;
+  margin: 0 5px;
+  padding: 6px;
+}
+.datagrid-header, .datagrid-toolbar, .datagrid-pager, .datagrid-footer-inner{
+	border:none;
+}

@@ -1,0 +1,193 @@
+/* 
+    Document   : genel
+    Created on : 07.Oca.2014, 16:27:53
+    Author     : Mustafa Zeynel Dağlı
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body{
+margin: 0 auto;
+}
+
+.bodywrapper {
+    
+}
+
+.topwrapper {
+border-bottom: 1px solid #d4d4d4;
+margin: 0 auto;
+} 
+
+.topwrapper .divtop, 
+.centerwrapper .divcenter, 
+.topwrapper .divtop .wide,
+.centerwrapper .divcenter .wide,
+.centerwrapper .divcenter .content{
+margin: 0 auto;
+
+}
+
+.topwrapper .divtop {
+width: 1200px;
+}
+
+.centerwrapper .divcenter{
+ /*width: 1200px;*/
+}
+
+.centerwrapper .divcenter .content{
+    
+}
+
+.centerwrapper .divcenter .content .left,
+.centerwrapper .divcenter .content .right,
+.centerwrapper .divcenter .content .center {
+    float : left;
+}
+
+.clear {
+    clear: both;
+}
+
+#header {
+position: relative;
+padding: 10px 0;
+margin: 0 auto;
+z-index: 1000;
+height : 100px;
+}
+
+
+ 
+#header #logo {
+background: url(../../Public/Images/logo.png) no-repeat 0px 0px;
+float: left;
+overflow: hidden;
+height: 100px;
+width :25%;
+}
+
+#header #content-right {
+    float : right;
+}
+
+#header #horiznav {
+ height: 37px;
+ float : none;
+ margin-top: 32px;
+}
+
+#header #horiznav ul{
+ list-style: none;
+ /*line-height: 37px;*/
+ padding-top: 0px;
+}
+
+#header  ul li {
+background: #fafafa;
+border: 1px solid #d4d4d4;
+box-shadow: inset 0px -10px 10px #f2f2f2;
+color: #fff;
+margin-right: 10px;
+-webkit-border-radius: 4px;
+-khtml-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+
+#header #horiznav ul li {
+float: left;
+padding: 0px 0px 0px 0px;
+position: relative;
+margin: 0 0px 0 0;
+margin : 0px 10px 0px 0px;
+}
+
+#horiznav a.activepath{
+color: #121212;
+}
+
+#horiznav ul li a{
+text-transform: uppercase;
+display: block;
+
+padding: 0px 25px 0px 25px;
+margin: 0px 0px 0px 0px;
+font: bold 80%/37px Tahoma;
+text-decoration: none;
+}
+
+#horiznav span.content{
+display: block;
+font-weight: normal;
+text-transform: capitalize;
+margin-top : -4px;
+}
+
+#horiznav span.content, span.title{
+line-height: 20px;
+display: list-item;
+font-size: 11px;
+}
+
+.wide .centertitle h1 {
+    font-family: 'plastik-fantaplastikfantasyRg';
+    font-weight: normal;
+    color: #504f4f;
+    text-align: center;
+    font-size: 45px;
+    text-shadow: 1px 1px #fff;
+}
+
+.wide .centertitle p {
+    font-size: 220% !important;
+    font-weight: bold;
+    margin: 0 0 30px 0;
+    line-height: 35px;
+    text-align: center;
+    color: #555;
+}
+
+.centerwrapper .divcenter .wide .centertitle {
+    margin : 0px auto;
+    width :1200px;
+}
+
+.centertitle .plarge span {
+    margin-right: 8px;
+}
+
+.centertitle .plarge small {
+    font-size: 52%;
+}
+
+/*
+ .btn-large {
+    padding: 9px 14px;
+    font-size: 16px;
+    line-height: normal;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #5bb75b;
+    border: 1px solid #bbb;
+    cursor : pointer;
+}
+
+.btn-primary {
+    color:#fff;
+    text-shadow:0 -1px 0 rgba(0,0,0,0.25);
+}
+
+btn {
+    
+}
+
+btn-success {
+    
+}
+
+btn-large {
+    
+}*/

@@ -33,180 +33,180 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 // Language 
 //disabled it
-//$route->add('language/switch/(:any)'), 'langswitch/switchLanguage/$1';
+//$routes->add('language/switch/(:any)', 'langswitch/switchLanguage/$1');
 
 // ADMIN
-$route->add('admin/newFlow'), 'Admin::newFlow';
-$route->add('admin/newProcess'), 'Admin::newProcess';
-$route->add('admin/newEquipment'), 'Admin::newEquipment';
-$route->add('admin/reports'), 'Admin::reports';
+$routes->add('admin/newFlow', 'Admin::newFlow');
+$routes->add('admin/newProcess', 'Admin::newProcess');
+$routes->add('admin/newEquipment', 'Admin::newEquipment');
+$routes->add('admin/reports', 'Admin::reports');
  
 //Report
-$route->add('report/(:any)')Rshow_single/$1';
-$route->add('allreports')Rshow_all';
-$route->add('admin/report'), 'Admin::report';
+#$routes->add('report/(:any)', 'show_single/$1');
+#$routes->add('allreports', 'show_all');
+$routes->add('admin/report', 'Admin::report');
 
-$route->add('admin/rpEmployeesList'), 'Admin::rpEmployeesList';
-$route->add('admin/rpCompaniesList'), 'Admin::rpCompaniesList';
-$route->add('admin/rpCompaniesInfoList'), 'Admin::rpCompaniesInfoList';
-$route->add('admin/rpCompaniesProjectsList'), 'Admin::rpCompaniesProjectsList';
-$route->add('admin/rpCompaniesProjectDetailsList'), 'Admin::rpCompaniesProjectDetailsList';
-$route->add('admin/rpCompaniesNotInClustersList'), 'Admin::rpCompaniesNotInClustersList';
-$route->add('admin/rpCompaniesWasteEmissionList'), 'Admin::rpCompaniesWasteEmissionList';
-$route->add('admin/rpCompaniesProductionList'), 'Admin::rpCompaniesProductionList';
-$route->add('admin/rpCompaniesProcessesList'), 'Admin::rpCompaniesProcessesList';
-$route->add('admin/rpConsultantsList'), 'Admin::rpConsultantsList';
-$route->add('admin/rpCompaniesInClustersList'), 'Admin::rpCompaniesInClustersList';
-$route->add('admin/rpEquipmentList'), 'Admin::rpEquipmentList';
-$route->add('admin/reportTest'), 'Admin::reportTest';
-$route->add('admin/reportTest'), 'Admin::reportTest';
-$route->add('admin/clusters'), 'Admin::clusters';
-$route->add('admin/industrialZones'), 'Admin::industrialZones';
-$route->add('admin/consultants'), 'Admin::consultants';
-$route->add('admin/employees'), 'Admin::employees';
-$route->add('admin/zoneEmployees'), 'Admin::zoneEmployees';
-$route->add('admin/zoneCompanies'), 'Admin::zoneCompanies';
-$route->add('createreport'), 'Reporting::create'; 
+$routes->add('admin/rpEmployeesList', 'Admin::rpEmployeesList');
+$routes->add('admin/rpCompaniesList', 'Admin::rpCompaniesList');
+$routes->add('admin/rpCompaniesInfoList', 'Admin::rpCompaniesInfoList');
+$routes->add('admin/rpCompaniesProjectsList', 'Admin::rpCompaniesProjectsList');
+$routes->add('admin/rpCompaniesProjectDetailsList', 'Admin::rpCompaniesProjectDetailsList');
+$routes->add('admin/rpCompaniesNotInClustersList', 'Admin::rpCompaniesNotInClustersList');
+$routes->add('admin/rpCompaniesWasteEmissionList', 'Admin::rpCompaniesWasteEmissionList');
+$routes->add('admin/rpCompaniesProductionList', 'Admin::rpCompaniesProductionList');
+$routes->add('admin/rpCompaniesProcessesList', 'Admin::rpCompaniesProcessesList');
+$routes->add('admin/rpConsultantsList', 'Admin::rpConsultantsList');
+$routes->add('admin/rpCompaniesInClustersList', 'Admin::rpCompaniesInClustersList');
+$routes->add('admin/rpEquipmentList', 'Admin::rpEquipmentList');
+$routes->add('admin/reportTest', 'Admin::reportTest');
+$routes->add('admin/reportTest', 'Admin::reportTest');
+$routes->add('admin/clusters', 'Admin::clusters');
+$routes->add('admin/industrialZones', 'Admin::industrialZones');
+$routes->add('admin/consultants', 'Admin::consultants');
+$routes->add('admin/employees', 'Admin::employees');
+$routes->add('admin/zoneEmployees', 'Admin::zoneEmployees');
+$routes->add('admin/zoneCompanies', 'Admin::zoneCompanies');
+$routes->add('createreport', 'Reporting::create'); 
 
 //IS scoping
-$route->add('isscoping'), 'Isscoping::index';
-$route->add('isscopingauto'), 'Isscoping::auto';
-$route->add('isScopingAutoPrjBase'), 'Isscoping::autoprjbase';
-$route->add('isScopingAutoPrjBaseMDF'), 'Isscoping::autoprjbaseMDF';
-$route->add('isScopingAutoPrjBaseMDFTest'), 'Isscoping::autoprjbaseMDFTest';
-$route->add('isScopingPrjBase'), 'Isscoping::prjbase';
-$route->add('isScopingPrjBaseMDF'), 'Isscoping::prjbaseMDF';
-$route->add('isscopingtooltip'), 'Isscoping::tooltip';
-$route->add('isscopingtooltipscenarios'), 'Isscoping::tooltipscenarios';
-$route->add('isscenarios'), 'Isscoping::isscenarios';
-$route->add('isscenariosCns'), 'Isscoping::isscenariosCns';
+$routes->add('isscoping', 'Isscoping::index');
+$routes->add('isscopingauto', 'Isscoping::auto');
+$routes->add('isScopingAutoPrjBase', 'Isscoping::autoprjbase');
+$routes->add('isScopingAutoPrjBaseMDF', 'Isscoping::autoprjbaseMDF');
+$routes->add('isScopingAutoPrjBaseMDFTest', 'Isscoping::autoprjbaseMDFTest');
+$routes->add('isScopingPrjBase', 'Isscoping::prjbase');
+$routes->add('isScopingPrjBaseMDF', 'Isscoping::prjbaseMDF');
+$routes->add('isscopingtooltip', 'Isscoping::tooltip');
+$routes->add('isscopingtooltipscenarios', 'Isscoping::tooltipscenarios');
+$routes->add('isscenarios', 'Isscoping::isscenarios');
+$routes->add('isscenariosCns', 'Isscoping::isscenariosCns');
 
 //map
-$route->add('map'), 'Map::index';
-$route->add('mapHeader'), 'Map::mapHeader';
+$routes->add('map', 'Map::index');
+$routes->add('mapHeader', 'Map::mapHeader');
 
 
 //Ecotracking
-$route->add('ecotracking/(:any)/(:any)/(:any)/(:any)/(:any)'), 'Ecotracking::save/$1/$2/$3/$4/$5';
-$route->add('ecotracking/json/(:any)/(:any)'), 'Ecotracking::json/$1/$2';
-$route->add('ecotracking/(:any)/(:any)'), 'Ecotracking::show/$1/$2';
-$route->add('ecotracking'), 'Ecotracking::index';
+$routes->add('ecotracking/(:any)/(:any)/(:any)/(:any)/(:any)', 'Ecotracking::save/$1/$2/$3/$4/$5');
+$routes->add('ecotracking/json/(:any)/(:any)', 'Ecotracking::json/$1/$2');
+$routes->add('ecotracking/(:any)/(:any)', 'Ecotracking::show/$1/$2');
+$routes->add('ecotracking', 'Ecotracking::index');
 
 //Cost Benefit
-$route->add('cost_benefit/(:any)/(:any)'), 'Cost_benefit::new_cost_benefit/$1/$2';
-$route->add('cost_benefit'), 'Cost_benefit::index';
-$route->add('cba/save/(:any)/(:any)/(:any)/(:any)'), 'Cost_benefit::save/$1/$2/$3/$4';
+$routes->add('cost_benefit/(:any)/(:any)', 'Cost_benefit::new_cost_benefit/$1/$2');
+$routes->add('cost_benefit', 'Cost_benefit::index');
+$routes->add('cba/save/(:any)/(:any)/(:any)/(:any)', 'Cost_benefit::save/$1/$2/$3/$4');
 
 //Html Parse
-$route->add('euro_dolar'), 'Cpscoping::dolar_euro_parse';
+$routes->add('euro_dolar', 'Cpscoping::dolar_euro_parse');
 
 //Easy UI Denemeleri
-$route->add('cp_allocation/deneme'), 'Cpscoping::deneme';
-$route->add('cp_allocation/deneme_json'), 'Cpscoping::deneme_json';
+$routes->add('cp_allocation/deneme', 'Cpscoping::deneme');
+$routes->add('cp_allocation/deneme_json', 'Cpscoping::deneme_json');
 
 //KPI
-$route->add('kpi_json/(:any)/(:any)'), 'Cpscoping::kpi_json/$1/$2';
-$route->add('kpi_calculation_chart/(:any)/(:any)'), 'Cpscoping::kpi_calculation_chart/$1/$2';
-$route->add('kpi_insert/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)'), 'Cpscoping::kpi_insert/$1/$2/$3/$4/$5/$6';
-$route->add('kpi_calculation/(:any)/(:any)'), 'Cpscoping::kpi_calculation/$1/$2';
-$route->add('search_result/(:any)/(:any)'), 'Cpscoping::search_result/$1/$2';
+$routes->add('kpi_json/(:any)/(:any)', 'Cpscoping::kpi_json/$1/$2');
+$routes->add('kpi_calculation_chart/(:any)/(:any)', 'Cpscoping::kpi_calculation_chart/$1/$2');
+$routes->add('kpi_insert/(:any)/(:any)/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::kpi_insert/$1/$2/$3/$4/$5/$6');
+$routes->add('kpi_calculation/(:any)/(:any)', 'Cpscoping::kpi_calculation/$1/$2');
+$routes->add('search_result/(:any)/(:any)', 'Cpscoping::search_result/$1/$2');
 
 //CP
-$route->add('Cpscoping/full_get/(:any)/(:any)/(:any)/(:any)'), 'Cpscoping::get_only_given_full/$1/$2/$3/$4';
-$route->add('Cpscoping/deneme'), 'Cpscoping::deneme';
-$route->add('Cpscoping/comment_save/(:any)/(:any)'), 'Cpscoping::comment_save/$1/$2';
-$route->add('Cpscoping/allocated_table/(:any)/(:any)/(:any)/(:any)/(:any)'), 'Cpscoping::get_already_allocated_allocation_except_given/$1/$2/$3/$4/$5';
-$route->add('Cpscoping/edit_allocation/(:any)'), 'Cpscoping::edit_allocation/$1';
-$route->add('Cpscoping/file_upload/(:any)/(:any)'), 'Cpscoping::cp_scoping_file_upload/$1/$2';
-$route->add('Cpscoping/file_delete/(:any)/(:any)'), 'Cpscoping::file_delete/$1/$2';
-$route->add('Cpscoping/is_candidate_insert/(:any)/(:any)'), 'Cpscoping::cp_is_candidate_insert/$1/$2';
-$route->add('Cpscoping/is_candidate_control/(:any)'), 'Cpscoping::cp_is_candidate_control/$1';
-$route->add('Cpscoping/cost_ep/(:any)/(:any)/(:any)'), 'Cpscoping::cost_ep_value/$1/$2/$3';
-$route->add('Cpscoping/get_allo/(:any)/(:any)/(:any)/(:any)/(:any)'), 'Cpscoping::get_allo_from_fname_pname/$1/$2/$3/$4/$5';
-$route->add('Cpscoping/(:any)/(:any)/show'), 'Cpscoping::cp_show_allocation/$1/$2';
-$route->add('Cpscoping/delete/(:any)/(:any)/(:any)'), 'Cpscoping::delete_allocation/$1/$2/$3';
-$route->add('cp_allocation_array/(:any)'), 'Cpscoping::cp_allocation_array/$1';
-$route->add('Cpscoping/(:any)/(:any)/allocation'), 'Cpscoping::cp_allocation/$1/$2';
-$route->add('Cpscoping/pro/(:any)'), 'Cpscoping::p_companies/$1';
-$route->add('Cpscoping'), 'Cpscoping::index';
+$routes->add('Cpscoping/full_get/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_only_given_full/$1/$2/$3/$4');
+$routes->add('Cpscoping/deneme', 'Cpscoping::deneme');
+$routes->add('Cpscoping/comment_save/(:any)/(:any)', 'Cpscoping::comment_save/$1/$2');
+$routes->add('Cpscoping/allocated_table/(:any)/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_already_allocated_allocation_except_given/$1/$2/$3/$4/$5');
+$routes->add('Cpscoping/edit_allocation/(:any)', 'Cpscoping::edit_allocation/$1');
+$routes->add('Cpscoping/file_upload/(:any)/(:any)', 'Cpscoping::cp_scoping_file_upload/$1/$2');
+$routes->add('Cpscoping/file_delete/(:any)/(:any)', 'Cpscoping::file_delete/$1/$2');
+$routes->add('Cpscoping/is_candidate_insert/(:any)/(:any)', 'Cpscoping::cp_is_candidate_insert/$1/$2');
+$routes->add('Cpscoping/is_candidate_control/(:any)', 'Cpscoping::cp_is_candidate_control/$1');
+$routes->add('Cpscoping/cost_ep/(:any)/(:any)/(:any)', 'Cpscoping::cost_ep_value/$1/$2/$3');
+$routes->add('Cpscoping/get_allo/(:any)/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_allo_from_fname_pname/$1/$2/$3/$4/$5');
+$routes->add('Cpscoping/(:any)/(:any)/show', 'Cpscoping::cp_show_allocation/$1/$2');
+$routes->add('Cpscoping/delete/(:any)/(:any)/(:any)', 'Cpscoping::delete_allocation/$1/$2/$3');
+$routes->add('cp_allocation_array/(:any)', 'Cpscoping::cp_allocation_array/$1');
+$routes->add('Cpscoping/(:any)/(:any)/allocation', 'Cpscoping::cp_allocation/$1/$2');
+$routes->add('Cpscoping/pro/(:any)', 'Cpscoping::p_companies/$1');
+$routes->add('Cpscoping', 'Cpscoping::index');
 
 //Password routes
-$route->add('send_email_for_change_pass'), 'Password::send_email_for_change_pass';
-$route->add('change_pass/(:any)'), 'Password::change_pass/$1';
-$route->add('new_password_email'), 'Password::new_password_email';
-$route->add('new_password/(:any)'), 'Password::new_password/$1';
+$routes->add('send_email_for_change_pass', 'Password::send_email_for_change_pass');
+$routes->add('change_pass/(:any)', 'Password::change_pass/$1');
+$routes->add('new_password_email', 'Password::new_password_email');
+$routes->add('new_password/(:any)', 'Password::new_password/$1');
 
-$route->add('cluster'), 'Cluster::cluster_to_match_company';
+$routes->add('cluster', 'Cluster::cluster_to_match_company');
 
-$route->add('become_consultant'), 'User::become_consultant';
-$route->add('profile_update'), 'User::user_profile_update';
-$route->add('user/(:any)'), 'User::user_profile/$1';
-$route->add('users'), 'User::show_all_users';
-$route->add('register'), 'User::user_register';
-$route->add('login'), 'User::user_login';
-$route->add('logout'), 'User::user_logout';
+$routes->add('become_consultant', 'User::become_consultant');
+$routes->add('profile_update', 'User::user_profile_update');
+$routes->add('user/(:any)', 'User::user_profile/$1');
+$routes->add('users', 'User::show_all_users');
+$routes->add('register', 'User::user_register');
+$routes->add('login', 'User::user_login');
+$routes->add('logout', 'User::user_logout');
 
 //OPen project
-$route->add('closeproject'), 'Project::close_project';
-$route->add('openproject'), 'Project::open_project';
-$route->add('update_project/(:any)'), 'Project::update_project/$1';
-$route->add('newproject'), 'Project::new_project';
-$route->add('projects'), 'Project::show_all_project';
-$route->add('myprojects'), 'Project::show_my_project';
-$route->add('contactperson'), 'Project::contact_person';
-$route->add('project/(:any)'), 'Project::view_project/$1';
-$route->add('deleteproject/(:any)'), 'Project::delete_project/$1';
-$route->add('addConsultantToProject/(:any)'), 'Project::addConsultantToProject/$1';
+$routes->add('closeproject', 'Project::close_project');
+$routes->add('openproject', 'Project::open_project');
+$routes->add('update_project/(:any)', 'Project::update_project/$1');
+$routes->add('newproject', 'Project::new_project');
+$routes->add('projects', 'Project::show_all_project');
+$routes->add('myprojects', 'Project::show_my_project');
+$routes->add('contactperson', 'Project::contact_person');
+$routes->add('project/(:any)', 'Project::view_project/$1');
+$routes->add('deleteproject/(:any)', 'Project::delete_project/$1');
+$routes->add('addConsultantToProject/(:any)', 'Project::addConsultantToProject/$1');
 
-$route->add('tuna_json/(:any)'), 'Company::get_company_info/$1';
-$route->add('companySearch'), 'Company::company_search';
-$route->add('update_company/(:any)'), 'Company::update_company/$1';
-$route->add('newcompany'), 'Company::new_company';
-$route->add('deletecompany/(:any)'), 'Company::delete_company/$1';
-$route->add('companies'), 'Company::show_all_companies';
-$route->add('nis/(:any)'), 'Company::isSelectionWithFlow/$1';
-$route->add('nis'), 'Company::isSelectionWithFlow';
-$route->add('mycompanies'), 'Company::show_my_companies';
-$route->add('projectcompanies'), 'Company::show_project_companies';
-$route->add('company/(:any)'), 'Company::companies/$1';
-$route->add('addUsertoCompany/(:any)'), 'Company::addUsertoCompany/$1';
-$route->add('removeUserfromCompany/(:any)/(:any)'), 'Company::removeUserfromCompany/$1/$2';
+$routes->add('tuna_json/(:any)', 'Company::get_company_info/$1');
+$routes->add('companySearch', 'Company::company_search');
+$routes->add('update_company/(:any)', 'Company::update_company/$1');
+$routes->add('newcompany', 'Company::new_company');
+$routes->add('deletecompany/(:any)', 'Company::delete_company/$1');
+$routes->add('companies', 'Company::show_all_companies');
+$routes->add('nis/(:any)', 'Company::isSelectionWithFlow/$1');
+$routes->add('nis', 'Company::isSelectionWithFlow');
+$routes->add('mycompanies', 'Company::show_my_companies');
+$routes->add('projectcompanies', 'Company::show_project_companies');
+$routes->add('company/(:any)', 'Company::companies/$1');
+$routes->add('addUsertoCompany/(:any)', 'Company::addUsertoCompany/$1');
+$routes->add('removeUserfromCompany/(:any)/(:any)', 'Company::removeUserfromCompany/$1/$2');
 
-$route->add('search'), 'Search::search_pro';
-$route->add('search/(:any)'), 'Search::search_pro/$1';
+$routes->add('search', 'Search::search_pro');
+$routes->add('search/(:any)', 'Search::search_pro/$1');
 
 // Dataset
-$route->add('deleteuserep/(:any)/(:any)'), 'User::deleteUserEp/$1/$2';
-$route->add('datasetexcel'), 'User::dataFromExcel';
-$route->add('uploadExcel'), 'User::uploadExcel';
-$route->add('flow_and_component'), 'Dataset::flow_and_component';
-$route->add('allocationlist/(:any)/(:any)'), 'Cpscoping::allocationlist/$1/$2';
-$route->add('new_flow/(:any)'), 'Dataset::new_flow/$1';
-$route->add('edit_flow/(:any)/(:any)/(:any)'), 'Dataset::edit_flow/$1/$2/$3';
-$route->add('edit_component/(:any)/(:any)'), 'Dataset::edit_component/$1/$2';
-$route->add('new_component/(:any)'), 'Dataset::new_component/$1';
-$route->add('delete_flow/(:any)/(:any)'), 'Dataset::delete_flow/$1/$2';
-$route->add('delete_component/(:any)/(:any)'), 'Dataset::delete_component/$1/$2';
-$route->add('UBP_values'), 'Dataset::UBP_values';
+$routes->add('deleteuserep/(:any)/(:any)', 'User::deleteUserEp/$1/$2');
+$routes->add('datasetexcel', 'User::dataFromExcel');
+$routes->add('uploadExcel', 'User::uploadExcel');
+$routes->add('flow_and_component', 'Dataset::flow_and_component');
+$routes->add('allocationlist/(:any)/(:any)', 'Cpscoping::allocationlist/$1/$2');
+$routes->add('new_flow/(:any)', 'Dataset::new_flow/$1');
+$routes->add('edit_flow/(:any)/(:any)/(:any)', 'Dataset::edit_flow/$1/$2/$3');
+$routes->add('edit_component/(:any)/(:any)', 'Dataset::edit_component/$1/$2');
+$routes->add('new_component/(:any)', 'Dataset::new_component/$1');
+$routes->add('delete_flow/(:any)/(:any)', 'Dataset::delete_flow/$1/$2');
+$routes->add('delete_component/(:any)/(:any)', 'Dataset::delete_component/$1/$2');
+$routes->add('UBP_values', 'Dataset::UBP_values');
 
-$route->add('new_product/(:any)'), 'Dataset::new_product/$1';
-$route->add('edit_product/(:any)/(:any)'), 'Dataset::edit_product/$1/$2';
-$route->add('product'), 'Dataset::product';
-$route->add('delete_product/(:any)/(:any)'), 'Dataset::delete_product/$1/$2';
+$routes->add('new_product/(:any)', 'Dataset::new_product/$1');
+$routes->add('edit_product/(:any)/(:any)', 'Dataset::edit_product/$1/$2');
+$routes->add('product', 'Dataset::product');
+$routes->add('delete_product/(:any)/(:any)', 'Dataset::delete_product/$1/$2');
 
-$route->add('edit_process/(:any)/(:any)'), 'Dataset::edit_process/$1/$2';
-$route->add('new_process/(:any)'), 'Dataset::new_process/$1';
-$route->add('delete_process/(:any)/(:any)/(:any)'), 'Dataset::delete_process/$1/$2/$3';
-$route->add('get_sub_process'), 'Dataset::get_sub_process';
-$route->add('my_ep_values/(:any)/(:any)'), 'Dataset::my_ep_values/$1/$2';
-$route->add('new_equipment/(:any)'), 'Dataset::new_equipment/$1';
-$route->add('get_equipment_type'), 'Dataset::get_equipment_type';
-$route->add('get_equipment_attribute'), 'Dataset::get_equipment_attribute';
-$route->add('delete_equipment/(:any)/(:any)'), 'Dataset::delete_equipment/$1/$2';
+$routes->add('edit_process/(:any)/(:any)', 'Dataset::edit_process/$1/$2');
+$routes->add('new_process/(:any)', 'Dataset::new_process/$1');
+$routes->add('delete_process/(:any)/(:any)/(:any)', 'Dataset::delete_process/$1/$2/$3');
+$routes->add('get_sub_process', 'Dataset::get_sub_process');
+$routes->add('my_ep_values/(:any)/(:any)', 'Dataset::my_ep_values/$1/$2');
+$routes->add('new_equipment/(:any)', 'Dataset::new_equipment/$1');
+$routes->add('get_equipment_type', 'Dataset::get_equipment_type');
+$routes->add('get_equipment_attribute', 'Dataset::get_equipment_attribute');
+$routes->add('delete_equipment/(:any)/(:any)', 'Dataset::delete_equipment/$1/$2');
 
-$route->add('/'), 'Homepage::index';
-$route->add('(:any)'] = 'Pages::view/$1';
-$route->add('404_override'] = '';
+$routes->add('/', 'Homepage::index');
+$routes->add('(:any)', 'Pages::view/$1');
+$routes->add('404_override', '');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

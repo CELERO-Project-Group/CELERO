@@ -9,8 +9,7 @@ class Ecotracking extends BaseController {
 		$this->load->model('ecotracking_model');
 		$this->load->model('company_model');
 		$this->load->model('equipment_model');
-				$this->config->set_item('language', $session->get('site_lang'));
-
+		$this->config->set_item('language', $session->get('site_lang'));
 	}
 
 	public function save($company_id,$machine_id,$powera,$powerb,$powerc){

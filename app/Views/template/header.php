@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="<?= asset_url('images/favicon.png'); ?>" >
+  <link rel="icon" href="<?= base_url('images/favicon.png'); ?>" >
   <meta charset="utf-8">
   <title>CELERO</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <!-- Loading Bootstrap -->
-  <link href="<?= asset_url('bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
 
   <!-- Loading Flat UI -->
-  <link href="<?= asset_url('css/flat-ui.css'); ?>" rel="stylesheet">
-  <link href="<?= asset_url('css/custom.css'); ?>" rel="stylesheet">
-  <link href="<?= asset_url('css/selectize.css'); ?>" rel="stylesheet">
-  <link href="<?= asset_url('css/miller.css'); ?>" rel="stylesheet">
-  <link rel="stylesheet" href="<?= asset_url('css/font-awesome.min.css'); ?>">
-    <!--<link href="<?php // echo asset_url('css/jquery-ui-1.10.4.custom.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('css/flat-ui.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('css/custom.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('css/selectize.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('css/miller.css'); ?>" rel="stylesheet">
+  <link rel="stylesheet" href="<?= base_url('css/font-awesome.min.css'); ?>">
+    <!--<link href="<?php // echo base_url('css/jquery-ui-1.10.4.custom.css'); ?>" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
@@ -22,15 +22,15 @@
 
       <![endif]-->
 
-      <script src="<?= asset_url('js/jquery-3.3.1.min.js'); ?>"></script>
-      <script src="<?= asset_url('js/bootstrap.min.js'); ?>"></script>
-      <script type="text/javascript" src="<?= asset_url('is/jquery.easyui.min.js'); ?>"></script>
+      <script src="<?= base_url('js/jquery-3.3.1.min.js'); ?>"></script>
+      <script src="<?= base_url('js/bootstrap.min.js'); ?>"></script>
+      <script type="text/javascript" src="<?= base_url('is/jquery.easyui.min.js'); ?>"></script>
       <?php   if($this->session->get_userdata('language')==null || $this->session->get_userdata('language')=='') { ?>
-        <script type="text/javascript" src="<?= asset_url('is/locale/easyui-lang-en.js'); ?>"></script>
+        <script type="text/javascript" src="<?= base_url('is/locale/easyui-lang-en.js'); ?>"></script>
       <?php  }else if($this->session->get_userdata('language')=='turkish'){ ?>
-            <script type="text/javascript" src="<?= asset_url('is/locale/easyui-lang-tr.js'); ?>"></script>
+            <script type="text/javascript" src="<?= base_url('is/locale/easyui-lang-tr.js'); ?>"></script>
       <?php  }else { ?>
-            <script type="text/javascript" src="<?= asset_url('is/locale/easyui-lang-en.js'); ?>"></script>
+            <script type="text/javascript" src="<?= base_url('is/locale/easyui-lang-en.js'); ?>"></script>
       <?php  } ?>
       <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
       <?php if($this->uri->segment(1)!="isscoping" and $this->uri->segment(1)!="isscopingauto"
@@ -41,7 +41,7 @@
         and $this->uri->segment(1)!="scenarios"
         and $this->uri->segment(1)!="cost_benefit"
         and $this->uri->segment(1)!="kpi_calculation"): ?>
-        <script src="<?= asset_url('js/selectize.min.js'); ?>"></script>
+        <script src="<?= base_url('js/selectize.min.js'); ?>"></script>
         <script type="text/javascript">
           $(function() {
             $('#selectize').selectize({
@@ -51,7 +51,7 @@
           //$( "select" ).selectize();
         });
       </script>
-      <script type="text/javascript" src="<?= asset_url('js/miller.js'); ?>"></script>
+      <script type="text/javascript" src="<?= base_url('js/miller.js'); ?>"></script>
     <?php endif ?>
   </head>
   <body <?php /*if($this->uri->segment(1)=="isscoping" or $this->uri->segment(1)=="isscopingauto"){echo 'class="easyui-layout"';}*/ ?>>

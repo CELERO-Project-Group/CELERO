@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ecoman Company" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="db4e76be-630f-450e-846c-1a87b7f69819">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="sub_company_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[40]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\sanane\\Desktop\\dokuman\\ostim\\raporlar\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sub_flow_type" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sub_flow_family" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[4]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT  distinct a.flow_id, a.qntty, a.cost, a.ep, a.flow_type_id ,b.name, b.name_tr , c.name as flow_type_name, d.name as familiy_name
+, a.flow_type_id ,b.flow_family_id ,a.cmpny_id
+  FROM t_cmpny_flow a
+  inner join r_report_used_configurations ccc on ccc.id =  $P{sub_company_id}
+  inner join es_project_settings zz on zz.op_project_id = ccc.project_id
+
+  inner join t_flow b on b.id= a.flow_id
+  inner join t_flow_type c on c.id = a.flow_type_id and c.active=  1
+  inner join t_flow_family d on d.id = b.flow_family_id and d.active = 1 and b.flow_family_id =  $P{sub_flow_family}
+  inner join t_unit u on u.id = a.qntty_unit_id and  u.active=1
+  where b.active = 1  and a.cmpny_id =  ccc.company_id
+   and  a.flow_type_id =   $P{sub_flow_type}
+  order by b.name ,c.name]]>
+	</queryString>
+	<field name="flow_id" class="java.lang.Integer"/>
+	<field name="qntty" class="java.math.BigDecimal"/>
+	<field name="cost" class="java.math.BigDecimal"/>
+	<field name="ep" class="java.math.BigDecimal"/>
+	<field name="flow_type_id" class="java.lang.Integer"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="name_tr" class="java.lang.String"/>
+	<field name="flow_type_name" class="java.lang.String"/>
+	<field name="familiy_name" class="java.lang.String"/>
+	<field name="flow_family_id" class="java.lang.Integer"/>
+	<field name="cmpny_id" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch">
+			<staticText>
+				<reportElement style="table_CH" x="365" y="-20" width="86" height="20" backcolor="#FFFF99" uuid="3d2eae24-d2e9-4c63-8f46-aab4dcb6fffd"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font size="8" pdfFontName="Times-Roman" pdfEncoding="Cp1252"/>
+				</textElement>
+				<text><![CDATA[EP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" x="198" y="-20" width="76" height="20" backcolor="#FFFF99" uuid="bab8dab4-99a4-4b7c-a5ef-46ef9324ca6e"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font size="8" pdfFontName="Times-Roman" pdfEncoding="Cp1252"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" x="82" y="-20" width="39" height="20" backcolor="#FFFF99" uuid="5ba8fe53-07d1-46d9-9a15-4201b846b8fd"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font size="8" pdfFontName="Times-Roman" pdfEncoding="Cp1252"/>
+				</textElement>
+				<text><![CDATA[Flow Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" x="274" y="-20" width="91" height="20" backcolor="#FFFF99" uuid="70afb826-3039-46a4-8d5d-60bdf767f21e"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font size="8" pdfFontName="Times-Roman" pdfEncoding="Cp1252"/>
+				</textElement>
+				<text><![CDATA[Cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" stretchType="RelativeToBandHeight" x="121" y="-20" width="77" height="20" backcolor="#FFFF99" uuid="c06b9f40-0e3f-463d-bf91-98c161e40e56"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Times-Roman" pdfEncoding="Cp1252"/>
+				</textElement>
+				<text><![CDATA[Flow Type Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_CH" x="1" y="-20" width="81" height="20" backcolor="#FFFF99" uuid="58b55e0e-5376-4f1d-a27c-1ae7c53f492e"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Times-Roman" pdfEncoding="Cp1252"/>
+				</textElement>
+				<text><![CDATA[Flow Name]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table_TD" stretchType="RelativeToTallestObject" x="1" y="0" width="81" height="20" isPrintWhenDetailOverflows="true" uuid="87bc0781-1a8a-4136-8098-bf9b44deb7a7"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table_TD" stretchType="RelativeToTallestObject" x="121" y="0" width="77" height="20" isPrintWhenDetailOverflows="true" uuid="c6468f86-078e-4552-8126-5fa042e8e8b3"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiy_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table_TD" stretchType="RelativeToTallestObject" x="199" y="0" width="75" height="20" isPrintWhenDetailOverflows="true" uuid="bb9c4ea8-d021-48a2-b840-670d47902f6a"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qntty}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table_TD" stretchType="RelativeToTallestObject" x="275" y="0" width="90" height="20" isPrintWhenDetailOverflows="true" uuid="5330c164-b6bb-4aaf-b890-b061f5e16c32"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cost}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table_TD" stretchType="RelativeToTallestObject" x="366" y="0" width="85" height="20" isPrintWhenDetailOverflows="true" uuid="ba36b244-7f89-4122-b253-fbc69e803ee3"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ep}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="table_TD" stretchType="RelativeToTallestObject" x="83" y="0" width="38" height="20" isPrintWhenDetailOverflows="true" uuid="930da6fc-acd0-4448-8e14-d3fb95eeca5d"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" pdfFontName="Times-Roman" isPdfEmbedded="true"/>
+					<paragraph leftIndent="2" rightIndent="2" spacingBefore="2" spacingAfter="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{flow_type_name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="0" width="1" height="20" uuid="2a386f34-89a3-4e48-b271-341e0bf4a24c"/>
+			</line>
+			<line>
+				<reportElement x="1" y="20" width="449" height="1" uuid="8add0d7c-1459-41a2-a90a-d9d600cda37a"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

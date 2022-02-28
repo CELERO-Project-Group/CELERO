@@ -1,0 +1,655 @@
+@charset "utf-8";
+/* CSS Document */
+/*coders : Kutlay Yegen / Zeynel Dagli*/ 
+
+
+/*Browser Hack: IE6 ve altı*/
+/** {
+	margin:0;
+	padding:0;
+}*/
+
+
+.body {
+	/*background: #B8C5D4 url(.suSoft_resimler/onyuz/ana_resimler/arkaplan_sb_1.jpg) no-repeat scroll center top;*/
+	/*background: #DADADA url(../../../suSoft_resimler/onyuz/sablon_1/ana_resimler/arkaplan_sb_2.jpg) no-repeat scroll center top;*/
+	background: #DADADA;
+	display: table;
+	width: 100%;
+	margin: 0;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#CCCCCC;
+	font-size:11px;
+}
+
+a{  
+color:#4B5676;
+font-family:verdana,helvetica,arial,sans-serif;
+font-size:10px;
+font-weight:bold;
+text-decoration:none;
+}
+a:hover{  
+color:#CA0002;
+
+}
+
+/*IE 6 HACK*/
+/* * html #alImg1 img { 
+ /*filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0); 
+ background-image: none;
+ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../../../suSoft_resimler/onyuz/sablon_1/ana_resimler/DENEME_.png", sizingMethod="scale");
+ 	border:#FF0000;
+	border-style:solid;
+ }*/
+
+
+.banner {
+	/*position:absolute;
+	left: 41px;
+	top: -310px;
+	border-style:none;
+	border:0px;*/
+	
+	position:absolute;
+	left: -10px;
+	top: -260px;
+	border-style:none;
+	border:0px;
+	
+}
+.banner_ata{  
+	position:absolute;
+	top:-220px;
+	left:780px;
+}
+
+.img_banner{   
+	border-style:none;
+	border:0px;
+	/*z-index:5;*/
+}
+
+
+
+
+.pad {
+	position:relative;
+	height: 17px;
+	margin-bottom: 240px;
+}
+
+
+.head {
+	/*height:70px;*/
+	/*width: 835px;*/
+	width:1002px;
+	margin: 0 auto;
+	position:relative;
+	padding: 0px 0px 0px 10;
+	
+}
+
+
+#ana_icerik {
+	/*background: transparent url(../../../suSoft_resimler/onyuz/sablon_1/ana_resimler/tekrarlayan_arkaplan_sb_1.jpg) repeat-y scroll left top;*/
+	background: #DADADA;
+	width:1002px;
+	/*width:610px;*/
+	margin:5px auto;
+	/*text-align:left;*/
+	/*height: 890px;*/
+	padding:0 0 0;
+	/*margin-bottom:0px;*/
+	position:relative;
+}
+
+
+#sol_kolon {
+	float:left;
+	padding:0px 0px 5px 0px;
+	position:relative;
+	/*width:565px;*/
+	width:640px;
+	/*z-index:1;*/
+	/*margin-right: 0px;*/
+}
+
+
+#haber {
+	/*background:transparent url() no-repeat scroll 0 0;*/
+	font-size:105%;
+	padding:0px 0px 20px 0px;
+	/*width:560px;*/
+	width:640px;
+	display:block;
+}
+
+
+
+.haber_icon {
+	position:absolute;
+	top: 13px;
+	right: -15px;
+	left: 451px;
+}
+
+
+
+.baslik_text {
+	-x-system-font:none;
+	color:#763712;
+	font-family:Georgia,Times,serif;
+	font-size:24px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:bold;
+	letter-spacing:-1px;
+	line-height:100%;
+	position:absolute;
+	left: 0px;
+	top: -16px;
+	width:437px;
+	height: 33px;
+}
+
+
+.baslik_text_2 {
+	position: absolute;
+	top: -17px;
+}
+
+
+.baslik_text_3 {
+	position: absolute;
+	left: 58px;
+	/*top: 14px;*/
+	-x-system-font:none;
+	color:#763712;
+	font-family:Georgia,Times,serif;
+	font-size:24px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:bold;
+	letter-spacing:-1px;
+	line-height:100%;
+}
+
+.baslik {
+	/*margin-left:-2px;*/
+	height:45px;
+	/*padding-top: 12px;*/
+	position:relative;
+}
+
+
+.metin {
+	-x-system-font: none;
+	color:#333333;
+	font-family: Georgia,"Times New Roman",Times,serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:155%;
+	margin-bottom: 5px;
+}
+
+
+.foto {
+	margin-left:-2px;
+	margin-bottom: 5px;
+	border: #666666 0px solid;
+	overflow: hidden;
+}
+
+
+#sag_kolon {
+	/*height: 100px;*/
+	/*width: 270px;*/
+	width: 354px;
+	position:relative;
+	/*float:left;*/
+	float:right;
+	margin: 0px 0px 0px 0px;
+	/*overflow:hidden;*/
+}
+
+
+
+#sag_kolon_icerik {
+	position: relative;
+	margin-bottom: 10px;
+}
+
+
+
+
+.makale {
+	margin-top: 15px;
+	position:relative;
+	background: url(../../../suSoft_resimler/onyuz/sablon_1/makale_modulu/makale_bg.png) no-repeat center top;
+	height: 360px;
+}
+
+
+
+.makale_pilot_resim {
+	position:absolute;
+	right:7px;
+	top:-8px;
+}
+
+
+.makale_1 {
+	margin-top: 120px;
+	margin-left: 18px;
+	width: 230px;
+	position:absolute;
+	color: #999999;
+	font-family: Georgia,"Times New Roman",Times,serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:130%;
+	left: 2px;
+	top: -5px;
+	overflow:hidden;
+}
+
+
+
+.more_makale a {
+	color: #999999;
+	font-family: Georgia,"Times New Roman",Times,serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:130%;
+	text-decoration: none;
+}
+
+
+.relative_tasiyici {
+	position:relative;
+	height: 17px;
+}
+
+
+
+.more_makale {
+	position:absolute;
+	width:40px;
+	right: 25px;
+	bottom: 0px;
+	color: #999999;
+	font-family: Georgia,"Times New Roman",Times,serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:130%;
+}
+
+
+
+.photo {
+	position:relative;
+	background: url(../../../suSoft_resimler/onyuz/sablon_1/random_foto_modulu/photoweek.png) no-repeat center top;
+	height: 190px;
+	
+}
+
+
+
+.photo_1 {
+	margin-top: 20px;
+	margin-left: 27px;
+	width: 212px;
+	position:absolute;
+	left: 2px;
+	top: -5px;
+	border: #333333;
+	overflow: hidden;
+}
+
+
+
+
+#footer {
+	background: #B8C5D4 url(../../../suSoft_resimler/onyuz/sablon_1/ana_resimler/footer.jpg) no-repeat scroll center top;
+	clear:both;
+	height: 250px;
+}
+
+
+
+.footer_1 {
+	height: 45px;
+	padding-top: 200px;
+	
+	
+}
+
+
+
+.footer_text {
+	text-decoration:none;
+	font-size:8px;
+	color:#666666;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	background: #B8C5D4;
+	
+}
+
+
+
+
+
+#form {
+	height: 75px;
+	position:relative;
+	background: url(.jpg) no-repeat;
+	/*margin-right: 38px;*/
+	padding-top: 2px;
+	margin-left: 9px;
+	margin-bottom:10px;
+}
+
+.login {
+	position: relative;
+	margin-bottom: 0px;
+	height: 25px;
+}
+
+
+.password {
+	position:relative;
+	margin-bottom: 0px;
+	height: 25px;
+}
+
+
+.log {
+	position:absolute;
+	left: 17px;
+	top: 1px;
+	color: #666666;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:155%;
+	text-align:right;
+	width: 90px;
+}
+
+
+
+.log_form_0 {
+	position:absolute;
+	left: 41px;
+	bottom: 12px;
+	width: 112px;
+}
+
+
+.log_form {
+	position:absolute;
+	right: 35px;
+	top: 1px;
+	width: 112px;
+}
+
+
+.pass {
+	position:absolute;
+	left: 17px;
+	top: 1px;
+	color:#666666;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:155%;
+	text-align:right;
+	width: 90px;
+}
+
+
+.pass_form {
+	position:absolute;
+	right: 35px;
+	top: 1px;
+	width: 112px;
+	padding: 0px;
+}
+
+
+.login_1 {
+	/*background: #FFFFDD url(suSoft_resimler/onyuz/sablon_1/form_modulu/shadow.jpg) no-repeat;*/
+	background: #FFFFDD;
+    border:  #CCCCCC solid 1px;
+	color: #999999;
+	font-family: verdana;
+	font-size:10px;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	width: 110px;
+	height: 15px;
+	padding-top: 1px;
+}
+
+
+.password_1 {
+	background: #FFFFDD;
+    border:  #CCCCCC solid 1px;
+	color:#999999;
+	font-family: verdana;
+	font-size:10px;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	width: 110px;
+	height: 15px;
+	padding-top: 1px;
+}
+
+
+.check_1 {
+	/*background: #CCFFCC;*/
+	/*border: #999999  solid 1px;*/
+	color:#999999;
+	font-family: verdana;
+	font-size:10px;
+}
+
+/*Browser hack: sadece IE7*/
+/**:first-child+html .check_1 {
+	background: #CCFFCC;
+	color:#999999;
+	font-family: verdana;
+	font-size:10px;
+}*/
+
+
+
+.button_login {
+	position:absolute;
+	right: 35px;
+}
+
+
+/*Browser hack: sadece IE7*/
+/**:first-child+html .button_login {
+	position:absolute;
+	right: 65px;
+}*/
+
+
+
+
+.enter {
+	position: relative;
+	/*margin-bottom: 10px;*/
+	/*height: 25px;*/
+	/*padding-right: 130px;*/
+}
+
+
+.save_ {
+	position:absolute;
+	left: 17px;
+	top: 1px;
+	color: #666666;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:155%;
+	text-align:right;
+	width: 90px;
+}
+
+
+/*.save_form {
+	position:absolute;
+	right: 145px;
+	top: 1px;
+	width: 1px;
+}*/
+
+.save_form {
+	position:absolute;
+	right: 150px;
+	top: 0px;
+	width: 1px;
+}
+
+
+
+.clear{  
+	clear:both
+}
+
+
+.foto img {
+	background:#FFFFFF none repeat scroll 0 0;
+	border:1px solid #D9D9D9;
+	padding:5px;
+	width:466px; 
+	height:102px;
+}
+
+
+
+
+#makale_ana {
+	background:transparent url() no-repeat scroll 0 0;
+	font-size:105%;
+	padding:0 0 20px 12px;
+	width:476px;
+	display:block;
+	position:relative;
+}
+
+
+
+.sag_kolon_pilotlar {
+background:url(../../../suSoft_resimler/onyuz/sablon_1/makale_modulu/sag.png) no-repeat;
+height:620px;
+}
+
+
+
+.makale_pilot_isim {
+	position:absolute;
+	right:99px;
+	top:41px;
+
+}
+
+/*sava hikayeleri cont. div'i*/
+.savas_hikayeleri_div  {   
+	color:#000000;
+	font-family:tahoma;
+	font-size:11px;
+	margin:0px 10px 10px 10px;
+	padding:0px 10px 10px 10px;
+	font-weight:bold;
+	overflow:hidden;
+}
+
+/*roster sayfas�nda */
+#ana_icerik_kab{  
+	background:#FFFFFF;
+
+}
+#ana_icerik_kab_orta{  
+	background:#FFFFFF;
+}
+#ana_icerik_kab_orta_kab{  
+	background:#FFFFFF;
+}
+
+/*#ana_icerik_sag_kolon_kab{  
+	background:#F2F2F2;
+}*/
+
+.ana_icerik_sag_kolon_kab{  
+	background:#F2F2F2;
+}
+
+.mistral{  
+	width:220px;
+	font-family:Mistral;
+	color:#7A7070;
+	font-size:20px;
+ 
+}
+/*IE(8 hack */
+.mistral{  
+
+	font-size /*\**/: 10px\9 
+}
+
+
+/*roster logbook ie6 hacki*/
+*html .logbook {
+width:586px;
+border:1px solid #000000;
+background:#11182a;
+height:249px;
+color:#ffffff;
+font-family:OCR A Std,OCR A Extended;
+font-size:9px;
+margin-top:15px;
+margin-left:4px;
+}
+
