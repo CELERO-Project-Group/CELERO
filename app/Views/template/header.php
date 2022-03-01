@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="<?= base_url('images/favicon.png'); ?>" >
+  <link rel="icon" href="<?= base_url('assets/images/favicon.png'); ?>" >
   <meta charset="utf-8">
   <title>CELERO</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <!-- Loading Bootstrap -->
-  <link href="<?= base_url('bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
 
   <!-- Loading Flat UI -->
-  <link href="<?= base_url('css/flat-ui.css'); ?>" rel="stylesheet">
-  <link href="<?= base_url('css/custom.css'); ?>" rel="stylesheet">
-  <link href="<?= base_url('css/selectize.css'); ?>" rel="stylesheet">
-  <link href="<?= base_url('css/miller.css'); ?>" rel="stylesheet">
-  <link rel="stylesheet" href="<?= base_url('css/font-awesome.min.css'); ?>">
-    <!--<link href="<?php // echo base_url('css/jquery-ui-1.10.4.custom.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/flat-ui.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/custom.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/selectize.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/miller.css'); ?>" rel="stylesheet">
+  <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css'); ?>">
+    <!--<link href="<?php // echo base_url('assets/css/jquery-ui-1.10.4.custom.css'); ?>" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
@@ -22,26 +22,22 @@
 
       <![endif]-->
 
-      <script src="<?= base_url('js/jquery-3.3.1.min.js'); ?>"></script>
-      <script src="<?= base_url('js/bootstrap.min.js'); ?>"></script>
-      <script type="text/javascript" src="<?= base_url('is/jquery.easyui.min.js'); ?>"></script>
-      <?php   if($this->session->get_userdata('language')==null || $this->session->get_userdata('language')=='') { ?>
-        <script type="text/javascript" src="<?= base_url('is/locale/easyui-lang-en.js'); ?>"></script>
-      <?php  }else if($this->session->get_userdata('language')=='turkish'){ ?>
-            <script type="text/javascript" src="<?= base_url('is/locale/easyui-lang-tr.js'); ?>"></script>
-      <?php  }else { ?>
-            <script type="text/javascript" src="<?= base_url('is/locale/easyui-lang-en.js'); ?>"></script>
-      <?php  } ?>
+      <script src="<?= base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
+      <script src="<?= base_url('assets/js/bootstrap.min.js'); ?>"></script>
+      
       <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
-      <?php if($this->uri->segment(1)!="isscoping" and $this->uri->segment(1)!="isscopingauto"
-        and $this->uri->segment(1)!="isScopingAutoPrjBase"
-        and $this->uri->segment(1)!="isScopingAutoPrjBaseMDF"
-        and $this->uri->segment(1)!="isScopingPrjBaseMDF"
-        and $this->uri->segment(1)!="isScopingPrjBase"
-        and $this->uri->segment(1)!="scenarios"
-        and $this->uri->segment(1)!="cost_benefit"
-        and $this->uri->segment(1)!="kpi_calculation"): ?>
-        <script src="<?= base_url('js/selectize.min.js'); ?>"></script>
+      <?php 
+       $uri = current_url(true);
+
+      if($uri->getSegment(1)!="isscoping" and $uri->getSegment(1)!="isscopingauto"
+        and $uri->getSegment(1)!="isScopingAutoPrjBase"
+        and $uri->getSegment(1)!="isScopingAutoPrjBaseMDF"
+        and $uri->getSegment(1)!="isScopingPrjBaseMDF"
+        and $uri->getSegment(1)!="isScopingPrjBase"
+        and $uri->getSegment(1)!="scenarios"
+        and $uri->getSegment(1)!="cost_benefit"
+        and $uri->getSegment(1)!="kpi_calculation"): ?>
+        <script src="<?= base_url('assets/js/selectize.min.js'); ?>"></script>
         <script type="text/javascript">
           $(function() {
             $('#selectize').selectize({
@@ -51,7 +47,7 @@
           //$( "select" ).selectize();
         });
       </script>
-      <script type="text/javascript" src="<?= base_url('js/miller.js'); ?>"></script>
+      <script type="text/javascript" src="<?= base_url('assets/js/miller.js'); ?>"></script>
     <?php endif ?>
   </head>
   <body <?php /*if($this->uri->segment(1)=="isscoping" or $this->uri->segment(1)=="isscopingauto"){echo 'class="easyui-layout"';}*/ ?>>
@@ -60,7 +56,7 @@
       <a class="navbar-brand" href="<?= base_url(); ?>" style="color:white;">CELERO</a>
       <?= lang("Validation.msg_first_name"); ?>
 
-      <form class="navbar-form navbar-right" action="<?= base_url('search'); ?>" method="post" role="search" style="display: table;">
+      <form class="navbar-form navbar-right" action="<?= base_url('assets/search'); ?>" method="post" role="search" style="display: table;">
         <div class="form-group">
           <div class="input-group" style="display:block;">
             <input name="term" class="form-control" id="navbarInput-01" type="search" placeholder="<?= lang("Validation.search"); ?>">
@@ -76,7 +72,7 @@
         <li class="navtus" data-rel="analysis"><a id="l4" href="#" ><i class="fa fa-recycle"></i> <?= lang("Validation.services"); ?></a></li>        
         <li class="navtus" data-rel="cases"><a id="l3" href="#" ><i class="fa fa-book"></i> <?= lang("Validation.cases"); ?></a></li>
         <li class="navtus" data-rel="profiles"><a id="l1" href="#" ><i class="fa fa-group"></i> <?=  lang("Validation.account"); ?></a></li>
-        <li data-rel="help"><a id="l6" href="<?= base_url('help'); ?>"><i class="fa fa-question-circle"></i>
+        <li data-rel="help"><a id="l6" href="<?= base_url('assets/help'); ?>"><i class="fa fa-question-circle"></i>
           <?= lang("Validation.help"); ?></a></li>
       </ul>
     </nav>
@@ -85,40 +81,40 @@
 
       <ul id="about" class="nav navbar-nav alt-nav" style="display:none;">
         <li><a href="#" class="nav-info"></a></li>
-        <li><a href="<?= base_url('functionalities'); ?>"><i class="fa fa-dashboard"></i> <?= lang("Validation.functionalities"); ?></a></li>
-        <li><a href="<?= base_url('contactus'); ?>"><i class="fa fa-envelope"></i> <?= lang("Validation.whoarewe"); ?></a></li>
-        <li><a href="<?= base_url('whatwedo'); ?>"><i class="fa fa-question-circle"></i> <?= lang("Validation.whatwedo"); ?></a></li>
-        <li><a href="<?= base_url('legal'); ?>"><i class="fa fa-gavel"></i> <?= lang("Validation.legal"); ?></a></li>
+        <li><a href="<?= base_url('assets/functionalities'); ?>"><i class="fa fa-dashboard"></i> <?= lang("Validation.functionalities"); ?></a></li>
+        <li><a href="<?= base_url('assets/contactus'); ?>"><i class="fa fa-envelope"></i> <?= lang("Validation.whoarewe"); ?></a></li>
+        <li><a href="<?= base_url('assets/whatwedo'); ?>"><i class="fa fa-question-circle"></i> <?= lang("Validation.whatwedo"); ?></a></li>
+        <li><a href="<?= base_url('assets/legal'); ?>"><i class="fa fa-gavel"></i> <?= lang("Validation.legal"); ?></a></li>
       </ul>
 
       <ul id="manual" class="nav navbar-nav alt-nav" style="display:none;">
         <li><a href="#" class="nav-info"></a></li>
-        <li><a href="<?= base_url('help'); ?>"><i class="fa fa-envelope"></i><?= lang("Validation.usermanual"); ?>, Video Instructions & FAQ</a></li>
+        <li><a href="<?= base_url('assets/help'); ?>"><i class="fa fa-envelope"></i><?= lang("Validation.usermanual"); ?>, Video Instructions & FAQ</a></li>
       </ul>
 
       <ul id="cases" class="nav navbar-nav alt-nav" style="display:none;">
         <li><a href="#" class="nav-info"></a></li>
-        <li class="head-li"><a href="<?= base_url('cases'); ?>"><i class="fa fa-book"></i> Case studies </a></li>
+        <li class="head-li"><a href="<?= base_url('assets/cases'); ?>"><i class="fa fa-book"></i> Case studies </a></li>
       </ul>
 
       <ul id="profiles" class="nav navbar-nav alt-nav" style="display:none;">
         <li><a href="#" class="nav-info"></a></li>
         <!-- TODO where to place Consultant list? under Help?
-         <li><a href="<?= base_url('users'); ?>"><i class="fa fa-group"></i> <?= lang("Validation.consultants"); ?></a></li> -->
+         <li><a href="<?= base_url('assets/users'); ?>"><i class="fa fa-group"></i> <?= lang("Validation.consultants"); ?></a></li> -->
         <?php
         if(isset($_SESSION['user_in'])):
           $tmp = $session->get('user_in');
         ?>
-            <li class="head-li"><a href="<?= base_url('user/'.$tmp['username']); ?>" style="text-transform: capitalize; padding: 15px 1px 15px 21px"" ><i class="fa fa-user"></i> <?= $tmp['username']; ?></a></li>
-            <li class="head-li"><a href="<?= base_url('profile_update'); ?>" ><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.updateprofile"); ?></a></li>
-            <li class="head-li"><a href="<?= base_url('datasetexcel'); ?>"><i class="fa fa-globe"></i> Import UBP values</a></li>
-            <li class="head-li"><a href="<?= base_url('mycompanies'); ?>" style="padding: 15px 1px 15px 21px"><i class="fa fa-building-o"></i> <?= lang("Validation.mycompanies"); ?></a></li>
+            <li class="head-li"><a href="<?= base_url('assets/user/'.$tmp['username']); ?>" style="text-transform: capitalize; padding: 15px 1px 15px 21px"" ><i class="fa fa-user"></i> <?= $tmp['username']; ?></a></li>
+            <li class="head-li"><a href="<?= base_url('assets/profile_update'); ?>" ><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.updateprofile"); ?></a></li>
+            <li class="head-li"><a href="<?= base_url('assets/datasetexcel'); ?>"><i class="fa fa-globe"></i> Import UBP values</a></li>
+            <li class="head-li"><a href="<?= base_url('assets/mycompanies'); ?>" style="padding: 15px 1px 15px 21px"><i class="fa fa-building-o"></i> <?= lang("Validation.mycompanies"); ?></a></li>
             <?php if ($tmp['role_id'] == 1): ?>            
-              <li class="head-li"><a href="<?= base_url('companies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.allcompanies"); ?></a></li>
+              <li class="head-li"><a href="<?= base_url('assets/companies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.allcompanies"); ?></a></li>
             <?php endif ?>
-            <li class="head-li"><a href="<?= base_url('myprojects'); ?>" style="padding: 15px 1px 15px 21px"; color:white;"><i class="fa fa-globe"></i> <?= lang("Validation.myprojects"); ?></a></li>
+            <li class="head-li"><a href="<?= base_url('assets/myprojects'); ?>" style="padding: 15px 1px 15px 21px"; color:white;"><i class="fa fa-globe"></i> <?= lang("Validation.myprojects"); ?></a></li>
             <?php if ($tmp['role_id'] == 1): ?>            
-              <li class="head-li"><a href="<?= base_url('projects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.allprojects"); ?></a></li>
+              <li class="head-li"><a href="<?= base_url('assets/projects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.allprojects"); ?></a></li>
 
             <?php endif ?>
             <li class="head-li">
@@ -127,44 +123,44 @@
                 <i class="fa fa-plus-circle"></i> <?= lang("Validation.add"); ?>
                 </button>
                 <ul class="dropdown-menu dropdown-red" role="menu" aria-labelledby="dropdownMenu2">
-                  <li><a href="<?= base_url('newcompany'); ?>">- <?= lang("Validation.createcompany"); ?></a></li>
-                  <li><a href="<?= base_url('newproject'); ?>">- <?= lang("Validation.createproject"); ?></a></li>
+                  <li><a href="<?= base_url('assets/newcompany'); ?>">- <?= lang("Validation.createcompany"); ?></a></li>
+                  <li><a href="<?= base_url('assets/newproject'); ?>">- <?= lang("Validation.createproject"); ?></a></li>
                 </ul>
               </div>
             </li>
-            <li class="pull-right"><a href="<?= base_url('logout'); ?>"><i class="fa fa-sign-out"></i> <?= lang("Validation.logout"); ?></a></li>
+            <li class="pull-right"><a href="<?= base_url('assets/logout'); ?>"><i class="fa fa-sign-out"></i> <?= lang("Validation.logout"); ?></a></li>
         <?php else: ?>
-            <li class="head-li"><a href="<?= base_url('login'); ?>"><i class="fa fa-sign-in"></i> <?= lang("Validation.login"); ?></a></li>
-            <li class="head-li"><a href="<?= base_url('register'); ?>"><i class="fa fa-plus"></i> <?= lang("Validation.register"); ?></a></li>
+            <li class="head-li"><a href="<?= base_url('assets/login'); ?>"><i class="fa fa-sign-in"></i> <?= lang("Validation.login"); ?></a></li>
+            <li class="head-li"><a href="<?= base_url('assets/register'); ?>"><i class="fa fa-plus"></i> <?= lang("Validation.register"); ?></a></li>
         <?php endif ?>
     </ul>
 
     <ul id="companies" class="nav navbar-nav alt-nav" style="display:none;">
       <li><a href="#" class="nav-info"></a></li>
       <?php if (isset($_SESSION['user_in'])): ?>
-        <li><a href="<?= base_url('mycompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.mycompanies"); ?></a></li>
+        <li><a href="<?= base_url('assets/mycompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.mycompanies"); ?></a></li>
         <?php if(isset($_SESSION['project_id'])): ?>
-          <li><a href="<?= base_url('projectcompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.projectcompanies"); ?></a></li>
+          <li><a href="<?= base_url('assets/projectcompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.projectcompanies"); ?></a></li>
         <?php endif ?>
       <?php endif ?>
-      <li><a href="<?= base_url('companies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.allcompanies"); ?></a></li>
+      <li><a href="<?= base_url('assets/companies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.allcompanies"); ?></a></li>
       <?php if (isset($_SESSION['user_in'])): ?>
-        <li class="head-li"><a href="<?= base_url('newcompany'); ?>"><i class="fa fa-plus-square"></i> <?= lang("Validation.createcompany"); ?></a></li>
+        <li class="head-li"><a href="<?= base_url('assets/newcompany'); ?>"><i class="fa fa-plus-square"></i> <?= lang("Validation.createcompany"); ?></a></li>
       <?php endif ?>
     </ul>
 
     <ul id="projects" class="nav navbar-nav alt-nav" style="display:none;">
          <li><a href="#" class="nav-info"></a></li>
       <?php if (isset($_SESSION['user_in'])): ?>
-        <li><a href="<?= base_url('myprojects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.myprojects"); ?></a></li>
+        <li><a href="<?= base_url('assets/myprojects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.myprojects"); ?></a></li>
       <?php endif ?>
-      <li><a href="<?= base_url('projects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.allprojects"); ?></a></li>
+      <li><a href="<?= base_url('assets/projects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.allprojects"); ?></a></li>
       <?php if (isset($_SESSION['user_in'])): ?>
-        <li><a href="<?= base_url('newproject'); ?>"><i class="fa fa-plus-circle"></i> <?= lang("Validation.createproject"); ?></a></li>
+        <li><a href="<?= base_url('assets/newproject'); ?>"><i class="fa fa-plus-circle"></i> <?= lang("Validation.createproject"); ?></a></li>
       <?php endif ?>
       <?php if(isset($_SESSION['project_id'])): ?>
-        <li class="pull-right"><a href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> <?= lang("Validation.closeproject"); ?></a></li>
-        <li class="pull-right"><a href="<?= base_url('project/'.$session->get('project_id')); ?>"><?= $session->get('project_name'); ?></a></li>
+        <li class="pull-right"><a href="<?= base_url('assets/closeproject'); ?>"><i class="fa fa-times-circle"></i> <?= lang("Validation.closeproject"); ?></a></li>
+        <li class="pull-right"><a href="<?= base_url('assets/project/'.$session->get('project_id')); ?>"><?= $session->get('project_name'); ?></a></li>
       <?php endif ?>
     </ul>
 
@@ -172,7 +168,7 @@
          <li><a href="#" class="nav-info"></a></li>
       <?php if (isset($_SESSION['user_in'])): ?>
         <?php if(isset($_SESSION['project_id'])): ?>
-          <li><a href="<?= base_url('cpscoping'); ?>"><i class="fa fa-recycle"></i> <?= lang("Validation.cpidentification"); ?></a></li>
+          <li><a href="<?= base_url('assets/cpscoping'); ?>"><i class="fa fa-recycle"></i> <?= lang("Validation.cpidentification"); ?></a></li>
           <li>
             <div class="dropdown">
               <button class="btn-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="padding: 12px 0px; color:white;">
@@ -180,27 +176,27 @@
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu dropdown-inverse" role="menu" aria-labelledby="dropdownMenu1">
-                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingPrjBase'); ?>">Manual IS</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingAutoPrjBase'); ?>">Automated IS</a></li>-->
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingPrjBaseMDF'); ?>">Manual IS</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingAutoPrjBaseMDF'); ?>">Automated IS</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isscenarios'); ?>">IS Scenarios(Supervisors)</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isscenariosCns'); ?>">IS Scenarios(Consultants)</a></li>
+                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('assets/isScopingPrjBase'); ?>">Manual IS</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('assets/isScopingAutoPrjBase'); ?>">Automated IS</a></li>-->
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('assets/isScopingPrjBaseMDF'); ?>">Manual IS</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('assets/isScopingAutoPrjBaseMDF'); ?>">Automated IS</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('assets/isscenarios'); ?>">IS Scenarios(Supervisors)</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('assets/isscenariosCns'); ?>">IS Scenarios(Consultants)</a></li>
               </ul>
             </div>
           </li>
-          <li><a href="<?= base_url('cost_benefit'); ?>"><i class="fa fa-euro"></i> <?= lang("Validation.costbenefitanalysis"); ?></a></li>
-          <li><a href="<?= base_url('nis'); ?>"><i class="fa fa-exchange"></i> <?= lang("Validation.nis"); ?></a></li>
+          <li><a href="<?= base_url('assets/cost_benefit'); ?>"><i class="fa fa-euro"></i> <?= lang("Validation.costbenefitanalysis"); ?></a></li>
+          <li><a href="<?= base_url('assets/nis'); ?>"><i class="fa fa-exchange"></i> <?= lang("Validation.nis"); ?></a></li>
           <!--link to the ecotracking is ".not-active" atm
           <li><a class="not-active" title="Not available yet"><i class="fa fa-area-chart"></i> <?= lang("Validation.ecotracking"); ?></a></li>-->
           <!--link to the gis panel moved to the last position and is ".not-active" atm 
           <li><a class="not-active" title="Not available yet"><i class="fa fa-globe"></i> <?= lang("Validation.gis"); ?></a></li>--> 
-          <li class="pull-right"><a href="<?= base_url('closeproject'); ?>" style="padding: 15px 10px;"><i class="fa fa-times-circle" title="Close Project"></i></a></li>   
-          <li class="pull-right"><a href="<?= base_url('project/'.$session->get('project_id')); ?>" style="padding: 15px 1px;">Project: <?= $session->get('project_name'); ?></a></li>
+          <li class="pull-right"><a href="<?= base_url('assets/closeproject'); ?>" style="padding: 15px 10px;"><i class="fa fa-times-circle" title="Close Project"></i></a></li>   
+          <li class="pull-right"><a href="<?= base_url('assets/project/'.$session->get('project_id')); ?>" style="padding: 15px 1px;">Project: <?= $session->get('project_name'); ?></a></li>
         <?php else: ?>
-          <li><a href="<?= base_url('projects'); ?>"><?= lang("Validation.analysisinfo"); ?></a></li>
+          <li><a href="<?= base_url('assets/projects'); ?>"><?= lang("Validation.analysisinfo"); ?></a></li>
           <!--<ul class="list-inline" style="margin:0px;">
-            <li class="head-li"><a href="<?= base_url('openproject'); ?>"><i class="fa fa-plus-square-o"></i> Open Project</a></li>
+            <li class="head-li"><a href="<?= base_url('assets/openproject'); ?>"><i class="fa fa-plus-square-o"></i> Open Project</a></li>
           </ul> -->
         <?php endif ?>
       <?php else: ?>
@@ -212,9 +208,9 @@
   <div class="clearfix" style="margin-bottom: 10px;"></div>
 
   <script type="text/javascript">
-      var project_durum = <?php if($session->get('project_id')){echo "true";}else{ echo "false";} ?>
+      var project_durum = <?php if(isset($_SESSION['project_id'])){echo "true";}else{ echo "false";} ?>
 
-      var logged_in = <?php if($session->get('user_in')){echo "true";}else{ echo "false";} ?>
+      var logged_in = <?php if(isset($_SESSION['user_in'])){echo "true";}else{ echo "false";} ?>
 
         $( document ).ready(function() {
             var pathname = window.location.pathname;

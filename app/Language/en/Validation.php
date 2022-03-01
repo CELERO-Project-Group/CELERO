@@ -21,7 +21,7 @@ return [
     "help"           	  => "Help",
     "faq"           	  	  => "Frequently asked questions",
     "usermanual"           => "User Manual",
-    "dl-usermanual"        => "Download user manual here",-
+    "dl-usermanual"        => "Download user manual here",
     "createreport"         => "Create Report",
     "allreports"           => "All Reports",
     "login"                => "Login",
@@ -44,7 +44,7 @@ return [
     "gis"                  => "GIS",
     "costbenefitanalysis"  => "Cost - Benefit Analysis",
     "ecotracking"          => "Eco Tracking",
-    "closeproject"         => "Close Project"
+    "closeproject"         => "Close Project",
     'slogan'               => "Improve Resource Efficiency with Cleaner Production and Industrial Symbiosis",
     'celerodescription'    => "License-free web app for Cleaner Production and Industrial Symbiosis",
     'startusing'			  => "Start using CELERO",

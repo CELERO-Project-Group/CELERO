@@ -1,49 +1,33 @@
     <div class="clearfix"></div>
     <div class="footer">© 2013-2020 CELERO - This site is optimized for <a href="https://www.google.com/chrome/" > Chrome </a> 
       <div class="footer-right">
-        <!-- Language selection, underlines the selected language-->
-        <?php if($session->get('site_lang')==null || $session->get('site_lang')=='') { ?>
-                <a href='<?= base_url('language/switch/english'); ?>' style="text-decoration: underline;">English</a>
-                /
-                <a href='<?= base_url('language/switch/turkish'); ?>'>Turkish</a>
-        <?php }else if($session->get('site_lang')=='turkish'){ ?>
-                <a href='<?= base_url('language/switch/english'); ?>'>English</a>
-                 /
-                <a href='<?= base_url('language/switch/turkish'); ?>' style="text-decoration: underline;">Turkish</a>
-        <?php }else { ?>
-                <a href='<?= base_url('language/switch/english'); ?>' style="text-decoration: underline;">English</a>
-                 /
-                <a href='<?= base_url('language/switch/turkish'); ?>'>Turkish</a>
-        <?php } ?>
+        Language
       </div>
     </div>
-    <?php if($this->uri->segment(1)!="isscoping" and $this->uri->segment(1)!="isscopingauto"
-            and $this->uri->segment(1)!="isScopingAutoPrjBaseMDF"
-            and $this->uri->segment(1)!="isScopingAutoPrjBase"
-            and $this->uri->segment(1)!="isScopingPrjBase"
-            and $this->uri->segment(1)!="isScopingPrjBaseMDF"
-            and $this->uri->segment(1)!="isscenarios"
-            and $this->uri->segment(1)!="isscenariosCns"
-            and $this->uri->segment(1)!="isScopingAutoPrjBaseMDFTest"
-            and $this->uri->segment(1)!="isScopingAutoPrjBaseMDF") : ?>
+    <?php $uri = current_url(true); if($uri->getSegment(1)!="isscoping" and $uri->getSegment(1)!="isscopingauto"
+            and $uri->getSegment(1)!="isScopingAutoPrjBaseMDF"
+            and $uri->getSegment(1)!="isScopingAutoPrjBase"
+            and $uri->getSegment(1)!="isScopingPrjBase"
+            and $uri->getSegment(1)!="isScopingPrjBaseMDF"
+            and $uri->getSegment(1)!="isscenarios"
+            and $uri->getSegment(1)!="isscenariosCns"
+            and $uri->getSegment(1)!="isScopingAutoPrjBaseMDFTest"
+            and $uri->getSegment(1)!="isScopingAutoPrjBaseMDF") : ?>
 
-    <script src="<?= asset_url('js/flatui-fileinput.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/flatui-fileinput.js'); ?>"></script>
     <!-- The cost benefit page doesnt use the bootstrap select box features -->
-    <? if ($this->uri->segment(1) !="cost_benefit"): ?>
-      <script src="<?= asset_url('js/bootstrap-select.js'); ?>"></script>
-      <script src="<?= asset_url('js/application.js'); ?>"></script>
+    <? if ($uri->getSegment(1) !="cost_benefit"): ?>
+      <script src="<?= base_url('assets/js/bootstrap-select.js'); ?>"></script>
+      <script src="<?= base_url('assets/js/application.js'); ?>"></script>
     <? endif; ?>
-    <script src="<?= asset_url('js/bootstrap-switch.js'); ?>"></script>
-    <script src="<?= asset_url('js/flatui-checkbox.js'); ?>"></script>
-    <script src="<?= asset_url('js/flatui-radio.js'); ?>"></script>
-    <script src="<?= asset_url('js/jquery.tagsinput.js'); ?>"></script>
-    <script src="<?= asset_url('js/jquery.placeholder.js'); ?>"></script>
-    <script src="<?= asset_url('js/holder.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/bootstrap-switch.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/flatui-checkbox.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/flatui-radio.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/jquery.tagsinput.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/jquery.placeholder.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/holder.js'); ?>"></script>
    
-
-    <link rel="stylesheet" type="text/css" href="<?= asset_url('is/themes/bootstrap/easyui.css'); ?>">
-    <link rel="stylesheet" type="text/css" href="<?= asset_url('is/themes/icon.css'); ?>">
-    <link rel="stylesheet" type="text/css" href="<?= asset_url('css/easyui-tuna.css'); ?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/css/easyui-tuna.css'); ?>">
 
     <script type="text/javascript">
         var marker;
@@ -84,7 +68,7 @@
         $('#equipment').bind('change',function () {
           var equipmentID = $(this).val();
           $.ajax({
-            url: "<?= base_url('get_equipment_type');?>",
+            url: "<?= base_url('assets/get_equipment_type');?>",
             async: false,
             type: "POST",
             data: "equipment_id="+equipmentID,
@@ -107,7 +91,7 @@
         $('#equipmentTypeName').bind('change',function () {
           var equipmentTypeID = $(this).val();
           $.ajax({
-            url: "<?= base_url('get_equipment_attribute');?>",
+            url: "<?= base_url('assets/get_equipment_attribute');?>",
             async: false,
             type: "POST",
             data: "equipment_type_id="+equipmentTypeID,
@@ -142,7 +126,7 @@
         var processID = id;
 
         $.ajax({
-          url: "<?= base_url('get_sub_process');?>",
+          url: "<?= base_url('assets/get_sub_process');?>",
           async: false,
           type: "POST",
           data: "processID="+processID,

@@ -2,7 +2,7 @@
 	<div class="container text-center">
 		<br>
 		<div style="color: black;font-size: 28px;padding: 10px;margin-top: -30px; width: 1000px;" ><?= lang('slogan'); ?></div>
-		<?php if ($session->get('user_in') == FALSE): ?>
+		<?php if (session('user_in')) : ?>
 			<div style="margin-top:450px;">
 				<a class="btn btn-lg btn-success" style="font-size: 15px;padding: 10px 40px;" href="<?= base_url('register'); ?>"><?= lang("Validation.startusing"); ?></a>
 			</div>
