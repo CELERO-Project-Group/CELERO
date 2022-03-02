@@ -2,15 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Models\user_model;
+use App\Models\company_model;
+use App\Models\flow_model;
+
 class User extends BaseController {
 
-	function __construct(){
-		parent::__construct();
-		$this->load->model('user_model');
-        $this->load->model('company_model');
-        $this->load->model('flow_model');
-		$this->load->library('form_validation');
-		$this->config->set_item('language', $session->get('site_lang'));
+	public function __construct(){
+		$this->user_model = new user_model(); 
+        $this->company_model = new company_model(); 
+        $this->flow_model = new flow_model(); 
 	}
 
     function sifirla($data){
