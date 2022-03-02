@@ -9,7 +9,7 @@ public function view($page)
 	if ( ! file_exists('application/views/pages/'.$page.'.php'))
 		{
 			// Whoops, we don't have a page for that!
-			show_404();
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 		}
 
 		$data['title'] = ucfirst($page); // Capitalize the first letter
