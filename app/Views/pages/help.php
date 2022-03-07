@@ -1,5 +1,4 @@
-<?php $this->
-load->view('template/header'); ?>
+<?php $this->load->view('template/header'); ?>
 <div class="container">
     <div class="col-md-10 well">
         <h>

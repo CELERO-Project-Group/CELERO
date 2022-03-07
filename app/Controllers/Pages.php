@@ -6,15 +6,15 @@ class Pages extends BaseController {
 
 public function view($page)
 {
-	if ( ! file_exists('application/views/pages/'.$page.'.php'))
-		{
-			// Whoops, we don't have a page for that!
-			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-		}
-
-		$data['title'] = ucfirst($page); // Capitalize the first letter
-
-		//header için başkba bir fonksyion yaz buraya
-		$this->load->view('pages/'.$page, $data);
+	if (!file_exists('../app/Views/pages/'.$page.'.php'))
+	{
+		throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 	}
+
+	$data['title'] = ucfirst($page); // Capitalize the first letter
+
+	//header için başkba bir fonksyion yaz buraya
+	echo view('pages/'.$page, $data);
+}
+
 }
