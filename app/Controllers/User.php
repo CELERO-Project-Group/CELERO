@@ -2,17 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Models\user_model;
-use App\Models\company_model;
-use App\Models\flow_model;
+use App\Models\User_model;
+use App\Models\Company_model;
+use App\Models\Flow_model;
 
 class User extends BaseController {
-
-	public function __construct(){
-		$this->user_model = new user_model(); 
-        $this->company_model = new company_model(); 
-        $this->flow_model = new flow_model(); 
-	}
 
     function sifirla($data){
         if(empty($data)) return 0;
@@ -246,36 +240,51 @@ class User extends BaseController {
 	}
 
 	public function user_login(){
-		$kullanici = $session->get('user_in');
-		if(!empty($kullanici)){
+		$user_model = model(user_model::class);
+		$request = \Config\Services::request();
+
+		$user = $this->session->username;
+		print_r($user);
+		if(!empty($user)){
 			redirect('', 'refresh');
 		}
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'required|xss_clean|trim|callback_check_user');
 
+		// $this->form_validation->set_rules('password', 'Password', 'required|xss_clean|trim|callback_check_user');
+		
+		$isValid = $this->validate([
+			'username'  => 'trim|required|min_length[3]',
+			'password' => 'required|trim',
+		]);
 
-		if ($this->form_validation->run() !== FALSE)
+		if (! $this->validate([]))
 		{
-			$username= mb_strtolower($this->input->post('username'));
-			$password=md5($this->input->post('password'));
-			$userInfo = $this->user_model->check_user($username,$password);
+			
+			$username= mb_strtolower($this->request->getPost('username'));
+			//echo $this->request->getPost('username');
+			$password=md5($this->request->getPost('password'));
+			$userInfo = $user_model->check_user($username,$password);
                         //print_r($userInfo);
 			//session ayaları ve atama
-			$session_array= array(
-				'id' => $userInfo['id'],
-				'username' => mb_strtolower($userInfo['user_name']),
-				'email' => $userInfo['email'],
-                'role_id' => $userInfo['role_id']
-				);
-			$session->set('user_in',$session_array);
+			if (! empty($userInfo) && is_array($userInfo)){
+				$session_array= array(
+					'id' => $userInfo['id'],
+					'username' => mb_strtolower($userInfo['user_name']),
+					'email' => $userInfo['email'],
+					'role_id' => $userInfo['role_id']
+					);
+				$this->session->set($session_array);
+			}
+
+			/*
+			
 
 			//Redirect after login
-			redirect('user/'.$username, 'refresh');
+			redirect('', 'refresh');*/
 		}
 
-		$this->load->view('template/header');
-		$this->load->view('user/login_user');
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('user/login_user', ['validation' => $this->validator,]);
+		echo view('template/footer');
 	}
 
 	public function check_user(){

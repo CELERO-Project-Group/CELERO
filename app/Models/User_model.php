@@ -5,11 +5,6 @@ use CodeIgniter\Model;
 
 class User_model extends Model {
 
-  public function __construct()
-  {
-    $db = db_connect();
-  }
-
   public function create_user($data){
     $db->insert('t_user', $data);
     return $db->insert_id();
@@ -23,16 +18,18 @@ class User_model extends Model {
   }
 
   public function check_user($username,$password){
-  	$db->from('t_user');
-  	$db->where('user_name',$username);
-  	$db->where('psswrd',$password);
+    $db = db_connect();
+    $builder = $db->table('t_user');
+  	$builder->where('user_name',$username);
+  	$builder->where('psswrd',$password);
         
-  	$query = $db->get();
-        //print_r($db->last_query());
+  	$query = $builder->get();
+        //print_r($query->getNumRows());
+        //exit;
         //$db->get_compiled_select();
-  	if($query -> num_rows() == 1)
+  	if($query->getNumRows() == 1)
   	{
-  		return $query->row_array();
+  		return $query->getRowArray();
   	}
   	else
   	{

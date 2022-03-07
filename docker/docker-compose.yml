@@ -10,7 +10,7 @@ services:
       - celerodb
     container_name: celerophp
     volumes:
-      - /Users/mirco.blaser@fhnw.ch/HLS/CELERO/celero_src_new:/var/www/html
+      - /Users/tcg/Documents/celero/CELERO:/var/www/html
       - ./apache_log:/var/log/apache2
 
   celerodb:  
@@ -32,5 +32,5 @@ services:
     image: cogniteev/echo
     command: echo 'Data Container for PostgreSQL'
     volumes:
-      - /Users/mirco.blaser@fhnw.ch/HLS/CELERO/celerodb_new:/var/lib/postgresql/data
+      - /Users/tcg/Documents/celero/celerodb_new:/var/lib/postgresql/data
     container_name: celerodbdata

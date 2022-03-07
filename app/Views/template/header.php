@@ -102,8 +102,9 @@
         <!-- TODO where to place Consultant list? under Help?
          <li><a href="<?= base_url('users'); ?>"><i class="fa fa-group"></i> <?= lang("Validation.consultants"); ?></a></li> -->
         <?php
-        if(isset($_SESSION['user_in'])):
-          $tmp = $session->get('user_in');
+        if(isset($this->session->username)):
+          $tmp = $this->session->username;
+          
         ?>
             <li class="head-li"><a href="<?= base_url('user/'.$tmp['username']); ?>" style="text-transform: capitalize; padding: 15px 1px 15px 21px"" ><i class="fa fa-user"></i> <?= $tmp['username']; ?></a></li>
             <li class="head-li"><a href="<?= base_url('profile_update'); ?>" ><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.updateprofile"); ?></a></li>

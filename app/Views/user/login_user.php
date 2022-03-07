@@ -3,13 +3,11 @@
 		<div class="col-md-4 col-md-offset-4 swissbox">
 			<p class="lead"><?= lang("Validation.userlogin"); ?></p>
 
-			<?php if(validation_errors() != NULL ): ?>
-		    	<div class="alert">
-		      		<button type="button" class="close" data-dismiss="alert">&times;</button>
-		    		<?= validation_errors(); ?>
-		    	</div>
-		    <?php endif ?>
-		    <?= form_open('login'); ?>
+			<?= $validation->listErrors() ?>
+
+			<form action="login" method="post">
+				<?= csrf_field() ?>
+
 		    	<div class="form-group">
 					<label for="username"><?= lang("Validation.username"); ?></label>
 					<input type="text" class="form-control" id="username" value="<?= set_value('username'); ?>" placeholder="<?= lang("Validation.username"); ?>" name="username">

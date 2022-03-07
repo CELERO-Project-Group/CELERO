@@ -143,7 +143,7 @@ $routes->add('profile_update', 'User::user_profile_update');
 $routes->add('user/(:any)', 'User::user_profile/$1');
 $routes->add('users', 'User::show_all_users');
 $routes->add('register', 'User::user_register');
-$routes->add('login', 'User::user_login');
+$routes->match(['get', 'post'],'login', 'User::user_login');
 $routes->add('logout', 'User::user_logout');
 
 //OPen project
