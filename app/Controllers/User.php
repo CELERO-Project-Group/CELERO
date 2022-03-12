@@ -243,10 +243,9 @@ class User extends BaseController {
 		$user_model = model(user_model::class);
 		$request = \Config\Services::request();
 
-		$user = $this->session->username;
-		print_r($user);
-		if(!empty($user)){
-			redirect('', 'refresh');
+
+		if(!empty($this->session->username)){
+			return redirect()->to(site_url());
 		}
 
 		// $this->form_validation->set_rules('password', 'Password', 'required|xss_clean|trim|callback_check_user');
@@ -274,12 +273,8 @@ class User extends BaseController {
 					);
 				$this->session->set($session_array);
 			}
-
-			/*
-			
-
 			//Redirect after login
-			redirect('', 'refresh');*/
+			redirect()->to(site_url());
 		}
 
 		echo view('template/header');

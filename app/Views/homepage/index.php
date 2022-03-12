@@ -7,11 +7,9 @@
 				<a class="btn btn-lg btn-success" style="font-size: 15px;padding: 10px 40px;" href="<?= base_url('register'); ?>"><?= lang("Validation.startusing"); ?></a>
 			</div>
 		<?php endif ?>
+		test
 		<?php
-		// TODO: we need to find a better way.
-		 $session = \Config\Services::session();
-
-		echo $session->username;
+		echo $username;
 		 ?>
 	</div>
 </div>
