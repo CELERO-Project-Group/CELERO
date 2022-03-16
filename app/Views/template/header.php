@@ -50,12 +50,10 @@
       <script type="text/javascript" src="<?= base_url('assets/js/miller.js'); ?>"></script>
     <?php endif ?>
   </head>
-  <body <?php /*if($this->uri->segment(1)=="isscoping" or $this->uri->segment(1)=="isscopingauto"){echo 'class="easyui-layout"';}*/ ?>>
+  <body>
 
     <nav class="navbar navbar-default navbar-lg" style="margin-bottom:0px;">
       <a class="navbar-brand" href="<?= base_url(); ?>" style="color:white;">CELERO</a>
-      <?= lang("Validation.msg_first_name"); ?>
-
       <form class="navbar-form navbar-right" action="<?= base_url('search'); ?>" method="post" role="search" style="display: table;">
         <div class="form-group">
           <div class="input-group" style="display:block;">
@@ -102,19 +100,19 @@
         <!-- TODO where to place Consultant list? under Help?
          <li><a href="<?= base_url('users'); ?>"><i class="fa fa-group"></i> <?= lang("Validation.consultants"); ?></a></li> -->
         <?php
-        if(isset($this->session->username)):
-          $tmp = $this->session->username;
+        if(isset($username)):
+          $tmp = $username;
           
         ?>
-            <li class="head-li"><a href="<?= base_url('user/'.$tmp['username']); ?>" style="text-transform: capitalize; padding: 15px 1px 15px 21px"" ><i class="fa fa-user"></i> <?= $tmp['username']; ?></a></li>
+            <li class="head-li"><a href="<?= base_url('user/'.$tmp); ?>" style="text-transform: capitalize; padding: 15px 1px 15px 21px"" ><i class="fa fa-user"></i> <?= $tmp; ?></a></li>
             <li class="head-li"><a href="<?= base_url('profile_update'); ?>" ><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.updateprofile"); ?></a></li>
             <li class="head-li"><a href="<?= base_url('datasetexcel'); ?>"><i class="fa fa-globe"></i> Import UBP values</a></li>
             <li class="head-li"><a href="<?= base_url('mycompanies'); ?>" style="padding: 15px 1px 15px 21px"><i class="fa fa-building-o"></i> <?= lang("Validation.mycompanies"); ?></a></li>
-            <?php if ($tmp['role_id'] == 1): ?>            
+            <?php if ($role_id == 1): ?>            
               <li class="head-li"><a href="<?= base_url('companies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.allcompanies"); ?></a></li>
             <?php endif ?>
             <li class="head-li"><a href="<?= base_url('myprojects'); ?>" style="padding: 15px 1px 15px 21px"; color:white;"><i class="fa fa-globe"></i> <?= lang("Validation.myprojects"); ?></a></li>
-            <?php if ($tmp['role_id'] == 1): ?>            
+            <?php if ($role_id == 1): ?>            
               <li class="head-li"><a href="<?= base_url('projects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.allprojects"); ?></a></li>
 
             <?php endif ?>

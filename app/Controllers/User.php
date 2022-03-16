@@ -311,8 +311,8 @@ class User extends BaseController {
 	}
 
 	public function user_logout(){
-		$this->session->sess_destroy();
-		redirect('', 'refresh');
+		$this->session->destroy();
+		return redirect()->to(site_url());
 	}
 
 	// Database de kayıtlı olan user kullanıcısının bilgilerini view sayfasına gönderiliyor
