@@ -459,4 +459,6 @@ return [
     "consultant" => 'Consultant',
     "consultantinfo" => 'Write consultant info',
     "nis" => 'New Is Scoping',
+    "wrongPassword" => 'Given user info is wrong. Check your password.',
+
 ];

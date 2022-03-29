@@ -241,29 +241,24 @@ class User extends BaseController {
 
 	public function user_login(){
 		$user_model = model(user_model::class);
-		$request = \Config\Services::request();
-
-
+		
 		if(!empty($this->session->username)){
 			return redirect()->to(site_url());
 		}
-
-		// $this->form_validation->set_rules('password', 'Password', 'required|xss_clean|trim|callback_check_user');
 		
-		$isValid = $this->validate([
-			'username'  => 'trim|required|min_length[3]',
-			'password' => 'required|trim',
-		]);
+		if(!empty($this->request->getPost())){
+			$isValid = $this->validate([
+				'username'  => 'trim|required|min_length[3]|isTrueUserInfo',
+				'password' => 'required|trim',
+			]);
+		}
 
-		if (! $this->validate([]))
+		if (!$this->validate([]))
 		{
-			
-			$username= mb_strtolower($this->request->getPost('username'));
-			//echo $this->request->getPost('username');
-			$password=md5($this->request->getPost('password'));
+			$request  = \Config\Services::request();
+			$username = mb_strtolower($this->request->getPost('username'));
+			$password = md5($this->request->getPost('password'));
 			$userInfo = $user_model->check_user($username,$password);
-                        //print_r($userInfo);
-			//session ayaları ve atama
 			if (! empty($userInfo) && is_array($userInfo)){
 				$session_array= array(
 					'id' => $userInfo['id'],
@@ -272,9 +267,8 @@ class User extends BaseController {
 					'role_id' => $userInfo['role_id']
 					);
 				$this->session->set($session_array);
-			}
-			//Redirect after login
-			redirect()->to(site_url());
+				return redirect()->to(site_url());
+			}			
 		}
 
 		echo view('template/header');
