@@ -290,18 +290,18 @@ class User extends BaseController {
 	}
 
 	public function user_profile($username){
+		$user_model = model(user_model::class);
 		//permission site /user/'username' only for logged in users viewable
-		$user = $session->get('user_in');
-		if(empty($user)){
-			redirect('', 'refresh');
+		if(empty($this->session->username)){
+			return redirect()->to(site_url());
 		}
 
-		$data['userInfo']=$this->user_model->get_userinfo_by_username($username);
-		$data['projectsAsWorker'] = $this->user_model->get_worker_projects_from_userid($data['userInfo']['id']);
-		$data['projectsAsConsultant'] = $this->user_model->get_consultant_projects_from_userid($data['userInfo']['id']);
-		$this->load->view('template/header');
-		$this->load->view('user/profile',$data);
-		$this->load->view('template/footer');
+		$data['userInfo']=$user_model->get_userinfo_by_username($username);
+		$data['projectsAsWorker'] = $user_model->get_worker_projects_from_userid($data['userInfo']['id']);
+		$data['projectsAsConsultant'] = $user_model->get_consultant_projects_from_userid($data['userInfo']['id']);
+		echo view('template/header');
+		echo view('user/profile',$data);
+		echo view('template/footer');
 	}
 
 	public function user_logout(){
@@ -312,110 +312,113 @@ class User extends BaseController {
 	// Database de kayıtlı olan user kullanıcısının bilgilerini view sayfasına gönderiliyor
 	// User önceden hangi bilgileri girdigini unutmus ise hatırlatma amaclida kullanilir
 	public function user_profile_update(){
-		$data = $this->user_model->get_session_user();
+		$user_model = model(user_model::class);
 
-		$user = $session->get('user_in');
-		if(empty($user)){
-			redirect('', 'refresh');
+		$data = $user_model->get_session_user();
+
+		if(empty($this->session->username)){
+			return redirect()->to(site_url());
 		}
 		//$userbilgisi = $this->user_model->cmpny_prsnl($data['id']);
 		//print_r($userbilgisi);
 		//form kontroller
 
 		//print_r($data);
-		if($this->input->post('username') != $data['user_name']) {
-		   $is_unique =  '|is_unique[t_user.user_name]';
-		} else {
-		   $is_unique =  '';
-		}
-
-
-		$this->form_validation->set_rules('name','Name','required|trim|xss_clean|max_length[50]');
-		$this->form_validation->set_rules('surname','Surname','required|trim|xss_clean|max_length[50]');
-		$this->form_validation->set_rules('jobTitle','Job Title','required|trim|xss_clean|max_length[150]');
-		$this->form_validation->set_rules('description','Description','trim|xss_clean|max_length[200]');
-		$this->form_validation->set_rules('cellPhone', 'Cell Phone Number', 'trim|xss_clean|max_length[50]');
-		$this->form_validation->set_rules('workPhone', 'Work Phone Number', 'trim|xss_clean|max_length[50]');
-		$this->form_validation->set_rules('fax', 'Fax Number', 'trim|xss_clean|max_length[50]');
-		$this->form_validation->set_rules('email', 'e-mail' ,'trim|required|valid_email|mb_strtolower|xss_clean|callback_email_check');
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[50]|xss_clean|mb_strtolower|alpha_numeric'.$is_unique);
-
-		if ($this->form_validation->run() !== FALSE)
-		{
-			//file properties
-			//@unlink('./assets/user_pictures/'.$data['photo']); //  silmeye gerek yok. overwrite true islemi bunu yapıyor zaten
-			$config['upload_path'] = './assets/user_pictures/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '5000';
-			$config['file_name']	= $data['id'].".jpg";
-			$this->load->library('upload', $config);
-			$this->upload->overwrite = true;
-			//Resmi servera yükleme
-			if (!$this->upload->do_upload())
-			{
-				//print_r($this->upload->display_errors());
-				//hata vermeye gerek yok , resim secmeyebilir.
+		if(!empty($this->request->getPost())){
+			if($this->request->getPost('username') != $data['user_name']) {
+			$is_unique =  '|is_unique[t_user.user_name]';
+			} else {
+			$is_unique =  '';
 			}
-			/*  upload'un ne yazdırğını kontrol için
-			else{
-				$photo_user = array('upload_data' => $this->upload->data());
-			}*/
-			//Yüklenen resmi boyutlandırma ve çevirme
-			$config['image_library'] = 'gd2';
-			$config['source_image']	= './assets/user_pictures/'.$data['photo'];
-			$config['maintain_ratio'] = TRUE;
-			$config['width']	 = 200;
-			$config['height']	 = 200;
-			$this->load->library('image_lib', $config);
-			$this->image_lib->resize();
-
-			$update = array(
-				'name'=>$this->input->post('name'),
-				'surname'=>$this->input->post('surname'),
-				'title'=>$this->input->post('jobTitle'),
-				'description'=>$this->input->post('description'),
-				'email'=>$this->input->post('email'),
-				'phone_num_1'=>$this->input->post('cellPhone'),
-				'phone_num_2'=>$this->input->post('workPhone'),
-				'fax_num'=>$this->input->post('fax'),
-				'user_name'=>$this->input->post('username'),
-				'psswrd'=>$data['psswrd'],
-				'photo' =>$data['id'].".jpg"
-			);
-
-			$this->user_model->update_user($update);
+		
 
 
-			//session ayaları ve atama
-			//username ve email degistigi icin session tekrar olusturuluyor.
-			$session_array= array(
-				'id' => $data['id'],
-				'username' => $update['user_name'],
-				'email' => $update['email'],
-				'role_id' => $data['role_id']
+			$this->form_validation->set_rules('name','Name','required|trim|xss_clean|max_length[50]');
+			$this->form_validation->set_rules('surname','Surname','required|trim|xss_clean|max_length[50]');
+			$this->form_validation->set_rules('jobTitle','Job Title','required|trim|xss_clean|max_length[150]');
+			$this->form_validation->set_rules('description','Description','trim|xss_clean|max_length[200]');
+			$this->form_validation->set_rules('cellPhone', 'Cell Phone Number', 'trim|xss_clean|max_length[50]');
+			$this->form_validation->set_rules('workPhone', 'Work Phone Number', 'trim|xss_clean|max_length[50]');
+			$this->form_validation->set_rules('fax', 'Fax Number', 'trim|xss_clean|max_length[50]');
+			$this->form_validation->set_rules('email', 'e-mail' ,'trim|required|valid_email|mb_strtolower|xss_clean|callback_email_check');
+			$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[50]|xss_clean|mb_strtolower|alpha_numeric'.$is_unique);
+
+			if ($this->form_validation->run() !== FALSE)
+			{
+				//file properties
+				//@unlink('./assets/user_pictures/'.$data['photo']); //  silmeye gerek yok. overwrite true islemi bunu yapıyor zaten
+				$config['upload_path'] = './assets/user_pictures/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['max_size']	= '5000';
+				$config['file_name']	= $data['id'].".jpg";
+				$this->load->library('upload', $config);
+				$this->upload->overwrite = true;
+				//Resmi servera yükleme
+				if (!$this->upload->do_upload())
+				{
+					//print_r($this->upload->display_errors());
+					//hata vermeye gerek yok , resim secmeyebilir.
+				}
+				/*  upload'un ne yazdırğını kontrol için
+				else{
+					$photo_user = array('upload_data' => $this->upload->data());
+				}*/
+				//Yüklenen resmi boyutlandırma ve çevirme
+				$config['image_library'] = 'gd2';
+				$config['source_image']	= './assets/user_pictures/'.$data['photo'];
+				$config['maintain_ratio'] = TRUE;
+				$config['width']	 = 200;
+				$config['height']	 = 200;
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+
+				$update = array(
+					'name'=>$this->input->post('name'),
+					'surname'=>$this->input->post('surname'),
+					'title'=>$this->input->post('jobTitle'),
+					'description'=>$this->input->post('description'),
+					'email'=>$this->input->post('email'),
+					'phone_num_1'=>$this->input->post('cellPhone'),
+					'phone_num_2'=>$this->input->post('workPhone'),
+					'fax_num'=>$this->input->post('fax'),
+					'user_name'=>$this->input->post('username'),
+					'psswrd'=>$data['psswrd'],
+					'photo' =>$data['id'].".jpg"
 				);
-			$session->set('user_in',$session_array);
 
-			$user_id = $session->get('user_in')['id'];
-			//echo $userbilgisi['cmpny_id'];
-			//echo $this->input->post('company');
-			/*if($userbilgisi['cmpny_id']!==$this->input->post('company')){
-				$cmpny_prsnl = array(
-						'user_id' => $user_id,
-						'cmpny_id' => $this->input->post('company'),
-						'is_contact' => '0'
+				$this->user_model->update_user($update);
+
+
+				//session ayaları ve atama
+				//username ve email degistigi icin session tekrar olusturuluyor.
+				$session_array= array(
+					'id' => $data['id'],
+					'username' => $update['user_name'],
+					'email' => $update['email'],
+					'role_id' => $data['role_id']
 					);
-				$this->company_model->update_cmpny_prsnl($user_id,$userbilgisi['cmpny_id'],$cmpny_prsnl);
-			}*/
+				$session->set('user_in',$session_array);
 
-			redirect('user/'.$update['user_name'], 'refresh');
+				$user_id = $session->get('user_in')['id'];
+				//echo $userbilgisi['cmpny_id'];
+				//echo $this->input->post('company');
+				/*if($userbilgisi['cmpny_id']!==$this->input->post('company')){
+					$cmpny_prsnl = array(
+							'user_id' => $user_id,
+							'cmpny_id' => $this->input->post('company'),
+							'is_contact' => '0'
+						);
+					$this->company_model->update_cmpny_prsnl($user_id,$userbilgisi['cmpny_id'],$cmpny_prsnl);
+				}*/
+
+				redirect('user/'.$update['user_name'], 'refresh');
+			}
 		}
-
 		//$data['companies'] = $this->company_model->get_companies();
 
-		$this->load->view('template/header');
-		$this->load->view('user/profile_update',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('user/profile_update',$data);
+		echo view('template/footer');
 	}
 
 	function email_check(){

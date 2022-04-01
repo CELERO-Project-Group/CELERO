@@ -100,19 +100,19 @@
         <!-- TODO where to place Consultant list? under Help?
          <li><a href="<?= base_url('users'); ?>"><i class="fa fa-group"></i> <?= lang("Validation.consultants"); ?></a></li> -->
         <?php
-        if(isset($username)):
-          $tmp = $username;
+        if(session()->username):
+          $tmp = session()->username;
           
         ?>
             <li class="head-li"><a href="<?= base_url('user/'.$tmp); ?>" style="text-transform: capitalize; padding: 15px 1px 15px 21px"" ><i class="fa fa-user"></i> <?= $tmp; ?></a></li>
             <li class="head-li"><a href="<?= base_url('profile_update'); ?>" ><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.updateprofile"); ?></a></li>
             <li class="head-li"><a href="<?= base_url('datasetexcel'); ?>"><i class="fa fa-globe"></i> Import UBP values</a></li>
             <li class="head-li"><a href="<?= base_url('mycompanies'); ?>" style="padding: 15px 1px 15px 21px"><i class="fa fa-building-o"></i> <?= lang("Validation.mycompanies"); ?></a></li>
-            <?php if ($role_id == 1): ?>            
+            <?php if (session()->role_id == 1): ?>            
               <li class="head-li"><a href="<?= base_url('companies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.allcompanies"); ?></a></li>
             <?php endif ?>
             <li class="head-li"><a href="<?= base_url('myprojects'); ?>" style="padding: 15px 1px 15px 21px"; color:white;"><i class="fa fa-globe"></i> <?= lang("Validation.myprojects"); ?></a></li>
-            <?php if ($role_id == 1): ?>            
+            <?php if (session()->role_id == 1): ?>            
               <li class="head-li"><a href="<?= base_url('projects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.allprojects"); ?></a></li>
 
             <?php endif ?>

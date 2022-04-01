@@ -3,15 +3,13 @@
 		<div class="col-md-4">
 			<?php if(file_exists("assets/user_pictures/".$userInfo['photo'])): ?>
 					<img class="img-responsive thumbnail" style="width: 100%" src="<?= asset_url("user_pictures/".$userInfo['photo']); ?>">
-				<?php else: ?>
-					<img class="img-responsive thumbnail" style="width: 100%" src="<?= asset_url("user_pictures/default.jpg"); ?>">
-			<?php endif ?>
+			<?php endif ?> 
 			<div style="margin-top: 10px;">
-				<?php  if($userInfo['id']==$session->get('user_in')['id']): ?>
-		  	<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("profile_update"); ?>"><?= lang("Validation.updateprofile"); ?></a>
-		  	<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url('send_email_for_change_pass'); ?>" style="text-transform: capitalize;"><?= lang("Validation.changepassword"); ?></a>
+				<?php  if($userInfo['id']==session()->id): ?>
+		  		<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("profile_update"); ?>"><?= lang("Validation.updateprofile"); ?></a>
+		  		<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url('send_email_for_change_pass'); ?>" style="text-transform: capitalize;"><?= lang("Validation.changepassword"); ?></a>
 		  	<?php endif ?>
-		  	<?php if(($userInfo['role_id']=='2') && $session->get('user_in')['id'] == $userInfo['id']): ?>
+		  	<?php if(($userInfo['role_id']=='2') && session()->id == $userInfo['id']): ?>
 		  		<a class="btn btn-success btn-block consultant" title="If you apply for consultant, the administrator has to approve it." data-placement='bottom' href="<?= base_url("become_consultant"); ?>"><?= lang("Validation.becomeconsultant"); ?></a>
 		  	<?php endif ?>
 		  	<?php if($userInfo['role_id']=="1"): ?>

@@ -11,10 +11,12 @@ class User_model extends Model {
   }
 
   public function get_userinfo_by_username($username){
-    $db->select('*');
-    $db->from('t_user');
-    $db->where('user_name',$username);
-    return $db->get()->row_array();
+    $db = db_connect();
+    $builder = $db->table('t_user');
+    $builder->select('*');
+    $builder->where('user_name', $username);
+    $query = $builder->get();
+    return $query->getRowArray();
   }
 
   public function check_user($username,$password){
@@ -72,21 +74,12 @@ class User_model extends Model {
   // Session dan acik olan kisinin username bilgisi aliniyor ve bu username e sahip
   // kisinin butun bilgileri controller a return ediliyor.
   public function get_session_user(){
-    if (isset($_SESSION['user_in'])){
-      $tmp = $session->get('user_in');
-
-      $db->from('t_user');
-      $db->where('id',$tmp['id']);
-      $query = $db->get();
-
-      if($query -> num_rows() == 1)
-      {
-        return $query->row_array();
-      }
-      else
-      {
-        return false;
-      }
+    if (!empty(session()->username)){
+        return $this->get_userinfo_by_username(session()->username);
+    }
+    else
+    {
+      return false;
     }
   }
 
@@ -107,13 +100,16 @@ class User_model extends Model {
   }
 
   public function get_worker_projects_from_userid($id){
-      $db->select('t_prj.name,t_prj.id as proje_id');
-      $db->from('t_prj');
-      $db->join('t_prj_cntct_prsnl', 't_prj_cntct_prsnl.prj_id = t_prj.id');
-      $db->join('t_user', 't_user.id = t_prj_cntct_prsnl.usr_id');
-      $db->where('t_user.id', $id);
-      $query = $db->get();
-      return $$query->getResultArray();
+
+    $db = db_connect();
+    $builder = $db->table('t_prj');
+    $builder->select('t_prj.name,t_prj.id as proje_id');
+    $builder->join('t_prj_cntct_prsnl', 't_prj_cntct_prsnl.prj_id = t_prj.id');
+    $builder->join('t_user', 't_user.id = t_prj_cntct_prsnl.usr_id');
+    $builder->where('t_user.id', $id);
+    $query = $builder->get();
+    return $query->getResultArray();
+      
   }
 
   public function deneme_json($id){
@@ -127,14 +123,17 @@ class User_model extends Model {
   }
 
   public function get_consultant_projects_from_userid($id){
-      $db->select('t_prj.name,t_prj.id as proje_id');
-      $db->from('t_prj');
-      $db->join('t_prj_cnsltnt', 't_prj_cnsltnt.prj_id = t_prj.id');
-      $db->join('t_user', 't_user.id = t_prj_cnsltnt.cnsltnt_id');
-      $db->where('t_user.id', $id);
-      $db->order_by("t_prj.name", "asc");
-      $query = $db->get();
-      return $$query->getResultArray();
+
+    $db = db_connect();
+    $builder = $db->table('t_prj');
+    $builder->select('t_prj.name,t_prj.id as proje_id');
+    $builder->join('t_prj_cnsltnt', 't_prj_cnsltnt.prj_id = t_prj.id');
+    $builder->join('t_user', 't_user.id = t_prj_cnsltnt.cnsltnt_id');
+    $builder->where('t_user.id', $id);
+    $builder->orderBy('t_prj.name', 'ASC');
+    $query = $builder->get();
+    return $query->getResultArray();
+
   }
 
   public function update_user($update){
