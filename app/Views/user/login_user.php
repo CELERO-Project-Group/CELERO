@@ -3,11 +3,10 @@
 		<div class="col-md-4 col-md-offset-4 swissbox">
 			<p class="lead"><?= lang("Validation.userlogin"); ?></p>
 
-
 			<?php
 				if($validation != NULL)
 				echo $validation->listErrors();
-			 ?>
+			?>
 
 			<form action="login" method="post" autocomplete="off">
 				<?= csrf_field() ?>

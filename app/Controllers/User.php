@@ -328,9 +328,6 @@ class User extends BaseController {
 			} else {
 			$is_unique =  '';
 			}
-		
-
-
 			$this->form_validation->set_rules('name','Name','required|trim|xss_clean|max_length[50]');
 			$this->form_validation->set_rules('surname','Surname','required|trim|xss_clean|max_length[50]');
 			$this->form_validation->set_rules('jobTitle','Job Title','required|trim|xss_clean|max_length[150]');
@@ -340,7 +337,7 @@ class User extends BaseController {
 			$this->form_validation->set_rules('fax', 'Fax Number', 'trim|xss_clean|max_length[50]');
 			$this->form_validation->set_rules('email', 'e-mail' ,'trim|required|valid_email|mb_strtolower|xss_clean|callback_email_check');
 			$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[50]|xss_clean|mb_strtolower|alpha_numeric'.$is_unique);
-		}
+		
 
 			if ($this->validate([]))
 			{
@@ -387,7 +384,7 @@ class User extends BaseController {
 
 				redirect('user/'.$update['user_name'], 'refresh');
 			}
-		
+		}
 		//$data['companies'] = $this->company_model->get_companies();
 		$data['validation']=$this->validator;
 		echo view('template/header');
