@@ -245,30 +245,28 @@ class User extends BaseController {
 		if(!empty($this->session->username)){
 			return redirect()->to(site_url());
 		}
-		
+		$isValid = FALSE;
 		if(!empty($this->request->getPost())){
-			$isValid = $this->validate([
+			if ($this->validate([
 				'username'  => 'trim|required|min_length[3]|isTrueUserInfo',
 				'password' => 'required|trim',
-			]);
-		}
-
-		if (!$this->validate([]))
-		{
-			$request  = \Config\Services::request();
-			$username = mb_strtolower($this->request->getPost('username'));
-			$password = md5($this->request->getPost('password'));
-			$userInfo = $user_model->check_user($username,$password);
-			if (! empty($userInfo) && is_array($userInfo)){
-				$session_array= array(
-					'id' => $userInfo['id'],
-					'username' => mb_strtolower($userInfo['user_name']),
-					'email' => $userInfo['email'],
-					'role_id' => $userInfo['role_id']
-					);
-				$this->session->set($session_array);
-				return redirect()->to(site_url());
-			}			
+			]))
+			{
+				$request  = \Config\Services::request();
+				$username = mb_strtolower($this->request->getPost('username'));
+				$password = md5($this->request->getPost('password'));
+				$userInfo = $user_model->check_user($username,$password);
+				if (! empty($userInfo) && is_array($userInfo)){
+					$session_array= array(
+						'id' => $userInfo['id'],
+						'username' => mb_strtolower($userInfo['user_name']),
+						'email' => $userInfo['email'],
+						'role_id' => $userInfo['role_id']
+						);
+					$this->session->set($session_array);
+					return redirect()->to(site_url());
+				}		
+			}
 		}
 
 		echo view('template/header');
@@ -342,35 +340,11 @@ class User extends BaseController {
 			$this->form_validation->set_rules('fax', 'Fax Number', 'trim|xss_clean|max_length[50]');
 			$this->form_validation->set_rules('email', 'e-mail' ,'trim|required|valid_email|mb_strtolower|xss_clean|callback_email_check');
 			$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[50]|xss_clean|mb_strtolower|alpha_numeric'.$is_unique);
+		}
 
-			if ($this->form_validation->run() !== FALSE)
+			if ($this->validate([]))
 			{
-				//file properties
-				//@unlink('./assets/user_pictures/'.$data['photo']); //  silmeye gerek yok. overwrite true islemi bunu yapıyor zaten
-				$config['upload_path'] = './assets/user_pictures/';
-				$config['allowed_types'] = 'gif|jpg|png';
-				$config['max_size']	= '5000';
-				$config['file_name']	= $data['id'].".jpg";
-				$this->load->library('upload', $config);
-				$this->upload->overwrite = true;
-				//Resmi servera yükleme
-				if (!$this->upload->do_upload())
-				{
-					//print_r($this->upload->display_errors());
-					//hata vermeye gerek yok , resim secmeyebilir.
-				}
-				/*  upload'un ne yazdırğını kontrol için
-				else{
-					$photo_user = array('upload_data' => $this->upload->data());
-				}*/
-				//Yüklenen resmi boyutlandırma ve çevirme
-				$config['image_library'] = 'gd2';
-				$config['source_image']	= './assets/user_pictures/'.$data['photo'];
-				$config['maintain_ratio'] = TRUE;
-				$config['width']	 = 200;
-				$config['height']	 = 200;
-				$this->load->library('image_lib', $config);
-				$this->image_lib->resize();
+				
 
 				$update = array(
 					'name'=>$this->input->post('name'),
@@ -413,9 +387,9 @@ class User extends BaseController {
 
 				redirect('user/'.$update['user_name'], 'refresh');
 			}
-		}
+		
 		//$data['companies'] = $this->company_model->get_companies();
-
+		$data['validation']=$this->validator;
 		echo view('template/header');
 		echo view('user/profile_update',$data);
 		echo view('template/footer');

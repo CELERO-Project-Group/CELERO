@@ -1,12 +1,7 @@
 <div class="container">
 	<p class="lead"><?= lang("Validation.updateprofile"); ?></p>
 
-	<?php if(validation_errors() != NULL ): ?>
-    <div class="alert">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <?= validation_errors(); ?>
-    </div>
-    <?php endif ?>
+	<?= $validation->listErrors() ?>
 
 	<?= form_open_multipart('profile_update'); ?>
 		<div class="row">
