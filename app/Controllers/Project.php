@@ -2,21 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Models\Project_model;
+use App\Models\Company_model;
+use App\Models\User_model;
+
+# TODO: every method needs user login check.
 class Project extends BaseController{
-
-	function __construct(){
-		parent::__construct();
-		$this->load->model('project_model');
-		$this->load->model('company_model');
-		$this->load->model('user_model');
-		$this->load->library('form_validation');
-		$temp = $session->get('user_in');
-		if(empty($temp)){
-			redirect(base_url('login'),'refresh');
-		}		
-				$this->config->set_item('language', $session->get('site_lang'));
-
-	}
 
 	public function open_project(){
 		$kullanici = $session->get('user_in');
@@ -26,7 +17,7 @@ class Project extends BaseController{
 			redirect('project', 'refresh');
 		}
 
-		$this->load->library('form_validation');
+		echo library('form_validation');
 		$this->form_validation->set_rules('projectid', 'Project ID', 'trim|required|xss_clean');
 		if ($this->form_validation->run() !== FALSE)
 		{
@@ -38,18 +29,19 @@ class Project extends BaseController{
 			redirect('project/'.$id, 'refresh');
 		}
 		$data['projects'] = $this->project_model->get_consultant_projects($kullanici['id']);
-		$this->load->view('template/header');
-		$this->load->view('project/open_project',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('project/open_project',$data);
+		echo view('template/footer');
 	}
 
 	public function close_project(){
+		
 		$session->remove('project_id');
 		redirect('myprojects', 'refresh');
 	}
 
 	public function new_project(){
-		$this->load->library('googlemaps');
+		echo library('googlemaps');
 		$kullanici = $session->get('user_in');
 		$is_consultant = $this->user_model->is_user_consultant($kullanici['id']);
 
@@ -72,7 +64,7 @@ class Project extends BaseController{
 		$data['consultants']=$this->user_model->get_consultants();
 		$data['project_status']=$this->project_model->get_active_project_status();
 
-		$this->load->library('form_validation');
+		echo library('form_validation');
  		$this->form_validation->set_rules('lat', 'Coordinates Latitude', 'trim|xss_clean|required');
 		$this->form_validation->set_rules('long', 'Coordinates Longitude', 'trim|xss_clean|required');
 		$this->form_validation->set_rules('projectName', 'Project Name', 'trim|required|xss_clean|max_length[200]|mb_strtolower|is_unique[t_prj.name]');
@@ -139,9 +131,9 @@ class Project extends BaseController{
 			redirect('project/'.$last_inserted_project_id, 'refresh');
 		}
 
-		$this->load->view('template/header');
-		$this->load->view('project/create_project',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('project/create_project',$data);
+		echo view('template/footer');
 	}
 
 	function check_default($array)
@@ -180,13 +172,16 @@ class Project extends BaseController{
 	}
 
 	public function show_all_project(){
-		$data['projects'] = $this->project_model->get_projects();
+		$user_model = model(User_model::class);
+		$project_model = model(Project_model::class);
+		
+		$data['projects'] = $project_model->get_projects();
 
-		$kullanici = $session->get('user_in');
-		if($kullanici['id']!=null){
-			$data['is_consultant'] = $this->user_model->is_user_consultant($kullanici['id']);
+		$kullaniciId = $this->session->id;
+		if($kullaniciId!=null){
+			$data['is_consultant'] = $user_model->is_user_consultant($kullaniciId);
 			foreach ($data['projects'] as $key => $d) {
-				$data['projects'][$key]['have_permission'] = $this->project_model->can_update_project_information($kullanici['id'],$d['id']);
+				$data['projects'][$key]['have_permission'] = $project_model->can_update_project_information($kullaniciId,$d['id']);
 			}
 		}
 		else{
@@ -197,22 +192,24 @@ class Project extends BaseController{
 		}
 
     //var_dump($data['projects']);
-		$this->load->view('template/header');
-		$this->load->view('project/show_all_project',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('project/show_all_project',$data);
+		echo view('template/footer');
 	}
 
 	public function show_my_project(){
-		$kullanici = $session->get('user_in');
-		if($kullanici['id']!=null)
-			$data['is_consultant'] = $this->user_model->is_user_consultant($kullanici['id']);
+		$user_model = model(User_model::class);
+		$project_model = model(Project_model::class);
+
+		if($this->session->id!=null)
+			$data['is_consultant'] = $user_model->is_user_consultant($this->session->id);
 		else
 			$data['is_consultant'] = false;
 
-		$data['projects'] = $this->project_model->get_consultant_projects($kullanici['id']);
-		$this->load->view('template/header');
-		$this->load->view('project/show_my_project',$data);
-		$this->load->view('template/footer');
+		$data['projects'] = $project_model->get_consultant_projects($this->session->id);
+		echo view('template/header');
+		echo view('project/show_my_project',$data);
+		echo view('template/footer');
 	}
 
 	public function view_project($prj_id){
@@ -236,7 +233,7 @@ class Project extends BaseController{
 		$data['contact'] = $this->project_model->get_prj_cntct_prsnl($prj_id);
 		$data['allconsultants'] = $this->user_model->get_consultants();
 
-		$this->load->library('googlemaps');
+		echo library('googlemaps');
 		$marker = array();
 		if($data['projects']['latitude']!=null && $data['projects']['longitude']!=null) {
 			$config['center'] = $data['projects']['latitude'].','. $data['projects']['longitude'];
@@ -263,9 +260,9 @@ class Project extends BaseController{
 		$data['is_consultant_of_project'] = $is_consultant_of_project;
 		$data['is_contactperson_of_project'] = $is_contactperson_of_project;
 
-		$this->load->view('template/header');
-		$this->load->view('project/project_show_detailed',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('project/project_show_detailed',$data);
+		echo view('template/footer');
 
 	}
 
@@ -309,7 +306,7 @@ class Project extends BaseController{
 
 		$data['contactusers']= $contactusers;
 
-		$this->load->library('form_validation');
+		echo library('form_validation');
 
 		if($this->input->post('projectName') != $data['projects']['name']) {
 		   $is_unique =  '|is_unique[t_prj.name]';
@@ -375,9 +372,9 @@ class Project extends BaseController{
 			$this->project_model->insert_project_contact_person($prj_cntct_prsnl);
 			redirect('project/'.$prjct_id, 'refresh');
 		}
-		$this->load->view('template/header');
-		$this->load->view('project/update_project',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('project/update_project',$data);
+		echo view('template/footer');
 	}
 
 	function name_control(){

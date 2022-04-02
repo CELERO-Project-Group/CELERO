@@ -166,17 +166,19 @@ class User_model extends Model {
   }
 
   public function is_user_consultant($id){
-    //kullanıcı consultant ise true değilse false döndürür
-    $db->select('*');
-    $db->from('t_user');
-    $db->where('id', $id);
-    $query = $db->get()->row_array();
+
+    $db = db_connect();
+    $builder = $db->table('t_user');
+    $builder->select('*');
+    $builder->where('id', $id);
+    $query = $builder->get()->getRowArray();
     if($query['role_id']=="1"){
       return TRUE;
     }
     else{
       return FALSE;
     }
+
   }
 
   public function check_user_email($email){

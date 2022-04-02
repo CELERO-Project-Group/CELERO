@@ -1,7 +1,5 @@
 <div class="container">
-	<?php if(!empty($this->session->flashdata('project_error'))): ?>
-		<div class="alert alert-warning"><?= $this->session->flashdata('project_error'); ?></div>
-	<?php endif ?>
+	
 	<div class="row">
 		<div class="col-md-8">
 				<div class="swissheader"><?= lang("Validation.myprojects"); ?></div>
@@ -56,7 +54,7 @@
 						</div>
 						<div class="col-md-3">
 							<div style="overflow:hidden;">
-								<?php if($session->get('project_id')==$pro['id']): ?>
+								<?php if(session()->project_id==$pro['id']): ?>
 									<a class="btn btn-tuna" href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> Close This Project</a>
 								<?php else: ?>
 									<?= form_open('openproject'); ?>

@@ -5,11 +5,7 @@ use CodeIgniter\Model;
 
 class Project_model extends Model
 {
-
-    public function __construct()
-    {
-        $db = db_connect();
-    }
+    
     public function create_project($project)
     {
         $db->insert('t_prj', $project);
@@ -46,25 +42,28 @@ class Project_model extends Model
 
     public function get_projects()
     {
-        $db->select("*");
-        $db->from('t_prj');
-        $db->order_by("name", "asc");
-        $query = $db->get();
-        return $$query->getResultArray();
+        $db = db_connect();
+        $builder = $db->table('t_prj');
+        $builder->select('*');
+        $builder->orderBy('name', 'asc');
+        $query = $builder->get();
+        return $query->getResultArray();
     }
 
     public function get_consultant_projects($cons_id)
     {
-        $db->select("t_prj.id, t_prj.name, t_prj.description, t_prj.latitude, t_prj.longitude");
-        $db->from('t_prj');
-        $db->join('t_prj_cnsltnt', 't_prj.id = t_prj_cnsltnt.prj_id');
-        $db->join('t_prj_cntct_prsnl', 't_prj.id = t_prj_cntct_prsnl.prj_id');
-        $db->where('t_prj_cnsltnt.cnsltnt_id', $cons_id);
-        $db->or_where('t_prj_cntct_prsnl.usr_id', $cons_id);
-        $db->group_by("t_prj.id");
-        $db->order_by("t_prj.name");
-        $query = $db->get();
-        return $$query->getResultArray();
+
+        $db = db_connect();
+        $builder = $db->table('t_prj');
+        $builder->select('t_prj.id, t_prj.name, t_prj.description, t_prj.latitude, t_prj.longitude');
+        $builder->join('t_prj_cnsltnt', 't_prj.id = t_prj_cnsltnt.prj_id');
+        $builder->join('t_prj_cntct_prsnl', 't_prj.id = t_prj_cntct_prsnl.prj_id');
+        $builder->where('t_prj_cnsltnt.cnsltnt_id', $cons_id);
+        $builder->orWhere('t_prj_cntct_prsnl.usr_id', $cons_id);
+        $builder->groupBy("t_prj.id");
+        $builder->orderBy("t_prj.name");
+        return $builder->get()->getResultArray();
+
     }
 
     public function get_project($prj_id)
@@ -142,17 +141,20 @@ class Project_model extends Model
 
     public function can_update_project_information($user_id, $project_id)
     {
-        $db->select('t_prj_cnsltnt.cnsltnt_id as cnsltnt_id, t_prj_cntct_prsnl.usr_id as cnsltnt_id2');
-        $db->from('t_prj_cnsltnt');
-        $db->join('t_prj_cntct_prsnl', 't_prj_cntct_prsnl.prj_id = t_prj_cnsltnt.prj_id', 'left');
-        $db->where('t_prj_cnsltnt.prj_id', $project_id);
-        $query = $db->get()->result_array();
+        
+        $db = db_connect();
+        $builder = $db->table('t_prj_cnsltnt');
+        $builder->select('t_prj_cnsltnt.cnsltnt_id as cnsltnt_id, t_prj_cntct_prsnl.usr_id as cnsltnt_id2');
+        $builder->join('t_prj_cntct_prsnl', 't_prj_cntct_prsnl.prj_id = t_prj_cnsltnt.prj_id', 'left');
+        $builder->where('t_prj_cnsltnt.prj_id', $project_id);
+        $query = $builder->get()->getResultArray();
         foreach ($query as $cnsltnt) {
             if ($cnsltnt['cnsltnt_id'] == $user_id or $cnsltnt['cnsltnt_id2'] == $user_id) {
                 return true;
             }
         }
         return false;
+
     }
 
     public function have_project_name($project_id, $project_name)
