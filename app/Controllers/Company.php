@@ -160,14 +160,18 @@ class Company extends BaseController {
 	}
 
 	public function show_all_companies(){
+
 		//permission site /companies only for logged in users viewable
-		$user = $session->get('user_in');
-		if(empty($user)){
-			redirect('', 'refresh');
+		// TODO: need flash error message
+		if(empty($this->session->username)){
+			return redirect()->to(site_url());
 		}
 
+		$company_model = model(Company_model::class);
+		$cluster_model = model(Cluster_model::class);
+		$user_model    = model(User_model::class);
 
-		$cluster_id = $this->input->post('cluster');
+		$cluster_id = $this->request->getPost('cluster');
 		$data['help'] = "1";
 		if($this->create_company_control() == FALSE){
 			$data['help'] = "0";
@@ -176,17 +180,16 @@ class Company extends BaseController {
 
 		if($cluster_id == null || $cluster_id == 0){
 			$data['cluster_name']['name'] = lang("Validation.allcompanies");
-			$data['companies'] = $this->company_model->get_companies();
+			$data['companies'] = $company_model->get_companies();
 		}
 		else{
-			$data['companies'] = $this->company_model->get_companies_with_cluster($cluster_id);
-			$data['cluster_name'] = $this->cluster_model->get_cluster_name($cluster_id);
+			$data['companies'] = $company_model->get_companies_with_cluster($cluster_id);
+			$data['cluster_name'] = $cluster_model->get_cluster_name($cluster_id);
 		}
-		$data['clusters'] = $this->cluster_model->get_clusters();
+		$data['clusters'] = $cluster_model->get_clusters();
 		//permission control
-		$kullanici = $session->get('user_in');
 		foreach ($data['companies'] as $key => $d) {
-			$data['companies'][$key]['have_permission'] = $this->user_model->can_edit_company($kullanici['id'],$d['id']);
+			$data['companies'][$key]['have_permission'] = $user_model->can_edit_company($this->session->id,$d['id']);
 		}
 		//print_r($data['companies']);
 		echo view('template/header');
@@ -238,7 +241,7 @@ class Company extends BaseController {
 	}
 
 	public function show_project_companies(){
-		$project_id = $session->get('project_id');
+		$project_id = $this->session->get('project_id');
 		$data['companies'] = $this->company_model->get_project_companies($project_id);
 
 		//print_r($data['companies']);
@@ -473,8 +476,8 @@ class Company extends BaseController {
 	}
 
 	public function create_company_control(){
-		$temp = $session->get('user_in');
-		$cmpny = $this->user_model->cmpny_prsnl($temp['id']);
+		$user_model = model(User_model::class);
+		$cmpny = $user_model->cmpny_prsnl($this->session->id);
 
 		if(empty($cmpny)){
 			return TRUE;

@@ -11,10 +11,14 @@ class Cluster_model extends Model {
   }
 
   public function get_clusters(){
-    $db->select('*');
-    $db->from('t_clstr');
-    $query = $db->get()->result_array();
-    return $query;
+
+    $db = db_connect();
+    $builder = $db->table('t_clstr');
+    $builder->select('*');
+    $builder->orderBy("name", "asc");
+    $query = $builder->get();
+    return $query->getResultArray();
+    
   }
 
   public function get_cluster_name($cluster_id){

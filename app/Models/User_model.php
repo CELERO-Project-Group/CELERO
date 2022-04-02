@@ -234,17 +234,20 @@ class User_model extends Model {
 
   //Bir kullanıcı bir şirketin danışmanı mıdır?
   public function is_consultant_of_company_by_user_id($user_id,$company_id){
-    $db->select('t_prj_cmpny.cmpny_id as cmpnyID');
-    $db->from('t_prj_cnsltnt');
-    $db->join('t_prj_cmpny', 't_prj_cmpny.prj_id = t_prj_cnsltnt.prj_id');
-    $db->where('t_prj_cnsltnt.cnsltnt_id',$user_id);
-    $db->where('t_prj_cmpny.cmpny_id',$company_id);
-    $query = $db->get()->result_array();
+
+    $db = db_connect();
+    $builder = $db->table('t_prj_cnsltnt');
+    $builder->select('t_prj_cmpny.cmpny_id as cmpnyID');
+    $builder->join('t_prj_cmpny', 't_prj_cmpny.prj_id = t_prj_cnsltnt.prj_id');
+    $builder->where('t_prj_cnsltnt.cnsltnt_id',$user_id);
+    $builder->where('t_prj_cmpny.cmpny_id',$company_id);
+    $query = $builder->get()->getResultArray();
     if(empty($query)){
       return FALSE;
     }else{
       return TRUE;
     }
+
   }
 
   public function is_consultant_of_project_by_user_id($user_id,$prj_id){
@@ -274,25 +277,31 @@ class User_model extends Model {
   }
 
   public function cmpny_prsnl($user_id){
-    $db->select('cmpny_id');
-    $db->from('t_cmpny_prsnl');
-    $db->where('user_id',$user_id);
-    $query = $db->get();
-    return $query->row_array();
+
+    $db = db_connect();
+    $builder = $db->table('t_cmpny_prsnl');
+    $builder->select('cmpny_id');
+    $builder->where('user_id', $user_id);
+    $query = $builder->get();
+    return $query->getRowArray();
+
   }
 
   //Firmanın contact person'ı mı?
   public function is_contact_by_userid($user_id,$company_id){
-    $db->select('*');
-    $db->from('t_cmpny_prsnl');
-    $db->where('user_id',$user_id);
-    $db->where('cmpny_id', $company_id);
-    $db->where('is_contact', '1');
-    $query = $db->get()->row_array();
+
+    $db = db_connect();
+    $builder = $db->table('t_cmpny_prsnl');
+    $builder->select('*');
+    $builder->where('user_id',$user_id);
+    $builder->where('cmpny_id', $company_id);
+    $builder->where('is_contact', '1');
+    $query = $builder->get()->getRowArray();
     if(empty($query))
       return FALSE;
     else
       return TRUE;
+
   }
 
   //verilen user'ın verilen şirketi edit edip edemeyeceğine dair bilgiyi verir

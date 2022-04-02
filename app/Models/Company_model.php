@@ -48,11 +48,14 @@ class Company_model extends Model
 
     public function get_companies()
     {
-        $db->select('id,name,latitude,longitude,description');
-        $db->from('t_cmpny');
-        $db->order_by("name", "asc");
-        $query = $db->get();
-        return $$query->getResultArray();
+
+        $db = db_connect();
+        $builder = $db->table('t_cmpny');
+        $builder->select('id,name,latitude,longitude,description');
+        $builder->orderBy("name", "asc");
+        $query = $builder->get();
+        return $query->getResultArray();
+        
     }
 
     public function get_my_companies($user_id)
