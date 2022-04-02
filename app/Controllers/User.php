@@ -191,11 +191,7 @@ class User extends BaseController {
 			{
 				$username = $this->request->getPost('username');
 				$password = md5($this->request->getPost('password'));
-				echo "<br>validate değil:<br>";
 				$userInfo = $user_model->check_user($username,$password);
-				echo "<br>deneme<br>";
-				print_r($userInfo);
-				exit;
 				if (!empty($userInfo) && is_array($userInfo)){
 					$session_array= array(
 						'id' => $userInfo['id'],
@@ -207,7 +203,7 @@ class User extends BaseController {
 					return redirect()->to(site_url());
 				}
 				else{
-					echo 'user info correct but returns empty value.';
+					echo 'User info correct but returns empty value.';
 					exit;
 				}
 			}
@@ -216,19 +212,6 @@ class User extends BaseController {
 		echo view('template/header');
 		echo view('user/login_user', ['validation' => $this->validator,]);
 		echo view('template/footer');
-	}
-
-	public function check_user(){
-		$username= mb_strtolower($this->input->post('username'));
-		$password=md5($this->input->post('password'));
-		$userInfo=$this->user_model->check_user($username,$password);
-
-		if($userInfo!== FALSE){
-			return true;
-		}else{
-			$this->form_validation->set_message('check_user', 'Password or Username is incorrect.');
-			return false;
-		}
 	}
 
 	public function user_profile($username){

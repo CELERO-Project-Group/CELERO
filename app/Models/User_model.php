@@ -15,38 +15,33 @@ class User_model extends Model {
   }
 
   public function get_userinfo_by_username($username){
+    
     $db = db_connect();
     $builder = $db->table('t_user');
     $builder->select('*');
     $builder->where('user_name', $username);
     $query = $builder->get();
     return $query->getRowArray();
+
   }
 
   public function check_user($username,$password){
+    
     $db = db_connect();
     $builder = $db->table('t_user');
   	$builder->where('user_name',$username);
   	$builder->where('psswrd',$password);
     $query = $builder->get();
-        //$db->get_compiled_select();
-        echo "1";
-        echo "<br>";
-        print_r($query->getRowArray());
 
   	if($query->getFieldCount() > 1)
   	{
-      echo "2";
-
-      print_r($query->getRowArray());
   		return $query->getRowArray();
   	}
   	else
   	{
-      echo "3";
-
   		return false;
   	}
+
   }
 
   /**
