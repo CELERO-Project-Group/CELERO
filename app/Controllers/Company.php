@@ -2,22 +2,16 @@
 
 namespace App\Controllers;
 
-class Company extends BaseController{
+use App\Models\Company_model;
+use App\Models\User_model;
+use App\Models\Cluster_model;
+use App\Models\Flow_model;
+use App\Models\Process_model;
+use App\Models\Component_model;
+use App\Models\Equipment_model;
+use App\Models\Product_model;
 
-	function __construct(){
-		parent::__construct();
-		$this->load->model('company_model');
-		$this->load->model('user_model');
-		$this->load->model('cluster_model');
-		$this->load->model('flow_model');
-		$this->load->model('process_model');
-		$this->load->model('component_model');
-		$this->load->model('equipment_model');
-		$this->load->model('product_model');
-		$this->load->library('form_validation');
-		$this->config->set_item('language', $session->get('site_lang'));
-
-	}
+class Company extends BaseController {
 
 	public function new_company(){
 		$temp = $session->get('user_in');
@@ -25,7 +19,7 @@ class Company extends BaseController{
 			redirect('', 'refresh');
 		}
 
-		$this->load->library('googlemaps');
+		echo library('googlemaps');
 		//alert("1:" + event.latLng.lat() + " 2:" + event.latLng.lng());
 		$config['center'] = '47.566667, 7.600000'; //Basel (at center of europe)
 		$config['zoom'] = '4';
@@ -120,7 +114,7 @@ class Company extends BaseController{
 				$config['maintain_ratio'] = TRUE;
 				$config['width'] = 200;
 				$config['height'] = 200;
-				$this->load->library('image_lib', $config);
+				echo library('image_lib', $config);
 
 				$this->image_lib->resize();
 
@@ -135,9 +129,9 @@ class Company extends BaseController{
         $data['countries'] = $this->company_model->get_countries();
 		$data['users']=$this->user_model->get_consultants();
 
-		$this->load->view('template/header');
-		$this->load->view('company/create_company',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('company/create_company',$data);
+		echo view('template/footer');
 	}
 
 	//bu kod telefon numaralarına - boşluk ve _ koymaya yarar
@@ -195,9 +189,9 @@ class Company extends BaseController{
 			$data['companies'][$key]['have_permission'] = $this->user_model->can_edit_company($kullanici['id'],$d['id']);
 		}
 		//print_r($data['companies']);
-		$this->load->view('template/header');
-		$this->load->view('company/show_all_companies',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('company/show_all_companies',$data);
+		echo view('template/footer');
 	}
 
 	public function isSelectionWithFlow($flow_id=FALSE){
@@ -224,23 +218,23 @@ class Company extends BaseController{
 		// 	$data['companies'][$key]['have_permission'] = $this->user_model->can_edit_company($kullanici['id'],$d['id']);
 		// }
 		//print_r($data['companies']);
-		$this->load->view('template/header');
-		$this->load->view('company/show_tuna',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('company/show_tuna',$data);
+		echo view('template/footer');
 	}
 
 	public function show_my_companies(){
-		$kullanici = $session->get('user_in');
+		$company_model = model(Company_model::class);
 
-		if(empty($kullanici)){
-			redirect('', 'refresh');
+		if(empty($this->session->username)){
+			return redirect()->to(site_url());
 		}
 		
-		$data['companies'] = $this->company_model->get_all_companies_i_have_rights($kullanici['id']);
+		$data['companies'] = $company_model->get_all_companies_i_have_rights($this->session->id);
 		
-		$this->load->view('template/header');
-		$this->load->view('company/show_my_companies',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('company/show_my_companies',$data);
+		echo view('template/footer');
 	}
 
 	public function show_project_companies(){
@@ -248,13 +242,13 @@ class Company extends BaseController{
 		$data['companies'] = $this->company_model->get_project_companies($project_id);
 
 		//print_r($data['companies']);
-		$this->load->view('template/header');
-		$this->load->view('company/show_project_companies',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('company/show_project_companies',$data);
+		echo view('template/footer');
 	}
 
 	public function companies($term){
-		$this->load->library('googlemaps');
+		echo library('googlemaps');
 
 		$temp = $session->get('user_in');
 		if($temp['id'] == null){
@@ -304,9 +298,9 @@ class Company extends BaseController{
 			$data['canEdit'] = "0";
 		}
 
-		$this->load->view('template/header');
-		$this->load->view('company/company_show_detailed',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('company/company_show_detailed',$data);
+		echo view('template/footer');
 	}
 
 
@@ -376,7 +370,7 @@ class Company extends BaseController{
 
 		if(empty($data['nace_code'])){$data['nace_code']['code']="";}
 
-		$this->load->library('googlemaps');
+		echo library('googlemaps');
 
 		$config['center'] = '47.566667, 7.600000'; //Basel (at center of europe)
 		$config['zoom'] = '4';
@@ -416,7 +410,7 @@ class Company extends BaseController{
 			$config['allowed_types'] = 'gif|jpg|png';
 			$config['max_size']	= '5000';
 			$config['file_name']	= $this->uri->segment(2).'.jpg';
-			$this->load->library('upload', $config);
+			echo library('upload', $config);
 			$this->upload->overwrite = true;
 			//Resmi servera yükleme
 			$resim = "";
@@ -432,7 +426,7 @@ class Company extends BaseController{
 				$config['maintain_ratio'] = TRUE;
 				$config['width']	 = 200;
 				$config['height']	 = 200;
-				$this->load->library('image_lib', $config);
+				echo library('image_lib', $config);
 
 				$this->image_lib->resize();
 
@@ -473,9 +467,9 @@ class Company extends BaseController{
 		    $this->company_model->update_cmpny_nace_code($cmpny_nace_code,$data['companies']['id']);
 		    redirect('company/'.$data['companies']['id'], 'refresh');
 	  	}
-		$this->load->view('template/header');
-		$this->load->view('company/update_company',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('company/update_company',$data);
+		echo view('template/footer');
 	}
 
 	public function create_company_control(){

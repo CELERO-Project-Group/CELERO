@@ -73,20 +73,19 @@ class Company_model extends Model
      */
     public function get_all_companies_i_have_rights($user_id)
     {
-        $db->select('DISTINCT ON (t_cmpny.name) *', false);
-        $db->from('t_cmpny');
-        $db->join('t_cmpny_prsnl', 't_cmpny_prsnl.cmpny_id = t_cmpny.id', 'left');
 
-        $db->join('t_prj_cmpny', 't_prj_cmpny.cmpny_id = t_cmpny.id', 'left');
-        $db->join('t_prj_cnsltnt', 't_prj_cnsltnt.prj_id = t_prj_cmpny.prj_id', 'left');
+        $db = db_connect();
+        $builder = $db->table('t_cmpny');
+        $builder->select('DISTINCT ON (t_cmpny.name) *', false);
+        $builder->join('t_cmpny_prsnl', 't_cmpny_prsnl.cmpny_id = t_cmpny.id', 'left');
+        $builder->join('t_prj_cmpny', 't_prj_cmpny.cmpny_id = t_cmpny.id', 'left');
+        $builder->join('t_prj_cnsltnt', 't_prj_cnsltnt.prj_id = t_prj_cmpny.prj_id', 'left');
+        $builder->where('t_cmpny_prsnl.user_id', $user_id);
+        $builder->orWhere('t_prj_cnsltnt.cnsltnt_id', $user_id);
+        $builder->orderBy('t_cmpny.name', 'asc');
+        $query = $builder->get();
+        return $query->getResultArray();
 
-        $db->where('t_cmpny_prsnl.user_id', $user_id);
-        $db->or_where('t_prj_cnsltnt.cnsltnt_id', $user_id);
-
-        $db->order_by("t_cmpny.name", "asc");
-
-        $query = $db->get();
-        return $$query->getResultArray();
     }
 
     public function get_project_companies($project_id)

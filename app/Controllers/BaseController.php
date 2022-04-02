@@ -38,8 +38,6 @@ class BaseController extends Controller
      */
     protected $helpers = ['form', 'url'];
 
-    
-
     /**
      * Constructor.
      */

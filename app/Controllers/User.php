@@ -240,7 +240,7 @@ class User extends BaseController {
 	}
 
 	public function user_login(){
-		$user_model = model(user_model::class);
+		$user_model = model(User_model::class);
 		
 		if(!empty($this->session->username)){
 			return redirect()->to(site_url());
