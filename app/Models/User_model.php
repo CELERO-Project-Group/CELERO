@@ -6,8 +6,12 @@ use CodeIgniter\Model;
 class User_model extends Model {
 
   public function create_user($data){
-    $db->insert('t_user', $data);
-    return $db->insert_id();
+
+    $db = db_connect();
+    $builder = $db->table('t_user');
+    $builder->insert($data);
+    return $db->insertID();
+
   }
 
   public function get_userinfo_by_username($username){
@@ -24,17 +28,23 @@ class User_model extends Model {
     $builder = $db->table('t_user');
   	$builder->where('user_name',$username);
   	$builder->where('psswrd',$password);
-        
-  	$query = $builder->get();
-        //print_r($query->getNumRows());
-        //exit;
+    $query = $builder->get();
         //$db->get_compiled_select();
-  	if($query->getNumRows() == 1)
+        echo "1";
+        echo "<br>";
+        print_r($query->getRowArray());
+
+  	if($query->getFieldCount() > 1)
   	{
+      echo "2";
+
+      print_r($query->getRowArray());
   		return $query->getRowArray();
   	}
   	else
   	{
+      echo "3";
+
   		return false;
   	}
   }

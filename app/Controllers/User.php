@@ -35,7 +35,7 @@ class User extends BaseController {
             $this->flow_model->set_userep($epArray);
         }
 
-        $this->load->view('template/header');
+        echo view('template/header');
         //echo "data from excel form";
         //echo $companyId;
 
@@ -79,8 +79,8 @@ class User extends BaseController {
         $data['userepvalues']=$this->flow_model->get_userep($kullanici['id']);
 		$data['units'] = $this->flow_model->get_unit_list();
 
-        $this->load->view('dataset/excelcontents',$data);
-        $this->load->view('template/footer');
+        echo view('dataset/excelcontents',$data);
+        echo view('template/footer');
 	}
 	
 	public function deleteUserEp($flow_name,$ep_value){
@@ -99,128 +99,65 @@ class User extends BaseController {
         $config['overwrite'] = TRUE;
         $config['file_name']            = $user['username'];
 
-        $this->load->library('upload', $config);
+        echo library('upload', $config);
         if ( ! $this->upload->do_upload('excelFile'))
         {
             $data = array('error' => $this->upload->display_errors());
             $data['id']=$user['id'];
 
-            $this->load->view('template/header');
-            $this->load->view('dataset/uploadexcel',$data);
-            $this->load->view('template/footer');
+            echo view('template/header');
+            echo view('dataset/uploadexcel',$data);
+            echo view('template/footer');
         }
         else
         {
             $data = array('upload_data' => $this->upload->data());
             $data['id']=$user['id'];
 
-            $this->load->view('template/header');
-            $this->load->view('dataset/uploadexcel',$data);
-            $this->load->view('template/footer');
+            echo view('template/header');
+            echo view('dataset/uploadexcel',$data);
+            echo view('template/footer');
         }
     }
 
 	public function user_register(){
 
-		$kullanici = $session->get('user_in');
-		if(!empty($kullanici)){
-			redirect('', 'refresh');
-		}
-		//form kontroller
+		$user_model = model(User_model::class);
 
-		$this->load->library('recaptcha');
-
-/*		$this->load->helper('captcha');
-		$vals = array(
-	    'img_path'	 => './assets/captcha/',
-			'img_url'	 => asset_url('captcha').'/',
-			'img_width'	 => '200',
-			'img_height' => 42,
-	    'expiration' => 1024
-    	);
-		if(strtolower($this->input->post('captcha')) == strtolower($session->get('word'))){
-			$captcha_control = true;
-		}
-		else{
-			$captcha_control = false;
+		if(!empty($this->session->username)){
+			return redirect()->to(site_url());
 		}
 
-		$cap = create_captcha($vals);
-		//print_r($cap);
-		$data['image'] = $cap['image'];
-		$session->set('word', $cap['word']);*/
+		# TODO: recaptcha needed.
+		//echo library('recaptcha');
 
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|mb_strtolower|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_user.user_name]');
-		$this->form_validation->set_rules('name','Name','required|trim|xss_clean|max_length[50]');
-		$this->form_validation->set_rules('surname','Surname','required|trim|xss_clean|max_length[50]');
-		$this->form_validation->set_rules('jobTitle','Job Title','required|trim|xss_clean|max_length[150]');
-		$this->form_validation->set_rules('description','Description','trim|xss_clean|max_length[200]');
-		$this->form_validation->set_rules('email', 'e-mail' ,'required|trim|xss_clean|valid_email|max_length[100]|mb_strtolower|is_unique[t_user.email]');
-		$this->form_validation->set_rules('cellPhone', 'Cell Phone Number', 'trim|xss_clean|max_length[50]');
-		$this->form_validation->set_rules('workPhone', 'Work Phone Number', 'trim|xss_clean|max_length[50]');
-		$this->form_validation->set_rules('fax', 'Fax Number', 'trim|xss_clean|max_length[50]');
-		$this->form_validation->set_rules('password', 'Password', 'required|trim|xss_clean|max_length[40]');
+		if(!empty($this->request->getPost())){
 
-		$this->recaptcha->recaptcha_check_answer();
-		if ($this->form_validation->run() !== FALSE  && $this->recaptcha->getIsValid())
-		{
-			//inserting data to database
-			$data2 = array(
-				'name'=>$this->input->post('name'),
-				'surname'=>$this->input->post('surname'),
-				'title'=>$this->input->post('jobTitle'),
-				'description'=>$this->input->post('description'),
-				'email'=>$this->input->post('email'),
-				'phone_num_1'=>$this->input->post('cellPhone'),
-				'phone_num_2'=>$this->input->post('workPhone'),
-				'fax_num'=>$this->input->post('fax'),
-				'user_name'=>$this->input->post('username'),
-				'psswrd'=>md5($this->input->post('password'))
-				//'photo'=>$this->input->post('username').'.jpg'
-			);
-			$last_inserted_user_id = $this->user_model->create_user($data2);
-
-			//file properties
-			$config['upload_path'] = './assets/user_pictures/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '5000';
-			$config['file_name']	= $last_inserted_user_id.'.jpg';
-			$this->load->library('upload', $config);
-
-			//Resmi servera yükleme
-			if (!$this->upload->do_upload())
+			if ($this->validate([
+				'username'  => 'trim|required|mb_strtolower|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_user.user_name]',
+				'name' => 'required|trim|max_length[50]',
+				'surname' => 'required|trim|max_length[50]',
+				'email' => 'required|trim|valid_email|max_length[100]|mb_strtolower|is_unique[t_user.email]',
+				'password' => 'required|trim|max_length[40]',
+			]))
 			{
-				$photo = array(
-					'photo'=>'default.jpg'
+
+				$data = array(
+					'name'=>$this->request->getPost('name'),
+					'surname'=>$this->request->getPost('surname'),
+					'email'=>$this->request->getPost('email'),
+					'user_name'=>$this->request->getPost('username'),
+					'psswrd'=>md5($this->request->getPost('password'))
 				);
-				$this->user_model->set_user_image($last_inserted_user_id,$photo);
+				$last_inserted_user_id = $user_model->create_user($data);
+				return redirect()->to("completed");
+
 			}
-			//Yüklenen resmi boyutlandırma ve çevirme
-			else{
-				$config['image_library'] = 'gd2';
-				$config['source_image']	= './assets/user_pictures/'.$last_inserted_user_id.'.jpg';
-				$config['maintain_ratio'] = TRUE;
-				$config['width']	 = 200;
-				$config['height']	 = 200;
-				$this->load->library('image_lib', $config);
-
-				$this->image_lib->resize();
-
-
-				$photo = array(
-					'photo'=>$last_inserted_user_id.'.jpg'
-				);
-				$this->user_model->set_user_image($last_inserted_user_id,$photo);
-			}
-			//process completed
-			redirect('completed', 'refresh');
 		}
 
-		$data['recaptcha_html'] = $this->recaptcha->recaptcha_get_html('',true);
-
-		$this->load->view('template/header');
-		$this->load->view('user/create_user',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('user/create_user', ['validation' => $this->validator,]);
+		echo view('template/footer');
 	}
 
 	function string_control($str)
@@ -245,18 +182,21 @@ class User extends BaseController {
 		if(!empty($this->session->username)){
 			return redirect()->to(site_url());
 		}
-		$isValid = FALSE;
+
 		if(!empty($this->request->getPost())){
 			if ($this->validate([
 				'username'  => 'trim|required|min_length[3]|isTrueUserInfo',
-				'password' => 'required|trim',
+				'password'  => 'trim|required',
 			]))
 			{
-				$request  = \Config\Services::request();
-				$username = mb_strtolower($this->request->getPost('username'));
+				$username = $this->request->getPost('username');
 				$password = md5($this->request->getPost('password'));
+				echo "<br>validate değil:<br>";
 				$userInfo = $user_model->check_user($username,$password);
-				if (! empty($userInfo) && is_array($userInfo)){
+				echo "<br>deneme<br>";
+				print_r($userInfo);
+				exit;
+				if (!empty($userInfo) && is_array($userInfo)){
 					$session_array= array(
 						'id' => $userInfo['id'],
 						'username' => mb_strtolower($userInfo['user_name']),
@@ -265,7 +205,11 @@ class User extends BaseController {
 						);
 					$this->session->set($session_array);
 					return redirect()->to(site_url());
-				}		
+				}
+				else{
+					echo 'user info correct but returns empty value.';
+					exit;
+				}
 			}
 		}
 
@@ -445,9 +389,9 @@ class User extends BaseController {
 
 		$data['users']=$this->user_model->get_consultants();
 
-		$this->load->view('template/header');
-		$this->load->view('user/show_all_users',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('user/show_all_users',$data);
+		echo view('template/footer');
 	}
 
 }
