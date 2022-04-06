@@ -234,8 +234,6 @@ class User extends BaseController {
 		return redirect()->to(site_url());
 	}
 
-	// Database de kayıtlı olan user kullanıcısının bilgilerini view sayfasına gönderiliyor
-	// User önceden hangi bilgileri girdigini unutmus ise hatırlatma amaclida kullanilir
 	public function user_profile_update(){
 		$user_model = model(User_model::class);
 
