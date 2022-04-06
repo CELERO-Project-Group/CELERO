@@ -1,9 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">
-			<?php if(file_exists("assets/user_pictures/".$userInfo['photo'])): ?>
-					<img class="img-responsive thumbnail" style="width: 100%" src="<?= asset_url("user_pictures/".$userInfo['photo']); ?>">
-			<?php endif ?> 
+			
 			<div style="margin-top: 10px;">
 				<?php  if($userInfo['id']==session()->id): ?>
 		  		<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("profile_update"); ?>"><?= lang("Validation.updateprofile"); ?></a>

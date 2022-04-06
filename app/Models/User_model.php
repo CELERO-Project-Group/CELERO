@@ -142,11 +142,11 @@ class User_model extends Model {
   }
 
   public function update_user($update){
-    if (isset($_SESSION['user_in'])){
-      $tmp = $session->get('user_in');
-      $db->where('id', $tmp['id']);
-      $db->update('t_user', $update);
-    }
+
+    $db = db_connect();
+    $builder = $db->table('t_user');
+    $builder->replace($update);
+    
   }
 
   public function make_user_consultant($id,$username=FALSE){

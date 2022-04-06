@@ -221,9 +221,9 @@ class User extends BaseController {
 			return redirect()->to(site_url());
 		}
 
-		$data['userInfo']=$user_model->get_userinfo_by_username($username);
-		$data['projectsAsWorker'] = $user_model->get_worker_projects_from_userid($data['userInfo']['id']);
-		$data['projectsAsConsultant'] = $user_model->get_consultant_projects_from_userid($data['userInfo']['id']);
+		$data['userInfo']                 = $user_model->get_userinfo_by_username($username);
+		$data['projectsAsWorker']         = $user_model->get_worker_projects_from_userid($data['userInfo']['id']);
+		$data['projectsAsConsultant']     = $user_model->get_consultant_projects_from_userid($data['userInfo']['id']);
 		echo view('template/header');
 		echo view('user/profile',$data);
 		echo view('template/footer');
@@ -237,120 +237,46 @@ class User extends BaseController {
 	// Database de kayıtlı olan user kullanıcısının bilgilerini view sayfasına gönderiliyor
 	// User önceden hangi bilgileri girdigini unutmus ise hatırlatma amaclida kullanilir
 	public function user_profile_update(){
-		$user_model = model(user_model::class);
+		$user_model = model(User_model::class);
 
 		$data = $user_model->get_session_user();
-
+		print_r($data);
 		if(empty($this->session->username)){
 			return redirect()->to(site_url());
 		}
-		//$userbilgisi = $this->user_model->cmpny_prsnl($data['id']);
-		//print_r($userbilgisi);
-		//form kontroller
-
-		//print_r($data);
-		if(!empty($this->request->getPost())){
-			if($this->request->getPost('username') != $data['user_name']) {
-			$is_unique =  '|is_unique[t_user.user_name]';
-			} else {
-			$is_unique =  '';
-			}
-			$this->form_validation->set_rules('name','Name','required|trim|xss_clean|max_length[50]');
-			$this->form_validation->set_rules('surname','Surname','required|trim|xss_clean|max_length[50]');
-			$this->form_validation->set_rules('jobTitle','Job Title','required|trim|xss_clean|max_length[150]');
-			$this->form_validation->set_rules('description','Description','trim|xss_clean|max_length[200]');
-			$this->form_validation->set_rules('cellPhone', 'Cell Phone Number', 'trim|xss_clean|max_length[50]');
-			$this->form_validation->set_rules('workPhone', 'Work Phone Number', 'trim|xss_clean|max_length[50]');
-			$this->form_validation->set_rules('fax', 'Fax Number', 'trim|xss_clean|max_length[50]');
-			$this->form_validation->set_rules('email', 'e-mail' ,'trim|required|valid_email|mb_strtolower|xss_clean|callback_email_check');
-			$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[50]|xss_clean|mb_strtolower|alpha_numeric'.$is_unique);
+		$username = $this->session->username;
 		
-
-			if ($this->validate([]))
+		if(!empty($this->request->getPost())){
+			if ($this->validate([
+				'username'  => 'trim|required|mb_strtolower|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_user.user_name,id,{id}]',
+				'name' => 'required|trim|max_length[50]',
+				'surname' => 'required|trim|max_length[50]',
+				'email' => 'required|trim|valid_email|max_length[100]|mb_strtolower|is_unique[t_user.email,id,{id}]',
+			]))
 			{
-				
-
 				$update = array(
-					'name'=>$this->input->post('name'),
-					'surname'=>$this->input->post('surname'),
-					'title'=>$this->input->post('jobTitle'),
-					'description'=>$this->input->post('description'),
-					'email'=>$this->input->post('email'),
-					'phone_num_1'=>$this->input->post('cellPhone'),
-					'phone_num_2'=>$this->input->post('workPhone'),
-					'fax_num'=>$this->input->post('fax'),
-					'user_name'=>$this->input->post('username'),
-					'psswrd'=>$data['psswrd'],
-					'photo' =>$data['id'].".jpg"
+					'id' => $data['id'],
+					'name'=>$this->request->getPost('name'),
+					'surname'=>$this->request->getPost('surname'),
+					'email'=>$this->request->getPost('email'),
+					'user_name'=>$this->request->getPost('username'),
 				);
+				$user_model->update_user($update);
 
-				$this->user_model->update_user($update);
-
-
-				//session ayaları ve atama
-				//username ve email degistigi icin session tekrar olusturuluyor.
 				$session_array= array(
 					'id' => $data['id'],
-					'username' => $update['user_name'],
-					'email' => $update['email'],
-					'role_id' => $data['role_id']
-					);
-				$session->set('user_in',$session_array);
-
-				$user_id = $session->get('user_in')['id'];
-				//echo $userbilgisi['cmpny_id'];
-				//echo $this->input->post('company');
-				/*if($userbilgisi['cmpny_id']!==$this->input->post('company')){
-					$cmpny_prsnl = array(
-							'user_id' => $user_id,
-							'cmpny_id' => $this->input->post('company'),
-							'is_contact' => '0'
-						);
-					$this->company_model->update_cmpny_prsnl($user_id,$userbilgisi['cmpny_id'],$cmpny_prsnl);
-				}*/
-
-				redirect('user/'.$update['user_name'], 'refresh');
+					'username' => $this->request->getPost('username'),
+					'email' => $this->request->getPost('email')					
+				);
+				$this->session->set($session_array);
 			}
 		}
-		//$data['companies'] = $this->company_model->get_companies();
+
 		$data['validation']=$this->validator;
 		echo view('template/header');
 		echo view('user/profile_update',$data);
 		echo view('template/footer');
 	}
-
-	function email_check(){
-		$emailForm = $this->input->post('email'); // formdan gelen yeni girilen email
-
-		$tmp = $session->get('user_in');
-		$emailSession = $tmp['email']; // session'da tutulan önceki email, şuan database'de de bu var.
-		$check_user_email = $this->user_model->check_user_email($emailForm);  // email varsa true , yoksa false
-		if(($emailForm == $emailSession) || !$check_user_email ){
-			return true;
-		}
-		else{
-			$this->form_validation->set_message('email_check', 'Please provide an acceptable email address.');
-			return false;
-		}
-
-	}
-
-
-	function username_check(){
-		$usernameForm = $this->input->post('username'); // formdan gelen yeni girilen username
-
-		$tmp = $session->get('user_in');
-		$usernameSession = $tmp['username']; // session'da tutulan önceki username, şuan database'de de bu var.
-		$check_username = $this->user_model->check_username($usernameForm);  // username varsa true , yoksa false
-		if(($usernameForm == $usernameSession) || !$check_username ){
-			return true;
-		}
-		else{
-			$this->form_validation->set_message('username_check', 'Please provide an acceptable username.');
-			return false;
-		}
-	}
-
 
 	public function become_consultant(){
 		$tmp = $session->get('user_in');
