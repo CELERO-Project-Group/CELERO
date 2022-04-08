@@ -277,14 +277,6 @@ td {
     padding: 8px;
 }
 
-.homemain {
-    background: url('../images/home.jpg');
-    height: 500px;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    margin-top: -20px;
-}
-
 .footer {
     padding: 25px;
     background-color: #f0f0f0;
