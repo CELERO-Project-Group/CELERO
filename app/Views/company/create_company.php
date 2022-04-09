@@ -1,16 +1,10 @@
-<?= $map['js']; ?>
 <div class="container">
 	<p class="lead"><?= lang("Validation.createcompany"); ?></p>
 
-	<?php if(validation_errors() != NULL ): ?>
-    <div class="alert">
-		<button type="button" class="close" data-dismiss="alert">&times;</button>
-		<h4>Form couldn't be saved</h4>
-      	<p>
-      		<?= validation_errors(); ?>
-      	</p>
-    </div>
-  	<?php endif ?>
+	<?php
+		if($validation != NULL)
+		echo $validation->listErrors();
+	?>
 
 	<?= form_open_multipart('newcompany'); ?>
 		<div class="row">
@@ -56,7 +50,7 @@
 					<select id="selectize" name="country">
 						<option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>
 						<?php foreach ($countries as $anc): ?>
-							<option value="<?= $anc['id']; ?>"><?= $anc['country_name']; ?> </option>
+							<option value="<?= $anc; ?>"><?= $anc; ?> </option>
 						<?php endforeach?>
 					</select>
 					<small></small>
@@ -97,7 +91,7 @@
 	    			<label for="users"><?= lang("Validation.assignconsultant"); ?></label>
 	    			<select multiple="multiple"  title="Choose at least one" class="select-block" id="users" name="users[]">
 						<?php foreach ($users as $consultant): ?>
-							<?php if (in_array($consultant['id'], $_POST['users'])) { ?>
+							<?php if (in_array($consultant['id'], $this->request->getPost('users'))) { ?>
 								<option value="<?= $consultant['id']; ?>" selected><?= $consultant['name'].' '.$consultant['surname'].' ('.$consultant['user_name'].')'; ?></option>
 							<?php } else { ?>
 								<option value="<?= $consultant['id']; ?>"><?= $consultant['name'].' '.$consultant['surname'].' ('.$consultant['user_name'].')'; ?></option>

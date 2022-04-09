@@ -49,13 +49,15 @@ class User_model extends Model {
    * @return all consultant information in the system ordered by name
    */
   public function get_consultants(){
-    $db->select('t_user.id as id,t_user.user_name as user_name,t_user.name as name,t_user.surname as surname,t_user.description as description');
-    $db->from('t_user');
-    $db->join('t_role', 't_role.id = t_user.role_id');
-    $db->where('t_role.short_code', 'CNS');
-    $db->order_by("name", "asc");
-    $query = $db->get();
-    return $$query->getResultArray();
+
+    $db = db_connect();
+    $builder = $db->table('t_user');
+    $builder->select('t_user.id as id,t_user.user_name as user_name,t_user.name as name,t_user.surname as surname,t_user.description as description');
+    $builder->join('t_role', 't_role.id = t_user.role_id');
+    $builder->where('t_role.short_code', 'CNS');
+    $builder->orderBy("name", "asc");
+    $query = $builder->get();
+    return $query->getResultArray();
 
   }
 

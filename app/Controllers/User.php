@@ -238,7 +238,7 @@ class User extends BaseController {
 		$user_model = model(User_model::class);
 
 		$data = $user_model->get_session_user();
-		print_r($data);
+
 		if(empty($this->session->username)){
 			return redirect()->to(site_url());
 		}

@@ -14,12 +14,14 @@ use App\Models\Product_model;
 class Company extends BaseController {
 
 	public function new_company(){
-		$temp = $session->get('user_in');
-		if($temp['id'] == null){
-			redirect('', 'refresh');
+		$user_model = model(User_model::class);
+		$company_model = model(Company_model::class);
+
+		if(empty($this->session->username)){
+			return redirect()->to(site_url());
 		}
 
-		echo library('googlemaps');
+		/*echo library('googlemaps');
 		//alert("1:" + event.latLng.lat() + " 2:" + event.latLng.lng());
 		$config['center'] = '47.566667, 7.600000'; //Basel (at center of europe)
 		$config['zoom'] = '4';
@@ -29,10 +31,10 @@ class Company extends BaseController {
 		$config['placesRadius'] = 20;
 		$this->googlemaps->initialize($config);
 
-		$data['map'] = $this->googlemaps->create_map();
+		$data['map'] = $this->googlemaps->create_map();*/
 
-
-		$this->form_validation->set_rules('companyName', 'Company Name', 'required|trim|xss_clean|mb_strtolower|max_length[254]|is_unique[t_cmpny.name]');
+		if(!empty($this->request->getPost())){
+			/*$this->form_validation->set_rules('companyName', 'Company Name', 'required|trim|xss_clean|mb_strtolower|max_length[254]|is_unique[t_cmpny.name]');
 		$this->form_validation->set_rules('naceCode', 'Nace Code', 'required|trim|xss_clean');
 		$this->form_validation->set_rules('companyDescription', 'Company Description', 'required|trim|xss_clean|max_length[200]');
 		$this->form_validation->set_rules('email', 'E-mail', 'required|trim|max_length[150]|xss_clean');
@@ -43,91 +45,78 @@ class Company extends BaseController {
 		$this->form_validation->set_rules('lat', 'Coordinates Latitude', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('long', 'Coordinates Longitude', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('users', 'Company User', 'trim|xss_clean');
-
-		if ($this->form_validation->run() !== FALSE)
-		{
-			$data = array(
-				'name'=>mb_strtolower($this->input->post('companyName')),
-				//'phone_num_1'=>$this->input->post('cellPhone'),
-				'phone_num_2'=>$this->input->post('workPhone'),
-				'fax_num'=>$this->input->post('fax'),
-				'address'=>substr($this->input->post('address'), 0, 99),
-				'description'=>substr($this->input->post('companyDescription'), 0, 199),
-				'email'=>$this->input->post('email'),
-				'latitude'=>$this->input->post('lat'),
-				'longitude'=>$this->input->post('long'),
-				'active'=>'1'
-			);
-			$code = $this->input->post('naceCode');
-			$last_id = $this->company_model->insert_company($data);
-			$cmpny_data = array(
-				'cmpny_id' => $last_id,
-				'description' => substr($data['description'], 0, 199)
-			);
-
-		    $nace_code_id = $this->company_model->search_nace_code($code);
-
-		    $cmpny_nace_code = array(
-		    	'cmpny_id' => $last_id,
-		    	'nace_code_id' => $nace_code_id['id']
-		    );
-
-			$users = $_POST['users']; // multiple select , secilen consultant'lar
-
-			foreach ($users as $consultant) {
-				$user = array(
-					'user_id' => $consultant,
-					'cmpny_id' => $last_id,
-					'is_contact' => 0
-				);
-				$this->company_model->add_worker_to_company($user);	
-			}
-
-		    $this->company_model->insert_cmpny_prsnl($last_id);
-		    $this->company_model->insert_cmpny_nace_code($cmpny_nace_code);
-
-			$this->validate([
-				'userfile' => 'uploaded[userfile]|max_size[userfile,5000]'
-							   . '|mime_in[userfile,image/png,image/jpg,image/gif]'
-							   . '|ext_in[userfile,png,jpg,gif]|max_dims[userfile,1024,768]'
-			]);
-		    $file = $this->request->getFile('userfile');
-
-			if (! $path = $file->store()) {
-				echo view('upload_form', ['error' => "upload failed"]);
-			} else {
-				$data = ['upload_file_path' => $path];
-
-				echo view('upload_success', $data);
-			}
-
-			/* we need to fix this
-			if (!$this->upload->do_upload())
+		*/
+			if ($this->validate([
+				'username'  => 'trim|required|mb_strtolower|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_user.user_name]',
+				'name' => 'required|trim|max_length[50]',
+				'surname' => 'required|trim|max_length[50]',
+				'email' => 'required|trim|valid_email|max_length[100]|mb_strtolower|is_unique[t_user.email]',
+				'password' => 'required|trim|max_length[40]',
+			]))
 			{
-				$logo = array(
-					'logo'=>'default.jpg'
-				);
-				$this->company_model->set_company_image($last_id,$logo);
-			}else{
-				$config['image_library'] = 'gd2';
-				$config['source_image']	= './assets/company_pictures/'.$last_id.'.jpg';
-				$config['maintain_ratio'] = TRUE;
-				$config['width'] = 200;
-				$config['height'] = 200;
-				echo library('image_lib', $config);
 
-				$this->image_lib->resize();
-
-				$logo = array(
-					'logo'=>$last_id.'.jpg'
+				$data = array(
+					'name'=>mb_strtolower($this->request->getPost('companyName')),
+					//'phone_num_1'=>$this->request->getPost('cellPhone'),
+					'phone_num_2'=>$this->request->getPost('workPhone'),
+					'fax_num'=>$this->request->getPost('fax'),
+					'address'=>substr($this->request->getPost('address'), 0, 99),
+					'description'=>substr($this->request->getPost('companyDescription'), 0, 199),
+					'email'=>$this->request->getPost('email'),
+					'latitude'=>$this->request->getPost('lat'),
+					'longitude'=>$this->request->getPost('long'),
+					'active'=>'1'
 				);
-				$this->company_model->set_company_image($last_id,$logo);
-			}*/
-			redirect('company/'.$last_id, 'refresh');
+				$code = $this->input->post('naceCode');
+				$last_id = $this->company_model->insert_company($data);
+				$cmpny_data = array(
+					'cmpny_id' => $last_id,
+					'description' => substr($data['description'], 0, 199)
+				);
+
+				$nace_code_id = $this->company_model->search_nace_code($code);
+
+				$cmpny_nace_code = array(
+					'cmpny_id' => $last_id,
+					'nace_code_id' => $nace_code_id['id']
+				);
+
+				$users = $_POST['users']; // multiple select , secilen consultant'lar
+
+				foreach ($users as $consultant) {
+					$user = array(
+						'user_id' => $consultant,
+						'cmpny_id' => $last_id,
+						'is_contact' => 0
+					);
+					$this->company_model->add_worker_to_company($user);	
+				}
+
+				$this->company_model->insert_cmpny_prsnl($last_id);
+				$this->company_model->insert_cmpny_nace_code($cmpny_nace_code);
+
+				$this->validate([
+					'userfile' => 'uploaded[userfile]|max_size[userfile,5000]'
+								. '|mime_in[userfile,image/png,image/jpg,image/gif]'
+								. '|ext_in[userfile,png,jpg,gif]|max_dims[userfile,1024,768]'
+				]);
+				$file = $this->request->getFile('userfile');
+
+				if (! $path = $file->store()) {
+					echo view('upload_form', ['error' => "upload failed"]);
+				} else {
+					$data = ['upload_file_path' => $path];
+
+					echo view('upload_success', $data);
+				}
+
+				}
 		}
-		$data['all_nace_codes'] = $this->company_model->get_all_nace_codes();
-        $data['countries'] = $this->company_model->get_countries();
-		$data['users']=$this->user_model->get_consultants();
+		$data['validation']=$this->validator;
+
+		$data['all_nace_codes'] = $company_model->get_all_nace_codes();
+        $data['countries'] = $company_model->get_countries();
+		$data['users']=$user_model->get_consultants();
 
 		echo view('template/header');
 		echo view('company/create_company',$data);
