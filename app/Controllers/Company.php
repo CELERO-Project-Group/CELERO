@@ -47,41 +47,38 @@ class Company extends BaseController {
 		$this->form_validation->set_rules('users', 'Company User', 'trim|xss_clean');
 		*/
 			if ($this->validate([
-				'username'  => 'trim|required|mb_strtolower|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_user.user_name]',
-				'name' => 'required|trim|max_length[50]',
-				'surname' => 'required|trim|max_length[50]',
-				'email' => 'required|trim|valid_email|max_length[100]|mb_strtolower|is_unique[t_user.email]',
-				'password' => 'required|trim|max_length[40]',
+				'companyName'  => 'trim|required|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_cmpny.name]',
+				'naceCode'  => 'trim|required',
+				'companyDescription' => 'required|trim|max_length[200]',
+				'email' => 'required|valid_email',
+				'workPhone' => 'required'
 			]))
 			{
 
 				$data = array(
 					'name'=>mb_strtolower($this->request->getPost('companyName')),
-					//'phone_num_1'=>$this->request->getPost('cellPhone'),
 					'phone_num_2'=>$this->request->getPost('workPhone'),
-					'fax_num'=>$this->request->getPost('fax'),
-					'address'=>substr($this->request->getPost('address'), 0, 99),
 					'description'=>substr($this->request->getPost('companyDescription'), 0, 199),
 					'email'=>$this->request->getPost('email'),
 					'latitude'=>$this->request->getPost('lat'),
 					'longitude'=>$this->request->getPost('long'),
 					'active'=>'1'
 				);
-				$code = $this->input->post('naceCode');
-				$last_id = $this->company_model->insert_company($data);
+				$code = $this->request->getPost('naceCode');
+				$last_id = $company_model->insert_company($data);
 				$cmpny_data = array(
 					'cmpny_id' => $last_id,
 					'description' => substr($data['description'], 0, 199)
 				);
 
-				$nace_code_id = $this->company_model->search_nace_code($code);
+				$nace_code_id = $company_model->search_nace_code($code);
 
 				$cmpny_nace_code = array(
 					'cmpny_id' => $last_id,
 					'nace_code_id' => $nace_code_id['id']
 				);
 
-				$users = $_POST['users']; // multiple select , secilen consultant'lar
+				$users = $this->request->getPost('users'); // multiple select , secilen consultant'lar
 
 				foreach ($users as $consultant) {
 					$user = array(
@@ -89,30 +86,21 @@ class Company extends BaseController {
 						'cmpny_id' => $last_id,
 						'is_contact' => 0
 					);
-					$this->company_model->add_worker_to_company($user);	
+					$company_model->add_worker_to_company($user);	
 				}
 
-				$this->company_model->insert_cmpny_prsnl($last_id);
-				$this->company_model->insert_cmpny_nace_code($cmpny_nace_code);
-
-				$this->validate([
-					'userfile' => 'uploaded[userfile]|max_size[userfile,5000]'
-								. '|mime_in[userfile,image/png,image/jpg,image/gif]'
-								. '|ext_in[userfile,png,jpg,gif]|max_dims[userfile,1024,768]'
-				]);
-				$file = $this->request->getFile('userfile');
-
-				if (! $path = $file->store()) {
-					echo view('upload_form', ['error' => "upload failed"]);
-				} else {
-					$data = ['upload_file_path' => $path];
-
-					echo view('upload_success', $data);
-				}
+				$companyOwner = array(
+					'user_id' => $this->session->id,
+					'cmpny_id' => $last_id,
+					'is_contact' => 0
+				);
+				$company_model->insert_cmpny_prsnl($companyOwner);
+				$company_model->insert_cmpny_nace_code($cmpny_nace_code);
 
 				}
 		}
 		$data['validation']=$this->validator;
+		//$data['post_users']=$this->request->;
 
 		$data['all_nace_codes'] = $company_model->get_all_nace_codes();
         $data['countries'] = $company_model->get_countries();
