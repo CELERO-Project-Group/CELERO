@@ -1,18 +1,10 @@
-<?= $map['js'] ?>
+
 <div class="container">
 	<div class="row">
 			<div class="col-md-4">
-			<div style="margin-bottom:10px;">
-				<?php if($companies['logo'] == null)
-						$companies['logo'] = '.jpg';
-					if(file_exists("assets/company_pictures/".$companies['logo'])): ?>
-					<img style="width:100%;" class="thumbnail" src="<?= asset_url('company_pictures/'.$companies['logo']) ?>" />
-				<?php else: ?>
-					<img style="width:100%;" class="thumbnail" src="<?= asset_url("company_pictures/default.jpg") ?>">
-				<?php endif ?>
-			</div>
+			
 
-			<?php if($session->get('user_in')['id']): ?>
+			<?php if(session()->id): ?>
 				<?php if($canEdit=='1'): ?>
 					<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("new_flow/".$companies['id']) ?>"><i class="fa fa-database"></i> <?= lang("Validation.editcompanydata") ?></a>
 					<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("update_company/".$companies['id']) ?>"><i class="fa fa-pencil-square-o"></i> <?= lang("Validation.editcompanyinfo") ?></a>
@@ -117,9 +109,7 @@
 					<td>
 					<?= lang("Validation.seeonmap") ?>
 					</td>
-					<td>
-					<?= $map['html'] ?>
-					</td>
+					
 				</tr>
 			</table>
 			<?php if($have_permission): ?>

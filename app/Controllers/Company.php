@@ -228,43 +228,46 @@ class Company extends BaseController {
 	}
 
 	public function companies($term){
-		echo library('googlemaps');
 
-		$temp = $session->get('user_in');
-		if($temp['id'] == null){
+		$flow_model = model(Flow_model::class);
+		$process_model = model(Process_model::class);
+		$component_model = model(Component_model::class);
+		$equipment_model = model(Equipment_model::class);
+		$product_model = model(Product_model::class);
+		$company_model = model(Company_model::class);
+		$user_model = model(User_model::class);
+
+		$temp = $this->session->id;
+		if($temp == null){
 			$data['valid'] = "0";
 		}else{
 			$data['valid'] = "1";
 		}
-		$data['company_flows'] = $this->flow_model->get_company_flow_list($term);
-		$data['company_prcss'] = $this->process_model->get_cmpny_flow_prcss($term);
-		$data['company_component'] = $this->component_model->get_cmpnnt($term);
-		$data['company_equipment'] = $this->equipment_model->all_information_of_equipment($term);
-		$data['company_product'] = $this->product_model->get_product_list($term);
+		$data['company_flows'] = $flow_model->get_company_flow_list($term);
+		$data['company_prcss'] = $process_model->get_cmpny_flow_prcss($term);
+		$data['company_component'] = $component_model->get_cmpnnt($term);
+		$data['company_equipment'] = $equipment_model->all_information_of_equipment($term);
+		$data['company_product'] = $product_model->get_product_list($term);
 
-		$data['companies'] = $this->company_model->get_company($term);
+		$data['companies'] = $company_model->get_company($term);
 		$config['center'] = $data['companies']['latitude'].','. $data['companies']['longitude'];
 	    $config['zoom'] = '15';
 	    $config['places'] = TRUE;
 	    $config['placesRadius'] = 20;
 	    $marker = array();
 		$marker['position'] = $data['companies']['latitude'].','. $data['companies']['longitude'];
-		$this->googlemaps->add_marker($marker);
-		$this->googlemaps->initialize($config);
 
-		$data['map'] = $this->googlemaps->create_map();
-		$data['nacecode'] = $this->company_model->get_nace_code($term);
-		$data['prjname'] = $this->company_model->get_company_proj($term);
-		$data['cmpnyperson'] = $this->company_model->get_company_workers($term);
-		$data['users_without_company']= $this->user_model->get_consultants();
+		$data['nacecode'] = $company_model->get_nace_code($term);
+		$data['prjname'] = $company_model->get_company_proj($term);
+		$data['cmpnyperson'] = $company_model->get_company_workers($term);
+		$data['users_without_company']= $user_model->get_consultants();
 		if(empty($data['nacecode'])){$data['nacecode']['code']="";}
 
 		//kullanıcının company'i editleme hakkı varmı kontrolü
-		$kullanici = $session->get('user_in');
-		$data['have_permission'] = $this->user_model->can_edit_company($kullanici['id'],$term);
+		$data['have_permission'] = $user_model->can_edit_company($temp,$term);
 
 		//checks if the company is created/owned by this user, only users that created the company can see the delete button
-		$owned_cmpnys = array_column($this->company_model->get_my_companies($temp['id']), 'cmpny_id');
+		$owned_cmpnys = array_column($company_model->get_my_companies($temp), 'cmpny_id');
 		if(in_array($data['companies']['id'], $owned_cmpnys)){
 			$data['canDelete'] = "1";
 		}else{
@@ -272,7 +275,7 @@ class Company extends BaseController {
 		}		
 
 		//checks if the company is editable by this user, only users that created the company can see the edit buttons
-		if($this->user_model->can_edit_company($kullanici['id'],$term)){
+		if($user_model->can_edit_company($temp,$term)){
 			$data['canEdit'] = "1";
 		}else{
 			$data['canEdit'] = "0";

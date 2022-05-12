@@ -64,13 +64,16 @@ class Company_model extends Model
 
     public function get_my_companies($user_id)
     {
-        $db->select('*');
-        $db->from('t_cmpny');
-        $db->join('t_cmpny_prsnl', 't_cmpny_prsnl.cmpny_id = t_cmpny.id');
-        $db->where('t_cmpny_prsnl.user_id', $user_id);
-        $db->order_by("name", "asc");
-        $query = $db->get();
-        return $$query->getResultArray();
+    
+
+        $db = db_connect();
+		$builder = $db->table('t_cmpny');
+		$builder->select("*");
+        $builder->join('t_cmpny_prsnl', 't_cmpny_prsnl.cmpny_id = t_cmpny.id');
+        $builder->where('t_cmpny_prsnl.user_id', $user_id);
+        $builder->orderBy("name", "asc");
+		$query = $builder->get();
+		return $query->getResultArray();
     }
 
     /**
@@ -108,20 +111,29 @@ class Company_model extends Model
 
     public function get_company($id)
     {
-        $db->select('*');
-        $query = $db->get_where('t_cmpny', array('id' => $id));
-        return $query->row_array();
+
+        $db = db_connect();
+		$builder = $db->table('t_cmpny');
+		$builder->select("*");
+		$builder->where("id",$id);
+		$query = $builder->get();
+		return $query->getRowArray();
+        
     }
 
     public function get_nace_code($id)
     {
-        $db->select('t_nace_code_rev2.code, t_nace_code_rev2.name');
-        $db->from('t_nace_code_rev2');
-        $db->join('t_cmpny_nace_code', 't_cmpny_nace_code.nace_code_id = t_nace_code_rev2.id', 'left');
-        $db->join('t_cmpny', 't_cmpny.id = t_cmpny_nace_code.cmpny_id', 'left');
-        $db->where('t_cmpny.id', $id);
-        $query = $db->get();
-        return $query->row_array();
+    
+
+        $db = db_connect();
+		$builder = $db->table('t_nace_code_rev2');
+		$builder->select("t_nace_code_rev2.code, t_nace_code_rev2.name");
+		$builder->join('t_cmpny_nace_code', 't_cmpny_nace_code.nace_code_id = t_nace_code_rev2.id', 'left');
+        $builder->join('t_cmpny', 't_cmpny.id = t_cmpny_nace_code.cmpny_id', 'left');
+        $builder->where('t_cmpny.id', $id);
+		$query = $builder->get();
+		return $query->getRowArray();
+
     }
 
     public function get_all_nace_codes()
@@ -143,24 +155,30 @@ class Company_model extends Model
 
     public function get_company_proj($id)
     {
-        $db->select('t_prj.name,t_prj.id as proje_id');
-        $db->from('t_prj');
-        $db->join('t_prj_cmpny', 't_prj_cmpny.prj_id = t_prj.id');
-        $db->join('t_cmpny', 't_cmpny.id = t_prj_cmpny.cmpny_id');
-        $db->where('t_cmpny.id', $id);
-        $query = $db->get();
-        return $$query->getResultArray();
+       
+
+        $db = db_connect();
+		$builder = $db->table('t_prj');
+		$builder->select("t_prj.name,t_prj.id as proje_id");
+		$builder->join('t_prj_cmpny', 't_prj_cmpny.prj_id = t_prj.id');
+        $builder->join('t_cmpny', 't_cmpny.id = t_prj_cmpny.cmpny_id');
+        $builder->where('t_cmpny.id', $id);
+		$query = $builder->get();
+		return $query->getResultArray();
     }
 
     public function get_company_workers($id)
     {
-        $db->select('t_user.name,t_user.surname,t_user.id,t_user.user_name');
-        $db->from('t_user');
-        $db->join('t_cmpny_prsnl', 't_cmpny_prsnl.user_id = t_user.id');
-        $db->join('t_cmpny', 't_cmpny.id = t_cmpny_prsnl.cmpny_id');
-        $db->where('t_cmpny.id', $id);
-        $query = $db->get();
-        return $$query->getResultArray();
+ 
+
+        $db = db_connect();
+		$builder = $db->table('t_user');
+		$builder->select("t_user.name,t_user.surname,t_user.id,t_user.user_name");
+		$builder->join('t_cmpny_prsnl', 't_cmpny_prsnl.user_id = t_user.id');
+        $builder->join('t_cmpny', 't_cmpny.id = t_cmpny_prsnl.cmpny_id');
+        $builder->where('t_cmpny.id', $id);
+		$query = $builder->get();
+		return $query->getResultArray();
     }
 
     public function company_search($q)

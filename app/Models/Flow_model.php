@@ -55,17 +55,20 @@ class Flow_model extends Model {
 	}
 
 	public function get_company_flow_list($companyID){
-		$db->select('*,t_flow_family.name as flowfamily,t_cmpny_flow.id as id,t_flow.name as flowname,t_flow_type.name  as flowtype,t_cmpny_flow.id as cmpny_flow_id,t_cmpny_flow.qntty as qntty,unit1.name as qntty_unit_name,t_cmpny_flow.cost as cost,t_cmpny_flow.ep as ep,t_cmpny_flow.ep_unit_id as ep_unit, t_cmpny_flow.cost_unit_id as cost_unit');
-		$db->from("t_cmpny_flow");
-		$db->join('t_flow','t_flow.id = t_cmpny_flow.flow_id');
-		$db->join('t_flow_family','t_flow.flow_family_id = t_flow_family.id', 'left');
-		$db->join('t_flow_type','t_flow_type.id = t_cmpny_flow.flow_type_id');
-		$db->join('t_unit as unit1','unit1.id = t_cmpny_flow.qntty_unit_id');
-		$db->where('cmpny_id',$companyID);
-		$db->order_by("t_flow.name", "asc");
-		$db->order_by("t_flow_type.name", "asc");
-		$query = $db->get();
-		return $$query->getResultArray();
+
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_flow');
+        $builder->select('*,t_flow_family.name as flowfamily,t_cmpny_flow.id as id,t_flow.name as flowname,t_flow_type.name  as flowtype,t_cmpny_flow.id as cmpny_flow_id,t_cmpny_flow.qntty as qntty,unit1.name as qntty_unit_name,t_cmpny_flow.cost as cost,t_cmpny_flow.ep as ep,t_cmpny_flow.ep_unit_id as ep_unit, t_cmpny_flow.cost_unit_id as cost_unit');
+        $builder->join('t_flow','t_flow.id = t_cmpny_flow.flow_id');
+		$builder->join('t_flow_family','t_flow.flow_family_id = t_flow_family.id', 'left');
+		$builder->join('t_flow_type','t_flow_type.id = t_cmpny_flow.flow_type_id');
+		$builder->join('t_unit as unit1','unit1.id = t_cmpny_flow.qntty_unit_id');
+        $builder->where('cmpny_id',$companyID);
+        $builder->orderBy("t_flow.name", "asc");
+		$builder->orderBy("t_flow_type.name", "asc");
+        $query = $builder->get();
+        return $query->getResultArray();
+
 	}
 
 	public function get_company_flow($companyID,$flow_id,$flow_type_id){

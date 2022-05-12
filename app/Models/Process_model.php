@@ -138,24 +138,27 @@ class Process_model extends Model {
 	}
 
 	public function get_cmpny_flow_prcss($id){
-		$db->select('t_cmpny_prcss.comment,t_cmpny_prcss.max_rate_util,t_cmpny_prcss.typ_rate_util,t_cmpny_prcss.min_rate_util,t_cmpny_flow.id as company_flow_id, t_flow.name as flowname, t_prcss.name as prcessname,
-			unit1.name as minrateu,unit2.name as typrateu,unit3.name as maxrateu,
-			t_flow_type.name as flow_type_name, t_prcss.id as prcessid, t_cmpny_prcss.id as company_process_id, 
-			t_cmpny_flow.flow_id as flow_id , t_cmpny_flow.flow_type_id as flow_type_id');
-		$db->from('t_cmpny_flow_prcss');
-		$db->join('t_cmpny_flow','t_cmpny_flow.id = t_cmpny_flow_prcss.cmpny_flow_id');
-		$db->join('t_flow','t_flow.id = t_cmpny_flow.flow_id');
-		$db->join('t_flow_family','t_flow_family.id = t_flow.flow_family_id','left');
-		$db->join('t_cmpny_prcss','t_cmpny_prcss.id = t_cmpny_flow_prcss.cmpny_prcss_id');
-		$db->join('t_unit as unit1','unit1.id = t_cmpny_prcss.min_rate_util_unit','left');
-		$db->join('t_unit as unit2','unit2.id = t_cmpny_prcss.typ_rate_util_unit','left');
-		$db->join('t_unit as unit3','unit3.id = t_cmpny_prcss.max_rate_util_unit','left');
-		$db->join('t_flow_type','t_flow_type.id = t_cmpny_flow.flow_type_id');
-		$db->join('t_prcss','t_prcss.id = t_cmpny_prcss.prcss_id');
-		$db->where('t_cmpny_flow.cmpny_id',$id);
-		$db->order_by("t_prcss.name", "asc"); 
-		$query = $db->get();
-	    return $$query->getResultArray();
+
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_flow_prcss');
+        $builder->select('t_cmpny_prcss.comment,t_cmpny_prcss.max_rate_util,t_cmpny_prcss.typ_rate_util,t_cmpny_prcss.min_rate_util,t_cmpny_flow.id as company_flow_id, t_flow.name as flowname, t_prcss.name as prcessname,
+		unit1.name as minrateu,unit2.name as typrateu,unit3.name as maxrateu,
+		t_flow_type.name as flow_type_name, t_prcss.id as prcessid, t_cmpny_prcss.id as company_process_id, 
+		t_cmpny_flow.flow_id as flow_id , t_cmpny_flow.flow_type_id as flow_type_id');
+        $builder->join('t_cmpny_flow','t_cmpny_flow.id = t_cmpny_flow_prcss.cmpny_flow_id');
+		$builder->join('t_flow','t_flow.id = t_cmpny_flow.flow_id');
+		$builder->join('t_flow_family','t_flow_family.id = t_flow.flow_family_id','left');
+		$builder->join('t_cmpny_prcss','t_cmpny_prcss.id = t_cmpny_flow_prcss.cmpny_prcss_id');
+		$builder->join('t_unit as unit1','unit1.id = t_cmpny_prcss.min_rate_util_unit','left');
+		$builder->join('t_unit as unit2','unit2.id = t_cmpny_prcss.typ_rate_util_unit','left');
+		$builder->join('t_unit as unit3','unit3.id = t_cmpny_prcss.max_rate_util_unit','left');
+		$builder->join('t_flow_type','t_flow_type.id = t_cmpny_flow.flow_type_id');
+		$builder->join('t_prcss','t_prcss.id = t_cmpny_prcss.prcss_id');
+		$builder->where('t_cmpny_flow.cmpny_id',$id);
+		$builder->orderBy("t_prcss.name", "asc"); 
+        $query = $builder->get();
+        return $query->getResultArray();
+
 	}
 
 	public function can_write_cmpny_prcss($cmpny_id,$prcss_id){
