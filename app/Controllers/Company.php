@@ -369,23 +369,23 @@ class Company extends BaseController {
 
 		if(!empty($this->request->getPost())){
 			if ($this->validate([
-				'companyName'  => 'trim|required|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_cmpny.name]',
-				'naceCode'  => 'trim|required',
-				'companyDescription' => 'required|trim|max_length[200]',
+				'companyName'  => 'required|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_cmpny.name]',
+				'naceCode'  => 'required',
+				'companyDescription' => 'required|max_length[200]',
 				'email' => 'required|valid_email',
 				'workPhone' => 'required'
-			]))
-			
+			])){
 
-				$data = array(
+			
+			
+				echo $this->request->getPost('companyName');
+				exit;
+				$company_data = array(
 					'name'=>$this->request->getPost('companyName'),
-					'phone_num_2'=>$this->request->getPost('workPhone'),
-					'description'=>substr($this->request->getPost('companyDescription'), 0, 199),
-					'email'=>$this->request->getPost('email'),
-					'latitude'=>$this->request->getPost('lat'),
-					'longitude'=>$this->request->getPost('long'),
-					'active'=>'1'
+					
 				);
+
+				$company_model->update_company($company_data,$term);
 
 				$code = $this->request->getPost('naceCode');
 				$nace_code_id = $company_model->search_nace_code($code);
@@ -400,10 +400,14 @@ class Company extends BaseController {
 					'description' => substr($data['companies']['description'], 0, 199)
 				);
 
-				$company_model->update_company($datas,$term);
+				
 		  		$company_model->update_cmpny_data($cmpny_data,$data['companies']['id']);
 		    	$company_model->update_cmpny_nace_code($cmpny_nace_code,$data['companies']['id']);
-		    redirect('company/'.$data['companies']['id'], 'refresh');
+
+				return redirect()->to(site_url('company/'.$data['companies']['id']));
+
+			}
+			
 	  	}
 		
 		$data['validation']=$this->validator;
