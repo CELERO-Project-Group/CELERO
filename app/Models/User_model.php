@@ -313,8 +313,14 @@ class User_model extends Model {
 
   }
 
+  //TODO: check if it creates security issues.
+  public function is_admin($user_id){
+    if($user_id == 1 || $user_id == 48290) return TRUE;
+  }
+
   //verilen user'ın verilen şirketi edit edip edemeyeceğine dair bilgiyi verir
   public function can_edit_company($user_id,$company_id){
+    if($this->is_admin($user_id)) return TRUE;
     $consultant = $this->is_consultant_of_company_by_user_id($user_id,$company_id);
     $contact = $this->is_contact_by_userid($user_id,$company_id);
     return $consultant || $contact;

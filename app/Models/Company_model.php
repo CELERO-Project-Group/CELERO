@@ -199,8 +199,10 @@ class Company_model extends Model
 
     public function update_company($data, $id)
     {
-        $db->where('id', $id);
-        $db->update('t_cmpny', $data);
+        $db = db_connect();
+        $builder = $db->table('t_cmpny');
+        $builder->where('id', $id);
+        $builder->update($data);
     }
 
     public function update_cmpny_data($data, $id)

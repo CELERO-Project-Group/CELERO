@@ -341,115 +341,73 @@ class Company extends BaseController {
 
 	public function update_company($term){
 
+		
+		$user_model = model(User_model::class);
+		$company_model = model(Company_model::class);
+
 		//kullanýcýnýn company'i editleme hakký varmý kontrolü
-		$kullanici = $session->get('user_in');
-		if(!$this->user_model->can_edit_company($kullanici['id'],$term)){
-			redirect(base_url(),'refresh');
+		$id = $this->session->id;
+		if(!$user_model->can_edit_company($id,$term)){
+			return redirect()->to(site_url());
 		}
 
-		$data['companies'] = $this->company_model->get_company($term);
-		$data['nace_code'] = $this->company_model->get_nace_code($term);
-		$data['all_nace_codes'] = $this->company_model->get_all_nace_codes();
+		
+		$data['companies'] = $company_model->get_company($term);
+		$data['nace_code'] = $company_model->get_nace_code($term);
+		$data['all_nace_codes'] = $company_model->get_all_nace_codes();
 
 		if(empty($data['nace_code'])){$data['nace_code']['code']="";}
 
-		echo library('googlemaps');
-
-		$config['center'] = '47.566667, 7.600000'; //Basel (at center of europe)
-		$config['zoom'] = '4';
-		$config['map_type'] = "HYBRID";
-		$config['places'] = TRUE;
-		$config['placesRadius'] = 20;
-
-		$marker = array();
-		$marker['position'] = $data['companies']['latitude'].','. $data['companies']['longitude'];
-		$this->googlemaps->add_marker($marker);
-   		$this->googlemaps->initialize($config);
-
-		$data['map'] = $this->googlemaps->create_map();
-
 		//print_r($data['companies']);
-		if($this->input->post('companyName') != $data['companies']['name']) {
+		//get post data $this->request->getPost('companyName')
+		if($this->request->getPost('companyName') != $data['companies']['name']) {
 		   $is_unique =  '|is_unique[t_cmpny.name]';
 		} else {
 		   $is_unique =  '';
 		}
 
-		$this->form_validation->set_rules('lat', 'Coordinates Latitude', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('long', 'Coordinates Longitude', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('companyName', 'Company Name', 'trim|required|mb_strtolower|max_length[254]|xss_clean'.$is_unique);
-		$this->form_validation->set_rules('naceCode', 'Nace Code', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('coordinates', 'Coordinates', 'trim|xss_clean');
-		$this->form_validation->set_rules('companyDescription', 'Company Description', 'trim|xss_clean|max_length[200]');
-		$this->form_validation->set_rules('email', 'E-mail', 'trim|required|max_length[49]|valid_email');
-		//$this->form_validation->set_rules('cellPhone', 'Cell Phone Number', 'required|callback_alpha_dash_space|min_length[5]|xss_clean');
-		$this->form_validation->set_rules('workPhone', 'Work Phone Number', 'required|min_length[5]|max_length[49]|xss_clean');
-		$this->form_validation->set_rules('fax', 'Fax Number', 'min_length[5]|max_length[49]|xss_clean');
-		$this->form_validation->set_rules('address', 'Address', 'trim|xss_clean|max_length[100]');
 
-		if ($this->form_validation->run() !== FALSE)
-		{
-			$config['upload_path'] = './assets/company_pictures/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']	= '5000';
-			$config['file_name']	= $this->uri->segment(2).'.jpg';
-			echo library('upload', $config);
-			$this->upload->overwrite = true;
-			//Resmi servera yükleme
-			$resim = "";
-			if (!$this->upload->do_upload())
-			{
-				$resim = "default";
-				//hata vermeye gerek yok , resim secmeyebilir.
-			}
-			else{
-			//Yüklenen resmi boyutlandýrma ve çevirme
-				$config['image_library'] = 'gd2';
-				$config['source_image']	= './assets/company_pictures/'.$this->uri->segment(2).'.jpg';
-				$config['maintain_ratio'] = TRUE;
-				$config['width']	 = 200;
-				$config['height']	 = 200;
-				echo library('image_lib', $config);
+		if(!empty($this->request->getPost())){
+			if ($this->validate([
+				'companyName'  => 'trim|required|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_cmpny.name]',
+				'naceCode'  => 'trim|required',
+				'companyDescription' => 'required|trim|max_length[200]',
+				'email' => 'required|valid_email',
+				'workPhone' => 'required'
+			]))
+			
 
-				$this->image_lib->resize();
+				$data = array(
+					'name'=>$this->request->getPost('companyName'),
+					'phone_num_2'=>$this->request->getPost('workPhone'),
+					'description'=>substr($this->request->getPost('companyDescription'), 0, 199),
+					'email'=>$this->request->getPost('email'),
+					'latitude'=>$this->request->getPost('lat'),
+					'longitude'=>$this->request->getPost('long'),
+					'active'=>'1'
+				);
 
-				$resim = $this->uri->segment(2);
-			}
+				$code = $this->request->getPost('naceCode');
+				$nace_code_id = $company_model->search_nace_code($code);
+				$cmpny_nace_code = array(
+					'cmpny_id' => $data['companies']['id'],
+					'nace_code_id' => $nace_code_id['id']
+				);
 
-			$data2 = array(
-				'name'=>mb_strtolower($this->input->post('companyName')),
-				//'phone_num_1'=>$this->input->post('cellPhone'),
-				'phone_num_2'=>$this->input->post('workPhone'),
-				'fax_num'=>$this->input->post('fax'),
-				'address'=>substr($this->input->post('address'), 0, 99),
-				'description'=>substr($this->input->post('companyDescription'), 0, 199),
-				'email'=>$this->input->post('email'),
-				'postal_code'=>'NULL',
-				'logo'=>$resim.'.jpg',
-				'active'=>'1',
-				'latitude'=>$this->input->post('lat'),
-				'longitude'=>$this->input->post('long')
-			);
-
-		    $this->company_model->update_company($data2,$term);
-
-		    $code = $this->input->post('naceCode');
 
 				$cmpny_data = array(
 					'cmpny_id' => $data['companies']['id'],
 					'description' => substr($data['companies']['description'], 0, 199)
 				);
 
-		  	$this->company_model->update_cmpny_data($cmpny_data,$data['companies']['id']);
-
-		  	$nace_code_id = $this->company_model->search_nace_code($code);
-	    	$cmpny_nace_code = array(
-		    	'cmpny_id' => $data['companies']['id'],
-		    	'nace_code_id' => $nace_code_id['id']
-		    );
-		    $this->company_model->update_cmpny_nace_code($cmpny_nace_code,$data['companies']['id']);
+				$company_model->update_company($datas,$term);
+		  		$company_model->update_cmpny_data($cmpny_data,$data['companies']['id']);
+		    	$company_model->update_cmpny_nace_code($cmpny_nace_code,$data['companies']['id']);
 		    redirect('company/'.$data['companies']['id'], 'refresh');
 	  	}
+		
+		$data['validation']=$this->validator;
+
 		echo view('template/header');
 		echo view('company/update_company',$data);
 		echo view('template/footer');
