@@ -5,9 +5,12 @@
 		if($validation != NULL)
 		echo $validation->listErrors();
 	?>
-
+		
 	<form action="<?= $companies['id'] ?>" method="post" autocomplete="off">
 	<?= csrf_field() ?>
+
+	<input class="form-control" id="id" value="<?= set_value('id',$companies['id']); ?>" name="id" type="hidden" />
+
 	<div class="row">
 		<div class="col-md-8">
 			<div class="form-group">

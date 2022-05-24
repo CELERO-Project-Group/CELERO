@@ -32,7 +32,7 @@
 
 					<?php if($is_consultant_of_project or $is_contactperson_of_project): ?>
 			<div style="margin-bottom:20px; overflow:hidden;">
-				<?php if($session->get('project_id')==$projects['id']): ?>
+				<?php if(session()->project_id==$projects['id']): ?>
 					<a class="btn btn-inverse btn-block" href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> <?= lang("Validation.closeproject"); ?></a>
 				<?php else: ?>
 					<?= form_open('openproject'); ?>
@@ -72,7 +72,7 @@
 				<?php endforeach ?>
 				</ul>
 			</div>
-			<?php if($session->get('user_in')['role_id']=='1'): ?>
+			<?php if(session()->role_id=='1'): ?>
 				<a style="margin-top: 10px;" class="btn btn-danger btn-block" href="<?= base_url("deleteproject/".$projects['id']); ?>" onclick="return confirm('Are you sure you want to delete the project <?= $projects['name']; ?>? \r\n \r\nWarning: The project will be deleted permanently and cannot be restored!');"><i class="fa fa-trash" ></i> <?= lang("Validation.deleteproject"); ?></a>
 			<?php endif ?>
 		</div>
@@ -80,7 +80,7 @@
 		<div class="col-md-8">
 			<div class="swissheader">
 			<?= $projects['name']; ?>
-				<?php if($session->get('project_id')==$projects['id']): ?>
+				<?php if(session()->project_id==$projects['id']): ?>
 					<small class="pull-right" style="font-size:10px;"><?= lang("Validation.alreadyopenproject"); ?></small>
 				<?php endif ?>
 			</div>

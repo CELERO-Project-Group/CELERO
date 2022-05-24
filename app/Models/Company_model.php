@@ -207,14 +207,18 @@ class Company_model extends Model
 
     public function update_cmpny_data($data, $id)
     {
-        $db->where('cmpny_id', $id);
-        $db->update('t_cmpny_data', $data);
+        $db = db_connect();
+        $builder = $db->table('t_cmpny_data');
+        $builder->where('cmpny_id', $id);
+        $builder->update($data);
     }
 
     public function update_cmpny_nace_code($data, $id)
     {
-        $db->where('cmpny_id', $id);
-        $db->update('t_cmpny_nace_code', $data);
+        $db = db_connect();
+        $builder = $db->table('t_cmpny_nace_code');
+        $builder->where('cmpny_id', $id);
+        $builder->update($data);
     }
 
     public function unique_control_email($email, $cmpny_id)

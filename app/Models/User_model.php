@@ -49,7 +49,6 @@ class User_model extends Model {
    * @return all consultant information in the system ordered by name
    */
   public function get_consultants(){
-
     $db = db_connect();
     $builder = $db->table('t_user');
     $builder->select('t_user.id as id,t_user.user_name as user_name,t_user.name as name,t_user.surname as surname,t_user.description as description');
@@ -58,7 +57,6 @@ class User_model extends Model {
     $builder->orderBy("name", "asc");
     $query = $builder->get();
     return $query->getResultArray();
-
   }
 
   public function get_company_users($cmpny_id){
@@ -260,29 +258,35 @@ class User_model extends Model {
   }
 
   public function is_consultant_of_project_by_user_id($user_id,$prj_id){
-    $db->select('*');
-    $db->from('t_prj_cnsltnt');
-    $db->where('t_prj_cnsltnt.cnsltnt_id',$user_id);
-    $db->where('t_prj_cnsltnt.prj_id',$prj_id);
-    $query = $db->get()->result_array();
+
+    $db = db_connect();
+    $builder = $db->table('t_prj_cnsltnt');
+    $builder->select('*');
+    $builder->where('t_prj_cnsltnt.cnsltnt_id', $user_id);
+    $builder->where('t_prj_cnsltnt.prj_id', $prj_id);
+    $query = $builder->get()->getResultArray();
     if(empty($query)){
       return FALSE;
     }else{
       return TRUE;
     }
+
   }
 
   public function is_contactperson_of_project_by_user_id($user_id,$prj_id){
-    $db->select('*');
-    $db->from('t_prj_cntct_prsnl');
-    $db->where('t_prj_cntct_prsnl.usr_id',$user_id);
-    $db->where('t_prj_cntct_prsnl.prj_id',$prj_id);
-    $query = $db->get()->result_array();
+
+    $db = db_connect();
+    $builder = $db->table('t_prj_cntct_prsnl');
+    $builder->select('*');
+    $builder->where('t_prj_cntct_prsnl.usr_id', $user_id);
+    $builder->where('t_prj_cntct_prsnl.prj_id', $prj_id);
+    $query = $builder->get()->getResultArray();
     if(empty($query)){
       return FALSE;
     }else{
       return TRUE;
     }
+
   }
 
   public function cmpny_prsnl($user_id){

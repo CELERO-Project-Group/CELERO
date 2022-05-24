@@ -7,19 +7,15 @@
         $( document ).tooltip();
     } );
 </script>
-<?= $map['js']; ?>
 
 <div class="container">
-	<p class="lead"><?= lang("Validation.createproject"); ?></p>
-
-	<?php if(validation_errors() != NULL ): ?>
-	    <div class="alert">
-	      <button type="button" class="close" data-dismiss="alert">&times;</button>
-	      <?= validation_errors(); ?>
-	    </div>
-    <?php endif ?>
+	<?php
+		if($validation != NULL)
+		echo $validation->listErrors();
+	?>
 
 	<?= form_open('newproject'); ?>
+		<?= csrf_field() ?>
 		<div class="row">
 			<div class="col-md-8">
 
@@ -44,39 +40,16 @@
 	    			<div>
 		    			<select id="status" class="info select-block" name="status">
 		  					<?php foreach ($project_status as $status): ?>
-								<?php if ($status['id'] == $_POST['status']) { ?>
-									<option value="<?= $status['id']; ?>" selected><?= $status['name']; ?></option>
-								<?php } else { ?>
 									<option value="<?= $status['id']; ?>"><?= $status['name']; ?></option>
-								<?php } ?>
 							<?php endforeach ?>
 						</select>
 					</div>
 	 			</div>
 
-	 			<div class="form-group">
+				 <div class="form-group">
 	    			<label for="description"><?= lang("Validation.description"); ?> <span class="small" style="color:red;">*Required</span></label>
 	    			<textarea class="form-control" rows="3" name="description" id="description" placeholder="<?= lang("Validation.description"); ?>" ><?= set_value('description'); ?></textarea>
 	 			</div>
-
-				<div class="form-group">
-					<label for="coordinates"><?= lang("Validation.coordinates"); ?></label>
-					<button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-block btn-inverse" id="coordinates" ><?= lang("Validation.selectonmap"); ?></button><br>
-					<div class="row">
-						<div class="col-md-4">
-							<span class="small" style="color:red;">*Required</span>
-							<input type="text" class="form-control" id="lat" placeholder="<?= lang("Validation.lat"); ?>" name="lat" style="color:#333333;" value="<?= set_value('lat'); ?>" readonly/>
-						</div>
-						<div class="col-md-4">
-							<span class="small" style="color:red;">*Required</span>
-							<input type="text" class="form-control" id="long" placeholder="<?= lang("Validation.long"); ?>" name="long" style="color:#333333;" value="<?= set_value('long'); ?>" readonly/>
-						</div>
-						<div class="col-md-4">
-							<span class="small" style="color:gray;">Optional</span>
-							<input type="text" class="form-control" id="zoomlevel" placeholder="Zoom Level" name="zoomlevel" style="color:#333333;" value="<?= set_value('zoomlevel'); ?>" />
-						</div>
-					</div>
- 				</div>
 
 	 			<div class="form-group">
 	    			<label for="assignedCompanies"><?= lang("Validation.assigncompany"); ?> <span class="small" style="color:red;">*Required</span></label>
@@ -86,11 +59,7 @@
                     <select multiple="multiple"  title="Choose at least one" class="select-block" id="assignCompany" name="assignCompany[]">
 
 						<?php foreach ($companies as $company): ?>
-							<?php if (in_array($company['id'], $_POST['assignCompany'])) { ?>
-								<option value="<?= $company['id']; ?>" selected><?= $company['name']; ?></option>
-							<?php } else { ?>
 								<option value="<?= $company['id']; ?>"><?= $company['name']; ?></option>
-							<?php } ?>
 						<?php endforeach ?>
 					</select>
 	 			</div>
@@ -100,19 +69,15 @@
 
                     <select multiple="multiple"  title="Choose at least one" class="select-block" id="assignConsultant" name="assignConsultant[]">
 						<?php foreach ($consultants as $consultant): ?>
-							<?php if (in_array($consultant['id'], $_POST['assignConsultant'])) { ?>
-								<option value="<?= $consultant['id']; ?>" selected><?= $consultant['name'].' '.$consultant['surname'].' ('.$consultant['user_name'].')'; ?></option>
-							<?php } else { ?>
-								<option value="<?= $consultant['id']; ?>"><?= $consultant['name'].' '.$consultant['surname'].' ('.$consultant['user_name'].')'; ?></option>
-							<?php } ?>
+							<option value="<?= $consultant['id']; ?>"><?= $consultant['name'].' '.$consultant['surname'].' ('.$consultant['user_name'].')'; ?></option>
+							
 						<?php endforeach ?>
 					</select>
 	 			</div>
-        		<?php $mevcut = $session->get('user_in'); ?>
 	 			<div class="form-group">
     				<label for="assignContactPerson"><?= lang("Validation.assigncontact"); ?> <span class="small" style="color:red;">*Required</span></label>
     				<select  class="select-block" id="assignContactPerson" name="assignContactPerson">
-            			<option value="<?= $mevcut['id']; ?>">Creator of the project (<?= $mevcut['username']; ?>)</option>
+            			<option value="<?= session()->id ?>">Creator of the project (<?= session()->username ?>)</option>
 					</select>
 	 			</div>
         		<button type="submit" class="btn btn-block btn-primary"><?= lang("Validation.createproject"); ?></button>
@@ -124,69 +89,11 @@
 		</div>
 	</form>
 
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" rendered="<?= $map['js']; ?>" >
-	  	<div class="modal-dialog">
-		    <div class="modal-content">
-			    <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			        <h4 class="modal-title" id="myModalLabel">Click Map</h4>
-			        <hr>
-			        <div class="row">
-			        	<div class="col-md-6">
-			        		<input type="text" class="form-control" id="latId" name="lat" style="color:#333333;" readonly/>
-			        	</div>
-			        	<div class="col-md-6">
-			        		<input type="text" class="form-control" id="longId" name="long"  style="color:#333333;" readonly/>
-			        	</div>
-			        </div>
-			    </div>
-			    <div class="modal-body">
-			       <?= $map['html']; ?>
-			       <br>
-			       <button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true"><?= lang("Validation.done"); ?></button>
-			    </div>
-		    	<div class="modal-footer"></div>
-			</div>
-	  	</div>
-	</div>
+    
 </div>
 
 
-<script type="text/javascript">
-    var marker;
-    var lat,lon;
 
-    $('#myModal2').on('shown.bs.modal', function (e) {
-        google.maps.event.trigger(map, 'resize'); // modal acildiktan sonra haritanın resize edilmesi gerekiyor.
-
-        map.setZoom(1);
-        if(!marker)
-            map.setCenter(new google.maps.LatLng(47.28833892581006,8.500927700381794));
-        else
-            map.setCenter(marker.getPosition());
-
-        google.maps.event.addListener(map, 'click', function(event) {
-            $("#latId").val("Lat:" + event.latLng.lat()); $("#longId").val("Long:" + event.latLng.lng());
-            $("#lat").val(event.latLng.lat()); $("#long").val(event.latLng.lng());
-            placeMarker(event.latLng);
-        });
-
-    });
-
-
-
-    function placeMarker(location) {
-      if ( marker ) {
-        marker.setPosition(location);
-      } else {
-        marker = new google.maps.Marker({
-          position: location,
-          map: map
-        });
-      }
-    }
-
-</script>
 <script type="text/javascript">
   // Datepicker on projects
   // jQuery UI Datepicker JS init

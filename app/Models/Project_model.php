@@ -8,8 +8,10 @@ class Project_model extends Model
     
     public function create_project($project)
     {
-        $db->insert('t_prj', $project);
-        return $db->insert_id();
+        $db = db_connect();
+        $builder = $db->table('t_prj');
+        $builder->insert($project);
+        return $db->insertID();
     }
 
     public function update_project($project, $id)
@@ -20,24 +22,34 @@ class Project_model extends Model
 
     public function get_active_project_status()
     {
-        $db->select('*');
-        $db->from('t_prj_status');
-        $db->where('active', 1);
-        $query = $db->get();
-        return $$query->getResultArray();
+
+        $db = db_connect();
+        $builder = $db->table('t_prj_status');
+        $builder->select('*');
+        $builder->where('active', 1);
+        $builder->orderBy("name", "asc");
+        $query = $builder->get();
+        return $query->getResultArray();
+
     }
 
     public function insert_project_company($prj_cmpny)
     {
-        $db->insert('t_prj_cmpny', $prj_cmpny);
+        $db = db_connect();
+        $builder = $db->table('t_prj_cmpny');
+        $builder->insert($prj_cmpny);
     }
     public function insert_project_consultant($prj_cnsltnt)
     {
-        $db->insert('t_prj_cnsltnt', $prj_cnsltnt);
+        $db = db_connect();
+        $builder = $db->table('t_prj_cnsltnt');
+        $builder->insert($prj_cnsltnt);
     }
     public function insert_project_contact_person($prj_cntct_prsnl)
     {
-        $db->insert('t_prj_cntct_prsnl', $prj_cntct_prsnl);
+        $db = db_connect();
+        $builder = $db->table('t_prj_cntct_prsnl');
+        $builder->insert($prj_cntct_prsnl);
     }
 
     public function get_projects()
@@ -68,41 +80,48 @@ class Project_model extends Model
 
     public function get_project($prj_id)
     {
-        $db->select("*");
-        $db->from('t_prj');
-        $db->where('id', $prj_id);
-        $query = $db->get();
-        return $query->row_array();
+        $db = db_connect();
+        $builder = $db->table('t_prj');
+        $builder->select('*');
+        $builder->where('id', $prj_id);
+        $query = $builder->get();
+        return $query->getRowArray();
     }
 
     public function get_status($prj_id)
     {
-        $db->select('t_prj_status.name');
-        $db->from('t_prj_status');
-        $db->join('t_prj', 't_prj.status_id = t_prj_status.id');
-        $db->where('t_prj.id', $prj_id);
-        $query = $db->get();
-        return $query->row_array();
+
+        $db = db_connect();
+        $builder = $db->table('t_prj_status');
+        $builder->select('t_prj_status.name');
+        $builder->join('t_prj', 't_prj.status_id = t_prj_status.id');
+        $builder->where('t_prj.id', $prj_id);
+        $query = $builder->get();
+        return $query->getRowArray();
+
     }
 
     public function get_prj_consaltnt($prj_id)
     {
-        $db->select('t_user.name,t_user.surname,t_user.id,t_user.user_name');
-        $db->from('t_user');
-        $db->join('t_prj_cnsltnt', 't_prj_cnsltnt.cnsltnt_id = t_user.id');
-        $db->where('t_prj_cnsltnt.prj_id', $prj_id);
-        $query = $db->get();
-        return $$query->getResultArray();
+        $db = db_connect();
+        $builder = $db->table('t_user');
+        $builder->select('t_user.name,t_user.surname,t_user.id,t_user.user_name');
+        $builder->join('t_prj_cnsltnt', 't_prj_cnsltnt.cnsltnt_id = t_user.id');
+        $builder->where('t_prj_cnsltnt.prj_id', $prj_id);
+        $query = $builder->get();
+        return $query->getResultArray();
     }
 
     public function get_prj_companies($prj_id)
     {
-        $db->select('t_cmpny.name,t_cmpny.id,latitude,longitude');
-        $db->from('t_cmpny');
-        $db->join('t_prj_cmpny', 't_prj_cmpny.cmpny_id = t_cmpny.id');
-        $db->where('t_prj_cmpny.prj_id', $prj_id);
-        $query = $db->get();
-        return $$query->getResultArray();
+
+        $db = db_connect();
+        $builder = $db->table('t_cmpny');
+        $builder->select('t_cmpny.name,t_cmpny.id,latitude,longitude');
+        $builder->join('t_prj_cmpny', 't_prj_cmpny.cmpny_id = t_cmpny.id');
+        $builder->where('t_prj_cmpny.prj_id', $prj_id);
+        $query = $builder->get();
+        return $query->getResultArray();
     }
 
     public function deneme_json_2($prj_id)
@@ -117,12 +136,16 @@ class Project_model extends Model
 
     public function get_prj_cntct_prsnl($prj_id)
     {
-        $db->select('t_user.name,t_user.surname,t_user.id,t_user.user_name');
-        $db->from('t_user');
-        $db->join('t_prj_cntct_prsnl', 't_prj_cntct_prsnl.usr_id = t_user.id');
-        $db->where('t_prj_cntct_prsnl.prj_id', $prj_id);
-        $query = $db->get();
-        return $$query->getResultArray();
+
+
+        $db = db_connect();
+        $builder = $db->table('t_user');
+        $builder->select('t_user.name,t_user.surname,t_user.id,t_user.user_name');
+        $builder->join('t_prj_cntct_prsnl', 't_prj_cntct_prsnl.usr_id = t_user.id');
+        $builder->where('t_prj_cntct_prsnl.prj_id', $prj_id);
+        $query = $builder->get();
+        return $query->getResultArray();
+
     }
     public function remove_company_from_project($projID)
     {

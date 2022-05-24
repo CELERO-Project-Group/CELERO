@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="icon" href="<?= base_url('assets/images/favicon.png'); ?>" >
   <meta charset="utf-8">
@@ -136,37 +137,37 @@
 
     <ul id="companies" class="nav navbar-nav alt-nav" style="display:none;">
       <li><a href="#" class="nav-info"></a></li>
-      <?php if (isset($_SESSION['user_in'])): ?>
+      <?php if (isset(session()->username)): ?>
         <li><a href="<?= base_url('mycompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.mycompanies"); ?></a></li>
-        <?php if(isset($_SESSION['project_id'])): ?>
+        <?php if(isset(session()->project_name)): ?>
           <li><a href="<?= base_url('projectcompanies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.projectcompanies"); ?></a></li>
         <?php endif ?>
       <?php endif ?>
       <li><a href="<?= base_url('companies'); ?>"><i class="fa fa-building-o"></i> <?= lang("Validation.allcompanies"); ?></a></li>
-      <?php if (isset($_SESSION['user_in'])): ?>
+      <?php if (isset(session()->username)): ?>
         <li class="head-li"><a href="<?= base_url('newcompany'); ?>"><i class="fa fa-plus-square"></i> <?= lang("Validation.createcompany"); ?></a></li>
       <?php endif ?>
     </ul>
 
     <ul id="projects" class="nav navbar-nav alt-nav" style="display:none;">
          <li><a href="#" class="nav-info"></a></li>
-      <?php if (isset($_SESSION['user_in'])): ?>
+      <?php if (isset(session()->username)): ?>
         <li><a href="<?= base_url('myprojects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.myprojects"); ?></a></li>
       <?php endif ?>
       <li><a href="<?= base_url('projects'); ?>"><i class="fa fa-globe"></i> <?= lang("Validation.allprojects"); ?></a></li>
-      <?php if (isset($_SESSION['user_in'])): ?>
+      <?php if (isset(session()->username)): ?>
         <li><a href="<?= base_url('newproject'); ?>"><i class="fa fa-plus-circle"></i> <?= lang("Validation.createproject"); ?></a></li>
       <?php endif ?>
-      <?php if(isset($_SESSION['project_id'])): ?>
+      <?php if(isset(session()->project_id)): ?>
         <li class="pull-right"><a href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> <?= lang("Validation.closeproject"); ?></a></li>
-        <li class="pull-right"><a href="<?= base_url('project/'.$session->get('project_id')); ?>"><?= $session->get('project_name'); ?></a></li>
+        <li class="pull-right"><a href="<?= base_url('project/'.session()->project_id); ?>"><?= session()->project_name['name'] ?></a></li>
       <?php endif ?>
     </ul>
 
     <ul id="analysis" class="nav navbar-nav alt-nav" style="display:none;">
          <li><a href="#" class="nav-info"></a></li>
-      <?php if (isset($_SESSION['user_in'])): ?>
-        <?php if(isset($_SESSION['project_id'])): ?>
+      <?php if (isset(session()->username)): ?>
+        <?php if(isset(session()->project_id)): ?>
           <li><a href="<?= base_url('cpscoping'); ?>"><i class="fa fa-recycle"></i> <?= lang("Validation.cpidentification"); ?></a></li>
           <li>
             <div class="dropdown">
@@ -191,7 +192,7 @@
           <!--link to the gis panel moved to the last position and is ".not-active" atm 
           <li><a class="not-active" title="Not available yet"><i class="fa fa-globe"></i> <?= lang("Validation.gis"); ?></a></li>--> 
           <li class="pull-right"><a href="<?= base_url('closeproject'); ?>" style="padding: 15px 10px;"><i class="fa fa-times-circle" title="Close Project"></i></a></li>   
-          <li class="pull-right"><a href="<?= base_url('project/'.$session->get('project_id')); ?>" style="padding: 15px 1px;">Project: <?= $session->get('project_name'); ?></a></li>
+          <li class="pull-right"><a href="<?= base_url('project/'.session()->project_id); ?>" style="padding: 15px 1px;">Project: <?= session()->project_name['name']; ?></a></li>
         <?php else: ?>
           <li><a href="<?= base_url('projects'); ?>"><?= lang("Validation.analysisinfo"); ?></a></li>
           <!--<ul class="list-inline" style="margin:0px;">
@@ -207,9 +208,9 @@
   <div class="clearfix" style="margin-bottom: 10px;"></div>
 
   <script type="text/javascript">
-      var project_durum = <?php if(isset($_SESSION['project_id'])){echo "true";}else{ echo "false";} ?>
+      var project_durum = <?php if(isset(session()->project_id)){echo "true";}else{ echo "false";} ?>
 
-      var logged_in = <?php if(isset($_SESSION['user_in'])){echo "true";}else{ echo "false";} ?>
+      var logged_in = <?php if(isset(session()->username)){echo "true";}else{ echo "false";} ?>
 
         $( document ).ready(function() {
             var pathname = window.location.pathname;

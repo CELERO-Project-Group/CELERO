@@ -358,31 +358,23 @@ class Company extends BaseController {
 
 		if(empty($data['nace_code'])){$data['nace_code']['code']="";}
 
-		//print_r($data['companies']);
-		//get post data $this->request->getPost('companyName')
-		if($this->request->getPost('companyName') != $data['companies']['name']) {
-		   $is_unique =  '|is_unique[t_cmpny.name]';
-		} else {
-		   $is_unique =  '';
-		}
-
 
 		if(!empty($this->request->getPost())){
 			if ($this->validate([
-				'companyName'  => 'required|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_cmpny.name]',
+				'companyName'  => 'required|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_cmpny.name,id,{id}]',
 				'naceCode'  => 'required',
 				'companyDescription' => 'required|max_length[200]',
 				'email' => 'required|valid_email',
 				'workPhone' => 'required'
 			])){
 
-			
-			
-				echo $this->request->getPost('companyName');
-				exit;
 				$company_data = array(
-					'name'=>$this->request->getPost('companyName'),
-					
+					'name'=>mb_strtolower($this->request->getPost('companyName')),
+					'phone_num_2'=>$this->request->getPost('workPhone'),
+					'description'=>substr($this->request->getPost('companyDescription'), 0, 199),
+					'email'=>$this->request->getPost('email'),
+					'latitude'=>$this->request->getPost('lat'),
+					'longitude'=>$this->request->getPost('long'),
 				);
 
 				$company_model->update_company($company_data,$term);
