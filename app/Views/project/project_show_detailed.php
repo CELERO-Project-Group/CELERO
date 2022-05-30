@@ -29,13 +29,14 @@
 	<div class="row">
 
 		<div class="col-md-4">
-
-					<?php if($is_consultant_of_project or $is_contactperson_of_project): ?>
+			<?php if($is_consultant_of_project or $is_contactperson_of_project): ?>
 			<div style="margin-bottom:20px; overflow:hidden;">
 				<?php if(session()->project_id==$projects['id']): ?>
 					<a class="btn btn-inverse btn-block" href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> <?= lang("Validation.closeproject"); ?></a>
 				<?php else: ?>
 					<?= form_open('openproject'); ?>
+					<?= csrf_field() ?>
+
 						<input type="hidden" name="projectid" value="<?= $projects['id']; ?>">
 						<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-plus-square-o"></i> <?= lang("Validation.openproject"); ?></button>
 					</form>

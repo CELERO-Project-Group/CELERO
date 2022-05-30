@@ -10,25 +10,32 @@ use App\Models\User_model;
 class Project extends BaseController{
 
 	public function open_project(){
-		$kullanici = $session->get('user_in');
-		$is_consultant = $this->user_model->is_user_consultant($kullanici['id']);
+
+		$user_model = model(User_model::class);
+		$project_model = model(Project_model::class);
+
+		$userId = $this->session->id;
+		$is_consultant = $user_model->is_user_consultant($userId);
 		if(!$is_consultant){
 			$this->session->set_flashdata('project_error', '<i class="fa fa-exclamation-circle"></i> Sorry, you dont have permission to open this project.');
 			redirect('project', 'refresh');
 		}
 
-		echo library('form_validation');
-		$this->form_validation->set_rules('projectid', 'Project ID', 'trim|required|xss_clean');
-		if ($this->form_validation->run() !== FALSE)
-		{
-			$session->remove('project_id');
-			$id = $this->input->post('projectid');
-			$session->set('project_id', $id);
-			$prj = $this->project_model->get_project($id);
-			$session->set('project_name', $prj['name']);
-			redirect('project/'.$id, 'refresh');
+		if(!empty($this->request->getPost())){
+			if ($this->validate([
+				'projectid'  => 'required',
+			]))
+			{
+				$projectId = $this->request->getPost('projectid');
+				$session_array= array(
+					'project_id' => $projectId,
+					'project_name' => $project_model->get_project($projectId)
+					);
+				$this->session->set($session_array);
+				return redirect()->to(site_url('project/'.$projectId));
+			}
 		}
-		$data['projects'] = $this->project_model->get_consultant_projects($kullanici['id']);
+		$data['projects'] = $project_model->get_consultant_projects($userId);
 		echo view('template/header');
 		echo view('project/open_project',$data);
 		echo view('template/footer');
