@@ -285,13 +285,14 @@ class Project extends BaseController{
 			date_default_timezone_set('UTC');
 
 			$project = array(
+				'id'=>$prjct_id,
 			'name'=>$this->input->post('projectName'),
 			'description'=>$this->input->post('description'),
 			'start_date'=>date('Y-m-d', strtotime(str_replace('-', '/', $this->input->post('datepicker')))), // mysql icin formatını ayarladık
 			'status_id'=>$this->input->post('status'),
 			'active'=>1 //default active:1 olarak kaydediyoruz.
 			);
-			$this->project_model->update_project($project,$prjct_id);
+			$this->project_model->update_project($project);
 
 			$companies = $_POST['assignCompany']; // multiple select , secilen company'ler
 
