@@ -19,44 +19,11 @@
 			<div class="swissheader"><?= $userInfo["name"].' '.$userInfo["surname"]; ?></div>
 			<table class="table table-striped table-bordered">
 				<tr>
-					<td style="width:120px;">
-					<?= lang("Validation.description"); ?>
-					</td>
-					<td>
-						<div><?= $userInfo['title']; ?></div>
-						<div><?= $userInfo['description']; ?></div>
-					</td>
-				</tr>
-				<tr>
 					<td>
 					<?= lang("Validation.email"); ?>
 					</td>
 					<td>
 					<?= $userInfo['email']; ?>
-					</td>
-				</tr>
-				<tr>
-					<td>
-					<?= lang("Validation.cellphone"); ?>
-					</td>
-					<td>
-					<?= $userInfo['phone_num_1']; ?>
-					</td>
-				</tr>
-				<tr>
-					<td>
-					<?= lang("Validation.workphone"); ?>
-					</td>
-					<td>
-					<?= $userInfo['phone_num_2']; ?>
-					</td>
-				</tr>
-				<tr>
-					<td>
-					<?= lang("Validation.faxnumber"); ?>
-					</td>
-					<td>
-					<?= $userInfo['fax_num']; ?>
 					</td>
 				</tr>
 			</table>

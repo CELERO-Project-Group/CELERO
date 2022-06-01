@@ -6,27 +6,22 @@ use CodeIgniter\Model;
 class User_model extends Model {
 
   public function create_user($data){
-
     $db = db_connect();
     $builder = $db->table('t_user');
     $builder->insert($data);
     return $db->insertID();
-
   }
 
   public function get_userinfo_by_username($username){
-    
     $db = db_connect();
     $builder = $db->table('t_user');
     $builder->select('*');
     $builder->where('user_name', $username);
     $query = $builder->get();
     return $query->getRowArray();
-
   }
 
   public function check_user($username,$password){
-    
     $db = db_connect();
     $builder = $db->table('t_user');
   	$builder->where('user_name',$username);
@@ -41,7 +36,6 @@ class User_model extends Model {
   	{
   		return false;
   	}
-
   }
 
   /**
@@ -60,15 +54,16 @@ class User_model extends Model {
   }
 
   public function get_company_users($cmpny_id){
-    $db->select('t_user.name as name,t_user.surname as surname,t_user.id as id,t_cmpny.name as cmpny_name');
-    $db->from('t_cmpny_prsnl');
-    $db->join('t_cmpny', 't_cmpny.id = t_cmpny_prsnl.cmpny_id');
-    $db->join('t_user', 't_user.id = t_cmpny_prsnl.user_id');
-    $db->where('t_cmpny_prsnl.cmpny_id', $cmpny_id);
-    $query = $db->get();
-    if($query->num_rows() > 0)
+    $db = db_connect();
+    $builder = $db->table('t_cmpny_prsnl');
+    $builder->select('t_user.name as name,t_user.surname as surname,t_user.id as id,t_cmpny.name as cmpny_name');
+    $builder->join('t_cmpny', 't_cmpny.id = t_cmpny_prsnl.cmpny_id');
+    $builder->join('t_user', 't_user.id = t_cmpny_prsnl.user_id');
+    $builder->where('t_cmpny_prsnl.cmpny_id', $cmpny_id);
+    $query = $builder->get();
+    if($query->getFieldCount() > 0)
     {
-      return $$query->getResultArray();
+      return $query->getResultArray();
     }
     else
     {
@@ -76,8 +71,6 @@ class User_model extends Model {
     }
   }
 
-  // Session dan acik olan kisinin username bilgisi aliniyor ve bu username e sahip
-  // kisinin butun bilgileri controller a return ediliyor.
   public function get_session_user(){
     if (!empty(session()->username)){
         return $this->get_userinfo_by_username(session()->username);
@@ -89,23 +82,24 @@ class User_model extends Model {
   }
 
   public function get_user($id){
-    $db->select('*');
-    $db->from('t_user');
-    $db->where('id', $id);
-    $query = $db->get();
-    return $$query->getResultArray();
+    $db = db_connect();
+    $builder = $db->table('t_user');
+    $builder->select('*');
+    $builder->where('id', $id);
+    $query = $builder->get();
+    return $query->getResultArray();
   }
 
   public function get_all_users(){
-    $db->select('*');
-    $db->from('t_user');
-    $db->order_by("name", "asc");
-    $query = $db->get();
-    return $$query->getResultArray();
+    $db = db_connect();
+    $builder = $db->table('t_user');
+    $builder->select('*');
+    $builder->orderBy("name", "asc");
+    $query = $builder->get();
+    return $query->getResultArray();
   }
 
   public function get_worker_projects_from_userid($id){
-
     $db = db_connect();
     $builder = $db->table('t_prj');
     $builder->select('t_prj.name,t_prj.id as proje_id');
@@ -113,22 +107,21 @@ class User_model extends Model {
     $builder->join('t_user', 't_user.id = t_prj_cntct_prsnl.usr_id');
     $builder->where('t_user.id', $id);
     $query = $builder->get();
-    return $query->getResultArray();
-      
+    return $query->getResultArray();  
   }
 
   public function deneme_json($id){
-      $db->select('t_prj.name as text,t_prj.id as id');
-      $db->from('t_prj');
-      $db->join('t_prj_cnsltnt', 't_prj_cnsltnt.prj_id = t_prj.id');
-      $db->join('t_user', 't_user.id = t_prj_cnsltnt.cnsltnt_id');
-      $db->where('t_user.id', $id);
-      $query = $db->get();
-      return $$query->getResultArray();
+    $db = db_connect();
+    $builder = $db->table('t_prj');
+    $builder->select('t_prj.name as text,t_prj.id as id');
+    $builder->join('t_prj_cnsltnt', 't_prj_cnsltnt.prj_id = t_prj.id');
+    $builder->join('t_user', 't_user.id = t_prj_cnsltnt.cnsltnt_id');
+    $builder->where('t_user.id', $id);
+    $query = $builder->get();
+    return $query->getResultArray();
   }
 
   public function get_consultant_projects_from_userid($id){
-
     $db = db_connect();
     $builder = $db->table('t_prj');
     $builder->select('t_prj.name,t_prj.id as proje_id');
@@ -138,40 +131,38 @@ class User_model extends Model {
     $builder->orderBy('t_prj.name', 'ASC');
     $query = $builder->get();
     return $query->getResultArray();
-
   }
 
   public function update_user($update){
-
     $db = db_connect();
     $builder = $db->table('t_user');
     $builder->replace($update);
-    
   }
 
   public function make_user_consultant($id,$username=FALSE){
     if(empty($username)){
       $username = "Username";
     }
-
-    // T_cnsltnt'a ekleme
+    // T_cnsltnt array
     $data = array(
       'user_id' => $id,
       'description' => $username,
       'active' => '1'
     );
-    $db->insert('t_cnsltnt', $data);
-
-    //T_USER'ı güncelleme
+    $db = db_connect();
+    $builder = $db->table('t_cnsltnt');
+    $builder->insert($data);
+    
+    // T_USER array
     $data = array(
-      'role_id' => '1'
+      'role_id' => '1',
+      'id' => $id
     );
-    $db->where('id', $id);
-    $db->update('t_user', $data);
+    $builder = $db->table('t_user');
+    $builder->replace($data);
   }
 
   public function is_user_consultant($id){
-
     $db = db_connect();
     $builder = $db->table('t_user');
     $builder->select('*');
@@ -183,65 +174,49 @@ class User_model extends Model {
     else{
       return FALSE;
     }
-
-  }
-
-  public function check_user_email($email){
-    $db->from('t_user');
-    $db->where('email',$email);
-    $query = $db->get();
-
-    if($query -> num_rows() == 1)
-      return true;
-    else
-      return false;
-  }
-
-  public function check_username($username){
-    $db->from('t_user');
-    $db->where('user_name',$username);
-    $query = $db->get();
-
-    if($query -> num_rows() == 1)
-      return true;
-    else
-      return false;
   }
 
   public function set_user_image($userId,$photo){
-    $db->where('id', $userId);
-    $db->update('t_user', $photo);
+    $db = db_connect();
+    $data = array(
+      'photo' => $photo,
+      'id' => $userId
+    );
+    $builder = $db->table('t_user');
+    $builder->replace($data);
   }
 
   public function users_without_company(){
-    $db->select('*')->from('t_user');
-    $db->where('`id` NOT IN (SELECT `user_id` FROM `t_cmpny_prsnl`)', NULL, FALSE);
-    $query = $db->get();
-    return $$query->getResultArray();
+    $db = db_connect();
+    $builder = $db->table('t_user');
+    $builder->select('*');
+    $builder->where('`id` NOT IN (SELECT `user_id` FROM `t_cmpny_prsnl`)', NULL, FALSE);
+    $query = $builder->get();
+    return $query->getResultArray();
   }
 
   public function do_consultant($id){
-    $db->select('t_role.short_code');
-    $db->from('t_role');
-    $db->join('t_user','t_user.role_id = t_role.id');
-    $db->where('t_user.id',$id);
-    $query = $db->get();
-    return $query->row_array();
+    $db = db_connect();
+    $builder = $db->table('t_role');
+    $builder->select('t_role.short_code');
+    $builder->join('t_user','t_user.role_id = t_role.id');
+    $builder->where('t_user.id',$id);
+    $query = $builder->get();
+    return $query->getRowArray();
   }
 
   //Bir danışmanın danışman olduğu şirketleri listeler
   public function do_edit_company_consultant($user_id){
-    $db->select('t_prj_cmpny.cmpny_id as cmpnyID');
-    $db->from('t_prj_cnsltnt');
-    $db->join('t_prj_cmpny', 't_prj_cmpny.prj_id = t_prj_cnsltnt.prj_id');
-    $db->where('t_prj_cnsltnt.cnsltnt_id',$user_id);
-    $query = $db->get()->result_array();
-    return $query;
+    $db = db_connect();
+    $builder = $db->table('t_prj_cnsltnt');
+    $builder->select('t_prj_cmpny.cmpny_id as cmpnyID');
+    $builder->join('t_prj_cmpny', 't_prj_cmpny.prj_id = t_prj_cnsltnt.prj_id');
+    $builder->where('t_prj_cnsltnt.cnsltnt_id',$user_id);
+    $query = $builder->get();
+    return $query->getResultArray();
   }
 
-  //Bir kullanıcı bir şirketin danışmanı mıdır?
   public function is_consultant_of_company_by_user_id($user_id,$company_id){
-
     $db = db_connect();
     $builder = $db->table('t_prj_cnsltnt');
     $builder->select('t_prj_cmpny.cmpny_id as cmpnyID');
@@ -254,11 +229,9 @@ class User_model extends Model {
     }else{
       return TRUE;
     }
-
   }
 
   public function is_consultant_of_project_by_user_id($user_id,$prj_id){
-
     $db = db_connect();
     $builder = $db->table('t_prj_cnsltnt');
     $builder->select('*');
@@ -270,11 +243,9 @@ class User_model extends Model {
     }else{
       return TRUE;
     }
-
   }
 
   public function is_contactperson_of_project_by_user_id($user_id,$prj_id){
-
     $db = db_connect();
     $builder = $db->table('t_prj_cntct_prsnl');
     $builder->select('*');
@@ -286,23 +257,18 @@ class User_model extends Model {
     }else{
       return TRUE;
     }
-
   }
 
   public function cmpny_prsnl($user_id){
-
     $db = db_connect();
     $builder = $db->table('t_cmpny_prsnl');
     $builder->select('cmpny_id');
     $builder->where('user_id', $user_id);
     $query = $builder->get();
     return $query->getRowArray();
-
   }
 
-  //Firmanın contact person'ı mı?
   public function is_contact_by_userid($user_id,$company_id){
-
     $db = db_connect();
     $builder = $db->table('t_cmpny_prsnl');
     $builder->select('*');
@@ -314,10 +280,9 @@ class User_model extends Model {
       return FALSE;
     else
       return TRUE;
-
   }
 
-  //TODO: check if it creates security issues.
+  //TODO: check if it creates security issues. Bypass for admins.
   public function is_admin($user_id){
     if($user_id == 1 || $user_id == 48290) return TRUE;
   }
@@ -331,9 +296,10 @@ class User_model extends Model {
   }
 
   public function create_dataset_for_users($data){
-    $db->insert('t_users_data', $data);
-    return $db->insert_id();
+    $db = db_connect();
+    $builder = $db->table('t_users_data');
+    $builder->insert($data);
+    return $db->insertID();
   }
 
 }
-?>

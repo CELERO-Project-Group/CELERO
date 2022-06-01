@@ -220,17 +220,24 @@ class Project extends BaseController{
 
 
 	public function update_project($prjct_id){
-		$kullanici = $session->get('user_in');
-		if(!$this->user_model->is_consultant_of_project_by_user_id($kullanici['id'],$prjct_id) and !$this->user_model->is_contactperson_of_project_by_user_id($kullanici['id'],$prjct_id)){
-			redirect('','refresh');
+
+		$user_model = model(User_model::class);
+		$project_model = model(Project_model::class);
+		$company_model = model(Company_model::class);
+
+		$userId = $this->session->id;
+
+		if(!$user_model->is_consultant_of_project_by_user_id($userId,$prjct_id) and !$user_model->is_contactperson_of_project_by_user_id($userId,$prjct_id)){
+			return redirect()->to(site_url('myprojects'));
 		}
-		$data['projects'] = $this->project_model->get_project($prjct_id);
-		$data['companies']=$this->company_model->get_companies();
-		$data['consultants']=$this->user_model->get_consultants();
-		$data['project_status']=$this->project_model->get_active_project_status();
-		$data['assignedCompanies'] = $this->project_model->get_prj_companies($prjct_id);
-		$data['assignedConsultant'] = $this->project_model->get_prj_consaltnt($prjct_id);
-		$data['assignedContactperson'] = $this->project_model->get_prj_cntct_prsnl($prjct_id);
+
+		$data['projects'] = $project_model->get_project($prjct_id);
+		$data['companies'] = $company_model->get_companies();
+		$data['consultants'] = $user_model->get_consultants();
+		$data['project_status'] = $project_model->get_active_project_status();
+		$data['assignedCompanies'] = $project_model->get_prj_companies($prjct_id);
+		$data['assignedConsultant'] = $project_model->get_prj_consaltnt($prjct_id);
+		$data['assignedContactperson'] = $project_model->get_prj_cntct_prsnl($prjct_id);
 
 		//print_r($data['projects']);
 
@@ -253,12 +260,10 @@ class Project extends BaseController{
 		$data['contactIDs']=$contactIDs;
 
 		foreach ($companyIDs as $cmpny_id) {
-			$contactusers[]= $this->user_model->get_company_users($cmpny_id);
+			$contactusers[]= $user_model->get_company_users($cmpny_id);
 		}
 
 		$data['contactusers']= $contactusers;
-
-		echo library('form_validation');
 
 		if($this->input->post('projectName') != $data['projects']['name']) {
 		   $is_unique =  '|is_unique[t_prj.name]';
