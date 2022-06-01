@@ -41,10 +41,11 @@ class Project extends BaseController{
 		echo view('template/footer');
 	}
 
+	// removes project sessions
 	public function close_project(){
-		
-		$session->remove('project_id');
-		redirect('myprojects', 'refresh');
+		session()->remove('project_id');
+		session()->remove('project_name');
+		return redirect()->to(site_url('myprojects'));
 	}
 
 	public function new_project(){

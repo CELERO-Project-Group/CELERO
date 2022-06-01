@@ -58,6 +58,7 @@
 									<a class="btn btn-tuna" href="<?= base_url('closeproject'); ?>"><i class="fa fa-times-circle"></i> Close This Project</a>
 								<?php else: ?>
 									<?= form_open('openproject'); ?>
+										<?= csrf_field() ?>
 										<input type="hidden" name="projectid" value="<?= $pro['id']; ?>">
 										<button type="submit" class="btn btn-tuna"><i class="fa fa-plus-square-o"></i> <?= lang("Validation.openproject"); ?></button>
 									</form>
