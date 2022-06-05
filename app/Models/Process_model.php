@@ -5,11 +5,6 @@ use CodeIgniter\Model;
 
 class Process_model extends Model {
 
-	public function __construct()
-	{
-		$db = db_connect();
-	}
-
 	public function get_cmpny_prcss_id_copy($cmpny_id,$prcss_id){
 		$db->select('id');
 		$db->from('t_cmpny_prcss');

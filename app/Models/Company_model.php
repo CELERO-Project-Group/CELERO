@@ -175,7 +175,7 @@ class Company_model extends Model
         $db = db_connect();
         $builder = $db->table('t_cmpny');
         $builder->where('id', $id);
-        $builder->update($data);
+        $builder->replace($data);
     }
 
     public function update_cmpny_data($data, $id)
@@ -183,7 +183,7 @@ class Company_model extends Model
         $db = db_connect();
         $builder = $db->table('t_cmpny_data');
         $builder->where('cmpny_id', $id);
-        $builder->update($data);
+        $builder->replace($data);
     }
 
     public function update_cmpny_nace_code($data, $id)
@@ -191,7 +191,7 @@ class Company_model extends Model
         $db = db_connect();
         $builder = $db->table('t_cmpny_nace_code');
         $builder->where('cmpny_id', $id);
-        $builder->update($data);
+        $builder->replace($data);
     }
 
     public function unique_control_email($email, $cmpny_id)

@@ -6,14 +6,11 @@ use CodeIgniter\Model;
 class Cpscoping_model extends Model
 {
 
-    public function __construct()
-    {
-        $db = db_connect();
-    }
-
     public function set_cp_allocation($data)
     {
-        $db->insert('t_cp_allocation', $data);
+        $db = db_connect();
+        $builder = $db->table('t_cp_allocation');
+        $builder->insert($data);
     }
 
     public function update_cp_allocation($data, $id)
