@@ -26,13 +26,14 @@
         //getEPValues(id,userid);
     }
 </script>
-<div class="col-md-4 borderli" <?php if (validation_errors() == NULL) {
+<div class="col-md-4 borderli" <?php if ($validation == NULL) {
     echo "id='gizle'";
 } ?>>
     <?= form_open_multipart('new_flow/' . $companyID); ?>
-    <?php if (validation_errors() == NULL): ?>
-        <button id="ac-hide" type="button" class="close" aria-hidden="true">&times;</button>
-    <?php endif ?>
+    <?php
+		if($validation != NULL)
+		echo $validation->listErrors();
+	?>
     <p class="lead"><?= lang("Validation.addflow"); ?></p>
     <!-- this is the new automatic Flow selector and EP calculator -->
     <div class="form-group">
@@ -70,77 +71,6 @@
         </div>
     </div>
 
-    <!--
-    <br>
-        <button id="manualep-hide-show" type="button" class="close col-md-12" aria-hidden="true" style="float: left;">
-            <label>Open form to enter EP manually (not recommended):</label>  
-            <i class="fa fa-arrow-down"></i>
-        </button>
-    <br> -->
-    <!-- this allows to enter flows calculate EP values manualy 
-    <div id="manualep" style="display: none;">
-        <div class="form-group">
-            <label for="selectize"><?= lang("Validation.flowname"); ?> <span style="color:red;">* <?= lang("Validation.notchangable"); ?></span></label>
-            <select id="selectize" onchange="getFlowId('<?= $user['id']; ?>')" class="info select-block" name="flowname">
-                <option value=""><?= lang("Validation.pleaseselect"); ?></option>
-                <?php foreach ($flownames as $flowname): ?>
-                    <option value="<?= $flowname['id']; ?>" <?= set_select('flowname', $flowname['id']); ?>><?= $flowname['name']; ?></option>
-                <?php endforeach ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="flowtype"><?= lang("Validation.flowtype"); ?> <span style="color:red;">* <?= lang("Validation.notchangable"); ?></span></label>
-            <select id="flowtype" class="info select-block" name="flowtype">
-                <?php foreach ($flowtypes as $flowtype): ?>
-                    <option value="<?= $flowtype['id']; ?>" <?= set_select('flowtype', $flowtype['id']); ?>><?= $flowtype['name']; ?></option>
-                <?php endforeach ?>
-            </select>
-        </div> -->
-        <div class="form-group" id="flow-family" style="display:none;">
-            <label for="flowfamily"><?= lang("Validation.flowfamily"); ?> <span style="color:red;">* <?= lang("Validation.notchangable"); ?></span></label>
-            <select id="flowfamily" class="info select-block" name="flowfamily">
-                <option value="">Nothing Selected</option>
-                <?php foreach ($flowfamilys as $flowfamily): ?>
-                    <option value="<?= $flowfamily['id']; ?>" <?= set_select('flowfamily', $flowfamily['id']); ?>><?= $flowfamily['name']; ?></option>
-                <?php endforeach ?>
-            </select>
-        </div>
-        <!--
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label for="quantity"><?= lang("Validation.quantity"); ?> (<?= lang("Validation.annual"); ?>) <span
-                                style="color:red;">*</span></label>
-                    <input class="form-control" onchange="getFlowId('<?= $user['id']; ?>')" id="quantity" name="quantity" placeholder="e.g. 12'123'000.00"
-                           value="<?= set_value('quantity'); ?>">
-                </div>
-                <div class="col-md-4">
-                    <label for="quantityUnit"><?= lang("Validation.quantity"); ?> <?= lang("Validation.unit"); ?> <span
-                                style="color:red;">*</span></label>
-                    <select id="selectize-units" class="info select-block" name="quantityUnit"> 
-                        <option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>
-                        <?php foreach ($units as $unit): ?>
-                            <option value="<?= $unit['id']; ?>" <?= set_select('quantityUnit', $unit['id']); ?>><?= $unit['name']; ?></option>
-                        <?php endforeach ?>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-8">
-                    <label for="ep">EP (<?= lang("Validation.annual"); ?>)</label>
-                    <input class="form-control" id="ep" name="ep" placeholder="e.g. 12'123'000.00"
-                           value="<?= set_value('ep'); ?>">
-                </div>
-                <div class="col-md-4">
-                    <label for="epUnit"><?= lang("Validation.epunit"); ?></label>
-                    <input type="text" class="form-control" id="epUnit" value="EP" name="epUnit" readonly>
-                </div>
-            </div>
-        </div>
-    </div>   -->
-    <!--hidden placeholder input (set to "true") for deactivated "availability" selection -->
     <div class="form-group">
         <input class="form-control" id="availability" name="availability" type="hidden"
                value="<?= set_value('availability', 'true'); ?>">
@@ -201,6 +131,7 @@
 
     <button type="submit" class="btn btn-info"><?= lang("Validation.addflow"); ?></button>
     </form>
+    
     <span class="label label-default"><span style="color:red;">*</span> <?= lang("Validation.labelarereq"); ?></span>
 
     <div class="modal fade" id="myModalEPcalc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -241,16 +172,16 @@
         </div>
     </div>
 </div>
-<?php if (validation_errors() == NULL): ?>
+<?php if ($validation == NULL): ?>
 
 <div class="col-md-12" id="buyukbas">
 
     <!-- error message if flow arleady exist, passed with flash data -->
-    <?php if (!$this->session->flashdata('message') == NULL): ?>
+    <?php if (!session()->getFlashdata('message')  == NULL): ?>
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <p></p>
-                <p><?= $this->session->flashdata('message');?></p>
+                <p><?= session()->getFlashdata('message')  ?></p>
             <p></p>
         </div>
     <?php endif ?>    
@@ -262,7 +193,7 @@
             <i class="fa fa-info-circle" title="Flows describe the total flow of Materials, Water and Energy
             of a company in order to generate products."></i>
         </p>
-        <?php if (validation_errors() == NULL): ?>
+        <?php if ($validation == NULL): ?>
             <button id="ac" class="btn btn-warning" style="margin-left: 20px;"> <?= lang("Validation.addflow"); ?></button>
         <?php endif ?>
 
@@ -445,7 +376,7 @@
             total = amount * UBPval / 1000000;
 
             //checks if flowfamily needs to be set
-            getFlowId('<?= $user['id']; ?>');
+            getFlowId('<?= session()->id ?>');
 
             //enters total into the modal
             $('#myModalEPcalc input#eptotal').val(total.toFixed(2));

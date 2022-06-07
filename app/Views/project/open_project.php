@@ -3,12 +3,10 @@
 		<div class="col-md-4 col-md-offset-4 swissbox">
 	<p class="lead">Open Project</p>
 
-	<?php if(validation_errors() != NULL ): ?>
-	<div class="alert">
-		<button type="button" class="close" data-dismiss="alert">&times;</button>
-		<?= validation_errors(); ?>
-	</div>
-	<?php endif ?>
+	<?php
+		if($validation != NULL)
+		echo $validation->listErrors();
+	?>
 	<?php //print_r($projects); ?>
 	<?= form_open('openproject'); ?>
 		<div class="row">

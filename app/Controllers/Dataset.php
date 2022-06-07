@@ -2,36 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Models\Product_model;
+use App\Models\User_model;
+use App\Models\Company_model;
+use App\Models\Flow_model;
+use App\Models\Process_model;
+use App\Models\Equipment_model;
+use App\Models\Component_model;
+use App\Models\Cpscoping_model;
+
 class Dataset extends BaseController {
 
-	function __construct(){
-		parent::__construct();
-		$this->load->model('product_model');
-		$this->load->model('user_model');
-		$this->load->model('company_model');
-		$this->load->model('flow_model');
-		$this->load->model('process_model');
-		$this->load->model('equipment_model');
-		$this->load->model('component_model');
-		$this->load->model('cpscoping_model');
-		$this->load->library('form_validation');
-	    header('Access-Control-Allow-Origin: *');
-	    header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-	    header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-	    $method = $_SERVER['REQUEST_METHOD'];
-	    if($method == "OPTIONS") {
-	        die();
-	    }
-
-
-		$this->config->set_item('language', $session->get('site_lang'));
-
-		$kullanici = $session->get('user_in');
-		//TO-DO: blocking ajax to work.
-		/*if($this->user_model->can_edit_company($kullanici['id'],$this->uri->segment(2)) == FALSE && $this->uri->segment(1) != "get_equipment_type" && $this->uri->segment(1) != "get_equipment_attribute"&& $this->uri->segment(1) != "get_sub_process"){
-			redirect(base_url(''), 'refresh');
-		}*/
-	}
 
 	function sifirla($data){
 		if(empty($data)) return 0;
@@ -107,163 +88,171 @@ class Dataset extends BaseController {
 
 	public function new_flow($companyID)
 	{
+
+		$flow_model = model(Flow_model::class);
+		$company_model = model(Company_model::class);
+		
 		//checks permissions, if not loged in a redirect happens
-		$user = $session->get('user_in');
+		$user = $this->session->username;
 		if(empty($user)){
 			redirect('', 'refresh');
 		}
 
-		$this->form_validation->set_rules('flowname', 'Flow Name', 'trim|required|xss_clean|strip_tags|callback_alpha_dash_space');
-		$this->form_validation->set_rules('flowtype', 'Flow Type', 'trim|required|xss_clean|strip_tags|callback_flow_varmi');
-		$this->form_validation->set_rules('quantity', 'Quantity', 
-			"trim|required|xss_clean|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]|max_length[8]");
-		$this->form_validation->set_rules('quantityUnit', 'Quantity Unit', 'trim|required|xss_clean|strip_tags');
-		$this->form_validation->set_rules('cost', 'Cost', "trim|required|xss_clean|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]|max_length[8]");
-		$this->form_validation->set_rules('costUnit', 'Cost Unit', 'trim|required|xss_clean|strip_tags');
-		$this->form_validation->set_rules('ep', 'EP', 
-			"trim|xss_clean|strip_tags|max_length[25]|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]");
-		$this->form_validation->set_rules('epUnit', 'EP Unit', 'trim|xss_clean|strip_tags');
-		$this->form_validation->set_rules('charactertype', 'Flow Character Type', 'trim|xss_clean|strip_tags|max_length[50]');
-		$this->form_validation->set_rules('availability', 'Availability', 'trim|xss_clean');
-		$this->form_validation->set_rules('cf', 'Chemical Formula', 'trim|xss_clean|max_length[30]');
-		$this->form_validation->set_rules('conc', 'Concentration', 'trim|xss_clean|strip_tags|numeric');
-		$this->form_validation->set_rules('concunit', 'Concentration Unti', 'trim|xss_clean');
-		$this->form_validation->set_rules('pres', 'Pressure', 'trim|xss_clean|strip_tags|numeric|max_length[10]');
-		$this->form_validation->set_rules('presunit', 'Pressure Unit', 'trim|xss_clean');
-		$this->form_validation->set_rules('ph', 'PH', 'trim|xss_clean|strip_tags|numeric|max_length[10]');
-		$this->form_validation->set_rules('state', 'State', 'trim|xss_clean');
-		$this->form_validation->set_rules('quality', 'Quality', 'trim|xss_clean|max_length[150]');
-		$this->form_validation->set_rules('oloc', 'Output Location', 'trim|xss_clean');
-		$this->form_validation->set_rules('spot', 'Substitution Potential', 'trim|xss_clean');
-		$this->form_validation->set_rules('desc', 'Description', 'trim|xss_clean|max_length[500]');
-		$this->form_validation->set_rules('comment', 'Comment', 'trim|xss_clean');
+		$data['flownames'] = $flow_model->get_flowname_list();
 
-		if($this->form_validation->run() !== FALSE) {
+		if(!empty($this->request->getPost())){
 
-			$data['flownames'] = $this->flow_model->get_flowname_list();
+			if ($this->validate([
+				'flowname', 'Flow Name', 'trim|required|strip_tags|callback_alpha_dash_space',
+				'flowtype', 'Flow Type', 'trim|required|strip_tags|callback_flow_varmi',
+				'quantity', 'Quantity', 
+					"trim|required|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]|max_length[8]",
+				'quantityUnit', 'Quantity Unit', 'trim|required|strip_tags',
+				'cost', 'Cost', "trim|required|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]|max_length[8]",
+				'costUnit', 'Cost Unit', 'trim|required|strip_tags',
+				'ep', 'EP', 
+					"trim|strip_tags|max_length[25]|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]",
+				'epUnit', 'EP Unit', 'trim|strip_tags',
+				'charactertype', 'Flow Character Type', 'trim|strip_tags|max_length[50]',
+				'availability', 'Availability', 'trim',
+				'cf', 'Chemical Formula', 'trim|max_length[30]',
+				'conc', 'Concentration', 'trim|strip_tags|numeric',
+				'concunit', 'Concentration Unti', 'trim',
+				'pres', 'Pressure', 'trim|strip_tags|numeric|max_length[10]',
+				'presunit', 'Pressure Unit', 'trim',
+				'ph', 'PH', 'trim|strip_tags|numeric|max_length[10]',
+				'state', 'State', 'trim',
+				'quality', 'Quality', 'trim|max_length[150]',
+				'oloc', 'Output Location', 'trim',
+				'spot', 'Substitution Potential', 'trim',
+				'desc', 'Description', 'trim|max_length[500]',
+				'comment', 'Comment', 'trim'
+			])){
 
-			//do we need to replace spaces with _ anymore? str_replace(' ', '_', $variable);
-			$flowID = $this->input->post('flowname');
-			//and make it to lower case? Its anyway predefined right now
-			//$flowID = strtolower($flowID);
 
-			//if the flow already exists the id is used, 
-			// other wise the name is used an new flow enty is created with is_new_flow($flowID,$flowfamilyID);
-			foreach ($data['flownames'] as $flowname) {
-				if ($flowID == $flowname['name']) {
-					$flowID = $flowname['id'];
+				//do we need to replace spaces with _ anymore? str_replace(' ', '_', $variable);
+				$flowID = $this->input->post('flowname');
+				//and make it to lower case? Its anyway predefined right now
+				//$flowID = strtolower($flowID);
+
+				//if the flow already exists the id is used, 
+				// other wise the name is used an new flow enty is created with is_new_flow($flowID,$flowfamilyID);
+				foreach ($data['flownames'] as $flowname) {
+					if ($flowID == $flowname['name']) {
+						$flowID = $flowname['id'];
+					}
 				}
-			}
 
 
-			$charactertype = $this->input->post('charactertype');
-			$flowtypeID = $this->input->post('flowtype');
-			$flowfamilyID = $this->input->post('flowfamily');
+				$charactertype = $this->input->post('charactertype');
+				$flowtypeID = $this->input->post('flowtype');
+				$flowfamilyID = $this->input->post('flowfamily');
 
-			//checks if flow already exist (as input OR output), same as flow_varmi()
-			$companyID = $this->uri->segment(2);
-			if(is_numeric($flowID)){
-				if(!$this->flow_model->has_same_flow($flowID,$flowtypeID,$companyID)){
-					$this->session->set_flashdata('message', 'Flow can only be added twice (as input and output), please check your flows.');
-					//print_r("false");
-			    	redirect(current_url());
+				//checks if flow already exist (as input OR output), same as flow_varmi()
+				$companyID = $this->uri->segment(2);
+				if(is_numeric($flowID)){
+					if(!$this->flow_model->has_same_flow($flowID,$flowtypeID,$companyID)){
+						$this->session->set_flashdata('message', 'Flow can only be added twice (as input and output), please check your flows.');
+						//print_r("false");
+						redirect(current_url());
+					}
 				}
-			}
 
 
-			//CHECKs IF FLOW IS NEW (old flows have their IDs)
-			$flowID = $this->process_model->is_new_flow($flowID,$flowfamilyID);
+				//CHECKs IF FLOW IS NEW (old flows have their IDs)
+				$flowID = $this->process_model->is_new_flow($flowID,$flowfamilyID);
 
-			#EP input field: By regex_match , . and ' are allowed.
-			#this replaces , with . and removes thousand separator ' to store numeric in DB later
-			$ep = $this->numeric_input_formater($this->input->post('ep'));
-			$epUnit = $this->input->post('epUnit');
+				#EP input field: By regex_match , . and ' are allowed.
+				#this replaces , with . and removes thousand separator ' to store numeric in DB later
+				$ep = $this->numeric_input_formater($this->input->post('ep'));
+				$epUnit = $this->input->post('epUnit');
 
-			#Cost input field: By regex_match , . and ' are allowed.
-			#this replaces , with . and removes thousand separator ' to store numeric in DB later
-			$cost = $this->numeric_input_formater($this->input->post('cost'));
-			$costUnit = $this->input->post('costUnit');
+				#Cost input field: By regex_match , . and ' are allowed.
+				#this replaces , with . and removes thousand separator ' to store numeric in DB later
+				$cost = $this->numeric_input_formater($this->input->post('cost'));
+				$costUnit = $this->input->post('costUnit');
 
-			#Quantity input field: By regex_match , . and ' are allowed.
-			#this replaces , with . and removes thousand separator ' to store numeric in DB later
-			$quantity = $this->numeric_input_formater($this->input->post('quantity'));
-			$quantityUnit = $this->input->post('quantityUnit');
+				#Quantity input field: By regex_match , . and ' are allowed.
+				#this replaces , with . and removes thousand separator ' to store numeric in DB later
+				$quantity = $this->numeric_input_formater($this->input->post('quantity'));
+				$quantityUnit = $this->input->post('quantityUnit');
 
-			$data['units'] = $this->flow_model->get_unit_list();
-			//the quantity unit gets passed as string but is predefined! User has only a specific set of units to chose from
-			foreach ($data['units'] as $unit) {
-				//if the submited unit matches the unit array, the id is assigned
-				if ($quantityUnit == $unit['name']) {
-					$quantityUnit = $unit['id'];
+				$data['units'] = $this->flow_model->get_unit_list();
+				//the quantity unit gets passed as string but is predefined! User has only a specific set of units to chose from
+				foreach ($data['units'] as $unit) {
+					//if the submited unit matches the unit array, the id is assigned
+					if ($quantityUnit == $unit['name']) {
+						$quantityUnit = $unit['id'];
+					}
+					else {
+						#todo what about those special units?
+						#add them to the DB manually....
+					}
 				}
-				else {
-					#todo what about those special units?
-					#add them to the DB manually....
+				
+				$cf = $this->input->post('cf');
+				$availability = $this->input->post('availability');
+				$conc = $this->input->post('conc');
+				$concunit = $this->input->post('concunit');
+				$pres = $this->input->post('pres');
+				$presunit = $this->input->post('presunit');
+				$ph = $this->input->post('ph');
+				$state = $this->input->post('state');
+				$quality = $this->input->post('quality');
+				$oloc = $this->input->post('oloc');
+				$desc = $this->input->post('desc');
+				$spot = $this->input->post('spot');
+				$comment = $this->input->post('comment');
+
+				$flow = array(
+					'cmpny_id'=>$companyID,
+					'flow_id'=>$flowID,
+					'character_type'=>$charactertype,
+					'qntty'=>$this->sifirla($quantity),
+					'qntty_unit_id'=>$this->sifirla($quantityUnit),
+					'cost' =>$this->sifirla($cost),
+					'cost_unit_id' =>$costUnit,
+					'ep' => $this->sifirla($ep),
+					'ep_unit_id' => $epUnit,
+					'flow_type_id'=> $this->sifirla($flowtypeID),
+					'chemical_formula' => $cf,
+					'availability' => $availability,
+					'state_id' => $state,
+					'quality' => $quality,
+					'output_location' => $oloc,
+					'substitute_potential' => $spot,
+					'description' => $desc,
+					'comment' => $comment
+				);
+				if(!empty($conc)){
+					$flow['concentration'] = $conc;
+					$flow['concunit'] = $concunit;
 				}
-			}
-			
-			$cf = $this->input->post('cf');
-			$availability = $this->input->post('availability');
-			$conc = $this->input->post('conc');
-			$concunit = $this->input->post('concunit');
-			$pres = $this->input->post('pres');
-			$presunit = $this->input->post('presunit');
-			$ph = $this->input->post('ph');
-			$state = $this->input->post('state');
-			$quality = $this->input->post('quality');
-			$oloc = $this->input->post('oloc');
-			$desc = $this->input->post('desc');
-			$spot = $this->input->post('spot');
-			$comment = $this->input->post('comment');
+				if(!empty($pres)){
+					$flow['pression'] = $pres;
+					$flow['presunit'] = $presunit;
+				}
+				if(!empty($ph)){
+					$flow['ph'] = $ph;
+				}
 
-			$flow = array(
-				'cmpny_id'=>$companyID,
-				'flow_id'=>$flowID,
-				'character_type'=>$charactertype,
-				'qntty'=>$this->sifirla($quantity),
-				'qntty_unit_id'=>$this->sifirla($quantityUnit),
-				'cost' =>$this->sifirla($cost),
-				'cost_unit_id' =>$costUnit,
-				'ep' => $this->sifirla($ep),
-				'ep_unit_id' => $epUnit,
-				'flow_type_id'=> $this->sifirla($flowtypeID),
-				'chemical_formula' => $cf,
-				'availability' => $availability,
-				'state_id' => $state,
-				'quality' => $quality,
-				'output_location' => $oloc,
-				'substitute_potential' => $spot,
-				'description' => $desc,
-				'comment' => $comment
-			);
-			if(!empty($conc)){
-				$flow['concentration'] = $conc;
-				$flow['concunit'] = $concunit;
-			}
-			if(!empty($pres)){
-				$flow['pression'] = $pres;
-				$flow['presunit'] = $presunit;
-			}
-			if(!empty($ph)){
-				$flow['ph'] = $ph;
+				$this->flow_model->register_flow_to_company($flow);
+				redirect(current_url());
 			}
 
-			$this->flow_model->register_flow_to_company($flow);
-			redirect(current_url());
 		}
 
-		$data['flowtypes'] = $this->flow_model->get_flowtype_list();
-		$data['flowfamilys'] = $this->flow_model->get_flowfamily_list();
-		$data['company_flows']=$this->flow_model->get_company_flow_list($companyID);
+		$data['flowtypes'] = $flow_model->get_flowtype_list();
+		$data['flowfamilys'] = $flow_model->get_flowfamily_list();
+		$data['company_flows']=$flow_model->get_company_flow_list($companyID);
 		$data['companyID'] = $companyID;
-		$data['company_info'] = $this->company_model->get_company($companyID);
-		
-		$data['user'] = $session->get('user_in');
+		$data['company_info'] = $company_model->get_company($companyID);
+		$data['validation']=$this->validator;
 
-		$this->load->view('template/header');
-		$this->load->view('dataset/dataSetLeftSide',$data);
-		$this->load->view('dataset/new_flow',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('dataset/dataSetLeftSide',$data);
+		echo view('dataset/new_flow',$data);
+		echo view('template/footer');
 
 	}
 
