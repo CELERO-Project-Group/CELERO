@@ -265,50 +265,43 @@ class Project extends BaseController{
 
 		$data['contactusers']= $contactusers;
 
-		if($this->input->post('projectName') != $data['projects']['name']) {
-		   $is_unique =  '|is_unique[t_prj.name]';
-		} else {
-		   $is_unique =  '';
-		}
-
-		$this->form_validation->set_rules('projectName', 'Project Name', 'trim|required|max_length[200]|mb_strtolower|xss_clean'.$is_unique); // buraya isunique kontrolü
-		$this->form_validation->set_rules('description', 'Description', 'trim|required|max_length[200]|xss_clean');
-		$this->form_validation->set_rules('assignCompany','Assign Company','callback_check_default2');
-		$this->form_validation->set_rules('assignConsultant','Assign Consultant','callback_check_default');
-		$this->form_validation->set_rules('assignContactPerson','Assign Contact Person','required');
-
-		//$this->form_validation->set_rules('surname', 'Password', 'required');
-		//$this->form_validation->set_rules('email', 'Email' ,'trim|required|valid_email');
-		if ($this->form_validation->run() !== FALSE)
-		{
+		if(!empty($this->request->getPost())){
+			if ($this->validate([
+				'projectName'  => 'trim|required|max_length[200]|is_unique[t_prj.name,id,{id}]',
+				'description'  => 'trim|required|max_length[200]',
+				'assignCompany' => 'required',
+				'assignConsultant' => 'required',
+				'assignContactPerson' => 'required'
+			]))
+			{
 
 			date_default_timezone_set('UTC');
 
 			$project = array(
 				'id'=>$prjct_id,
-			'name'=>$this->input->post('projectName'),
-			'description'=>$this->input->post('description'),
-			'start_date'=>date('Y-m-d', strtotime(str_replace('-', '/', $this->input->post('datepicker')))), // mysql icin formatını ayarladık
-			'status_id'=>$this->input->post('status'),
-			'active'=>1 //default active:1 olarak kaydediyoruz.
+				'name'=>$this->request->getPost('projectName'),
+				'description'=>$this->request->getPost('description'),
+				'start_date'=>date('Y-m-d', strtotime(str_replace('-', '/', $this->request->getPost('datepicker')))), // mysql icin formatını ayarladık
+				'status_id'=>$this->request->getPost('status'),
+				'active'=>1 //default active:1 olarak kaydediyoruz.
 			);
-			$this->project_model->update_project($project);
+			$project_model->update_project($project);
 
 			$companies = $_POST['assignCompany']; // multiple select , secilen company'ler
 
-			$this->project_model->remove_company_from_project($prjct_id);	// once hepsini siliyoruz projeye ba�l� companylerin
+			$project_model->remove_company_from_project($prjct_id);	// once hepsini siliyoruz projeye ba�l� companylerin
 
 			foreach ($companies as $company) {
 				$prj_cmpny=array(
 					'prj_id' => $prjct_id,
 					'cmpny_id' => $company
 					);
-				$this->project_model->insert_project_company($prj_cmpny);
+				$project_model->insert_project_company($prj_cmpny);
 			}
 
-			$consultants = $_POST['assignConsultant']; // multiple select , secilen consultant'lar
+			$consultants = $this->request->getPost('assignConsultant'); // multiple select , secilen consultant'lar
 
-			$this->project_model->remove_consultant_from_project($prjct_id);
+			$project_model->remove_consultant_from_project($prjct_id);
 
 			foreach ($consultants as $consultant) {
 				$prj_cnsltnt=array(
@@ -316,20 +309,24 @@ class Project extends BaseController{
 					'cnsltnt_id' => $consultant,
 					'active' => 1
 					);
-				$this->project_model->insert_project_consultant($prj_cnsltnt);
+				$project_model->insert_project_consultant($prj_cnsltnt);
 			}
 
-			$this->project_model->remove_contactuser_from_project($prjct_id);
+			$project_model->remove_contactuser_from_project($prjct_id);
 
-			$contactuser= $this->input->post('assignContactPerson');
+			$contactuser= $this->request->getPost('assignContactPerson');
 			$prj_cntct_prsnl=array(
 				'prj_id' => $prjct_id,
 				'usr_id' => $contactuser
 			);
 
-			$this->project_model->insert_project_contact_person($prj_cntct_prsnl);
-			redirect('project/'.$prjct_id, 'refresh');
+			$project_model->insert_project_contact_person($prj_cntct_prsnl);
+			
+			return redirect()->to('project/'.$prjct_id);
+			}
 		}
+		$data['validation']=$this->validator;
+
 		echo view('template/header');
 		echo view('project/update_project',$data);
 		echo view('template/footer');

@@ -1,17 +1,14 @@
 <div class="container">
 	<p class="lead"><?= lang("Validation.editprojectinfo"); ?></p>
-
-	<!-- for Datepicker -->
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-	<?php if(validation_errors() != NULL ): ?>
-	    <div class="alert">
-	      <button type="button" class="close" data-dismiss="alert">&times;</button>
-	      <?= validation_errors(); ?>
-	    </div>
-    <?php endif ?>
-
+	<?php
+		if($validation != NULL)
+		echo $validation->listErrors();
+	?>
 	<?= form_open('update_project/'.$projects['id']); ?>
+	<?= csrf_field() ?>
+		<input class="form-control" id="id" value="<?= set_value('id',$projects['id']); ?>" name="id" type="hidden" />
+
 		<div class="row">
 			<div class="col-md-8">
 				<div class="form-group">

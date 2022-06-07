@@ -146,21 +146,21 @@ class Project_model extends Model
     {
         $db = db_connect();
         $builder = $db->table('t_prj_cmpny');
-        $builder->delete(['id' => $projID]);
+        $builder->delete(['prj_id' => $projID]);
     }
 
     public function remove_consultant_from_project($projID)
     {
         $db = db_connect();
         $builder = $db->table('t_prj_cnsltnt');
-        $builder->delete(['id' => $projID]);
+        $builder->delete(['prj_id' => $projID]);
     }
 
     public function remove_contactuser_from_project($projID)
     {
         $db = db_connect();
         $builder = $db->table('t_prj_cntct_prsnl');
-        $builder->delete(['id' => $projID]);
+        $builder->delete(['prj_id' => $projID]);
     }
 
     public function can_update_project_information($user_id, $project_id)
