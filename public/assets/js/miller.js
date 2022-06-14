@@ -1,11 +1,10 @@
 /**
  * v1.3.1.1
  */
-
 function miller_column_UBP(){
     
     $.ajax({
-                url: 'http://localhost/UBP_values',
+                url: '../UBP_values',
                 type: 'GET',
                 crossDomain: true,
                 contentType: "application/json; charset=utf-8",

@@ -674,15 +674,16 @@ class Dataset extends BaseController {
 	// REFFNET UBP values
 	public function UBP_values(){
 		//todo only users with permission/licenese should be able to get the UBP value
+		$flow_model = model(Flow_model::class);
+		$user_model = model(User_model::class);
 
-		//checks permissions, if not loged in a redirect happens
-		$user = $session->get('user_in');
-		if(empty($user)){
-			redirect('', 'refresh');
+		if(!empty($this->session->username)){
+			return redirect()->to(site_url());
 		}
 
+
 		//All users can have their own imported / created UBP Data
-		$data['userepvalues'] = $this->flow_model->get_userep($user['id']);
+		$data['userepvalues'] = $flow_model->get_userep($this->session->id);
 
 		//if they have UBP data they are shown, else they get an info in the miller 
 		if (!empty($data['userepvalues'])) {
@@ -738,7 +739,7 @@ class Dataset extends BaseController {
 		}
 
 
-		$is_consultant = $this->user_model->is_user_consultant($user['id']);
+		$is_consultant = $user_model->is_user_consultant($this->session->id);
 		//only consultants get UBP data (needs to be even stricter in future!)
 		if ($is_consultant) {
 			$url = 'https://reffnetservice.azurewebsites.net/api/LCA/GetAll?parentNr=500&token=TOKEN';
