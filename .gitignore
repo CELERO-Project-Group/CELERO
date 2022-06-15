@@ -1,3 +1,10 @@
+#CELERO local config files
+app/Config/App.php
+app/Config/Database.php
+docker/docker-compose.yml
+docker/php/Dockerfile
+
+
 #-------------------------
 # Operating Specific Junk Files
 #-------------------------
