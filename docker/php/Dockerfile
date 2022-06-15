@@ -31,5 +31,8 @@ COPY config/php.ini /usr/local/etc/php
 
 RUN service apache2 restart
 
+RUN chown -R www-data:www-data /var/www
+RUN chmod -R 0777 /var/www
+
 #RUN chmod -R 0777 /var/www/html/writable
 
