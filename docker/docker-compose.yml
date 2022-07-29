@@ -2,35 +2,36 @@ version: '2.1'
 
 services:
 
-  celerophp:
+  celerophp-test:
     build: ./php
     ports:
-      - "80:80"
+      - "8080:80"
     links:
-      - celerodb
-    container_name: celerophp
+      - celerodb-test
+    container_name: celerophp-test
     volumes:
-      - C:\Users\user\Documents\CELERO:/var/www/html
+      - /home/celero/celero-test:/var/www/html
       - ./apache_log:/var/log/apache2
+    user: "0:0"
 
-  celerodb:  
+  celerodb-test:  
     build:
       context: ./db
       args:
         PASSWORD: password
         USER: postgres
     ports:
-      - "5432:5432"
+      - "3001:5432"
     volumes_from:
-      - celerodbdata
-    container_name: celerodb
+      - celerodbdata-test
+    container_name: celerodb-test
     environment:
       POSTGRES_PASSWORD: password
-
+  
   #No Linux, only data container
-  celerodbdata:  
+  celerodbdata-test:  
     image: cogniteev/echo
     command: echo 'Data Container for PostgreSQL'
     volumes:
-      - C:\Users\user\Documents\celerodb_new:/var/lib/postgresql/data
-    container_name: celerodbdata
+      - /home/celero/celero-test/celerodb:/var/lib/postgresql/data
+    container_name: celerodbdata-test
