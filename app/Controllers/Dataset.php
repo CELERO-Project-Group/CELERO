@@ -9,7 +9,6 @@ use App\Models\Flow_model;
 use App\Models\Process_model;
 use App\Models\Equipment_model;
 use App\Models\Component_model;
-use App\Models\Cpscoping_model;
 
 class Dataset extends BaseController {
 
@@ -21,27 +20,35 @@ class Dataset extends BaseController {
 
 	public function new_product($companyID)
 	{
-		$this->form_validation->set_rules('product', 'Product Field', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('quantities', 'Product Quantity', 'trim|numeric|xss_clean');
-		$this->form_validation->set_rules('ucost', 'Unit Cost', 'trim|numeric|xss_clean');
-		$this->form_validation->set_rules('ucostu', 'Unit Cost Unit', 'trim|xss_clean');
-		$this->form_validation->set_rules('qunit', 'Quantity Unit', 'trim|xss_clean');
-		$this->form_validation->set_rules('tper', 'Time Period', 'trim|xss_clean');
+		$product_model = model(Product_model::class);
+		$flow_model = model(Flow_model::class);
+		$company_model = model(Company_model::class);
 
-		if($this->form_validation->run() !== FALSE) {
-			$productArray = array(
-					'cmpny_id' => $companyID,
-					'name' => $this->request->getPost('product'),
-					'quantities' => $this->sifirla($this->request->getPost('quantities')),
-					'ucost' => $this->sifirla($this->request->getPost('ucost')),
-					'ucostu' => $this->request->getPost('ucostu'),
-					'qunit' => $this->request->getPost('qunit'),
-					'tper' => $this->request->getPost('tper'),
-				);
-			$this->product_model->set_product($productArray);
+		if(!empty($this->request->getPost())){
+			if ($this->validate([
+				'product'=>  'trim|required',
+				'quantities'=>  'trim|numeric',
+				'ucost'=> 'trim|numeric',
+				'ucostu'=>'trim',
+				'qunit'=> 'trim',
+				'tper'=> 'trim'
+			]))
+			{
+				$productArray = array(
+						'cmpny_id' => $companyID,
+						'name' => $this->request->getPost('product'),
+						'quantities' => $this->sifirla($this->request->getPost('quantities')),
+						'ucost' => $this->sifirla($this->request->getPost('ucost')),
+						'ucostu' => $this->request->getPost('ucostu'),
+						'qunit' => $this->request->getPost('qunit'),
+						'tper' => $this->request->getPost('tper'),
+					);
+				$product_model->set_product($productArray);
+			}
+
 		}
 
-		$data['product'] = $this->product_model->get_product_list($companyID);
+		$data['product'] = $product_model->get_product_list($companyID);
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
 		$data['units'] = $flow_model->get_unit_list();
@@ -54,6 +61,9 @@ class Dataset extends BaseController {
 
 	public function edit_product($companyID,$product_id)
 	{
+		$flow_model = model(Flow_model::class);
+		$company_model = model(Company_model::class);
+		
 		$this->form_validation->set_rules('product', 'Product Field', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('quantities', 'Product Quantity', 'trim|numeric|xss_clean');
 		$this->form_validation->set_rules('ucost', 'Unit Cost', 'trim|numeric|xss_clean');
@@ -71,12 +81,12 @@ class Dataset extends BaseController {
 					'qunit' => $this->request->getPost('qunit'),
 					'tper' => $this->request->getPost('tper'),
 				);
-			$this->product_model->update_product($companyID,$product_id,$productArray);
+			$product_model->update_product($companyID,$product_id,$productArray);
 			redirect(base_url('new_product/'.$companyID), 'refresh'); // tablo olusurken ajax kullan�labilir.
 
 		}
 
-		$data['product'] = $this->product_model->get_product_by_cid_pid($companyID,$product_id);
+		$data['product'] = $product_model->get_product_by_cid_pid($companyID,$product_id);
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
 		$data['units'] = $flow_model->get_unit_list();
@@ -88,7 +98,7 @@ class Dataset extends BaseController {
 
 	public function new_flow($companyID)
 	{
-
+		$process_model = model(Process_model::class);
 		$flow_model = model(Flow_model::class);
 		$company_model = model(Company_model::class);
 		
@@ -258,6 +268,11 @@ class Dataset extends BaseController {
 
 	public function edit_flow($companyID,$flow_id,$flow_type_id)
 	{
+		$process_model = model(Process_model::class);
+		$equipment_model = model(Equipment_model::class);
+		$flow_model = model(Flow_model::class);
+		$component_model = model(Component_model::class);
+
 		$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required|xss_clean|strip_tags|numeric');
 		$this->form_validation->set_rules('quantityUnit', 'Quantity Unit', 'trim|required|xss_clean|strip_tags');
 		$this->form_validation->set_rules('cost', 'Cost', 'trim|required|xss_clean|strip_tags|numeric');
@@ -300,11 +315,6 @@ class Dataset extends BaseController {
 			$state = $this->request->getPost('state');
 			$quality = $this->request->getPost('quality');
 			$oloc = $this->request->getPost('oloc');
-			//$odis = $this->request->getPost('odis');
-			//$otrasmean = $this->request->getPost('otrasmean');
-			//$sdis = $this->request->getPost('sdis');
-			//$strasmean = $this->request->getPost('strasmean');
-			//$rtech = $this->request->getPost('rtech');
 			$desc = $this->request->getPost('desc');
 			$spot = $this->request->getPost('spot');
 			$comment = $this->request->getPost('comment');
@@ -361,6 +371,7 @@ class Dataset extends BaseController {
 
 	function flow_varmi()
 	{
+		$flow_model = model(Flow_model::class);
 		$flowID = $this->request->getPost('flowname');
 		$flowtypeID = $this->request->getPost('flowtype');
 		$companyID = $this->uri->segment(2);
@@ -641,7 +652,13 @@ class Dataset extends BaseController {
 		$product_model->delete_product($id);
 		redirect('new_product/'.$companyID, 'refresh');
 	}
+
 	public function delete_flow($companyID,$id){
+		$process_model = model(Process_model::class);
+		$equipment_model = model(Equipment_model::class);
+		$flow_model = model(Flow_model::class);
+		$component_model = model(Component_model::class);
+
 		$cmpny_flow_prcss_id_list = $process_model->cmpny_flow_prcss_id_list($id);
 		$process_model->delete_cmpny_flow_process($id);
 
@@ -654,28 +671,32 @@ class Dataset extends BaseController {
 
 		$component_model->delete_flow_cmpnnt_by_flowID($id);
 		$flow_model->delete_flow($id);
-		redirect('new_flow/'.$companyID, 'refresh');
+		return redirect()->to(site_url('new_flow/'.$companyID));
 	}
 
 	public function delete_component($companyID,$id){
+		$component_model = model(Component_model::class);
 		$component_model->delete_flow_cmpnnt_by_cmpnntID($id);
 		$component_model->delete_cmpnnt($companyID,$id);
-		redirect('new_component/'.$companyID, 'refresh');
+		return redirect()->to(site_url('new_component/'.$companyID));
 	}
 
 	public function get_equipment_type(){
+		$equipment_model = model(Equipment_model::class);
 		$equipment_id = $this->request->getPost('equipment_id');
 		$type_list = $equipment_model->get_equipment_type_list($equipment_id);
 		echo json_encode($type_list);
 	}
 
 	public function get_equipment_attribute(){
+		$equipment_model = model(Equipment_model::class);
 		$equipment_type_id = $this->request->getPost('equipment_type_id');
 		$attribute_list = $equipment_model->get_equipment_attribute_list($equipment_type_id);
 		echo json_encode($attribute_list);
 	}
 
 	public function get_sub_process(){
+		$process_model = model(Process_model::class);
 		$processID = $this->request->getPost('processID');
 		$process_list = $process_model->get_process_from_motherID($processID);
 		echo json_encode($process_list);
@@ -683,6 +704,7 @@ class Dataset extends BaseController {
 
 	// returns flowname user matchup for ajax.
 	public function my_ep_values($flowname,$userid){
+		$flow_model = model(Flow_model::class);
 		$epvalue=$flow_model->get_My_Ep_Values($flowname,$userid);
 		echo json_encode($epvalue);
 	}
@@ -794,6 +816,8 @@ class Dataset extends BaseController {
 	}
 
 	public function delete_process($companyID,$company_process_id,$company_flow_id){
+		$process_model = model(Process_model::class);
+		$equipment_model = model(Equipment_model::class);
 
 		$process_model->delete_company_flow_prcss($company_process_id,$company_flow_id);
 
@@ -808,7 +832,7 @@ class Dataset extends BaseController {
 	}
 
 	public function delete_equipment($cmpny_id,$cmpny_eqpmnt_id){
-
+		$equipment_model = model(Equipment_model::class);
 		$equipment_model->delete_cmpny_prcss_eqpmnt_type($cmpny_eqpmnt_id);
 		$equipment_model->delete_cmpny_eqpmnt($cmpny_eqpmnt_id);
 		redirect('new_equipment/'.$cmpny_id,'refresh');
@@ -852,10 +876,5 @@ class Dataset extends BaseController {
 		// $this->user_model->create_dataset_for_users($data);
 
 		//we will call views in here and show it
-
-
 	}
-
-
-
 }
