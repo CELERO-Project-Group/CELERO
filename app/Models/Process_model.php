@@ -6,27 +6,33 @@ use CodeIgniter\Model;
 class Process_model extends Model {
 
 	public function get_cmpny_prcss_id_copy($cmpny_id,$prcss_id){
-		$db->select('id');
-		$db->from('t_cmpny_prcss');
-		$db->where('cmpny_id',$cmpny_id);
-		$db->where('prcss_id',$prcss_id);
-		return $db->get()->row_array();
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_prcss');
+        $builder->select('id');
+        $builder->where('cmpny_id',$cmpny_id);
+		$builder->where('prcss_id',$prcss_id);
+        $query = $builder->get();
+        return $query->getRowArray();
 	}
 
 	public function get_cmpny_prcss_from_id($cmpny_id,$prcss_id){
-		$db->select('*');
-		$db->from('t_cmpny_prcss');
-		$db->where('cmpny_id',$cmpny_id);
-		$db->where('prcss_id',$prcss_id);
-		return $db->get()->row_array();
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_prcss');
+        $builder->select('*');
+        $builder->where('cmpny_id',$cmpny_id);
+		$builder->where('prcss_id',$prcss_id);
+        $query = $builder->get();
+        return $query->getRowArray();
 	}
 
 	public function get_cmpny_prcss_from_rid($cmpny_id,$prcss_id){
-		$db->select('*');
-		$db->from('t_cmpny_prcss');
-		$db->where('cmpny_id',$cmpny_id);
-		$db->where('id',$prcss_id);
-		return $db->get()->row_array();
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_prcss');
+        $builder->select('*');
+        $builder->where('cmpny_id',$cmpny_id);
+		$builder->where('id',$prcss_id);
+        $query = $builder->get();
+        return $query->getRowArray();
 	}
 
 	//update comment of a process
@@ -34,48 +40,54 @@ class Process_model extends Model {
 		$data = array(
                'comment' => $comment
             );
-		$db->where('cmpny_id',$cmpny_id);
-		$db->where('prcss_id',$prcss_id);
-    $db->update('t_cmpny_prcss',$data); 
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_prcss');
+        $builder->where('cmpny_id',$cmpny_id);
+		$builder->where('prcss_id',$prcss_id);
+        $builder->replace($data);
 	}
 
 	public function get_processfamily_list(){
-		$db->select('*');
-		$db->from('t_prcss_family');
-		$query = $db->get();
-		return $$query->getResultArray();
+		$db = db_connect();
+        $builder = $db->table('t_prcss_family');
+        $builder->select("*");
+        $query = $builder->get();
+        return $query->getResultArray();
 	}
 
 	public function get_process(){
-		$db->select('*');
-	    $db->from('t_prcss');
-	    $query = $db->get();
-	    return $$query->getResultArray();
+		$db = db_connect();
+        $builder = $db->table('t_prcss');
+        $builder->select("*");
+        $query = $builder->get();
+        return $query->getResultArray();
 	}
 
 	public function get_process_from_process_name($process_name){
-		$db->select('*');
-    	$db->from('t_prcss');
-        $db->where('name',$process_name);
-		$query = $db->get();
-		return $query->row_array();
+		$db = db_connect();
+        $builder = $db->table('t_prcss');
+        $builder->select('*');
+        $builder->where('name',$process_name);
+        $query = $builder->get();
+        return $query->getRowArray();
 	}
 
 	public function get_process_from_process_id($prcss_id){
-		$db->select('*');
-    	$db->from('t_prcss');
-        $db->where('id',$prcss_id);
-		$query = $db->get();
-		return $query->row_array();
+		$db = db_connect();
+        $builder = $db->table('t_prcss');
+        $builder->select('*');
+        $builder->where('id',$prcss_id);
+        $query = $builder->get();
+        return $query->getRowArray();
 	}
 	
 	public function get_main_process(){
-		$db->select('*');
-		$db->from('t_prcss');
-		//$db->where('mother_id',NULL);
-		$db->where('active',1);
-		$query = $db->get();
-		return $$query->getResultArray();
+		$db = db_connect();
+        $builder = $db->table('t_prcss');
+        $builder->select("*");
+		$builder->where('active',1);
+        $query = $builder->get();
+        return $query->getResultArray();
 	}
 
 	public function is_new_process($process_id,$processfamilyID = false){
@@ -89,8 +101,10 @@ class Process_model extends Model {
 				'active' => 1,
 				'layer' => 1
 			);
-			$db->insert('t_prcss',$data);
-			return $db->insert_id();
+			$db = db_connect();
+			$builder = $db->table('t_prcss');
+			$builder->insert($data);
+			return $db->insertID();
 		}
 
 	}
@@ -105,35 +119,38 @@ class Process_model extends Model {
 				'flow_family_id' => $flowfamilyID,
 				'active' => 1,
 			);
-			$db->insert('t_flow',$data);
-			//echo "d";
-			//exit;
-			//echo $db->last_query();
-			return $db->insert_id('t_flow_id_seq');
+			$db = db_connect();
+			$builder = $db->table('t_flow');
+			$builder->insert($data);
+			return $db->insertID('t_flow_id_seq');
 		}
 
 	}
 
 	public function get_process_from_motherID($mother_id){
-		$db->select('*');
-	    $db->from('t_prcss');
-	    $db->where('mother_id',$mother_id);
-	    $db->where('active',1);
-	    $query = $db->get();
-	    return $$query->getResultArray();
+		$db = db_connect();
+        $builder = $db->table('t_prcss');
+        $builder->select('*');
+		$builder->where('mother_id',$mother_id);
+	    $builder->where('active',1);
+        $query = $builder->get();
+        return $query->getResultArray();
 	}
 
 	public function cmpny_flow_prcss($data){
-		$db->insert('t_cmpny_flow_prcss',$data);
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_flow_prcss');
+        $builder->insert($data);
 	}
 
 	public function cmpny_prcss($data){
-		$db->insert('t_cmpny_prcss',$data);
-		return $db->insert_id();
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_prcss');
+        $builder->insert($data);
+        return $db->insertID();
 	}
 
 	public function get_cmpny_flow_prcss($id){
-
 		$db = db_connect();
         $builder = $db->table('t_cmpny_flow_prcss');
         $builder->select('t_cmpny_prcss.comment,t_cmpny_prcss.max_rate_util,t_cmpny_prcss.typ_rate_util,t_cmpny_prcss.min_rate_util,t_cmpny_flow.id as company_flow_id, t_flow.name as flowname, t_prcss.name as prcessname,
@@ -153,15 +170,15 @@ class Process_model extends Model {
 		$builder->orderBy("t_prcss.name", "asc"); 
         $query = $builder->get();
         return $query->getResultArray();
-
 	}
 
 	public function can_write_cmpny_prcss($cmpny_id,$prcss_id){
-		$db->select('id');
-	    $db->from('t_cmpny_prcss');
-	    $db->where('cmpny_id',$cmpny_id);
-	    $db->where('prcss_id',$prcss_id);
-	    $query = $db->get()->row_array();
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_prcss');
+        $builder->select('id');
+        $builder->where('cmpny_id',$cmpny_id);
+	    $builder->where('prcss_id',$prcss_id);
+        $query = $builder->get();
 	    if(empty($query))
 	    	return false;
 	    else
@@ -169,38 +186,47 @@ class Process_model extends Model {
 	}
 
 	public function can_write_cmpny_flow_prcss($cmpny_flow_id,$cmpny_prcss_id){
-		$db->select('*');
-    $db->from('t_cmpny_flow_prcss');
-    $db->where('cmpny_flow_id',$cmpny_flow_id);
-    $db->where('cmpny_prcss_id',$cmpny_prcss_id);
-    $query = $db->get()->row_array();
-    if(empty($query)){
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_flow_prcss');
+        $builder->select('*');
+		$builder->where('cmpny_flow_id',$cmpny_flow_id);
+		$builder->where('cmpny_prcss_id',$cmpny_prcss_id);
+        $query = $builder->get();
+		if(empty($query)){
 			return true;
 		}
 		return false;
 	}
+
 	public function cmpny_flow_prcss_id_list($id){
-		$db->select('cmpny_prcss_id');
-	    $db->from('t_cmpny_flow_prcss');
-	    $db->where('cmpny_flow_id',$id);
-	    $query = $db->get();
-	    return $$query->getResultArray();
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_flow_prcss');
+        $builder->select('cmpny_prcss_id');
+		$builder->where('cmpny_flow_id',$id);
+        $query = $builder->get();
+        return $query->getResultArray();
 	}
 
 	public function delete_cmpny_flow_process($cmpny_flow_id){
-		$db->where('cmpny_flow_id', $cmpny_flow_id);
-    	$db->delete('t_cmpny_flow_prcss'); 
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_flow_prcss');
+		$builder->where('cmpny_flow_id', $cmpny_flow_id);
+        $builder->delete();
 	}
 
 	public function delete_cmpny_process($cmpny_prcss_id){
-		$db->where('id', $cmpny_prcss_id);
-    	$db->delete('t_cmpny_prcss'); 
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_prcss');
+		$builder->where('id', $cmpny_prcss_id);
+        $builder->delete();
 	}
+
 	public function still_exist_this_cmpny_prcss($cmpny_prcss_id){
-		$db->select('*');
-	    $db->from('t_cmpny_flow_prcss');
-	    $db->where('cmpny_prcss_id',$cmpny_prcss_id);
-	    $query = $db->get()->row_array();
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_flow_prcss');
+        $builder->select("*");
+	    $builder->where('cmpny_prcss_id',$cmpny_prcss_id);
+        $query = $builder->get()->getRowArray();
 	    if(empty($query))
 	    	return false;
 	    else
@@ -208,38 +234,49 @@ class Process_model extends Model {
 	}
 
 	public function delete_company_flow_prcss($cmpny_prcss_id,$cmpny_flow_id){
-		$db->where('cmpny_prcss_id', $cmpny_prcss_id);
-		$db->where('cmpny_flow_id', $cmpny_flow_id);
-		$db->delete('t_cmpny_flow_prcss'); 
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_flow_prcss');
+		$builder->where('cmpny_prcss_id', $cmpny_prcss_id);
+		$builder->where('cmpny_flow_id', $cmpny_flow_id);
+        $builder->delete();
 	}
 
 	public function delete_cmpny_prcss_eqpmnt_type($cmpny_prcss_id){
-		$db->where('cmpny_prcss_id',$cmpny_prcss_id);
-		$db->delete('t_cmpny_prcss_eqpmnt_type');
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_prcss_eqpmnt_type');
+		$builder->where('cmpny_prcss_id', $cmpny_prcss_id);
+        $builder->delete();
 	}
 
 	public function delete_cmpny_prcss($company_id){
-		$db->where('cmpny_id',$company_id);
-		$db->delete('t_cmpny_prcss');
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_prcss');
+		$builder->where('cmpny_id',$company_id);
+        $builder->delete();
 	}
 
 	public function get_cmpny_prcss_id($cmpny_id){
-		$db->select('id');
-		$db->from('t_cmpny_prcss');
-		$db->where('cmpny_id',$cmpny_id);
-		$query = $db->get()->result_array();
-		return $query;
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_prcss');
+        $builder->select('id');
+		$builder->where('cmpny_id',$cmpny_id);
+        $query = $builder->get();
+        return $query->getResultArray();
 	}
 
 	public function delete_cmpny_eqpmnt($companyID){
-		$db->where('cmpny_id',$companyID);
-		$db->delete('t_cmpny_eqpmnt');
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_eqpmnt');
+		$builder->where('cmpny_id',$companyID);
+        $builder->delete();
 	}
 
 	public function update_cmpny_flow_prcss($companyID,$process_id,$cmpny_prcss){
-		$db->where('t_cmpny_prcss.cmpny_id',$companyID);   
-    $db->where('t_cmpny_prcss.id',$process_id);   
-    $db->update('t_cmpny_prcss',$cmpny_prcss); 
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_prcss');
+		$builder->where('t_cmpny_prcss.cmpny_id',$companyID);   
+    	$builder->where('t_cmpny_prcss.id',$process_id);   
+        $builder->replace($cmpny_prcss);
 	}
 }
 ?>

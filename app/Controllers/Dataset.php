@@ -47,7 +47,7 @@ class Dataset extends BaseController {
 			}
 		}
 
-		$data['validation']=$this->validator;
+		$data['validation'] = $this->validator;
 		$data['product'] = $product_model->get_product_list($companyID);
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
@@ -360,7 +360,7 @@ class Dataset extends BaseController {
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
 		$data['units'] = $flow_model->get_unit_list();
-		$data['validation']=$this->validator;
+		$data['validation'] = $this->validator;
 
 		echo view('template/header');
 		echo view('dataset/edit_flow',$data);
@@ -450,7 +450,8 @@ class Dataset extends BaseController {
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
 		$data['flow_and_flow_type'] = $component_model->get_cmpny_flow_and_flow_type($companyID);
-		
+		$data['validation'] = $this->validator;
+
 		echo view('template/header');
 		echo view('dataset/dataSetLeftSide',$data);
 		echo view('dataset/new_component',$data);
@@ -465,7 +466,7 @@ class Dataset extends BaseController {
 
 		if(!empty($this->request->getPost())){
 			if ($this->validate([
-					'component_name'=> 'Component Name', 'trim|required|xss_clean'
+					'component_name'=> 'trim|required'
 				])){
 
 				$component_array = array(
@@ -493,7 +494,6 @@ class Dataset extends BaseController {
 		}
 
 		$data['validation'] = $this->validator;
-
 		$data['component'] = $component_model->get_cmpnnt_info($companyID,$id);
 		$data['units'] = $flow_model->get_unit_list();
 		$data['ctypes'] = $component_model->get_cmpnnt_type();
@@ -544,6 +544,7 @@ class Dataset extends BaseController {
 			}
 		}
 
+		$data['validation'] = $this->validator;
 		$data['process'] = $process_model->get_main_process();
 		$data['company_flows']=$flow_model->get_company_flow_list($companyID);
 		$data['cmpny_flow_prcss'] = $process_model->get_cmpny_flow_prcss($companyID);
@@ -579,6 +580,7 @@ class Dataset extends BaseController {
 			}
 		}
 
+		$data['validation'] = $this->validator;
 		$data['process'] = $process_model->get_cmpny_prcss_from_rid($companyID,$process_id);
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
@@ -631,7 +633,7 @@ class Dataset extends BaseController {
 			}
 		}
 
-		$data['validation']=$this->validator;
+		$data['validation'] = $this->validator;
 		$data['companyID'] = $companyID;
 		$data['equipmentName'] = $equipment_model->get_equipment_name();
 		$data['process'] = $equipment_model->cmpny_prcss($companyID);
