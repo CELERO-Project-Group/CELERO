@@ -394,47 +394,58 @@ class Dataset extends BaseController {
 
 	public function new_component($companyID){
 
-		$this->form_validation->set_rules('component_name', 'Component Name', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('flowtype', 'Flow Type', 'trim|xss_clean');
+		$component_model = model(Component_model::class);
+		$company_model = model(Company_model::class);
+		$flow_model = model(Flow_model::class);
 
-		if($this->form_validation->run() !== FALSE) {
-			$component_array = array(
-				'cmpny_id' => $companyID,
-				'name' => $this->input->post('component_name'),
-				'name_tr' => $this->input->post('component_name'),
-				'active' => '1'
-			);
-			$component_id = $this->component_model->set_cmpnnt($component_array);
-
-			$cmpny_flow_cmpnnt = array(
-				'cmpny_flow_id' => $this->input->post('flowtype'),
-				'description' => $this->input->post('description'),
-				'qntty' => $this->sifirla($this->input->post('quantity')),
-				'qntty_unit_id' => $this->sifirla($this->input->post('quantityUnit')),
-				'supply_cost' => $this->sifirla($this->input->post('cost')),
-				'supply_cost_unit' => $this->input->post('costUnit'),
-				'output_cost' => $this->sifirla($this->input->post('ocost')),
-				'output_cost_unit' => $this->input->post('ocostunit'),
-				'data_quality' => $this->input->post('quality'),
-				'substitute_potential' => $this->input->post('spot'),
-				'comment' => $this->input->post('comment'),
-				'cmpnt_type_id' =>$this->sifirla($this->input->post('component_type')),
-				'cmpnnt_id' => $component_id
-			);
-			$this->component_model->set_cmpny_flow_cmpnnt($cmpny_flow_cmpnnt);
+		if(empty($this->session->username)){
+			return redirect()->to(site_url());
 		}
 
-		$data['units'] = $this->flow_model->get_unit_list();
-		$data['component_name'] = $this->component_model->get_cmpnnt($companyID);
-		$data['ctypes'] = $this->component_model->get_cmpnnt_type();
-		$data['companyID'] = $companyID;
-		$data['company_info'] = $this->company_model->get_company($companyID);
-		$data['flow_and_flow_type'] = $this->component_model->get_cmpny_flow_and_flow_type($companyID);
+		if(!empty($this->request->getPost())){
 
-		$this->load->view('template/header');
-		$this->load->view('dataset/dataSetLeftSide',$data);
-		$this->load->view('dataset/new_component',$data);
-		$this->load->view('template/footer');
+			if ($this->validate([
+					'component_name', 'Component Name', 'trim|required',
+					'flowtype', 'Flow Type', 'trim'
+				])){
+
+					$component_array = array(
+						'cmpny_id' => $companyID,
+						'name' => $this->equest->getPost('component_name'),
+						'name_tr' => $this->equest->getPost('component_name'),
+						'active' => '1'
+					);
+					$component_id = $component_model->set_cmpnnt($component_array);
+
+					$cmpny_flow_cmpnnt = array(
+						'cmpny_flow_id' => $this->equest->getPost('flowtype'),
+						'description' => $this->equest->getPost('description'),
+						'qntty' => $this->sifirla($this->equest->getPost('quantity')),
+						'qntty_unit_id' => $this->sifirla($this->equest->getPost('quantityUnit')),
+						'supply_cost' => $this->sifirla($this->equest->getPost('cost')),
+						'supply_cost_unit' => $this->equest->getPost('costUnit'),
+						'output_cost' => $this->sifirla($this->equest->getPost('ocost')),
+						'output_cost_unit' => $this->equest->getPost('ocostunit'),
+						'data_quality' => $this->equest->getPost('quality'),
+						'substitute_potential' => $this->equest->getPost('spot'),
+						'comment' => $this->equest->getPost('comment'),
+						'cmpnt_type_id' =>$this->sifirla($this->equest->getPost('component_type')),
+						'cmpnnt_id' => $component_id
+					);
+					$component_model->set_cmpny_flow_cmpnnt($cmpny_flow_cmpnnt);
+				}
+		}
+		$data['units'] = $flow_model->get_unit_list();
+		$data['component_name'] = $component_model->get_cmpnnt($companyID);
+		$data['ctypes'] = $component_model->get_cmpnnt_type();
+		$data['companyID'] = $companyID;
+		$data['company_info'] = $company_model->get_company($companyID);
+		$data['flow_and_flow_type'] = $component_model->get_cmpny_flow_and_flow_type($companyID);
+		
+		echo view('template/header');
+		echo view('dataset/dataSetLeftSide',$data);
+		echo view('dataset/new_component',$data);
+		echo view('template/footer');
 	}
 
 	public function edit_component($companyID,$id){
