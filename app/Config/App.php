@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://32038.hostserv.eu:8080/';
+    public $baseURL = 'http://127.0.0.1/';
 
     /**
      * --------------------------------------------------------------------------

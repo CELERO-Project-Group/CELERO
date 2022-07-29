@@ -75,17 +75,17 @@ class Dataset extends BaseController {
 				'tper' 		 	=>  'trim'
 			]))
 			{
-			$productArray = array(
-					'cmpny_id' => $companyID,
-					'name' => $this->request->getPost('product'),
-					'quantities' => $this->sifirla($this->request->getPost('quantities')),
-					'ucost' => $this->sifirla($this->request->getPost('ucost')),
-					'ucostu' => $this->request->getPost('ucostu'),
-					'qunit' => $this->request->getPost('qunit'),
-					'tper' => $this->request->getPost('tper'),
-				);
-			$product_model->update_product($companyID,$product_id,$productArray);
-			return redirect()->to('new_product/'.$companyID);
+				$productArray = array(
+						'cmpny_id' => $companyID,
+						'name' => $this->request->getPost('product'),
+						'quantities' => $this->sifirla($this->request->getPost('quantities')),
+						'ucost' => $this->sifirla($this->request->getPost('ucost')),
+						'ucostu' => $this->request->getPost('ucostu'),
+						'qunit' => $this->request->getPost('qunit'),
+						'tper' => $this->request->getPost('tper'),
+					);
+				$product_model->update_product($companyID,$product_id,$productArray);
+				return redirect()->to('new_product/'.$companyID);
 			}
 		}
 		
@@ -114,33 +114,30 @@ class Dataset extends BaseController {
 
 		$data['flownames'] = $flow_model->get_flowname_list();
 
-		if(!empty($this->request->getPost())){
-
+		if (!empty($this->request->getPost())){
 			if ($this->validate([
-				'flowname', 'Flow Name', 'trim|required|strip_tags|callback_alpha_dash_space',
-				'flowtype', 'Flow Type', 'trim|required|strip_tags|callback_flow_varmi',
-				'quantity', 'Quantity', 
-					"trim|required|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]|max_length[8]",
-				'quantityUnit', 'Quantity Unit', 'trim|required|strip_tags',
-				'cost', 'Cost', "trim|required|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]|max_length[8]",
-				'costUnit', 'Cost Unit', 'trim|required|strip_tags',
-				'ep', 'EP', 
-					"trim|strip_tags|max_length[25]|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]",
-				'epUnit', 'EP Unit', 'trim|strip_tags',
-				'charactertype', 'Flow Character Type', 'trim|strip_tags|max_length[50]',
-				'availability', 'Availability', 'trim',
-				'cf', 'Chemical Formula', 'trim|max_length[30]',
-				'conc', 'Concentration', 'trim|strip_tags|numeric',
-				'concunit', 'Concentration Unti', 'trim',
-				'pres', 'Pressure', 'trim|strip_tags|numeric|max_length[10]',
-				'presunit', 'Pressure Unit', 'trim',
-				'ph', 'PH', 'trim|strip_tags|numeric|max_length[10]',
-				'state', 'State', 'trim',
-				'quality', 'Quality', 'trim|max_length[150]',
-				'oloc', 'Output Location', 'trim',
-				'spot', 'Substitution Potential', 'trim',
-				'desc', 'Description', 'trim|max_length[500]',
-				'comment', 'Comment', 'trim'
+				'flowname' => 'trim|required|strip_tags|callback_alpha_dash_space',
+				'flowtype' => 'trim|required|strip_tags|callback_flow_varmi',
+				'quantity' => "trim|required|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]|max_length[8]",
+				'quantityUnit' => 'trim|required|strip_tags',
+				'cost' =>  "trim|required|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]|max_length[8]",
+				'costUnit' =>  'trim|required|strip_tags',
+				'ep' =>  "trim|strip_tags|max_length[25]|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]",
+				'epUnit' => 'trim|strip_tags',
+				'charactertype' =>  'trim|strip_tags|max_length[50]',
+				'availability' =>  'trim',
+				'cf' =>  'trim|max_length[30]',
+				'conc' =>  'trim|strip_tags|numeric',
+				'concunit' =>  'trim',
+				'pres' =>  'trim|strip_tags|numeric|max_length[10]',
+				'presunit' =>  'trim',
+				'ph' =>  'trim|strip_tags|numeric|max_length[10]',
+				'state' =>  'trim',
+				'quality' =>  'trim|max_length[150]',
+				'oloc' =>  'trim',
+				'spot' =>  'trim',
+				'desc' =>  'trim|max_length[500]',
+				'comment' =>  'trim'
 			])){
 
 
@@ -261,7 +258,7 @@ class Dataset extends BaseController {
 		$data['company_flows']=$flow_model->get_company_flow_list($companyID);
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
-		$data['validation']=$this->validator;
+		$data['validation'] = $this->validator;
 
 		echo view('template/header');
 		echo view('dataset/dataSetLeftSide',$data);
@@ -272,34 +269,32 @@ class Dataset extends BaseController {
 
 	public function edit_flow($companyID,$flow_id,$flow_type_id)
 	{
-		$process_model = model(Process_model::class);
-		$equipment_model = model(Equipment_model::class);
 		$flow_model = model(Flow_model::class);
-		$component_model = model(Component_model::class);
+		$company_model = model(Company_model::class);
 
-		$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required|xss_clean|strip_tags|numeric');
-		$this->form_validation->set_rules('quantityUnit', 'Quantity Unit', 'trim|required|xss_clean|strip_tags');
-		$this->form_validation->set_rules('cost', 'Cost', 'trim|required|xss_clean|strip_tags|numeric');
-		$this->form_validation->set_rules('costUnit', 'Cost Unit', 'trim|required|xss_clean|strip_tags');
-		$this->form_validation->set_rules('ep', 'EP', 'trim|xss_clean|strip_tags|numeric');
-		$this->form_validation->set_rules('epUnit', 'EP Unit', 'trim|xss_clean|strip_tags');
-
-		$this->form_validation->set_rules('charactertype', 'Flow Character Type', 'trim|xss_clean|strip_tags|max_length[50]');
-		$this->form_validation->set_rules('availability', 'Availability', 'trim|xss_clean');
-		$this->form_validation->set_rules('cf', 'Chemical Formula', 'trim|xss_clean|max_length[100]');
-		$this->form_validation->set_rules('conc', 'Concentration', 'trim|xss_clean|strip_tags|numeric');
-		$this->form_validation->set_rules('concunit', 'Concentration Unti', 'trim|xss_clean');
-		$this->form_validation->set_rules('pres', 'Pressure', 'trim|xss_clean|strip_tags|numeric|max_length[14]');
-		$this->form_validation->set_rules('presunit', 'Pressure Unit', 'trim|xss_clean');
-		$this->form_validation->set_rules('ph', 'PH', 'trim|xss_clean|strip_tags|numeric|max_length[14]');
-		$this->form_validation->set_rules('state', 'State', 'trim|xss_clean');
-		$this->form_validation->set_rules('quality', 'Quality', 'trim|xss_clean|max_length[150]');
-		$this->form_validation->set_rules('oloc', 'Output Location', 'trim|xss_clean');
-		$this->form_validation->set_rules('spot', 'Substitution Potential', 'trim|xss_clean');
-		$this->form_validation->set_rules('desc', 'Description', 'trim|xss_clean|max_length[500]');
-		$this->form_validation->set_rules('comment', 'Comment', 'trim|xss_clean');
-
-		if($this->form_validation->run() !== FALSE) {
+		if (!empty($this->request->getPost())){
+			if ($this->validate([
+				'quantity'=> 'trim|required|strip_tags|numeric',
+				'quantityUnit'=> 'trim|required|strip_tags',
+				'cost'=> 'trim|required|strip_tags|numeric',
+				'costUnit'=> 'trim|required|strip_tags',
+				'ep'=> 'trim|strip_tags|numeric',
+				'epUnit'=> 'trim|strip_tags',
+				'charactertype'=> 'trim|strip_tags|max_length[50]',
+				'availability'=> 'trim',
+				'cf'=> 'trim|max_length[100]',
+				'conc'=> 'trim|strip_tags|numeric',
+				'concunit'=> 'trim',
+				'pres'=> 'trim|strip_tags|numeric|max_length[14]',
+				'presunit'=> 'trim',
+				'ph'=> 'trim|strip_tags|numeric|max_length[14]',
+				'state'=> 'trim',
+				'quality'=> 'trim|max_length[150]',
+				'oloc'=> 'trim',
+				'spot'=> 'trim',
+				'desc'=> 'trim|max_length[500]',
+				'comment'=> 'trim'
+			])){
 
 			$charactertype = $this->request->getPost('charactertype');
 			$ep = $this->request->getPost('ep');
@@ -353,24 +348,23 @@ class Dataset extends BaseController {
 			}
 
 			$flow_model->update_flow_info($companyID,$flow_id,$flow_type_id,$flow);
+			return redirect()->to('new_flow/'.$companyID);
 
-			redirect(base_url('new_flow/'.$companyID), 'refresh'); // tablo olusurken ajax kullan�labilir.
-			//�uan sayfa yenileniyor her seferinde database'den sat�rlar ekleniyor.
-
+			}
 		}
 
 		$data['flow']=$flow_model->get_company_flow($companyID,$flow_id,$flow_type_id);
 		if(empty($data['flow'])){
-			redirect(base_url(), 'refresh'); // tablo olusurken ajax kullan�labilir.
+			return redirect()->to(site_url());
 		}
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
 		$data['units'] = $flow_model->get_unit_list();
+		$data['validation']=$this->validator;
 
 		echo view('template/header');
 		echo view('dataset/edit_flow',$data);
 		echo view('template/footer');
-
 	}
 
 	function flow_varmi()

@@ -131,7 +131,7 @@ class Project extends BaseController{
 	}
 
 	public function contact_person(){
-		$cmpny_id=$this->input->post('company_id'); // 1,2,3 �eklinde company id ler al�nd�
+		$cmpny_id=$this->input->post('company_id'); // 1,2,3 seklinde company id ler al�nd�
 		$user = array();
 		if($cmpny_id != 'null'){
 			$cmpny_id_arr = explode(",", $cmpny_id); // explode ile parse edildi. array icinde company id'ler tutuluyor.
@@ -140,7 +140,7 @@ class Project extends BaseController{
 				$user[] = $this->user_model->get_company_users($cmpny_id);
 			}
 			//foreach dongusu icinde tek tek company id'ler gonderilip ilgili user'lar bulunacak.
-			//suanda sadece ilk company id ' yi al�p user lar� donuyor.
+			//suanda sadece ilk company id ' yi alip user lari donuyor.
 		}
 		echo json_encode($user);
 	}
@@ -349,9 +349,9 @@ class Project extends BaseController{
 		if($this->project_model->can_update_project_information($c_user['id'], $project_id) == true && $this->user_model->is_user_consultant($c_user['id']) == true){
 			$session->remove('project_id');
 			$this->project_model->delete_project($project_id);
-			redirect(base_url('myprojects'),'refresh');
+			return redirect()->to('myprojects');
 		}else{
-			redirect(base_url(''),'refresh');
+			return redirect()->to(site_url());
 		}	
 	}
 

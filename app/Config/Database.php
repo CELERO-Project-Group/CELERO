@@ -32,11 +32,11 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'celerodb-test',
-        'username' => 'postgres',
-        'password' => '1q2w3e4r',
-        'database' => 'ecoman_01_10',
-        'DBDriver' => 'Postgre',
+        'hostname' => 'localhost',
+        'username' => '',
+        'password' => '',
+        'database' => '',
+        'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => true,
         'DBDebug'  => (ENVIRONMENT !== 'production'),
