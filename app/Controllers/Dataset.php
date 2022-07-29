@@ -582,45 +582,51 @@ class Dataset extends BaseController {
 
 	public function new_equipment($companyID){
 
-		$this->form_validation->set_rules('usedprocess','Used Process','required');
-		$this->form_validation->set_rules('equipment','Equipment Name','required');
-		$this->form_validation->set_rules('equipmentTypeName','Equipment Type Name','required');
-		$this->form_validation->set_rules('equipmentAttributeName','Equipment Attribute Name','required');
-		$this->form_validation->set_rules('eqpmnt_attrbt_val','Equipment Attribute Value','trim|required|numeric|xss_clean');
-		$this->form_validation->set_rules('eqpmnt_attrbt_unit','Equipment Attribute Unit','required|numeric');
+		$equipment_model = model(Equipment_model::class);
+		$company_model = model(Company_model::class);
+		$flow_model = model(Flow_model::class);
 
-		if ($this->form_validation->run() !== FALSE)
-		{
-			$prcss_id = $this->request->getPost('usedprocess');
-			$equipment_id = $this->request->getPost('equipment');
-			$equipment_type_id = $this->request->getPost('equipmentTypeName');
-			$equipment_type_attribute_id = $this->request->getPost('equipmentAttributeName');
-			$eqpmnt_attrbt_val = $this->request->getPost('eqpmnt_attrbt_val');
-			$eqpmnt_attrbt_unit = $this->request->getPost('eqpmnt_attrbt_unit');
+		if(!empty($this->request->getPost())){
+			if ($this->validate([
+				'usedprocess'  => 'required',
+				'equipment'  => 'required',
+				'equipmentTypeName'  => 'required',
+				'equipmentAttributeName'  => 'required',
+				'eqpmnt_attrbt_val'  => 'trim|required|numeric',
+				'eqpmnt_attrbt_unit'  => 'required|numeric'
+			]))
+			{
+				$prcss_id = $this->request->getPost('usedprocess');
+				$equipment_id = $this->request->getPost('equipment');
+				$equipment_type_id = $this->request->getPost('equipmentTypeName');
+				$equipment_type_attribute_id = $this->request->getPost('equipmentAttributeName');
+				$eqpmnt_attrbt_val = $this->request->getPost('eqpmnt_attrbt_val');
+				$eqpmnt_attrbt_unit = $this->request->getPost('eqpmnt_attrbt_unit');
 
-			$cmpny_eqpmnt_type_attrbt = array(
-					'cmpny_id' => $companyID,
-					'eqpmnt_id' => $equipment_id,
-					'eqpmnt_type_id' => $equipment_type_id,
-					'eqpmnt_type_attrbt_id' => $equipment_type_attribute_id,
-					'eqpmnt_attrbt_val' => $eqpmnt_attrbt_val,
-					'eqpmnt_attrbt_unit' => $eqpmnt_attrbt_unit
-				);
-			$last_index = $this->equipment_model->set_info($cmpny_eqpmnt_type_attrbt);
+				$cmpny_eqpmnt_type_attrbt = array(
+						'cmpny_id' => $companyID,
+						'eqpmnt_id' => $equipment_id,
+						'eqpmnt_type_id' => $equipment_type_id,
+						'eqpmnt_type_attrbt_id' => $equipment_type_attribute_id,
+						'eqpmnt_attrbt_val' => $eqpmnt_attrbt_val,
+						'eqpmnt_attrbt_unit' => $eqpmnt_attrbt_unit
+					);
 
-			$cmpny_prcss_id = $this->equipment_model->get_cmpny_prcss_id($companyID,$prcss_id);
-
-			$cmpny_prcss = array(
-					'cmpny_eqpmnt_type_id' => $last_index,
-					'cmpny_prcss_id' => $cmpny_prcss_id['id']
-				);
-			$this->equipment_model->set_cmpny_prcss($cmpny_prcss);
+				$last_index = $equipment_model->set_info($cmpny_eqpmnt_type_attrbt);
+				$cmpny_prcss_id = $equipment_model->get_cmpny_prcss_id($companyID,$prcss_id);
+				$cmpny_prcss = array(
+						'cmpny_eqpmnt_type_id' => $last_index,
+						'cmpny_prcss_id' => $cmpny_prcss_id['id']
+					);
+				$equipment_model->set_cmpny_prcss($cmpny_prcss);
+			}
 		}
 
+		$data['validation']=$this->validator;
 		$data['companyID'] = $companyID;
-		$data['equipmentName'] = $this->equipment_model->get_equipment_name();
-		$data['process'] = $this->equipment_model->cmpny_prcss($companyID);
-		$data['informations'] = $this->equipment_model->all_information_of_equipment($companyID);
+		$data['equipmentName'] = $equipment_model->get_equipment_name();
+		$data['process'] = $equipment_model->cmpny_prcss($companyID);
+		$data['informations'] = $equipment_model->all_information_of_equipment($companyID);
 		$data['company_info'] = $company_model->get_company($companyID);
 		$data['units'] = $flow_model->get_unit_list();
 
@@ -631,7 +637,8 @@ class Dataset extends BaseController {
 	}
 
 	public function delete_product($companyID,$id){
-		$this->product_model->delete_product($id);
+		$product_model = model(Product_model::class);
+		$product_model->delete_product($id);
 		redirect('new_product/'.$companyID, 'refresh');
 	}
 	public function delete_flow($companyID,$id){
@@ -640,7 +647,7 @@ class Dataset extends BaseController {
 
 		foreach ($cmpny_flow_prcss_id_list as $cmpny_flow_prcss_id) {
 			if(!$process_model->still_exist_this_cmpny_prcss($cmpny_flow_prcss_id['cmpny_prcss_id'])){
-				$this->equipment_model->delete_cmpny_equipment($cmpny_flow_prcss_id['cmpny_prcss_id']);
+				$equipment_model->delete_cmpny_equipment($cmpny_flow_prcss_id['cmpny_prcss_id']);
 				$process_model->delete_cmpny_process($cmpny_flow_prcss_id['cmpny_prcss_id']);
 			}
 		}
@@ -658,13 +665,13 @@ class Dataset extends BaseController {
 
 	public function get_equipment_type(){
 		$equipment_id = $this->request->getPost('equipment_id');
-		$type_list = $this->equipment_model->get_equipment_type_list($equipment_id);
+		$type_list = $equipment_model->get_equipment_type_list($equipment_id);
 		echo json_encode($type_list);
 	}
 
 	public function get_equipment_attribute(){
 		$equipment_type_id = $this->request->getPost('equipment_type_id');
-		$attribute_list = $this->equipment_model->get_equipment_attribute_list($equipment_type_id);
+		$attribute_list = $equipment_model->get_equipment_attribute_list($equipment_type_id);
 		echo json_encode($attribute_list);
 	}
 
@@ -792,7 +799,7 @@ class Dataset extends BaseController {
 
 		if(!$process_model->still_exist_this_cmpny_prcss($company_process_id))
 		{
-			$this->equipment_model->delete_cmpny_equipment($company_process_id);
+			$equipment_model->delete_cmpny_equipment($company_process_id);
 			$process_model->delete_cmpny_process($company_process_id);
 			//deletes allocations that are based on this process
 			$this->cpscoping_model->delete_allocation_prcssid($company_process_id);
@@ -802,8 +809,8 @@ class Dataset extends BaseController {
 
 	public function delete_equipment($cmpny_id,$cmpny_eqpmnt_id){
 
-		$this->equipment_model->delete_cmpny_prcss_eqpmnt_type($cmpny_eqpmnt_id);
-		$this->equipment_model->delete_cmpny_eqpmnt($cmpny_eqpmnt_id);
+		$equipment_model->delete_cmpny_prcss_eqpmnt_type($cmpny_eqpmnt_id);
+		$equipment_model->delete_cmpny_eqpmnt($cmpny_eqpmnt_id);
 		redirect('new_equipment/'.$cmpny_id,'refresh');
 	}
 

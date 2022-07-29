@@ -123,8 +123,8 @@ class Project extends BaseController{
 				return redirect()->to(site_url('project/'.$last_inserted_project_id));
 			}
 		}
-		$data['validation']=$this->validator;
 
+		$data['validation']=$this->validator;
 		echo view('template/header');
 		echo view('project/create_project',$data);
 		echo view('template/footer');
