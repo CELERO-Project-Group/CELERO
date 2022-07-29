@@ -45,9 +45,9 @@ class Dataset extends BaseController {
 					);
 				$product_model->set_product($productArray);
 			}
-
 		}
 
+		$data['validation']=$this->validator;
 		$data['product'] = $product_model->get_product_list($companyID);
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
@@ -61,17 +61,20 @@ class Dataset extends BaseController {
 
 	public function edit_product($companyID,$product_id)
 	{
+		$product_model = model(Product_model::class);
 		$flow_model = model(Flow_model::class);
 		$company_model = model(Company_model::class);
 		
-		$this->form_validation->set_rules('product', 'Product Field', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('quantities', 'Product Quantity', 'trim|numeric|xss_clean');
-		$this->form_validation->set_rules('ucost', 'Unit Cost', 'trim|numeric|xss_clean');
-		$this->form_validation->set_rules('ucostu', 'Unit Cost Unit', 'trim|xss_clean');
-		$this->form_validation->set_rules('qunit', 'Quantity Unit', 'trim|xss_clean');
-		$this->form_validation->set_rules('tper', 'Time Period', 'trim|xss_clean');
-
-		if($this->form_validation->run() !== FALSE) {
+		if(!empty($this->request->getPost())){
+			if ($this->validate([
+				'product' 		=> 'trim|required',
+				'quantities'	=>  'trim|numeric',
+				'ucost'			=>  'trim|numeric',
+				'ucostu'		=>  'trim',
+				'qunit'			=>  'trim',
+				'tper' 		 	=>  'trim'
+			]))
+			{
 			$productArray = array(
 					'cmpny_id' => $companyID,
 					'name' => $this->request->getPost('product'),
@@ -82,10 +85,11 @@ class Dataset extends BaseController {
 					'tper' => $this->request->getPost('tper'),
 				);
 			$product_model->update_product($companyID,$product_id,$productArray);
-			redirect(base_url('new_product/'.$companyID), 'refresh'); // tablo olusurken ajax kullan�labilir.
-
+			return redirect()->to('new_product/'.$companyID);
+			}
 		}
-
+		
+		$data['validation'] = $this->validator;
 		$data['product'] = $product_model->get_product_by_cid_pid($companyID,$product_id);
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
