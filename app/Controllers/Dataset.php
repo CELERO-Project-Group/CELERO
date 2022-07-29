@@ -160,7 +160,7 @@ class Dataset extends BaseController {
 
 
 				//CHECKs IF FLOW IS NEW (old flows have their IDs)
-				$flowID = $this->process_model->is_new_flow($flowID,$flowfamilyID);
+				$flowID = $process_model->is_new_flow($flowID,$flowfamilyID);
 
 				#EP input field: By regex_match , . and ' are allowed.
 				#this replaces , with . and removes thousand separator ' to store numeric in DB later
@@ -497,56 +497,51 @@ class Dataset extends BaseController {
 	}
 
 	public function new_process($companyID){
-		
-		$this->form_validation->set_rules('process','Process','required');
-		$this->form_validation->set_rules('usedFlows','Used Flows','required');
-		$this->form_validation->set_rules('comment','Comment','trim|xss_clean');
 
+		$flow_model = model(Flow_model::class);
+		$process_model = model(Process_model::class);
+		$company_model = model(Company_model::class);
 
-		if ($this->form_validation->run() !== FALSE)
-		{
-			$used_flows = $this->request->getPost('usedFlows');
-			$process_id = $this->request->getPost('process');
-			$processfamilyID = $this->request->getPost('processfamily');
+		if(!empty($this->request->getPost())){
+			if ($this->validate([
+				'process'=>'Process','required',
+				'usedFlows'=>'Used Flows','required',
+				'comment'=>'Comment','trim'
+			]))
+			{
+				$used_flows = $this->request->getPost('usedFlows');
+				$process_id = $this->request->getPost('process');
+				$processfamilyID = $this->request->getPost('processfamily');
 
-			//CHECK IF PROCESS IS NEW?
-			$process_id = $this->process_model->is_new_process($process_id,$processfamilyID);
+				//CHECK IF PROCESS IS NEW?
+				$process_id = $process_model->is_new_process($process_id,$processfamilyID);
+				$cmpny_prcss_id = $process_model->can_write_cmpny_prcss($companyID,$process_id);
 
-			$cmpny_prcss_id = $this->process_model->can_write_cmpny_prcss($companyID,$process_id);
-
-			if($cmpny_prcss_id == false){
-				$cmpny_prcss = array(
-					'cmpny_id' => $companyID,
-					// 'min_rate_util' => $this->sifirla($this->request->getPost('min_rate_util')),
-					// 'min_rate_util_unit' => $this->sifirla($this->request->getPost('min_rate_util_unit')),
-					// 'typ_rate_util' => $this->sifirla($this->request->getPost('typ_rate_util')),
-					// 'typ_rate_util_unit' => $this->sifirla($this->request->getPost('typ_rate_util_unit')),
-					// 'max_rate_util' => $this->sifirla($this->request->getPost('max_rate_util')),
-					// 'max_rate_util_unit' => $this->sifirla($this->request->getPost('max_rate_util_unit')),
-					'comment' => $this->request->getPost('comment'),
-					'prcss_id' => $process_id
-				);
-				$cmpny_prcss_id['id'] = $this->process_model->cmpny_prcss($cmpny_prcss);
-			}
-
-				if($this->process_model->can_write_cmpny_flow_prcss($used_flows,$cmpny_prcss_id['id']) == true){
-					$cmpny_flow_prcss = array(
-						'cmpny_flow_id' => $used_flows,
-						'cmpny_prcss_id' => $cmpny_prcss_id['id']
+				if($cmpny_prcss_id == false){
+					$cmpny_prcss = array(
+						'cmpny_id' => $companyID,
+						'comment' => $this->request->getPost('comment'),
+						'prcss_id' => $process_id
 					);
-					$this->process_model->cmpny_flow_prcss($cmpny_flow_prcss);
+					$cmpny_prcss_id['id'] = $process_model->cmpny_prcss($cmpny_prcss);
+				}
+					if($process_model->can_write_cmpny_flow_prcss($used_flows,$cmpny_prcss_id['id']) == true){
+						$cmpny_flow_prcss = array(
+							'cmpny_flow_id' => $used_flows,
+							'cmpny_prcss_id' => $cmpny_prcss_id['id']
+						);
+					$process_model->cmpny_flow_prcss($cmpny_flow_prcss);
+				}
 			}
 		}
 
-		$data['process'] = $this->process_model->get_main_process();
+		$data['process'] = $process_model->get_main_process();
 		$data['company_flows']=$flow_model->get_company_flow_list($companyID);
-		$data['cmpny_flow_prcss'] = $this->process_model->get_cmpny_flow_prcss($companyID);
+		$data['cmpny_flow_prcss'] = $process_model->get_cmpny_flow_prcss($companyID);
 		$data['cmpny_flow_prcss_count'] = array_count_values(array_column($data['cmpny_flow_prcss'], 'prcessname'));
-
-
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
-		$data['processfamilys'] = $this->process_model->get_processfamily_list();
+		$data['processfamilys'] = $process_model->get_processfamily_list();
 		$data['units'] = $flow_model->get_unit_list();
 
 		echo view('template/header');
@@ -557,28 +552,25 @@ class Dataset extends BaseController {
 
 	public function edit_process($companyID,$process_id){
 
-		// $this->form_validation->set_rules('min_rate_util','Minimum rate of utilization','trim|numeric|xss_clean');
-		// $this->form_validation->set_rules('typ_rate_util','Typical rate of utilization','trim|numeric|xss_clean');
-		// $this->form_validation->set_rules('max_rate_util','Maximum rate of utilization','trim|numeric|xss_clean');
-		$this->form_validation->set_rules('comment','Comment','trim|xss_clean');
-
-		if ($this->form_validation->run() !== FALSE)
-		{
-			//cant change flow and process since they affect other tables on database and also need lots of control for now.
-			$cmpny_prcss = array(
-				// 'min_rate_util' => $this->sifirla($this->request->getPost('min_rate_util')),
-				// 'min_rate_util_unit' => $this->sifirla($this->request->getPost('min_rate_util_unit')),
-				// 'typ_rate_util' => $this->sifirla($this->request->getPost('typ_rate_util')),
-				// 'typ_rate_util_unit' => $this->sifirla($this->request->getPost('typ_rate_util_unit')),
-				// 'max_rate_util' => $this->sifirla($this->request->getPost('max_rate_util')),
-				// 'max_rate_util_unit' => $this->sifirla($this->request->getPost('max_rate_util_unit')),
-				'comment' => $this->request->getPost('comment'),
-			);
-			$this->process_model->update_cmpny_flow_prcss($companyID,$process_id,$cmpny_prcss);
-			redirect(base_url('new_process/'.$companyID), 'refresh');
+		$flow_model = model(Flow_model::class);
+		$process_model = model(Process_model::class);
+		$company_model = model(Company_model::class);
+	
+		if(!empty($this->request->getPost())){
+			if ($this->validate([
+				'comment'=>'Comment','trim|xss_clean',
+			]))
+			{
+				//cant change flow and process since they affect other tables on database and also need lots of control for now.
+				$cmpny_prcss = array(
+					'comment' => $this->request->getPost('comment'),
+				);
+				$process_model->update_cmpny_flow_prcss($companyID,$process_id,$cmpny_prcss);
+				return redirect()->to('new_process/'.$companyID);
+			}
 		}
 
-		$data['process'] = $this->process_model->get_cmpny_prcss_from_rid($companyID,$process_id);
+		$data['process'] = $process_model->get_cmpny_prcss_from_rid($companyID,$process_id);
 		$data['companyID'] = $companyID;
 		$data['company_info'] = $company_model->get_company($companyID);
 		$data['units'] = $flow_model->get_unit_list();
@@ -643,13 +635,13 @@ class Dataset extends BaseController {
 		redirect('new_product/'.$companyID, 'refresh');
 	}
 	public function delete_flow($companyID,$id){
-		$cmpny_flow_prcss_id_list = $this->process_model->cmpny_flow_prcss_id_list($id);
-		$this->process_model->delete_cmpny_flow_process($id);
+		$cmpny_flow_prcss_id_list = $process_model->cmpny_flow_prcss_id_list($id);
+		$process_model->delete_cmpny_flow_process($id);
 
 		foreach ($cmpny_flow_prcss_id_list as $cmpny_flow_prcss_id) {
-			if(!$this->process_model->still_exist_this_cmpny_prcss($cmpny_flow_prcss_id['cmpny_prcss_id'])){
+			if(!$process_model->still_exist_this_cmpny_prcss($cmpny_flow_prcss_id['cmpny_prcss_id'])){
 				$this->equipment_model->delete_cmpny_equipment($cmpny_flow_prcss_id['cmpny_prcss_id']);
-				$this->process_model->delete_cmpny_process($cmpny_flow_prcss_id['cmpny_prcss_id']);
+				$process_model->delete_cmpny_process($cmpny_flow_prcss_id['cmpny_prcss_id']);
 			}
 		}
 
@@ -678,7 +670,7 @@ class Dataset extends BaseController {
 
 	public function get_sub_process(){
 		$processID = $this->request->getPost('processID');
-		$process_list = $this->process_model->get_process_from_motherID($processID);
+		$process_list = $process_model->get_process_from_motherID($processID);
 		echo json_encode($process_list);
 	}
 
@@ -796,12 +788,12 @@ class Dataset extends BaseController {
 
 	public function delete_process($companyID,$company_process_id,$company_flow_id){
 
-		$this->process_model->delete_company_flow_prcss($company_process_id,$company_flow_id);
+		$process_model->delete_company_flow_prcss($company_process_id,$company_flow_id);
 
-		if(!$this->process_model->still_exist_this_cmpny_prcss($company_process_id))
+		if(!$process_model->still_exist_this_cmpny_prcss($company_process_id))
 		{
 			$this->equipment_model->delete_cmpny_equipment($company_process_id);
-			$this->process_model->delete_cmpny_process($company_process_id);
+			$process_model->delete_cmpny_process($company_process_id);
 			//deletes allocations that are based on this process
 			$this->cpscoping_model->delete_allocation_prcssid($company_process_id);
 		}
