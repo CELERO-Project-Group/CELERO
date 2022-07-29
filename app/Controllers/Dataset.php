@@ -31,25 +31,25 @@ class Dataset extends BaseController {
 		if($this->form_validation->run() !== FALSE) {
 			$productArray = array(
 					'cmpny_id' => $companyID,
-					'name' => $this->input->post('product'),
-					'quantities' => $this->sifirla($this->input->post('quantities')),
-					'ucost' => $this->sifirla($this->input->post('ucost')),
-					'ucostu' => $this->input->post('ucostu'),
-					'qunit' => $this->input->post('qunit'),
-					'tper' => $this->input->post('tper'),
+					'name' => $this->request->getPost('product'),
+					'quantities' => $this->sifirla($this->request->getPost('quantities')),
+					'ucost' => $this->sifirla($this->request->getPost('ucost')),
+					'ucostu' => $this->request->getPost('ucostu'),
+					'qunit' => $this->request->getPost('qunit'),
+					'tper' => $this->request->getPost('tper'),
 				);
 			$this->product_model->set_product($productArray);
 		}
 
 		$data['product'] = $this->product_model->get_product_list($companyID);
 		$data['companyID'] = $companyID;
-		$data['company_info'] = $this->company_model->get_company($companyID);
-		$data['units'] = $this->flow_model->get_unit_list();
+		$data['company_info'] = $company_model->get_company($companyID);
+		$data['units'] = $flow_model->get_unit_list();
 
-		$this->load->view('template/header');
-		$this->load->view('dataset/dataSetLeftSide',$data);
-		$this->load->view('dataset/new_product',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('dataset/dataSetLeftSide',$data);
+		echo view('dataset/new_product',$data);
+		echo view('template/footer');
 	}
 
 	public function edit_product($companyID,$product_id)
@@ -64,12 +64,12 @@ class Dataset extends BaseController {
 		if($this->form_validation->run() !== FALSE) {
 			$productArray = array(
 					'cmpny_id' => $companyID,
-					'name' => $this->input->post('product'),
-					'quantities' => $this->sifirla($this->input->post('quantities')),
-					'ucost' => $this->sifirla($this->input->post('ucost')),
-					'ucostu' => $this->input->post('ucostu'),
-					'qunit' => $this->input->post('qunit'),
-					'tper' => $this->input->post('tper'),
+					'name' => $this->request->getPost('product'),
+					'quantities' => $this->sifirla($this->request->getPost('quantities')),
+					'ucost' => $this->sifirla($this->request->getPost('ucost')),
+					'ucostu' => $this->request->getPost('ucostu'),
+					'qunit' => $this->request->getPost('qunit'),
+					'tper' => $this->request->getPost('tper'),
 				);
 			$this->product_model->update_product($companyID,$product_id,$productArray);
 			redirect(base_url('new_product/'.$companyID), 'refresh'); // tablo olusurken ajax kullan�labilir.
@@ -78,12 +78,12 @@ class Dataset extends BaseController {
 
 		$data['product'] = $this->product_model->get_product_by_cid_pid($companyID,$product_id);
 		$data['companyID'] = $companyID;
-		$data['company_info'] = $this->company_model->get_company($companyID);
-		$data['units'] = $this->flow_model->get_unit_list();
+		$data['company_info'] = $company_model->get_company($companyID);
+		$data['units'] = $flow_model->get_unit_list();
 
-		$this->load->view('template/header');
-		$this->load->view('dataset/edit_product',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('dataset/edit_product',$data);
+		echo view('template/footer');
 	}
 
 	public function new_flow($companyID)
@@ -131,7 +131,7 @@ class Dataset extends BaseController {
 
 
 				//do we need to replace spaces with _ anymore? str_replace(' ', '_', $variable);
-				$flowID = $this->input->post('flowname');
+				$flowID = $this->request->getPost('flowname');
 				//and make it to lower case? Its anyway predefined right now
 				//$flowID = strtolower($flowID);
 
@@ -144,14 +144,14 @@ class Dataset extends BaseController {
 				}
 
 
-				$charactertype = $this->input->post('charactertype');
-				$flowtypeID = $this->input->post('flowtype');
-				$flowfamilyID = $this->input->post('flowfamily');
+				$charactertype = $this->request->getPost('charactertype');
+				$flowtypeID = $this->request->getPost('flowtype');
+				$flowfamilyID = $this->request->getPost('flowfamily');
 
 				//checks if flow already exist (as input OR output), same as flow_varmi()
 				$companyID = $this->uri->segment(2);
 				if(is_numeric($flowID)){
-					if(!$this->flow_model->has_same_flow($flowID,$flowtypeID,$companyID)){
+					if(!$flow_model->has_same_flow($flowID,$flowtypeID,$companyID)){
 						$this->session->set_flashdata('message', 'Flow can only be added twice (as input and output), please check your flows.');
 						//print_r("false");
 						redirect(current_url());
@@ -164,20 +164,20 @@ class Dataset extends BaseController {
 
 				#EP input field: By regex_match , . and ' are allowed.
 				#this replaces , with . and removes thousand separator ' to store numeric in DB later
-				$ep = $this->numeric_input_formater($this->input->post('ep'));
-				$epUnit = $this->input->post('epUnit');
+				$ep = $this->numeric_input_formater($this->request->getPost('ep'));
+				$epUnit = $this->request->getPost('epUnit');
 
 				#Cost input field: By regex_match , . and ' are allowed.
 				#this replaces , with . and removes thousand separator ' to store numeric in DB later
-				$cost = $this->numeric_input_formater($this->input->post('cost'));
-				$costUnit = $this->input->post('costUnit');
+				$cost = $this->numeric_input_formater($this->request->getPost('cost'));
+				$costUnit = $this->request->getPost('costUnit');
 
 				#Quantity input field: By regex_match , . and ' are allowed.
 				#this replaces , with . and removes thousand separator ' to store numeric in DB later
-				$quantity = $this->numeric_input_formater($this->input->post('quantity'));
-				$quantityUnit = $this->input->post('quantityUnit');
+				$quantity = $this->numeric_input_formater($this->request->getPost('quantity'));
+				$quantityUnit = $this->request->getPost('quantityUnit');
 
-				$data['units'] = $this->flow_model->get_unit_list();
+				$data['units'] = $flow_model->get_unit_list();
 				//the quantity unit gets passed as string but is predefined! User has only a specific set of units to chose from
 				foreach ($data['units'] as $unit) {
 					//if the submited unit matches the unit array, the id is assigned
@@ -190,19 +190,19 @@ class Dataset extends BaseController {
 					}
 				}
 				
-				$cf = $this->input->post('cf');
-				$availability = $this->input->post('availability');
-				$conc = $this->input->post('conc');
-				$concunit = $this->input->post('concunit');
-				$pres = $this->input->post('pres');
-				$presunit = $this->input->post('presunit');
-				$ph = $this->input->post('ph');
-				$state = $this->input->post('state');
-				$quality = $this->input->post('quality');
-				$oloc = $this->input->post('oloc');
-				$desc = $this->input->post('desc');
-				$spot = $this->input->post('spot');
-				$comment = $this->input->post('comment');
+				$cf = $this->request->getPost('cf');
+				$availability = $this->request->getPost('availability');
+				$conc = $this->request->getPost('conc');
+				$concunit = $this->request->getPost('concunit');
+				$pres = $this->request->getPost('pres');
+				$presunit = $this->request->getPost('presunit');
+				$ph = $this->request->getPost('ph');
+				$state = $this->request->getPost('state');
+				$quality = $this->request->getPost('quality');
+				$oloc = $this->request->getPost('oloc');
+				$desc = $this->request->getPost('desc');
+				$spot = $this->request->getPost('spot');
+				$comment = $this->request->getPost('comment');
 
 				$flow = array(
 					'cmpny_id'=>$companyID,
@@ -236,7 +236,7 @@ class Dataset extends BaseController {
 					$flow['ph'] = $ph;
 				}
 
-				$this->flow_model->register_flow_to_company($flow);
+				$flow_model->register_flow_to_company($flow);
 				redirect(current_url());
 			}
 
@@ -282,32 +282,32 @@ class Dataset extends BaseController {
 
 		if($this->form_validation->run() !== FALSE) {
 
-			$charactertype = $this->input->post('charactertype');
-			$ep = $this->input->post('ep');
-			$epUnit = $this->input->post('epUnit');
-			$cost = $this->input->post('cost');
-			$costUnit = $this->input->post('costUnit');
-			$quantity = $this->input->post('quantity');
-			$quantityUnit = $this->input->post('quantityUnit');
+			$charactertype = $this->request->getPost('charactertype');
+			$ep = $this->request->getPost('ep');
+			$epUnit = $this->request->getPost('epUnit');
+			$cost = $this->request->getPost('cost');
+			$costUnit = $this->request->getPost('costUnit');
+			$quantity = $this->request->getPost('quantity');
+			$quantityUnit = $this->request->getPost('quantityUnit');
 
-			$cf = $this->input->post('cf');
-			$availability = $this->input->post('availability');
-			$conc = $this->input->post('conc');
-			$concunit = $this->input->post('concunit');
-			$pres = $this->input->post('pres');
-			$presunit = $this->input->post('presunit');
-			$ph = $this->input->post('ph');
-			$state = $this->input->post('state');
-			$quality = $this->input->post('quality');
-			$oloc = $this->input->post('oloc');
-			//$odis = $this->input->post('odis');
-			//$otrasmean = $this->input->post('otrasmean');
-			//$sdis = $this->input->post('sdis');
-			//$strasmean = $this->input->post('strasmean');
-			//$rtech = $this->input->post('rtech');
-			$desc = $this->input->post('desc');
-			$spot = $this->input->post('spot');
-			$comment = $this->input->post('comment');
+			$cf = $this->request->getPost('cf');
+			$availability = $this->request->getPost('availability');
+			$conc = $this->request->getPost('conc');
+			$concunit = $this->request->getPost('concunit');
+			$pres = $this->request->getPost('pres');
+			$presunit = $this->request->getPost('presunit');
+			$ph = $this->request->getPost('ph');
+			$state = $this->request->getPost('state');
+			$quality = $this->request->getPost('quality');
+			$oloc = $this->request->getPost('oloc');
+			//$odis = $this->request->getPost('odis');
+			//$otrasmean = $this->request->getPost('otrasmean');
+			//$sdis = $this->request->getPost('sdis');
+			//$strasmean = $this->request->getPost('strasmean');
+			//$rtech = $this->request->getPost('rtech');
+			$desc = $this->request->getPost('desc');
+			$spot = $this->request->getPost('spot');
+			$comment = $this->request->getPost('comment');
 
 			$flow = array(
 				'character_type'=>$charactertype,
@@ -338,34 +338,34 @@ class Dataset extends BaseController {
 				$flow['ph'] = $ph;
 			}
 
-			$this->flow_model->update_flow_info($companyID,$flow_id,$flow_type_id,$flow);
+			$flow_model->update_flow_info($companyID,$flow_id,$flow_type_id,$flow);
 
 			redirect(base_url('new_flow/'.$companyID), 'refresh'); // tablo olusurken ajax kullan�labilir.
 			//�uan sayfa yenileniyor her seferinde database'den sat�rlar ekleniyor.
 
 		}
 
-		$data['flow']=$this->flow_model->get_company_flow($companyID,$flow_id,$flow_type_id);
+		$data['flow']=$flow_model->get_company_flow($companyID,$flow_id,$flow_type_id);
 		if(empty($data['flow'])){
 			redirect(base_url(), 'refresh'); // tablo olusurken ajax kullan�labilir.
 		}
 		$data['companyID'] = $companyID;
-		$data['company_info'] = $this->company_model->get_company($companyID);
-		$data['units'] = $this->flow_model->get_unit_list();
+		$data['company_info'] = $company_model->get_company($companyID);
+		$data['units'] = $flow_model->get_unit_list();
 
-		$this->load->view('template/header');
-		$this->load->view('dataset/edit_flow',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('dataset/edit_flow',$data);
+		echo view('template/footer');
 
 	}
 
 	function flow_varmi()
 	{
-		$flowID = $this->input->post('flowname');
-		$flowtypeID = $this->input->post('flowtype');
+		$flowID = $this->request->getPost('flowname');
+		$flowtypeID = $this->request->getPost('flowtype');
 		$companyID = $this->uri->segment(2);
 		if(is_numeric($flowID)){
-			if(!$this->flow_model->has_same_flow($flowID,$flowtypeID,$companyID)){
+			if(!$flow_model->has_same_flow($flowID,$flowtypeID,$companyID)){
 				$this->form_validation->set_message('flow_varmi', 'Flow name already exists, please choose another name or edit existing flow.');
 		    return false;
 			}
@@ -405,31 +405,31 @@ class Dataset extends BaseController {
 		if(!empty($this->request->getPost())){
 
 			if ($this->validate([
-					'component_name', 'Component Name', 'trim|required',
-					'flowtype', 'Flow Type', 'trim'
+					'component_name'=> 'Component Name', 'trim|required',
+					'flowtype'=> 'Flow Type', 'trim'
 				])){
 
 					$component_array = array(
 						'cmpny_id' => $companyID,
-						'name' => $this->equest->getPost('component_name'),
-						'name_tr' => $this->equest->getPost('component_name'),
+						'name' => $this->request->getPost('component_name'),
+						'name_tr' => $this->request->getPost('component_name'),
 						'active' => '1'
 					);
 					$component_id = $component_model->set_cmpnnt($component_array);
 
 					$cmpny_flow_cmpnnt = array(
-						'cmpny_flow_id' => $this->equest->getPost('flowtype'),
-						'description' => $this->equest->getPost('description'),
-						'qntty' => $this->sifirla($this->equest->getPost('quantity')),
-						'qntty_unit_id' => $this->sifirla($this->equest->getPost('quantityUnit')),
-						'supply_cost' => $this->sifirla($this->equest->getPost('cost')),
-						'supply_cost_unit' => $this->equest->getPost('costUnit'),
-						'output_cost' => $this->sifirla($this->equest->getPost('ocost')),
-						'output_cost_unit' => $this->equest->getPost('ocostunit'),
-						'data_quality' => $this->equest->getPost('quality'),
-						'substitute_potential' => $this->equest->getPost('spot'),
-						'comment' => $this->equest->getPost('comment'),
-						'cmpnt_type_id' =>$this->sifirla($this->equest->getPost('component_type')),
+						'cmpny_flow_id' => $this->request->getPost('flowtype'),
+						'description' => $this->request->getPost('description'),
+						'qntty' => $this->sifirla($this->request->getPost('quantity')),
+						'qntty_unit_id' => $this->sifirla($this->request->getPost('quantityUnit')),
+						'supply_cost' => $this->sifirla($this->request->getPost('cost')),
+						'supply_cost_unit' => $this->request->getPost('costUnit'),
+						'output_cost' => $this->sifirla($this->request->getPost('ocost')),
+						'output_cost_unit' => $this->request->getPost('ocostunit'),
+						'data_quality' => $this->request->getPost('quality'),
+						'substitute_potential' => $this->request->getPost('spot'),
+						'comment' => $this->request->getPost('comment'),
+						'cmpnt_type_id' =>$this->sifirla($this->request->getPost('component_type')),
 						'cmpnnt_id' => $component_id
 					);
 					$component_model->set_cmpny_flow_cmpnnt($cmpny_flow_cmpnnt);
@@ -450,58 +450,64 @@ class Dataset extends BaseController {
 
 	public function edit_component($companyID,$id){
 
-		$this->form_validation->set_rules('component_name', 'Component Name', 'trim|required|xss_clean');
+		$component_model = model(Component_model::class);
+		$company_model = model(Company_model::class);
+		$flow_model = model(Flow_model::class);
 
-		if($this->form_validation->run() !== FALSE) {
-			$component_array = array(
-				'name' => $this->input->post('component_name'),
-				'name_tr' => $this->input->post('component_name'),
-			);
-			$component_id = $this->component_model->update_cmpnnt($component_array,$id,$companyID);
+		if(!empty($this->request->getPost())){
+			if ($this->validate([
+					'component_name'=> 'Component Name', 'trim|required|xss_clean'
+				])){
 
-			$cmpny_flow_cmpnnt = array(
-				'description' => $this->input->post('description'),
-				'qntty' => $this->sifirla($this->input->post('quantity')),
-				'qntty_unit_id' => $this->sifirla($this->input->post('quantityUnit')),
-				'supply_cost' => $this->sifirla($this->input->post('cost')),
-				'supply_cost_unit' => $this->input->post('costUnit'),
-				'output_cost' => $this->sifirla($this->input->post('ocost')),
-				'output_cost_unit' => $this->input->post('ocostunit'),
-				'data_quality' => $this->input->post('quality'),
-				'substitute_potential' => $this->input->post('spot'),
-				'comment' => $this->input->post('comment'),
-				'cmpnt_type_id' =>$this->sifirla($this->input->post('component_type')),
-			);
-			$this->component_model->update_cmpny_flow_cmpnnt($cmpny_flow_cmpnnt,$id);
-			redirect('new_component/'.$companyID, 'refresh');
+				$component_array = array(
+					'name' => $this->request->getPost('component_name'),
+					'name_tr' => $this->request->getPost('component_name'),
+				);
+				$component_id = $component_model->update_cmpnnt($component_array,$id,$companyID);
+
+				$cmpny_flow_cmpnnt = array(
+					'description' => $this->request->getPost('description'),
+					'qntty' => $this->sifirla($this->request->getPost('quantity')),
+					'qntty_unit_id' => $this->sifirla($this->request->getPost('quantityUnit')),
+					'supply_cost' => $this->sifirla($this->request->getPost('cost')),
+					'supply_cost_unit' => $this->request->getPost('costUnit'),
+					'output_cost' => $this->sifirla($this->request->getPost('ocost')),
+					'output_cost_unit' => $this->request->getPost('ocostunit'),
+					'data_quality' => $this->request->getPost('quality'),
+					'substitute_potential' => $this->request->getPost('spot'),
+					'comment' => $this->request->getPost('comment'),
+					'cmpnt_type_id' =>$this->sifirla($this->request->getPost('component_type')),
+				);
+				$component_model->update_cmpny_flow_cmpnnt($cmpny_flow_cmpnnt,$id);
+				return redirect()->to(site_url('new_component/'.$companyID));
+			}
 		}
 
-		$data['component'] = $this->component_model->get_cmpnnt_info($companyID,$id);
-		$data['units'] = $this->flow_model->get_unit_list();
-		$data['ctypes'] = $this->component_model->get_cmpnnt_type();
-		$data['companyID'] = $companyID;
-		$data['company_info'] = $this->company_model->get_company($companyID);
+		$data['validation'] = $this->validator;
 
-		$this->load->view('template/header');
-		$this->load->view('dataset/edit_component',$data);
-		$this->load->view('template/footer');
+		$data['component'] = $component_model->get_cmpnnt_info($companyID,$id);
+		$data['units'] = $flow_model->get_unit_list();
+		$data['ctypes'] = $component_model->get_cmpnnt_type();
+		$data['companyID'] = $companyID;
+		$data['company_info'] = $company_model->get_company($companyID);
+
+		echo view('template/header');
+		echo view('dataset/edit_component',$data);
+		echo view('template/footer');
 	}
 
 	public function new_process($companyID){
+		
 		$this->form_validation->set_rules('process','Process','required');
 		$this->form_validation->set_rules('usedFlows','Used Flows','required');
-
-		// $this->form_validation->set_rules('min_rate_util','Minimum rate of utilization','trim|numeric|xss_clean');
-		// $this->form_validation->set_rules('typ_rate_util','Typical rate of utilization','trim|numeric|xss_clean');
-		// $this->form_validation->set_rules('max_rate_util','Maximum rate of utilization','trim|numeric|xss_clean');
 		$this->form_validation->set_rules('comment','Comment','trim|xss_clean');
 
 
 		if ($this->form_validation->run() !== FALSE)
 		{
-			$used_flows = $this->input->post('usedFlows');
-			$process_id = $this->input->post('process');
-			$processfamilyID = $this->input->post('processfamily');
+			$used_flows = $this->request->getPost('usedFlows');
+			$process_id = $this->request->getPost('process');
+			$processfamilyID = $this->request->getPost('processfamily');
 
 			//CHECK IF PROCESS IS NEW?
 			$process_id = $this->process_model->is_new_process($process_id,$processfamilyID);
@@ -511,13 +517,13 @@ class Dataset extends BaseController {
 			if($cmpny_prcss_id == false){
 				$cmpny_prcss = array(
 					'cmpny_id' => $companyID,
-					// 'min_rate_util' => $this->sifirla($this->input->post('min_rate_util')),
-					// 'min_rate_util_unit' => $this->sifirla($this->input->post('min_rate_util_unit')),
-					// 'typ_rate_util' => $this->sifirla($this->input->post('typ_rate_util')),
-					// 'typ_rate_util_unit' => $this->sifirla($this->input->post('typ_rate_util_unit')),
-					// 'max_rate_util' => $this->sifirla($this->input->post('max_rate_util')),
-					// 'max_rate_util_unit' => $this->sifirla($this->input->post('max_rate_util_unit')),
-					'comment' => $this->input->post('comment'),
+					// 'min_rate_util' => $this->sifirla($this->request->getPost('min_rate_util')),
+					// 'min_rate_util_unit' => $this->sifirla($this->request->getPost('min_rate_util_unit')),
+					// 'typ_rate_util' => $this->sifirla($this->request->getPost('typ_rate_util')),
+					// 'typ_rate_util_unit' => $this->sifirla($this->request->getPost('typ_rate_util_unit')),
+					// 'max_rate_util' => $this->sifirla($this->request->getPost('max_rate_util')),
+					// 'max_rate_util_unit' => $this->sifirla($this->request->getPost('max_rate_util_unit')),
+					'comment' => $this->request->getPost('comment'),
 					'prcss_id' => $process_id
 				);
 				$cmpny_prcss_id['id'] = $this->process_model->cmpny_prcss($cmpny_prcss);
@@ -533,20 +539,20 @@ class Dataset extends BaseController {
 		}
 
 		$data['process'] = $this->process_model->get_main_process();
-		$data['company_flows']=$this->flow_model->get_company_flow_list($companyID);
+		$data['company_flows']=$flow_model->get_company_flow_list($companyID);
 		$data['cmpny_flow_prcss'] = $this->process_model->get_cmpny_flow_prcss($companyID);
 		$data['cmpny_flow_prcss_count'] = array_count_values(array_column($data['cmpny_flow_prcss'], 'prcessname'));
 
 
 		$data['companyID'] = $companyID;
-		$data['company_info'] = $this->company_model->get_company($companyID);
+		$data['company_info'] = $company_model->get_company($companyID);
 		$data['processfamilys'] = $this->process_model->get_processfamily_list();
-		$data['units'] = $this->flow_model->get_unit_list();
+		$data['units'] = $flow_model->get_unit_list();
 
-		$this->load->view('template/header');
-		$this->load->view('dataset/dataSetLeftSide',$data);
-		$this->load->view('dataset/new_process',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('dataset/dataSetLeftSide',$data);
+		echo view('dataset/new_process',$data);
+		echo view('template/footer');
 	}
 
 	public function edit_process($companyID,$process_id){
@@ -560,13 +566,13 @@ class Dataset extends BaseController {
 		{
 			//cant change flow and process since they affect other tables on database and also need lots of control for now.
 			$cmpny_prcss = array(
-				// 'min_rate_util' => $this->sifirla($this->input->post('min_rate_util')),
-				// 'min_rate_util_unit' => $this->sifirla($this->input->post('min_rate_util_unit')),
-				// 'typ_rate_util' => $this->sifirla($this->input->post('typ_rate_util')),
-				// 'typ_rate_util_unit' => $this->sifirla($this->input->post('typ_rate_util_unit')),
-				// 'max_rate_util' => $this->sifirla($this->input->post('max_rate_util')),
-				// 'max_rate_util_unit' => $this->sifirla($this->input->post('max_rate_util_unit')),
-				'comment' => $this->input->post('comment'),
+				// 'min_rate_util' => $this->sifirla($this->request->getPost('min_rate_util')),
+				// 'min_rate_util_unit' => $this->sifirla($this->request->getPost('min_rate_util_unit')),
+				// 'typ_rate_util' => $this->sifirla($this->request->getPost('typ_rate_util')),
+				// 'typ_rate_util_unit' => $this->sifirla($this->request->getPost('typ_rate_util_unit')),
+				// 'max_rate_util' => $this->sifirla($this->request->getPost('max_rate_util')),
+				// 'max_rate_util_unit' => $this->sifirla($this->request->getPost('max_rate_util_unit')),
+				'comment' => $this->request->getPost('comment'),
 			);
 			$this->process_model->update_cmpny_flow_prcss($companyID,$process_id,$cmpny_prcss);
 			redirect(base_url('new_process/'.$companyID), 'refresh');
@@ -574,12 +580,12 @@ class Dataset extends BaseController {
 
 		$data['process'] = $this->process_model->get_cmpny_prcss_from_rid($companyID,$process_id);
 		$data['companyID'] = $companyID;
-		$data['company_info'] = $this->company_model->get_company($companyID);
-		$data['units'] = $this->flow_model->get_unit_list();
+		$data['company_info'] = $company_model->get_company($companyID);
+		$data['units'] = $flow_model->get_unit_list();
 
-		$this->load->view('template/header');
-		$this->load->view('dataset/edit_process',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('dataset/edit_process',$data);
+		echo view('template/footer');
 	}
 
 	public function new_equipment($companyID){
@@ -593,12 +599,12 @@ class Dataset extends BaseController {
 
 		if ($this->form_validation->run() !== FALSE)
 		{
-			$prcss_id = $this->input->post('usedprocess');
-			$equipment_id = $this->input->post('equipment');
-			$equipment_type_id = $this->input->post('equipmentTypeName');
-			$equipment_type_attribute_id = $this->input->post('equipmentAttributeName');
-			$eqpmnt_attrbt_val = $this->input->post('eqpmnt_attrbt_val');
-			$eqpmnt_attrbt_unit = $this->input->post('eqpmnt_attrbt_unit');
+			$prcss_id = $this->request->getPost('usedprocess');
+			$equipment_id = $this->request->getPost('equipment');
+			$equipment_type_id = $this->request->getPost('equipmentTypeName');
+			$equipment_type_attribute_id = $this->request->getPost('equipmentAttributeName');
+			$eqpmnt_attrbt_val = $this->request->getPost('eqpmnt_attrbt_val');
+			$eqpmnt_attrbt_unit = $this->request->getPost('eqpmnt_attrbt_unit');
 
 			$cmpny_eqpmnt_type_attrbt = array(
 					'cmpny_id' => $companyID,
@@ -623,13 +629,13 @@ class Dataset extends BaseController {
 		$data['equipmentName'] = $this->equipment_model->get_equipment_name();
 		$data['process'] = $this->equipment_model->cmpny_prcss($companyID);
 		$data['informations'] = $this->equipment_model->all_information_of_equipment($companyID);
-		$data['company_info'] = $this->company_model->get_company($companyID);
-		$data['units'] = $this->flow_model->get_unit_list();
+		$data['company_info'] = $company_model->get_company($companyID);
+		$data['units'] = $flow_model->get_unit_list();
 
-		$this->load->view('template/header');
-		$this->load->view('dataset/dataSetLeftSide',$data);
-		$this->load->view('dataset/new_equipment',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('dataset/dataSetLeftSide',$data);
+		echo view('dataset/new_equipment',$data);
+		echo view('template/footer');
 	}
 
 	public function delete_product($companyID,$id){
@@ -647,38 +653,38 @@ class Dataset extends BaseController {
 			}
 		}
 
-		$this->component_model->delete_flow_cmpnnt_by_flowID($id);
-		$this->flow_model->delete_flow($id);
+		$component_model->delete_flow_cmpnnt_by_flowID($id);
+		$flow_model->delete_flow($id);
 		redirect('new_flow/'.$companyID, 'refresh');
 	}
 
 	public function delete_component($companyID,$id){
-		$this->component_model->delete_flow_cmpnnt_by_cmpnntID($id);
-		$this->component_model->delete_cmpnnt($companyID,$id);
+		$component_model->delete_flow_cmpnnt_by_cmpnntID($id);
+		$component_model->delete_cmpnnt($companyID,$id);
 		redirect('new_component/'.$companyID, 'refresh');
 	}
 
 	public function get_equipment_type(){
-		$equipment_id = $this->input->post('equipment_id');
+		$equipment_id = $this->request->getPost('equipment_id');
 		$type_list = $this->equipment_model->get_equipment_type_list($equipment_id);
 		echo json_encode($type_list);
 	}
 
 	public function get_equipment_attribute(){
-		$equipment_type_id = $this->input->post('equipment_type_id');
+		$equipment_type_id = $this->request->getPost('equipment_type_id');
 		$attribute_list = $this->equipment_model->get_equipment_attribute_list($equipment_type_id);
 		echo json_encode($attribute_list);
 	}
 
 	public function get_sub_process(){
-		$processID = $this->input->post('processID');
+		$processID = $this->request->getPost('processID');
 		$process_list = $this->process_model->get_process_from_motherID($processID);
 		echo json_encode($process_list);
 	}
 
 	// returns flowname user matchup for ajax.
 	public function my_ep_values($flowname,$userid){
-		$epvalue=$this->flow_model->get_My_Ep_Values($flowname,$userid);
+		$epvalue=$flow_model->get_My_Ep_Values($flowname,$userid);
 		echo json_encode($epvalue);
 	}
 
@@ -817,7 +823,7 @@ class Dataset extends BaseController {
 		$file = './assets/excel/test.xlsx';
  
 		//load the excel library
-		$this->load->library('excel');
+		echo library('excel');
 		 
 		//read file from path
 		$objPHPExcel = PHPExcel_IOFactory::load($file);
