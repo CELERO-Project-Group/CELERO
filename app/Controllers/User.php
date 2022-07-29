@@ -18,16 +18,16 @@ class User extends BaseController {
         $this->form_validation->set_rules('epvalue', 'EP Value', 
         	"trim|required|xss_clean|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]");
         $this->form_validation->set_rules('epQuantityUnit', 'EP Quantity Value', 'trim|required|xss_clean');
-		$kullanici = $session->get('user_in');
+		$userid = $this->session->id;
+		$username = $this->session->username;
 		
 		//formats number correctly
 		$quantity = str_replace(',', '.', $this->input->post('epvalue'));
 		$quantity = str_replace("'", '', $quantity);
 
-        //print_r($kullanici);
         if($this->form_validation->run() !== FALSE) {
             $epArray = array(
-                    'user_id' => $kullanici['id'],
+                    'user_id' => $userid,
                     'flow_name' => $this->input->post('flowname'),
                     'ep_q_unit' => $this->input->post('epQuantityUnit'),
                     'ep_value' => $this->sifirla($quantity),
@@ -40,8 +40,8 @@ class User extends BaseController {
         //echo $companyId;
 
 		include APPPATH . 'libraries/Excel.php';
-		if(file_exists('./assets/excels/'.$kullanici['username'].'.xlsx')){
-			$inputFileName = './assets/excels/'.$kullanici['username'].'.xlsx';
+		if(file_exists('./assets/excels/'.$username.'.xlsx')){
+			$inputFileName = './assets/excels/'.$username.'.xlsx';
 		}else{
 			$inputFileName = './assets/excels/default.xlsx';
 		}
@@ -84,26 +84,27 @@ class User extends BaseController {
 	}
 	
 	public function deleteUserEp($flow_name,$ep_value){
-		$kullanici = $session->get('user_in');
+		$kullaniciID = $this->session->id;
 		$flow_name = urldecode($flow_name);
-		$this->flow_model->delete_userep($flow_name,$ep_value,$kullanici['id']);
+		$this->flow_model->delete_userep($flow_name,$ep_value,$kullaniciID);
 		redirect('datasetexcel', 'refresh');
 	}
 
     public function uploadExcel(){
+		$userid = $this->session->id;
+		$username = $this->session->username;
 
-        $user = $session->get('user_in');
-        $config['upload_path']          = './assets/excels/';
+		$config['upload_path']          = './assets/excels/';
         $config['allowed_types']        = 'xlsx|xls';
         $config['max_size']             = 100;
         $config['overwrite'] = TRUE;
-        $config['file_name']            = $user['username'];
+        $config['file_name']            = $username;
 
         echo library('upload', $config);
         if ( ! $this->upload->do_upload('excelFile'))
         {
             $data = array('error' => $this->upload->display_errors());
-            $data['id']=$user['id'];
+            $data['id']=$userid;
 
             echo view('template/header');
             echo view('dataset/uploadexcel',$data);
@@ -112,7 +113,7 @@ class User extends BaseController {
         else
         {
             $data = array('upload_data' => $this->upload->data());
-            $data['id']=$user['id'];
+            $data['id']=$userid;
 
             echo view('template/header');
             echo view('dataset/uploadexcel',$data);
@@ -127,9 +128,6 @@ class User extends BaseController {
 		if(!empty($this->session->username)){
 			return redirect()->to(site_url());
 		}
-
-		# TODO: recaptcha needed.
-		//echo library('recaptcha');
 
 		if(!empty($this->request->getPost())){
 
@@ -277,30 +275,26 @@ class User extends BaseController {
 	}
 
 	public function become_consultant(){
-		$tmp = $session->get('user_in');
-		if(empty($tmp) || $this->user_model->is_user_consultant($tmp['id'])){
-			redirect('', 'refresh');
+		$userid = $this->session->id;
+		$username = $this->session->username;
+		if(empty($tmp) || $this->user_model->is_user_consultant($userid)){
+			return redirect()->to(site_url());
 		}
 		else{
-			$this->user_model->make_user_consultant($tmp['id'],$tmp['username']);
-			redirect('user/'.$tmp['username'], 'refresh');
+			$this->user_model->make_user_consultant($userid,$username);
+			return redirect()->to(site_url('user/'.$username));
 		}
 	}
 
 	public function show_all_users(){
-		//permission: site /user only for logged in users viewable
-		$user = $session->get('user_in');
-		if(empty($user)){
-			redirect('', 'refresh');
+		if(!empty($this->session->username)){
+			return redirect()->to(site_url());
 		}
-
 		$data['users']=$this->user_model->get_consultants();
-
 		echo view('template/header');
 		echo view('user/show_all_users',$data);
 		echo view('template/footer');
 	}
 
 }
-//test
 ?>

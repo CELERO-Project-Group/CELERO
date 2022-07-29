@@ -131,13 +131,15 @@ class Project extends BaseController{
 	}
 
 	public function contact_person(){
+		$user_model = model(User_model::class);
+
 		$cmpny_id=$this->input->post('company_id'); // 1,2,3 seklinde company id ler al�nd�
 		$user = array();
 		if($cmpny_id != 'null'){
 			$cmpny_id_arr = explode(",", $cmpny_id); // explode ile parse edildi. array icinde company id'ler tutuluyor.
 
 			foreach ($cmpny_id_arr as $cmpny_id) {
-				$user[] = $this->user_model->get_company_users($cmpny_id);
+				$user[] = $user_model->get_company_users($cmpny_id);
 			}
 			//foreach dongusu icinde tek tek company id'ler gonderilip ilgili user'lar bulunacak.
 			//suanda sadece ilk company id ' yi alip user lari donuyor.
@@ -165,7 +167,6 @@ class Project extends BaseController{
 			}
 		}
 
-    //var_dump($data['projects']);
 		echo view('template/header');
 		echo view('project/show_all_project',$data);
 		echo view('template/footer');
@@ -333,9 +334,11 @@ class Project extends BaseController{
 	}
 
 	function name_control(){
+		$project_model = model(Project_model::class);
+
 		$project_id = $this->uri->segment(2);
 		$project_name = $this->input->post('projectName');
-		if($this->project_model->have_project_name($project_id,$project_name))
+		if($project_model->have_project_name($project_id,$project_name))
 			return true;
 		else{
 			$this->form_validation->set_message('name_control','Project name is required');
@@ -345,10 +348,13 @@ class Project extends BaseController{
 
 	//delets project (if user has permission to edit/update project and is consultant)
 	public function delete_project($project_id){
-		$c_user = $this->user_model->get_session_user();
-		if($this->project_model->can_update_project_information($c_user['id'], $project_id) == true && $this->user_model->is_user_consultant($c_user['id']) == true){
-			$session->remove('project_id');
-			$this->project_model->delete_project($project_id);
+		$user_model = model(User_model::class);
+		$project_model = model(Project_model::class);
+
+		$c_user = $user_model->get_session_user();
+		if($project_model->can_update_project_information($c_user['id'], $project_id) == true && $user_model->is_user_consultant($c_user['id']) == true){
+			$this->session->remove('project_id');
+			$project_model->delete_project($project_id);
 			return redirect()->to('myprojects');
 		}else{
 			return redirect()->to(site_url());
@@ -356,9 +362,10 @@ class Project extends BaseController{
 	}
 
 	public function addConsultantToProject($term){
-		// check if user has a permission to edit company info
-		$kullanici = $session->get('user_in');
-		if(!$this->project_model->can_update_project_information($kullanici['id'],$term)){
+		$project_model = model(Project_model::class);
+
+		$kullaniciID = $this->session->id;
+		if(!$project_model->can_update_project_information($kullaniciID,$term)){
 			redirect(base_url(),'refresh');
 		}
 
@@ -370,13 +377,14 @@ class Project extends BaseController{
 				'cnsltnt_id' => $this->input->post('users'),
 				'active' => 1
 				);
-			$this->project_model->insert_project_consultant($prj_cnsltnt);
+			$project_model->insert_project_consultant($prj_cnsltnt);
 		}
-		redirect('project/'.$term, 'refresh');
+		return redirect()->to('project/'.$term);
 	}
 
 	function check_consultant($str,$term) {
-		return !$this->project_model->can_update_project_information($str,$term);
+		$project_model = model(Project_model::class);
+		return !$project_model->can_update_project_information($str,$term);
 	}
 	
 }
