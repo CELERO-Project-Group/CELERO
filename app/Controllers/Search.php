@@ -5,13 +5,15 @@ namespace App\Controllers;
 class Search extends BaseController {
 
 	public function search_pro($term = FALSE){
+		$search_model = model(Search_model::class);
+
 		if($term=="")
 		{
-			$term = $this->input->post('term');
+			$term = $this->request->getPost('term');
 			if(!empty($term))
-				redirect(base_url('search/'.$term), 'refresh');
+				return redirect()->to(site_url('search/'.$term));
 			else
-				redirect(base_url('','refresh'));
+				return redirect()->to(site_url(''));
 		}
 
 		$data['companies'] = $search_model->search_company($term);

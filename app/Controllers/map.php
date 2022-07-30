@@ -7,89 +7,46 @@ namespace App\Controllers;
 class Map extends BaseController {
 
 	public function index(){  
-            //print_r($this->session->get_userdata('language'));
-            //print_r($session->get['user_in']);
-            if(isset($session->get['user_in'])) {
-               if(empty($session->get['user_in'])){
-			redirect(base_url('login'),'refresh');
-		} 
-            } else {
-                redirect(base_url('login'),'refresh');
-            }
-            
-            if(isset($session->get['project_id'])) {
-                if($session->get['project_id']==null || $session->get['project_id']==''){
-                    return redirect()->to(site_url('projects'));
-                }
-            } else {
+        //print_r($this->session->get_userdata('language'));
+        //print_r($session->get['user_in']);
+        if(isset($session->get['user_in'])) {
+            if(empty($session->get['user_in'])){
+                return redirect()->to(site_url('login'));
+            } 
+        } else {
+            return redirect()->to(site_url('login'));
+        }
+        
+        if(isset($session->get['project_id'])) {
+            if($session->get['project_id']==null || $session->get['project_id']==''){
                 return redirect()->to(site_url('projects'));
             }
-            
-            if(isset($this->session->get_userdata('language'))) {
-               if(empty($this->session->get_userdata('language'))==null){
-			$data['site_lang'] = 'english';
-		} else {
-                    if($this->session->get_userdata('language')=='english')  $data['site_lang'] = 'english';
-                    if($this->session->get_userdata('language')=='turkish')  $data['site_lang'] = 'turkish';
-                } 
-            } else {
-                $data['site_lang'] = 'english';
-            }  
-             $data['project_id'] = $session->get['project_id'];
-             $data['projects'] = $project_model->get_project($session->get['project_id']);
-             $data['language'] = $session->get('site_lang');
-             //print_r($data['projects']);
-            /*if(isset($session->get['project_id'])) {
-                if($session->get['project_id']==null || $session->get['project_id']==''){
-                    return redirect()->to(site_url('projects'));
-                }
-            } else {
-                return redirect()->to(site_url('projects'));
-            }*/
-            
-            /*if(isset($session->get['user_in']['role_id'])) {
-                if(($session->get['user_in']['role_id']==null || $session->get['user_in']['role_id']=='')
-                         || $session->get['user_in']['role_id']!=1){
-                      return redirect()->to(site_url('company'));
-		}
-            } else {
-                //redirect(base_url('company'), 'refresh');
-            }*/
+        } else {
+            return redirect()->to(site_url('projects'));
+        }
+        
+        $data['site_lang'] = 'english';
+    
+        $data['project_id'] = $session->get['project_id'];
+        $data['projects'] = $project_model->get_project($session->get['project_id']);
+        $data['language'] = $session->get('site_lang');
 
-            $this->load->view('template/header_map');
-            $this->load->view('map/index',$data);
-            $this->load->view('template/footer_map');
+
+        echo view('template/header_map');
+        echo view('map/index',$data);
+        echo view('template/footer_map');
 	}
         
-        public function mapHeader(){   
-            //print_r($session->get['user_in']);
-            if(isset($session->get['user_in'])) {
-               if(empty($session->get['user_in'])){
-			redirect(base_url('login'),'refresh');
-				} 
-            } else {
-                redirect(base_url('login'),'refresh');
-            }
-                
-            /*if(isset($session->get['project_id'])) {
-                if($session->get['project_id']==null || $session->get['project_id']==''){
-                    return redirect()->to(site_url('projects'));
-                }
-            } else {
-                return redirect()->to(site_url('projects'));
-            }*/
-            
-            /*if(isset($session->get['user_in']['role_id'])) {
-                if(($session->get['user_in']['role_id']==null || $session->get['user_in']['role_id']=='')
-                         || $session->get['user_in']['role_id']!=1){
-                      return redirect()->to(site_url('company'));
-				}
-            } else {
-                //redirect(base_url('company'), 'refresh');
-            }*/
-
-            $this->load->view('map/mapHeader');
-           
+    public function mapHeader(){   
+        //print_r($session->get['user_in']);
+        if(isset($session->get['user_in'])) {
+            if(empty($session->get['user_in'])){
+                return redirect()->to(site_url('login'));
+            } 
+        } else {
+            return redirect()->to(site_url('login'));
+        }
+        echo view('map/mapHeader');           
 	}
 
 	

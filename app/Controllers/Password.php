@@ -11,10 +11,10 @@ class Password extends BaseController {
 		$this->form_validation->set_rules('new_pass_again', 'New Password(Again)', 'trim|xss_clean|required');
 		if ($this->form_validation->run() !== FALSE){
 			$user = $session->get('user_in');
-			$pass = md5($this->input->post('old_pass'));
+			$pass = md5($this->request->getPost('old_pass'));
 			if($password_model->do_similar_pass($user['id'],$pass)){
 				$data = array(
-						'psswrd' => md5($this->input->post('new_pass'))
+						'psswrd' => md5($this->request->getPost('new_pass'))
 					);
 				$password_model->change_pass($user['id'],$data);
 				redirect('send_email_for_change_pass','refresh');
@@ -39,8 +39,8 @@ class Password extends BaseController {
 
 				$user_id = $password_model->get_user_id($random);
 
-				$old_pass = $this->input->post('old_pass');
-				$new_pass = $this->input->post('new_pass');
+				$old_pass = $this->request->getPost('old_pass');
+				$new_pass = $this->request->getPost('new_pass');
 				if($password_model->do_similar_pass($user_id,md5($old_pass)) == true){
 					$control = array(
 							'psswrd' => md5($new_pass)
@@ -84,7 +84,7 @@ class Password extends BaseController {
 
 		if ($this->form_validation->run() !== FALSE){
 
-			$email = $this->input->post('email');
+			$email = $this->request->getPost('email');
 
 			$user_id = $password_model->get_id($email);
 
@@ -121,7 +121,7 @@ class Password extends BaseController {
 
 			if ($this->form_validation->run() !== FALSE){
 				if($this->password_check() == true){
-					$new_pass = $this->input->post('new_pass');
+					$new_pass = $this->request->getPost('new_pass');
 					$control = array(
 						'psswrd' => md5($new_pass)
 					);
@@ -194,7 +194,7 @@ class Password extends BaseController {
 
 	// checks password matches
 	public function password_check(){
-		if($this->input->post('new_pass') == $this->input->post('new_pass_again')){
+		if($this->request->getPost('new_pass') == $this->request->getPost('new_pass_again')){
 			return true;
 		}
 		else{
@@ -216,7 +216,7 @@ class Password extends BaseController {
 	// come on.
 	public function user_logout(){
 		$this->session->sess_destroy();
-		redirect('', 'refresh');
+		return redirect()->to(site_url(''));
 	}
 }
 ?>

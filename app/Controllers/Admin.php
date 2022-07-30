@@ -14,7 +14,7 @@ class Admin extends BaseController {
             //print_r($session->get['user_in']['id']);
                 $loginData = $session->get('user_in');
 		if(empty($loginData)){
-			redirect(base_url('login'),'refresh');
+			return redirect()->to(site_url('login'));
 		}
                 $data['userID'] = $session->get['user_in']['id'];
                 $data['userName'] = $session->get['user_in']['username'];
@@ -27,7 +27,7 @@ class Admin extends BaseController {
             //print_r($session->get['user_in']['id']);
                 $loginData = $session->get('user_in');
 		if(empty($loginData)){
-			redirect(base_url('login'),'refresh');
+			return redirect()->to(site_url('login'));
 		}
                 $data['userID'] = $session->get['user_in']['id'];
                 $data['userName'] = $session->get['user_in']['username'];
@@ -40,7 +40,7 @@ class Admin extends BaseController {
                 //print_r($session->get['user_in']);
                 $loginData = $session->get('user_in');
 		if(empty($loginData)){
-			redirect(base_url('login'),'refresh');
+			return redirect()->to(site_url('login'));
 		}
                 $data['userName'] = $session->get['user_in']['username'];
 		echo view('template/header_admin');
@@ -52,7 +52,7 @@ class Admin extends BaseController {
             //print_r($session->get['user_in']['id']);
                 $loginData = $session->get('user_in');
 		if(empty($loginData)){
-			redirect(base_url('login'),'refresh');
+			return redirect()->to(site_url('login'));
 		}
                 $data['userName'] = $session->get['user_in']['username'];
 		echo view('template/header_admin');
@@ -64,7 +64,7 @@ class Admin extends BaseController {
             //print_r($session->get['user_in']['id']);
                 $loginData = $session->get('user_in');
 		if(empty($loginData)){
-			redirect(base_url('login'),'refresh');
+			return redirect()->to(site_url('login'));
 		}
                 $data['userName'] = $session->get['user_in']['username'];
 		echo view('template/header_admin');
@@ -87,7 +87,7 @@ class Admin extends BaseController {
         public function clusters() {
            $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -99,7 +99,7 @@ class Admin extends BaseController {
         public function industrialZones() {
            $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -111,7 +111,7 @@ class Admin extends BaseController {
         public function reports() {
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -123,7 +123,7 @@ class Admin extends BaseController {
         public function consultants() {
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -135,7 +135,7 @@ class Admin extends BaseController {
         public function employees() {  
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -147,7 +147,7 @@ class Admin extends BaseController {
         public function rpEmployeesList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -160,7 +160,7 @@ class Admin extends BaseController {
         public function rpCompaniesList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -173,7 +173,7 @@ class Admin extends BaseController {
          public function rpCompaniesInfoList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -186,7 +186,7 @@ class Admin extends BaseController {
         public function rpCompaniesProjectsList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -199,7 +199,7 @@ class Admin extends BaseController {
         public function rpCompaniesProjectDetailsList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -212,7 +212,7 @@ class Admin extends BaseController {
         public function rpCompaniesNotInClustersList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -225,7 +225,7 @@ class Admin extends BaseController {
         public function rpCompaniesWasteEmissionList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -238,7 +238,7 @@ class Admin extends BaseController {
         public function rpCompaniesProductionList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -251,7 +251,7 @@ class Admin extends BaseController {
         public function rpCompaniesProcessesList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -264,7 +264,7 @@ class Admin extends BaseController {
         public function rpConsultantsList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -277,7 +277,7 @@ class Admin extends BaseController {
         public function rpCompaniesInClustersList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -290,7 +290,7 @@ class Admin extends BaseController {
         public function rpEquipmentList() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -304,7 +304,7 @@ class Admin extends BaseController {
         public function zoneEmployees() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
@@ -317,7 +317,7 @@ class Admin extends BaseController {
         public function zoneCompanies() { 
             $loginData = $session->get('user_in');
             if(empty($loginData)){
-                    redirect(base_url('login'),'refresh');
+                    return redirect()->to(site_url('login'));
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];

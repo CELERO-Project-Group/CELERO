@@ -109,7 +109,7 @@ class Dataset extends BaseController {
 		//checks permissions, if not loged in a redirect happens
 		$user = $this->session->username;
 		if(empty($user)){
-			redirect('', 'refresh');
+			return redirect()->to(site_url(''));
 		}
 
 		$data['flownames'] = $flow_model->get_flowname_list();

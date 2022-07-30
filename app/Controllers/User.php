@@ -14,6 +14,9 @@ class User extends BaseController {
     }
 
     public function dataFromExcel(){
+
+		$flow_model = model(Flow_model::class);
+
         $this->form_validation->set_rules('flowname', 'Flow Name', 'trim|required');
         $this->form_validation->set_rules('epvalue', 'EP Value', 
         	"trim|required|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]");
@@ -22,14 +25,14 @@ class User extends BaseController {
 		$username = $this->session->username;
 		
 		//formats number correctly
-		$quantity = str_replace(',', '.', $this->input->post('epvalue'));
+		$quantity = str_replace(',', '.', $this->request->getPost('epvalue'));
 		$quantity = str_replace("'", '', $quantity);
 
         if($this->form_validation->run() !== FALSE) {
             $epArray = array(
                     'user_id' => $userid,
-                    'flow_name' => $this->input->post('flowname'),
-                    'ep_q_unit' => $this->input->post('epQuantityUnit'),
+                    'flow_name' => $this->request->getPost('flowname'),
+                    'ep_q_unit' => $this->request->getPost('epQuantityUnit'),
                     'ep_value' => $this->sifirla($quantity),
                 );
             $flow_model->set_userep($epArray);
@@ -84,6 +87,8 @@ class User extends BaseController {
 	}
 	
 	public function deleteUserEp($flow_name,$ep_value){
+		$flow_model = model(Flow_model::class);
+
 		$kullaniciID = $this->session->id;
 		$flow_name = urldecode($flow_name);
 		$flow_model->delete_userep($flow_name,$ep_value,$kullaniciID);

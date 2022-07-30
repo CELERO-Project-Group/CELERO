@@ -99,28 +99,28 @@ class Cpscoping extends BaseController {
 		//$this->form_validation->set_rules('kpi_error', 'Kpi Error', 'required|trim|integer|xss_clean');
 		
 		if ($this->form_validation->run() !== FALSE){
-			$prcss_name = $this->input->post('prcss_name');
-			$flow_name = $this->input->post('flow_name');
-			$flow_type_name = $this->input->post('flow_type_name');
-			$amount = $this->input->post('amount');
-			$allocation_amount = $this->input->post('allocation_amount');
-			$importance_amount = $this->input->post('error_amount');
-			$cost = $this->input->post('cost');
-			$allocation_cost = $this->input->post('allocation_cost');
-			$importance_cost = $this->input->post('error_cost');
-			$env_impact = $this->input->post('env_impact');
-			$allocation_env_impact = $this->input->post('allocation_env_impact');
-			$importance_env_impact = $this->input->post('error_ep');
-			$unit_amount = $this->input->post('unit_amount');
-			$unit_cost = $this->input->post('unit_cost');
-			$unit_env_impact = $this->input->post('unit_env_impact');
-			$reference = $this->input->post('reference');
-			$unit_reference = $this->input->post('unit_reference');
-			$kpi = $this->input->post('kpi');
-			$unit_kpi = $this->input->post('unit_kpi');
-			$kpidef = $this->input->post('kpidef');
-			$nameofref = $this->input->post('nameofref');
-			//$kpi_error = $this->input->post('kpi_error');
+			$prcss_name = $this->request->getPost('prcss_name');
+			$flow_name = $this->request->getPost('flow_name');
+			$flow_type_name = $this->request->getPost('flow_type_name');
+			$amount = $this->request->getPost('amount');
+			$allocation_amount = $this->request->getPost('allocation_amount');
+			$importance_amount = $this->request->getPost('error_amount');
+			$cost = $this->request->getPost('cost');
+			$allocation_cost = $this->request->getPost('allocation_cost');
+			$importance_cost = $this->request->getPost('error_cost');
+			$env_impact = $this->request->getPost('env_impact');
+			$allocation_env_impact = $this->request->getPost('allocation_env_impact');
+			$importance_env_impact = $this->request->getPost('error_ep');
+			$unit_amount = $this->request->getPost('unit_amount');
+			$unit_cost = $this->request->getPost('unit_cost');
+			$unit_env_impact = $this->request->getPost('unit_env_impact');
+			$reference = $this->request->getPost('reference');
+			$unit_reference = $this->request->getPost('unit_reference');
+			$kpi = $this->request->getPost('kpi');
+			$unit_kpi = $this->request->getPost('unit_kpi');
+			$kpidef = $this->request->getPost('kpidef');
+			$nameofref = $this->request->getPost('nameofref');
+			//$kpi_error = $this->request->getPost('kpi_error');
 
 			$array_allocation = array(
 				'prcss_id'=>$prcss_name,
@@ -283,25 +283,25 @@ class Cpscoping extends BaseController {
 
 		if ($this->form_validation->run() !== FALSE){
 
-			$amount = $this->input->post('amount');
-			$allocation_amount = $this->input->post('allocation_amount');
-			$importance_amount = $this->input->post('error_amount');
-			$cost = $this->input->post('cost');
-			$allocation_cost = $this->input->post('allocation_cost');
-			$importance_cost = $this->input->post('error_cost');
-			$env_impact = $this->input->post('env_impact');
-			$allocation_env_impact = $this->input->post('allocation_env_impact');
-			$importance_env_impact = $this->input->post('error_ep');
-			$unit_amount = $this->input->post('unit_amount');
-			$unit_cost = $this->input->post('unit_cost');
-			$unit_env_impact = $this->input->post('unit_env_impact');
-			$reference = $this->input->post('reference');
-			$unit_reference = $this->input->post('unit_reference');
-			$kpi = $this->input->post('kpi');
-			$unit_kpi = $this->input->post('unit_kpi');
-			$nameofref = $this->input->post('nameofref');
-			$kpidef = $this->input->post('kpidef');
-			//$kpi_error = $this->input->post('kpi_error');
+			$amount = $this->request->getPost('amount');
+			$allocation_amount = $this->request->getPost('allocation_amount');
+			$importance_amount = $this->request->getPost('error_amount');
+			$cost = $this->request->getPost('cost');
+			$allocation_cost = $this->request->getPost('allocation_cost');
+			$importance_cost = $this->request->getPost('error_cost');
+			$env_impact = $this->request->getPost('env_impact');
+			$allocation_env_impact = $this->request->getPost('allocation_env_impact');
+			$importance_env_impact = $this->request->getPost('error_ep');
+			$unit_amount = $this->request->getPost('unit_amount');
+			$unit_cost = $this->request->getPost('unit_cost');
+			$unit_env_impact = $this->request->getPost('unit_env_impact');
+			$reference = $this->request->getPost('reference');
+			$unit_reference = $this->request->getPost('unit_reference');
+			$kpi = $this->request->getPost('kpi');
+			$unit_kpi = $this->request->getPost('unit_kpi');
+			$nameofref = $this->request->getPost('nameofref');
+			$kpidef = $this->request->getPost('kpidef');
+			//$kpi_error = $this->request->getPost('kpi_error');
 
 			$array_allocation = array(
 				'amount'=>$amount,
@@ -623,7 +623,7 @@ class Cpscoping extends BaseController {
 
 	public function search_result($prjct_id,$cmpny_id){
 		$cpscoping_model = model(Cpscoping_model::class);
-		$search = $this->input->post('search');
+		$search = $this->request->getPost('search');
 		$data['result'] = $cpscoping_model->search_result($search);
 		$data['prjct_id'] = $prjct_id;
 		$data['cmpny_id'] = $cmpny_id;

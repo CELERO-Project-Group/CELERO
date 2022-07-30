@@ -11,8 +11,8 @@ class Cluster extends BaseController{
 
 		if ($this->form_validation->run() !== FALSE)
 		{
-			$company_id = $this->input->post('company');
-			$cluster_id = $this->input->post('cluster');
+			$company_id = $this->request->getPost('company');
+			$cluster_id = $this->request->getPost('cluster');
 			if($cluster_model->can_write_info($cluster_id,$company_id) == true){
 				$cmpny_clstr = array(
 						'cmpny_id' => $company_id,

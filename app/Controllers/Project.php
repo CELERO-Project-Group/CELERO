@@ -133,7 +133,7 @@ class Project extends BaseController{
 	public function contact_person(){
 		$user_model = model(User_model::class);
 
-		$cmpny_id=$this->input->post('company_id'); // 1,2,3 seklinde company id ler al�nd�
+		$cmpny_id=$this->request->getPost('company_id'); // 1,2,3 seklinde company id ler al�nd�
 		$user = array();
 		if($cmpny_id != 'null'){
 			$cmpny_id_arr = explode(",", $cmpny_id); // explode ile parse edildi. array icinde company id'ler tutuluyor.
@@ -337,7 +337,7 @@ class Project extends BaseController{
 		$project_model = model(Project_model::class);
 
 		$project_id = $this->uri->segment(2);
-		$project_name = $this->input->post('projectName');
+		$project_name = $this->request->getPost('projectName');
 		if($project_model->have_project_name($project_id,$project_name))
 			return true;
 		else{
@@ -374,7 +374,7 @@ class Project extends BaseController{
 		{	
 			$prj_cnsltnt=array(
 				'prj_id' => $term,
-				'cnsltnt_id' => $this->input->post('users'),
+				'cnsltnt_id' => $this->request->getPost('users'),
 				'active' => 1
 				);
 			$project_model->insert_project_consultant($prj_cnsltnt);

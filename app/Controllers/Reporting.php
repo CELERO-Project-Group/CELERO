@@ -16,7 +16,7 @@ class Reporting extends BaseController{
 	public function show_all(){
                 $loginData = $session->get('user_in');
 		if(empty($loginData)){
-			redirect(base_url('login'),'refresh');
+			return redirect()->to(site_url('login'));
 		}
                 $project_id = $session->get('project_id');
                 //print_r($project_id);
@@ -34,7 +34,7 @@ class Reporting extends BaseController{
 		//burada php kodu kullanabilirsiniz. data arrayinin içini doldurabilirsiniz.
 		$loginData = $session->get('user_in');
 		if(empty($loginData)){
-			redirect(base_url('login'),'refresh');
+			return redirect()->to(site_url('login'));
 		}
                 $data['userID'] = $session->get['user_in']['id'];
                 $data['userName'] = $session->get['user_in']['username'];
