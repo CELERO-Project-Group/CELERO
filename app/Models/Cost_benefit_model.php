@@ -6,27 +6,25 @@ use CodeIgniter\Model;
 class Cost_benefit_model extends Model
 {
 
-    public function __construct()
-    {
-        $db = db_connect();
-    }
-
     public function get_is_candidates()
     {
-        $db->select('allocation_id');
-        $db->from('t_cp_is_candidate');
-        $db->where('active', '1');
-        return $db->get()->result_array();
+        $db = db_connect();
+        $builder = $db->table('t_cp_is_candidate');
+        $builder->select('allocation_id');
+        $builder->where('active', '1');
+        $query = $builder->get();
+        return $query->getResultArray();
     }
 
     public function get_allocation_ids($allocation_id, $prjct_id, $cmpny_id)
     {
-        $db->select('id');
-        $db->from('t_cp_company_project');
-        $db->where('allocation_id', $allocation_id);
-        $db->where('prjct_id', $prjct_id);
-        $db->where('cmpny_id', $cmpny_id);
-        $query = $db->get()->row_array();
+        $db = db_connect();
+        $builder = $db->table('t_cp_company_project');
+        $builder->select('id');
+        $builder->where('allocation_id', $allocation_id);
+        $builder->where('prjct_id', $prjct_id);
+        $builder->where('cmpny_id', $cmpny_id);
+        $query = $builder->get()->getRowArray();
         if (!empty($query)) {
             return true;
         } else {
@@ -306,11 +304,14 @@ class Cost_benefit_model extends Model
             );
 
             if ($flag) {
-                #from 't_costbenefit_temp'
-                $db->where('is_id', $id);
-                $db->update('t_costbenefit_temp', $data);
+                $db = db_connect();
+                $builder = $db->table('t_costbenefit_temp');
+                $builder->where('is_id', $id);
+                $builder->replace($data);
             } else {
-                $db->insert('t_costbenefit_temp', $data);
+                $db = db_connect();
+                $builder = $db->table('t_costbenefit_temp');
+                $builder->insert($data);
             }
         } else {
             $data = array(
@@ -449,11 +450,14 @@ class Cost_benefit_model extends Model
                 'cp_id'            => $id,
             );
             if ($flag) {
-                #from 't_costbenefit_temp'
-                $db->where('cp_id', $id);
-                $db->update('t_costbenefit_temp', $data);
+                $db = db_connect();
+                $builder = $db->table('t_costbenefit_temp');
+                $builder->where('cp_id', $id);
+                $builder->replace($data);
             } else {
-                $db->insert('t_costbenefit_temp', $data);
+                $db = db_connect();
+                $builder = $db->table('t_costbenefit_temp');
+                $builder->insert($data);
             }
         }
     }
@@ -461,10 +465,13 @@ class Cost_benefit_model extends Model
     public function is_cb_exist($id)
     {
         $where = "(t_costbenefit_temp.is_id='" . $id . "' or t_costbenefit_temp.cp_id='" . $id . "') ";
-        $db->select('*');
-        $db->from('t_costbenefit_temp');
-        $db->where($where);
-        $query = $db->get()->row_array();
+ 
+        $db = db_connect();
+        $builder = $db->table('t_costbenefit_temp');
+        $builder->select('*');
+        $builder->where($where);
+        $query = $builder->get()->getRowArray();
+
         if (!empty($query)) {
             return true;
         } else {
