@@ -21,7 +21,7 @@ class Password_model extends Model {
 		$db = db_connect();
 		$builder = $db->table('t_user');
 		$builder->where('id', $user_id);
-		$builder->replace($data);
+		$builder->update($data);
 	}
 
 	public function get_email($user_id){

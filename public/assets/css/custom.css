@@ -491,3 +491,9 @@ pre p{
     margin-left: auto;
     margin-right: auto;
 }
+.errors{
+    border: 1px solid red;
+    padding-top: 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}

@@ -413,8 +413,8 @@ class Dataset extends BaseController {
 		if(!empty($this->request->getPost())){
 
 			if ($this->validate([
-					'component_name'=> 'Component Name', 'trim|required',
-					'flowtype'=> 'Flow Type', 'trim'
+					'component_name'=> 'trim|required',
+					'flowtype'=> 'trim'
 				])){
 
 					$component_array = array(

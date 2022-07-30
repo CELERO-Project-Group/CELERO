@@ -44,7 +44,7 @@ class Process_model extends Model {
         $builder = $db->table('t_cmpny_prcss');
         $builder->where('cmpny_id',$cmpny_id);
 		$builder->where('prcss_id',$prcss_id);
-        $builder->replace($data);
+        $builder->update($data);
 	}
 
 	public function get_processfamily_list(){

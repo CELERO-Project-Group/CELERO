@@ -1,9 +1,14 @@
 <?php //print_r($component); ?>
+	<?php
+		if($validation != NULL)
+		echo $validation->listErrors();
+	?>
 	<div class="col-md-6 col-md-offset-3">
 		<?= form_open_multipart('edit_component/'.$companyID.'/'.$component['id']); ?>
+			<?= csrf_field() ?>
 			<p class="lead"><?= lang("Validation.editcomponent"); ?></p>
 			<div class="form-group">
-			    <label for="component_name"><?= lang("Validation.componentname"); ?> <span style="color:red;">*</span></label>
+				<label for="component_name"><?= lang("Validation.componentname"); ?> <span style="color:red;">*</span></label>
 			   	<input class="form-control" id="component_name" name="component_name" placeholder="<?= lang("Validation.componentname"); ?>" value="<?= set_value('component_name',$component['component_name']); ?>">
 		 	</div>
 
@@ -31,12 +36,12 @@
 					</div>
 					<div class="col-md-4">
 						<label for="quantity"><?= lang("Validation.quantityunit"); ?></label>
-				        <select id="selectize-units" class="info select-block" name="quantityUnit"> 
-		                    <option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>
-		                    <?php foreach ($units as $unit): ?>
-		                        <option value="<?= $unit['id']; ?>" <?= set_select('quantityUnit', $unit['id']); ?>><?= $unit['name']; ?></option>
-		                    <?php endforeach ?>
-		                </select>
+						<select id="selectize-units" class="info select-block" name="quantityUnit"> 
+							<option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>
+							<?php foreach ($units as $unit): ?>
+								<option value="<?= $unit['id']; ?>" <?= set_select('quantityUnit', $unit['id']); ?>><?= $unit['name']; ?></option>
+							<?php endforeach ?>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -112,7 +117,7 @@
 		<span class="label label-default"><span style="color:red;">*</span> <?= lang("Validation.labelarereq"); ?>.</span>
 </div>
 <script type="text/javascript">
-    $('#selectize-units').selectize({
-        create: false
-    });
+	$('#selectize-units').selectize({
+		create: false
+	});
 </script>

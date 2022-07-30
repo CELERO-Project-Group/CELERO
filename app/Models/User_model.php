@@ -166,7 +166,7 @@ class User_model extends Model
 			'id' => $id
 		);
 		$builder = $db->table('t_user');
-		$builder->replace($data);
+		$builder->update($data);
 	}
 
 	public function is_user_consultant($id)
@@ -191,7 +191,7 @@ class User_model extends Model
 			'id' => $userId
 		);
 		$builder = $db->table('t_user');
-		$builder->replace($data);
+		$builder->update($data);
 	}
 
 	public function users_without_company()

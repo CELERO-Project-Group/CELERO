@@ -194,6 +194,7 @@ class Cpscoping extends BaseController {
 		$data['allocationlar'] = $cpscoping_model->get_allocation_values($company_id,$project_id);
 		$data['companyID'] = $company_id;
 		$data['company_info'] = $company_model->get_company($company_id);
+		$data['validation'] = $this->validator;
 
 		echo view('template/header');
 		echo view('dataset/dataSetLeftSide',$data);

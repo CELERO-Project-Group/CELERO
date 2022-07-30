@@ -18,7 +18,7 @@ class Cpscoping_model extends Model
 		$db = db_connect();
 		$builder = $db->table('t_cp_allocation');
 		$builder->where('t_cp_allocation.id', $id);
-		$builder->replace($data);
+		$builder->update($data);
 	}
 
 	public function set_cp_allocation_main($data)

@@ -307,7 +307,7 @@ class Cost_benefit_model extends Model
                 $db = db_connect();
                 $builder = $db->table('t_costbenefit_temp');
                 $builder->where('is_id', $id);
-                $builder->replace($data);
+                $builder->update($data);
             } else {
                 $db = db_connect();
                 $builder = $db->table('t_costbenefit_temp');
@@ -453,7 +453,7 @@ class Cost_benefit_model extends Model
                 $db = db_connect();
                 $builder = $db->table('t_costbenefit_temp');
                 $builder->where('cp_id', $id);
-                $builder->replace($data);
+                $builder->update($data);
             } else {
                 $db = db_connect();
                 $builder = $db->table('t_costbenefit_temp');

@@ -1,8 +1,9 @@
 	<div class="col-md-4 borderli">
 		<?= form_open_multipart('new_component/'.$companyID); ?>
+			<?= csrf_field() ?>
 			<p class="lead"><?= lang("Validation.addcomponent"); ?></p>
 			<div class="form-group">
-			    <label for="component_name"><?= lang("Validation.componentname"); ?> <span style="color:red;">*</span></label>
+				<label for="component_name"><?= lang("Validation.componentname"); ?> <span style="color:red;">*</span></label>
 			   	<input class="form-control" id="component_name" name="component_name" placeholder="<?= lang("Validation.componentname"); ?>">
 		 	</div>
 
@@ -38,12 +39,12 @@
 					</div>
 					<div class="col-md-4">
 						<label for="quantity"><?= lang("Validation.quantityunit"); ?></label>
-		                <select id="selectize-units" class="info select-block" name="quantityUnit"> 
-		                    <option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>
-		                    <?php foreach ($units as $unit): ?>
-		                        <option value="<?= $unit['id']; ?>" <?= set_select('quantityUnit', $unit['id']); ?>><?= $unit['name']; ?></option>
-		                    <?php endforeach ?>
-		                </select>
+						<select id="selectize-units" class="info select-block" name="quantityUnit"> 
+							<option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>
+							<?php foreach ($units as $unit): ?>
+								<option value="<?= $unit['id']; ?>" <?= set_select('quantityUnit', $unit['id']); ?>><?= $unit['name']; ?></option>
+							<?php endforeach ?>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -145,7 +146,7 @@
 		</div>
 
 <script type="text/javascript">
-    $('#selectize-units').selectize({
-        create: false
-    });
+	$('#selectize-units').selectize({
+		create: false
+	});
 </script>

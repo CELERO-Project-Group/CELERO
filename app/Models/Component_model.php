@@ -33,7 +33,7 @@ class Component_model extends Model {
 		$builder = $db->table('t_cmpnnt');
 		$builder->where('t_cmpnnt.cmpny_id',$company_id); 
 		$builder->where('t_cmpnnt.id',$id);     
-		$builder->replace($data);
+		$builder->update($data);
 	}
 
 	//gets component types
@@ -55,7 +55,7 @@ class Component_model extends Model {
 		$db = db_connect();
         $builder = $db->table('t_cmpny_flow_cmpnnt');
         $builder->where('t_cmpny_flow_cmpnnt.cmpnnt_id',$id); 
-        $builder->replace($data);
+        $builder->update($data);
 	}
 
 	public function get_cmpnnt($cmpny_id){
@@ -76,7 +76,7 @@ class Component_model extends Model {
 	public function get_cmpnnt_info($cmpny_id,$id){
 		$db = db_connect();
         $builder = $db->table('t_cmpny_flow');
-		$builder->select('*, t_cmpnnt.id as id,t_cmpnnt.name as component_name, t_flow.name as flow_name, t_flow_type.name as flow_type_name');
+		$builder->select('*, t_cmpnnt.id as id,t_cmpnnt.name as component_name, t_flow.name as flow_name, t_flow_type.name as type_name');
 		$builder->join('t_cmpny_flow_cmpnnt','t_cmpny_flow.id = t_cmpny_flow_cmpnnt.cmpny_flow_id');
 		$builder->join('t_cmpnnt','t_cmpny_flow_cmpnnt.cmpnnt_id = t_cmpnnt.id');
 		$builder->join('t_cmpnt_type','t_cmpny_flow_cmpnnt.cmpnt_type_id = t_cmpnt_type.id','left');
