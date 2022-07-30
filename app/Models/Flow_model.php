@@ -114,15 +114,19 @@ class Flow_model extends Model {
 	}
 
 	public function delete_flow($id){
-		$db->where('id', $id);
-		$db->delete('t_cmpny_flow');
+		$db = db_connect();
+        $builder = $db->table('t_cmpny_flow');
+		$builder->where('id', $id);
+        $builder->delete();
 	}
 
 	public function update_flow_info($companyID,$flow_id,$flow_type_id,$flow){
-	    $db->where('t_cmpny_flow.cmpny_id',$companyID);
-	    $db->where('t_cmpny_flow.flow_id',$flow_id);
-	    $db->where('t_cmpny_flow.flow_type_id',$flow_type_id);
-	    $db->update('t_cmpny_flow',$flow);
+		$db = db_connect();
+		$builder = $db->table('t_cmpny_flow');
+		$builder->where('t_cmpny_flow.cmpny_id',$companyID);
+	    $builder->where('t_cmpny_flow.flow_id',$flow_id);
+	    $builder->where('t_cmpny_flow.flow_type_id',$flow_type_id); 
+		$builder->replace($flow);
 	}
 
 	public function set_userep($data){
@@ -132,10 +136,12 @@ class Flow_model extends Model {
 	}
 
 	public function delete_userep($flow_name,$ep_value,$user_id){
-		$db->where('user_id', $user_id);
-		$db->where('ep_value', $ep_value);
-		$db->where('flow_name', $flow_name);
-		$db->delete('t_user_ep_values');
+		$db = db_connect();
+        $builder = $db->table('t_user_ep_values');
+        $builder->where('user_id', $user_id);
+		$builder->where('ep_value', $ep_value);
+		$builder->where('flow_name', $flow_name);
+        $builder->delete();
 	}
 
 	// gets flow ep values from excel imported data based on given userid.

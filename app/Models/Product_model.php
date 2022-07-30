@@ -49,11 +49,12 @@ class Product_model extends Model
         $builder->delete(['id' => $id]);
 	}
 
-	// TODO
 	public function update_product($companyID, $product_id, $productArray)
 	{
-		$db->where('t_prdct.cmpny_id', $companyID);
-		$db->where('t_prdct.id', $product_id);
-		$db->update('t_prdct', $productArray);
+		$db = db_connect();
+		$builder = $db->table('t_prdct');
+		$builder->where('t_prdct.cmpny_id', $companyID);
+		$builder->where('t_prdct.id', $product_id);
+		$builder->replace($productArray);
 	}
 }
