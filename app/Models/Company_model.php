@@ -7,11 +7,6 @@ use CodeIgniter\Model;
 class Company_model extends Model
 {
 
-    public function __construct()
-    {
-        $db = db_connect();
-    }
-
     public function insert_company($data)
     {
         $db = db_connect();
