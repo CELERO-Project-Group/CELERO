@@ -75,7 +75,7 @@ class Password extends BaseController {
 			echo view('template/footer');
 		}
 		else{
-			redirect('','refresh');
+			return redirect()->back();
 		}
 	}
 
@@ -104,7 +104,7 @@ class Password extends BaseController {
 					'email' => $email
 				);
 			$this->sendMAil($data);
-			redirect('','refresh');
+			return redirect()->back();
 		}
 		echo view('template/header');
 		echo view('password/new_password_email');

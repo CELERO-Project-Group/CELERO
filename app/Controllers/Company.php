@@ -125,6 +125,7 @@ class Company extends BaseController {
 
 	function is_in_nace($nace)
 	{
+		$company_model = model(Company_model::class);
 		$degisken= $company_model->is_in_nace($nace);
 
 		if($degisken){
@@ -138,8 +139,6 @@ class Company extends BaseController {
 
 	public function show_all_companies(){
 
-		//permission site /companies only for logged in users viewable
-		// TODO: need flash error message
 		if(empty($this->session->username)){
 			return redirect()->to(site_url());
 		}
@@ -152,7 +151,6 @@ class Company extends BaseController {
 		$data['help'] = "1";
 		if($this->create_company_control() == FALSE){
 			$data['help'] = "0";
-			//redirect('', 'refresh');
 		}
 
 		if($cluster_id == null || $cluster_id == 0){
@@ -175,8 +173,12 @@ class Company extends BaseController {
 	}
 
 	public function isSelectionWithFlow($flow_id=FALSE){
+		$flow_model = model(Flow_model::class);
+		$company_model = model(Company_model::class);
+		$cluster_model = model(Cluster_model::class);
+
 		$data['flowlist'] = $flow_model->get_flowname_list();
-		$cluster_id = $this->input->post('cluster');
+		$cluster_id = $this->request->getPost('cluster');
 		if($cluster_id == null || $cluster_id == 0){
 			if(!empty($flow_id)){
 				$data['cluster_name']['name'] = 'All Companies in selected flow';
@@ -192,12 +194,7 @@ class Company extends BaseController {
 			$data['cluster_name'] = $cluster_model->get_cluster_name($cluster_id);
 		}
 		$data['clusters'] = $cluster_model->get_clusters();
-		//permission control
-		$kullanici = $session->get('user_in');
-		// foreach ($data['companies'] as $key => $d) {
-		// 	$data['companies'][$key]['have_permission'] = $this->user_model->can_edit_company($kullanici['id'],$d['id']);
-		// }
-		//print_r($data['companies']);
+
 		echo view('template/header');
 		echo view('company/show_tuna',$data);
 		echo view('template/footer');
@@ -218,17 +215,16 @@ class Company extends BaseController {
 	}
 
 	public function show_project_companies(){
+		$company_model = model(Company_model::class);
 		$project_id = $this->session->get('project_id');
 		$data['companies'] = $company_model->get_project_companies($project_id);
 
-		//print_r($data['companies']);
 		echo view('template/header');
 		echo view('company/show_project_companies',$data);
 		echo view('template/footer');
 	}
 
 	public function companies($term){
-
 		$flow_model = model(Flow_model::class);
 		$process_model = model(Process_model::class);
 		$component_model = model(Component_model::class);
@@ -288,6 +284,7 @@ class Company extends BaseController {
 
 
 	public function company_search(){
+		$company_model = model(Company_model::class);
 		if (isset($_GET['term'])){
       		$q = strtolower($_GET['term']);
       		$results = $company_model->company_search($q);
@@ -297,9 +294,11 @@ class Company extends BaseController {
 	}
 
 	public function addUsertoCompany($term){
-		// check if user has a permission to edit company info
-		$kullanici = $session->get('user_in');
-		if(!$this->user_model->can_edit_company($kullanici['id'],$term)){
+		$user_model = model(User_model::class);
+		$company_model = model(Company_model::class);
+		
+		$userId = $this->session->id;
+		if(!$user_model->can_edit_company($userId,$term)){
 			redirect(base_url(),'refresh');
 		}
 
@@ -307,7 +306,7 @@ class Company extends BaseController {
 		if ($this->form_validation->run() !== FALSE)
 		{
 			$user = array(
-				'user_id' => $this->input->post('users'),
+				'user_id' => $this->request->getPost('users'),
       			'cmpny_id' => $term,
       			'is_contact' => 0
     		);
@@ -319,13 +318,16 @@ class Company extends BaseController {
 	}
 
 	function check_companyuser($str,$term) {
-		return !$this->user_model->can_edit_company($str,$term);
+		$user_model = model(User_model::class);
+		return !$user_model->can_edit_company($str,$term);
 	}
 
 	public function removeUserfromCompany($term,$selected_user_id){
-		// check if user has a permission to edit company info, if not redirects to main page.
-		$user = $session->get('user_in');
-		if(!$this->user_model->can_edit_company($user['id'],$term)){
+		$user_model = model(User_model::class);
+		$company_model = model(Company_model::class);
+		
+		$userId = $this->session->id;
+		if(!$user_model->can_edit_company($userId,$term)){
 			redirect(base_url(),'refresh');
 		}
 
@@ -336,12 +338,9 @@ class Company extends BaseController {
 		);
     	$company_model->remove_worker_to_company($user);
 		redirect('company/'.$term, 'refresh');
-
 	}
 
 	public function update_company($term){
-
-		
 		$user_model = model(User_model::class);
 		$company_model = model(Company_model::class);
 
@@ -351,7 +350,6 @@ class Company extends BaseController {
 			return redirect()->to(site_url());
 		}
 
-		
 		$data['companies'] = $company_model->get_company($term);
 		$data['nace_code'] = $company_model->get_nace_code($term);
 		$data['all_nace_codes'] = $company_model->get_all_nace_codes();
@@ -423,6 +421,9 @@ class Company extends BaseController {
 
 
 	public function get_company_info($company_id){
+		$company_model = model(Company_model::class);
+		$flow_model = model(Flow_model::class);
+
 		$data['company_info'] = $company_model->get_company($company_id);
 		$data['company_flows'] = $flow_model->get_company_flow_list($company_id);
 		$data['company_prcss'] = $this->process_model->get_cmpny_flow_prcss($company_id);
@@ -435,13 +436,14 @@ class Company extends BaseController {
 
 	//delet company (if user is owner/creator of company)
 	public function delete_company($cmpny_id){
-		$temp = $session->get('user_in');
-		$owned_cmpnys = array_column($company_model->get_my_companies($temp['id']), 'cmpny_id');
+		$company_model = model(Company_model::class);
+		$userId = $this->session->id;
+		$owned_cmpnys = array_column($company_model->get_my_companies($userId), 'cmpny_id');
 		if(in_array($cmpny_id, $owned_cmpnys)){
 			$company_model->delete_company($cmpny_id);
 			redirect(base_url('mycompanies'),'refresh');
 		}else{
-			redirect(base_url(''),'refresh');
+			return redirect()->to(site_url());
 		}	
 	}
 }

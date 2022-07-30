@@ -5,33 +5,22 @@ namespace App\Controllers;
 class Cost_benefit extends BaseController
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->library('form_validation');
-        $this->load->model('cost_benefit_model');
-        $this->load->model('cpscoping_model');
-        $this->load->model('user_model');
-        $this->load->model('company_model');
-        $this->load->model('project_model');
-        $c_user = $this->user_model->get_session_user();
-        if ($this->cpscoping_model->can_consultant_prjct($c_user['id']) == false) {
-            redirect('', 'refresh');
-        }
-        $this->config->set_item('language', $session->get('site_lang'));
-
-    }
-
     public function new_cost_benefit($prjct_id, $cmpny_id)
     {
-        $allocation_id_array = $this->cpscoping_model->get_allocation_id_from_ids($cmpny_id,$prjct_id);
+        $cpscoping_model = model(Cpscoping_model::class);
+        $company_model = model(Company_model::class);
+
+        if ($cpscoping_model->can_consultant_prjct($this->session->id) == false) {
+            redirect('', 'refresh');
+        }
+        $allocation_id_array = $cpscoping_model->get_allocation_id_from_ids($cmpny_id,$prjct_id);
         $data['allocation'] = array();
         foreach ($allocation_id_array as $ids) {
-            $data['allocated_flows'][] = $this->cpscoping_model->get_allocation_from_allocation_id($ids['allocation_id']);
+            $data['allocated_flows'][] = $cpscoping_model->get_allocation_from_allocation_id($ids['allocation_id']);
         }
-        $data['company']    = $this->company_model->get_company($cmpny_id);
-        $data['allocation'] = $this->cpscoping_model->get_cost_benefit_info($cmpny_id, $prjct_id);
-        $data['is']         = $this->cpscoping_model->get_cost_benefit_info_is($cmpny_id, $prjct_id);
+        $data['company']    = $company_model->get_company($cmpny_id);
+        $data['allocation'] = $cpscoping_model->get_cost_benefit_info($cmpny_id, $prjct_id);
+        $data['is']         = $cpscoping_model->get_cost_benefit_info_is($cmpny_id, $prjct_id);
         
         echo view('template/header');
         echo view('cost_benefit/index', $data);
@@ -40,7 +29,13 @@ class Cost_benefit extends BaseController
 
     public function index()
     {
-        $data['com_pro'] = $this->project_model->get_prj_companies($session->get('project_id'));
+        $cpscoping_model = model(Cpscoping_model::class);
+        $project_model = model(Project_model::class);
+
+        if ($cpscoping_model->can_consultant_prjct($this->session->id) == false) {
+            redirect('', 'refresh');
+        }
+        $data['com_pro'] = $project_model->get_prj_companies(session()->project_id);
 
         echo view('template/header');
         echo view('cost_benefit/list', $data);
@@ -50,6 +45,11 @@ class Cost_benefit extends BaseController
     //cost-benefit analysis form saving
     public function save($prjct_id, $cmpny_id, $id, $cp_or_is)
     {
+        $cpscoping_model = model(Cpscoping_model::class);
+
+        if ($cpscoping_model->can_consultant_prjct($this->session->id) == false) {
+            redirect('', 'refresh');
+        }
         //TODO: Maybe we can find a better way to do it :)
         $capexold         = $this->input->post('capexold');
         $flow_name_1      = $this->input->post('flow-name-1');

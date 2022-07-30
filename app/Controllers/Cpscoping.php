@@ -11,19 +11,19 @@ class Cpscoping extends BaseController {
 
 		$c_user = $user_model->get_session_user();
 		if($cpscoping_model->can_consultant_prjct($c_user['id']) == false){
-			redirect('','refresh');
+			return redirect()->back();
 		}else{
 			//$data['c_projects']=$user_model->get_consultant_projects_from_userid($c_user['id']);
 			$result = array(array());
 			$com_array = array();
 			$i = 0;
 			//foreach ($data['c_projects'] as $project_name) {
-				$com_array = $project_model->get_prj_companies($session->get('project_id'));
+				$com_array = $project_model->get_prj_companies(session()->project_id);
 				foreach ($com_array as $c) {
 					$com_pro = array(
-						"project_name" => $session->get('project_name'),
+						"project_name" => session()->project_name,
 						"company_name" => $c['name'],
-						"project_id" => $session->get('project_id'),
+						"project_id" => session()->project_id,
 						"company_id" => $c['id']
 					);
 					$result[$i] = $com_pro;
@@ -33,7 +33,7 @@ class Cpscoping extends BaseController {
 			$deneme = array(array());
 			$j = 0;
 			foreach ($result as $r) {
-				$flow_prcss = $cpscoping_model->get_allocation_values($r['company_id'],$session->get('project_id'));
+				$flow_prcss = $cpscoping_model->get_allocation_values($r['company_id'],session()->project_id);
 				$deneme[$j] = $flow_prcss;
 				$j++;
 			}
@@ -190,9 +190,10 @@ class Cpscoping extends BaseController {
 
 	public function allocationlist($project_id,$company_id){
 		$cpscoping_model = model(Cpscoping_model::class);
+		$company_model = model(Company_model::class);
 		$data['allocationlar'] = $cpscoping_model->get_allocation_values($company_id,$project_id);
 		$data['companyID'] = $company_id;
-		$data['company_info'] = $this->company_model->get_company($company_id);
+		$data['company_info'] = $company_model->get_company($company_id);
 
 		echo view('template/header');
 		echo view('dataset/dataSetLeftSide',$data);
@@ -251,8 +252,8 @@ class Cpscoping extends BaseController {
 		// check if allocation is not set or deleted
 		if(empty($data['allocation'])) { redirect(site_url()); }
 		//check if user has permission to edit
-		$kullanici = $session->get('user_in');
-		$permission= $user_model->can_edit_company($kullanici['id'],$data['allocation']['cmpny_id']);
+		$userId = $this->session->id;
+		$permission= $user_model->can_edit_company($userId,$data['allocation']['cmpny_id']);
 		if($permission==FALSE){redirect(site_url());}
 
 
@@ -741,7 +742,7 @@ class Cpscoping extends BaseController {
 
 		$c_user = $user_model->get_session_user();
 		if($project_model->can_update_project_information($c_user['id'], $project_id) == false){
-			redirect(base_url(''),'refresh');
+			return redirect()->to(site_url());
 		}else{
 			$cpscoping_model->delete_allocation($allocation_id,$project_id,$company_id);
 			redirect(base_url('cpscoping'),'refresh');
