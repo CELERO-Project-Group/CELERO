@@ -5,27 +5,24 @@ use CodeIgniter\Model;
 
 class Search_model extends Model {
 
-	public function __construct()
-	{
-		$db = db_connect();
-	}
-
 	public function search_company($term){
-		$db->select('*');
-		$db->from('t_cmpny');
-		$db->like('name', $term); 
-		$db->or_like('description', $term);
-		$query = $db->get();
-		return $$query->getResultArray();
+		$db = db_connect();
+		$builder = $db->table('t_cmpny');
+		$builder->select('*');
+		$builder->like('name', $term); 
+		$builder->orLike('description', $term);
+		$query = $builder->get();
+		return $query->getResultArray();
 	}
 
 	public function search_project($term){
-		$db->select('*');
-		$db->from('t_prj');
-		$db->like('name', $term); 
-		$db->or_like('description', $term);
-		$query = $db->get();
-		return $$query->getResultArray();
+		$db = db_connect();
+		$builder = $db->table('t_prj');
+		$builder->select('*');
+		$builder->like('name', $term); 
+		$builder->orLike('description', $term);
+		$query = $builder->get();
+		return $query->getResultArray();
 	}
 
 }
