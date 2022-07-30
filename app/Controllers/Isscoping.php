@@ -7,22 +7,22 @@ class Isscoping extends BaseController
 
     public function index()
     {
-        //print_r($session->get['user_in']);
-        if (isset($session->get['user_in'])) {
-            if (empty($session->get['user_in'])) {
-                redirect(base_url('login'), 'refresh');
+        //print_r($this->session->username);
+        if (isset($this->session->username)) {
+            if (empty($this->session->username)) {
+                return redirect()->to(site_url('login'));
             }
         } else {
-            redirect(base_url('login'), 'refresh');
+            return redirect()->to(site_url('login'));
         }
 
-        if (isset($session->get['user_in']['role_id'])) {
-            if (($session->get['user_in']['role_id'] == null || $session->get['user_in']['role_id'] == '')
-                || $session->get['user_in']['role_id'] != '3') {
-                redirect(base_url('company'), 'refresh');
+        if (isset($this->session->role_id)) {
+            if (($this->session->role_id == null || $this->session->role_id == '')
+                || $this->session->role_id != '3') {
+               return redirect()->to(site_url('company'));
             }
         } else {
-            redirect(base_url('company'), 'refresh');
+           return redirect()->to(site_url('company'));
         }
 
         echo view('template/header');
@@ -32,24 +32,25 @@ class Isscoping extends BaseController
 
     public function auto()
     {
-        //print_r($session->get['user_in']);
-        $data['userID'] = $session->get['user_in']['id'];
+        
+        //print_r($this->session->username);
+        $data['userID'] = $this->session->id;
 
-        if (isset($session->get['user_in'])) {
-            if (empty($session->get['user_in'])) {
-                redirect(base_url('login'), 'refresh');
+        if (isset($this->session->username)) {
+            if (empty($this->session->username)) {
+                return redirect()->to(site_url('login'));
             }
         } else {
-            redirect(base_url('login'), 'refresh');
+            return redirect()->to(site_url('login'));
         }
 
-        if (isset($session->get['user_in']['role_id'])) {
-            if (($session->get['user_in']['role_id'] == null || $session->get['user_in']['role_id'] == '')
-                || $session->get['user_in']['role_id'] != '3') {
-                redirect(base_url('company'), 'refresh');
+        if (isset($this->session->role_id)) {
+            if (($this->session->role_id == null || $this->session->role_id == '')
+                || $this->session->role_id != '3') {
+               return redirect()->to(site_url('company'));
             }
         } else {
-            redirect(base_url('company'), 'refresh');
+           return redirect()->to(site_url('company'));
         }
 
         echo view('template/header');
@@ -59,40 +60,39 @@ class Isscoping extends BaseController
 
     public function autoprjbaseMDF()
     {
-        //print_r('zeynel');
-        //print_r($session->get['user_in']);
-        //print_r($session->get);
-        if (isset($session->get['user_in'])) {
-            if (empty($session->get['user_in'])) {
-                redirect(base_url('login'), 'refresh');
+		$company_model = model(Company_model::class);
+
+        if (isset($this->session->username)) {
+            if (empty($this->session->username)) {
+                return redirect()->to(site_url('login'));
             }
         } else {
-            redirect(base_url('login'), 'refresh');
+            return redirect()->to(site_url('login'));
         }
 
-        if (isset($session->get['project_id'])) {
-            if ($session->get['project_id'] == null || $session->get['project_id'] == '') {
-                redirect(base_url('projects'), 'refresh');
+        if (isset($this->session->get('project_id'))) {
+            if ($this->session->get('project_id') == null || $this->session->get('project_id') == '') {
+                return redirect()->to(site_url('projects'));
             }
         } else {
-            redirect(base_url('projects'), 'refresh');
+            return redirect()->to(site_url('projects'));
         }
 
-        if (isset($session->get['user_in']['role_id'])) {
-            if (($session->get['user_in']['role_id'] == null || $session->get['user_in']['role_id'] == '')
-                || $session->get['user_in']['role_id'] != 1) {
-                redirect(base_url('company'), 'refresh');
+        if (isset($this->session->role_id)) {
+            if (($this->session->role_id == null || $this->session->role_id == '')
+                || $this->session->role_id != 1) {
+               return redirect()->to(site_url('company'));
             }
         } else {
-            redirect(base_url('company'), 'refresh');
+           return redirect()->to(site_url('company'));
         }
 
-        $project_id = $session->get('project_id');
+        $project_id = $this->session->get('project_id');
 
         $data['companies'] = $company_model->get_project_companies($project_id);
-        $data['userID']     = $session->get['user_in']['id'];
-        $data['project_id'] = $session->get['project_id'];
-        $data['language']   = $session->get('site_lang');
+        $data['userID']     = $this->session->id;
+        $data['project_id'] = $this->session->get('project_id');
+        
         echo view('template/header');
         echo view('isscoping/autoprojectbaseMDF', $data);
         echo view('template/footer');
@@ -101,35 +101,35 @@ class Isscoping extends BaseController
     public function autoprjbaseMDFTest()
     {
         //print_r('zeynel');
-        //print_r($session->get['user_in']);
+        //print_r($this->session->username);
         //print_r($session->get);
-        if (isset($session->get['user_in'])) {
-            if (empty($session->get['user_in'])) {
-                redirect(base_url('login'), 'refresh');
+        if (isset($this->session->username)) {
+            if (empty($this->session->username)) {
+                return redirect()->to(site_url('login'));
             }
         } else {
-            redirect(base_url('login'), 'refresh');
+            return redirect()->to(site_url('login'));
         }
 
-        if (isset($session->get['project_id'])) {
-            if ($session->get['project_id'] == null || $session->get['project_id'] == '') {
-                redirect(base_url('projects'), 'refresh');
+        if (isset($this->session->get('project_id'))) {
+            if ($this->session->get('project_id') == null || $this->session->get('project_id') == '') {
+                return redirect()->to(site_url('projects'));
             }
         } else {
-            redirect(base_url('projects'), 'refresh');
+            return redirect()->to(site_url('projects'));
         }
 
-        if (isset($session->get['user_in']['role_id'])) {
-            if (($session->get['user_in']['role_id'] == null || $session->get['user_in']['role_id'] == '')
-                || $session->get['user_in']['role_id'] != 1) {
-                redirect(base_url('company'), 'refresh');
+        if (isset($this->session->role_id)) {
+            if (($this->session->role_id == null || $this->session->role_id == '')
+                || $this->session->role_id != 1) {
+               return redirect()->to(site_url('company'));
             }
         } else {
-            redirect(base_url('company'), 'refresh');
+           return redirect()->to(site_url('company'));
         }
 
-        $data['userID']     = $session->get['user_in']['id'];
-        $data['project_id'] = $session->get['project_id'];
+        $data['userID']     = $this->session->id;
+        $data['project_id'] = $this->session->get('project_id');
         echo view('template/header');
         echo view('isscoping/autoprojectbaseMDF_test', $data);
         echo view('template/footer');
@@ -138,35 +138,35 @@ class Isscoping extends BaseController
     public function autoprjbase()
     {
         //print_r('zeynel');
-        //print_r($session->get['user_in']);
+        //print_r($this->session->username);
         //print_r($session->get);
-        if (isset($session->get['user_in'])) {
-            if (empty($session->get['user_in'])) {
-                redirect(base_url('login'), 'refresh');
+        if (isset($this->session->username)) {
+            if (empty($this->session->username)) {
+                return redirect()->to(site_url('login'));
             }
         } else {
-            redirect(base_url('login'), 'refresh');
+            return redirect()->to(site_url('login'));
         }
 
-        if (isset($session->get['project_id'])) {
-            if ($session->get['project_id'] == null || $session->get['project_id'] == '') {
-                redirect(base_url('projects'), 'refresh');
+        if (isset($this->session->get('project_id'))) {
+            if ($this->session->get('project_id') == null || $this->session->get('project_id') == '') {
+                return redirect()->to(site_url('projects'));
             }
         } else {
-            redirect(base_url('projects'), 'refresh');
+            return redirect()->to(site_url('projects'));
         }
 
-        if (isset($session->get['user_in']['role_id'])) {
-            if (($session->get['user_in']['role_id'] == null || $session->get['user_in']['role_id'] == '')
-                || $session->get['user_in']['role_id'] != 1) {
-                redirect(base_url('company'), 'refresh');
+        if (isset($this->session->role_id)) {
+            if (($this->session->role_id == null || $this->session->role_id == '')
+                || $this->session->role_id != 1) {
+               return redirect()->to(site_url('company'));
             }
         } else {
-            redirect(base_url('company'), 'refresh');
+           return redirect()->to(site_url('company'));
         }
 
-        $data['userID']     = $session->get['user_in']['id'];
-        $data['project_id'] = $session->get['project_id'];
+        $data['userID']     = $this->session->id;
+        $data['project_id'] = $this->session->get('project_id');
         echo view('template/header');
         echo view('isscoping/autoprojectbase', $data);
         echo view('template/footer');
@@ -174,40 +174,42 @@ class Isscoping extends BaseController
 
     public function prjbaseMDF()
     {
+        $company_model = model(Company_model::class);
+
         //print_r($session->get);
-        //print_r($session->get['user_in']['id']);
-        if (isset($session->get['user_in'])) {
-            if (empty($session->get['user_in'])) {
-                redirect(base_url('login'), 'refresh');
+        //print_r($this->session->id);
+        if (isset($this->session->username)) {
+            if (empty($this->session->username)) {
+                return redirect()->to(site_url('login'));
             }
         } else {
-            redirect(base_url('login'), 'refresh');
+            return redirect()->to(site_url('login'));
         }
 
-        if (isset($session->get['project_id'])) {
-            if ($session->get['project_id'] == null || $session->get['project_id'] == '') {
-                redirect(base_url('projects'), 'refresh');
+        if (isset($this->session->get('project_id'))) {
+            if ($this->session->get('project_id') == null || $this->session->get('project_id') == '') {
+                return redirect()->to(site_url('projects'));
             }
         } else {
-            redirect(base_url('projects'), 'refresh');
+            return redirect()->to(site_url('projects'));
         }
 
-        if (isset($session->get['user_in']['role_id'])) {
-            if (($session->get['user_in']['role_id'] == null || $session->get['user_in']['role_id'] == '')
-                || $session->get['user_in']['role_id'] != 1) {
-                redirect(base_url('company'), 'refresh');
+        if (isset($this->session->role_id)) {
+            if (($this->session->role_id == null || $this->session->role_id == '')
+                || $this->session->role_id != 1) {
+               return redirect()->to(site_url('company'));
             }
         } else {
-            redirect(base_url('company'), 'refresh');
+           return redirect()->to(site_url('company'));
         }
 
 
-        $project_id = $session->get('project_id');
+        $project_id = $this->session->get('project_id');
 
         $data['companies'] = $company_model->get_project_companies($project_id);
-        $data['userID']     = $session->get['user_in']['id'];
-        $data['project_id'] = $session->get['project_id'];
-        $data['language']   = $session->get('site_lang');
+        $data['userID']     = $this->session->id;
+        $data['project_id'] = $this->session->get('project_id');
+        
         echo view('template/header');
         echo view('isscoping/projectbaseMDF', $data);
         echo view('template/footer');
@@ -216,34 +218,34 @@ class Isscoping extends BaseController
     public function prjbase()
     {
         //print_r($session->get);
-        //print_r($session->get['user_in']['id']);
-        if (isset($session->get['user_in'])) {
-            if (empty($session->get['user_in'])) {
-                redirect(base_url('login'), 'refresh');
+        //print_r($this->session->id);
+        if (isset($this->session->username)) {
+            if (empty($this->session->username)) {
+                return redirect()->to(site_url('login'));
             }
         } else {
-            redirect(base_url('login'), 'refresh');
+            return redirect()->to(site_url('login'));
         }
 
-        if (isset($session->get['project_id'])) {
-            if ($session->get['project_id'] == null || $session->get['project_id'] == '') {
-                redirect(base_url('projects'), 'refresh');
+        if (isset($this->session->get('project_id'))) {
+            if ($this->session->get('project_id') == null || $this->session->get('project_id') == '') {
+                return redirect()->to(site_url('projects'));
             }
         } else {
-            redirect(base_url('projects'), 'refresh');
+            return redirect()->to(site_url('projects'));
         }
 
-        if (isset($session->get['user_in']['role_id'])) {
-            if (($session->get['user_in']['role_id'] == null || $session->get['user_in']['role_id'] == '')
-                || $session->get['user_in']['role_id'] != 1) {
-                redirect(base_url('company'), 'refresh');
+        if (isset($this->session->role_id)) {
+            if (($this->session->role_id == null || $this->session->role_id == '')
+                || $this->session->role_id != 1) {
+               return redirect()->to(site_url('company'));
             }
         } else {
-            redirect(base_url('company'), 'refresh');
+           return redirect()->to(site_url('company'));
         }
 
-        $data['userID']     = $session->get['user_in']['id'];
-        $data['project_id'] = $session->get['project_id'];
+        $data['userID']     = $this->session->id;
+        $data['project_id'] = $this->session->get('project_id');
         echo view('template/header');
         echo view('isscoping/projectbase', $data);
         echo view('template/footer');
@@ -265,41 +267,40 @@ class Isscoping extends BaseController
 
     public function isscenarios()
     {
-        //print_r('zeynel');
-        //print_r($session->get['user_in']);
-        //print_r($session->get);
-        if (isset($session->get['user_in'])) {
-            if (empty($session->get['user_in'])) {
-                redirect(base_url('login'), 'refresh');
+        $company_model = model(Company_model::class);
+
+        if (isset($this->session->username)) {
+            if (empty($this->session->username)) {
+                return redirect()->to(site_url('login'));
             }
         } else {
-            redirect(base_url('login'), 'refresh');
+            return redirect()->to(site_url('login'));
         }
 
-        if (isset($session->get['project_id'])) {
-            if ($session->get['project_id'] == null || $session->get['project_id'] == '') {
-                redirect(base_url('projects'), 'refresh');
+        if (isset($this->session->get('project_id'))) {
+            if ($this->session->get('project_id') == null || $this->session->get('project_id') == '') {
+                return redirect()->to(site_url('projects'));
             }
         } else {
-            redirect(base_url('projects'), 'refresh');
+            return redirect()->to(site_url('projects'));
         }
 
-        if (isset($session->get['user_in']['role_id'])) {
-            if (($session->get['user_in']['role_id'] == null || $session->get['user_in']['role_id'] == '')
-                || $session->get['user_in']['role_id'] != 1) {
-                redirect(base_url('company'), 'refresh');
+        if (isset($this->session->role_id)) {
+            if (($this->session->role_id == null || $this->session->role_id == '')
+                || $this->session->role_id != 1) {
+               return redirect()->to(site_url('company'));
             }
         } else {
-            redirect(base_url('company'), 'refresh');
+           return redirect()->to(site_url('company'));
         }
 
 
-        $project_id = $session->get('project_id');
+        $project_id = $this->session->get('project_id');
 
         $data['companies'] = $company_model->get_project_companies($project_id);
-        $data['userID']     = $session->get['user_in']['id'];
-        $data['project_id'] = $session->get['project_id'];
-        $data['language']   = $session->get('site_lang');
+        $data['userID']     = $this->session->id;
+        $data['project_id'] = $this->session->get('project_id');
+        
         echo view('template/header');
         echo view('isscoping/isscenarios', $data);
         echo view('template/footer');
@@ -307,41 +308,40 @@ class Isscoping extends BaseController
 
     public function isscenariosCns()
     {
-        //print_r('zeynel');
-        //print_r($session->get['user_in']);
-        //print_r($session->get);
-        if (isset($session->get['user_in'])) {
-            if (empty($session->get['user_in'])) {
-                redirect(base_url('login'), 'refresh');
+        $company_model = model(Company_model::class);
+
+        if (isset($this->session->username)) {
+            if (empty($this->session->username)) {
+                return redirect()->to(site_url('login'));
             }
         } else {
-            redirect(base_url('login'), 'refresh');
+            return redirect()->to(site_url('login'));
         }
 
-        if (isset($session->get['project_id'])) {
-            if ($session->get['project_id'] == null || $session->get['project_id'] == '') {
-                redirect(base_url('projects'), 'refresh');
+        if (isset($this->session->get('project_id'))) {
+            if ($this->session->get('project_id') == null || $this->session->get('project_id') == '') {
+                return redirect()->to(site_url('projects'));
             }
         } else {
-            redirect(base_url('projects'), 'refresh');
+            return redirect()->to(site_url('projects'));
         }
 
-        if (isset($session->get['user_in']['role_id'])) {
-            if (($session->get['user_in']['role_id'] == null || $session->get['user_in']['role_id'] == '')
-                || $session->get['user_in']['role_id'] != 1) {
-                redirect(base_url('company'), 'refresh');
+        if (isset($this->session->role_id)) {
+            if (($this->session->role_id == null || $this->session->role_id == '')
+                || $this->session->role_id != 1) {
+               return redirect()->to(site_url('company'));
             }
         } else {
-            redirect(base_url('company'), 'refresh');
+           return redirect()->to(site_url('company'));
         }
 
         
-        $project_id = $session->get('project_id');
+        $project_id = $this->session->get('project_id');
 
         $data['companies'] = $company_model->get_project_companies($project_id);
-        $data['userID']     = $session->get['user_in']['id'];
-        $data['project_id'] = $session->get['project_id'];
-        $data['language']   = $session->get('site_lang');
+        $data['userID']     = $this->session->id;
+        $data['project_id'] = $this->session->get('project_id');
+        
         echo view('template/header');
         echo view('isscoping/isscenariosCns', $data);
         echo view('template/footer');

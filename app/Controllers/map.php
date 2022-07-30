@@ -19,10 +19,10 @@ class Map extends BaseController {
             
             if(isset($session->get['project_id'])) {
                 if($session->get['project_id']==null || $session->get['project_id']==''){
-                    redirect(base_url('projects'), 'refresh');
+                    return redirect()->to(site_url('projects'));
                 }
             } else {
-                redirect(base_url('projects'), 'refresh');
+                return redirect()->to(site_url('projects'));
             }
             
             if(isset($this->session->get_userdata('language'))) {
@@ -41,16 +41,16 @@ class Map extends BaseController {
              //print_r($data['projects']);
             /*if(isset($session->get['project_id'])) {
                 if($session->get['project_id']==null || $session->get['project_id']==''){
-                    redirect(base_url('projects'), 'refresh');
+                    return redirect()->to(site_url('projects'));
                 }
             } else {
-                redirect(base_url('projects'), 'refresh');
+                return redirect()->to(site_url('projects'));
             }*/
             
             /*if(isset($session->get['user_in']['role_id'])) {
                 if(($session->get['user_in']['role_id']==null || $session->get['user_in']['role_id']=='')
                          || $session->get['user_in']['role_id']!=1){
-                       redirect(base_url('company'), 'refresh');
+                      return redirect()->to(site_url('company'));
 		}
             } else {
                 //redirect(base_url('company'), 'refresh');
@@ -73,16 +73,16 @@ class Map extends BaseController {
                 
             /*if(isset($session->get['project_id'])) {
                 if($session->get['project_id']==null || $session->get['project_id']==''){
-                    redirect(base_url('projects'), 'refresh');
+                    return redirect()->to(site_url('projects'));
                 }
             } else {
-                redirect(base_url('projects'), 'refresh');
+                return redirect()->to(site_url('projects'));
             }*/
             
             /*if(isset($session->get['user_in']['role_id'])) {
                 if(($session->get['user_in']['role_id']==null || $session->get['user_in']['role_id']=='')
                          || $session->get['user_in']['role_id']!=1){
-                       redirect(base_url('company'), 'refresh');
+                      return redirect()->to(site_url('company'));
 				}
             } else {
                 //redirect(base_url('company'), 'refresh');

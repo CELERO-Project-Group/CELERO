@@ -4,20 +4,16 @@ namespace App\Controllers;
 
 class Ecotracking extends BaseController {
 
-	function __construct(){
-		parent::__construct();
-		$this->load->model('ecotracking_model');
-		$this->load->model('company_model');
-		$this->load->model('equipment_model');
-		$this->config->set_item('language', $session->get('site_lang'));
-	}
-
 	public function save($company_id,$machine_id,$powera,$powerb,$powerc){
-		$this->ecotracking_model->save($company_id,$machine_id,$powera,$powerb,$powerc);
+		$ecotracking_model = model(Ecotracking_model::class);
+
+		$ecotracking_model->save($company_id,$machine_id,$powera,$powerb,$powerc);
 		redirect('ecotracking/'.$company_id.'/'.$machine_id);
 	}
 
 	public function show($company_id,$machine_id){
+		$ecotracking_model = model(Ecotracking_model::class);
+
 		$data['veriler'] = $ecotracking_model->get($company_id,$machine_id);
 		$data['company_id']=$company_id;
 		echo view('template/header');
@@ -26,20 +22,21 @@ class Ecotracking extends BaseController {
 	}
 
 	public function index(){
-		$project_id = $session->get('project_id');
-		$data['companies'] = $company_model->get_project_companies($project_id);
-		//print_r($data['companies']);
+		$equipment_model = model(Equipment_model::class);
+		$company_model = model(Company_model::class);
+
+		$data['companies'] = $company_model->get_project_companies(session()->project_id);
 		foreach ($data['companies'] as $company) {
-			//echo $company['id'];
 			$data['informations'][] = $equipment_model->all_information_of_equipment($company['id']);
 		}
-		//print_r($data['informations']);
 		echo view('template/header');
 		echo view('ecotracking/index',$data);
 		echo view('template/footer');
 	}
 
 	public function json($company_id,$machine_id){
+		$ecotracking_model = model(Ecotracking_model::class);
+
 		header("Content-Type: application/json", true);
 		/* Return JSON */
 		$data['veriler'] = $ecotracking_model->get($company_id,$machine_id);
