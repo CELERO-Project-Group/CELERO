@@ -5,18 +5,19 @@ namespace App\Controllers;
 class Password extends BaseController {
 
 	public function send_email_for_change_pass(){
+		$password_model = model(Password_model::class);
 
 		$this->form_validation->set_rules('old_pass', 'Old Password', 'trim|xss_clean|required');
 		$this->form_validation->set_rules('new_pass', 'New Password', 'trim|xss_clean|required|callback_password_check');
 		$this->form_validation->set_rules('new_pass_again', 'New Password(Again)', 'trim|xss_clean|required');
 		if ($this->form_validation->run() !== FALSE){
-			$user = $session->get('user_in');
+			$userId = $this->session->id;
 			$pass = md5($this->request->getPost('old_pass'));
-			if($password_model->do_similar_pass($user['id'],$pass)){
+			if($password_model->do_similar_pass($userId,$pass)){
 				$data = array(
 						'psswrd' => md5($this->request->getPost('new_pass'))
 					);
-				$password_model->change_pass($user['id'],$data);
+				$password_model->change_pass($userId,$data);
 				redirect('send_email_for_change_pass','refresh');
 			}
 		}
@@ -26,6 +27,7 @@ class Password extends BaseController {
 	}
 
 	public function change_pass($rnd_str){
+		$password_model = model(Password_model::class);
 
 		$random = $rnd_str = $this->uri->segment(2);
 
@@ -80,6 +82,8 @@ class Password extends BaseController {
 	}
 
 	public function new_password_email(){
+		$password_model = model(Password_model::class);
+
 		$this->form_validation->set_rules('email', 'E-mail', 'trim|xss_clean|required');
 
 		if ($this->form_validation->run() !== FALSE){
@@ -112,6 +116,8 @@ class Password extends BaseController {
 	}
 
 	public function new_password($rnd_string){
+		$password_model = model(Password_model::class);
+
 		$user_id = $password_model->get_user_id($rnd_string);
 		if(isset($user_id)){
 			$data['random_string'] = $rnd_string;

@@ -6,7 +6,6 @@ class Ecotracking extends BaseController {
 
 	public function save($company_id,$machine_id,$powera,$powerb,$powerc){
 		$ecotracking_model = model(Ecotracking_model::class);
-
 		$ecotracking_model->save($company_id,$machine_id,$powera,$powerb,$powerc);
 		redirect('ecotracking/'.$company_id.'/'.$machine_id);
 	}

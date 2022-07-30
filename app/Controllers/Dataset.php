@@ -169,7 +169,6 @@ class Dataset extends BaseController {
 					}
 				}
 
-
 				//CHECKs IF FLOW IS NEW (old flows have their IDs)
 				$flowID = $process_model->is_new_flow($flowID,$flowfamilyID);
 
@@ -845,10 +844,8 @@ class Dataset extends BaseController {
 		//this is just for test
 		$file = './assets/excel/test.xlsx';
  
-		//load the excel library
-		echo library('excel');
-		 
-		//read file from path
+		// TODO: use composer require phpoffice/phpspreadsheet
+
 		$objPHPExcel = PHPExcel_IOFactory::load($file);
 		 
 		//get only the Cell Collection

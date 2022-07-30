@@ -745,7 +745,7 @@ class Cpscoping extends BaseController {
 			return redirect()->to(site_url());
 		}else{
 			$cpscoping_model->delete_allocation($allocation_id,$project_id,$company_id);
-			redirect(base_url('cpscoping'),'refresh');
+			return redirect()->to(site_url('cpscoping'));
 		}
 	}
 

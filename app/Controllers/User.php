@@ -89,9 +89,9 @@ class User extends BaseController {
 	public function deleteUserEp($flow_name,$ep_value){
 		$flow_model = model(Flow_model::class);
 
-		$kullaniciID = $this->session->id;
+		$userId = $this->session->id;
 		$flow_name = urldecode($flow_name);
-		$flow_model->delete_userep($flow_name,$ep_value,$kullaniciID);
+		$flow_model->delete_userep($flow_name,$ep_value,$userId);
 		redirect('datasetexcel', 'refresh');
 	}
 
