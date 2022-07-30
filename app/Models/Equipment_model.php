@@ -5,11 +5,6 @@ use CodeIgniter\Model;
 
 class Equipment_model extends Model {
 
-	public function __construct()
-	{
-		$db = db_connect();
-	}
-
 	public function get_equipment_name(){
 		$db = db_connect();
 		$builder = $db->table('t_eqpmnt');
