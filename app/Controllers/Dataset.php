@@ -165,7 +165,7 @@ class Dataset extends BaseController {
 					if(!$flow_model->has_same_flow($flowID,$flowtypeID,$companyID)){
 						$this->session->set_flashdata('message', 'Flow can only be added twice (as input and output), please check your flows.');
 						//print_r("false");
-						redirect(current_url());
+						return redirect()->back();
 					}
 				}
 
@@ -247,7 +247,7 @@ class Dataset extends BaseController {
 				}
 
 				$flow_model->register_flow_to_company($flow);
-				redirect(current_url());
+				return redirect()->back();
 			}
 
 		}
@@ -649,7 +649,7 @@ class Dataset extends BaseController {
 	public function delete_product($companyID,$id){
 		$product_model = model(Product_model::class);
 		$product_model->delete_product($id);
-		redirect('new_product/'.$companyID, 'refresh');
+		return redirect()->to(site_url('new_product/'.$companyID));
 	}
 
 	public function delete_flow($companyID,$id){
@@ -827,14 +827,14 @@ class Dataset extends BaseController {
 			//deletes allocations that are based on this process
 			$this->cpscoping_model->delete_allocation_prcssid($company_process_id);
 		}
-		redirect('new_process/'.$companyID);
+		return redirect()->to(site_url('new_process/'.$companyID));
 	}
 
 	public function delete_equipment($cmpny_id,$cmpny_eqpmnt_id){
 		$equipment_model = model(Equipment_model::class);
 		$equipment_model->delete_cmpny_prcss_eqpmnt_type($cmpny_eqpmnt_id);
 		$equipment_model->delete_cmpny_eqpmnt($cmpny_eqpmnt_id);
-		redirect('new_equipment/'.$cmpny_id,'refresh');
+		return redirect()->to(site_url('new_equipment/'.$cmpny_id));
 	}
 
 	/**
