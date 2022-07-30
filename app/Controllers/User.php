@@ -14,10 +14,10 @@ class User extends BaseController {
     }
 
     public function dataFromExcel(){
-        $this->form_validation->set_rules('flowname', 'Flow Name', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('flowname', 'Flow Name', 'trim|required');
         $this->form_validation->set_rules('epvalue', 'EP Value', 
-        	"trim|required|xss_clean|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]");
-        $this->form_validation->set_rules('epQuantityUnit', 'EP Quantity Value', 'trim|required|xss_clean');
+        	"trim|required|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]");
+        $this->form_validation->set_rules('epQuantityUnit', 'EP Quantity Value', 'trim|required');
 		$userid = $this->session->id;
 		$username = $this->session->username;
 		
@@ -32,7 +32,7 @@ class User extends BaseController {
                     'ep_q_unit' => $this->input->post('epQuantityUnit'),
                     'ep_value' => $this->sifirla($quantity),
                 );
-            $this->flow_model->set_userep($epArray);
+            $flow_model->set_userep($epArray);
         }
 
         echo view('template/header');
@@ -76,8 +76,8 @@ class User extends BaseController {
         //echo "------";
         //print_r($excelcontents);
         $data['excelcontents'] = $excelcontents;
-        $data['userepvalues']=$this->flow_model->get_userep($kullanici['id']);
-		$data['units'] = $this->flow_model->get_unit_list();
+        $data['userepvalues']=$flow_model->get_userep($kullanici['id']);
+		$data['units'] = $flow_model->get_unit_list();
 
         echo view('dataset/excelcontents',$data);
         echo view('template/footer');
@@ -86,7 +86,7 @@ class User extends BaseController {
 	public function deleteUserEp($flow_name,$ep_value){
 		$kullaniciID = $this->session->id;
 		$flow_name = urldecode($flow_name);
-		$this->flow_model->delete_userep($flow_name,$ep_value,$kullaniciID);
+		$flow_model->delete_userep($flow_name,$ep_value,$kullaniciID);
 		redirect('datasetexcel', 'refresh');
 	}
 
@@ -268,29 +268,33 @@ class User extends BaseController {
 			}
 		}
 
-		$data['validation']=$this->validator;
+		$data['validation'] = $this->validator;
 		echo view('template/header');
 		echo view('user/profile_update',$data);
 		echo view('template/footer');
 	}
 
 	public function become_consultant(){
+		$user_model = model(User_model::class);
+
 		$userid = $this->session->id;
 		$username = $this->session->username;
-		if(empty($tmp) || $this->user_model->is_user_consultant($userid)){
+		if(empty($tmp) || $user_model->is_user_consultant($userid)){
 			return redirect()->to(site_url());
 		}
 		else{
-			$this->user_model->make_user_consultant($userid,$username);
+			$user_model->make_user_consultant($userid,$username);
 			return redirect()->to(site_url('user/'.$username));
 		}
 	}
 
 	public function show_all_users(){
+		$user_model = model(User_model::class);
+
 		if(!empty($this->session->username)){
 			return redirect()->to(site_url());
 		}
-		$data['users']=$this->user_model->get_consultants();
+		$data['users']=$user_model->get_consultants();
 		echo view('template/header');
 		echo view('user/show_all_users',$data);
 		echo view('template/footer');

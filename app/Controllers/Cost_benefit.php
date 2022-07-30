@@ -33,18 +33,18 @@ class Cost_benefit extends BaseController
         $data['allocation'] = $this->cpscoping_model->get_cost_benefit_info($cmpny_id, $prjct_id);
         $data['is']         = $this->cpscoping_model->get_cost_benefit_info_is($cmpny_id, $prjct_id);
         
-        $this->load->view('template/header');
-        $this->load->view('cost_benefit/index', $data);
-        $this->load->view('template/footer');
+        echo view('template/header');
+        echo view('cost_benefit/index', $data);
+        echo view('template/footer');
     }
 
     public function index()
     {
         $data['com_pro'] = $this->project_model->get_prj_companies($session->get('project_id'));
 
-        $this->load->view('template/header');
-        $this->load->view('cost_benefit/list', $data);
-        $this->load->view('template/footer');
+        echo view('template/header');
+        echo view('cost_benefit/list', $data);
+        echo view('template/footer');
     }
 
     //cost-benefit analysis form saving

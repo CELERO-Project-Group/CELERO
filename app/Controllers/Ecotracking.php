@@ -18,31 +18,31 @@ class Ecotracking extends BaseController {
 	}
 
 	public function show($company_id,$machine_id){
-		$data['veriler'] = $this->ecotracking_model->get($company_id,$machine_id);
+		$data['veriler'] = $ecotracking_model->get($company_id,$machine_id);
 		$data['company_id']=$company_id;
-		$this->load->view('template/header');
-		$this->load->view('ecotracking/show',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('ecotracking/show',$data);
+		echo view('template/footer');
 	}
 
 	public function index(){
 		$project_id = $session->get('project_id');
-		$data['companies'] = $this->company_model->get_project_companies($project_id);
+		$data['companies'] = $company_model->get_project_companies($project_id);
 		//print_r($data['companies']);
 		foreach ($data['companies'] as $company) {
 			//echo $company['id'];
-			$data['informations'][] = $this->equipment_model->all_information_of_equipment($company['id']);
+			$data['informations'][] = $equipment_model->all_information_of_equipment($company['id']);
 		}
 		//print_r($data['informations']);
-		$this->load->view('template/header');
-		$this->load->view('ecotracking/index',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('ecotracking/index',$data);
+		echo view('template/footer');
 	}
 
 	public function json($company_id,$machine_id){
 		header("Content-Type: application/json", true);
 		/* Return JSON */
-		$data['veriler'] = $this->ecotracking_model->get($company_id,$machine_id);
+		$data['veriler'] = $ecotracking_model->get($company_id,$machine_id);
 		//print_r($data);
 
 		$numItems = count($data['veriler']);

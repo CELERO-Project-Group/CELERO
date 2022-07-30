@@ -4,15 +4,6 @@ namespace App\Controllers;
 
 class Cluster extends BaseController{
 
-	function __construct(){
-		parent::__construct();
-		$this->load->model('cluster_model');
-		$this->load->model('company_model');
-		$this->load->library('form_validation');
-				$this->config->set_item('language', $session->get('site_lang'));
-
-	}
-
 	public function cluster_to_match_company(){
 
 		$this->form_validation->set_rules('company','Company Field','required');
@@ -22,21 +13,21 @@ class Cluster extends BaseController{
 		{
 			$company_id = $this->input->post('company');
 			$cluster_id = $this->input->post('cluster');
-			if($this->cluster_model->can_write_info($cluster_id,$company_id) == true){
+			if($cluster_model->can_write_info($cluster_id,$company_id) == true){
 				$cmpny_clstr = array(
 						'cmpny_id' => $company_id,
 						'clstr_id' => $cluster_id
 					);
-				$this->cluster_model->set_cmpny_clstr($cmpny_clstr);
+				$cluster_model->set_cmpny_clstr($cmpny_clstr);
 			}
 		}
 
-		$data['clusters'] = $this->cluster_model->get_clusters();
-		$data['companies'] = $this->company_model->get_companies();
+		$data['clusters'] = $cluster_model->get_clusters();
+		$data['companies'] = $company_model->get_companies();
 
-		$this->load->view('template/header');
-		$this->load->view('cluster/cluster_match_company',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('cluster/cluster_match_company',$data);
+		echo view('template/footer');
 	}
 }
 ?>

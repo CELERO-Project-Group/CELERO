@@ -6,11 +6,6 @@ namespace App\Controllers;
 
 class Map extends BaseController {
 
-	function __construct(){
-		parent::__construct();
-                $this->load->model('project_model');
-	}
-
 	public function index(){  
             //print_r($this->session->get_userdata('language'));
             //print_r($session->get['user_in']);
@@ -41,7 +36,7 @@ class Map extends BaseController {
                 $data['site_lang'] = 'english';
             }  
              $data['project_id'] = $session->get['project_id'];
-             $data['projects'] = $this->project_model->get_project($session->get['project_id']);
+             $data['projects'] = $project_model->get_project($session->get['project_id']);
              $data['language'] = $session->get('site_lang');
              //print_r($data['projects']);
             /*if(isset($session->get['project_id'])) {

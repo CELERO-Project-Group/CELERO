@@ -4,14 +4,6 @@ namespace App\Controllers;
 
 class Password extends BaseController {
 
-	function __construct(){
-		parent::__construct();
-		$this->load->model('password_model');
-		$this->load->library('form_validation');
-				$this->config->set_item('language', $session->get('site_lang'));
-
-	}
-
 	public function send_email_for_change_pass(){
 
 		$this->form_validation->set_rules('old_pass', 'Old Password', 'trim|xss_clean|required');
@@ -20,24 +12,24 @@ class Password extends BaseController {
 		if ($this->form_validation->run() !== FALSE){
 			$user = $session->get('user_in');
 			$pass = md5($this->input->post('old_pass'));
-			if($this->password_model->do_similar_pass($user['id'],$pass)){
+			if($password_model->do_similar_pass($user['id'],$pass)){
 				$data = array(
 						'psswrd' => md5($this->input->post('new_pass'))
 					);
-				$this->password_model->change_pass($user['id'],$data);
+				$password_model->change_pass($user['id'],$data);
 				redirect('send_email_for_change_pass','refresh');
 			}
 		}
-		$this->load->view('template/header');
-		$this->load->view('password/send_email_for_change_pass');
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('password/send_email_for_change_pass');
+		echo view('template/footer');
 	}
 
 	public function change_pass($rnd_str){
 
 		$random = $rnd_str = $this->uri->segment(2);
 
-		if($this->password_model->click_control($random) == true){
+		if($password_model->click_control($random) == true){
 
 			$this->form_validation->set_rules('old_pass', 'Old Password', 'trim|xss_clean|required');
 			$this->form_validation->set_rules('new_pass', 'New Password', 'trim|xss_clean|required|callback_password_check');
@@ -45,19 +37,19 @@ class Password extends BaseController {
 
 			if ($this->form_validation->run() !== FALSE){
 
-				$user_id = $this->password_model->get_user_id($random);
+				$user_id = $password_model->get_user_id($random);
 
 				$old_pass = $this->input->post('old_pass');
 				$new_pass = $this->input->post('new_pass');
-				if($this->password_model->do_similar_pass($user_id,md5($old_pass)) == true){
+				if($password_model->do_similar_pass($user_id,md5($old_pass)) == true){
 					$control = array(
 							'psswrd' => md5($new_pass)
 						);
-					$this->password_model->change_pass($user_id,$control);
+					$password_model->change_pass($user_id,$control);
 				}
 
 				$message = 'Your password has been changed. Your new password is: '.$new_pass;
-				$email = $this->password_model->get_email($user_id);
+				$email = $password_model->get_email($user_id);
 
 				$send_email = array(
 						'message' => $message,
@@ -69,7 +61,7 @@ class Password extends BaseController {
 					'random_string' => null,
 					'click_control' => 0
 				);
-				$this->password_model->set_random_string_zero($random,$rnd_str);
+				$password_model->set_random_string_zero($random,$rnd_str);
 
 				redirect('login','refresh');
 			}
@@ -78,9 +70,9 @@ class Password extends BaseController {
 				'random_string' => $random
 			);
 
-			$this->load->view('template/header');
-			$this->load->view('password/change_pass',$data);
-			$this->load->view('template/footer');
+			echo view('template/header');
+			echo view('password/change_pass',$data);
+			echo view('template/footer');
 		}
 		else{
 			redirect('','refresh');
@@ -94,7 +86,7 @@ class Password extends BaseController {
 
 			$email = $this->input->post('email');
 
-			$user_id = $this->password_model->get_id($email);
+			$user_id = $password_model->get_id($email);
 
 			$random_str = $this->generateRandomString();
 			$asd = base_url("new_password/".$random_str);
@@ -105,7 +97,7 @@ class Password extends BaseController {
 					'random_string' => $random_str,
 					'click_control' => 1
 				);
-			$this->password_model->set_random_string($user_id,$rnd_str);
+			$password_model->set_random_string($user_id,$rnd_str);
 
 			$data = array(
 					'message' => $message,
@@ -114,13 +106,13 @@ class Password extends BaseController {
 			$this->sendMAil($data);
 			redirect('','refresh');
 		}
-		$this->load->view('template/header');
-		$this->load->view('password/new_password_email');
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('password/new_password_email');
+		echo view('template/footer');
 	}
 
 	public function new_password($rnd_string){
-		$user_id = $this->password_model->get_user_id($rnd_string);
+		$user_id = $password_model->get_user_id($rnd_string);
 		if(isset($user_id)){
 			$data['random_string'] = $rnd_string;
 
@@ -133,10 +125,10 @@ class Password extends BaseController {
 					$control = array(
 						'psswrd' => md5($new_pass)
 					);
-					$this->password_model->change_pass($user_id,$control);
+					$password_model->change_pass($user_id,$control);
 
 					$message = 'Your password has been changed. Your new password is: '.$new_pass;
-					$email = $this->password_model->get_email($user_id);
+					$email = $password_model->get_email($user_id);
 
 					$send_email = array(
 						'message' => $message,
@@ -154,15 +146,15 @@ class Password extends BaseController {
 											} else {
 													$message = 'Your mail has not been sent.You could not change password';
 											}
-											$this->password_model->set_random_string_zero($rnd_string,$rnd_str);
+											$password_model->set_random_string_zero($rnd_string,$rnd_str);
 											$data['success'] = $message;
 					//redirect('login','refresh');
 				}
 			}
 
-			$this->load->view('template/header');
-			$this->load->view('password/new_pass',$data);
-			$this->load->view('template/footer');
+			echo view('template/header');
+			echo view('password/new_pass',$data);
+			echo view('template/footer');
 		}else{
 			echo "Wrong pass number.";
 		}

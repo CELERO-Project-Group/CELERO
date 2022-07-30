@@ -125,7 +125,7 @@ class Company extends BaseController {
 
 	function is_in_nace($nace)
 	{
-		$degisken= $this->company_model->is_in_nace($nace);
+		$degisken= $company_model->is_in_nace($nace);
 
 		if($degisken){
 			return TRUE;
@@ -175,23 +175,23 @@ class Company extends BaseController {
 	}
 
 	public function isSelectionWithFlow($flow_id=FALSE){
-		$data['flowlist'] = $this->flow_model->get_flowname_list();
+		$data['flowlist'] = $flow_model->get_flowname_list();
 		$cluster_id = $this->input->post('cluster');
 		if($cluster_id == null || $cluster_id == 0){
 			if(!empty($flow_id)){
 				$data['cluster_name']['name'] = 'All Companies in selected flow';
 				$data['companies'] = [];
-				$data['companies'] = $this->company_model->get_companies_from_flow($flow_id);
+				$data['companies'] = $company_model->get_companies_from_flow($flow_id);
 			}else{
 				$data['cluster_name']['name'] = 'All Companies';
-				$data['companies'] = $this->company_model->get_companies();
+				$data['companies'] = $company_model->get_companies();
 			}
 		}
 		else{
-			$data['companies'] = $this->company_model->get_companies_with_cluster($cluster_id);
-			$data['cluster_name'] = $this->cluster_model->get_cluster_name($cluster_id);
+			$data['companies'] = $company_model->get_companies_with_cluster($cluster_id);
+			$data['cluster_name'] = $cluster_model->get_cluster_name($cluster_id);
 		}
-		$data['clusters'] = $this->cluster_model->get_clusters();
+		$data['clusters'] = $cluster_model->get_clusters();
 		//permission control
 		$kullanici = $session->get('user_in');
 		// foreach ($data['companies'] as $key => $d) {
@@ -219,7 +219,7 @@ class Company extends BaseController {
 
 	public function show_project_companies(){
 		$project_id = $this->session->get('project_id');
-		$data['companies'] = $this->company_model->get_project_companies($project_id);
+		$data['companies'] = $company_model->get_project_companies($project_id);
 
 		//print_r($data['companies']);
 		echo view('template/header');
@@ -290,7 +290,7 @@ class Company extends BaseController {
 	public function company_search(){
 		if (isset($_GET['term'])){
       		$q = strtolower($_GET['term']);
-      		$results = $this->company_model->company_search($q);
+      		$results = $company_model->company_search($q);
    		}
 		// and return to autocomplete
 		echo $results;
@@ -311,7 +311,7 @@ class Company extends BaseController {
       			'cmpny_id' => $term,
       			'is_contact' => 0
     		);
-    	$this->company_model->add_worker_to_company($user);
+    	$company_model->add_worker_to_company($user);
 		}
 
 		redirect('company/'.$term, 'refresh');
@@ -334,7 +334,7 @@ class Company extends BaseController {
 			'cmpny_id' => $term,
 			'is_contact' => 0
 		);
-    	$this->company_model->remove_worker_to_company($user);
+    	$company_model->remove_worker_to_company($user);
 		redirect('company/'.$term, 'refresh');
 
 	}
@@ -423,8 +423,8 @@ class Company extends BaseController {
 
 
 	public function get_company_info($company_id){
-		$data['company_info'] = $this->company_model->get_company($company_id);
-		$data['company_flows'] = $this->flow_model->get_company_flow_list($company_id);
+		$data['company_info'] = $company_model->get_company($company_id);
+		$data['company_flows'] = $flow_model->get_company_flow_list($company_id);
 		$data['company_prcss'] = $this->process_model->get_cmpny_flow_prcss($company_id);
 		$data['company_component'] = $this->component_model->get_cmpnnt($company_id);
 		$data['company_equipment'] = $this->equipment_model->all_information_of_equipment($company_id);
@@ -436,9 +436,9 @@ class Company extends BaseController {
 	//delet company (if user is owner/creator of company)
 	public function delete_company($cmpny_id){
 		$temp = $session->get('user_in');
-		$owned_cmpnys = array_column($this->company_model->get_my_companies($temp['id']), 'cmpny_id');
+		$owned_cmpnys = array_column($company_model->get_my_companies($temp['id']), 'cmpny_id');
 		if(in_array($cmpny_id, $owned_cmpnys)){
-			$this->company_model->delete_company($cmpny_id);
+			$company_model->delete_company($cmpny_id);
 			redirect(base_url('mycompanies'),'refresh');
 		}else{
 			redirect(base_url(''),'refresh');

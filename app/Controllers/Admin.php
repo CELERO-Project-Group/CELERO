@@ -4,14 +4,10 @@ namespace App\Controllers;
 
 class Admin extends BaseController {
 
-	function __construct(){
-		parent::__construct();
-	}
-
 	public function index(){
-		$this->load->view('template/header_admin');
-		$this->load->view('isscoping/index');
-		$this->load->view('template/footer_admin');
+		echo view('template/header_admin');
+		echo view('isscoping/index');
+		echo view('template/footer_admin');
 	}
         
         public function report(){  
@@ -22,9 +18,9 @@ class Admin extends BaseController {
 		}
                 $data['userID'] = $session->get['user_in']['id'];
                 $data['userName'] = $session->get['user_in']['username'];
-		$this->load->view('template/header_admin');
-		$this->load->view('admin/report',$data); 
-		$this->load->view('template/footer_admin');
+		echo view('template/header_admin');
+		echo view('admin/report',$data); 
+		echo view('template/footer_admin');
 	}
        
         public function reportTest(){  
@@ -35,9 +31,9 @@ class Admin extends BaseController {
 		}
                 $data['userID'] = $session->get['user_in']['id'];
                 $data['userName'] = $session->get['user_in']['username'];
-		$this->load->view('template/header_admin_test');
-		$this->load->view('admin/reportTest',$data); 
-		$this->load->view('template/footer_admin');
+		echo view('template/header_admin_test');
+		echo view('admin/reportTest',$data); 
+		echo view('template/footer_admin');
 	}
 
 	public function newFlow(){
@@ -47,9 +43,9 @@ class Admin extends BaseController {
 			redirect(base_url('login'),'refresh');
 		}
                 $data['userName'] = $session->get['user_in']['username'];
-		$this->load->view('template/header_admin');
-		$this->load->view('admin/newFlow',$data);    
-		$this->load->view('template/footer_admin');
+		echo view('template/header_admin');
+		echo view('admin/newFlow',$data);    
+		echo view('template/footer_admin');
 	}
         
         public function newEquipment(){  
@@ -59,9 +55,9 @@ class Admin extends BaseController {
 			redirect(base_url('login'),'refresh');
 		}
                 $data['userName'] = $session->get['user_in']['username'];
-		$this->load->view('template/header_admin');
-		$this->load->view('admin/newEquipment',$data); 
-		$this->load->view('template/footer_admin');
+		echo view('template/header_admin');
+		echo view('admin/newEquipment',$data); 
+		echo view('template/footer_admin');
 	}
         
         public function newProcess(){  
@@ -71,28 +67,22 @@ class Admin extends BaseController {
 			redirect(base_url('login'),'refresh');
 		}
                 $data['userName'] = $session->get['user_in']['username'];
-		$this->load->view('template/header_admin');
-		$this->load->view('admin/newProcess',$data); 
-		$this->load->view('template/footer_admin');
+		echo view('template/header_admin');
+		echo view('admin/newProcess',$data); 
+		echo view('template/footer_admin');
 	}
         
         public function tooltip(){
-		//$this->load->view('template/header');
-		$this->load->view('isscoping/tooltip');
-		//$this->load->view('template/footer');
+		//echo view('template/header');
+		echo view('isscoping/tooltip');
+		//echo view('template/footer');
 	}
         
          public function tooltipscenarios(){
-		//$this->load->view('template/header');
-		$this->load->view('isscoping/tooltipscenarios');
-		//$this->load->view('template/footer');
+		//echo view('template/header');
+		echo view('isscoping/tooltipscenarios');
+		//echo view('template/footer');
 	}
-        
-        
-        
-        
-        
-        
          
         public function clusters() {
            $loginData = $session->get('user_in');
@@ -101,9 +91,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/clusters',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/clusters',$data); 
+            echo view('template/footer_admin'); 
         }
         
         public function industrialZones() {
@@ -113,9 +103,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/industrialZones',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/industrialZones',$data); 
+            echo view('template/footer_admin'); 
         }
         
         public function reports() {
@@ -125,9 +115,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/reports',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/reports',$data); 
+            echo view('template/footer_admin'); 
         }
         
         public function consultants() {
@@ -137,9 +127,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/consultants',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/consultants',$data); 
+            echo view('template/footer_admin'); 
         }
         
         public function employees() {  
@@ -149,9 +139,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/employees',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/employees',$data); 
+            echo view('template/footer_admin'); 
         }
         
         public function rpEmployeesList() { 
@@ -161,9 +151,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpEmployeesList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpEmployeesList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -174,9 +164,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpCompaniesList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpCompaniesList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -187,9 +177,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpCompaniesInfoList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpCompaniesInfoList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -200,9 +190,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpCompaniesProjectsList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpCompaniesProjectsList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -213,9 +203,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpCompaniesProjectDetailsList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpCompaniesProjectDetailsList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -226,9 +216,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpCompaniesNotInClustersList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpCompaniesNotInClustersList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -239,9 +229,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpCompaniesWasteEmissionList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpCompaniesWasteEmissionList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -252,9 +242,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpCompaniesProductionList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpCompaniesProductionList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -265,9 +255,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpCompaniesProcessesList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpCompaniesProcessesList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -278,9 +268,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpConsultantsList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpConsultantsList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -291,9 +281,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpCompaniesInClustersList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpCompaniesInClustersList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -304,9 +294,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/rpEquipmentList',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/rpEquipmentList',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -318,9 +308,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/zoneEmployees',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/zoneEmployees',$data); 
+            echo view('template/footer_admin'); 
         
         }
         
@@ -331,9 +321,9 @@ class Admin extends BaseController {
             }
             $data['userID'] = $session->get['user_in']['id'];
             $data['userName'] = $session->get['user_in']['username'];
-            $this->load->view('template/header_admin'); 
-            $this->load->view('admin/zoneCompanies',$data); 
-            $this->load->view('template/footer_admin'); 
+            echo view('template/header_admin'); 
+            echo view('admin/zoneCompanies',$data); 
+            echo view('template/footer_admin'); 
         
         }
         

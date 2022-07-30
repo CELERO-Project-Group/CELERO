@@ -4,13 +4,6 @@ namespace App\Controllers;
 
 class Search extends BaseController {
 
-	function __construct(){
-		parent::__construct();
-		$this->load->model('search_model','',TRUE);
-				$this->config->set_item('language', $session->get('site_lang'));
-
-	}
-
 	public function search_pro($term = FALSE){
 		if($term=="")
 		{
@@ -21,12 +14,12 @@ class Search extends BaseController {
 				redirect(base_url('','refresh'));
 		}
 
-		$data['companies'] = $this->search_model->search_company($term);
-		$data['projects'] = $this->search_model->search_project($term);
+		$data['companies'] = $search_model->search_company($term);
+		$data['projects'] = $search_model->search_project($term);
 
-		$this->load->view('template/header');
-		$this->load->view('search/index',$data);
-		$this->load->view('template/footer');
+		echo view('template/header');
+		echo view('search/index',$data);
+		echo view('template/footer');
 	}
 }
 ?>

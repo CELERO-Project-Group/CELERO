@@ -5,14 +5,6 @@ namespace App\Controllers;
 class Isscoping extends BaseController
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('company_model');
-        $this->config->set_item('language', $session->get('site_lang'));
-
-    }
-
     public function index()
     {
         //print_r($session->get['user_in']);
@@ -33,9 +25,9 @@ class Isscoping extends BaseController
             redirect(base_url('company'), 'refresh');
         }
 
-        $this->load->view('template/header');
-        $this->load->view('isscoping/index');
-        $this->load->view('template/footer');
+        echo view('template/header');
+        echo view('isscoping/index');
+        echo view('template/footer');
     }
 
     public function auto()
@@ -60,9 +52,9 @@ class Isscoping extends BaseController
             redirect(base_url('company'), 'refresh');
         }
 
-        $this->load->view('template/header');
-        $this->load->view('isscoping/auto', $data);
-        $this->load->view('template/footer');
+        echo view('template/header');
+        echo view('isscoping/auto', $data);
+        echo view('template/footer');
     }
 
     public function autoprjbaseMDF()
@@ -97,13 +89,13 @@ class Isscoping extends BaseController
 
         $project_id = $session->get('project_id');
 
-        $data['companies'] = $this->company_model->get_project_companies($project_id);
+        $data['companies'] = $company_model->get_project_companies($project_id);
         $data['userID']     = $session->get['user_in']['id'];
         $data['project_id'] = $session->get['project_id'];
         $data['language']   = $session->get('site_lang');
-        $this->load->view('template/header');
-        $this->load->view('isscoping/autoprojectbaseMDF', $data);
-        $this->load->view('template/footer');
+        echo view('template/header');
+        echo view('isscoping/autoprojectbaseMDF', $data);
+        echo view('template/footer');
     }
 
     public function autoprjbaseMDFTest()
@@ -138,9 +130,9 @@ class Isscoping extends BaseController
 
         $data['userID']     = $session->get['user_in']['id'];
         $data['project_id'] = $session->get['project_id'];
-        $this->load->view('template/header');
-        $this->load->view('isscoping/autoprojectbaseMDF_test', $data);
-        $this->load->view('template/footer');
+        echo view('template/header');
+        echo view('isscoping/autoprojectbaseMDF_test', $data);
+        echo view('template/footer');
     }
 
     public function autoprjbase()
@@ -175,9 +167,9 @@ class Isscoping extends BaseController
 
         $data['userID']     = $session->get['user_in']['id'];
         $data['project_id'] = $session->get['project_id'];
-        $this->load->view('template/header');
-        $this->load->view('isscoping/autoprojectbase', $data);
-        $this->load->view('template/footer');
+        echo view('template/header');
+        echo view('isscoping/autoprojectbase', $data);
+        echo view('template/footer');
     }
 
     public function prjbaseMDF()
@@ -212,13 +204,13 @@ class Isscoping extends BaseController
 
         $project_id = $session->get('project_id');
 
-        $data['companies'] = $this->company_model->get_project_companies($project_id);
+        $data['companies'] = $company_model->get_project_companies($project_id);
         $data['userID']     = $session->get['user_in']['id'];
         $data['project_id'] = $session->get['project_id'];
         $data['language']   = $session->get('site_lang');
-        $this->load->view('template/header');
-        $this->load->view('isscoping/projectbaseMDF', $data);
-        $this->load->view('template/footer');
+        echo view('template/header');
+        echo view('isscoping/projectbaseMDF', $data);
+        echo view('template/footer');
     }
 
     public function prjbase()
@@ -252,23 +244,23 @@ class Isscoping extends BaseController
 
         $data['userID']     = $session->get['user_in']['id'];
         $data['project_id'] = $session->get['project_id'];
-        $this->load->view('template/header');
-        $this->load->view('isscoping/projectbase', $data);
-        $this->load->view('template/footer');
+        echo view('template/header');
+        echo view('isscoping/projectbase', $data);
+        echo view('template/footer');
     }
 
     public function tooltip()
     {
-        //$this->load->view('template/header');
-        $this->load->view('isscoping/tooltip');
-        //$this->load->view('template/footer');
+        //echo view('template/header');
+        echo view('isscoping/tooltip');
+        //echo view('template/footer');
     }
 
     public function tooltipscenarios()
     {
-        //$this->load->view('template/header');
-        $this->load->view('isscoping/tooltipscenarios');
-        //$this->load->view('template/footer');
+        //echo view('template/header');
+        echo view('isscoping/tooltipscenarios');
+        //echo view('template/footer');
     }
 
     public function isscenarios()
@@ -304,13 +296,13 @@ class Isscoping extends BaseController
 
         $project_id = $session->get('project_id');
 
-        $data['companies'] = $this->company_model->get_project_companies($project_id);
+        $data['companies'] = $company_model->get_project_companies($project_id);
         $data['userID']     = $session->get['user_in']['id'];
         $data['project_id'] = $session->get['project_id'];
         $data['language']   = $session->get('site_lang');
-        $this->load->view('template/header');
-        $this->load->view('isscoping/isscenarios', $data);
-        $this->load->view('template/footer');
+        echo view('template/header');
+        echo view('isscoping/isscenarios', $data);
+        echo view('template/footer');
     }
 
     public function isscenariosCns()
@@ -346,13 +338,13 @@ class Isscoping extends BaseController
         
         $project_id = $session->get('project_id');
 
-        $data['companies'] = $this->company_model->get_project_companies($project_id);
+        $data['companies'] = $company_model->get_project_companies($project_id);
         $data['userID']     = $session->get['user_in']['id'];
         $data['project_id'] = $session->get['project_id'];
         $data['language']   = $session->get('site_lang');
-        $this->load->view('template/header');
-        $this->load->view('isscoping/isscenariosCns', $data);
-        $this->load->view('template/footer');
+        echo view('template/header');
+        echo view('isscoping/isscenariosCns', $data);
+        echo view('template/footer');
     }
 
 }
