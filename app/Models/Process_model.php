@@ -178,7 +178,7 @@ class Process_model extends Model {
         $builder->select('id');
         $builder->where('cmpny_id',$cmpny_id);
 	    $builder->where('prcss_id',$prcss_id);
-        $query = $builder->get();
+        $query = $builder->get()->getRowArray();
 	    if(empty($query))
 	    	return false;
 	    else
@@ -191,7 +191,7 @@ class Process_model extends Model {
         $builder->select('*');
 		$builder->where('cmpny_flow_id',$cmpny_flow_id);
 		$builder->where('cmpny_prcss_id',$cmpny_prcss_id);
-        $query = $builder->get();
+        $query = $builder->get()->getResultArray();
 		if(empty($query)){
 			return true;
 		}
@@ -276,7 +276,7 @@ class Process_model extends Model {
         $builder = $db->table('t_cmpny_prcss');
 		$builder->where('t_cmpny_prcss.cmpny_id',$companyID);   
     	$builder->where('t_cmpny_prcss.id',$process_id);   
-        $builder->replace($cmpny_prcss);
+        $builder->update($cmpny_prcss);
 	}
 }
 ?>

@@ -512,9 +512,9 @@ class Dataset extends BaseController {
 
 		if(!empty($this->request->getPost())){
 			if ($this->validate([
-				'process'=>'Process','required',
-				'usedFlows'=>'Used Flows','required',
-				'comment'=>'Comment','trim'
+				'process'=>'required',
+				'usedFlows'=>'required',
+				'comment'=>'trim'
 			]))
 			{
 				$used_flows = $this->request->getPost('usedFlows');
@@ -525,14 +525,14 @@ class Dataset extends BaseController {
 				$process_id = $process_model->is_new_process($process_id,$processfamilyID);
 				$cmpny_prcss_id = $process_model->can_write_cmpny_prcss($companyID,$process_id);
 
-				if($cmpny_prcss_id == false){
-					$cmpny_prcss = array(
-						'cmpny_id' => $companyID,
-						'comment' => $this->request->getPost('comment'),
-						'prcss_id' => $process_id
-					);
-					$cmpny_prcss_id['id'] = $process_model->cmpny_prcss($cmpny_prcss);
-				}
+					if($cmpny_prcss_id == false){
+						$cmpny_prcss = array(
+							'cmpny_id' => $companyID,
+							'comment' => $this->request->getPost('comment'),
+							'prcss_id' => $process_id
+						);
+						$cmpny_prcss_id['id'] = $process_model->cmpny_prcss($cmpny_prcss);
+					}
 					if($process_model->can_write_cmpny_flow_prcss($used_flows,$cmpny_prcss_id['id']) == true){
 						$cmpny_flow_prcss = array(
 							'cmpny_flow_id' => $used_flows,
@@ -567,7 +567,7 @@ class Dataset extends BaseController {
 	
 		if(!empty($this->request->getPost())){
 			if ($this->validate([
-				'comment'=>'Comment','trim|xss_clean',
+				'comment'=>'trim|required',
 			]))
 			{
 				//cant change flow and process since they affect other tables on database and also need lots of control for now.
@@ -817,6 +817,7 @@ class Dataset extends BaseController {
 	public function delete_process($companyID,$company_process_id,$company_flow_id){
 		$process_model = model(Process_model::class);
 		$equipment_model = model(Equipment_model::class);
+		$cpscoping_model = model(Cpscoping_model::class);
 
 		$process_model->delete_company_flow_prcss($company_process_id,$company_flow_id);
 
@@ -825,7 +826,7 @@ class Dataset extends BaseController {
 			$equipment_model->delete_cmpny_equipment($company_process_id);
 			$process_model->delete_cmpny_process($company_process_id);
 			//deletes allocations that are based on this process
-			$this->cpscoping_model->delete_allocation_prcssid($company_process_id);
+			$cpscoping_model->delete_allocation_prcssid($company_process_id);
 		}
 		return redirect()->to(site_url('new_process/'.$companyID));
 	}
