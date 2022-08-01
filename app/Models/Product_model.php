@@ -55,6 +55,6 @@ class Product_model extends Model
 		$builder = $db->table('t_prdct');
 		$builder->where('t_prdct.cmpny_id', $companyID);
 		$builder->where('t_prdct.id', $product_id);
-		$builder->replace($productArray);
+		$builder->update($productArray);
 	}
 }
