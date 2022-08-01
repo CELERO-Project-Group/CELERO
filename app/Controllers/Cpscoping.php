@@ -13,7 +13,7 @@ class Cpscoping extends BaseController {
 		if($cpscoping_model->can_consultant_prjct($c_user['id']) == false){
 			return redirect()->back();
 		}else{
-			//$data['c_projects']=$user_model->get_consultant_projects_from_userid($c_user['id']);
+			$data['c_projects']=$user_model->get_consultant_projects_from_userid($c_user['id']);
 			$result = array(array());
 			$com_array = array();
 			$i = 0;

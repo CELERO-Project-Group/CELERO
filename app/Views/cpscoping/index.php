@@ -39,11 +39,11 @@ $(document).ready(function() {
         <option value="0">Nothing Selected</option>
     </select>
     <a href="#" class="btn btn-default btn-sm" id="cpscopinga">New CP potentials identification</a>-->
-    <div><?= lang("Validation.companiesunder"); ?> <?= $session->get('project_name'); ?></div><br>
+    <div><?= lang("Validation.companiesunder"); ?> <?= session()->project_name['name']; ?></div><br>
     <?php foreach ($com_pro as $cp): ?>
         <div class="boxhead"><?= $cp['company_name']; ?></div>
         <div class="boxcontent">
-            <a href="<?= base_url('cpscoping/'.$session->get('project_id').'/'.$cp['company_id'].'/allocation'); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("Validation.createallocation"); ?></a>
+            <a href="<?= base_url('cpscoping/'.session()->project_name['id'].'/'.$cp['company_id'].'/allocation'); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("Validation.createallocation"); ?></a>
             <a href="<?= base_url('new_flow/'.$cp['company_id']); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("Validation.datasetmanagement"); ?></a>
         </div>
     <?php endforeach ?><br>

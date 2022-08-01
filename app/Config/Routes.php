@@ -112,23 +112,23 @@ $routes->add('kpi_calculation/(:any)/(:any)', 'Cpscoping::kpi_calculation/$1/$2'
 $routes->add('search_result/(:any)/(:any)', 'Cpscoping::search_result/$1/$2');
 
 //CP
-$routes->add('Cpscoping/full_get/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_only_given_full/$1/$2/$3/$4');
-$routes->add('Cpscoping/deneme', 'Cpscoping::deneme');
-$routes->add('Cpscoping/comment_save/(:any)/(:any)', 'Cpscoping::comment_save/$1/$2');
-$routes->add('Cpscoping/allocated_table/(:any)/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_already_allocated_allocation_except_given/$1/$2/$3/$4/$5');
-$routes->add('Cpscoping/edit_allocation/(:any)', 'Cpscoping::edit_allocation/$1');
-$routes->add('Cpscoping/file_upload/(:any)/(:any)', 'Cpscoping::cp_scoping_file_upload/$1/$2');
-$routes->add('Cpscoping/file_delete/(:any)/(:any)', 'Cpscoping::file_delete/$1/$2');
-$routes->add('Cpscoping/is_candidate_insert/(:any)/(:any)', 'Cpscoping::cp_is_candidate_insert/$1/$2');
-$routes->add('Cpscoping/is_candidate_control/(:any)', 'Cpscoping::cp_is_candidate_control/$1');
-$routes->add('Cpscoping/cost_ep/(:any)/(:any)/(:any)', 'Cpscoping::cost_ep_value/$1/$2/$3');
-$routes->add('Cpscoping/get_allo/(:any)/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_allo_from_fname_pname/$1/$2/$3/$4/$5');
-$routes->add('Cpscoping/(:any)/(:any)/show', 'Cpscoping::cp_show_allocation/$1/$2');
-$routes->add('Cpscoping/delete/(:any)/(:any)/(:any)', 'Cpscoping::delete_allocation/$1/$2/$3');
+$routes->add('cpscoping/full_get/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_only_given_full/$1/$2/$3/$4');
+$routes->add('cpscoping/deneme', 'Cpscoping::deneme');
+$routes->add('cpscoping/comment_save/(:any)/(:any)', 'Cpscoping::comment_save/$1/$2');
+$routes->add('cpscoping/allocated_table/(:any)/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_already_allocated_allocation_except_given/$1/$2/$3/$4/$5');
+$routes->add('cpscoping/edit_allocation/(:any)', 'Cpscoping::edit_allocation/$1');
+$routes->add('cpscoping/file_upload/(:any)/(:any)', 'Cpscoping::cp_scoping_file_upload/$1/$2');
+$routes->add('cpscoping/file_delete/(:any)/(:any)', 'Cpscoping::file_delete/$1/$2');
+$routes->add('cpscoping/is_candidate_insert/(:any)/(:any)', 'Cpscoping::cp_is_candidate_insert/$1/$2');
+$routes->add('cpscoping/is_candidate_control/(:any)', 'Cpscoping::cp_is_candidate_control/$1');
+$routes->add('cpscoping/cost_ep/(:any)/(:any)/(:any)', 'Cpscoping::cost_ep_value/$1/$2/$3');
+$routes->add('cpscoping/get_allo/(:any)/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_allo_from_fname_pname/$1/$2/$3/$4/$5');
+$routes->add('cpscoping/(:any)/(:any)/show', 'Cpscoping::cp_show_allocation/$1/$2');
+$routes->add('cpscoping/delete/(:any)/(:any)/(:any)', 'Cpscoping::delete_allocation/$1/$2/$3');
 $routes->add('cp_allocation_array/(:any)', 'Cpscoping::cp_allocation_array/$1');
-$routes->add('Cpscoping/(:any)/(:any)/allocation', 'Cpscoping::cp_allocation/$1/$2');
-$routes->add('Cpscoping/pro/(:any)', 'Cpscoping::p_companies/$1');
-$routes->add('Cpscoping', 'Cpscoping::index');
+$routes->add('cpscoping/(:any)/(:any)/allocation', 'Cpscoping::cp_allocation/$1/$2');
+$routes->add('cpscoping/pro/(:any)', 'Cpscoping::p_companies/$1');
+$routes->add('cpscoping', 'Cpscoping::index');
 
 //Password routes
 $routes->add('send_email_for_change_pass', 'Password::send_email_for_change_pass');
