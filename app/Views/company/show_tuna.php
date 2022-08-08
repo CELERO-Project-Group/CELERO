@@ -1,5 +1,5 @@
-<script type="text/javascript" src="<?= asset_url('js/json2html.js'); ?>"></script>
-<script type="text/javascript" src="<?= asset_url('js/jquery.json2html.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/json2html.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/jquery.json2html.js'); ?>"></script>
 
 <div class="">
     <div style="padding:10px 20px;">

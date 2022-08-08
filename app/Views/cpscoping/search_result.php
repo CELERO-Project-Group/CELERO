@@ -12,7 +12,7 @@
 				<?php $sayac = 1; foreach ($result as $r): ?>
 					<tr>
 						<th><?= $sayac;$sayac++; ?></th>
-						<th><a href="<?= asset_url('cp_scoping_files').'/'.$r["file_name"]; ?>"><?= $r['file_name']; ?></a></th>
+						<th><a href="<?= base_url('assets/cp_scoping_files').'/'.$r["file_name"]; ?>"><?= $r['file_name']; ?></a></th>
 					</tr>
 				<?php endforeach ?>
 			</table>

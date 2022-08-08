@@ -26,7 +26,7 @@
 		</p>
 	</div>
 </div>
-<img  src="<?= asset_url('images/home.jpg'); ?>" alt="workflow" style="width:80%;" class="center">
+<img  src="<?= base_url('assets/images/home.jpg'); ?>" alt="workflow" style="width:80%;" class="center">
 
 <?php
 	echo view('template/footer'); 

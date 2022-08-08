@@ -1,14 +1,14 @@
 
-<link rel="stylesheet" type="text/css" href="<?= asset_url('is/themes/bootstrap/easyui.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?= asset_url('is/themes/icon.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/is/themes/bootstrap/easyui.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/is/themes/icon.css'); ?>">
 
 
-<script src="<?= asset_url('is/src/datagrid-filter.js'); ?>"></script>
+<script src="<?= base_url('assets/is/src/datagrid-filter.js'); ?>"></script>
 <script type="text/javascript" src="https://www.jeasyui.com/easyui/datagrid-detailview.js"></script>
 <?php if($language == 'turkish') { ?>
-    <script src="<?= asset_url('is/IS_js/js2_scen_slim2_project_base_mdf_tr.js'); ?>"></script>
+    <script src="<?= base_url('assets/is/IS_js/js2_scen_slim2_project_base_mdf_tr.js'); ?>"></script>
 <?php } else { ?>
-    <script src="<?= asset_url('is/IS_js/js2_scen_slim2_project_base_mdf.js'); ?>"></script>
+    <script src="<?= base_url('assets/is/IS_js/js2_scen_slim2_project_base_mdf.js'); ?>"></script>
 <?php }  ?>
      
 <!-- Zeynel Da�l�
@@ -164,7 +164,7 @@
             <input class="easyui-combobox" 
                name="IS_search2" id="IS_search2"
                data-options="
-                       url:'<?= asset_url('is/combobox_data1.json'); ?>',
+                       url:'<?= base_url('assets/is/combobox_data1.json'); ?>',
                        method:'get',
                        valueField:'id',
                        textField:'text',
@@ -211,7 +211,7 @@
                         <input class="easyui-combobox" 
                             name="IS" id="IS"
                             data-options="
-                                    url:'<?= asset_url('is/combobox_data1.json'); ?>',
+                                    url:'<?= base_url('assets/is/combobox_data1.json'); ?>',
                                     method:'get',
                                     valueField:'id',
                                     textField:'text',

@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?= asset_url('js/easy-ui-1.4.2.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/easy-ui-1.4.2.js'); ?>"></script>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript">
 

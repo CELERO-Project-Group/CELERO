@@ -5,22 +5,22 @@
     <title>CPIS Tool</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <!-- Loading Bootstrap -->
-    <link href="<?= asset_url('bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
 
     <!-- Loading Flat UI -->
-    <link href="<?= asset_url('mapHeader/flat-ui.css'); ?>" rel="stylesheet">
-    <link href="<?= asset_url('mapHeader/custom.css'); ?>" rel="stylesheet">
-    <link href="<?= asset_url('mapHeader/selectize.css'); ?>" rel="stylesheet">
-    <link rel="stylesheet" href="<?= asset_url('mapHeader/font-awesome.min.css'); ?>">
-    <!--<link href="<?php // echo asset_url('css/jquery-ui-1.10.4.custom.css'); ?>" rel="stylesheet"> 
+    <link href="<?= base_url('assets/mapHeader/flat-ui.css'); ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/mapHeader/custom.css'); ?>" rel="stylesheet">
+    <link href="<?= base_url('assets/mapHeader/selectize.css'); ?>" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url('assets/mapHeader/font-awesome.min.css'); ?>">
+    <!--<link href="<?php // echo base_url('assets/css/jquery-ui-1.10.4.custom.css'); ?>" rel="stylesheet"> 
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
     <![endif]-->
 
-    <!--<script src="<?= asset_url('js/jquery-1.10.2.min.js'); ?>"></script>
-    <script src="<?= asset_url('js/bootstrap.min.js'); ?>"></script>-->
+    <!--<script src="<?= base_url('assets/js/jquery-1.10.2.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/bootstrap.min.js'); ?>"></script>-->
 
 
     <!-- font -->
@@ -33,8 +33,8 @@
               color:#ffffff; ">CELERO
       <div style="float:right;height: 21px;margin-top: -15px;">
           <ul class="nav navbar-nav navbar-right">
-                <li><a href='<?= base_url('language/switch/turkish'); ?>' style="padding-right: 0px; border-right: 0px;border-left: 0px; "><img src="<?= asset_url('images/Turkey.png'); ?>"></a></li>
-                <li><a href='<?= base_url('language/switch/english'); ?>' style="border-right: 0px;border-left: 0px;"><img src="<?= asset_url('images/United-States.png'); ?>"></a></li>
+                <li><a href='<?= base_url('language/switch/turkish'); ?>' style="padding-right: 0px; border-right: 0px;border-left: 0px; "><img src="<?= base_url('assets/images/Turkey.png'); ?>"></a></li>
+                <li><a href='<?= base_url('language/switch/english'); ?>' style="border-right: 0px;border-left: 0px;"><img src="<?= base_url('assets/images/United-States.png'); ?>"></a></li>
             </ul>
           
       </div>
@@ -81,14 +81,14 @@
    
 
   
-  <!--<script src="<?= asset_url('js/flatui-fileinput.js'); ?>"></script>
-    <script src="<?= asset_url('js/bootstrap-select.js'); ?>"></script>
-    <script src="<?= asset_url('js/bootstrap-switch.js'); ?>"></script>
-    <script src="<?= asset_url('js/flatui-checkbox.js'); ?>"></script>
-    <script src="<?= asset_url('js/flatui-radio.js'); ?>"></script>
-    <script src="<?= asset_url('js/jquery.tagsinput.js'); ?>"></script>
-    <script src="<?= asset_url('js/jquery.placeholder.js'); ?>"></script>
-    <script src="<?= asset_url('js/holder.js'); ?>"></script>
-    <script src="<?= asset_url('js/application.js'); ?>"></script>-->
+  <!--<script src="<?= base_url('assets/js/flatui-fileinput.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/bootstrap-select.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/bootstrap-switch.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/flatui-checkbox.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/flatui-radio.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/jquery.tagsinput.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/jquery.placeholder.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/holder.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/application.js'); ?>"></script>-->
     
 

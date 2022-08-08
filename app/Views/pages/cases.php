@@ -37,8 +37,8 @@ load->view('template/header');
                 My EP Data
             </strong>
         </p>
-        <img src="<?= asset_url('images/case/image001.png'); ?>" style="width:20%;" class="center"><br>
-        <img src="<?= asset_url('images/case/image003.png'); ?>" style="width:70%;" class="center"><br><br>
+        <img src="<?= base_url('assets/images/case/image001.png'); ?>" style="width:20%;" class="center"><br>
+        <img src="<?= base_url('assets/images/case/image003.png'); ?>" style="width:70%;" class="center"><br><br>
         <p>
             <strong>
                 Case_printingcompany:
@@ -65,7 +65,7 @@ load->view('template/header');
             <li>
                 <p>Output: waste graphic paper, 300 tons</p>
             </li>
-             <img src="<?= asset_url('images/case/image005.png'); ?>" style="width:100%;" class="center"><br><br>
+             <img src="<?= base_url('assets/images/case/image005.png'); ?>" style="width:100%;" class="center"><br><br>
         </ol>
 
         <p class="indented">
@@ -80,7 +80,7 @@ load->view('template/header');
             <li>
                 <p> Offset printing</p>
             </li>
-            <img src="<?= asset_url('images/case/image007.png'); ?>" style="width:60%;" class="center"><br><br>
+            <img src="<?= base_url('assets/images/case/image007.png'); ?>" style="width:60%;" class="center"><br><br>
         </ol>
         <p class="indented">
             <strong>
@@ -112,7 +112,7 @@ load->view('template/header');
             <li>
                 <p>Output: Aluminum waste from laser cutting 2247 kg, Income 1 CHF / kg waste aluminum</p>
             </li>
-            <img src="<?= asset_url('images/case/image009.png'); ?>" style="width:90%;" class="center"><br><br>
+            <img src="<?= base_url('assets/images/case/image009.png'); ?>" style="width:90%;" class="center"><br><br>
         </ol>
         <p class="indented">
             <strong>
@@ -123,7 +123,7 @@ load->view('template/header');
             <li>
                 <p>Laser cutting of Al-plates to a final size of 0.4 x 600 x 800 mm, 50% of the electricity is used for this process</p>
             </li>
-            <img src="<?= asset_url('images/case/image011.png'); ?>" style="width:60%;" class="center"><br><br>
+            <img src="<?= base_url('assets/images/case/image011.png'); ?>" style="width:60%;" class="center"><br><br>
         </ul>
         <p class="indented">
             <strong>
@@ -145,7 +145,7 @@ load->view('template/header');
                 Data set management
             </strong>
             <br>
-            <img src="<?= asset_url('images/case/image013.png'); ?>" style="width:90%;" class="center"><br><br>
+            <img src="<?= base_url('assets/images/case/image013.png'); ?>" style="width:90%;" class="center"><br><br>
         </p>
         <strong>
             5. Search for CP & IS potentials
@@ -158,11 +158,11 @@ load->view('template/header');
         <ul class="indented">
             <li>
                 <p>Lighting process</p>
-                <img src="<?= asset_url('images/case/image015.png'); ?>" style="width:95%;" class="center"><br><br>
+                <img src="<?= base_url('assets/images/case/image015.png'); ?>" style="width:95%;" class="center"><br><br>
             </li>
             <li>
                 <p>Printing process</p>
-                <img src="<?= asset_url('images/case/image017.png'); ?>" style="width:95%;" class="center"><br><br>
+                <img src="<?= base_url('assets/images/case/image017.png'); ?>" style="width:95%;" class="center"><br><br>
             </li>
         </ul>
         <p>
@@ -178,21 +178,21 @@ load->view('template/header');
             <li>
                 <p>Substitution of the Aluminium plates by used offset printing plates from the offset printing company.</p>
             </li>
-            <img src="<?= asset_url('images/case/image019.png'); ?>" style="width:100%;" class="center"><br><br> 
-            <img src="<?= asset_url('images/case/image021.png'); ?>" style="width:100%;" class="center"><br><br>  
+            <img src="<?= base_url('assets/images/case/image019.png'); ?>" style="width:100%;" class="center"><br><br> 
+            <img src="<?= base_url('assets/images/case/image021.png'); ?>" style="width:100%;" class="center"><br><br>  
         </ul>
 
         <strong>
             6. Cost-Benefit Analysis
             <br>
             <br>
-            <img src="<?= asset_url('images/case/image023.png'); ?>" style="width:95%;" class="center"><br><br>
-            <img src="<?= asset_url('images/case/image025.png'); ?>" style="width:100%;" class="center"><br><br>
-            <img src="<?= asset_url('images/case/image027.png'); ?>" style="width:100%;" class="center"><br><br>
-            <img src="<?= asset_url('images/case/image029.png'); ?>" style="width:100%;" class="center"><br><br>
-            <img src="<?= asset_url('images/case/image031.png'); ?>" style="width:60%;" class="center"><br><br>
-            <img src="<?= asset_url('images/case/image033.png'); ?>" style="width:60%;" class="center"><br><br>
-            <img src="<?= asset_url('images/case/image035.png'); ?>" style="width:100%;" class="center"><br><br>
+            <img src="<?= base_url('assets/images/case/image023.png'); ?>" style="width:95%;" class="center"><br><br>
+            <img src="<?= base_url('assets/images/case/image025.png'); ?>" style="width:100%;" class="center"><br><br>
+            <img src="<?= base_url('assets/images/case/image027.png'); ?>" style="width:100%;" class="center"><br><br>
+            <img src="<?= base_url('assets/images/case/image029.png'); ?>" style="width:100%;" class="center"><br><br>
+            <img src="<?= base_url('assets/images/case/image031.png'); ?>" style="width:60%;" class="center"><br><br>
+            <img src="<?= base_url('assets/images/case/image033.png'); ?>" style="width:60%;" class="center"><br><br>
+            <img src="<?= base_url('assets/images/case/image035.png'); ?>" style="width:100%;" class="center"><br><br>
         </strong>
     </div>
 </div>

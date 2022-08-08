@@ -1,13 +1,13 @@
 
-<link rel="stylesheet" type="text/css" href="<?= asset_url('is/themes/bootstrap/easyui.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?= asset_url('is/themes/icon.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/is/themes/bootstrap/easyui.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/is/themes/icon.css'); ?>">
 
-<script type="text/javascript" src="<?= asset_url('is/jquery.easyui.min.js'); ?>"></script>
-<script type="text/javascript" src="<?= asset_url('is/locale/easyui-lang-tr.js'); ?>"></script>
-<script type="text/javascript" src="<?= asset_url('is/locale_IS/IS_lang_tr.js'); ?>"></script>
-<script src="<?= asset_url('is/print/jQuery.print.js'); ?>"></script> 
-<script src="<?= asset_url('is/src/datagrid-filter.js'); ?>"></script>
-<script src="<?= asset_url('is/IS_js/js1_scen_slim2.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/is/jquery.easyui.min.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/is/locale/easyui-lang-tr.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/is/locale_IS/IS_lang_tr.js'); ?>"></script>
+<script src="<?= base_url('assets/is/print/jQuery.print.js'); ?>"></script> 
+<script src="<?= base_url('assets/is/src/datagrid-filter.js'); ?>"></script>
+<script src="<?= base_url('assets/is/IS_js/js1_scen_slim2.js'); ?>"></script>
 
 <div class="col-md-12">
     <div id="cc" class="easyui-layout" data-options="fit:true" style="height:1000px;">
@@ -65,7 +65,7 @@
                     <input class="easyui-combobox" 
                        name="IS_search" id="IS_search"
                        data-options="
-                               url:'<?= asset_url('is/combobox_data1.json'); ?>',
+                               url:'<?= base_url('assets/is/combobox_data1.json'); ?>',
                                method:'get',
                                valueField:'id',
                                textField:'text',
@@ -129,7 +129,7 @@
                         <input class="easyui-combobox" 
                             name="IS"
                             data-options="
-                                    url:'<?= asset_url('is/combobox_data1.json'); ?>',
+                                    url:'<?= base_url('assets/is/combobox_data1.json'); ?>',
                                     method:'get',
                                     valueField:'id',
                                     textField:'text',

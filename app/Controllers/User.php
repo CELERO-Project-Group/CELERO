@@ -14,74 +14,73 @@ class User extends BaseController {
     }
 
     public function dataFromExcel(){
-
 		$flow_model = model(Flow_model::class);
 
-        $this->form_validation->set_rules('flowname', 'Flow Name', 'trim|required');
-        $this->form_validation->set_rules('epvalue', 'EP Value', 
-        	"trim|required|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]");
-        $this->form_validation->set_rules('epQuantityUnit', 'EP Quantity Value', 'trim|required');
 		$userid = $this->session->id;
 		$username = $this->session->username;
-		
-		//formats number correctly
-		$quantity = str_replace(',', '.', $this->request->getPost('epvalue'));
-		$quantity = str_replace("'", '', $quantity);
+		$excelcontents = [];
 
-        if($this->form_validation->run() !== FALSE) {
-            $epArray = array(
-                    'user_id' => $userid,
-                    'flow_name' => $this->request->getPost('flowname'),
-                    'ep_q_unit' => $this->request->getPost('epQuantityUnit'),
-                    'ep_value' => $this->sifirla($quantity),
-                );
-            $flow_model->set_userep($epArray);
-        }
+		if(!empty($this->request->getPost())){
+			if ($this->validate([
+				'flowname'  => 'trim|required',
+				'epvalue' => "required|trim|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]",
+				'epQuantityUnit' => 'required|trim'
+			]))
+			{	
+				//formats number correctly
+				$quantity = str_replace(',', '.', $this->request->getPost('epvalue'));
+				$quantity = str_replace("'", '', $quantity);
 
-        echo view('template/header');
-        //echo "data from excel form";
-        //echo $companyId;
+				$epArray = array(
+						'user_id' => $userid,
+						'flow_name' => $this->request->getPost('flowname'),
+						'ep_q_unit' => $this->request->getPost('epQuantityUnit'),
+						'ep_value' => $this->sifirla($quantity),
+					);
+				$flow_model->set_userep($epArray);
+				
+				/* include APPPATH . 'libraries/Excel.php';
+				if(file_exists('./assets/excels/'.$username.'.xlsx')){
+					$inputFileName = './assets/excels/'.$username.'.xlsx';
+				}else{
+					$inputFileName = './assets/excels/default.xlsx';
+				}
 
-		include APPPATH . 'libraries/Excel.php';
-		if(file_exists('./assets/excels/'.$username.'.xlsx')){
-			$inputFileName = './assets/excels/'.$username.'.xlsx';
-		}else{
-			$inputFileName = './assets/excels/default.xlsx';
+				//  Read your Excel workbook
+				try {
+					$inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+					$objReader = PHPExcel_IOFactory::createReader($inputFileType);
+					$objPHPExcel = $objReader->load($inputFileName);
+				} catch(Exception $e) {
+					die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+				}
+
+				//  Get worksheet dimensions
+				$sheet = $objPHPExcel->getSheet(0);
+				$highestRow = $sheet->getHighestRow();
+				$highestColumn = $sheet->getHighestColumn(); */
+
+				//  Loop through each row (starts at 2, first is header line) of the worksheet in turn
+				/* for ($row = 2; $row <= $highestRow; $row++){
+
+					//  Read a row of data into an array
+					$rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
+													NULL,
+													TRUE,
+													FALSE);
+					//  Insert row data array into your database of choice here
+					//print_r($rowData[0]);
+					$excelcontents[] = $rowData[0];
+				} */
+				//echo "------";
+				//print_r($excelcontents);
+			}
 		}
-
-        //  Read your Excel workbook
-        try {
-            $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
-            $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-            $objPHPExcel = $objReader->load($inputFileName);
-        } catch(Exception $e) {
-            die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
-        }
-
-        //  Get worksheet dimensions
-        $sheet = $objPHPExcel->getSheet(0);
-        $highestRow = $sheet->getHighestRow();
-        $highestColumn = $sheet->getHighestColumn();
-
-        $excelcontents = [];
-        //  Loop through each row (starts at 2, first is header line) of the worksheet in turn
-        for ($row = 2; $row <= $highestRow; $row++){
-
-            //  Read a row of data into an array
-            $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
-                                            NULL,
-                                            TRUE,
-                                            FALSE);
-            //  Insert row data array into your database of choice here
-            //print_r($rowData[0]);
-            $excelcontents[] = $rowData[0];
-        }
-        //echo "------";
-        //print_r($excelcontents);
+		$data['validation']=$this->validator;
         $data['excelcontents'] = $excelcontents;
-        $data['userepvalues']=$flow_model->get_userep($kullanici['id']);
+        $data['userepvalues']=$flow_model->get_userep($userid);
 		$data['units'] = $flow_model->get_unit_list();
-
+		echo view('template/header');
         echo view('dataset/excelcontents',$data);
         echo view('template/footer');
 	}

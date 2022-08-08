@@ -6,7 +6,7 @@
 		The project partners are:</h></b><br><br>
 		<table width="100%">
 			<tr>
-				<td style="text-align: center; width: 30%;" width="20%"><img src="<?= asset_url('images/nw.png'); ?>" alt="" style="width:45%;"></td>
+				<td style="text-align: center; width: 30%;" width="20%"><img src="<?= base_url('assets/images/nw.png'); ?>" alt="" style="width:45%;"></td>
 				<td>
 					<p>University of Applied Sciences and Arts Northwestern Switzerland  (FHNW) <br>
 					Gründenstrasse 40 <br>
@@ -17,7 +17,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td style="text-align: center; width: 30%;"><img src="<?= asset_url('images/bg.png'); ?>" alt="" style="width:30%;"></td>
+				<td style="text-align: center; width: 30%;"><img src="<?= base_url('assets/images/bg.png'); ?>" alt="" style="width:30%;"></td>
 				<td>
 					<p> BG Ingénieurs Conseils  <br>
 					Avenue de Cour 61, CP 241 <br>

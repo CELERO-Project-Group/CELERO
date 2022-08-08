@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?= asset_url('js/easy-ui-1.4.2.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/easy-ui-1.4.2.js'); ?>"></script>
 <?php if (!empty($kpi_values)): ?>
 	<div class="col-md-12" style="margin-bottom: 10px;">
 		<a class="btn btn-inverse btn-sm" href="<?= base_url('cpscoping/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/show'); ?>"><?= lang("Validation.gotocp"); ?></a>

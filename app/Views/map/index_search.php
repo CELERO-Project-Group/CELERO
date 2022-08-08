@@ -1,46 +1,46 @@
 
-<link rel="stylesheet" type="text/css" href="<?= asset_url('map/thirdPartyResources/ext-js/3.4.1.1/resources/css/ext-all-theme-easyui.css'); ?>"/>
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/map/thirdPartyResources/ext-js/3.4.1.1/resources/css/ext-all-theme-easyui.css'); ?>"/>
 <!--<link rel="stylesheet" type="text/css" href="../../resources/themes/greenery/css/xtheme-greenery.css"/>-->
 
-<script type="text/javascript" src="<?= asset_url('map/thirdPartyResources/ext-js/3.4.1.1/adapter/ext/ext-base.js'); ?>"></script>
-<script type="text/javascript" src="<?= asset_url('map/thirdPartyResources/ext-js/3.4.1.1/ext-all.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/map/thirdPartyResources/ext-js/3.4.1.1/adapter/ext/ext-base.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/map/thirdPartyResources/ext-js/3.4.1.1/ext-all.js'); ?>"></script>
 
 <!-- External lib: Google Maps -->
-<link rel="stylesheet" type="text/css" href="<?= asset_url('map/thirdPartyResources/openlayers/2.12/theme/default/style.css'); ?>"/>
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/map/thirdPartyResources/openlayers/2.12/theme/default/style.css'); ?>"/>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <!-- External lib: OpenLayers -->
-<script type="text/javascript" src="<?= asset_url('map/thirdPartyResources/openlayers/2.12/OpenLayers.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/map/thirdPartyResources/openlayers/2.12/OpenLayers.js'); ?>"></script>
 
 <!-- External lib: GeoExt 1.0 -->
-<script type="text/javascript" src="<?= asset_url('map/thirdPartyResources/geoext/1.1/script/GeoExt.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/map/thirdPartyResources/geoext/1.1/script/GeoExt.js'); ?>"></script>
 
 <?php   if($site_lang==null || $site_lang=='') { ?>
-    <script type="text/javascript" src="<?= asset_url('map/lib/i18n/en_US.js'); ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/map/lib/i18n/en_US.js'); ?>"></script>
 <?php  }else if($site_lang=='turkish'){ ?>
-    <script type="text/javascript" src="<?= asset_url('map/lib/i18n/tr_TR.js'); ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/map/lib/i18n/tr_TR.js'); ?>"></script>
 <?php  }else { ?>
-    <script type="text/javascript" src="<?= asset_url('map/lib/i18n/en_US.js'); ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/map/lib/i18n/en_US.js'); ?>"></script>
 <?php  } ?>
     
 
 <!-- External lib: geoext-viewer -->
 
 
-<script type="text/javascript" src="<?= asset_url('map/ux/oleditor/ole/client/lib/Editor/Lang/en.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/map/ux/oleditor/ole/client/lib/Editor/Lang/en.js'); ?>"></script>
 <!--<script type="text/javascript" src="/openlayers-editor/justs.ole.git/client/lib/Editor/Lang/en.js"></script>-->
 <!--<script type="text/javascript" src="/openlayers-editor/justs.ole.git/client/lib/loader.js"></script>-->
 <!--<script type="text/javascript" src="../../ux/oleditor/ole/client/lib/loader.js"></script>-->
-<script type="text/javascript" src="<?= asset_url('map/ux/oleditor/ole/ole.min.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/map/ux/oleditor/ole/ole.min.js'); ?>"></script>
 
 
 
-<script src="<?= asset_url('map/lib/DynLoader.js'); ?>" type="text/javascript"></script>
-<!--<link rel="stylesheet" type="text/css" href="<?= asset_url('map/resources/css/default.css'); ?>"/>-->
-<link rel="stylesheet" type="text/css" href="<?= asset_url('map/resources/css/default-theme-easyui.css'); ?>"/>
-<link rel="stylesheet" href="<?= asset_url('map/ux/oleditor/ole/client/theme/geosilk/geosilk.css'); ?>" type="text/css" />
+<script src="<?= base_url('assets/map/lib/DynLoader.js'); ?>" type="text/javascript"></script>
+<!--<link rel="stylesheet" type="text/css" href="<?= base_url('assets/map/resources/css/default.css'); ?>"/>-->
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/map/resources/css/default-theme-easyui.css'); ?>"/>
+<link rel="stylesheet" href="<?= base_url('assets/map/ux/oleditor/ole/client/theme/geosilk/geosilk.css'); ?>" type="text/css" />
 <!--<script type="text/javascript" src="../../script/Ostim.js"></script>-->
-<!--<script type="text/javascript" src="<?= asset_url('map/DefaultOptionsWorld.js'); ?>"></script>
+<!--<script type="text/javascript" src="<?= base_url('assets/map/DefaultOptionsWorld.js'); ?>"></script>
 <!--<script type="text/javascript" src="../featureinfopanel/Config.js"></script>-->
 <!--<script type="text/javascript" src="Config.js"></script>-->
 

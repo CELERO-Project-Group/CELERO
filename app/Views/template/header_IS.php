@@ -5,29 +5,29 @@
   <title>CELERO</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <!-- Loading Bootstrap -->
-  <link href="<?= asset_url('bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
 
   <!-- Loading Flat UI -->
-  <link href="<?= asset_url('css/flat-ui.css'); ?>" rel="stylesheet">
-  <link href="<?= asset_url('css/custom.css'); ?>" rel="stylesheet">
-  <link href="<?= asset_url('css/selectize.css'); ?>" rel="stylesheet">
-  <link rel="stylesheet" href="<?= asset_url('css/font-awesome.min.css'); ?>">
-    <!--<link href="<?php // echo asset_url('css/jquery-ui-1.10.4.custom.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/flat-ui.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/custom.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/selectize.css'); ?>" rel="stylesheet">
+  <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css'); ?>">
+    <!--<link href="<?php // echo base_url('assets/css/jquery-ui-1.10.4.custom.css'); ?>" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
       <![endif]-->
 
-      <script src="<?= asset_url('js/jquery-1.10.2.min.js'); ?>"></script>
-      <script src="<?= asset_url('js/bootstrap.min.js'); ?>"></script>
-      <script type="text/javascript" src="<?= asset_url('is/jquery.easyui.min.js'); ?>"></script>
+      <script src="<?= base_url('assets/js/jquery-1.10.2.min.js'); ?>"></script>
+      <script src="<?= base_url('assets/js/bootstrap.min.js'); ?>"></script>
+      <script type="text/javascript" src="<?= base_url('assets/is/jquery.easyui.min.js'); ?>"></script>
       <?php   if($this->session->get_userdata('language')==null || $this->session->get_userdata('language')=='') { ?>
-        <script type="text/javascript" src="<?= asset_url('is/locale/easyui-lang-en.js'); ?>"></script>
+        <script type="text/javascript" src="<?= base_url('assets/is/locale/easyui-lang-en.js'); ?>"></script>
       <?php  }else if($this->session->get_userdata('language')=='turkish'){ ?>
-            <script type="text/javascript" src="<?= asset_url('is/locale/easyui-lang-tr.js'); ?>"></script>
+            <script type="text/javascript" src="<?= base_url('assets/is/locale/easyui-lang-tr.js'); ?>"></script>
       <?php  }else { ?>
-            <script type="text/javascript" src="<?= asset_url('is/locale/easyui-lang-en.js'); ?>"></script>
+            <script type="text/javascript" src="<?= base_url('assets/is/locale/easyui-lang-en.js'); ?>"></script>
       <?php  } ?>
       <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
       <?php if($this->uri->segment(1)!="isscoping" and $this->uri->segment(1)!="isscopingauto"
@@ -38,7 +38,7 @@
         and $this->uri->segment(1)!="scenarios"
         and $this->uri->segment(1)!="cost_benefit"
         and $this->uri->segment(1)!="kpi_calculation"): ?>
-        <script src="<?= asset_url('js/selectize.min.js'); ?>"></script>
+        <script src="<?= base_url('assets/js/selectize.min.js'); ?>"></script>
         <script type="text/javascript">
           $(function() {
             $('#selectize').selectize({
@@ -68,8 +68,8 @@
       </form>
       <!-- language selection moved to the footer
       <ul class="nav navbar-nav navbar-right">
-        <li><a href='<?= base_url('language/switch/turkish'); ?>' style="padding-right: 0px; padding-bottom:25px; "><img src="<?= asset_url('images/Turkey.png'); ?>"></a></li>
-        <li><a href='<?= base_url('language/switch/english'); ?>' style="padding-bottom: 25px;"><img src="<?= asset_url('images/United-States.png'); ?>"></a></li>
+        <li><a href='<?= base_url('language/switch/turkish'); ?>' style="padding-right: 0px; padding-bottom:25px; "><img src="<?= base_url('assets/images/Turkey.png'); ?>"></a></li>
+        <li><a href='<?= base_url('language/switch/english'); ?>' style="padding-bottom: 25px;"><img src="<?= base_url('assets/images/United-States.png'); ?>"></a></li>
       </ul>
       -->
       <ul class="nav navbar-nav navbar-left ust-nav">

@@ -1,28 +1,27 @@
 <script type="text/javascript">
-$(document).ready(function() {
-    $("#projects").change(function() {         
-        var secim = $( "#projects" ).val();
-        $('#companiess').children().remove();
-        $.ajax({ 
-            type: "POST",
-            dataType:'json',
-            url: '<?= base_url('cpscoping/pro'); ?>/'+secim, 
-            success: function(data)
-            {
-            	$('#companiess').append('<option value="0">Nothing Selected</option>');
-                for(var k = 0 ; k < data.length ; k++){
-                    $('#companiess').append('<option value="'+data[k].id+'">'+data[k].name+'</option>');
+    $(document).ready(function() {
+        $("#projects").change(function() {         
+            var secim = $( "#projects" ).val();
+            $('#companiess').children().remove();
+            $.ajax({ 
+                type: "POST",
+                dataType:'json',
+                url: '<?= base_url('cpscoping/pro'); ?>/'+secim, 
+                success: function(data)
+                {
+                    $('#companiess').append('<option value="0">Nothing Selected</option>');
+                    for(var k = 0 ; k < data.length ; k++){
+                        $('#companiess').append('<option value="'+data[k].id+'">'+data[k].name+'</option>');
+                    }
                 }
-            }
+            });
+        });
+        $("#companiess").change(function() {         
+            var pro = $( "#projects" ).val();
+            var com = $( "#companiess" ).val();
+            $("#cpscopinga").attr("href", '<?= base_url('cpscoping'); ?>/'+pro+'/'+com+'/allocation');
         });
     });
-    $("#companiess").change(function() {         
-        var pro = $( "#projects" ).val();
-        var com = $( "#companiess" ).val();
-        $("#cpscopinga").attr("href", '<?= base_url('cpscoping'); ?>/'+pro+'/'+com+'/allocation');
-    });
-});
-
 </script>
 
 

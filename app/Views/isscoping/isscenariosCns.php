@@ -1,20 +1,20 @@
 
-<link rel="stylesheet" type="text/css" href="<?= asset_url('is/themes/bootstrap/easyui.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?= asset_url('is/themes/icon.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/is/themes/bootstrap/easyui.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?= base_url('assets/is/themes/icon.css'); ?>">
 
-<script type="text/javascript" src="<?= asset_url('is/jquery.easyui.min.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/is/jquery.easyui.min.js'); ?>"></script>
 <?php if ($language == 'turkish') {?>
-    <script type="text/javascript" src="<?= asset_url('is/locale/easyui-lang-tr.js'); ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/is/locale/easyui-lang-tr.js'); ?>"></script>
 <?php }?>
-<!--<script type="text/javascript" src="<?= asset_url('is/locale_IS/IS_lang_tr.js'); ?>"></script>-->
+<!--<script type="text/javascript" src="<?= base_url('assets/is/locale_IS/IS_lang_tr.js'); ?>"></script>-->
 <script type="text/javascript" src="https://www.jeasyui.com/easyui/datagrid-detailview.js"></script>
 
-<!--<script src="<?php /*echo asset_url('is/src/datagrid-filter.js');*/?>"></script>-->
+<!--<script src="<?php /*echo base_url('assets/is/src/datagrid-filter.js');*/?>"></script>-->
 
 <?php if ($language == 'turkish') {?>
-    <script src="<?= asset_url('is/IS_js/scenariosCns_tr.js'); ?>"></script>
+    <script src="<?= base_url('assets/is/IS_js/scenariosCns_tr.js'); ?>"></script>
 <?php } else {?>
-    <script src="<?= asset_url('is/IS_js/scenariosCns.js'); ?>"></script>
+    <script src="<?= base_url('assets/is/IS_js/scenariosCns.js'); ?>"></script>
 <?php }?>
 
 <!-- Zeynel Dağlı
