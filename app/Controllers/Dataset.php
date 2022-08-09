@@ -714,10 +714,9 @@ class Dataset extends BaseController {
 		$flow_model = model(Flow_model::class);
 		$user_model = model(User_model::class);
 
-		if(!empty($this->session->username)){
+		if(empty($this->session->username)){
 			return redirect()->to(site_url());
 		}
-
 
 		//All users can have their own imported / created UBP Data
 		$data['userepvalues'] = $flow_model->get_userep($this->session->id);
@@ -774,7 +773,6 @@ class Dataset extends BaseController {
 
 			$json = $obj;
 		}
-
 
 		$is_consultant = $user_model->is_user_consultant($this->session->id);
 		//only consultants get UBP data (needs to be even stricter in future!)
