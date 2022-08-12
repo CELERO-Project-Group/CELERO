@@ -777,7 +777,7 @@ class Dataset extends BaseController {
 		$is_consultant = $user_model->is_user_consultant($this->session->id);
 		//only consultants get UBP data (needs to be even stricter in future!)
 		if ($is_consultant) {
-			$url = 'https://reffnetservice.azurewebsites.net/api/LCA/GetAll?parentNr=500&token=TOKEN';
+			$url = 'https://reffnetservice.azurewebsites.net/api/LCA/GetAll?parentNr=500&token='.$_ENV['TOKEN'];
 
 			//Use file_get_contents to GET the URL in question.
 			$contents = file_get_contents($url);
