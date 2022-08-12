@@ -2,20 +2,25 @@
  * v1.3.1.1
  */
 function miller_column_UBP(){
-    
+    console.log("nace ");
+
     $.ajax({
-                url: '../UBP_values',
+                url: "../UBP_values",
                 type: 'GET',
-                crossDomain: true,
+                crossDomain: false,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: AjaxSucceeded,
                 error: AjaxFailed
             });
             function AjaxSucceeded(result) {
+                console.log("nace started");
+
                 startNace(result);
             }
             function AjaxFailed(result) {
+                console.log("nace error");
+
                 //TODO create better error message 
                 console.log(result);
             }
@@ -219,7 +224,7 @@ function miller_column_UBP(){
 }
 
 function miller_column_nace(){
-    $.getJSON("/assets/js/miller-NACE-codes.json", function(json) {
+    $.getJSON("miller-NACE-codes.json", function(json) {
         var nacejson = json;
 
         var $millerCol = $("#miller_col");
