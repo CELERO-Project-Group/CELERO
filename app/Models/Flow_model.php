@@ -126,7 +126,7 @@ class Flow_model extends Model {
 		$builder->where('t_cmpny_flow.cmpny_id',$companyID);
 	    $builder->where('t_cmpny_flow.flow_id',$flow_id);
 	    $builder->where('t_cmpny_flow.flow_type_id',$flow_type_id); 
-		$builder->replace($flow);
+		$builder->update($flow);
 	}
 
 	public function set_userep($data){

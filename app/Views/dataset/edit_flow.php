@@ -1,14 +1,12 @@
 	<?php //print_r($flow); ?>
 	<div class="col-md-6 col-md-offset-3">
-	<?php if(validation_errors() != NULL ): ?>
-	    <div class="alert alert-danger">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-	      	<div class="popover-content">
-	      		<?= validation_errors(); ?>
-	      	</div>
-	    </div>
-	<?php endif ?>
+	<?php
+		if($validation != NULL)
+		echo $validation->listErrors();
+	?>
 		<?= form_open_multipart('edit_flow/'.$companyID.'/'.$flow['flow_id'].'/'.$flow['flow_type_id']); ?>
+		<?= csrf_field() ?>
+    
 			<p class="lead"><?= lang("Validation.editflow"); ?></p>
 			<div class="well">
 				<div><?= lang("Validation.flowname"); ?>: <?= $flow['flowname']; ?></div>
