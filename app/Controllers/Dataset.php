@@ -105,7 +105,7 @@ class Dataset extends BaseController {
 		$process_model = model(Process_model::class);
 		$flow_model = model(Flow_model::class);
 		$company_model = model(Company_model::class);
-		
+
 		//checks permissions, if not loged in a redirect happens
 		$user = $this->session->username;
 		if(empty($user)){
@@ -116,8 +116,8 @@ class Dataset extends BaseController {
 
 		if (!empty($this->request->getPost())){
 			if ($this->validate([
-				'flowname' => 'trim|required|strip_tags|callback_alpha_dash_space',
-				'flowtype' => 'trim|required|strip_tags|callback_flow_varmi',
+				'flowname' => 'trim|required|strip_tags',
+				'flowtype' => 'trim|required|strip_tags',
 				'quantity' => "trim|required|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]|max_length[8]",
 				'quantityUnit' => 'trim|required|strip_tags',
 				'cost' =>  "trim|required|strip_tags|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]|max_length[8]",
@@ -127,11 +127,6 @@ class Dataset extends BaseController {
 				'charactertype' =>  'trim|strip_tags|max_length[50]',
 				'availability' =>  'trim',
 				'cf' =>  'trim|max_length[30]',
-				'conc' =>  'trim|strip_tags|numeric',
-				'concunit' =>  'trim',
-				'pres' =>  'trim|strip_tags|numeric|max_length[10]',
-				'presunit' =>  'trim',
-				'ph' =>  'trim|strip_tags|numeric|max_length[10]',
 				'state' =>  'trim',
 				'quality' =>  'trim|max_length[150]',
 				'oloc' =>  'trim',
@@ -160,7 +155,9 @@ class Dataset extends BaseController {
 				$flowfamilyID = $this->request->getPost('flowfamily');
 
 				//checks if flow already exist (as input OR output), same as flow_varmi()
-				$companyID = $this->uri->segment(2);
+				$uri = service('uri');
+
+				$companyID = $uri->getSegment(2);
 				if(is_numeric($flowID)){
 					if(!$flow_model->has_same_flow($flowID,$flowtypeID,$companyID)){
 						$this->session->set_flashdata('message', 'Flow can only be added twice (as input and output), please check your flows.');
@@ -247,7 +244,6 @@ class Dataset extends BaseController {
 				}
 
 				$flow_model->register_flow_to_company($flow);
-				return redirect()->back();
 			}
 
 		}
@@ -387,10 +383,6 @@ class Dataset extends BaseController {
 
 	}
 
-	function alpha_dash_space($str)
-	{
-	  return ( ! preg_match("/^([-a-z0-9_ ])+$/i", $str)) ? FALSE : TRUE;
-	}
 
 	function numeric_input_formater($int)
 	{

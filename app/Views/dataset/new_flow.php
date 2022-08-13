@@ -30,6 +30,7 @@
     echo "id='gizle'";
 } ?>>
     <?= form_open_multipart('new_flow/' . $companyID); ?>
+    <?= csrf_field() ?>
     <?php
 		if($validation != NULL)
 		echo $validation->listErrors();
