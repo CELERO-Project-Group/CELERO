@@ -359,10 +359,12 @@ class Dataset extends BaseController {
 
 	function flow_varmi()
 	{
+		$uri = service('uri');
+
 		$flow_model = model(Flow_model::class);
 		$flowID = $this->request->getPost('flowname');
 		$flowtypeID = $this->request->getPost('flowtype');
-		$companyID = $this->uri->segment(2);
+		$companyID = $uri->segment(2);
 		if(is_numeric($flowID)){
 			if(!$flow_model->has_same_flow($flowID,$flowtypeID,$companyID)){
 				$this->form_validation->set_message('flow_varmi', 'Flow name already exists, please choose another name or edit existing flow.');

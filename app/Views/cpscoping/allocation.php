@@ -3,87 +3,87 @@ var pathname = window.location.pathname;
 var prj_id = pathname.split("/")[2];
 var cmpny_id = pathname.split("/")[3];
 $(document).ready(function() {
-    $("#prcss_name").change(function() {
-    	var prcss_id = $( "#prcss_name").val();
-        $('#flow_name').children().remove();
-        $('#flow_type_name').children().remove();
-        //empties all allocation fields when a process is selected, values stay in place if submit fails
+	$("#prcss_name").change(function() {
+		var prcss_id = $( "#prcss_name").val();
+		$('#flow_name').children().remove();
+		$('#flow_type_name').children().remove();
+		//empties all allocation fields when a process is selected, values stay in place if submit fails
 
 		$('#allocation_fields').children().find('input[type=text]:not([id^="error"]), textarea').val("");
 
-        $.ajax({
-            type: "POST",
-            dataType:'json',
-            url: '<?= base_url('cp_allocation_array'); ?>/'+cmpny_id,
-            success: function(data)
-            {
-            	$('#flow_name').append('<option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>');
-           		for(var k = 0 ; k < data.length ; k++){
-           			if(data[k].company_process_id == prcss_id){
-                    	$('#flow_name').append('<option value="'+data[k].flow_id+'">'+data[k].flowname+" ("+data[k].flow_type_name+')</option>');
-                    }
-                }
-                $('#flow_type_name').append('<option value="0" disabled selected><?= lang("Validation.pleaseselect"); ?></option>');
-           		for(var k = 0 ; k < data.length ; k++){
-           			if(data[k].company_process_id == prcss_id){
-       					if(!optionExists(data[k].flow_type_id)){
-                			$('#flow_type_name').append('<option value="'+data[k].flow_type_id+'">'+data[k].flow_type_name+'</option>');
-       					}
-                    }
-                }
-            }
-        });
-    });
-    //if the page submit fails (not all mandatory fields), this is triggered and re-sets the flow and flow type dropdown
-    if(<?= set_value("flow_name") ?: "0" ?> != "0"){
-    	$("#prcss_name").val("<?= set_value('prcss_name') ?>");
+		$.ajax({
+			type: "GET",
+			dataType:'json',
+			url: '<?= base_url('cp_allocation_array'); ?>/'+cmpny_id,
+			success: function(data)
+			{
+				$('#flow_name').append('<option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>');
+		   		for(var k = 0 ; k < data.length ; k++){
+		   			if(data[k].company_process_id == prcss_id){
+						$('#flow_name').append('<option value="'+data[k].flow_id+'">'+data[k].flowname+" ("+data[k].flow_type_name+')</option>');
+					}
+				}
+				$('#flow_type_name').append('<option value="0" disabled selected><?= lang("Validation.pleaseselect"); ?></option>');
+		   		for(var k = 0 ; k < data.length ; k++){
+		   			if(data[k].company_process_id == prcss_id){
+	   					if(!optionExists(data[k].flow_type_id)){
+							$('#flow_type_name').append('<option value="'+data[k].flow_type_id+'">'+data[k].flow_type_name+'</option>');
+	   					}
+					}
+				}
+			}
+		});
+	});
+	//if the page submit fails (not all mandatory fields), this is triggered and re-sets the flow and flow type dropdown
+	if(<?= set_value("flow_name") ?: "0" ?> != "0"){
+		$("#prcss_name").val("<?= set_value('prcss_name') ?>");
 
-    	var prcss_id = $( "#prcss_name").val();
-    	var isselected = "";
-    	$.ajax({
-            type: "POST",
-            dataType:'json',
-            url: '<?= base_url('cp_allocation_array'); ?>/'+cmpny_id,
-            success: function(data)
-            {
-            	//fills the flow dropdown and sets "selected" where the php set_value matches, if no php set_value is set the output is 0
-           		for(var k = 0 ; k < data.length ; k++){
-           			if(data[k].company_process_id == prcss_id){
-           				if (data[k].flow_id  == <?= set_value("flow_name") ?: "0" ?>) {
-           					$('#flow_name').append('<option value="'+data[k].flow_id+'" selected>'+data[k].flowname+" ("+data[k].flow_type_name+')</option>');
-           				} else {
-           					$('#flow_name').append('<option value="'+data[k].flow_id+'">'+data[k].flowname+" ("+data[k].flow_type_name+')</option>');
-           				}
-                    }
-                }
-                $('#flow_type_name').append('<option value="0" disabled selected><?= lang("Validation.pleaseselect"); ?></option>');
-           		for(var k = 0 ; k < data.length ; k++){
-           			if(data[k].company_process_id == prcss_id){
-       					if(!optionExists(data[k].flow_type_id)){
-                			$('#flow_type_name').append('<option value="'+data[k].flow_type_id+'">'+data[k].flow_type_name+'</option>');
-       					}
-                    }
-                }
-                $('#flow_type_name').val("<?= set_value('flow_type_name') ?>");
-            }
-        });
+		var prcss_id = $( "#prcss_name").val();
+		var isselected = "";
+		$.ajax({
+			type: "POST",
+			dataType:'json',
+			url: '<?= base_url('cp_allocation_array'); ?>/'+cmpny_id,
+			success: function(data)
+			{
+				//fills the flow dropdown and sets "selected" where the php set_value matches, if no php set_value is set the output is 0
+		   		for(var k = 0 ; k < data.length ; k++){
+		   			if(data[k].company_process_id == prcss_id){
+		   				if (data[k].flow_id  == <?= set_value("flow_name") ?: "0" ?>) {
+		   					$('#flow_name').append('<option value="'+data[k].flow_id+'" selected>'+data[k].flowname+" ("+data[k].flow_type_name+')</option>');
+		   				} else {
+		   					$('#flow_name').append('<option value="'+data[k].flow_id+'">'+data[k].flowname+" ("+data[k].flow_type_name+')</option>');
+		   				}
+					}
+				}
+				$('#flow_type_name').append('<option value="0" disabled selected><?= lang("Validation.pleaseselect"); ?></option>');
+		   		for(var k = 0 ; k < data.length ; k++){
+		   			if(data[k].company_process_id == prcss_id){
+	   					if(!optionExists(data[k].flow_type_id)){
+							$('#flow_type_name').append('<option value="'+data[k].flow_type_id+'">'+data[k].flow_type_name+'</option>');
+	   					}
+					}
+				}
+				$('#flow_type_name').val("<?= set_value('flow_type_name') ?>");
+			}
+		});
 
-    };
+	};
 
-    //when a flow is selected
-    $("#flow_name").change(function() {
-    	//empties all allocation fields if not yet submited, values stay in place if submit fails
-    	if(<?= set_value("flow_name") ?: "0" ?> == "0"){
-	    	$('#allocation_fields').children().find('input[type=text]:not([id^="error"]), textarea').val("");
+	//when a flow is selected
+	$("#flow_name").change(function() {
+		//empties all allocation fields if not yet submited, values stay in place if submit fails
+		if(<?= set_value("flow_name") ?: "0" ?> == "0"){
+			$('#allocation_fields').children().find('input[type=text]:not([id^="error"]), textarea').val("");
 			$('#allocation_fields').children().find("#unit_env_impact").val("EP");
 		}
 		//sets flow_type_name accordingly to selected flow_name
 		if ($(this).children("option:selected").text().split("(").pop() == "Input)"){
-        	$('#flow_type_name').val("1").change();
-     	}
-     	else {
-     		$('#flow_type_name').val("2").change();
-     	}
+			$('#flow_type_name').val("1").change();
+	 	}
+	 	else {
+	 		$('#flow_type_name').val("2").change();
+	 	}
 	});
 });
 $(document).on("submit", "form", function (e) {
@@ -94,7 +94,9 @@ $(document).on("submit", "form", function (e) {
 function optionExists(val) {
   return $("#flow_type_name option[value='" + val + "']").length !== 0;
 }
-
+<?php 
+		$uri = service('uri');
+?>
 //already allocated table fill function
 function aatf() {
 /*		$( "#aprocess" ).text($('#prcss_name').val());
@@ -102,15 +104,16 @@ function aatf() {
 		$( "#atype" ).text($('#flow_type_name').val());*/
 
 		//define variables
- 		var project_id = "<?= $session->get('project_id'); ?>";
+
+ 		var project_id = "<?=  session()->project_id  ?>";
  		var process_id = $('#prcss_name').val();
  		var flow_id = $('#flow_name').val();
  		var flow_type_id = $('#flow_type_name').val();
- 		var cmpny_id = "<?= $this->uri->segment(3); ?>";
+ 		var cmpny_id = "<?= $uri->getSegment(3); ?>";
 
 		//get other allocation data for a selected flow and flow type
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			dataType:'json',
 			url: '<?= base_url('cpscoping/allocated_table'); ?>/'+flow_id+'/'+flow_type_id+'/'+cmpny_id+'/'+process_id+'/'+project_id,
 			success: function(data)
@@ -128,16 +131,14 @@ function aatf() {
 		});
 	}
 </script>
-<?php if (validation_errors() != NULL): ?>
-    <div class="alert alert-danger">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<div>Form couldn't be saved. Please fix the errors.</div>
-      	<div class="popover-content">
-      		<?= validation_errors(); ?>
-      	</div>
-    </div>
-<?php endif?>
+
+<?php
+	if($validation != NULL)
+	echo $validation->listErrors();
+?>
 <?= form_open_multipart('cpscoping/' . $project_id . '/' . $company_id . '/allocation'); ?>
+<?= csrf_field() ?>
+
 	<div>
 		<div class="col-md-3">
 			<div><span class="badge">1</span> <?= lang("Validation.alloheading1"); ?></div>
@@ -148,16 +149,16 @@ function aatf() {
 					<select name="prcss_name" id="prcss_name" onchange="aatf()" value="<?= set_value('prcss_name'); ?>" class="btn-group select select-block">
 						<option value=""><?= lang("Validation.pleaseselect"); ?></option>
 						<?php
-$kontrol = array();
-$index   = 0;
-?>
+							$kontrol = array();
+							$index   = 0;
+						?>
 						<?php for ($i = 0; $i < sizeof($prcss_info); $i++): ?>
 							<?php
-$isselected = "";
-if ($prcss_info[$i]['company_process_id'] == set_value('prcss_name')) {
-    $isselected = "selected";
-}
-?>
+							$isselected = "";
+								if ($prcss_info[$i]['company_process_id'] == set_value('prcss_name')) {
+									$isselected = "selected";
+								}
+							?>
 							<option value="<?= $prcss_info[$i]['company_process_id']; ?>" <?= $isselected; ?>><?= $prcss_info[$i]['prcessname']; ?></option>
 						<?php endfor?>
 					</select>
@@ -325,8 +326,8 @@ if ($prcss_info[$i]['company_process_id'] == set_value('prcss_name')) {
 			<hr>
 			<div class="form-group clearfix row">
 				<label class="control-label col-md-3">
-                    <?= lang("Validation.kpi"); ?>
-                </label>
+					<?= lang("Validation.kpi"); ?>
+				</label>
 				<label class="control-label col-md-3"><?= lang("Validation.kpiunit"); ?></label>
 				<label class="control-label col-md-6"><?= lang("Validation.kpidef"); ?></label>
 				<div class="col-md-3">
@@ -371,52 +372,52 @@ if ($prcss_info[$i]['company_process_id'] == set_value('prcss_name')) {
 <script type="text/javascript">
 //tooltip accuracy field
 $('.tooltip-acc').tooltip({
-    position: 'top',
-    content: '<span style="color:#fff"><?= lang("Validation.accuratei"); ?></span>',
-    onShow: function(){
-        $(this).tooltip('tip').css({
-            backgroundColor: '#999',
-            borderColor: '#999'
-        });
-    }
+	position: 'top',
+	content: '<span style="color:#fff"><?= lang("Validation.accuratei"); ?></span>',
+	onShow: function(){
+		$(this).tooltip('tip').css({
+			backgroundColor: '#999',
+			borderColor: '#999'
+		});
+	}
 });
 //tooltip reference field
 $('.tooltip-ref').tooltip({
-    position: 'top',
-    content: '<span style="color:#fff"><?= lang("Validation.reference-ttip"); ?></span>',
-    onShow: function(){
-        $(this).tooltip('tip').css({
-            backgroundColor: '#999',
-            borderColor: '#999'
-        });
-    }
+	position: 'top',
+	content: '<span style="color:#fff"><?= lang("Validation.reference-ttip"); ?></span>',
+	onShow: function(){
+		$(this).tooltip('tip').css({
+			backgroundColor: '#999',
+			borderColor: '#999'
+		});
+	}
 });
 //tooltip amount field
 $('.tooltip-amo').tooltip({
-    position: 'top',
-    content: '<span style="color:#fff"><?= lang("Validation.amount-ttip"); ?></span>',
-    onShow: function(){
-        $(this).tooltip('tip').css({
-            backgroundColor: '#999',
-            borderColor: '#999'
-        });
-    }
+	position: 'top',
+	content: '<span style="color:#fff"><?= lang("Validation.amount-ttip"); ?></span>',
+	onShow: function(){
+		$(this).tooltip('tip').css({
+			backgroundColor: '#999',
+			borderColor: '#999'
+		});
+	}
 });
 //tooltip allocation field
 $('.tooltip-allo').tooltip({
-    position: 'top',
-    content: '<span style="color:#fff"><?= lang("Validation.allocation-ttip"); ?></span>',
-    onShow: function(){
-        $(this).tooltip('tip').css({
-            backgroundColor: '#999',
-            borderColor: '#999'
-        });
-    }
+	position: 'top',
+	content: '<span style="color:#fff"><?= lang("Validation.allocation-ttip"); ?></span>',
+	onShow: function(){
+		$(this).tooltip('tip').css({
+			backgroundColor: '#999',
+			borderColor: '#999'
+		});
+	}
 });
 </script>
 <script type="text/javascript">
 $('#flow_type_name').change(function(b){
-	var cmpny_id = "<?= $this->uri->segment(3); ?>";
+	var cmpny_id = "<?= $uri->getSegment(3); ?>";
 
 	var e = document.getElementById("prcss_name");
 	var prcss_name = e.options[e.selectedIndex].value;
@@ -475,7 +476,7 @@ $('#flow_type_name').change(function(b){
 			  	}
 			  	else {
 			  		var oran3=$('#allocation_cost').val()/old_cc;
-			    	$('#cost').val((old_cc2*oran3).toFixed(2));
+					$('#cost').val((old_cc2*oran3).toFixed(2));
 			  	}
 			});
 
@@ -505,11 +506,11 @@ $('#flow_type_name').change(function(b){
 
 //prevents the dropdown fields from opening when enter is pressed on a input field and focuses the next text input field
 $(".col-md-9>.form-group").keydown(function(e){
-    if(e.keyCode == 13) {
-        e.preventDefault();
-        current_focus = $(this).parent().find("input[type=text]").index($(':focus'));
+	if(e.keyCode == 13) {
+		e.preventDefault();
+		current_focus = $(this).parent().find("input[type=text]").index($(':focus'));
 		$(':focus').parents().eq(2).find("input[type=text]").eq(current_focus+1).focus();
-    }
+	}
 });
 
 var old_aa = $('#allocation_amount').val();

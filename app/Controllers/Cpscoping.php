@@ -68,37 +68,33 @@ class Cpscoping extends BaseController {
 		$cpscoping_model = model(Cpscoping_model::class);
 		$product_model = model(Product_model::class);
 		$flow_model = model(Flow_model::class);
-		$process_model = model(Process_model::class);
+		$process_model = model(Process_model::class);	
 
-		$this->form_validation->set_rules('prcss_name', 'Process Name', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('flow_name', 'Flow Name', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('flow_type_name', 'Flow Type Name', 'required|trim|xss_clean');
-		
-		$this->form_validation->set_rules('amount', 'Amount', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('allocation_amount', 'Amount Allocation', 'required|trim|max_length[7]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('error_amount', 'Amount Error Rate', 'required|trim|integer|max_length[3]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('unit_amount', 'Unit Amount', 'required|trim|xss_clean');
+		if (!empty($this->request->getPost())){
+			if ($this->validate([
+				'prcss_name'=> 'required|trim',
+				'flow_name'=> 'required|trim',
+				'flow_type_name'=> 'required|trim',
+				'amount'=> 'required|trim',
+				'allocation_amount'=>  'required|trim|max_length[7]|greater_than[0]',
+				'error_amount'=> 'required|trim|integer|max_length[3]|greater_than[0]',
+				'unit_amount'=> 'required|trim',
+				'cost'=> 'required|trim',
+				'allocation_cost'=>  'required|trim|max_length[7]|greater_than[0]',
+				'error_cost'=>  'required|trim|integer|max_length[3]|greater_than[0]',
+				'unit_cost'=>  'required|trim',
+				'env_impact'=>  'required|trim|max_length[25]',
+				'allocation_env_impact'=>  'required|trim|max_length[7]|greater_than[0]',
+				'error_ep'=>  'required|trim|integer|max_length[3]|greater_than[0]',
+				'unit_env_impact'=>  'required|trim',
+				'reference'=>  'required|trim',
+				'unit_reference'=>  'required|trim',
+				'nameofref'=>  'trim|required',
+				'kpi'=>  'required|trim',
+				'unit_kpi'=>  'required|trim',
+				'kpidef'=>  'trim'
+			])){
 
-		$this->form_validation->set_rules('cost', 'Cost', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('allocation_cost', 'Cost Allocation', 'required|trim|max_length[7]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('error_cost', 'Cost Error Rate', 'required|trim|integer|max_length[3]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('unit_cost', 'Unit Cost', 'required|trim|xss_clean');
-		
-		$this->form_validation->set_rules('env_impact', 'Env. Impact', 'required|trim|max_length[25]|xss_clean');
-		$this->form_validation->set_rules('allocation_env_impact', 'Env. Impact Allocation', 'required|trim|max_length[7]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('error_ep', 'Env. Impact Rate', 'required|trim|integer|max_length[3]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('unit_env_impact', 'Unit Env. Impact', 'required|trim|xss_clean');
-
-		$this->form_validation->set_rules('reference', 'Reference', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('unit_reference', 'Unit Reference', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('nameofref', 'Name of reference', 'trim|required|xss_clean');
-		
-		$this->form_validation->set_rules('kpi', 'Kpi', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('unit_kpi', ' Unit Kpi', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('kpidef', ' KPI definition', 'trim|xss_clean');
-		//$this->form_validation->set_rules('kpi_error', 'Kpi Error', 'required|trim|integer|xss_clean');
-		
-		if ($this->form_validation->run() !== FALSE){
 			$prcss_name = $this->request->getPost('prcss_name');
 			$flow_name = $this->request->getPost('flow_name');
 			$flow_type_name = $this->request->getPost('flow_type_name');
@@ -154,6 +150,7 @@ class Cpscoping extends BaseController {
 			$cpscoping_model->set_cp_allocation_main($allocation_array);
 
 			redirect('cpscoping/'.$project_id.'/'.$company_id.'/show');
+			}
 		}
 		$data['project_id'] = $project_id;
 		$data['company_id'] = $company_id;
@@ -180,7 +177,7 @@ class Cpscoping extends BaseController {
 				$temp_index++;
 			}
 		}
-
+		$data['validation'] = $this->validator;
 		$data['prcss_info'] = $array_temp;
  
 		echo view('template/header');
@@ -258,31 +255,30 @@ class Cpscoping extends BaseController {
 		if($permission==FALSE){redirect(site_url());}
 
 
-		$this->form_validation->set_rules('amount', 'Amount', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('allocation_amount', 'Amount Allocation', 'required|trim|max_length[7]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('error_amount', 'Amount Error Rate', 'required|trim|integer|max_length[3]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('unit_amount', 'Unit Amount', 'required|trim|xss_clean');
-
-		$this->form_validation->set_rules('cost', 'Cost', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('allocation_cost', 'Cost Allocation', 'required|trim|max_length[7]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('error_cost', 'Cost Error Rate', 'required|trim|integer|max_length[3]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('unit_cost', 'Unit Cost', 'required|trim|xss_clean');
-		
-		$this->form_validation->set_rules('env_impact', 'Env. Impact', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('allocation_env_impact', 'Env. Impact Allocation', 'required|trim|max_length[7]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('error_ep', 'Env. Impact Rate', 'required|trim|integer|max_length[3]|greater_than[0]|xss_clean');
-		$this->form_validation->set_rules('unit_env_impact', 'Unit Env. Impact', 'required|trim|xss_clean');
-
-		$this->form_validation->set_rules('reference', 'Reference', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('unit_reference', 'Unit Reference', 'required|trim|xss_clean');
-		
-		$this->form_validation->set_rules('kpi', 'Kpi', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('unit_kpi', ' Unit Kpi', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('nameofref', ' Name of reference', 'trim|xss_clean|max_length[50]');
-		$this->form_validation->set_rules('kpidef', ' KPI definition', 'trim|xss_clean|max_length[250]');
-
-
-		if ($this->form_validation->run() !== FALSE){
+		if (!empty($this->request->getPost())){
+			if ($this->validate([
+				'prcss_name'=> 'required|trim',
+				'flow_name'=> 'required|trim',
+				'flow_type_name'=> 'required|trim',
+				'amount'=> 'required|trim',
+				'allocation_amount'=>  'required|trim|max_length[7]|greater_than[0]',
+				'error_amount'=> 'required|trim|integer|max_length[3]|greater_than[0]',
+				'unit_amount'=> 'required|trim',
+				'cost'=> 'required|trim',
+				'allocation_cost'=>  'required|trim|max_length[7]|greater_than[0]',
+				'error_cost'=>  'required|trim|integer|max_length[3]|greater_than[0]',
+				'unit_cost'=>  'required|trim',
+				'env_impact'=>  'required|trim|max_length[25]',
+				'allocation_env_impact'=>  'required|trim|max_length[7]|greater_than[0]',
+				'error_ep'=>  'required|trim|integer|max_length[3]|greater_than[0]',
+				'unit_env_impact'=>  'required|trim',
+				'reference'=>  'required|trim',
+				'unit_reference'=>  'required|trim',
+				'nameofref'=>  'trim|required',
+				'kpi'=>  'required|trim',
+				'unit_kpi'=>  'required|trim',
+				'kpidef'=>  'trim'
+			])){
 
 			$amount = $this->request->getPost('amount');
 			$allocation_amount = $this->request->getPost('allocation_amount');
@@ -327,6 +323,7 @@ class Cpscoping extends BaseController {
 			$cpscoping_model->update_cp_allocation($array_allocation,$allocation_id);
 
 			redirect('cpscoping');
+			}
 		}
 
 		echo view('template/header');
@@ -589,25 +586,25 @@ class Cpscoping extends BaseController {
 
 		echo library('upload', $config);
 		
-        if (!$this->upload->do_upload('docuFile'))
-        {	
-        	//forwards error message to kpi_calculation() 
-            $this->session->set_flashdata('error', $this->upload->display_errors());
+		if (!$this->upload->do_upload('docuFile'))
+		{	
+			//forwards error message to kpi_calculation() 
+			$this->session->set_flashdata('error', $this->upload->display_errors());
  			redirect(base_url('kpi_calculation/'.$prjct_id.'/'.$cmpny_id),'refresh');
-        }
-        else
-        {
-        	$cp_scoping_files = array(
+		}
+		else
+		{
+			$cp_scoping_files = array(
 				'prjct_id' => $prjct_id,
 				'cmpny_id' => $cmpny_id,
 				'file_name' => $this->upload->data('file_name'),
 			);
 
 			//forwards data for successful upload to kpi_calculation()
-        	$cpscoping_model->insert_cp_scoping_file($cp_scoping_files);
+			$cpscoping_model->insert_cp_scoping_file($cp_scoping_files);
 			$this->session->set_flashdata('success', $this->upload->data());
 			redirect(base_url('kpi_calculation/'.$prjct_id.'/'.$cmpny_id),'refresh');
-        }
+		}
 	}
 
 	public function file_delete($filename,$prjct_id,$cmpny_id){
@@ -719,12 +716,12 @@ class Cpscoping extends BaseController {
 			if(!empty($query['flow_id'])){
 				if($query['flow_id'] == $flow_id && $query['flow_type_id'] == $flow_type_id && $query['prcss_id'] == $prcss_id){
 					$insert_array = array(
-				      'benchmark_kpi' => $benchmark_kpi,
-				      'best_practice' => $best_practice,
-				      'option' => $option,
-				      'description' => $description
-				    );
-				    $cpscoping_model->kpi_insert($insert_array,$allocation_id);
+					  'benchmark_kpi' => $benchmark_kpi,
+					  'best_practice' => $best_practice,
+					  'option' => $option,
+					  'description' => $description
+					);
+					$cpscoping_model->kpi_insert($insert_array,$allocation_id);
 				   	$return = $query['prcss_name']." ".$query['flow_name']." ".$query['flow_type_name']."'s new data has been saved to database.</br>";
 				}
 			}
