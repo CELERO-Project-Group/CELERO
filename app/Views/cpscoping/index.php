@@ -57,7 +57,6 @@
         <div class="cp-heading">
             <div class="row">
                 <div class="col-md-12"><a href="<?= base_url('company/'.$cp['company_id']); ?>"><?= $cp['company_name']; ?></a></div>
-<!--<div class="col-md-6" style="border-left: 1px solid #C3C3C3;"><b>Project</b><br><a href="<?= base_url('project/'.$cp['project_id']); ?>"><?= $cp['project_name']; ?></a></div> -->
             </div>
         </div>
         <div class="cp-bar">

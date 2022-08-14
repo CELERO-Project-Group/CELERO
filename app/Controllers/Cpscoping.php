@@ -141,15 +141,14 @@ class Cpscoping extends BaseController {
 				'kpidef' => $kpidef,
 				'nameofref' => $nameofref
 			);
-			$cpscoping_model->set_cp_allocation($array_allocation);
+			$insertID = $cpscoping_model->set_cp_allocation($array_allocation);
 			$allocation_array = array(
-				'allocation_id' => $db->insert_id(),
+				'allocation_id' => $insertID,
 				'prjct_id' => $project_id,
 				'cmpny_id' => $company_id
 			);
 			$cpscoping_model->set_cp_allocation_main($allocation_array);
-
-			redirect('cpscoping/'.$project_id.'/'.$company_id.'/show');
+			return redirect()->to('cpscoping/'.$project_id.'/'.$company_id.'/show');
 			}
 		}
 		$data['project_id'] = $project_id;
@@ -203,6 +202,7 @@ class Cpscoping extends BaseController {
 		$cpscoping_model = model(Cpscoping_model::class);
 		$allocation_id_array = $cpscoping_model->get_allocation_id_from_ids($company_id,$project_id);
 		$data['allocation'] = array();
+		$data['allocation_output'] = array();
 		foreach ($allocation_id_array as $ids) {
 
 			$ilkveri = $cpscoping_model->get_allocation_from_allocation_id($ids['allocation_id']);			
@@ -226,10 +226,9 @@ class Cpscoping extends BaseController {
 				$data['allocationveri'][$prcss_total]['unit_env_impact'] = 'EP';
 			}
 
-			$data['allocation'][] = $cpscoping_model->get_allocation_from_allocation_id($ids['allocation_id']);
-			//print_r($data['allocationveri']);
-			//echo "<hr>";
+			$data['allocation'][] = $cpscoping_model->get_allocation_from_allocation_id($ids['allocation_id']);		
 			$data['allocation_output'][] = $cpscoping_model->get_allocation_from_allocation_id_output($ids['allocation_id']);
+
 			$data['active'][$ids['allocation_id']] = $cpscoping_model->get_is_candidate_active_position($ids['allocation_id']);
 
 		}

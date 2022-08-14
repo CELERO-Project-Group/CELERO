@@ -1,3 +1,6 @@
+<?php 
+		$uri = service('uri');
+?>
 <script type="text/javascript" src="<?= base_url('assets/js/easy-ui-1.4.2.js'); ?>"></script>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript">
@@ -20,7 +23,7 @@
 		$.ajax({
 			type: "GET",
 			dataType: 'json',
-			url: '<?= base_url('cpscoping/cost_ep'); ?>/'+prcss_id+'/'+<?= $this->uri->segment(2);?>+'/'+<?= $this->uri->segment(3); ?>,
+			url: '<?= base_url('cpscoping/cost_ep'); ?>/'+prcss_id+'/'+<?= $uri->getSegment(2);?>+'/'+<?= $uri->getSegment(3); ?>,
 			success: function(data){
 				list.push(data);
 				//datagrid'in içini doldurma
@@ -78,8 +81,8 @@
 	};
 </script>
 		<div class="col-md-12" style="margin-bottom: 10px;">
-			<a class="btn btn-inverse btn-sm" href="<?= base_url('kpi_calculation/'.$this->uri->segment(2).'/'.$this->uri->segment(3)); ?>"><?= lang("Validation.gotokpi"); ?></a>
-			<a href="<?= base_url('new_flow/'.$this->uri->segment(3)); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("Validation.gotodataset"); ?></a>
+			<a class="btn btn-inverse btn-sm" href="<?= base_url('kpi_calculation/'.$uri->getSegment(2).'/'.$uri->getSegment(3)); ?>"><?= lang("Validation.gotokpi"); ?></a>
+			<a href="<?= base_url('new_flow/'.$uri->getSegment(3)); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("Validation.gotodataset"); ?></a>
 		</div>
 		<div class="col-md-12" id="sol4">
 			<p><?= lang("Validation.cpscopingheading1"); ?></p>
@@ -241,9 +244,12 @@
 					if($degisken == 1){
 						$id = 0;
 						foreach ($allocation_output as $a_output) {
-							if($a_output['flow_name'] == $a['flow_name']){
-								$id = $a_output['allocation_id'];
+							if(!empty($a_output['flow_name'])){
+								if($a_output['flow_name'] == $a['flow_name']){
+									$id = $a_output['allocation_id'];
+								}
 							}
+							
 						}
 						if($id == 0){
 							continue;
@@ -389,8 +395,8 @@
         function accept(){
             if (endEditing()){
             	var rows = $('#dg').datagrid('getRows');
-        			var prjct_id = <?= $this->uri->segment(2); ?>;
-							var cmpny_id = <?= $this->uri->segment(3); ?>;
+        			var prjct_id = <?= $uri->getSegment(2); ?>;
+							var cmpny_id = <?= $uri->getSegment(3); ?>;
 							$("#alerts").html("");
 							$("#alerts").fadeIn( "fast" );
 							$.each(rows, function(i, row) {

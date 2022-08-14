@@ -41,7 +41,7 @@ $(document).ready(function() {
 		var prcss_id = $( "#prcss_name").val();
 		var isselected = "";
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			dataType:'json',
 			url: '<?= base_url('cp_allocation_array'); ?>/'+cmpny_id,
 			success: function(data)
@@ -428,7 +428,7 @@ $('#flow_type_name').change(function(b){
 	console.log(prcss_name+" "+flow_name+" "+flow_type_name);
 	//get other allocation data for a selected flow and flow type
 	$.ajax({
-		type: "POST",
+		type: "GET",
 		dataType:'json',
 		url: '<?= base_url('cpscoping/full_get'); ?>/'+flow_name+'/'+flow_type_name+'/'+cmpny_id+'/'+prcss_name,
 		success: function(data)
