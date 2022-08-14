@@ -1,3 +1,6 @@
+<?php 
+	$uri = service('uri');
+?>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <div class="col-md-12">
 	<div class="lead"><?= $company['name']; ?></div>
@@ -26,7 +29,7 @@
         <!-- if no capexold is defined make it 0 (because its a numeric field in the DB, if empty = error!-->
         <?php if(empty($a['capexold'])){$a['capexold']=0;} ?>
 		<?php $attributes = array('id' => 'form-'.$i); ?>
-		<?= form_open('cba/save/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$iid.'/'.$tip, $attributes); ?>
+		<?= form_open('cba/save/'.$uri->getSegment(2).'/'.$uri->getSegment(3).'/'.$iid.'/'.$tip, $attributes); ?>
     <table class="tg costtable">
         <tr>
             <th colspan="9" style="font-size: 12px; text-align: left;">
@@ -566,127 +569,9 @@
 			<?php foreach ($allocation as $a): ?>
 				<?php if(!empty($a['cp_id'])){$iid=$a['cp_id']; $tip="cp";}else{$iid=$a['is_id'];$tip="is";} ?>
  				<?php $attributes = array('id' => 'form-'.$i); ?>
-				<?php // echo form_open('cba/save/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/'.$iid.'/'.$tip, $attributes); ?>
-				<!-- <table class="costtable">
-					<tr>
-						<td>#</td><td><?= $i; ?></td>
-					</tr>
-					<tr>
-						<td width="250"><?= lang("Validation.option"); ?></td>
-						<td width="75%">
-						<?php //print_r($a); ?>
-							<b><?php if(!empty($a['prcss_name'])) {echo $a['prcss_name'];} else {echo "IS potential"; } ?></b> 
-							<small class="text-muted"><?= $a['flow_name']; ?><?php if(!empty($a['prcss_name'])) {echo "-".$a['flow_type_name']; } ?></small><br>
-							<span class="text-info">
-								<?php if(empty($a['cmpny_from_name'])) {echo $a['best'];} else {echo $a['flow_name']." input IS potential from ".$a['cmpny_from_name']; } ?>
-							</span>
-						</td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.discountrate"); ?> (%)</td>
-						<td><div class="  "><input type="text" name="disrate" id="disrate-<?= $i; ?>"  value="<?= $a['disrate']; ?>" class="form-control" placeholder="You should fill this field."></div></td>
-					</tr>
-						<tr><td><?= lang("Validation.capexold"); ?> (<?= $a['unit_cost']; ?>/<?= lang("Validation.year"); ?>)</td>								
-						<td><div class="  "><input type="text" name="capexold" id="capexold-<?= $i; ?>" class="form-control  " value="<?= $a['capexold']; ?>" placeholder="You should fill this field."></div></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.opexold"); ?> (<?= $a['unit_cost']; ?>/<?= lang("Validation.year"); ?>)</td>
-						<td><input type="text" name="opexold" id="opexold-<?= $i; ?>" class="form-control"></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.lifetimeold"); ?> (<?= lang("Validation.year"); ?>)</td>
-						<td><div class="  "><input type="text" name="ltold" id="ltold-<?= $i; ?>" value="<?= $a['ltold']; ?>" class="form-control" placeholder="You should fill this field."></div></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.capexnew"); ?> (<?= $a['unit_cost']; ?>/<?= lang("Validation.year"); ?>)</td>
-						<td><div class="  "><input type="text" name="capexnew" id="capexnew-<?= $i; ?>" value="<?= $a['capexnew']; ?>" class="form-control" placeholder="You should fill this field."></div></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.opexnew"); ?> (<?= $a['unit_cost']; ?>/<?= lang("Validation.year"); ?>)</td>
-						<td><input type="text" name="opexnew" id="opexnew-<?= $i; ?>" class="form-control"></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.lifetimenew"); ?> (<?= lang("Validation.year"); ?>)</td>
-						<td><div class="  "><input type="text" name="ltnew" id="ltnew-<?= $i; ?>" value="<?= $a['ltnew']; ?>" class="form-control" placeholder="You should fill this field."></div></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.anncostold"); ?></td>
-						<td><input type="text" name="acold" id="acold-<?= $i; ?>" class="form-control"></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.anncostnew"); ?></td>
-						<td><input type="text" name="acnew" id="acnew-<?= $i; ?>" class="form-control"></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.economiccostbenefit"); ?></td>
-						<td><input type="text" name="eco" id="eco-<?= $i; ?>" class="form-control"></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.unit"); ?></td>
-						<td>Euro/<?= lang("Validation.year"); ?></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.oldcons"); ?></td><td><input type="text" name="oldcons" id="oldcons-<?= $i; ?>" class="form-control" value="<?= $a['qntty']; ?>"></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.oldcost"); ?></td><td><input type="text" name="oldcost" id="oldcost-<?= $i; ?>" class="form-control" value="<?= $a['cost']; ?>"></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.oldep"); ?></td><td><input type="text" name="oldep" id="oldep-<?= $i; ?>" class="form-control" value="<?= $a['ep']; ?>"></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.newcons"); ?></td>
-						<td><div class="  "><input type="text" name="newcons" id="newcons-<?= $i; ?>" value="<?= $a['newcons']; ?>" class="form-control" placeholder="You should fill this field."></div></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.unit"); ?></td>
-						<td><input type="hidden" name="unit2" value="<?= $a['qntty_unit']; ?>/<?= lang('year'); ?>" > <?= $a['qntty_unit']; ?>/<?= lang("Validation.year"); ?></td>
-					</tr>
-					<tr>
-						<td><?= $a['unit_cost']; ?>/ <?= lang("Validation.unit"); ?></td>
-						<td><input type="text" name="euunit" id="euunit-<?= $i; ?>" class="form-control" value="<?= ($a['cost']/$a['qntty']); ?>" ></td>
-					</tr>
-					<tr>
-						<td>EP/ <?= lang("Validation.unit"); ?></td>
-						<td><input type="text" name="eipunit" id="eipunit-<?= $i; ?>" class="form-control" value="<?= ($a['ep']/$a['qntty']); ?>" ></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.ecologicalbenefit"); ?></td>
-						<td><input type="text" name="ecoben" id="ecoben-<?= $i; ?>" class="form-control"></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.unit"); ?></td>
-						<td>EP/<?= lang("Validation.year"); ?></td>
-					</tr>
-					<tr>
-						<td><?= lang("Validation.marginalcost"); ?></td>
-						<td><input type="text" name="marcos" id="marcos-<?= $i; ?>" class="form-control"></td>	
-					</tr>
-					<tr>
-						<td><?= lang("Validation.unit"); ?></td><td>$/EP</td>
-					</tr>
-				</table>
-				<input type="submit" value="<?= lang("Validation.save"); ?>" class="btn btn-block btn-info" style="margin-top:20px;"/> -->
+				<?php // echo form_open('cba/save/'.$uri->getSegment(2).'/'.$uri->getSegment(3).'/'.$iid.'/'.$tip, $attributes); ?>
+				
 				<script type="text/javascript">
-                    
-				/*	$('#form-<?= $i; ?> input').keydown(function(e){
-						
-						// Allow: backspace, delete, tab, escape, enter and .
-						if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-						     // Allow: Ctrl+A
-						    (e.keyCode == 65 && e.ctrlKey === true) || 
-						     // Allow: home, end, left, right, down, up
-						    (e.keyCode >= 35 && e.keyCode <= 40)) {
-						         // let it happen, don't do anything
-						         return;
-						}
-						// Ensure that it is a number and stop the keypress
-						if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-						    e.preventDefault();
-						}
-
-						//console.log("x<?= $i; ?>");
-					});*/
 
 					function calculate(){
 
@@ -921,7 +806,7 @@
 	$t=0;
 	$toplameco=0;
     $alloc = $allocation;
-
+    $tuna_array = array();
     #sorts the allocation by marcos-1 ascending (lowest value first)
     usort($alloc, function($a, $b) {
         return $a['marcos-1'] <=> $b['marcos-1'];
@@ -1092,9 +977,14 @@
     //Eg. if the user deletes this values they are reentered automatically
     var flownamedef= "<?= $b['flow_name']; ?>";
     var qntty_unit= "<?= $b['qntty_unit']; ?>";
+    <?php if(!empty($b['amount'])): ?>
     var amount= "<?= $b['amount']; ?>";
+    <?php endif ?>
     var cost= "<?= $b['cost']; ?>";
+    <?php if(!empty($b['env_impact'])): ?>
     var env_impact= "<?= $b['env_impact']; ?>";
+    <?php endif ?>
+
     var k= <?= $k; ?>;
     
     if(document.getElementById('flow-name-1-'+k).value=="" || document.getElementById('flow-value-1-'+k).value==""){

@@ -139,7 +139,6 @@ class Cpscoping_model extends Model
 		$builder->join('t_cmpny_flow', 't_cmpny_flow.flow_id = t_cp_allocation.flow_id and t_cmpny_flow.cmpny_id = t_cp_company_project.cmpny_id and t_cmpny_flow.flow_type_id = t_cp_allocation.flow_type_id', 'left');
 		$builder->join('t_unit', 't_unit.id = t_cmpny_flow.qntty_unit_id');
 		$builder->join('t_costbenefit_temp', 't_costbenefit_temp.cp_id = t_cp_allocation.id', 'left');
-		$builder->whereNotIn('t_cp_allocation.best_practice', "");
 		$builder->where('t_cp_company_project.prjct_id', $prjct_id);
 		$builder->where('t_cp_company_project.cmpny_id', $cmpny_id);
 		$builder->where('t_cp_allocation.option', '1');
