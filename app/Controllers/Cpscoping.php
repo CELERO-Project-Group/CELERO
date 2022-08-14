@@ -324,6 +324,7 @@ class Cpscoping extends BaseController {
 			redirect('cpscoping');
 			}
 		}
+		$data['validation'] = $this->validator;
 
 		echo view('template/header');
 		echo view('cpscoping/edit_allocation',$data);

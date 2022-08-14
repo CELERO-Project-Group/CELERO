@@ -6,7 +6,7 @@
 	//$( "#atype" ).text($('#flow_type_name').val());
 
 		//define variables
- 		var project_id = "<?= $session->get('project_id'); ?>";
+ 		var project_id = "<?= session()->project_id; ?>";
  		var process_id = "<?= $allocation['prcss_id']; ?>";
  		var flow_id = "<?= $allocation['flow_id']; ?>";
  		var flow_type_id = "<?= $allocation['flow_type_id']; ?>";
@@ -32,17 +32,13 @@
 		});
 	}
 </script>
-<?php //print_r($allocation); ?>
-<?php if(validation_errors() != NULL ): ?>
-    <div class="alert alert-danger">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<div>Form couldn't be saved. Please fix the errors.</div>
-      	<div class="popover-content">
-      		<?= validation_errors(); ?>
-      	</div>
-    </div>
-<?php endif ?>
+<?php
+	if($validation != NULL)
+	echo $validation->listErrors();
+?>
 <?= form_open_multipart('cpscoping/edit_allocation/'.$allocation['allocation_id']); ?>
+<?= csrf_field() ?>
+
 	<div>
 		<div class="col-md-3">
 			<div><?= lang("Validation.allocation"); ?></div>
