@@ -1,8 +1,11 @@
+<?php 
+	$uri = service('uri');
+?>
 <script type="text/javascript" src="<?= base_url('assets/js/easy-ui-1.4.2.js'); ?>"></script>
 <?php if (!empty($kpi_values)): ?>
 	<div class="col-md-12" style="margin-bottom: 10px;">
-		<a class="btn btn-inverse btn-sm" href="<?= base_url('cpscoping/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/show'); ?>"><?= lang("Validation.gotocp"); ?></a>
-		<a href="<?= base_url('new_flow/'.$this->uri->segment(3)); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("Validation.gotodataset"); ?></a>
+		<a class="btn btn-inverse btn-sm" href="<?= base_url('cpscoping/'.$uri->getSegment(2).'/'.$uri->getSegment(3).'/show'); ?>"><?= lang("Validation.gotocp"); ?></a>
+		<a href="<?= base_url('new_flow/'.$uri->getSegment(3)); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("Validation.gotodataset"); ?></a>
 	</div>
 	<div class="col-md-12" id="8lik">
 			<table id="dg" class="easyui-datagrid"
@@ -11,7 +14,7 @@
 			        singleSelect: false,
 			        ctrlSelect: true,
 			        toolbar: '#tb',
-			        url: '<?= base_url("kpi_json/".$this->uri->segment(2).'/'.$this->uri->segment(3)); ?>',
+			        url: '<?= base_url("kpi_json/".$uri->getSegment(2).'/'.$uri->getSegment(3)); ?>',
 			        method: 'get',
 			        fitColumns: true,
 			        nowrap: false,
@@ -87,8 +90,8 @@
         function accept(){
             if(endEditing()){
             	var rows = $('#dg').datagrid('getRows');
-    			var prjct_id = <?= $this->uri->segment(2); ?>;
-				var cmpny_id = <?= $this->uri->segment(3); ?>;
+    			var prjct_id = <?= $uri->getSegment(2); ?>;
+				var cmpny_id = <?= $uri->getSegment(3); ?>;
 				var promises = [];
 				$("#alerts").html("");
 				$("#myModalsave").modal("show");
@@ -167,7 +170,7 @@
 </div>
 <div class="col-md-6">
 		<p><b><?= lang("Validation.searchdocument"); ?></b></p>
-			<?= form_open_multipart('search_result/'.$this->uri->segment(2).'/'.$this->uri->segment(3)); ?>
+			<?= form_open_multipart('search_result/'.$uri->getSegment(2).'/'.$uri->getSegment(3)); ?>
 			 	<input style="margin-bottom:10px;" type="text" class="form-control" id="search" placeholder="" name="search">
 		  	</form>
 		<hr>
@@ -181,7 +184,7 @@
 	      				echo "<div style=' color:#2eb3e7;margin: 10px 0;padding: 15px;padding-bottom: 20;border: 1px solid;'>You have successfully uploaded a new file.</div>";
 	                }
                 ?>
-				<?= form_open_multipart('cpscoping/file_upload/'.$this->uri->segment('2').'/'.$this->uri->segment('3')); ?>
+				<?= form_open_multipart('cpscoping/file_upload/'.$uri->getSegment('2').'/'.$uri->getSegment('3')); ?>
 				    <input type="file" name="docuFile" id="docuFile"> <br/>
 				    <input type="submit" class="btn btn-info btn-sm" value="<?= lang("Validation.savefile"); ?>">
 		   		</form>
@@ -211,7 +214,7 @@
 							</a>
 			    		</td>
 			    		<td>
-			    			<a onclick="return confirm('Are you sure?')" href="<?= base_url("cpscoping/file_delete/".$file['file_name']."/".$this->uri->segment(2)."/".$this->uri->segment(3)); ?>"><?= lang("Validation.delete"); ?></a>
+			    			<a onclick="return confirm('Are you sure?')" href="<?= base_url("cpscoping/file_delete/".$file['file_name']."/".$uri->getSegment(2)."/".$uri->getSegment(3)); ?>"><?= lang("Validation.delete"); ?></a>
 			    		</td>
 			    	</tr>
 			    <?php endforeach ?>
@@ -223,7 +226,7 @@
 	<div class="container">
 		<div class="col-md-4"></div>
 		<div class="col-md-4" style="margin-bottom: 10px; text-align:center;">
-			<a class="btn btn-default btn-sm" href="<?= base_url('cpscoping/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/show'); ?>">Show CP Scoping Data</a>
+			<a class="btn btn-default btn-sm" href="<?= base_url('cpscoping/'.$uri->getSegment(2).'/'.$uri->getSegment(3).'/show'); ?>">Show CP Scoping Data</a>
 			<p>There is nothing to display!</p>
 		</div>
 		<div class="col-md-4"></div>
@@ -250,8 +253,8 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 	function deneme() {
-		var prjct_id = <?= $this->uri->segment(2); ?>;
-		var cmpny_id = <?= $this->uri->segment(3); ?>;
+		var prjct_id = <?= $uri->getSegment(2); ?>;
+		var cmpny_id = <?= $uri->getSegment(3); ?>;
 
 		var prcss_array = new Array();
 		var flow_array = new Array();
@@ -261,7 +264,7 @@
 		var kpi2 = new Array();
 		var index = 0;
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			dataType: 'json',
 			url: '<?= base_url('kpi_calculation_chart'); ?>/'+prjct_id+'/'+cmpny_id,
 			success: function(data){

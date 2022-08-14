@@ -658,8 +658,8 @@ class Cpscoping extends BaseController {
 			$data['kpi_values'][] = $cpscoping_model->get_allocation_from_allocation_id($allocation_id['allocation_id']);
 		}
 
-		$data['error'] = $this->session->flashdata('error');
-		$data['success'] = $this->session->flashdata('success');
+		$data['error'] = $this->session->getFlashdata('error');
+		$data['success'] = $this->session->getFlashdata('success');
 
 		echo view('template/header');
 		echo view('cpscoping/kpi_calculation',$data);
