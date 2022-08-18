@@ -27,29 +27,6 @@
       <script src="<?= base_url('assets/js/bootstrap.min.js'); ?>"></script>
       
       <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
-      <?php 
-       $uri = current_url(true);
-
-      if($uri->getSegment(1)!="isscoping" and $uri->getSegment(1)!="isscopingauto"
-        and $uri->getSegment(1)!="isScopingAutoPrjBase"
-        and $uri->getSegment(1)!="isScopingAutoPrjBaseMDF"
-        and $uri->getSegment(1)!="isScopingPrjBaseMDF"
-        and $uri->getSegment(1)!="isScopingPrjBase"
-        and $uri->getSegment(1)!="scenarios"
-        and $uri->getSegment(1)!="cost_benefit"
-        and $uri->getSegment(1)!="kpi_calculation"): ?>
-        <script src="<?= base_url('assets/js/selectize.min.js'); ?>"></script>
-        <script type="text/javascript">
-          $(function() {
-            $('#selectize').selectize({
-              create: true,
-              sortField: 'text'
-            });
-          //$( "select" ).selectize();
-        });
-      </script>
-      <script type="text/javascript" src="<?= base_url('assets/js/miller.js'); ?>"></script>
-    <?php endif ?>
   </head>
   <body>
 
@@ -169,22 +146,6 @@
       <?php if (isset(session()->username)): ?>
         <?php if(isset(session()->project_id)): ?>
           <li><a href="<?= base_url('cpscoping'); ?>"><i class="fa fa-recycle"></i> <?= lang("Validation.cpidentification"); ?></a></li>
-          <li>
-            <div class="dropdown">
-              <button class="btn-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="padding: 12px 0px; color:white;">
-                <i class="fa fa-exchange"></i> <?= lang("Validation.isidentification"); ?>
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu dropdown-inverse" role="menu" aria-labelledby="dropdownMenu1">
-                <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingPrjBase'); ?>">Manual IS</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingAutoPrjBase'); ?>">Automated IS</a></li>-->
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingPrjBaseMDF'); ?>">Manual IS</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isScopingAutoPrjBaseMDF'); ?>">Automated IS</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isscenarios'); ?>">IS Scenarios(Supervisors)</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="<?= base_url('isscenariosCns'); ?>">IS Scenarios(Consultants)</a></li>
-              </ul>
-            </div>
-          </li>
           <li><a href="<?= base_url('cost_benefit'); ?>"><i class="fa fa-euro"></i> <?= lang("Validation.costbenefitanalysis"); ?></a></li>
           <li><a href="<?= base_url('nis'); ?>"><i class="fa fa-exchange"></i> <?= lang("Validation.nis"); ?></a></li>
           <!--link to the ecotracking is ".not-active" atm
