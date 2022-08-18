@@ -1,6 +1,5 @@
 <?php 		
-	$this->
-load->view('template/header');
+	echo view('template/header');
 ?>
 <div class="container">
     <div class="well">
@@ -197,6 +196,5 @@ load->view('template/header');
     </div>
 </div>
 <?php
-	$this->
-load->view('template/footer'); 
+	echo view('template/footer'); 
 ?>
