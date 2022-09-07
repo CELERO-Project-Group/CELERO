@@ -14,6 +14,8 @@
   <link href="<?= base_url('assets/css/custom.css'); ?>" rel="stylesheet">
   <link href="<?= base_url('assets/css/selectize.css'); ?>" rel="stylesheet">
   <link href="<?= base_url('assets/css/miller.css'); ?>" rel="stylesheet">
+
+
   <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css'); ?>">
     <!--<link href="<?php // echo base_url('assets/css/jquery-ui-1.10.4.custom.css'); ?>" rel="stylesheet">
 
@@ -25,7 +27,8 @@
 
       <script src="<?= base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
       <script src="<?= base_url('assets/js/bootstrap.min.js'); ?>"></script>
-      
+      <script src="<?= base_url('assets/js/miller.js'); ?>"></script>
+
       <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
   </head>
   <body>

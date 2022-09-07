@@ -362,11 +362,7 @@
         });
     </script>
 
-    <script type="text/javascript">
-        $('#selectize-units').selectize({
-            create: false
-        });
-    </script>
+
 
     <script type="text/javascript">
 
