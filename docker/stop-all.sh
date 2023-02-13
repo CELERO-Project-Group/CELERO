@@ -1,9 +1,9 @@
 echo "Stopping containers"
-docker stop celerophp-test
-docker stop celerodb-test
-docker stop celerodbdata-test
+docker stop celerophp
+docker stop celerodb
+docker stop celerodbdata
 
 echo "Removing containers"
-docker rm celerophp-test
-docker rm celerodb-test
-docker rm celerodbdata-test
+docker rm celerophp
+docker rm celerodb
+docker rm celerodbdata

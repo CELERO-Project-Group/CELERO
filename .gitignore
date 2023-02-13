@@ -137,3 +137,7 @@ nb-configuration.xml
 
 /.php-cs-fixer.php
 docker/**/*.log
+
+*.pem
+*.log
+*.DS_Store

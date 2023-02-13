@@ -2,36 +2,59 @@ version: '2.1'
 
 services:
 
-  celerophp-test:
+  celerophp:
     build: ./php
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
     links:
-      - celerodb-test
-    container_name: celerophp-test
+      - celerodb
+    networks:
+      celero:
+        ipv4_address: 172.21.0.4
+    container_name: celerophp
     volumes:
-      - /home/celero/celero-test:/var/www/html
+      - /home/celero/celero-docker:/var/www/html
       - ./apache_log:/var/log/apache2
-    user: "0:0"
+      - /etc/letsencrypt:/etc/letsencrypt
+        #volumes_from:
+        #- letsencryptdata
+        #user: "33:33"
+    restart: always
 
-  celerodb-test:  
+  celerodb:  
     build:
       context: ./db
       args:
         PASSWORD: password
         USER: postgres
+    networks:
+      - celero
     ports:
       - "3001:5432"
     volumes_from:
-      - celerodbdata-test
-    container_name: celerodb-test
+      - celerodbdata
+    container_name: celerodb
     environment:
       POSTGRES_PASSWORD: password
+
+      #letsencryptdata:
+    #image: cogniteev/echo
+    #command: echo 'Data Container for letsencrypt'
+    #volumes:
+    #  - /var/celero/letsencrypt:/etc/letsencrypt
+    #container_name: letsencryptdata
+    #restart: always
   
   #No Linux, only data container
-  celerodbdata-test:  
+  celerodbdata:  
     image: cogniteev/echo
     command: echo 'Data Container for PostgreSQL'
     volumes:
-      - /home/celero/celero-test/celerodb:/var/lib/postgresql/data
-    container_name: celerodbdata-test
+      - /home/celero/celero-docker/celerodb:/var/lib/postgresql/data
+    container_name: celerodbdata
+
+networks:
+  celero:
+    external:
+      name: celeronet

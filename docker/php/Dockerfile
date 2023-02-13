@@ -21,10 +21,15 @@ RUN rm -rf /var/lib/apt/lists/*
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer self-update --2
 
+#COPY config/default-ssl.conf /etc/apache2/sites-enabled
 COPY config/apache.conf /etc/apache2/sites-available/000-default.conf
+COPY cert19.pem /etc/apache2/
+COPY privkey19.pem /etc/apache2/
+COPY fullchain19.pem /etc/apache2/
 
 # Codeigniter needs to rewrite urls
 RUN a2enmod rewrite
+RUN a2enmod ssl
 
 # Configure environment and database connection
 COPY config/php.ini /usr/local/etc/php

@@ -32,7 +32,7 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'celerodb-test',
+        'hostname' => 'celerodb',
         'username' => 'postgres',
         'password' => '1q2w3e4r',
         'database' => 'ecoman_01_10',

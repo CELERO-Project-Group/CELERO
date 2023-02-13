@@ -8,3 +8,6 @@ RUN apt-get update \
       && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /docker-entrypoint-initdb.d
+
+#RUN chown -R celero:celero /var/lib/postgresql/data
+#RUN chmod -R 0777 /var/lib/posgresql/data
