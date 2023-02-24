@@ -34,7 +34,7 @@ $routes->setAutoRoute(true);
 // Language 
 //disabled it
 //$routes->add('language/switch/(:any)', 'langswitch/switchLanguage/$1');
-$routes->get('sendEmail', 'SendMail::index');
+$routes->add('sendEmail', 'SendMail::index');
 $routes->match(['get', 'post'], 'SendMail/sendMail', 'SendMail::sendMail');
 
 // ADMIN
