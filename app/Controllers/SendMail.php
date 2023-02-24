@@ -6,7 +6,7 @@ class SendMail extends Controller
 {
     public function index() 
 	{
-        return view('form_view');
+        return view('/pages/form_view');
     }
     function sendMail() { 
         $to = $this->request->getVar('mailTo');
@@ -28,5 +28,6 @@ class SendMail extends Controller
             $data = $email->printDebugger(['headers']);
             print_r($data);
         }
+        exit();
     }
 }
