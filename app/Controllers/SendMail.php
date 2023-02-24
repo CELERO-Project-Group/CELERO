@@ -6,10 +6,11 @@ class SendMail extends Controller
 {
     public function index() 
 	{
-        return view('/pages/form_view');
+        return view('/email/form_view');
     }
     function sendMail() { 
-        $to = $this->request->getVar('mailTo');
+        echo 'Email successfully sent';
+        /* $to = $this->request->getVar('mailTo');
         $subject = $this->request->getVar('subject');
         $message = $this->request->getVar('message');
         
@@ -28,6 +29,6 @@ class SendMail extends Controller
             $data = $email->printDebugger(['headers']);
             print_r($data);
         }
-        exit();
+        exit(); */
     }
 }

@@ -13,7 +13,7 @@
 </head>
 <body>
   <div class="container mt-5">
-    <form method="post" action="<?php echo base_url('SendMail/sendMail') ?>">
+    <form method="post" action="sendMail">
       <div class="form-group">
         <label>Receiver Email</label>
         <input type="text" name="mailTo" class="form-control">

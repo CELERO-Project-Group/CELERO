@@ -34,8 +34,7 @@ $routes->setAutoRoute(true);
 // Language 
 //disabled it
 //$routes->add('language/switch/(:any)', 'langswitch/switchLanguage/$1');
-$routes->add('sendEmail', 'SendMail::index');
-$routes->match(['get', 'post'], 'SendMail/sendMail', 'SendMail::sendMail');
+
 
 // ADMIN
 $routes->add('admin/newFlow', 'Admin::newFlow');
@@ -205,6 +204,9 @@ $routes->add('new_equipment/(:any)', 'Dataset::new_equipment/$1');
 $routes->add('get_equipment_type', 'Dataset::get_equipment_type');
 $routes->add('get_equipment_attribute', 'Dataset::get_equipment_attribute');
 $routes->add('delete_equipment/(:any)/(:any)', 'Dataset::delete_equipment/$1/$2');
+
+$routes->add('sendEmail', 'SendMail::index');
+$routes->add('sendMail', 'SendMail::sendMail');
 
 $routes->add('/', 'Homepage::index');
 $routes->add('(:any)', 'Pages::view/$1');
