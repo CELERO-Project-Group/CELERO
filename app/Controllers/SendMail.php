@@ -1,16 +1,15 @@
 <?php 
 namespace App\Controllers;
-use App\Models\FormModel;
-use CodeIgniter\Controller;
-class SendMail extends Controller
-{
+
+class SendMail extends BaseController {
+
     public function index() 
 	{
         return view('/email/form_view');
     }
-    function sendMail() { 
-        echo 'Email successfully sent';
-        /* $to = $this->request->getVar('mailTo');
+
+    public function sendMail() { 
+        $to = $this->request->getVar('mailTo');
         $subject = $this->request->getVar('subject');
         $message = $this->request->getVar('message');
         
@@ -29,6 +28,6 @@ class SendMail extends Controller
             $data = $email->printDebugger(['headers']);
             print_r($data);
         }
-        exit(); */
+        exit(); 
     }
 }
