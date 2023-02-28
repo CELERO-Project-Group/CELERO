@@ -196,7 +196,7 @@ class Company extends BaseController {
 		$data['clusters'] = $cluster_model->get_clusters();
 
 		echo view('template/header');
-		echo view('company/show_tuna',$data);
+		echo view('company/isscoping',$data);
 		echo view('template/footer');
 	}
 
@@ -423,13 +423,17 @@ class Company extends BaseController {
 	public function get_company_info($company_id){
 		$company_model = model(Company_model::class);
 		$flow_model = model(Flow_model::class);
+		$process_model = model(Process_model::class);
+		$component_model = model(Component_model::class);
+		$equipment_model = model(Equipment_model::class);
+		$product_model = model(Product_model::class);
 
 		$data['company_info'] = $company_model->get_company($company_id);
 		$data['company_flows'] = $flow_model->get_company_flow_list($company_id);
-		$data['company_prcss'] = $this->process_model->get_cmpny_flow_prcss($company_id);
-		$data['company_component'] = $this->component_model->get_cmpnnt($company_id);
-		$data['company_equipment'] = $this->equipment_model->all_information_of_equipment($company_id);
-		$data['company_product'] = $this->product_model->get_product_list($company_id);
+		$data['company_prcss'] = $process_model->get_cmpny_flow_prcss($company_id);
+		$data['company_component'] = $component_model->get_cmpnnt($company_id);
+		$data['company_equipment'] = $equipment_model->all_information_of_equipment($company_id);
+		$data['company_product'] = $product_model->get_product_list($company_id);
 		header("Content-Type: application/json", true);
 		echo json_encode($data);
 	}

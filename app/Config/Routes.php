@@ -70,17 +70,8 @@ $routes->add('admin/zoneCompanies', 'Admin::zoneCompanies');
 $routes->add('createreport', 'Reporting::create'); 
 
 //IS scoping
-$routes->add('isscoping', 'Isscoping::index');
-$routes->add('isscopingauto', 'Isscoping::auto');
-$routes->add('isScopingAutoPrjBase', 'Isscoping::autoprjbase');
-$routes->add('isScopingAutoPrjBaseMDF', 'Isscoping::autoprjbaseMDF');
-$routes->add('isScopingAutoPrjBaseMDFTest', 'Isscoping::autoprjbaseMDFTest');
-$routes->add('isScopingPrjBase', 'Isscoping::prjbase');
-$routes->add('isScopingPrjBaseMDF', 'Isscoping::prjbaseMDF');
-$routes->add('isscopingtooltip', 'Isscoping::tooltip');
-$routes->add('isscopingtooltipscenarios', 'Isscoping::tooltipscenarios');
-$routes->add('isscenarios', 'Isscoping::isscenarios');
-$routes->add('isscenariosCns', 'Isscoping::isscenariosCns');
+$routes->add('isscoping/(:any)', 'Company::isSelectionWithFlow/$1');
+$routes->add('isscoping', 'Company::isSelectionWithFlow');
 
 //map
 $routes->add('map', 'Map::index');
@@ -165,8 +156,6 @@ $routes->add('update_company/(:any)', 'Company::update_company/$1');
 $routes->add('newcompany', 'Company::new_company');
 $routes->add('deletecompany/(:any)', 'Company::delete_company/$1');
 $routes->add('companies', 'Company::show_all_companies');
-$routes->add('nis/(:any)', 'Company::isSelectionWithFlow/$1');
-$routes->add('nis', 'Company::isSelectionWithFlow');
 $routes->add('mycompanies', 'Company::show_my_companies');
 $routes->add('projectcompanies', 'Company::show_project_companies');
 $routes->add('company/(:any)', 'Company::companies/$1');

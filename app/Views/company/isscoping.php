@@ -1,5 +1,6 @@
 <script type="text/javascript" src="<?= base_url('assets/js/json2html.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/jquery.json2html.js'); ?>"></script>
+<script type="text/javascript" src="<?= base_url('assets/js/selectize.min.js'); ?>"></script>
 
 <div class="">
     <div style="padding:10px 20px;">
@@ -14,7 +15,6 @@
 
         <input type="button" onclick="getFilteredFlows()" value="Filter" />
         <input type="button" onclick="clearFilteredFlows()" value="Clear Selected" />
-
     </div>
 
   <div class="">
@@ -289,7 +289,7 @@
     var selectize = $select[0].selectize;
     function getFilteredFlows(){
         console.log("selected flow ids: " + selectize.items);
-        var link = '<?= base_url('/nis/')."'+selectize.items.toString().replace(/,/g, '-')"; ?>;
+        var link = '<?= base_url('/isscoping/')."/'+selectize.items.toString().replace(/,/g, '-')"; ?>;
         //TODO: it is working right now but I need to modify controllers as well. Until its done, i will comment next line.
         window.location.replace(link);
     }

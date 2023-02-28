@@ -149,6 +149,7 @@
       <?php if (isset(session()->username)): ?>
         <?php if(isset(session()->project_id)): ?>
           <li><a href="<?= base_url('cpscoping'); ?>"><i class="fa fa-recycle"></i> <?= lang("Validation.cpidentification"); ?></a></li>
+          <li><a href="<?= base_url('isscoping'); ?>"><i class="fa fa-recycle"></i> <?= lang("Validation.isidentification"); ?></a></li>
           <li><a href="<?= base_url('cost_benefit'); ?>"><i class="fa fa-euro"></i> <?= lang("Validation.costbenefitanalysis"); ?></a></li>
           <li><a href="<?= base_url('nis'); ?>"><i class="fa fa-exchange"></i> <?= lang("Validation.nis"); ?></a></li>
           <!--link to the ecotracking is ".not-active" atm
