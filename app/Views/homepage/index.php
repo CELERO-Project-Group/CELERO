@@ -1,6 +1,6 @@
 <div>
 	<div class="text-center">
-		<div><?= lang('slogan'); ?></div>
+		<div>SLOGAN WILL BE HERE:<?= lang('slogan'); ?></div>
 		<?php if (session('user_in')) : ?>
 			<div style="margin-top:450px;">
 				<a class="btn btn-lg btn-success" style="font-size: 15px;padding: 10px 40px;" href="<?= base_url('register'); ?>"><?= lang("Validation.startusing"); ?></a>
