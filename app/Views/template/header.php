@@ -2,22 +2,22 @@
 <html lang="en">
 
 <head>
-  <link rel="icon" href="/assets/images/favicon.png" >
+  <link rel="icon" href="<?= base_url('assets/images/favicon.png'); ?>" >
   <meta charset="utf-8">
   <title>CELERO</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <!-- Loading Bootstrap -->
-  <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="<?= base_url('assets/bootstrap/css/bootstrap.css'); ?>" rel="stylesheet">
 
   <!-- Loading Flat UI -->
-  <link href="/assets/css/flat-ui.css" rel="stylesheet">
-  <link href="/assets/css/custom.css" rel="stylesheet">
-  <link href="/assets/css/selectize.css" rel="stylesheet">
-  <link href="/assets/css/miller.css" rel="stylesheet">
+  <link href="<?= base_url('assets/css/flat-ui.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/custom.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/selectize.css'); ?>" rel="stylesheet">
+  <link href="<?= base_url('assets/css/miller.css'); ?>" rel="stylesheet">
 
 
-  <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
-    <!--<link href="<?php // echo base_url('assets/css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+  <link rel="stylesheet" href="<?= base_url('assets/css/font-awesome.min.css'); ?>">
+    <!--<link href="<?php // echo base_url('assets/css/jquery-ui-1.10.4.custom.css'); ?>" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
@@ -25,9 +25,9 @@
 
       <![endif]-->
 
-      <script src="/assets/js/jquery-3.3.1.min.js"></script>
-      <script src="/assets/js/bootstrap.min.js"></script>
-      <script src="/assets/js/miller.js"></script>
+      <script src="<?= base_url('assets/js/jquery-3.3.1.min.js'); ?>"></script>
+      <script src="<?= base_url('assets/js/bootstrap.min.js'); ?>"></script>
+      <script src="<?= base_url('assets/js/miller.js'); ?>"></script>
 
       <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
   </head>

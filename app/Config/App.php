@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://127.0.0.1/';
+    public $baseURL = 'https://32038.hostserv.eu/';
 
     /**
      * --------------------------------------------------------------------------
@@ -137,7 +137,7 @@ class App extends BaseConfig
      *
      * @var bool
      */
-    public $forceGlobalSecureRequests = false;
+    public $forceGlobalSecureRequests = true;
 
     /**
      * --------------------------------------------------------------------------
