@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-  <link rel="icon" href="/assets/images/favicon.png" >
+  <link rel="icon" href="https://32038.hostserv.eu/assets/images/favicon.png" >
   <meta charset="utf-8">
   <title>CELERO</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <!-- Loading Bootstrap -->
-  <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="https://32038.hostserv.eu/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 
   <!-- Loading Flat UI -->
   <link href="/assets/css/flat-ui.css" rel="stylesheet">
@@ -16,7 +16,7 @@
   <link href="/assets/css/miller.css" rel="stylesheet">
 
 
-  <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://32038.hostserv.eu/assets/css/font-awesome.min.css">
     <!--<link href="<?php // echo base_url('assets/css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
