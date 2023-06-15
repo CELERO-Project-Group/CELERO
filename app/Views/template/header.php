@@ -4,7 +4,7 @@
 <head>
   <link rel="icon" href="https://32038.hostserv.eu/assets/images/favicon.png" >
   <meta charset="utf-8">
-  <title>CELERO</title>
+  <title>CELERO (BETA)</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <!-- Loading Bootstrap -->
   <link href="https://32038.hostserv.eu/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
