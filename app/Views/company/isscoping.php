@@ -71,6 +71,33 @@
         //print_r($company_array);
         ?>
         <div id="map" style="height: 650px;"></div>
+        <h4>Selected flow matches</h4>
+        <table id="addedFlowsTableId" class="table w-100 table-striped">
+          <thead>
+              <tr>
+                  <th>Company Id</th>
+                  <th>Flow Id</th>
+                  <th>Flow Name</th>
+                  <th>Company Name</th>
+                  <th>Actions</th> <!-- Actions column added -->
+              </tr>
+          </thead>
+          <tbody>
+              <tr class="no-data">
+                  <td colspan="5">No matches added yet</td> <!-- colspan changed to 5 -->
+              </tr>
+          </tbody>
+          <tfoot>
+              <tr class="send-row" style="display: none;">
+                  <td colspan="5"> <!-- colspan changed to 5 -->
+                      <button class="btn btn-primary">Send to CP Scoping</button>
+                  </td>
+              </tr>
+          </tfoot>
+      </table>
+
+
+
     </div>
     <div class="col-md-4">
         <div class="swissheader">Detailed information</div>
@@ -156,6 +183,10 @@
   {"tag":"table","class":"table table-bordered","children":[
     {"tag":"tbody","children":[
         {"tag":"tr","children":[
+            {"tag":"td","html":"Company ID"},
+            {"tag":"td","colspan":"4","html":"${company_info.id}"}
+          ]},
+        {"tag":"tr","children":[
             {"tag":"td","html":"Company Info"},
             {"tag":"td","colspan":"4","html":"<h4>${company_info.name}</h4>"}
           ]},
@@ -240,14 +271,81 @@
       ]}
   ]};
 
+  $(document).off('click', '.add-flow-btn').on('click', '.add-flow-btn', function() {
+    var companyInfo = {
+      companyId: $("td:contains('Company ID')").next().text(),
+      companyName: $("td:contains('Company Info')").next().text(),
+
+  };
+    var flowId = $(this).data('flow-id');
+    var flowName = $(this).data('flow-name');
+
+    // Here we use the companyName from companyInfo object
+    var companyName = companyInfo.companyName;
+    var companyId = companyInfo.companyId;
+
+    // Create a new row in "Added Flows" table
+    var newRow = '<tr><td>' + companyId + '</td><td>' + flowId + '</td><td>' + flowName + '</td><td>' + companyName + '</td><td><button class="btn btn-danger remove-row-btn">Remove</button></td></tr></tr>';
+
+    // Add the new row to "Added Flows" table
+    $('#addedFlowsTableId').append(newRow);
+
+    if ($('#addedFlowsTableId tbody tr').length > 1) {
+        $('.no-data').hide();
+        $('.send-row').show();
+    } else {
+        $('.no-data').show();
+        $('.send-row').hide();
+    }
+  });
+
+  $(document).on('click', '.remove-row-btn', function() {
+      $(this).closest('tr').remove();
+
+      // Update visibility of "No matches added yet" row and "Send to CP Scoping" row
+      if ($('#addedFlowsTableId tbody tr').length > 1) {
+          $('.no-data').hide();
+          $('.send-row').show();
+      } else {
+          $('.no-data').show();
+          $('.send-row').hide();
+      }
+  });
+
   var company_flows_transform =
-    {"tag":"tr","children":[
-      {"tag":"td","children":[{"tag":"a","href":"<?= base_url("nis"); ?>/${flow_id}","html":"${flowname}"}]},
+  {
+    "tag":"tr","children":[
+      {
+        "tag":"td",
+        "children":[
+          {
+            "tag":"div",
+            "children": [
+              {
+                "tag":"a",
+                "style":"display:block;margin-bottom: 10px;color: #00098b;background-color: #f0f0f0;border-radius: 4px;padding: 6px;",
+                "href":"<?= base_url('nis'); ?>/${flow_id}",
+                "html":"${flowname}"
+              },
+              {
+                "tag":"button",
+                "class":"btn btn-primary add-flow-btn btn-sm",
+                "data-flow-id":"${flow_id}",
+                "data-company-id":"${company_info.id}",
+                "data-company-name":"${company_info.name}",
+                "data-flow-name":"${flowname}",
+                "html":"Add to Matches"
+              }
+            ]
+          }
+        ]
+      },
       {"tag":"td","html":"${flowtype}"},
       {"tag":"td","html":"${qntty} ${cost_unit}"},
       {"tag":"td","html":"${cost} ${qntty_unit_name}"},
-      {"tag":"td","html":"${ep} EP"},
-    ]};
+      {"tag":"td","html":"${ep} EP"}
+    ]
+  };
 
   var company_process_transform =
     {"tag":"tr","children":[

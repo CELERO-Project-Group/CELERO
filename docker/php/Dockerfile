@@ -23,9 +23,12 @@ RUN composer self-update --2
 
 #COPY config/default-ssl.conf /etc/apache2/sites-enabled
 COPY config/apache.conf /etc/apache2/sites-available/000-default.conf
-COPY cert19.pem /etc/apache2/
-COPY privkey19.pem /etc/apache2/
-COPY fullchain19.pem /etc/apache2/
+RUN echo "ServerName 127.0.0.1" >> /etc/apache2/apache2.conf
+RUN service apache2 restart
+
+# COPY cert19.pem /etc/apache2/
+# COPY privkey19.pem /etc/apache2/
+# COPY fullchain19.pem /etc/apache2/
 
 # Codeigniter needs to rewrite urls
 RUN a2enmod rewrite
