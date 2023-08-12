@@ -90,21 +90,27 @@
       
       <h4>Selected end matches</h4>
       <table id="isScopingTable">
-        <thead>
-          <tr>
-            <th>Company Id</th>
-            <th>Flow Id</th>
-            <th>Flow Name</th>
-            <th>Flow Type</th>
-            <th>Company Name</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Burada eklenen veriler gösterilecek -->
-        </tbody>
-      </table>
-
+      <thead>
+        <tr>
+          <th>Company From Id</th>
+          <th>Company From Name</th>
+          <th>Company To Id</th>
+          <th>Company To Name</th>
+          <th>Flow Id</th>
+          <th>Flow Name</th>
+          <th>Flow Type</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Burada eklenen veriler gösterilecek -->
+      </tbody>
+    </table>
+    <form id="dataForm" action="/savenewisscoping" method="post">
+        <?= csrf_field() ?>
+        <!-- Hidden fields will be dynamically added here -->
+        <input type="submit" value="Send to CBA">
+    </form>
 
     </div>
     
@@ -282,7 +288,7 @@
     var companyId = companyInfo.companyId;
 
     // Create a new row in "Added Flows" table
-    var newRow = '<tr><td>' + companyId + '</td><td>' + flowId + '</td><td>' + flowName + '</td><td>' + flowType + '</td><td>' + companyName + '</td><td><button class="btn btn-primary addToScopingBtn">Add to IS scoping</button> <button class="btn btn-danger remove-row-btn">Remove</button></td></tr>';
+    var newRow = '<tr><td>' + companyId + '</td><td>' + flowId + '</td><td>' + flowName + '</td><td>' + flowType + '</td><td>' + companyName + '</td><td><button class="btn btn-primary selectAsFrom">Select as From</button> <button class="btn btn-primary selectAsTo">Select as To</button> <button class="btn btn-danger remove-row-btn">Remove</button></td></tr>';
 
     // Add the new row to "Added Flows" table
     $('#addedFlowsTableId').append(newRow);
@@ -345,19 +351,70 @@
     ]
   };
 
-  $(document).off('click', '.addToScopingBtn').on('click', '.addToScopingBtn', function() {
-    // IS scoping tablosunda kaç satır olduğunu kontrol edin
-    var rowCount = $("#isScopingTable tbody tr").length;
-    
-    // Yalnızca 2 satıra kadar veri eklenmesine izin ver
-    if (rowCount < 2) {
-      var row = $(this).closest('tr').clone();  // Mevcut satırı klonlayın
-      row.find('.addToScopingBtn').remove();     // Klonlanmış satırdaki "Add to IS scoping" butonunu kaldırın
-      $("#isScopingTable tbody").append(row);    // Klonlanmış satırı IS scoping tablosuna ekleyin
-    } else {
-      alert("You can only add 2 company flows to the IS scoping table.");
-    }
+  var selectedFrom = null;
+  var selectedTo = null;
+
+  $(document).off('click', '.selectAsFrom').on('click', '.selectAsFrom', function() {
+      selectedFrom = $(this).closest('tr');
   });
+
+  $(document).off('click', '.selectAsTo').on('click', '.selectAsTo', function() {
+      selectedTo = $(this).closest('tr');
+      
+      if (selectedFrom) {
+          var newRow = '<tr>'
+              + '<td>' + selectedFrom.find('td:eq(0)').text() + '</td>'   // Company From Id
+              + '<td>' + selectedFrom.find('td:eq(4)').text() + '</td>'   // Company From Name
+              + '<td>' + selectedTo.find('td:eq(0)').text() + '</td>'     // Company To Id
+              + '<td>' + selectedTo.find('td:eq(4)').text() + '</td>'     // Company To Name
+              + '<td>' + selectedFrom.find('td:eq(1)').text() + '</td>'   // Flow Id
+              + '<td>' + selectedFrom.find('td:eq(2)').text() + '</td>'   // Flow Name
+              + '<td>' + selectedFrom.find('td:eq(3)').text() + '</td>'   // Flow Type
+              + '<td><button class="btn btn-danger remove-row-btn">Remove</button></td>'
+              + '</tr>';
+              
+          $("#isScopingTable tbody").append(newRow);
+          
+          // Seçimleri sıfırlayın
+          selectedFrom = null;
+          selectedTo = null;
+      } else {
+          alert("Please select a 'from' company first.");
+      }
+  });
+
+  $(document).ready(function() {
+    $('#dataForm').submit(function(e) {
+      e.preventDefault(); // Prevent the default form submit action
+
+      // Remove old hidden inputs if they exist to avoid duplicate data
+      $('.dynamicInput').remove();
+
+      var counter = 0; // Sayaç değerini sıfırlayarak başlat
+
+      // Iterate over each row in the table to get the data and create hidden fields
+      $('#isScopingTable tbody tr').each(function() {
+          var fromId = $(this).find('td:eq(0)').text().trim();
+          var toId = $(this).find('td:eq(2)').text().trim();
+          var flowId = $(this).find('td:eq(4)').text().trim();
+
+          var inputs = `
+              <input class="dynamicInput" type="hidden" name="companies[${counter}][from_id]" value="${fromId}" />
+              <input class="dynamicInput" type="hidden" name="companies[${counter}][to_id]" value="${toId}" />
+              <input class="dynamicInput" type="hidden" name="companies[${counter}][flow_id]" value="${flowId}" />
+          `;
+
+          $('#dataForm').append(inputs);
+
+          counter++; // Her satır için sayaç değerini arttır
+      });
+
+      // After adding all the inputs, submit the form
+      this.submit();
+    });
+  });
+
+
 
 
   var company_process_transform =

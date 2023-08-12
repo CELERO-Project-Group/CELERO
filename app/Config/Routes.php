@@ -87,6 +87,7 @@ $routes->add('ecotracking', 'Ecotracking::index');
 //Cost Benefit
 $routes->add('cost_benefit/(:any)/(:any)', 'Cost_benefit::new_cost_benefit/$1/$2');
 $routes->add('cost_benefit', 'Cost_benefit::index');
+$routes->add('savenewisscoping', 'Cost_benefit::saveNewISScopingPotential');
 $routes->add('cba/save/(:any)/(:any)/(:any)/(:any)', 'Cost_benefit::save/$1/$2/$3/$4');
 
 //Html Parse

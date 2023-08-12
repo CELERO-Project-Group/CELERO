@@ -42,6 +42,18 @@ class Cost_benefit extends BaseController
         echo view('template/footer');
     }
 
+    public function saveNewISScopingPotential() {
+        $data = $this->request->getPost('companies');
+    
+        // Debugging
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+    
+        // ... your further processing ...
+    }
+    
+
     //cost-benefit analysis form saving
     public function save($prjct_id, $cmpny_id, $id, $cp_or_is)
     {
