@@ -87,7 +87,23 @@
               </tr>
           </tbody>
       </table>
-
+      
+      <h4>Selected end matches</h4>
+      <table id="isScopingTable">
+        <thead>
+          <tr>
+            <th>Company Id</th>
+            <th>Flow Id</th>
+            <th>Flow Name</th>
+            <th>Flow Type</th>
+            <th>Company Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Burada eklenen veriler gösterilecek -->
+        </tbody>
+      </table>
 
 
     </div>
@@ -266,7 +282,7 @@
     var companyId = companyInfo.companyId;
 
     // Create a new row in "Added Flows" table
-    var newRow = '<tr><td>' + companyId + '</td><td>' + flowId + '</td><td>' + flowName + '</td><td>' + flowType + '</td><td>' + companyName + '</td><td><button class="btn btn-danger remove-row-btn">Remove</button></td></tr></tr>';
+    var newRow = '<tr><td>' + companyId + '</td><td>' + flowId + '</td><td>' + flowName + '</td><td>' + flowType + '</td><td>' + companyName + '</td><td><button class="btn btn-primary addToScopingBtn">Add to IS scoping</button> <button class="btn btn-danger remove-row-btn">Remove</button></td></tr>';
 
     // Add the new row to "Added Flows" table
     $('#addedFlowsTableId').append(newRow);
@@ -328,6 +344,21 @@
       {"tag":"td","html":"${ep} EP"}
     ]
   };
+
+  $(document).off('click', '.addToScopingBtn').on('click', '.addToScopingBtn', function() {
+    // IS scoping tablosunda kaç satır olduğunu kontrol edin
+    var rowCount = $("#isScopingTable tbody tr").length;
+    
+    // Yalnızca 2 satıra kadar veri eklenmesine izin ver
+    if (rowCount < 2) {
+      var row = $(this).closest('tr').clone();  // Mevcut satırı klonlayın
+      row.find('.addToScopingBtn').remove();     // Klonlanmış satırdaki "Add to IS scoping" butonunu kaldırın
+      $("#isScopingTable tbody").append(row);    // Klonlanmış satırı IS scoping tablosuna ekleyin
+    } else {
+      alert("You can only add 2 company flows to the IS scoping table.");
+    }
+  });
+
 
   var company_process_transform =
     {"tag":"tr","children":[
