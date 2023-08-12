@@ -43,17 +43,40 @@ class Cost_benefit extends BaseController
     }
 
     public function saveNewISScopingPotential() {
-        $data = $this->request->getPost('companies');
+
+        $Cpscoping_model = model(Cpscoping_model::class);
     
+        $data = $this->request->getPost('companies');
+        
         // Debugging
         echo "<pre>";
         print_r($data);
         echo "</pre>";
     
-        // ... your further processing ...
+        if (is_array($data)) {
+            foreach ($data as $entry) {
+                if (isset($entry['from_id'], $entry['to_id'], $entry['flow_id'])) {
+                    $formattedEntry = [
+                        'cmpny_from_id' => $entry['from_id'],
+                        'cmpny_to_id'   => $entry['to_id'],
+                        'flow_id'       => $entry['flow_id'],
+                        'is_prj_id'       => 130,
+                    ];
+            
+                    $Cpscoping_model->insertNewIsData($formattedEntry);
+                } else {
+                    echo "One of the entries did not have the expected keys.";
+                }
+            }
+        } else {
+            echo "Received data is not an array.";
+        }
+        
+        // Redirect or do whatever you want after saving
+        return redirect()->to(site_url('cost_benefit'));
     }
+     
     
-
     //cost-benefit analysis form saving
     public function save($prjct_id, $cmpny_id, $id, $cp_or_is)
     {

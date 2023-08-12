@@ -170,6 +170,14 @@ class Cpscoping_model extends Model
 		return $data;
 	}
 
+	public function insertNewIsData($data)
+    {
+        $db = db_connect();
+        $builder = $db->table('t_is_prj_details'); // Tablo adınız
+        
+        return $builder->insert($data);
+    }
+
 	public function get_allocation_values($cmpny_id, $prjct_id)
 	{
 		$db = db_connect();
