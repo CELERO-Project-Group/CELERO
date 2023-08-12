@@ -87,6 +87,37 @@ class Company_model extends Model
         return $query->getResultArray();
     }
 
+    
+    public function get_project_companies_with_flow($project_id, $flow_id = null)
+    {
+        $db = db_connect();
+        $builder = $db->table('t_cmpny');
+        $builder->select('t_cmpny.*, t_cmpny_flow.description');
+        $builder->join('t_cmpny_flow', 't_cmpny_flow.cmpny_id = t_cmpny.id');
+        $builder->join('t_prj_cmpny', 't_prj_cmpny.cmpny_id = t_cmpny.id');
+        $builder->where('t_prj_cmpny.prj_id', $project_id);
+    
+        if ($flow_id !== null) {
+            if (strpos($flow_id, "-") !== false) {
+                $flow_array = explode('-', $flow_id);
+                foreach ($flow_array as $fi) {
+                    $builder->where(['t_cmpny_flow.flow_id' => $fi, 't_prj_cmpny.prj_id' => $project_id]);
+                }
+                
+            } else {
+                $builder->where('t_cmpny_flow.flow_id', $flow_id);
+            }
+        }
+    
+        $builder->orderBy('name', 'asc');
+        $builder->distinct();
+    
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+    
+
+
     public function get_company($id)
     {
         $db = db_connect();

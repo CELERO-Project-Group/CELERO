@@ -18,7 +18,7 @@
     </div>
 
   <div class="">
-    <div class="col-md-3">
+    <div class="col-md-6">
         <div class="">Select a Company</div>
           <div class="heightlimit">
           <table style="clear:both; width: 100%;" class="table-hover">
@@ -41,21 +41,19 @@
               </tr>
             <?php endforeach ?>
             </table>
-            </div>
-      <?= form_open_multipart('tuna'); ?>
-      <div class="well" style="margin-top: 20px;">
-        <label for="cluster">Select Cluster</label>
-        <select title="Choose at least one" class="select-block" id="cluster" name="cluster">
-          <option value="0">All of the Companies</option>
-          <?php foreach ($clusters as $cluster): ?>
-            <option value="<?= $cluster['id']; ?>"><?= $cluster['name']; ?></option>
-          <?php endforeach ?>
-        </select>
-        <button type="submit" class="btn btn-primary">Show</button>
       </div>
-      </form>
+      <div style="margin-top:15px;">
+        <div class="swissheader">Detailed information</div>
+
+        <div class="heightlimit" id="info">
+          <div class="alert">Please select a company to see detailed information.</div>
+        </div>
+        <div class="well">
+          Non-exist data will be shown as empty.
+        </div>
+      </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-6">
         <div class="swissheader"><?= $cluster_name['name'];?></div>
         <!-- harita -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.3/dist/leaflet.css" />
@@ -70,14 +68,15 @@
         }
         //print_r($company_array);
         ?>
-        <div id="map" style="height: 650px;"></div>
-        <h4>Selected flow matches</h4>
+        <div id="map" style="height: 450px;"></div>
+        <h4>Selected potential flow matches</h4>
         <table id="addedFlowsTableId" class="table w-100 table-striped">
           <thead>
               <tr>
                   <th>Company Id</th>
                   <th>Flow Id</th>
                   <th>Flow Name</th>
+                  <th>Flow Type</th>
                   <th>Company Name</th>
                   <th>Actions</th> <!-- Actions column added -->
               </tr>
@@ -87,31 +86,12 @@
                   <td colspan="5">No matches added yet</td> <!-- colspan changed to 5 -->
               </tr>
           </tbody>
-          <tfoot>
-              <tr class="send-row" style="display: none;">
-                  <td colspan="5"> <!-- colspan changed to 5 -->
-                      <button class="btn btn-primary">Send to CP Scoping</button>
-                  </td>
-              </tr>
-          </tfoot>
       </table>
 
 
 
     </div>
-    <div class="col-md-4">
-        <div class="swissheader">Detailed information</div>
-
-      <div class="heightlimit" id="info">
-        <div class="alert">Please select a company to see detailed information.</div>
-      </div>
-      <div class="well">
-        Non-exist data will be shown as empty.
-      </div>
-
-<!--       <a class="btn btn-default btn-sm" href="<?= base_url('cluster'); ?>">Add company to a cluster</a>
- -->
-    </div>
+    
   </div>
 </div>
 <script type="text/javascript">
@@ -279,13 +259,14 @@
   };
     var flowId = $(this).data('flow-id');
     var flowName = $(this).data('flow-name');
+    var flowType = $(this).data('flow-type');  // Capture flow type
 
     // Here we use the companyName from companyInfo object
     var companyName = companyInfo.companyName;
     var companyId = companyInfo.companyId;
 
     // Create a new row in "Added Flows" table
-    var newRow = '<tr><td>' + companyId + '</td><td>' + flowId + '</td><td>' + flowName + '</td><td>' + companyName + '</td><td><button class="btn btn-danger remove-row-btn">Remove</button></td></tr></tr>';
+    var newRow = '<tr><td>' + companyId + '</td><td>' + flowId + '</td><td>' + flowName + '</td><td>' + flowType + '</td><td>' + companyName + '</td><td><button class="btn btn-danger remove-row-btn">Remove</button></td></tr></tr>';
 
     // Add the new row to "Added Flows" table
     $('#addedFlowsTableId').append(newRow);
@@ -328,13 +309,14 @@
                 "html":"${flowname}"
               },
               {
-                "tag":"button",
-                "class":"btn btn-primary add-flow-btn btn-sm",
-                "data-flow-id":"${flow_id}",
-                "data-company-id":"${company_info.id}",
-                "data-company-name":"${company_info.name}",
-                "data-flow-name":"${flowname}",
-                "html":"Add to Matches"
+                "tag": "button",
+                "class": "btn btn-primary add-flow-btn btn-sm",
+                "data-flow-id": "${flow_id}",
+                "data-company-id": "${company_info.id}",
+                "data-company-name": "${company_info.name}",
+                "data-flow-name": "${flowname}",
+                "data-flow-type": "${flowtype}",  // Store flow type as a data attribute
+                "html": "Add to Matches"
               }
             ]
           }

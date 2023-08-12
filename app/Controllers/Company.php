@@ -175,25 +175,18 @@ class Company extends BaseController {
 	public function isSelectionWithFlow($flow_id=FALSE){
 		$flow_model = model(Flow_model::class);
 		$company_model = model(Company_model::class);
-		$cluster_model = model(Cluster_model::class);
+		$project_id = $this->session->get('project_id');
 
 		$data['flowlist'] = $flow_model->get_flowname_list();
-		$cluster_id = $this->request->getPost('cluster');
-		if($cluster_id == null || $cluster_id == 0){
-			if(!empty($flow_id)){
-				$data['cluster_name']['name'] = 'All Companies in selected flow';
-				$data['companies'] = [];
-				$data['companies'] = $company_model->get_companies_from_flow($flow_id);
-			}else{
-				$data['cluster_name']['name'] = 'All Companies';
-				$data['companies'] = $company_model->get_companies();
-			}
+
+		if(!empty($flow_id)){
+			$data['cluster_name']['name'] = 'All Companies in selected flow';
+			$data['companies'] = [];
+			$data['companies'] = $company_model->get_project_companies_with_flow($project_id,$flow_id);
+		}else{
+			$data['cluster_name']['name'] = 'All Project Companies';
+			$data['companies'] = $company_model->get_project_companies($project_id);
 		}
-		else{
-			$data['companies'] = $company_model->get_companies_with_cluster($cluster_id);
-			$data['cluster_name'] = $cluster_model->get_cluster_name($cluster_id);
-		}
-		$data['clusters'] = $cluster_model->get_clusters();
 
 		echo view('template/header');
 		echo view('company/isscoping',$data);
