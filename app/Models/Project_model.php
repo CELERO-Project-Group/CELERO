@@ -214,8 +214,6 @@ class Project_model extends Model
         $builder = $db->table('t_prj_cmpny');
         $builder->delete(['prj_id' => $project_id]);
 
-        //deletes the project
-        $builder = $db->table('t_prj');
-        $builder->delete(['prj_id' => $project_id]);
+
     }
 }
