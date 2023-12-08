@@ -26,7 +26,8 @@
         //getEPValues(id,userid);
     }
 </script>
-<div class="col-md-4 borderli" <?php if ($validation == NULL) {
+<?php $validation = \Config\Services::validation() ?>
+<div class="col-md-4 borderli" <?php if ( $validation == NULL) {
     echo "id='gizle'";
 } ?>>
     <?= form_open_multipart('new_flow/' . $companyID); ?>
@@ -173,7 +174,7 @@
         </div>
     </div>
 </div>
-<?php if ($validation == NULL): ?>
+<?php if (\Config\Services::validation() == NULL): ?>
 
 <div class="col-md-12" id="buyukbas">
 
@@ -318,6 +319,7 @@
             //calculates and formats the kilo, Mega and Giga values
             table_trs.each(function (i) {
                 $tds = $(this).find('td');
+
                 var column = 6;
                 if ($tds.length == 17) {
                     column = 5;
