@@ -82,15 +82,31 @@ class Company extends BaseController {
 					'nace_code_id' => $nace_code_id['id']
 				);
 
-				$users = $this->request->getPost('users'); // multiple select , secilen consultant'lar
-
-				foreach ($users as $consultant) {
-					$user = array(
-						'user_id' => $consultant,
-						'cmpny_id' => $last_id,
-						'is_contact' => 0
-					);
-					$company_model->add_worker_to_company($user);	
+				$users = $this->request->getPost('users');
+				
+				if (count($users) > 0) {
+					//one person selected
+					if (count($users) == 1) {
+						// Handle the case when there is only one user
+						$consultant = $users[0];
+						$user = array(
+							'user_id' => $consultant,
+							'cmpny_id' => $last_id,
+							'is_contact' => 0
+						);
+						$company_model->add_worker_to_company($user);
+					} else {
+						//multi person select
+						// Handle the case when there is more than one user
+						foreach ($users as $consultant) {
+							$user = array(
+								'user_id' => $consultant,
+								'cmpny_id' => $last_id,
+								'is_contact' => 0
+							);
+							$company_model->add_worker_to_company($user);
+						}
+					}
 				}
 
 				$companyOwner = array(
