@@ -226,6 +226,7 @@ function miller_column_UBP(){
 function miller_column_nace(){
     $.getJSON("miller-NACE-codes.json", function(json) {
         var nacejson = json;
+        console.log(nacejson);
 
         var $millerCol = $("#miller_col");
         $millerCol.millerColumn({
