@@ -765,12 +765,22 @@ class Dataset extends BaseController {
 
 		$is_consultant = $user_model->is_user_consultant($this->session->id);
 		//only consultants get UBP data (needs to be even stricter in future!)
-		if ($is_consultant) {
-			$url = 'https://reffnetservice.azurewebsites.net/api/LCA/GetAll?parentNr=500&token='.$_ENV['TOKEN'];
+		if ($is_consultant == 1) {
+
+			//$url = 'https://reffnetservice.azurewebsites.net/api/LCA/GetAll?parentNr=500&token='.$_ENV['TOKEN'];
+
+			// concat directly is not really secure. Breaking it and concat it would be safer like here
+			$url = 'https://reffnetservice.azurewebsites.net/api/LCA/GetAll';
+			$queryParams = [
+				'parentNr' => 500,
+				'token' => 'TOKEN'
+			];			
+
+			$url .= '?'. http_build_query($queryParams);
 
 			//Use file_get_contents to GET the URL in question.
 			$contents = file_get_contents($url);
-
+			
 			//Decodes json to check if the UBP data is array and object and to merge if it is possible
 			//Decodes contents
 			$json_EBP = json_decode($contents, true);
@@ -783,7 +793,7 @@ class Dataset extends BaseController {
 				//merges both arrays (from EBP and from EP import)
 				$json = array_merge($json_EBP, $obj);	
 			}
-		}
+		
 
 		#sorts the json by its name values ascending (a to z)
 	    usort($json, function($a, $b) {
@@ -796,7 +806,12 @@ class Dataset extends BaseController {
 		    echo json_encode($json);
 		}
 		else {
-			echo "UBP access failed"; // todo if get json failed, send error
+			echo "UBP access failed";// todo if get json failed, send error
+		}
+
+	}
+		else {
+			echo "UBP access failed. You don't have correct permission to access the data"; // todo if not consultant, send error
 		}
 		
 	}
