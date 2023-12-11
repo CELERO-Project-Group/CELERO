@@ -27,7 +27,7 @@
 
                             
                 <div class="form-group">
-                    <label for="country">Country</label>
+                    <label for="selectize">Country</label>
 					<select id="selectize" name="country">
 						<option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>
 						<?php foreach ($countries as $anc): ?>
