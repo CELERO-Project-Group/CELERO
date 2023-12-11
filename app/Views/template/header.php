@@ -27,6 +27,8 @@
       <script src="/assets/js/jquery-3.3.1.min.js"></script>
       <script src="/assets/js/bootstrap.min.js"></script>
       <script src="/assets/js/miller.js"></script>
+      <script src="/assets/js/selectize.min.js"></script>
+
 
       <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
   </head>
