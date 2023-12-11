@@ -33,22 +33,22 @@
         var marker;
         var lat,lon;
 
-        $('#myModal').on('shown.bs.modal', function (e) {
-            google.maps.event.trigger(map, 'resize'); // modal acildiktan sonra haritanın resize edilmesi gerekiyor.
+        // $('#myModal').on('shown.bs.modal', function (e) {
+        //     google.maps.event.trigger(map, 'resize'); // modal acildiktan sonra haritanın resize edilmesi gerekiyor.
 
-            map.setZoom(4);
-            if(!marker)
-                map.setCenter(new google.maps.LatLng(47.566667, 7.600000));
-            else
-                map.setCenter(marker.getPosition());
+        //     map.setZoom(4);
+        //     if(!marker)
+        //         map.setCenter(new google.maps.LatLng(47.566667, 7.600000));
+        //     else
+        //         map.setCenter(marker.getPosition());
 
-            google.maps.event.addListener(map, 'click', function(event) {
-                $("#latId").val("Lat:" + event.latLng.lat()); $("#longId").val("Long:" + event.latLng.lng());
-                $("#lat").val(event.latLng.lat()); $("#long").val(event.latLng.lng());
-                placeMarker(event.latLng);
-            });
+        //     google.maps.event.addListener(map, 'click', function(event) {
+        //         $("#latId").val("Lat:" + event.latLng.lat()); $("#longId").val("Long:" + event.latLng.lng());
+        //         $("#lat").val(event.latLng.lat()); $("#long").val(event.latLng.lng());
+        //         placeMarker(event.latLng);
+        //     });
 
-        });
+        // });
 
         function placeMarker(location) {
           if ( marker ) {
