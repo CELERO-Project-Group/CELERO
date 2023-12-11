@@ -18,6 +18,10 @@
 
   <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 
+  <!-- Map Library (Leaflet) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
+
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
   <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -28,6 +32,13 @@
   <script src="/assets/js/bootstrap.min.js"></script>
   <script src="/assets/js/selectize.min.js"></script>
   <script src="/assets/js/miller.js"></script>
+  <script src="/assets/js/map.js"></script>
+
+  
+  <!-- <style>
+    #map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
+  </style>   -->
+
 
 
   <!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.0.8/es5-shim.min.js"></script><![endif]-->
