@@ -100,18 +100,16 @@
 	 	</div>
 	</div>
 </div>
-
-<!-- Selectize was not imported -->
-
+//<script src="assets\js\miller.js"></script>
 <script type="text/javascript">
 	
 	$('#selectize').selectize({
 		create: false
 	});
-
 	//js function for miller-coloumn NACE-code selector
 	miller_column_nace();
+
     $(document).ready(function(){
-        $("[rel=tooltip]").tooltip({ placement: 'right' });
-    });
+         $("[rel=tooltip]").tooltip({ placement: 'right' });
+     });
 </script>

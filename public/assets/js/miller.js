@@ -218,47 +218,54 @@ function miller_column_UBP(){
                 if ( $("#myModalEPcalc input#quantity").val() ) {
                     $("#myModalEPcalc input#quantity").trigger('input');
                 }
-            }
+            }2
         }); 
     };
 }
 
+// NACE code selector in "Create Company"
 function miller_column_nace(){
-    $.getJSON("miller-NACE-codes.json", function(json) {
-        var nacejson = json;
-        console.log(nacejson);
-
-        var $millerCol = $("#miller_col");
-        $millerCol.millerColumn({
-            isReadOnly: true,
-            initData: nacejson[0] //level 1 A to U
-        });
-
-        $millerCol.on("item-selected", ".miller-col-list-item", function (event, data) {
-            var newcategory = jQuery.extend(true, {}, nacejson[data.categoryId]);
-
-            if(data.categoryId == 1){
-                level1 = data.itemId;
-            }
-
-            if(data.categoryId < 4){
-                for (i = nacejson[data.categoryId].items.length-1; i >= 0; i--){
-                    if(nacejson[data.categoryId].items[i]["parentId"] != data.itemId){
-                        newcategory.items.splice(i,1);
-                    }
+    $.ajax({
+        url: "assets/js/miller-NACE-codes.json",
+        dataType: 'json',
+        success: function(json) {
+            var nacejson = json;
+    
+            var $millerCol = $("#miller_col");
+            $millerCol.millerColumn({ 
+                isReadOnly: true,
+                initData: nacejson[0] // level 1 A to U
+            });
+    
+            $millerCol.on("item-selected", ".miller-col-list-item", function (event, data) {
+                var newcategory = jQuery.extend(true, {}, nacejson[data.categoryId]);
+    
+                if (data.categoryId == 1) {
+                    level1 = data.itemId;
                 }
-                $("input#naceCode").val("");
-                $("input#naceCode").css({'background-color' : '#f4f6f6'})
-                $millerCol.millerColumn("addCol", newcategory);
-
-            } else{
-                var nacecode = "";
-                nacecode = level1+"."+data.itemId;
-                $("input#naceCode").val(nacecode);
-                $("input#naceCode").css({'background-color' : '#bdffa9'})
-            }
-        }); 
+    
+                if (data.categoryId < 4) {
+                    for (i = nacejson[data.categoryId].items.length - 1; i >= 0; i--) {
+                        if (nacejson[data.categoryId].items[i]["parentId"] != data.itemId) {
+                            newcategory.items.splice(i, 1);
+                        }
+                    }
+                    $("input#naceCode").val("");
+                    $("input#naceCode").css({'background-color': '#f4f6f6'});
+                    $millerCol.millerColumn("addCol", newcategory);
+                } else {
+                    var nacecode = "";
+                    nacecode = level1 + "." + data.itemId;
+                    $("input#naceCode").val(nacecode);
+                    $("input#naceCode").css({'background-color': '#bdffa9'});
+                }
+            });
+        },
+        error: function() {
+            console.error("Failed to load JSON data");
+        }
     });
+    
 }
 
 
