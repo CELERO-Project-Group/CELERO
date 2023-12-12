@@ -16,7 +16,7 @@
 	    			<input type="text" class="form-control" id="projectName" placeholder="<?= lang("Validation.name"); ?>" value="<?= set_value('projectName',$projects['name']); ?>" name="projectName">
 	 			</div>
 	 			<div class="form-group">
-	 				<label for="datePicker"><?= lang("Validation.startdate"); ?></label>
+	 				<label for="datepicker-01"><?= lang("Validation.startdate"); ?></label>
 	    			<div class="input-group">
 				    	<span class="input-group-btn">
 				      		<button class="btn" type="button" style="height: 38px; border: 1px solid;"><span class="fui-calendar"></span></button>
@@ -39,7 +39,7 @@
 	    			<textarea class="form-control" rows="3" name="description" id="description" placeholder="Description" value=""><?= set_value('description',$projects['description']); ?></textarea>
 	 			</div>
 	 			<div class="form-group">
-	    			<label for="assignedCompanies"><?= lang("Validation.assigncompany"); ?></label>
+	    			<label for="assignCompany"><?= lang("Validation.assigncompany"); ?></label>
 	    			<!--  <input type="text" id="companySearch" />	-->
 
 	    			<select multiple="multiple"  class="select-block" id="assignCompany" name="assignCompany[]">
@@ -50,7 +50,7 @@
 					</select>
 	 			</div>
 	 			<div class="form-group">
-	    			<label for="assignedConsultant"><?= lang("Validation.assignconsultant"); ?></label>
+	    			<label for="assignConsultant"><?= lang("Validation.assignconsultant"); ?></label>
 	    			<select multiple="multiple" class="select-block" id="assignConsultant" name="assignConsultant[]">
 
 						<?php foreach ($consultants as $consultant): ?>
@@ -59,14 +59,15 @@
 					</select>
 	 			</div>
 	 			<div class="form-group">
-	    			<label for="assignContactPerson"><?= lang("Validation.assigncontact"); ?></label>
-	    			<select  class="select-block" id="assignContactPerson" name="assignContactPerson">
+	    			<label for="assignedContactperson"><?= lang("Validation.assigncontact"); ?></label>
+	    			<select  class="select-block" id="assignedContactperson" name="assignedContactperson">
 	    			<?php foreach ($contactusers as $contacts): ?>
 	    			<?php foreach ($contacts as $contactuser): ?>
 							<option value="<?= $contactuser['id']; ?>"<?php if(in_array($contactuser['id'], $contactIDs)) echo 'selected';?>  ><?= $contactuser['name'].' '.$contactuser['surname'].' ('.$contactuser['cmpny_name'].')'; ?></option>
 						<?php endforeach ?>
 							<?php endforeach ?>
 					</select>
+					<!-- <?php print_r($contacts);?> -->
 	 			</div>
 	 			<br>
 				<button type="submit" class="btn btn-inverse col-md-9"><?= lang("Validation.save"); ?></button>

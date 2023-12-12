@@ -65,7 +65,8 @@ class User_model extends Model
 		$builder->join('t_user', 't_user.id = t_cmpny_prsnl.user_id');
 		$builder->where('t_cmpny_prsnl.cmpny_id', $cmpny_id);
 		$query = $builder->get();
-		if ($query->getFieldCount() > 0) {
+		print_r($query);
+		if ($query->getFieldCount() >= 0) {
 			return $query->getResultArray();
 		} else {
 			return false;

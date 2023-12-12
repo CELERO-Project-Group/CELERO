@@ -320,18 +320,19 @@ class Company extends BaseController {
 	public function addUsertoCompany($term){
 		$user_model = model(User_model::class);
 		$company_model = model(Company_model::class);
-
 		$session = session();
-		
+		print_r($session->id);
+
 		$userId = $session->id;
 		if(!$user_model->can_edit_company($userId,$term)){
 			//redirect(base_url(),'refresh');
 			return redirect()->to(base_url());
 		}
-
+		
 		//$this->form_validation->set_rules('users','User','required|callback_check_companyuser['.$term.']');
 		if ($this->form_validation->run() !== FALSE) 
 		{
+			echo "IT'S GOING IN HERE";
 			$user = array(
 				'user_id' => $this->request->getPost('users'),
       			'cmpny_id' => $term,
