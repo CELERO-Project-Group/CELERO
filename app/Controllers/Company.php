@@ -166,11 +166,6 @@ class Company extends BaseController {
 			return redirect()->to(site_url());
 		}
 
-		/* codeignite 3
-		$company_model = model(Company_model::class);
-		$cluster_model = model(Cluster_model::class);
-		$user_model    = model(User_model::class);
-		*/
 		$company_model = model(Company_model::class);
         $cluster_model = model(Cluster_model::class);
         $user_model    = model(User_model::class);
