@@ -45,7 +45,7 @@
 </head>
 
 <body>
-
+  <div id="page-container">
   <nav class="navbar navbar-default navbar-lg" style="margin-bottom:0px;">
     <a class="navbar-brand" href="<?= base_url(); ?>" style="color:white;">CELERO</a>
     <form class="navbar-form navbar-right" action="<?= base_url('search'); ?>" method="post" role="search"
@@ -80,6 +80,7 @@
     </ul>
   </nav>
 
+  
   <div class="content-container" style="margin-bottom: 20px;display: block;height: 52px;">
 
     <ul id="about" class="nav navbar-nav alt-nav" style="display:none;">
@@ -267,6 +268,8 @@
 
   </div>
   <div class="clearfix" style="margin-bottom: 10px;"></div>
+
+  <div id="content-wrap">
 
   <script type="text/javascript">
     var project_durum = <?php if (isset(session()->project_id)) {
