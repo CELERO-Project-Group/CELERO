@@ -22,34 +22,7 @@ class Company extends BaseController {
 			
 			return redirect()->to(site_url());
 		}
-	
-		/*echo library('googlemaps');
-		//alert("1:" + event.latLng.lat() + " 2:" + event.latLng.lng());
-		$config['center'] = '47.566667, 7.600000'; //Basel (at center of europe)
-		$config['zoom'] = '4';
-		$config['map_type'] = "HYBRID";
-		$config['onclick'] = '$("#latId").val("Lat:" + event.latLng.lat()); $("#longId").val("Long:" + event.latLng.lng()); $("#lat").val(event.latLng.lat()); $("#long").val(event.latLng.lng());';
-		$config['places'] = TRUE;
-		$config['placesRadius'] = 20;
-		$this->googlemaps->initialize($config);
-
-		$data['map'] = $this->googlemaps->create_map();*/
-		
 		if(!empty($this->request->getPost())){
-
-			
-			/*$this->form_validation->set_rules('companyName', 'Company Name', 'required|trim|xss_clean|mb_strtolower|max_length[254]|is_unique[t_cmpny.name]');
-		$this->form_validation->set_rules('naceCode', 'Nace Code', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('companyDescription', 'Company Description', 'required|trim|xss_clean|max_length[200]');
-		$this->form_validation->set_rules('email', 'E-mail', 'required|trim|max_length[150]|xss_clean');
-		//$this->form_validation->set_rules('cellPhone', 'Cell Phone Number', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('workPhone', 'Work Phone Number', 'required|trim|max_length[49]|xss_clean');
-		$this->form_validation->set_rules('fax', 'Fax Number', 'trim|max_length[49]|xss_clean');
-		$this->form_validation->set_rules('address', 'Address', 'required|trim|xss_clean|max_length[100]');
-		$this->form_validation->set_rules('lat', 'Coordinates Latitude', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('long', 'Coordinates Longitude', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('users', 'Company User', 'trim|xss_clean');
-		*/
 			if ($this->validate([
 				'companyName'  => [
 					'rules' =>'trim|required|alpha_numeric_space|min_length[5]|max_length[50]|is_unique[t_cmpny.name]',
@@ -132,6 +105,7 @@ class Company extends BaseController {
 				$company_model->insert_cmpny_prsnl($companyOwner);
 				$company_model->insert_cmpny_nace_code($cmpny_nace_code);
 
+				return redirect()->to("company/$companyOwner[cmpny_id]");
 				}
 		}
 
