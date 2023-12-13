@@ -25,7 +25,7 @@
 	 			</div>
 
 	 			<div class="form-group">
-	 				<label for="datePicker"><?= lang("Validation.startdate"); ?> <span class="small" style="color:gray;">Optional</span></label>
+	 				<label for="datepicker-01"><?= lang("Validation.startdate"); ?> <span class="small" style="color:gray;">Optional</span></label>
 	    			<div class="input-group">
 				    	<span class="input-group-btn">
 				      		<button class="btn" type="button" style="height: 38px; border: 1px solid;"><span class="fui-calendar"></span></button>
@@ -52,7 +52,7 @@
 	 			</div>
 
 	 			<div class="form-group">
-	    			<label for="assignedCompanies"><?= lang("Validation.assigncompany"); ?> <span class="small" style="color:red;">*Required</span></label>
+	    			<label for="assignCompany"><?= lang("Validation.assigncompany"); ?> <span class="small" style="color:red;">*Required</span></label>
 	    			<!--  <input type="text" id="companySearch" />	-->
                     <i class="fa fa-info-circle" title="Choose the Companies you want to analyse in this Project."></i>
 
@@ -64,7 +64,7 @@
 					</select>
 	 			</div>
 	 			<div class="form-group">
-	    			<label for="assignedConsultant"><?= lang("Validation.assignconsultant"); ?> <span class="small" style="color:red;">*Required</span></label>
+	    			<label for="assignConsultant"><?= lang("Validation.assignconsultant"); ?> <span class="small" style="color:red;">*Required</span></label>
                     <i class="fa fa-info-circle" title="Choose the corresponding consultants to the Project. They will have full access to this project."></i>
 
                     <select multiple="multiple"  title="Choose at least one" class="select-block" id="assignConsultant" name="assignConsultant[]">

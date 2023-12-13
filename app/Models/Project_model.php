@@ -203,17 +203,18 @@ class Project_model extends Model
     {
         $db = db_connect();
 
-        $builder = $db->table('t_prj_cnsltnt');
-        $builder->delete(['prj_id' => $project_id]);
+        function deleteFromTable($db, $table, $project_id){
+            $builder = $db->table($table);
 
-        //deletes the linked consultants
-        $builder = $db->table('t_prj_cnsltnt');
-        $builder->delete(['prj_id' => $project_id]);
+            $column = $table == 't_prj' ? 'id' : 'prj_id';
 
-        //deletes the linked companies
-        $builder = $db->table('t_prj_cmpny');
-        $builder->delete(['prj_id' => $project_id]);
+            $builder->where($column, $project_id);
+            $builder->delete();
+        }
 
+        deleteFromTable($db,'t_prj_cnsltnt',$project_id);
+        deleteFromTable($db,'t_prj_cmpny',$project_id );
+        deleteFromTable($db,'t_prj',$project_id );
 
     }
 }
