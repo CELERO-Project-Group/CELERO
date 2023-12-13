@@ -51,12 +51,41 @@ class Company extends BaseController {
 		$this->form_validation->set_rules('users', 'Company User', 'trim|xss_clean');
 		*/
 			if ($this->validate([
-				'companyName'  => 'trim|required|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_cmpny.name]',
-				'naceCode'  => 'trim|required',
-				'companyDescription' => 'required|trim|max_length[200]',
-				'email' => 'required|valid_email',
-				'workPhone' => 'required'
-			]))
+				'companyName'  => [
+					'rules' =>'trim|required|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_cmpny.name]',
+					'label' => 'Company Name'],
+
+				'naceCode'  =>
+				['rules' => 'trim|required',
+				'label' => 'NACE Code'],
+
+				'country' =>
+				['rules' => 'required',
+				'errors' => [
+					        'required' => 'Country is not selected']],
+
+				'email' =>
+				['rules' => 'required|valid_email'],
+
+				'workPhone' =>
+				['rules' => 'required',
+				'label' => 'Work Phone'],
+
+				'lat' =>
+				['rules' => 'required',
+				'errors' => [
+					'required' => 'Location is not selected on the map']],
+	
+				'companyDescription' =>
+				['rules' => 'required|trim|max_length[200]',
+				'label' => 'Company Description'],
+
+				'users' =>
+				['rules' => 'required',
+				'errors' => [
+					'required' => 'Consultant is not selected']],
+				]
+				))
 			{
 
 				$data = array(
@@ -85,19 +114,28 @@ class Company extends BaseController {
 				$users = $this->request->getPost('users');
 				
 				if (count($users) > 0) {
-					//one person selected
-					if (count($users) == 1) {
-						// Handle the case when there is only one user
-						$consultant = $users[0];
-						$user = array(
-							'user_id' => $consultant,
-							'cmpny_id' => $last_id,
-							'is_contact' => 0
-						);
-						$company_model->add_worker_to_company($user);
-					} else {
-						//multi person select
-						// Handle the case when there is more than one user
+					//at least one person selected
+					// if (count($users) == 1) {
+					// 	// Handle the case when there is only one user
+					// 	$consultant = $users[0];
+					// 	$user = array(
+					// 		'user_id' => $consultant,
+					// 		'cmpny_id' => $last_id,
+					// 		'is_contact' => 0
+					// 	);
+					// 	$company_model->add_worker_to_company($user);
+					// } else {
+					// 	//multi person select
+					// 	// Handle the case when there is more than one user
+					// 	foreach ($users as $consultant) {
+					// 		$user = array(
+					// 			'user_id' => $consultant,
+					// 			'cmpny_id' => $last_id,
+					// 			'is_contact' => 0
+					// 		);
+					// 		$company_model->add_worker_to_company($user);
+					// 	}
+					// }
 						foreach ($users as $consultant) {
 							$user = array(
 								'user_id' => $consultant,
@@ -106,7 +144,10 @@ class Company extends BaseController {
 							);
 							$company_model->add_worker_to_company($user);
 						}
-					}
+				}
+
+				else {
+					echo "HEllo maybe you are interested";
 				}
 
 				$companyOwner = array(
