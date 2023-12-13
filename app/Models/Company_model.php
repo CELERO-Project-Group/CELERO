@@ -87,7 +87,7 @@ class Company_model extends Model
         return $query->getResultArray();
     }
 
-    
+
     public function get_project_companies_with_flow($project_id, $flow_id = null)
     {
         $db = db_connect();
@@ -96,26 +96,26 @@ class Company_model extends Model
         $builder->join('t_cmpny_flow', 't_cmpny_flow.cmpny_id = t_cmpny.id');
         $builder->join('t_prj_cmpny', 't_prj_cmpny.cmpny_id = t_cmpny.id');
         $builder->where('t_prj_cmpny.prj_id', $project_id);
-    
+
         if ($flow_id !== null) {
             if (strpos($flow_id, "-") !== false) {
                 $flow_array = explode('-', $flow_id);
                 foreach ($flow_array as $fi) {
                     $builder->where(['t_cmpny_flow.flow_id' => $fi, 't_prj_cmpny.prj_id' => $project_id]);
                 }
-                
+
             } else {
                 $builder->where('t_cmpny_flow.flow_id', $flow_id);
             }
         }
-    
+
         $builder->orderBy('name', 'asc');
         $builder->distinct();
-    
+
         $query = $builder->get();
         return $query->getResultArray();
     }
-    
+
 
 
     public function get_company($id)
@@ -190,7 +190,7 @@ class Company_model extends Model
             foreach ($query->getResultArray() as $row) {
                 $new_row['label'] = htmlentities(stripslashes($row['name']));
                 $new_row['value'] = htmlentities(stripslashes($row['id']));
-                $row_set[]        = $new_row; //build an array
+                $row_set[] = $new_row; //build an array
             }
             return json_encode($row_set); //format the array into json data
         }
@@ -248,12 +248,12 @@ class Company_model extends Model
     }
 
     public function update_cmpny_prsnl($user_id, $cmpny_id, $data)
-    {        
+    {
         $db = db_connect();
-		$builder = $db->table('t_cmpny_prsnl');
-		$builder->where('user_id', $user_id);
-        $builder->where('cmpny_id', $cmpny_id);   
-		$builder->update($data);
+        $builder = $db->table('t_cmpny_prsnl');
+        $builder->where('user_id', $user_id);
+        $builder->where('cmpny_id', $cmpny_id);
+        $builder->update($data);
     }
 
     public function return_email($id)
@@ -371,67 +371,52 @@ class Company_model extends Model
     }
 
     //company delete model
-    // TODO
     public function delete_company($cmpny_id)
     {
         $db = db_connect();
-        
+
+        function deleteFromTable($db, $table, $cmpny_id, $nested = false, $nestedField = '', $nestedTable = '')
+        {
+            // Check if the table exists
+            if ($db->tableExists($table)) {
+                // Deletes the company from the table
+                $builder = $db->table($table);
+                // the last query execution has nit cmpny_id as a name but id
+                $column = $table == 't_cmpny' ? 'id' : 'cmpny_id';
+                if ($nested) {
+                    $builder->select('id');
+                    $builder->where($column, $cmpny_id);
+                    $query = $builder->get()->getResultArray();
+                    if (!empty($query)) {
+                        $builder = $db->table($nestedTable);
+                        $builder->whereIn($nestedField, $query);
+                        $builder->delete();
+                    }
+                } else {
+                    $builder->where($column, $cmpny_id);
+                    $builder->delete();
+                }
+            } 
+        }
+
         //deletes the company from clusters table
-        $builder = $db->table('cmpny_id');
-        $builder->where('cmpny_id', $cmpny_id);
-        $builder->delete();
-
+        deleteFromTable($db, 'cmpny_id', $cmpny_id);
         //deletes the company from NACE codes table
-        $builder = $db->table('t_cmpny_nace_code');
-        $builder->where('cmpny_id', $cmpny_id);
-        $builder->delete();
-
+        deleteFromTable($db, 't_cmpny_nace_code', $cmpny_id);
         //deletes the company from t_cmpny_prsnl table
-        $builder = $db->table('t_cmpny_prsnl');
-        $builder->where('cmpny_id', $cmpny_id);
-        $builder->delete();
-        
+        deleteFromTable($db, 't_cmpny_prsnl', $cmpny_id);
         //deletes the company from project table
-        $builder = $db->table('t_prj_cmpny');
-        $builder->where('cmpny_id', $cmpny_id);
-        $builder->delete();
-
+        deleteFromTable($db, 't_prj_cmpny', $cmpny_id);
         //deletes the company from company flow component table
-        $builder = $db->table('t_cmpnnt');
-        $builder->select('id');
-        $builder->where('cmpny_id', $cmpny_id);
-        $query = $builder->get()->getResultArray();
-        if (!empty($query)) {
-            $builder = $db->table('t_cmpny_flow_cmpnnt');
-            $builder->whereIn('cmpnnt_id', $query);
-            $builder->delete();
-        }
-
-        // //deletes the company from component table
-        $builder = $db->table('t_cmpnnt');
-        $builder->where('cmpny_id', $cmpny_id);
-        $builder->delete();
-
+        deleteFromTable($db, 't_cmpnnt', $cmpny_id, true, 'cmpnnt_id', 't_cmpny_flow_cmpnnt');
+        //deletes the company from component table
+        deleteFromTable($db, 't_cmpnnt', $cmpny_id);
         //deletes the company from company process equipment table
-        $builder = $db->table('t_cmpny_eqpmnt');
-        $builder->select('id');
-        $builder->where('cmpny_id', $cmpny_id);
-        $query = $builder->get()->getResultArray();
-        if (!empty($query)) {
-            $builder = $db->table('t_cmpny_prcss_eqpmnt_type');
-            $builder->whereIn('cmpny_eqpmnt_type_id', $query);
-            $builder->delete();
-        }
-
+        deleteFromTable($db, 't_cmpny_eqpmnt', $cmpny_id, true, 'cmpny_eqpmnt_type_id', 't_cmpny_prcss_eqpmnt_type');
         //deletes the company from equipment table
-        $builder = $db->table('t_cmpny_eqpmnt');
-        $builder->where('cmpny_id', $cmpny_id);
-        $builder->delete();
-
+        deleteFromTable($db, 't_cmpny_eqpmnt', $cmpny_id);
         //deletes the company from company table
-        $builder = $db->table('t_cmpny');
-        $builder->where('id', $cmpny_id);
-        $builder->delete();
-        
+        deleteFromTable($db, 't_cmpny', $cmpny_id);
+
     }
 }
