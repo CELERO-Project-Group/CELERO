@@ -66,11 +66,21 @@ class Project extends BaseController{
 
 		if(!empty($this->request->getPost())){
 			if ($this->validate([
-				'projectName'  => 'trim|required|max_length[200]|is_unique[t_prj.name]',
-				'description'  => 'trim|required|max_length[200]',
-				'assignCompany' => 'required',
-				'assignConsultant' => 'required',
-				'assignContactPerson' => 'required'
+				'projectName'  => [
+					'rules' => 'trim|required|max_length[200]|is_unique[t_prj.name]',
+				'label' => 'Project Name'],
+				'description'  => [
+					'rules' => 'trim|required|max_length[200]',
+				'label' => 'Description'],
+				'assignCompany' => [
+					'rules' => 'required',
+				'label' => 'Assign Company'],
+				'assignConsultant' => [
+					'rules' => 'required',
+				'label' => 'Assign Consultant'],
+				'assignContactPerson' => [
+					'rules' => 'required',
+					'label' => 'Assign Contact Person']
 			]))
 			{
 				$project = array(
@@ -378,11 +388,13 @@ class Project extends BaseController{
 	}
 
 	public function addConsultantToProject($term){
+	
 		$project_model = model(Project_model::class);
-
-		$kullaniciID = $this->session->id;
-		if(!$project_model->can_update_project_information($kullaniciID,$term)){
-			redirect(base_url(),'refresh');
+		$session = session();
+		$user_id = $this->$session->id;
+		if(!$project_model->can_update_project_information($user_id,$term)){
+	
+			return redirect()->to(base_url());
 		}
 
 		$this->form_validation->set_rules('users','User','required|callback_check_consultant['.$term.']');
