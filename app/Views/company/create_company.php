@@ -37,11 +37,11 @@
 						</div>
 					</div>
 				</div>
-
-
 				<div class="form-group">
-					<label for="selectize">Country</label>
-					<select id="selectize" name="country">
+					<label for="country">
+						<?= lang("Validation.country");?>
+					</label>
+					<select id="country" name="country" class="select-block" data-live-search="true">
 						<option value="" disabled selected>
 							<?= lang("Validation.pleaseselect"); ?>
 						</option>
@@ -49,7 +49,8 @@
 							<option value="<?= $anc; ?>">
 								<?= $anc; ?>
 							</option>
-						<?php endforeach ?>
+						<?php endforeach ?> 
+		
 					</select>
 					<small></small>
 				</div>
@@ -182,9 +183,10 @@
 
 <script type="text/javascript">
 
-	$('#selectize').selectize({
-		create: false
-	});
+	// $('#country').selectize({
+	// 	create: false
+	// });
+
 	//js function for miller-coloumn NACE-code selector
 	miller_column_nace();
 
