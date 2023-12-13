@@ -13,7 +13,7 @@
 
 		    	<div class="form-group">
 					<label for="username"><?= lang("Validation.username"); ?></label>
-					<input type="text" class="form-control" id="username" autocomplete="off" value="<?= set_value('username'); ?>" placeholder="<?= lang("Validation.username"); ?>" name="username">
+					<input type="text" class="form-control" id="username" autocomplete="off" value="<?= set_value('username'); ?>" placeholder="<?= lang("Validation.username"); ?>" name="username" autofocus>
 				</div>
 				<div class="form-group">
 					<label for="password"><?= lang("Validation.password"); ?></label>
