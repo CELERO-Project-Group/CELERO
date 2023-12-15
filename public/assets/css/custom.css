@@ -546,3 +546,7 @@ pre p {
 .content2{
     padding: 15px;
 }
+
+.col-space{
+    padding: 0 25px 0 25px;
+}
