@@ -14,6 +14,8 @@
   <link href="/assets/css/custom.css" rel="stylesheet">
   <link href="/assets/css/selectize.css" rel="stylesheet">
   <link href="/assets/css/miller.css" rel="stylesheet">
+  
+  <link href="/assets/css/easyui-tuna.css" rel="stylesheet">
 
 
   <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
@@ -33,6 +35,7 @@
   <script src="/assets/js/selectize.min.js"></script>
   <script src="/assets/js/miller.js"></script>
   <script src="/assets/js/map.js"></script>
+  <script src="/assets/js/easy-ui-1.4.2.js"></script>
 
   
   <!-- <style>
