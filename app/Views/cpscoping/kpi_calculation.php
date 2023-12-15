@@ -5,10 +5,10 @@ $uri = service('uri');
 <?php if (!empty($kpi_values)): ?>
 	<div class="row">
 		<div class="col-md-12" style="margin-bottom: 10px;">
-			<a class="btn btn-inverse btn-sm"
+			<!-- <a class="btn btn-inverse btn-sm"
 				href="<?= base_url('cpscoping/' . $uri->getSegment(2) . '/' . $uri->getSegment(3) . '/show'); ?>">
 				<?= lang("Validation.gotocp"); ?>
-			</a>
+			</a> -->
 			<a href="<?= base_url('new_flow/' . $uri->getSegment(3)); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga">
 				<?= lang("Validation.gotodataset"); ?>
 			</a>
