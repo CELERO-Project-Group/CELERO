@@ -17,7 +17,7 @@
     <input type="button" onclick="clearFilteredFlows()" value="Clear Selected" />
   </div>
 
-  <div class="">
+  <div class="row">
     <div class="col-md-6">
       <div class="">Select a Company</div>
       <div class="heightlimit">
