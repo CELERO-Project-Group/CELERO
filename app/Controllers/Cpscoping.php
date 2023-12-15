@@ -1,6 +1,13 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\User_model;
+use App\Models\Project_model;
+use App\Models\Cpscoping_model;
+use App\Models\Product_model;
+use App\Models\Flow_model;
+use App\Models\Process_model;
+use App\Models\Company_model;
 
 class Cpscoping extends BaseController {
 	
