@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\Company_model;
+use App\Models\Cpscoping_model;
+use App\Models\Project_model;
 
 class Cost_benefit extends BaseController
 {
