@@ -346,9 +346,11 @@ class Company extends BaseController {
 		$session = session();
 		
 		$userId = $session->id;
+
+		//TODO change the redirect to something like "you don't have the rights to do this!"
 		if(!$user_model->can_edit_company($userId,$term)){
 			// redirect(base_url(),'refresh');
-			return redirect()->to(base_url());
+			return redirect()->to(site_url('company/'.$term));
 		}
 
 		$user = array(
