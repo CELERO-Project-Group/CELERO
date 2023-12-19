@@ -242,6 +242,8 @@ class Project extends BaseController{
 			return redirect()->to(site_url('myprojects'));
 		}
 
+	
+
 		$data['projects'] = $project_model->get_project($prjct_id);
 		$data['companies'] = $company_model->get_companies();
 		$data['consultants'] = $user_model->get_consultants();
@@ -258,37 +260,29 @@ class Project extends BaseController{
 		}
 		$data['companyIDs']=$companyIDs;
 
-		//debug
-		echo "companyIDs";
-		print_r($data['companyIDs']);
+		// //debug
+		// echo "companyIDs";
+		// print_r($data['companyIDs']);
 
 		$consultantIDs = array();
 		foreach ($data['assignedConsultant'] as $key) { // bu k�s�mda sadece id lerden olusan array i al�yorum
 			$consultantIDs[] = $key['id'];
 		}
 		$data['consultantIDs']=$consultantIDs;
-
+	
 	
 		$contactIDs = array();
 		foreach ($data['assignedContactperson'] as $key) { // bu k�s�mda sadece id lerden olusan array i al�yorum
 			$contactIDs[] = $key['id'];
 		}
 		$data['contactIDs']=$contactIDs;
-
-		//debug
-		echo "contactIDs";
-		print_r($data['contactIDs']);
-
 		$contactusers = array();
 		foreach ($companyIDs as $cmpny_id) {
 			$contactusers[]= $user_model->get_company_users($cmpny_id);
 		}
+		
 		$data['contactusers']= $contactusers;
 
-		//debug
-		echo "<br/>";
-		echo "contactusers";
-		print_r($data['contactusers']);
 
 		if(!empty($this->request->getPost())){
 			if ($this->validate([
@@ -301,7 +295,7 @@ class Project extends BaseController{
 			{
 
 			date_default_timezone_set('UTC');
-
+			
 			$project = array(
 				'id'=>$prjct_id,
 				'name'=>$this->request->getPost('projectName'),
@@ -336,6 +330,7 @@ class Project extends BaseController{
 					);
 				$project_model->insert_project_consultant($prj_cnsltnt);
 			}
+			
 
 			$project_model->remove_contactuser_from_project($prjct_id);
 
