@@ -13,15 +13,15 @@
  		var cmpny_id = "<?= $allocation['cmpny_id']; ?>";
 
 		//get other allocation data for a selected flow and flow type
-		$.ajax({ 
+		$.ajax({
 			type: "POST",
 			dataType:'json',
-			url: '<?= base_url('cpscoping/allocated_table'); ?>/'+flow_id+'/'+flow_type_id+'/'+cmpny_id+'/'+process_id+'/'+project_id, 
+			url: '<?= base_url('cpscoping/allocated_table'); ?>/'+flow_id+'/'+flow_type_id+'/'+cmpny_id+'/'+process_id+'/'+project_id,
 			success: function(data)
 			{
 				var vPool="";
 				for (var i = 0; i < data.length; i++) {
-					
+
 					vPool += '<div class="col-md-4"><table style="width:100%;"><tr><td colspan="3" style="height:60px;"><?= lang("Validation.process"); ?>: ' + data[i].prcss_name + '</td></tr><tr><td><?= lang("Validation.amount"); ?></td><td>' + data[i].amount + ' ' + data[i].unit_amount + ' <span class="label label-info">' + data[i].error_amount + '%</span></td><td style="width:70px;"><?= lang("Validation.accuracyrate"); ?>: '+data[i].allocation_amount+'%</td></tr><tr><td><?= lang("Validation.cost"); ?></td><td>' + data[i].cost + ' ' + data[i].unit_cost + ' <span class="label label-info">' + data[i].error_cost + '%</span></td><td style="width:70px;"><?= lang("Validation.accuracyrate"); ?>: '+data[i].allocation_cost+'%</td></tr><tr><td><?= lang("Validation.ep"); ?></td><td>' + data[i].env_impact + ' ' + data[i].unit_env_impact + ' <span class="label label-info">' + data[i].error_ep + '%</span></td><td style="width:70px;"><?= lang("Validation.accuracyrate"); ?>: '+data[i].allocation_env_impact+'%</td></tr></table></div>';
 					//alert(data);
 
@@ -167,11 +167,11 @@
 				<div class="col-md-6">
 					<input type="text" value="<?= set_value('kpidef',$allocation['kpidef']); ?>" class="form-control" id="kpidef" placeholder="<?= lang("Validation.kpidef"); ?>" name="kpidef">
 				</div>
-				
+
 			</div>
 			<div>
 				<button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> <?= lang("Validation.savedata"); ?></button>
-				<a href="<?= base_url('cpscoping'); ?>" class="btn btn-default" style="float: right;"><i class="fa fa-ban" ></i> <?= lang("Validation.cancel"); ?></a>
+				<a href="<?=base_url('allocationlist'.'/'.session()->project_id.'/'.$allocation['cmpny_id']); ?>" class="btn btn-default" style="float: right;"><i class="fa fa-ban" ></i> <?= lang("Validation.cancel"); ?></a>
 			</div>
 			<div style="margin-top:30px;"><?= lang("Validation.alloheading5"); ?></div>
 			<hr>
@@ -187,7 +187,7 @@
 <script type="text/javascript">
 	$("#amount").change(hesapla);
 	$("#reference").change(hesapla);
-	function hesapla() { 
+	function hesapla() {
 		$("#kpi").val(Number(($("#amount").val()/$("#reference").val()).toFixed(5)));
 	}
 	$("#unit_amount").change(unit_hesapla);

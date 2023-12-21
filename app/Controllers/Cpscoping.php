@@ -356,36 +356,36 @@ class Cpscoping extends BaseController {
 // 		echo json_encode($data);
 // 	}
 
-// 	public function get_already_allocated_allocation_except_given($flow_id,$flow_type_id,$cmpny_id,$process_id,$prjct_id){
-// 		$cpscoping_model = model(Cpscoping_model::class);
-// 		$array = $cpscoping_model->get_process_id_from_flow_and_type($flow_id,$flow_type_id,$prjct_id);
-// 		$tumprocessler = array();
-// 		foreach ($array as $key => $a) {
-// 			if($process_id!==$a['prcss_id']){
-// 				$procesler = $cpscoping_model->get_process_from_allocatedpid_and_cmpny_id($a['prcss_id'],$cmpny_id);
-// 				if(!empty($procesler)){
-// 					$tumprocessler[$key] = $procesler;
-// 					$tumprocessler[$key]['allocation_id']=$a['id'];
-// 					$tumprocessler[$key]['allo_prcss_id']=$a['prcss_id'];
-// 				}
-// 			}
-// 		}
+	public function get_already_allocated_allocation_except_given($flow_id,$flow_type_id,$cmpny_id,$process_id,$prjct_id){
+		$cpscoping_model = model(Cpscoping_model::class);
+		$array = $cpscoping_model->get_process_id_from_flow_and_type($flow_id,$flow_type_id,$prjct_id);
+		$tumprocessler = array();
+		foreach ($array as $key => $a) {
+			if($process_id!==$a['prcss_id']){
+				$procesler = $cpscoping_model->get_process_from_allocatedpid_and_cmpny_id($a['prcss_id'],$cmpny_id);
+				if(!empty($procesler)){
+					$tumprocessler[$key] = $procesler;
+					$tumprocessler[$key]['allocation_id']=$a['id'];
+					$tumprocessler[$key]['allo_prcss_id']=$a['prcss_id'];
+				}
+			}
+		}
 
-// 		$allocated_processler = array();
-// 		foreach ($tumprocessler as $t) {
-// 			$allocated_processler[]=$cpscoping_model->get_allocation_from_allocation_id($t['allocation_id']);
-// 		}
+		$allocated_processler = array();
+		foreach ($tumprocessler as $t) {
+			$allocated_processler[]=$cpscoping_model->get_allocation_from_allocation_id($t['allocation_id']);
+		}
 
-// 		header("Content-Type: application/json", true);
-// 		echo json_encode($allocated_processler);
-// 	}
+		header("Content-Type: application/json", true);
+		echo json_encode($allocated_processler);
+	}
 
-// 	public function get_only_given_full($flow_id,$flow_type_id,$cmpny_id,$process_id){
-// 		$flow_model = model(Flow_model::class);
-// 		$result = $flow_model->get_company_flow($cmpny_id,$flow_id,$flow_type_id);
-// 		header("Content-Type: application/json", true);
-// 		echo json_encode($result);
-// 	}
+	public function get_only_given_full($flow_id,$flow_type_id,$cmpny_id,$process_id){
+		$flow_model = model(Flow_model::class);
+		$result = $flow_model->get_company_flow($cmpny_id,$flow_id,$flow_type_id);
+		header("Content-Type: application/json", true);
+		echo json_encode($result);
+	}
 
 // 	public function get_allo_from_fname_pname($flow_id,$process_id,$cmpny_id,$input_output,$prjct_id){
 // 		$cpscoping_model = model(Cpscoping_model::class);

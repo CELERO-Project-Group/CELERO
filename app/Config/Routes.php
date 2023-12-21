@@ -105,10 +105,10 @@ $routes->add('kpi_calculation/(:any)/(:any)', 'Cpscoping::kpi_calculation/$1/$2'
 $routes->add('search_result/(:any)/(:any)', 'Cpscoping::search_result/$1/$2');
 
 //CP
-// $routes->add('cpscoping/full_get/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_only_given_full/$1/$2/$3/$4');
+$routes->add('cpscoping/full_get/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_only_given_full/$1/$2/$3/$4');
 // $routes->add('cpscoping/deneme', 'Cpscoping::deneme');
 // $routes->add('cpscoping/comment_save/(:any)/(:any)', 'Cpscoping::comment_save/$1/$2');
-// $routes->add('cpscoping/allocated_table/(:any)/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_already_allocated_allocation_except_given/$1/$2/$3/$4/$5');
+$routes->add('cpscoping/allocated_table/(:any)/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_already_allocated_allocation_except_given/$1/$2/$3/$4/$5');
 $routes->add('cpscoping/edit_allocation/(:any)', 'Cpscoping::edit_allocation/$1');
 // $routes->add('cpscoping/file_upload/(:any)/(:any)', 'Cpscoping::cp_scoping_file_upload/$1/$2');
 // $routes->add('cpscoping/file_delete/(:any)/(:any)', 'Cpscoping::file_delete/$1/$2');
