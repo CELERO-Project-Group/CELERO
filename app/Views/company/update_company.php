@@ -67,6 +67,7 @@
 			</div>
 		</div>
 	</form>
+	<!-- NACE MODAL -->
 	<div class="modal fade" id="myModalNACE" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 		aria-hidden="true">
 		<div class="modal-dialog-nace">
@@ -97,6 +98,41 @@
 		</div>
 	</div>
 </div>
+<!-- MAP MODAL -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Click Map</h4>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="latId" name="lat" style="color:#333333;"
+							value="<?= set_value('lat',$companies['latitude']); ?>" readonly />
+						</div>
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="longId" name="long" style="color:#333333;"
+							value="<?= set_value('long',$companies['latitude']); ?>" readonly />
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<!-- Map Selector -->
+					<div id="map"></div>
+					<br>
+					<button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true">
+						<?= lang("Validation.done"); ?>
+					</button>
+				</div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
+
+
+
+
 
 <script type="text/javascript">
 	$('#selectize').selectize({ 
@@ -105,6 +141,10 @@
 
 	//js function for miller-coloumn NACE-code selector, see miller.js
 	miller_column_nace();
+
+	$('#myModal').on('shown.bs.modal', function () {
+    map_location_chooser();
+});
 
 	//UNUSED CODE?
   	function getCountryIdName() {

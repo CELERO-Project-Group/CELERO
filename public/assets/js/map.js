@@ -11,6 +11,7 @@ function map_location_chooser() {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
+
     // OnClick Marker
     var marker = null; // Variable to store the marker
 
