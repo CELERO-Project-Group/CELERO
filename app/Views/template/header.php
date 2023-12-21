@@ -232,9 +232,9 @@
       <li><a href="#" class="nav-info"></a></li>
       <?php if (isset(session()->username)): ?>
         <?php if (isset(session()->project_id)): ?>
-          <!-- <li><a href="<?= base_url('cpscoping'); ?>"><i class="fa fa-recycle"></i>
+          <li><a href="<?= base_url('cpscoping'); ?>"><i class="fa fa-recycle"></i>
               <?= lang("Validation.cpidentification"); ?>
-            </a></li> -->
+            </a></li>
           <li><a href="<?= base_url('isscoping'); ?>"><i class="fa fa-recycle"></i>
               <?= lang("Validation.isidentification"); ?>
             </a></li>

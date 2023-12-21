@@ -11,64 +11,64 @@ use App\Models\Company_model;
 
 class Cpscoping extends BaseController {
 	
-// 	public function index(){
-// 		$project_model = model(Project_model::class);
-// 		$user_model = model(User_model::class);
-// 		$cpscoping_model = model(Cpscoping_model::class);
+	public function index(){
+		$project_model = model(Project_model::class);
+		$user_model = model(User_model::class);
+		$cpscoping_model = model(Cpscoping_model::class);
 
-// 		$c_user = $user_model->get_session_user();
-// 		if($cpscoping_model->can_consultant_prjct($c_user['id']) == false){
-// 			return redirect()->back();
-// 		}else{
-// 			$data['c_projects']=$user_model->get_consultant_projects_from_userid($c_user['id']);
-// 			$result = array(array());
-// 			$com_array = array();
-// 			$i = 0;
-// 			//foreach ($data['c_projects'] as $project_name) {
-// 				$com_array = $project_model->get_prj_companies(session()->project_id);
-// 				foreach ($com_array as $c) {
-// 					$com_pro = array(
-// 						"project_name" => session()->project_name,
-// 						"company_name" => $c['name'],
-// 						"project_id" => session()->project_id,
-// 						"company_id" => $c['id']
-// 					);
-// 					$result[$i] = $com_pro;
-// 					$i++;
-// 				}
-// 			//}
-// 			$deneme = array(array());
-// 			$j = 0;
-// 			foreach ($result as $r) {
-// 				$flow_prcss = $cpscoping_model->get_allocation_values($r['company_id'],session()->project_id);
-// 				$deneme[$j] = $flow_prcss;
-// 				$j++;
-// 			}
-// 			$data['flow_prcss'] = $deneme;
-// 			$data['com_pro'] = $result;
-// 			echo view('template/header');
-// 			echo view('cpscoping/index',$data);
-// 			echo view('template/footer');
-// 		}
-// 	}
+		$c_user = $user_model->get_session_user();
+		if($cpscoping_model->can_consultant_prjct($c_user['id']) == false){
+			return redirect()->back();
+		}else{
+			$data['c_projects']=$user_model->get_consultant_projects_from_userid($c_user['id']);
+			$result = array(array());
+			$com_array = array();
+			$i = 0;
+			//foreach ($data['c_projects'] as $project_name) {
+				$com_array = $project_model->get_prj_companies(session()->project_id);
+				foreach ($com_array as $c) {
+					$com_pro = array(
+						"project_name" => session()->project_name,
+						"company_name" => $c['name'],
+						"project_id" => session()->project_id,
+						"company_id" => $c['id']
+					);
+					$result[$i] = $com_pro;
+					$i++;
+				}
+			//}
+			$deneme = array(array());
+			$j = 0;
+			foreach ($result as $r) {
+				$flow_prcss = $cpscoping_model->get_allocation_values($r['company_id'],session()->project_id);
+				$deneme[$j] = $flow_prcss;
+				$j++;
+			}
+			$data['flow_prcss'] = $deneme;
+			$data['com_pro'] = $result;
+			echo view('template/header');
+			echo view('cpscoping/index',$data);
+			echo view('template/footer');
+		}
+	}
 
 // 	//Getting project companies from ajax
-// 	public function p_companies($pid){
-// 		$project_model = model(Project_model::class);
-// 		$com_array = $project_model->get_prj_companies($pid);
-// 		header("Content-Type: application/json", true);
-// 		/* Return JSON */
-// 		echo json_encode($com_array);
-// 	}
+	public function p_companies($pid){
+		$project_model = model(Project_model::class);
+		$com_array = $project_model->get_prj_companies($pid);
+		header("Content-Type: application/json", true);
+		/* Return JSON */
+		echo json_encode($com_array);
+	}
 
-// 	public function checkbox_control($str){
-// 		if($str == 0){
-// 			$this->form_validation->set_message('checkbox_control', 'The %s field is required.');
-// 			return FALSE;
-// 		}else{
-// 			return TRUE;
-// 		}
-// 	}
+	public function checkbox_control($str){
+		if($str == 0){
+			$this->form_validation->set_message('checkbox_control', 'The %s field is required.');
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	}
 
 // 	public function cp_allocation($project_id,$company_id){
 
@@ -340,21 +340,21 @@ class Cpscoping extends BaseController {
 		echo view('template/footer');
 	}
 
-// 	public function kpi_calculation_chart($prjct_id,$cmpny_id){
-// 		$cpscoping_model = model(Cpscoping_model::class);
-// 		$allocation_id_array = $cpscoping_model->get_allocation_id_from_ids($cmpny_id,$prjct_id);
-// 		$data['allocation'] = array();
-// 		foreach ($allocation_id_array as $ids) {
-// 			if(!empty($ids['allocation_id'])){
-// 				$veri = $cpscoping_model->get_allocation_from_allocation_id($ids['allocation_id']);
-// 				if(!empty($veri['allocation_id'])){
-// 					$data['allocation'][] = $veri;
-// 				}
-// 			}
-// 		}
-// 		header("Content-Type: application/json", true);
-// 		echo json_encode($data);
-// 	}
+	public function kpi_calculation_chart($prjct_id,$cmpny_id){
+		$cpscoping_model = model(Cpscoping_model::class);
+		$allocation_id_array = $cpscoping_model->get_allocation_id_from_ids($cmpny_id,$prjct_id);
+		$data['allocation'] = array();
+		foreach ($allocation_id_array as $ids) {
+			if(!empty($ids['allocation_id'])){
+				$veri = $cpscoping_model->get_allocation_from_allocation_id($ids['allocation_id']);
+				if(!empty($veri['allocation_id'])){
+					$data['allocation'][] = $veri;
+				}
+			}
+		}
+		header("Content-Type: application/json", true);
+		echo json_encode($data);
+	}
 
 	public function get_already_allocated_allocation_except_given($flow_id,$flow_type_id,$cmpny_id,$process_id,$prjct_id){
 		$cpscoping_model = model(Cpscoping_model::class);
@@ -586,47 +586,47 @@ class Cpscoping extends BaseController {
 // 		}
 // 	}
 
-// 	public function cp_scoping_file_upload($prjct_id,$cmpny_id){
-// 		$cpscoping_model = model(Cpscoping_model::class);
+	public function cp_scoping_file_upload($prjct_id,$cmpny_id){
+		$cpscoping_model = model(Cpscoping_model::class);
 
-// 		$config['upload_path'] 			= './assets/cp_scoping_files/';
-// 		$config['allowed_types']		= 'pdf|doc|docx';
-// 		$config['max_size']				= '20000';
+		$config['upload_path'] 			= './assets/cp_scoping_files/';
+		$config['allowed_types']		= 'pdf|doc|docx';
+		$config['max_size']				= '20000';
 
-// 		echo library('upload', $config);
+		echo library('upload', $config);
 		
-// 		if (!$this->upload->do_upload('docuFile'))
-// 		{	
-// 			//forwards error message to kpi_calculation() 
-// 			$this->session->set_flashdata('error', $this->upload->display_errors());
-//  			redirect(base_url('kpi_calculation/'.$prjct_id.'/'.$cmpny_id),'refresh');
-// 		}
-// 		else
-// 		{
-// 			$cp_scoping_files = array(
-// 				'prjct_id' => $prjct_id,
-// 				'cmpny_id' => $cmpny_id,
-// 				'file_name' => $this->upload->data('file_name'),
-// 			);
+		if (!$this->upload->do_upload('docuFile'))
+		{	
+			//forwards error message to kpi_calculation() 
+			$this->session->set_flashdata('error', $this->upload->display_errors());
+ 			redirect(base_url('kpi_calculation/'.$prjct_id.'/'.$cmpny_id),'refresh');
+		}
+		else
+		{
+			$cp_scoping_files = array(
+				'prjct_id' => $prjct_id,
+				'cmpny_id' => $cmpny_id,
+				'file_name' => $this->upload->data('file_name'),
+			);
 
-// 			//forwards data for successful upload to kpi_calculation()
-// 			$cpscoping_model->insert_cp_scoping_file($cp_scoping_files);
-// 			$this->session->set_flashdata('success', $this->upload->data());
-// 			redirect(base_url('kpi_calculation/'.$prjct_id.'/'.$cmpny_id),'refresh');
-// 		}
-// 	}
+			//forwards data for successful upload to kpi_calculation()
+			$cpscoping_model->insert_cp_scoping_file($cp_scoping_files);
+			$this->session->set_flashdata('success', $this->upload->data());
+			redirect(base_url('kpi_calculation/'.$prjct_id.'/'.$cmpny_id),'refresh');
+		}
+	}
 
-// 	public function file_delete($filename,$prjct_id,$cmpny_id){
-// 		$cpscoping_model = model(Cpscoping_model::class);
-// 		unlink("assets/cp_scoping_files/".$filename);
-// 		$cp_scoping_files = array(
-// 			'prjct_id' => $prjct_id,
-// 			'cmpny_id' => $cmpny_id,
-// 			'file_name' => $filename
-// 		);
-// 		$cpscoping_model->delete_cp_scoping_file($cp_scoping_files);
-// 		redirect(base_url('kpi_calculation/'.$prjct_id.'/'.$cmpny_id),'refresh');
-// 	}
+	public function file_delete($filename,$prjct_id,$cmpny_id){
+		$cpscoping_model = model(Cpscoping_model::class);
+		unlink("assets/cp_scoping_files/".$filename);
+		$cp_scoping_files = array(
+			'prjct_id' => $prjct_id,
+			'cmpny_id' => $cmpny_id,
+			'file_name' => $filename
+		);
+		$cpscoping_model->delete_cp_scoping_file($cp_scoping_files);
+		redirect(base_url('kpi_calculation/'.$prjct_id.'/'.$cmpny_id),'refresh');
+	}
 
 // 	public function search_result($prjct_id,$cmpny_id){
 // 		$cpscoping_model = model(Cpscoping_model::class);
@@ -660,45 +660,45 @@ class Cpscoping extends BaseController {
 // 		echo json_encode($allocation_array);
 // 	}
 
-// 	public function kpi_calculation($prjct_id,$cmpny_id){
-// 		$cpscoping_model = model(Cpscoping_model::class);
-// 		$data['cp_files'] = $cpscoping_model->get_cp_scoping_files($prjct_id,$cmpny_id);
-// 		$allocation_ids = $cpscoping_model->get_allocation_id_from_ids($cmpny_id,$prjct_id);
-// 		foreach ($allocation_ids as $allocation_id) {
-// 			$data['kpi_values'][] = $cpscoping_model->get_allocation_from_allocation_id($allocation_id['allocation_id']);
-// 		}
+	public function kpi_calculation($prjct_id,$cmpny_id){
+		$cpscoping_model = model(Cpscoping_model::class);
+		$data['cp_files'] = $cpscoping_model->get_cp_scoping_files($prjct_id,$cmpny_id);
+		$allocation_ids = $cpscoping_model->get_allocation_id_from_ids($cmpny_id,$prjct_id);
+		foreach ($allocation_ids as $allocation_id) {
+			$data['kpi_values'][] = $cpscoping_model->get_allocation_from_allocation_id($allocation_id['allocation_id']);
+		}
 
-// 		$data['error'] = $this->session->getFlashdata('error');
-// 		$data['success'] = $this->session->getFlashdata('success');
+		$data['error'] = $this->session->getFlashdata('error');
+		$data['success'] = $this->session->getFlashdata('success');
 
-// 		echo view('template/header');
-// 		echo view('cpscoping/kpi_calculation',$data);
-// 		echo view('template/footer');
-// 	}
+		echo view('template/header');
+		echo view('cpscoping/kpi_calculation',$data);
+		echo view('template/footer');
+	}
 
-// 	public function kpi_json($prjct_id,$cmpny_id){
-// 		$cpscoping_model = model(Cpscoping_model::class);
-// 		$data['cp_files'] = $cpscoping_model->get_cp_scoping_files($prjct_id,$cmpny_id);
-// 		$allocation_ids = $cpscoping_model->get_allocation_id_from_ids($cmpny_id,$prjct_id);
+	public function kpi_json($prjct_id,$cmpny_id){
+		$cpscoping_model = model(Cpscoping_model::class);
+		$data['cp_files'] = $cpscoping_model->get_cp_scoping_files($prjct_id,$cmpny_id);
+		$allocation_ids = $cpscoping_model->get_allocation_id_from_ids($cmpny_id,$prjct_id);
 		
-// 		foreach ($allocation_ids as $a => $key) {
+		foreach ($allocation_ids as $a => $key) {
 			
-// 					$data['kpi_values'][$a] = $cpscoping_model->get_allocation_from_allocation_id($key['allocation_id']);
+					$data['kpi_values'][$a] = $cpscoping_model->get_allocation_from_allocation_id($key['allocation_id']);
 					
-// 					$data['kpi_values'][$a]['allocation_name']=$data['kpi_values'][$a]['prcss_name']." - ".$data['kpi_values'][$a]['flow_name']." - ".$data['kpi_values'][$a]['flow_type_name'];
+					$data['kpi_values'][$a]['allocation_name']=$data['kpi_values'][$a]['prcss_name']." - ".$data['kpi_values'][$a]['flow_name']." - ".$data['kpi_values'][$a]['flow_type_name'];
 					
-// 					if(!isset($data['kpi_values'][$a]['option'])){
-// 						$data['kpi_values'][$a]['option']=0;
-// 					}
-// 					if($data['kpi_values'][$a]['option']==1){
-// 						$data['kpi_values'][$a]['option']="Option";
-// 					}else{
-// 						$data['kpi_values'][$a]['option']="Not An Option";
-// 			}
-// 		}
-// 		header("Content-Type: application/json", true);
-// 		echo json_encode($data['kpi_values']);
-// 	}
+					if(!isset($data['kpi_values'][$a]['option'])){
+						$data['kpi_values'][$a]['option']=0;
+					}
+					if($data['kpi_values'][$a]['option']==1){
+						$data['kpi_values'][$a]['option']="Option";
+					}else{
+						$data['kpi_values'][$a]['option']="Not An Option";
+			}
+		}
+		header("Content-Type: application/json", true);
+		echo json_encode($data['kpi_values']);
+	}
 
 // 	public function kpi_insert($prjct_id,$cmpny_id,$flow_id,$flow_type_id,$prcss_id,$allocation_id){
 // 		$cpscoping_model = model(Cpscoping_model::class);
