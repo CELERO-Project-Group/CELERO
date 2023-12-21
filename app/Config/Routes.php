@@ -109,7 +109,7 @@ $routes->add('search_result/(:any)/(:any)', 'Cpscoping::search_result/$1/$2');
 // $routes->add('cpscoping/deneme', 'Cpscoping::deneme');
 // $routes->add('cpscoping/comment_save/(:any)/(:any)', 'Cpscoping::comment_save/$1/$2');
 // $routes->add('cpscoping/allocated_table/(:any)/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_already_allocated_allocation_except_given/$1/$2/$3/$4/$5');
-// $routes->add('cpscoping/edit_allocation/(:any)', 'Cpscoping::edit_allocation/$1');
+$routes->add('cpscoping/edit_allocation/(:any)', 'Cpscoping::edit_allocation/$1');
 // $routes->add('cpscoping/file_upload/(:any)/(:any)', 'Cpscoping::cp_scoping_file_upload/$1/$2');
 // $routes->add('cpscoping/file_delete/(:any)/(:any)', 'Cpscoping::file_delete/$1/$2');
 // $routes->add('cpscoping/is_candidate_insert/(:any)/(:any)', 'Cpscoping::cp_is_candidate_insert/$1/$2');

@@ -6,6 +6,7 @@
 	$uri = service('uri');
 
  ?>
+ <div class="row">
 <div class="col-md-12">
 	<?php
 		if($validation != NULL)
@@ -32,4 +33,5 @@
 			<li <?php if ($uri->getSegment(1) == "new_equipment"){ echo "class='btn-inverse'"; } ?>><a class="not-active" title="Not available yet"><?= lang("Validation.equipment"); ?></a></li> -->
 			</ul>
 	</div>
+</div>
 </div>
