@@ -67,33 +67,39 @@
 			</div>
 		</div>
 	</form>
-	<div class="modal fade" id="myModalNACE" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="myModalNACE" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		aria-hidden="true">
 		<div class="modal-dialog-nace">
-		    <div class="modal-content">
-			    <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			        <h4 class="modal-title" id="myModalLabel"><?= lang("Validation.selectlevel4nace"); ?></h4>
-			        <hr>
-			        <div class="row">
-			        	<div class="col-md-12">
-			        		<input type="text" class="form-control" id="naceCode" name="nace-code" style="color:#333333;" readonly/>
-			        	</div>
-			  
-			        </div>
-			    </div>
-			    <div class="modal-body">
-			    	<!-- Miller column NACE Code selector -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">
+						<?= lang("Validation.selectlevel4nace"); ?>
+					</h4>
+					<hr>
+					<div class="row">
+						<div class="col-md-12">
+							<input type="text" class="form-control" id="naceCode" name="nace-code"
+								style="color:#333333;" readonly />
+						</div>
+					</div>
+				</div>
+				<div class="modal-body">
+					<!-- Miller column NACE Code selector -->
 					<div id="miller_col"></div>
-			      	<br>
-		      		<button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true"><?= lang("Validation.done"); ?></button>
-			    </div>
-			    <div class="modal-footer"></div>
-		    </div>
-	 	</div>
+					<br>
+					<button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true">
+						<?= lang("Validation.done"); ?>
+					</button>
+				</div>
+				<div class="modal-footer"></div>
+			</div>
+		</div>
 	</div>
 </div>
+
 <script type="text/javascript">
-	$('#selectize').selectize({
+	$('#selectize').selectize({ 
     	create: false
  	});
 

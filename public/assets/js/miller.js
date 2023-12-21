@@ -226,7 +226,7 @@ function miller_column_UBP(){
 // NACE code selector in "Create Company"
 function miller_column_nace(){
     $.ajax({
-        url: "assets/js/miller-NACE-codes.json",
+        url: "../assets/js/miller-NACE-codes.json",
         dataType: 'json',
         success: function(json) {
             var nacejson = json;
@@ -262,6 +262,7 @@ function miller_column_nace(){
             });
         },
         error: function() {
+           
             console.error("Failed to load JSON data");
         }
     });

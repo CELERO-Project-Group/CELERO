@@ -60,7 +60,6 @@
             </div>
         </div>
         <div class="cp-bar">
-           
             <a style="margin-right:10px;" href="<?= base_url('kpi_calculation/'.$cp['project_id'].'/'.$cp['company_id']); ?>" class=" btn-sm btn-success"><?= lang("Validation.viewkpi"); ?></a>
             <a href="<?= base_url('cost_benefit/'.$cp['project_id'].'/'.$cp['company_id']); ?>" class=" btn-sm btn-warning"><?= lang("Validation.viewcba"); ?></a>
         </div>
