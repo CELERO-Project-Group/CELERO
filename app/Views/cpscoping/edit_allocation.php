@@ -38,7 +38,7 @@ if ($validation != NULL)
 <?= form_open_multipart('cpscoping/edit_allocation/' . $allocation['allocation_id']); ?>
 <?= csrf_field() ?>
 
-<div>
+<div class="row">
 	<div class="col-md-3">
 		<div>
 			<?= lang("Validation.allocation"); ?>
