@@ -70,126 +70,126 @@ class Cpscoping extends BaseController {
 		}
 	}
 
-// 	public function cp_allocation($project_id,$company_id){
+	public function cp_allocation($project_id,$company_id){
 
-// 		$cpscoping_model = model(Cpscoping_model::class);
-// 		$product_model = model(Product_model::class);
-// 		$flow_model = model(Flow_model::class);
-// 		$process_model = model(Process_model::class);	
+		$cpscoping_model = model(Cpscoping_model::class);
+		$product_model = model(Product_model::class);
+		$flow_model = model(Flow_model::class);
+		$process_model = model(Process_model::class);	
 
-// 		if (!empty($this->request->getPost())){
-// 			if ($this->validate([
-// 				'prcss_name'=> 'required|trim',
-// 				'flow_name'=> 'required|trim',
-// 				'flow_type_name'=> 'required|trim',
-// 				'amount'=> 'required|trim',
-// 				'allocation_amount'=>  'required|trim|max_length[7]|greater_than[0]',
-// 				'error_amount'=> 'required|trim|integer|max_length[3]|greater_than[0]',
-// 				'unit_amount'=> 'required|trim',
-// 				'cost'=> 'required|trim',
-// 				'allocation_cost'=>  'required|trim|max_length[7]|greater_than[0]',
-// 				'error_cost'=>  'required|trim|integer|max_length[3]|greater_than[0]',
-// 				'unit_cost'=>  'required|trim',
-// 				'env_impact'=>  'required|trim|max_length[25]',
-// 				'allocation_env_impact'=>  'required|trim|max_length[7]|greater_than[0]',
-// 				'error_ep'=>  'required|trim|integer|max_length[3]|greater_than[0]',
-// 				'unit_env_impact'=>  'required|trim',
-// 				'reference'=>  'required|trim',
-// 				'unit_reference'=>  'required|trim',
-// 				'nameofref'=>  'trim|required',
-// 				'kpi'=>  'required|trim',
-// 				'unit_kpi'=>  'required|trim',
-// 				'kpidef'=>  'trim'
-// 			])){
+		if (!empty($this->request->getPost())){
+			if ($this->validate([
+				'prcss_name'=> 'required|trim',
+				'flow_name'=> 'required|trim',
+				'flow_type_name'=> 'required|trim',
+				'amount'=> 'required|trim',
+				'allocation_amount'=>  'required|trim|max_length[7]|greater_than[0]',
+				'error_amount'=> 'required|trim|integer|max_length[3]|greater_than[0]',
+				'unit_amount'=> 'required|trim',
+				'cost'=> 'required|trim',
+				'allocation_cost'=>  'required|trim|max_length[7]|greater_than[0]',
+				'error_cost'=>  'required|trim|integer|max_length[3]|greater_than[0]',
+				'unit_cost'=>  'required|trim',
+				'env_impact'=>  'required|trim|max_length[25]',
+				'allocation_env_impact'=>  'required|trim|max_length[7]|greater_than[0]',
+				'error_ep'=>  'required|trim|integer|max_length[3]|greater_than[0]',
+				'unit_env_impact'=>  'required|trim',
+				'reference'=>  'required|trim',
+				'unit_reference'=>  'required|trim',
+				'nameofref'=>  'trim|required',
+				'kpi'=>  'required|trim',
+				'unit_kpi'=>  'required|trim',
+				'kpidef'=>  'trim'
+			])){
 
-// 			$prcss_name = $this->request->getPost('prcss_name');
-// 			$flow_name = $this->request->getPost('flow_name');
-// 			$flow_type_name = $this->request->getPost('flow_type_name');
-// 			$amount = $this->request->getPost('amount');
-// 			$allocation_amount = $this->request->getPost('allocation_amount');
-// 			$importance_amount = $this->request->getPost('error_amount');
-// 			$cost = $this->request->getPost('cost');
-// 			$allocation_cost = $this->request->getPost('allocation_cost');
-// 			$importance_cost = $this->request->getPost('error_cost');
-// 			$env_impact = $this->request->getPost('env_impact');
-// 			$allocation_env_impact = $this->request->getPost('allocation_env_impact');
-// 			$importance_env_impact = $this->request->getPost('error_ep');
-// 			$unit_amount = $this->request->getPost('unit_amount');
-// 			$unit_cost = $this->request->getPost('unit_cost');
-// 			$unit_env_impact = $this->request->getPost('unit_env_impact');
-// 			$reference = $this->request->getPost('reference');
-// 			$unit_reference = $this->request->getPost('unit_reference');
-// 			$kpi = $this->request->getPost('kpi');
-// 			$unit_kpi = $this->request->getPost('unit_kpi');
-// 			$kpidef = $this->request->getPost('kpidef');
-// 			$nameofref = $this->request->getPost('nameofref');
-// 			//$kpi_error = $this->request->getPost('kpi_error');
+			$prcss_name = $this->request->getPost('prcss_name');
+			$flow_name = $this->request->getPost('flow_name');
+			$flow_type_name = $this->request->getPost('flow_type_name');
+			$amount = $this->request->getPost('amount');
+			$allocation_amount = $this->request->getPost('allocation_amount');
+			$importance_amount = $this->request->getPost('error_amount');
+			$cost = $this->request->getPost('cost');
+			$allocation_cost = $this->request->getPost('allocation_cost');
+			$importance_cost = $this->request->getPost('error_cost');
+			$env_impact = $this->request->getPost('env_impact');
+			$allocation_env_impact = $this->request->getPost('allocation_env_impact');
+			$importance_env_impact = $this->request->getPost('error_ep');
+			$unit_amount = $this->request->getPost('unit_amount');
+			$unit_cost = $this->request->getPost('unit_cost');
+			$unit_env_impact = $this->request->getPost('unit_env_impact');
+			$reference = $this->request->getPost('reference');
+			$unit_reference = $this->request->getPost('unit_reference');
+			$kpi = $this->request->getPost('kpi');
+			$unit_kpi = $this->request->getPost('unit_kpi');
+			$kpidef = $this->request->getPost('kpidef');
+			$nameofref = $this->request->getPost('nameofref');
+			//$kpi_error = $this->request->getPost('kpi_error');
 
-// 			$array_allocation = array(
-// 				'prcss_id'=>$prcss_name,
-// 				'flow_id'=>$flow_name,
-// 				'flow_type_id'=>$flow_type_name,
-// 				'amount'=>$amount,
-// 				'unit_amount'=>$unit_amount,
-// 				'allocation_amount'=>$allocation_amount,
-// 				'error_amount'=>$importance_amount,
-// 				'cost'=>$cost,
-// 				'unit_cost'=>$unit_cost,
-// 				'allocation_cost'=>$allocation_cost,
-// 				'error_cost'=>$importance_cost,
-// 				'env_impact'=>$env_impact,
-// 				'unit_env_impact'=>$unit_env_impact,
-// 				'allocation_env_impact'=>$allocation_env_impact,
-// 				'error_ep'=>$importance_env_impact,
-// 				'reference' => $reference,
-// 				'unit_reference' => $unit_reference,
-// 				'kpi' => $kpi,
-// 				'unit_kpi' => $unit_kpi,
-// 				'kpidef' => $kpidef,
-// 				'nameofref' => $nameofref
-// 			);
-// 			$insertID = $cpscoping_model->set_cp_allocation($array_allocation);
-// 			$allocation_array = array(
-// 				'allocation_id' => $insertID,
-// 				'prjct_id' => $project_id,
-// 				'cmpny_id' => $company_id
-// 			);
-// 			$cpscoping_model->set_cp_allocation_main($allocation_array);
-// 			return redirect()->to('cpscoping/'.$project_id.'/'.$company_id.'/show');
-// 			}
-// 		}
-// 		$data['project_id'] = $project_id;
-// 		$data['company_id'] = $company_id;
-// 		$data['product'] = $product_model->get_product_list($company_id);
-// 		$data['company_flows']=$flow_model->get_company_flow_list($company_id);
-// 		$data['prcss_info'] = $process_model->get_cmpny_flow_prcss($company_id);
-// 		$data['unit_list'] = $flow_model->get_unit_list();
+			$array_allocation = array(
+				'prcss_id'=>$prcss_name,
+				'flow_id'=>$flow_name,
+				'flow_type_id'=>$flow_type_name,
+				'amount'=>$amount,
+				'unit_amount'=>$unit_amount,
+				'allocation_amount'=>$allocation_amount,
+				'error_amount'=>$importance_amount,
+				'cost'=>$cost,
+				'unit_cost'=>$unit_cost,
+				'allocation_cost'=>$allocation_cost,
+				'error_cost'=>$importance_cost,
+				'env_impact'=>$env_impact,
+				'unit_env_impact'=>$unit_env_impact,
+				'allocation_env_impact'=>$allocation_env_impact,
+				'error_ep'=>$importance_env_impact,
+				'reference' => $reference,
+				'unit_reference' => $unit_reference,
+				'kpi' => $kpi,
+				'unit_kpi' => $unit_kpi,
+				'kpidef' => $kpidef,
+				'nameofref' => $nameofref
+			);
+			$insertID = $cpscoping_model->set_cp_allocation($array_allocation);
+			$allocation_array = array(
+				'allocation_id' => $insertID,
+				'prjct_id' => $project_id,
+				'cmpny_id' => $company_id
+			);
+			$cpscoping_model->set_cp_allocation_main($allocation_array);
+			return redirect()->to('cpscoping/'.$project_id.'/'.$company_id.'/show');
+			}
+		}
+		$data['project_id'] = $project_id;
+		$data['company_id'] = $company_id;
+		$data['product'] = $product_model->get_product_list($company_id);
+		$data['company_flows']=$flow_model->get_company_flow_list($company_id);
+		$data['prcss_info'] = $process_model->get_cmpny_flow_prcss($company_id);
+		$data['unit_list'] = $flow_model->get_unit_list();
 
-// 		$array_temp = array();
-// 		$temp_index = 0;
-// 		$kontrol = array();
-// 		$index = 0;
-// 		foreach ($data['prcss_info'] as $prcss_info) {
-// 			$deneme = 0;
-// 			$kontrol[$index] = $prcss_info['prcessname'];
-// 			$index++;
-// 			for($k = 0 ; $k < $index - 1 ; $k++){
-// 				if($kontrol[$k] == $prcss_info['prcessname']){
-// 					$deneme = 1;
-// 				}
-// 			}
-// 			if($deneme == 0){
-// 				$array_temp[$temp_index] = $prcss_info;
-// 				$temp_index++;
-// 			}
-// 		}
-// 		$data['validation'] = $this->validator;
-// 		$data['prcss_info'] = $array_temp;
+		$array_temp = array();
+		$temp_index = 0;
+		$kontrol = array();
+		$index = 0;
+		foreach ($data['prcss_info'] as $prcss_info) {
+			$deneme = 0;
+			$kontrol[$index] = $prcss_info['prcessname'];
+			$index++;
+			for($k = 0 ; $k < $index - 1 ; $k++){
+				if($kontrol[$k] == $prcss_info['prcessname']){
+					$deneme = 1;
+				}
+			}
+			if($deneme == 0){
+				$array_temp[$temp_index] = $prcss_info;
+				$temp_index++;
+			}
+		}
+		$data['validation'] = $this->validator;
+		$data['prcss_info'] = $array_temp;
  
-// 		echo view('template/header');
-// 		echo view('cpscoping/allocation',$data);
-// 		echo view('template/footer');
-// 	}
+		echo view('template/header');
+		echo view('cpscoping/allocation',$data);
+		echo view('template/footer');
+	}
 
 	public function allocationlist($project_id,$company_id){
 		$cpscoping_model = model(Cpscoping_model::class);

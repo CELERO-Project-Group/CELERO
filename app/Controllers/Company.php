@@ -204,7 +204,7 @@ class Company extends BaseController {
 			$data['companies'] = $company_model->get_project_companies($project_id);
 		}
 
-		print_r($data);
+		//print_r($data);
 
 		echo view('template/header');
 		echo view('company/isscoping',$data);

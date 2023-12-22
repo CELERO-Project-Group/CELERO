@@ -118,9 +118,9 @@ $routes->add('cpscoping/edit_allocation/(:any)', 'Cpscoping::edit_allocation/$1'
 // $routes->add('cpscoping/cost_ep/(:any)/(:any)/(:any)', 'Cpscoping::cost_ep_value/$1/$2/$3');
 // $routes->add('cpscoping/get_allo/(:any)/(:any)/(:any)/(:any)/(:any)', 'Cpscoping::get_allo_from_fname_pname/$1/$2/$3/$4/$5');
 $routes->add('cpscoping/(:any)/(:any)/show', 'Cpscoping::cp_show_allocation/$1/$2');
-// $routes->add('cpscoping/delete/(:any)/(:any)/(:any)', 'Cpscoping::delete_allocation/$1/$2/$3');
-// $routes->add('cp_allocation_array/(:any)', 'Cpscoping::cp_allocation_array/$1');
-// $routes->add('cpscoping/(:any)/(:any)/allocation', 'Cpscoping::cp_allocation/$1/$2');
+$routes->add('cpscoping/delete/(:any)/(:any)/(:any)', 'Cpscoping::delete_allocation/$1/$2/$3');
+$routes->add('cp_allocation_array/(:any)', 'Cpscoping::cp_allocation_array/$1');
+$routes->add('cpscoping/(:any)/(:any)/allocation', 'Cpscoping::cp_allocation/$1/$2');
 // $routes->add('cpscoping/pro/(:any)', 'Cpscoping::p_companies/$1');
 
 //Password routes
