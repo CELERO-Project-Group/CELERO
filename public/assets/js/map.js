@@ -1,3 +1,5 @@
+
+// TODO if there is already coordinates it should pin a mark on the map
 function map_location_chooser() {
     var map = L.map('map').setView([47.5348, 7.6419], 8);
     map.fitWorld().zoomIn();
