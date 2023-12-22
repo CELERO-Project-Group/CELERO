@@ -137,7 +137,7 @@ if ($validation != NULL)
 <?= csrf_field() ?>
 
 <div class="row">
-	<div class="col-md-3">
+	<div class="col-md-3 col-space">
 		<div><span class="badge">1</span>
 			<?= lang("Validation.alloheading1"); ?>
 		</div>
@@ -285,7 +285,8 @@ if ($validation != NULL)
 			<?= lang("Validation.alloheading3"); ?>
 		<?php endif ?>
 	</div>
-	<div class="col-md-9" id="allocation_fields">
+	
+	<div class="col-md-9 col-space" id="allocation_fields">
 		<div><span class="badge">2</span>
 			<?= lang("Validation.alloheading4"); ?>
 		</div>
@@ -293,159 +294,122 @@ if ($validation != NULL)
 		<div class="form-group clearfix row">
 			<div class="col-md-12">
 				<div class="col-md-4 col-space">
-					<div class="row">
-						<label class="control-label tooltip-amo" data-toggle="tooltip">
-							<?= lang("Validation.amount"); ?> <i style="color:red;" class="fa fa-question-circle"></i>
-						</label>
-					</div>
-					<div class="row">
-						<input type="text" class="form-control" value="<?= set_value('amount'); ?>" id="amount"
-							placeholder="<?= lang("Validation.number"); ?>" name="amount">
-					</div>
+
+					<label class="control-label tooltip-amo" data-toggle="tooltip">
+						<?= lang("Validation.amount"); ?> <i style="color:red;" class="fa fa-question-circle"></i>
+					</label>
+
+
+					<input type="text" class="form-control" value="<?= set_value('amount'); ?>" id="amount"
+						placeholder="<?= lang("Validation.number"); ?>" name="amount">
+
 				</div>
 				<div class="col-md-4 col-space">
-					<div class="row">
-						<label class="control-label">
-							<?= lang("Validation.amountunit"); ?>
-						</label>
-					</div>
-					<div class="row">
-						<select name="unit_amount" id="unit_amount" class="btn-group select select-block">
-							<option value="">
-								<?= lang("Validation.pleaseselect"); ?>
+
+					<label class="control-label">
+						<?= lang("Validation.amountunit"); ?>
+					</label>
+
+					<select name="unit_amount" id="unit_amount" class="btn-group select select-block">
+						<option value="">
+							<?= lang("Validation.pleaseselect"); ?>
+						</option>
+						<?php foreach ($unit_list as $u): ?>
+							<option value="<?= $u['name']; ?>" <?= set_select('unit_amount', $u['name']); ?>>
+								<?= $u['name']; ?>
 							</option>
-							<?php foreach ($unit_list as $u): ?>
-								<option value="<?= $u['name']; ?>" <?= set_select('unit_amount', $u['name']); ?>>
-									<?= $u['name']; ?>
-								</option>
-							<?php endforeach ?>
-						</select>
-
-					</div>
+						<?php endforeach ?>
+					</select>
 				</div>
 				<div class="col-md-4 col-space">
-					<div class="row">
-						<label class="control-label tooltip-allo" data-toggle="tooltip">
-							<?= lang("Validation.allocation"); ?> (%) <i style="color:red;"
-								class="fa fa-question-circle"></i>
-						</label>
-					</div>
 
-					<div class="row">
-						<input type="text" class="form-control" value="<?= set_value('allocation_amount'); ?>"
-							id="allocation_amount" placeholder="<?= lang("Validation.percentage"); ?>"
-							name="allocation_amount">
-					</div>
+					<label class="control-label tooltip-allo" data-toggle="tooltip">
+						<?= lang("Validation.allocation"); ?> (%) <i style="color:red;"
+							class="fa fa-question-circle"></i>
+					</label>
+					<input type="text" class="form-control" value="<?= set_value('allocation_amount'); ?>"
+						id="allocation_amount" placeholder="<?= lang("Validation.percentage"); ?>"
+						name="allocation_amount">
+
 				</div>
-				<!-- <label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip">
-				<?= lang("Validation.accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i>
-			</label> -->
-				<!-- <div class="col-md-3">
-				<input type="text" class="form-control" value="<?= set_value('error_amount', 80); ?>" id="error_amount"
-					placeholder="<?= lang("Validation.percentage"); ?>" name="error_amount">
-			</div> -->
+
 			</div>
 		</div>
 		<hr>
 		<div class="form-group clearfix row">
 			<div class="col-md-12">
 				<div class="col-md-4 col-space">
-					<div class="row">
-						<label class="control-label">
-							<?= lang("Validation.cost"); ?>
-						</label>
-					</div>
-					<div class="row">
-						<input type="text" class="form-control" value="<?= set_value('cost'); ?>" id="cost"
-							placeholder="<?= lang("Validation.number"); ?>" name="cost">
-					</div>
+
+					<label class="control-label">
+						<?= lang("Validation.cost"); ?>
+					</label>
+
+
+					<input type="text" class="form-control" value="<?= set_value('cost'); ?>" id="cost"
+						placeholder="<?= lang("Validation.number"); ?>" name="cost">
+
 				</div>
 				<div class="col-md-4 col-space">
-					<div class="row">
-						<label class="control-label">
-							<?= lang("Validation.costunit"); ?>
-						</label>
-					</div>
-					<div class="row">
-						<select name="unit_cost" id="unit_cost" class="btn-group select select-block">
-							<option value="">
-								<?= lang("Validation.pleaseselect"); ?>
-							</option>
-							<option value="Euro" <?= set_select('unit_cost', 'Euro'); ?>>Euro</option>
-							<option value="Dollar" <?= set_select('unit_cost', 'Dolar'); ?>>Dollar</option>
-							<option value="TL" <?= set_select('unit_cost', 'TL'); ?>>TL</option>
-							<option value="CHF" <?= set_select('unit_cost', 'CHF'); ?>>CHF</option>
-						</select>
-					</div>
+
+					<label class="control-label">
+						<?= lang("Validation.costunit"); ?>
+					</label>
+
+
+					<select name="unit_cost" id="unit_cost" class="btn-group select select-block">
+						<option value="">
+							<?= lang("Validation.pleaseselect"); ?>
+						</option>
+						<option value="Euro" <?= set_select('unit_cost', 'Euro'); ?>>Euro</option>
+						<option value="Dollar" <?= set_select('unit_cost', 'Dolar'); ?>>Dollar</option>
+						<option value="TL" <?= set_select('unit_cost', 'TL'); ?>>TL</option>
+						<option value="CHF" <?= set_select('unit_cost', 'CHF'); ?>>CHF</option>
+					</select>
+
 				</div>
 				<div class="col-md-4 col-space">
-					<div class="row">
-						<label class="control-label tooltip-allo" data-toggle="tooltip">
-							<?= lang("Validation.allocation"); ?> (%) <i style="color:red;"
-								class="fa fa-question-circle"></i>
-						</label>
-					</div>
-					<div class="row">
-						<input type="text" class="form-control" value="<?= set_value('allocation_cost'); ?>"
-							id="allocation_cost" placeholder="<?= lang("Validation.percentage"); ?>"
-							name="allocation_cost">
-					</div>
+
+					<label class="control-label tooltip-allo" data-toggle="tooltip">
+						<?= lang("Validation.allocation"); ?> (%) <i style="color:red;"
+							class="fa fa-question-circle"></i>
+					</label>
+
+					<input type="text" class="form-control" value="<?= set_value('allocation_cost'); ?>"
+						id="allocation_cost" placeholder="<?= lang("Validation.percentage"); ?>" name="allocation_cost">
+
 				</div>
 			</div>
-			<!-- <label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip">
-				<?= lang("Validation.accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i>
-			</label> -->
-			<!-- <div class="col-md-3">
-				<input type="text" class="form-control" value="<?= set_value('error_cost', 80); ?>" id="error_cost"
-					placeholder="<?= lang("Validation.percentage"); ?>" name="error_cost">
-			</div> -->
+
 		</div>
 		<hr>
 		<div class="form-group clearfix row">
 			<div class="col-md-12">
 				<div class="col-md-4 col-space">
-					<div class="row">
 						<label class="control-label">
 							<?= lang("Validation.environmentalimpact"); ?>
 						</label>
-					</div>
-					<div class="row">
 						<input type="text" class="form-control" value="<?= set_value('env_impact'); ?>" id="env_impact"
 							placeholder="<?= lang("Validation.number"); ?>" name="env_impact">
-					</div>
+					
 				</div>
 				<div class="col-md-4 col-space">
-					<div class="row">
 						<label class="control-label">
 							<?= lang("Validation.ep"); ?>
 						</label>
-					</div>
-					<div class="row">
 						<input class="form-control" id="unit_env_impact" placeholder="EP" value="EP"
 							name="unit_env_impact" readonly>
-					</div>
 				</div>
 				<div class="col-md-4 col-space">
-					<div class="row">
 						<label class="control-label tooltip-allo" data-toggle="tooltip">
 							<?= lang("Validation.allocation"); ?> (%) <i style="color:red;"
 								class="fa fa-question-circle"></i>
 						</label>
-					</div>
-					<div class="row">
 						<input type="text" class="form-control" value="<?= set_value('allocation_env_impact'); ?>"
 							id="allocation_env_impact" placeholder="<?= lang("Validation.percentage"); ?>"
 							name="allocation_env_impact">
-					</div>
 				</div>
 			</div>
-			<!-- <label class="control-label col-md-3 tooltip-acc" data-toggle="tooltip">
-				<?= lang("Validation.accuracyrate"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i>
-			</label> -->
-			<!-- <div class="col-md-3">
-				<input type="text" class="form-control" value="<?= set_value('error_ep', 80); ?>" id="error_ep"
-					placeholder="<?= lang("Validation.percentage"); ?>" name="error_ep">
-			</div> -->
+		
 		</div>
 		<hr>
 		<div class="form-group clearfix row">
