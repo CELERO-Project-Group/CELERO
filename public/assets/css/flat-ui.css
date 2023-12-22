@@ -374,7 +374,7 @@ you can use the generic selector below, but it's slower:
   border-top-color: #34495e !important;
 }
 body {
-  font-family: , Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: 1.72222;
   color: #34495e;
@@ -1463,7 +1463,7 @@ label {
 .form-control {
   border: 2px solid #bdc3c7;
   color: #34495e;
-  font-family: , Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.467;
   padding: 8px 12px;
@@ -2326,7 +2326,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   background: transparent;
   border: none;
   color: #34495e;
-  font-family: , Helvetica, Arial, sans-serif;
+  font-family:  Helvetica, Arial, sans-serif;
   font-size: 14px;
   margin: 0px;
   padding: 0 0 0 5px;
@@ -2405,7 +2405,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
 .twitter-typeahead .tt-hint {
   border: 2px solid #bdc3c7;
   color: #34495e;
-  font-family: , Helvetica, Arial, sans-serif;
+  font-family:  Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.467;
   padding: 8px 12px;
@@ -4899,7 +4899,7 @@ select[multiple].navbar-form .btn {
 }
 .navbar-unread,
 .navbar-new {
-  font-family: , Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   background-color: #1abc9c;
   border-radius: 50%;
   color: #ffffff;
@@ -4914,6 +4914,7 @@ select[multiple].navbar-form .btn {
   width: 6px;
   z-index: 10;
 }
+
 @media (max-width: 768px) {
   .navbar-unread,
   .navbar-new {
@@ -5485,7 +5486,7 @@ fieldset[disabled] .navbar-inverse .navbar-btn.active {
   background-color: #2a7aaf;
   border-radius: 50%;
   color: #ffffff;
-  font-family: , Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 12px;
   font-weight: 700;
   line-height: 1.667;
