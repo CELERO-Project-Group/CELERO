@@ -8,9 +8,11 @@
  ?>
 <div class="row">
 		<div class="col-md-12" style="margin-bottom: 10px;">
+		<?php if (isset(session()->project_id)): ?>
 			<a href="<?= base_url('cpscoping'); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga">
 				<?= lang("Validation.gotocpscoping"); ?>
 			</a>
+		<?php endif; ?>
 			<a href="<?= base_url('company/'.$company_info['id']); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga">
 				<?= lang("Validation.gotocompany"); ?>
 			</a>
