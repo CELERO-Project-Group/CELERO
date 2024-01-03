@@ -235,7 +235,7 @@ if ($validation != NULL)
 			<button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i>
 				<?= lang("Validation.savedata"); ?>
 			</button>
-			<a href="<?= base_url('allocationlist' . '/' . session()->project_id . '/' . $allocation['cmpny_id']); ?>"
+			<a href="<?= base_url('cpscoping'); ?>"
 				class="btn btn-default" style="float: right;"><i class="fa fa-ban"></i>
 				<?= lang("Validation.cancel"); ?>
 			</a>
@@ -322,6 +322,8 @@ if ($validation != NULL)
 		var prcss_name = "<?= $allocation['prcss_id']; ?>";
 		var flow_type_name = "<?= $allocation['flow_type_id']; ?>";
 		var flow_name = "<?= $allocation['flow_id']; ?>";
+
+		console.log(prcss_name, flow_type_name, flow_name);
 
 		//get other allocation data for a selected flow and flow type
 		$.ajax({
