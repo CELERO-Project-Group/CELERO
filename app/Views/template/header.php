@@ -14,7 +14,7 @@
   <link href="/assets/css/custom.css" rel="stylesheet">
   <link href="/assets/css/selectize.css" rel="stylesheet">
   <link href="/assets/css/miller.css" rel="stylesheet">
-  
+
   <link href="/assets/css/easyui-tuna.css" rel="stylesheet">
 
 
@@ -37,7 +37,7 @@
   <script src="/assets/js/map.js"></script>
   <script src="/assets/js/easy-ui-1.4.2.js"></script>
 
-  
+
   <!-- <style>
     #map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
   </style>   -->
@@ -83,7 +83,7 @@
     </ul>
   </nav>
 
-  
+
   <div class="content-container" style="margin-bottom: 20px;display: block;height: 52px;">
 
     <ul id="about" class="nav navbar-nav alt-nav" style="display:none;">
@@ -241,12 +241,12 @@
           <li><a href="<?= base_url('cost_benefit'); ?>"><i class="fa fa-euro"></i>
               <?= lang("Validation.costbenefitanalysis"); ?>
             </a></li>
-          <li><a href="<?= base_url('nis'); ?>"><i class="fa fa-exchange"></i>
+          <!-- <li><a href="<?= base_url('nis'); ?>"><i class="fa fa-exchange"></i>
               <?= lang("Validation.nis"); ?>
-            </a></li>
+            </a></li> -->
           <!--link to the ecotracking is ".not-active" atm
           <li><a class="not-active" title="Not available yet"><i class="fa fa-area-chart"></i> <?= lang("Validation.ecotracking"); ?></a></li>-->
-          <!--link to the gis panel moved to the last position and is ".not-active" atm 
+          <!--link to the gis panel moved to the last position and is ".not-active" atm
           <li><a class="not-active" title="Not available yet"><i class="fa fa-globe"></i> <?= lang("Validation.gis"); ?></a></li>-->
           <li class="pull-right"><a href="<?= base_url('closeproject'); ?>" style="padding: 15px 10px;"><i
                 class="fa fa-times-circle" title="Close Project"></i></a></li>
