@@ -130,8 +130,8 @@
         <li class="head-li"><a href="<?= base_url('profile_update'); ?>"><i class="fa fa-pencil-square-o"></i>
             <?= lang("Validation.updateprofile"); ?>
           </a></li>
-        <li class="head-li"><a href="<?= base_url('datasetexcel'); ?>"><i class="fa fa-globe"></i> Import UBP values</a>
-        </li>
+        <!-- <li class="head-li"><a href="<?= base_url('datasetexcel'); ?>"><i class="fa fa-globe"></i> Import UBP values</a>
+        </li> -->
         <li class="head-li"><a href="<?= base_url('mycompanies'); ?>" style="padding: 15px 1px 15px 21px"><i
               class="fa fa-building-o"></i>
             <?= lang("Validation.mycompanies"); ?>
