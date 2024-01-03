@@ -58,7 +58,6 @@ if ($validation != NULL)
 		</div>
 	</div>
 
-	<!-- TODO Adding  Company Flows Table here (same like in creating new allocations -->
 
 	<div class="col-md-9">
 		<div>

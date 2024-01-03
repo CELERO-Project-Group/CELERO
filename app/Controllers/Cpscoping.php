@@ -84,15 +84,15 @@ class Cpscoping extends BaseController {
 				'flow_type_name'=> 'required|trim',
 				'amount'=> 'required|trim',
 				'allocation_amount'=>  'required|trim|max_length[7]|greater_than[0]',
-				'error_amount'=> 'required|trim|integer|max_length[3]|greater_than[0]',
+				// 'error_amount'=> 'required|trim|integer|max_length[3]|greater_than[0]',
 				'unit_amount'=> 'required|trim',
 				'cost'=> 'required|trim',
 				'allocation_cost'=>  'required|trim|max_length[7]|greater_than[0]',
-				'error_cost'=>  'required|trim|integer|max_length[3]|greater_than[0]',
+				// 'error_cost'=>  'required|trim|integer|max_length[3]|greater_than[0]',
 				'unit_cost'=>  'required|trim',
 				'env_impact'=>  'required|trim|max_length[25]',
 				'allocation_env_impact'=>  'required|trim|max_length[7]|greater_than[0]',
-				'error_ep'=>  'required|trim|integer|max_length[3]|greater_than[0]',
+				// 'error_ep'=>  'required|trim|integer|max_length[3]|greater_than[0]',
 				'unit_env_impact'=>  'required|trim',
 				'reference'=>  'required|trim',
 				'unit_reference'=>  'required|trim',
@@ -107,13 +107,13 @@ class Cpscoping extends BaseController {
 			$flow_type_name = $this->request->getPost('flow_type_name');
 			$amount = $this->request->getPost('amount');
 			$allocation_amount = $this->request->getPost('allocation_amount');
-			$importance_amount = $this->request->getPost('error_amount');
+			// $importance_amount = $this->request->getPost('error_amount');
 			$cost = $this->request->getPost('cost');
 			$allocation_cost = $this->request->getPost('allocation_cost');
-			$importance_cost = $this->request->getPost('error_cost');
+			// $importance_cost = $this->request->getPost('error_cost');
 			$env_impact = $this->request->getPost('env_impact');
 			$allocation_env_impact = $this->request->getPost('allocation_env_impact');
-			$importance_env_impact = $this->request->getPost('error_ep');
+			// $importance_env_impact = $this->request->getPost('error_ep');
 			$unit_amount = $this->request->getPost('unit_amount');
 			$unit_cost = $this->request->getPost('unit_cost');
 			$unit_env_impact = $this->request->getPost('unit_env_impact');
@@ -132,15 +132,15 @@ class Cpscoping extends BaseController {
 				'amount'=>$amount,
 				'unit_amount'=>$unit_amount,
 				'allocation_amount'=>$allocation_amount,
-				'error_amount'=>$importance_amount,
+				// 'error_amount'=>$importance_amount,
 				'cost'=>$cost,
 				'unit_cost'=>$unit_cost,
 				'allocation_cost'=>$allocation_cost,
-				'error_cost'=>$importance_cost,
+				// 'error_cost'=>$importance_cost,
 				'env_impact'=>$env_impact,
 				'unit_env_impact'=>$unit_env_impact,
 				'allocation_env_impact'=>$allocation_env_impact,
-				'error_ep'=>$importance_env_impact,
+				// 'error_ep'=>$importance_env_impact,
 				'reference' => $reference,
 				'unit_reference' => $unit_reference,
 				'kpi' => $kpi,
@@ -155,7 +155,7 @@ class Cpscoping extends BaseController {
 				'cmpny_id' => $company_id
 			);
 			$cpscoping_model->set_cp_allocation_main($allocation_array);
-			return redirect()->to('cpscoping/'.$project_id.'/'.$company_id.'/show');
+			return redirect()->to('cpscoping');
 			}
 		}
 		$data['project_id'] = $project_id;
@@ -224,7 +224,7 @@ class Cpscoping extends BaseController {
 					$data['allocationveri'][$prcss_total]['unit_amount'] = '';
 					$data['allocationveri'][$prcss_total]['cost'] = '0';
 					$data['allocationveri'][$prcss_total]['unit_cost'] = '';
-					$data['allocationveri'][$prcss_total]['env_impact'] = '0';
+					$data['allocationveri'][$prcss_total]['endv_impact'] = '0';
 					$data['allocationveri'][$prcss_total]['unit_env_impact'] = '';
 				}
 				$data['allocationveri'][$prcss_total]['amount'] += $ilkveri['amount'];
