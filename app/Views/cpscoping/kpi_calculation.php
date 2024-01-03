@@ -13,6 +13,7 @@ $uri = service('uri');
 			</a>
 		</div>
 	</div>
+
 	<div class="row">
 		<div class="col-md-12" id="8lik">
 			<table id="dg" class="easyui-datagrid" data-options="
@@ -201,116 +202,118 @@ $uri = service('uri');
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script>
-				function formatDetail(value, row) {
-					var href = 'cpscoping/edit_allocation/' + value;
-					return '<a class="label label-info" href="<?= base_url("' + href + '"); ?>"><?= lang("Validation.edit"); ?></a>';
-				}
-				function formatOption(val, row) {
-					if (val == "Option") {
-						return '<span style="color:green;">(' + val + ')</span>';
-					} else {
-						return '<span style="color:darkred;">(' + val + ')</span>';
-					}
-				}
-			</script>
-			<script type="text/javascript">
-				var editIndex = undefined;
-				function endEditing() {
-					if (editIndex == undefined) { return true }
-					if ($('#dg').datagrid('validateRow', editIndex)) {
-						$('#dg').datagrid('endEdit', editIndex);
-						editIndex = undefined;
-						return true;
-					} else {
-						return false;
-					}
-				}
-				function onClickRow(index) {
-					if (editIndex != index) {
-						if (endEditing()) {
-							$('#dg').datagrid('selectRow', index)
-								.datagrid('beginEdit', index);
-							editIndex = index;
-						} else {
-							$('#dg').datagrid('selectRow', editIndex);
+
+	function formatDetail(value, row) {
+		var href = '/cpscoping/edit_allocation/' + value;
+		return '<a class="label label-info" href="' + href + '"><?= lang("Validation.edit"); ?></a>';
+	}
+
+	function formatOption(val, row) {
+		if (val == "Option") {
+			return '<span style="color:green;">(' + val + ')</span>';
+		} else {
+			return '<span style="color:darkred;">(' + val + ')</span>';
+		}
+	}
+</script>
+<script type="text/javascript">
+	var editIndex = undefined;
+	function endEditing() {
+		if (editIndex == undefined) { return true }
+		if ($('#dg').datagrid('validateRow', editIndex)) {
+			$('#dg').datagrid('endEdit', editIndex);
+			editIndex = undefined;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	function onClickRow(index) {
+		if (editIndex != index) {
+			if (endEditing()) {
+				$('#dg').datagrid('selectRow', index)
+					.datagrid('beginEdit', index);
+				editIndex = index;
+			} else {
+				$('#dg').datagrid('selectRow', editIndex);
+			}
+		}
+	}
+	function accept() {
+		if (endEditing()) {
+			var rows = $('#dg').datagrid('getRows');
+			var prjct_id = <?= $uri->getSegment(2); ?>;
+			var cmpny_id = <?= $uri->getSegment(3); ?>;
+			var promises = [];
+			$("#alerts").html("");
+			$("#myModalsave").modal("show");
+			$("#myModalsave .modal-body button").prop("disabled", true);
+			$("#myModalsave .modal-body button").text("Saving");
+			$("#alerts").fadeIn("fast");
+			$('#dg').datagrid('unselectAll');
+			$.each(rows, function (i, row) {
+				$('#dg').datagrid('endEdit', i);
+				/* var url = row.isNewRecord ? 'test.php?savetest=true' : 'test.php?updatetest=true'; */
+				var url = '../../kpi_insert/' + prjct_id + '/' + cmpny_id + '/' + row.flow_id + '/' + row.flow_type_id + '/' + row.prcss_id + '/' + row.allocation_id;
+				var request = $.ajax(url, {
+					type: 'POST',
+					dataType: 'json',
+					data: row,
+					success: function (data, textStatus, jqXHR) {
+						insertInline(i + 1, data);
+						console.log(data);
+						//if the returned data is an error it contains color:red 
+						if (data.indexOf("red") >= 0) {
+							//marks the rows which are incomplete
+							$('#dg').datagrid('selectRow', i);
 						}
-					}
-				}
-				function accept() {
-					if (endEditing()) {
-						var rows = $('#dg').datagrid('getRows');
-						var prjct_id = <?= $uri->getSegment(2); ?>;
-						var cmpny_id = <?= $uri->getSegment(3); ?>;
-						var promises = [];
-						$("#alerts").html("");
-						$("#myModalsave").modal("show");
-						$("#myModalsave .modal-body button").prop("disabled", true);
-						$("#myModalsave .modal-body button").text("Saving");
-						$("#alerts").fadeIn("fast");
-						$('#dg').datagrid('unselectAll');
-						$.each(rows, function (i, row) {
-							$('#dg').datagrid('endEdit', i);
-							/* var url = row.isNewRecord ? 'test.php?savetest=true' : 'test.php?updatetest=true'; */
-							var url = '../../kpi_insert/' + prjct_id + '/' + cmpny_id + '/' + row.flow_id + '/' + row.flow_type_id + '/' + row.prcss_id + '/' + row.allocation_id;
-							var request = $.ajax(url, {
-								type: 'POST',
-								dataType: 'json',
-								data: row,
-								success: function (data, textStatus, jqXHR) {
-									insertInline(i + 1, data);
-									console.log(data);
-									//if the returned data is an error it contains color:red 
-									if (data.indexOf("red") >= 0) {
-										//marks the rows which are incomplete
-										$('#dg').datagrid('selectRow', i);
-									}
-								},
-								error: function (jqXHR, textStatus, errorThrown) {
-									console.log(textStatus, errorThrown);
-								},
-							});
-							promises.push(request);
-						});
-					}
-					//allows to do something after all requests in the loop are finished
-					$.when.apply(null, promises).done(function () {
-						$("#myModalsave .modal-body button").prop("disabled", false);
-						$("#myModalsave .modal-body button").text("Done");
-						deneme();
-					})
-				}
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						console.log(textStatus, errorThrown);
+					},
+				});
+				promises.push(request);
+			});
+		}
+		//allows to do something after all requests in the loop are finished
+		$.when.apply(null, promises).done(function () {
+			$("#myModalsave .modal-body button").prop("disabled", false);
+			$("#myModalsave .modal-body button").text("Done");
+			deneme();
+		})
+	}
 
 
-				function reject() {
-					$('#dg').datagrid('rejectChanges');
-					editIndex = undefined;
-				}
-				function getChanges() {
-					var rows = $('#dg').datagrid('getChanges');
-					alert(rows.length + ' rows are changed!');
-				}
+	function reject() {
+		$('#dg').datagrid('rejectChanges');
+		editIndex = undefined;
+	}
+	function getChanges() {
+		var rows = $('#dg').datagrid('getChanges');
+		alert(rows.length + ' rows are changed!');
+	}
 
-				//allows to sort the answers/rows from the asynchronous post from the save (accept() function)
-				function insertInline(rownumber, data) {
-					var curDomElement;
-					var prevDomElement;
-					var insertBefore;
-					$('#alerts div').each(function (index) {
-						prevDomElement = curDomElement;
-						curDomElement = $(this);
-						if (parseInt(curDomElement.data('row')) > rownumber) {
-							insertBefore = curDomElement;
-							return false;
-						}
-					});
-					if (insertBefore) {
-						$("<div data-row=" + rownumber + ">Row " + rownumber + ": " + data + "</div)").insertBefore(insertBefore);
-					} else {
-						$("#alerts").append("<div data-row=" + rownumber + ">Row " + rownumber + ": " + data + "</div)");
-					}
-				}
+	//allows to sort the answers/rows from the asynchronous post from the save (accept() function)
+	function insertInline(rownumber, data) {
+		var curDomElement;
+		var prevDomElement;
+		var insertBefore;
+		$('#alerts div').each(function (index) {
+			prevDomElement = curDomElement;
+			curDomElement = $(this);
+			if (parseInt(curDomElement.data('row')) > rownumber) {
+				insertBefore = curDomElement;
+				return false;
+			}
+		});
+		if (insertBefore) {
+			$("<div data-row=" + rownumber + ">Row " + rownumber + ": " + data + "</div)").insertBefore(insertBefore);
+		} else {
+			$("#alerts").append("<div data-row=" + rownumber + ">Row " + rownumber + ": " + data + "</div)");
+		}
+	}
 
-			</script>
+</script>
 <script type="text/javascript">
 	function deneme() {
 		var prjct_id = <?= $uri->getSegment(2); ?>;
