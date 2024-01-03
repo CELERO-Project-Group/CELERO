@@ -31,8 +31,6 @@ $uri = service('uri');
                                         <?php endif; ?>
                                         <br>
                                         <?php if (isset($a['is_id'])): ?>
-                                            <?php $prjct_id = $a['prjct_id']; ?>
-                                            <?php $cmpny_id = $a['cmpny_id']; ?>
                                             <?php $all_id = $a['is_id']; ?>
                                             <!-- type_id -> 1 for is_id link -->
                                             <?php $type_id = 1; ?>
