@@ -28,18 +28,17 @@ $uri = service('uri');
                                             <?php $all_id = $a['allocation_id']; ?>
                                             <!-- type_id -> 0 for allocation_id link -->
                                             <?php $type_id = 0; ?>
-                                            <?php echo "Allocation: "; print_r($all_id) ?>
                                         <?php endif; ?>
                                         <br>
                                         <?php if (isset($a['is_id'])): ?>
+                                            <?php $prjct_id = $a['prjct_id']; ?>
+                                            <?php $cmpny_id = $a['cmpny_id']; ?>
                                             <?php $all_id = $a['is_id']; ?>
                                             <!-- type_id -> 1 for is_id link -->
                                             <?php $type_id = 1; ?>
-                                            <?php echo "is ID: "; print_r($all_id) ?>
                                         <?php endif; ?>
 
-                                        <?php print_r($a) ?>
-                                        
+                                   
                                             <!-- cp_or_is variable set based on available/empty $a['cp_id'] -->
                                             <?php if (!empty($a['cp_id'])) {
                                                 $iid = $a['cp_id'];
