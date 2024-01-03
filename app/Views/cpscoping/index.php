@@ -23,7 +23,7 @@
         });
     });
 </script>
-
+<div class="row">
 
 <div class="col-md-3">
     <p><?= lang("Validation.cpheading"); ?></p>
@@ -87,4 +87,5 @@
         </table>
         <?php $i++; ?>
     <?php endforeach ?>
+</div>
 </div>
