@@ -40,6 +40,13 @@
         <p class="lead">
             <?= lang("Validation.addflow"); ?>
         </p>
+        <div class="row">
+		<div class="col-md-12" style="margin-bottom: 10px;">
+			<a href="<?= base_url('datasetexcel'); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga">
+				<?= lang("Validation.importubp"); ?>
+			</a>
+		</div>
+	</div>
         <!-- this is the new automatic Flow selector and EP calculator -->
         <div class="form-group">
             <label for="epcalc">

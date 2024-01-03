@@ -7,6 +7,14 @@
 	} );
 </script>
 
+<div class="row">
+		<div class="col-md-12" style="margin-bottom: 10px;">
+			<a href="javascript:void(0);" onclick="window.history.back();" class="btn btn-inverse btn-sm" id="cpscopinga">
+				<?= lang("Validation.goback"); ?>
+			</a>
+		</div>
+	</div>
+
 <div style="padding:20px;padding-top:0px;">
 	<div class="row">
 		<div class="col-md-12" style="margin-bottom:30px; background-color:#f0f0f0; padding:20px;">

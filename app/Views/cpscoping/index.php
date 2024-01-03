@@ -44,6 +44,7 @@
         <div class="boxcontent">
             <a href="<?= base_url('cpscoping/'.session()->project_name['id'].'/'.$cp['company_id'].'/allocation'); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("Validation.createallocation"); ?></a>
             <a href="<?= base_url('new_flow/'.$cp['company_id']); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga"><?= lang("Validation.datasetmanagement"); ?></a>
+
         </div>
     <?php endforeach ?><br>
 </div>

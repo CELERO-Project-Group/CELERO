@@ -14,6 +14,16 @@ $uri = service('uri');
 
     .dropdowni {overflow:visible; position:relative;}
     </style>
+    <div class="row">
+		<div class="col-md-12" style="margin-bottom: 10px;">
+			<a href="<?= base_url('cpscoping'); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga">
+				<?= lang("Validation.gotocpscoping"); ?>
+			</a>
+			<a href="<?= base_url('new_flow/' . $uri->getSegment(3)); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga">
+				<?= lang("Validation.gotodataset"); ?>
+			</a>
+		</div>
+	</div>
 <div class="row">
 <div class="col-md-12">
     <div class="lead"><?= $company['name']; ?></div>

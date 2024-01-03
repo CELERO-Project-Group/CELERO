@@ -6,6 +6,16 @@
 	$uri = service('uri');
 
  ?>
+<div class="row">
+		<div class="col-md-12" style="margin-bottom: 10px;">
+			<a href="<?= base_url('cpscoping'); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga">
+				<?= lang("Validation.gotocpscoping"); ?>
+			</a>
+			<a href="<?= base_url('company/'.$company_info['id']); ?>/" class="btn btn-inverse btn-sm" id="cpscopinga">
+				<?= lang("Validation.gotocompany"); ?>
+			</a>
+		</div>
+	</div>
  <div class="row">
 <div class="col-md-12">
 	<?php
@@ -17,8 +27,6 @@
 		<div class="pull-right">
 		<span class="label label-default"><b><?= lang("Validation.email"); ?>:</b> <?= $company_info['email']; ?></span>
 		<span class="label label-default"><b><?= lang("Validation.cellphone"); ?>:</b> <?= $company_info['phone_num_1']; ?></span>
-		<span><a href="<?= base_url('company/'.$company_info['id']); ?>" class="label label-primary"><?= lang("Validation.gotocompany"); ?></a></span>
-		<span><a href="<?= base_url('datasetexcel'); ?>" class="label label-primary">Add Data From Excel File</a></span>
 		</div>
 	</div>
 	<div>

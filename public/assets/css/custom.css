@@ -140,6 +140,7 @@ body {
 .btn-inverse {
     color: black;
     background: rgb(227, 234, 239);
+
     /* Old browsers */
     /* FF3.6+ */
     /* Chrome,Safari4+ */
@@ -275,6 +276,9 @@ td {
     border-radius: 0 0 4px 4px;
     margin-bottom: 15px;
     border-top: none;
+    justify-content: space-around;
+    display: flex;
+
 }
 
 .table-bordered {
