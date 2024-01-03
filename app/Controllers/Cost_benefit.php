@@ -54,10 +54,8 @@ class Cost_benefit extends BaseController
 
         $data = $this->request->getPost('companies');
 
-        // Debugging
-        echo "<pre>";
         print_r($data);
-        echo "</pre>";
+
 
         if (is_array($data)) {
             foreach ($data as $entry) {
@@ -78,10 +76,31 @@ class Cost_benefit extends BaseController
             echo "Received data is not an array.";
         }
 
+
         // Redirect or do whatever you want after saving
-        return redirect()->to(site_url('cost_benefit'));
+       return redirect()->to(site_url('cost_benefit'));
     }
 
+    public function deleteAllocationTable($prjct_id, $cmpny_id,$type_id, $all_id) {
+
+        $cpscoping_model = model(Cpscoping_model::class);
+        $user_model = model(User_model::class);
+		$project_model = model(Project_model::class);
+
+
+		$c_user = $user_model->get_session_user();
+		if($project_model->can_update_project_information($c_user['id'], $prjct_id) == false){
+			return redirect()->to(site_url());
+		}else{
+            $cpscoping_model->delete_allocation_table($prjct_id, $cmpny_id, $type_id, $all_id);
+			return redirect()->to(site_url('cost_benefit/'. $prjct_id .'/' . $cmpny_id));
+		}
+     
+       
+
+
+
+    }
 
     //cost-benefit analysis form saving
     public function save($prjct_id, $cmpny_id, $id, $cp_or_is)

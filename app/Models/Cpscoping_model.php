@@ -328,6 +328,36 @@ class Cpscoping_model extends Model
 		}
 	}
 
+	//allocation delete model with table from cost_benefit
+	public function delete_allocation_table($prjct_id,$cmpny_id,$type_id, $all_id)
+	{
+		$db = db_connect();
+
+		//if there is a $allocation_id
+		if ($type_id == 0)
+		{
+			$builder = $db->table('t_cp_allocation');
+			$builder->where('id', $all_id);
+			$builder->delete();
+
+			$builder = $db->table('t_cp_company_project');
+			$builder->where('allocation_id', $all_id);
+			$builder->where('prjct_id', $prjct_id);
+			$builder->where('cmpny_id', $cmpny_id);
+			$builder->delete();
+		}
+
+		//if there is an is_id
+		if ($type_id = 1)
+		{
+			$builder = $db->table('t_is_prj_details');
+			$builder->where('id', $all_id);
+			$builder->delete();
+		}
+
+	}
+
+
 	//allocation delete model
 	public function delete_allocation($allocation_id, $project_id, $company_id)
 	{
