@@ -46,6 +46,8 @@ $uri = service('uri');
                                             <?php $type_id = 1; ?>
                                         <?php endif; ?>
 
+                                        <?php print_r($a); ?>
+
                                    
                                             <!-- cp_or_is variable set based on available/empty $a['cp_id'] -->
                                             <?php if (!empty($a['cp_id'])) {
@@ -1058,6 +1060,9 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
                                     <?php endif ?>
 
                                     var k= <?= $k; ?>;
+                                    
+                                    
+
     
                                     if(document.getElementById('flow-name-1-'+k).value=="" || document.getElementById('flow-value-1-'+k).value==""){
                                         document.getElementById('flow-name-1-'+k).value = flownamedef;
@@ -1075,7 +1080,11 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
                                         document.getElementById('flow-specost-2-'+k).value = cost/amount;
                                         document.getElementById('flow-eipunit-2-'+k).value = env_impact/amount;
                                     }
-
+                                    console.log(flownamedef);
+                                    console.log("Cost: " + cost)
+                                    console.log("Amount: " + amount)
+                                    console.log("Sum: " + cost/amount);
+                                    
                                 </script>
 
                                 <script type="text/javascript">
@@ -1090,6 +1099,8 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
                                     //gets the cmpny flow array as json in JS
                                     var flow_array = <?= json_encode($allocated_flows); ?>;
 
+                                    console.log("Not Defined:" + flow_array);
+
                                     //loops through all flows and gets the one that is selected
                                     for (flow in flow_array){
                                         if (flow_array[flow]['allocation_id'] == selected_id){
@@ -1097,6 +1108,8 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
                                             $('#flow-name-'+table_key).val(flow_array[flow]['flow_name'] +" ("+ flow_array[flow]['flow_type_name']+")");
                                             $('#flow-value-'+table_key).val(flow_array[flow]['amount']);
                                             $('#flow-unit-'+table_key).val(flow_array[flow]['unit_amount']);
+                                            // $('#flow-specost-'+table_key).val(flow_array[flow]['cost']/flow_array[flow]['amount']);
+                                            // $('#flow-eipunit-'+table_key).val(flow_array[flow]['env_impact']/flow_array[flow]['amount']);
                                             $('#flow-specost-'+table_key).val(flow_array[flow]['cost']/flow_array[flow]['amount']);
                                             $('#flow-eipunit-'+table_key).val(flow_array[flow]['env_impact']/flow_array[flow]['amount']);
 
