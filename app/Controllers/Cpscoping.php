@@ -46,6 +46,7 @@ class Cpscoping extends BaseController {
 			}
 			$data['flow_prcss'] = $deneme;
 			$data['com_pro'] = $result;
+			
 			echo view('template/header');
 			echo view('cpscoping/index',$data);
 			echo view('template/footer');
@@ -148,6 +149,18 @@ class Cpscoping extends BaseController {
 				'kpidef' => $kpidef,
 				'nameofref' => $nameofref
 			);
+
+			// Keys to be excluded (don't need them anymore)
+			$keys_to_exclude = ['error_amount', 'error_cost', 'error_ep'];
+
+			// Remove unwanted keys from the array
+			foreach ($keys_to_exclude as $key) {
+				unset($array_allocation[$key]);
+			}
+
+
+
+
 			$insertID = $cpscoping_model->set_cp_allocation($array_allocation);
 			$allocation_array = array(
 				'allocation_id' => $insertID,
@@ -328,6 +341,16 @@ class Cpscoping extends BaseController {
 				'nameofref' => $nameofref,
 				'unit_kpi' => $unit_kpi
 			);
+
+			// Keys to be excluded
+			$keys_to_exclude = ['error_amount', 'error_cost', 'error_ep'];
+
+			// Remove unwanted keys from the array
+			foreach ($keys_to_exclude as $key) {
+				unset($array_allocation[$key]);
+			}
+
+
 			$cpscoping_model->update_cp_allocation($array_allocation,$allocation_id);
 
 			return redirect()->to('cpscoping');
