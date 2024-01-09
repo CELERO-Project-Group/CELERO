@@ -46,7 +46,7 @@ $uri = service('uri');
                                             <?php $type_id = 1; ?>
                                         <?php endif; ?>
 
-                                        <?php print_r($a); ?>
+                               
 
                                    
                                             <!-- cp_or_is variable set based on available/empty $a['cp_id'] -->

@@ -69,6 +69,7 @@
                 <th style="width: 500px;"><?= lang("Validation.processname"); ?></th>
                 <th style="width: 400px;"><?= lang("Validation.flowname"); ?></th>
                 <th style="width: 200px;"><?= lang("Validation.flowtype"); ?></th>
+                <th style="width: 200px;"><?= lang("Validation.kpidef"); ?></th>
                 <th><?= lang("Validation.manage"); ?></th>
             </tr>
         <?php endif ?>
@@ -78,6 +79,7 @@
                 <td><?= $flow_prcss[$i][$k]['prcss_name']; ?></td>
                 <td><?= $flow_prcss[$i][$k]['flow_name']; ?></td>
                 <td><?= $flow_prcss[$i][$k]['flow_type_name']; ?></td>
+                <td><?= $flow_prcss[$i][$k]['kpidef']; ?></td>
                 <td>
                     <a class="label label-info" href="<?= base_url('cpscoping/edit_allocation/'.$flow_prcss[$i][$k]['allocation_id']); ?>"><?= lang("Validation.editallocation"); ?></a>
                     <a class="label label-danger" href="<?= base_url('cpscoping/delete/'.$flow_prcss[$i][$k]['allocation_id'].'/'.$flow_prcss[$i][$k]['project_id'].'/'.$flow_prcss[$i][$k]['company_id']); ?>" 

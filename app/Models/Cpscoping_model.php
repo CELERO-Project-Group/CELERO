@@ -184,6 +184,7 @@ class Cpscoping_model extends Model
 		$builder = $db->table('t_cp_company_project');
 		$builder->select('t_prcss.name as prcss_name, t_flow.name as flow_name, t_flow_type.name as flow_type_name, t_cp_company_project.allocation_id as allocation_id, t_cp_company_project.prjct_id as project_id, t_cp_company_project.cmpny_id as company_id');
 		$builder->join('t_cp_allocation', 't_cp_allocation.id = t_cp_company_project.allocation_id');
+		$builder->select('t_cp_company_project.*, t_cp_allocation.kpidef');
 		$builder->join('t_flow', 't_flow.id = t_cp_allocation.flow_id');
 		$builder->join('t_flow_type', 't_flow_type.id = t_cp_allocation.flow_type_id');
 		$builder->join('t_cmpny_prcss', 't_cmpny_prcss.id = t_cp_allocation.prcss_id');
