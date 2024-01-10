@@ -27,7 +27,7 @@ $uri = service('uri');
 <div class="row">
 <div class="col-md-12">
     <div class="lead"><?= $company['name']; ?></div>
-    <?php $allocation = array_merge($allocation, $is); ?>
+    <?php $allocation = array_merge($allocation, $is['to_company'], $is['from_company']); ?>
     <p><?= lang("Validation.cbaheading"); ?></p>
     <?php if (!empty($allocation)): ?>
                                     <?php $i = 1; ?>
@@ -1080,10 +1080,10 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
                                         document.getElementById('flow-specost-2-'+k).value = cost/amount;
                                         document.getElementById('flow-eipunit-2-'+k).value = env_impact/amount;
                                     }
-                                    console.log(flownamedef);
-                                    console.log("Cost: " + cost)
-                                    console.log("Amount: " + amount)
-                                    console.log("Sum: " + cost/amount);
+                                    // console.log(flownamedef);
+                                    // console.log("Cost: " + cost)
+                                    // console.log("Amount: " + amount)
+                                    // console.log("Sum: " + cost/amount);
                                     
                                 </script>
 

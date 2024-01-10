@@ -147,7 +147,7 @@ class Cpscoping_model extends Model
 		return $data;
 	}
 
-	public function get_cost_benefit_info_is($cmpny_id, $prjct_id)
+	public function get_cost_benefit_info_is_to_company($cmpny_id, $prjct_id)
 	{
 		$db = db_connect();
 		$builder = $db->table('t_is_prj_details');
@@ -170,10 +170,33 @@ class Cpscoping_model extends Model
 		return $data;
 	}
 
+	public function get_cost_benefit_info_is_from_company($cmpny_id, $prjct_id)
+	{
+		$db = db_connect();
+		$builder = $db->table('t_is_prj_details');
+		$builder->select('DISTINCT on ("t_is_prj_details"."id") *,
+		t_is_prj_details.id as is_id,
+		t_cmpny_flow.qntty as qntty,
+		t_unit.name as qntty_unit,
+		t_cmpny_flow.cost as cost,
+		t_cmpny_flow.ep as ep,
+		t_flow.name as flow_name,
+		t_cmpny.name as cmpny_from_name,
+		');
+		$builder->join('t_flow', 't_flow.id = t_is_prj_details.flow_id');
+		$builder->join('t_cmpny', 't_cmpny.id = t_is_prj_details.cmpny_from_id');
+		$builder->join('t_cmpny_flow', 't_cmpny_flow.flow_id = t_is_prj_details.flow_id and t_cmpny_flow.cmpny_id = t_is_prj_details.cmpny_to_id');
+		$builder->join('t_unit', 't_unit.id = t_cmpny_flow.qntty_unit_id');
+		$builder->join('t_costbenefit_temp', 't_costbenefit_temp.is_id = t_is_prj_details.id', 'left');
+		$builder->where('t_is_prj_details.cmpny_from_id', $cmpny_id);
+		$data = $builder->get()->getResultArray();
+		return $data;
+	}
+
 	public function insertNewIsData($data)
     {
         $db = db_connect();
-        $builder = $db->table('t_is_prj_details'); // Tablo adınız
+        $builder = $db->table('t_is_prj_details'); 
         
         return $builder->insert($data);
     }

@@ -25,8 +25,10 @@ class Cost_benefit extends BaseController
         }
         $data['company'] = $company_model->get_company($cmpny_id);
         $data['allocation'] = $cpscoping_model->get_cost_benefit_info($cmpny_id, $prjct_id);
-        $data['is'] = $cpscoping_model->get_cost_benefit_info_is($cmpny_id, $prjct_id);
+        $data['is']['to_company'] = $cpscoping_model->get_cost_benefit_info_is_to_company($cmpny_id, $prjct_id);
+        $data['is']['from_company'] = $cpscoping_model->get_cost_benefit_info_is_from_company($cmpny_id, $prjct_id);
 
+        print_r($data['is']);
         echo view('template/header');
         echo view('cost_benefit/index', $data);
         echo view('template/footer');
@@ -40,22 +42,20 @@ class Cost_benefit extends BaseController
         if ($cpscoping_model->can_consultant_prjct($this->session->id) == false) {
             return redirect()->to(site_url(''));
         }
+
         $data['com_pro'] = $project_model->get_prj_companies(session()->project_id);
+        print_r($data['com_pro']);
 
         echo view('template/header');
         echo view('cost_benefit/list', $data);
         echo view('template/footer');
     }
 
-    public function saveNewISScopingPotential()
-    {
-
+    public function saveNewISScopingPotential($prj_id)
+    {      
         $Cpscoping_model = model(Cpscoping_model::class);
 
         $data = $this->request->getPost('companies');
-
-        print_r($data);
-
 
         if (is_array($data)) {
             foreach ($data as $entry) {
@@ -64,7 +64,7 @@ class Cost_benefit extends BaseController
                         'cmpny_from_id' => $entry['from_id'],
                         'cmpny_to_id' => $entry['to_id'],
                         'flow_id' => $entry['flow_id'],
-                        'is_prj_id' => 130,
+                        'is_prj_id' => $prj_id,
                     ];
 
                     $Cpscoping_model->insertNewIsData($formattedEntry);
@@ -78,7 +78,7 @@ class Cost_benefit extends BaseController
 
 
         // Redirect or do whatever you want after saving
-       return redirect()->to(site_url('cost_benefit'));
+        return redirect()->to(site_url('cost_benefit'));
     }
 
     public function deleteAllocationTable($prjct_id, $cmpny_id,$type_id, $all_id) {

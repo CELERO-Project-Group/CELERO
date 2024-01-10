@@ -2,14 +2,20 @@
 <script type="text/javascript" src="<?= base_url('assets/js/jquery.json2html.js'); ?>"></script>
 <script type="text/javascript" src="<?= base_url('assets/js/selectize.min.js'); ?>"></script>
 
+
+
 <div class="">
   <div style="padding:10px 20px;">
     <div>Select Flows to Filter. You can select multiple flows</div>
     <small>When flows selected, system will only show companies which have selected flows in its dataset.</small>
     <select id="selectize-units" class="info select-block" name="selectedFlows" multiple>
-      <option value="" disabled selected><?= lang("Validation.pleaseselect"); ?></option>
-      <?php foreach ($flowlist as $flow) : ?>
-        <option value="<?= $flow['id']; ?>"><?= $flow['name']; ?></option>
+      <option value="" disabled selected>
+        <?= lang("Validation.pleaseselect"); ?>
+      </option>
+      <?php foreach ($flowlist as $flow): ?>
+        <option value="<?= $flow['id']; ?>">
+          <?= $flow['name']; ?>
+        </option>
       <?php endforeach ?>
     </select>
 
@@ -24,14 +30,18 @@
         <table style="clear:both; width: 100%;" class="table-hover">
           <?php //print_r($companies); 
           ?>
-          <?php foreach ($companies as $com) : ?>
+          <?php foreach ($companies as $com): ?>
             <tr>
               <td style="padding: 10px 15px;">
                 <a class="a" href="javascript:;" id="<?= $com['id']; ?>" style="display: block; cursor:pointer;">
                   <div class="row">
                     <div class="col-md-9">
-                      <div><b><?= $com['name']; ?></b></div>
-                      <div><span style="color:#999999; font-size:12px;"><?= $com['description']; ?></span></div>
+                      <div><b>
+                          <?= $com['name']; ?>
+                        </b></div>
+                      <div><span style="color:#999999; font-size:12px;">
+                          <?= $com['description']; ?>
+                        </span></div>
                     </div>
                     <div class="col-md-3">
 
@@ -55,7 +65,9 @@
       </div>
     </div>
     <div class="col-md-6">
-      <div class="swissheader"><?= $cluster_name['name']; ?></div>
+      <div class="swissheader">
+        <?= $cluster_name['name']; ?>
+      </div>
       <!-- harita -->
       <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.3/dist/leaflet.css" />
       <script src="https://unpkg.com/leaflet@0.7.3/dist/leaflet.js"></script>
@@ -107,7 +119,16 @@
           <!-- Burada eklenen veriler gösterilecek -->
         </tbody>
       </table>
-      <form id="dataForm" action="/savenewisscoping" method="post">
+      <?php
+        $prjct_id = null; // Initialize $prjct_id to a default value
+
+      foreach ($companies as $cp):
+        if (isset($cp['prj_id'])):
+          $prjct_id = $cp['prj_id']; // Update $prjct_id when a valid 'prj_id' is found
+        endif;
+      endforeach;
+          ?>
+      <form id="dataForm" action="/savenewisscoping/<?php echo $prjct_id; ?>" method="post">
         <?= csrf_field() ?>
         <!-- Hidden fields will be dynamically added here -->
         <input type="submit" value="Send to CBA">
@@ -118,7 +139,7 @@
   </div>
 </div>
 <script type="text/javascript">
-  $(".a").click(function() {
+  $(".a").click(function () {
     markerFunction($(this)[0].id);
     //alert("as");
   });
@@ -142,8 +163,8 @@
   var markers = [];
   for (var i = 0; i < planes.length; i++) {
     marker = new L.marker([planes[i][0], planes[i][1]], {
-        id: planes[i][3]
-      })
+      id: planes[i][3]
+    })
       .bindPopup(planes[i][2])
       .addTo(map)
       .on('popupopen', onClick);
@@ -174,11 +195,11 @@
       data: {
         format: 'json'
       },
-      error: function() {
+      error: function () {
         $('#info').html('<p>An error has occurred</p>');
       },
       dataType: 'json',
-      success: function(data) {
+      success: function (data) {
         //alert("ds");
         console.log(data);
         //var $title = $('<h1>').text(data.name);
@@ -190,267 +211,267 @@
           "tag": "table",
           "class": "table table-bordered",
           "children": [{
-              "tag": "tbody",
+            "tag": "tbody",
+            "children": [{
+              "tag": "tr",
               "children": [{
-                  "tag": "tr",
-                  "children": [{
-                      "tag": "td",
-                      "html": "Company ID"
-                    },
-                    {
-                      "tag": "td",
-                      "colspan": "4",
-                      "html": "${company_info.id}"
-                    }
-                  ]
-                },
-                {
-                  "tag": "tr",
-                  "children": [{
-                      "tag": "td",
-                      "html": "Company Info"
-                    },
-                    {
-                      "tag": "td",
-                      "colspan": "4",
-                      "html": "<h4>${company_info.name}</h4>"
-                    }
-                  ]
-                },
-                {
-                  "tag": "tr",
-                  "children": [{
-                      "tag": "td",
-                      "html": "E-mail"
-                    },
-                    {
-                      "tag": "td",
-                      "colspan": "4",
-                      "html": "${company_info.email}"
-                    }
-                  ]
-                },
-                {
-                  "tag": "tr",
-                  "children": [{
-                      "tag": "td",
-                      "html": "Phone"
-                    },
-                    {
-                      "tag": "td",
-                      "colspan": "4",
-                      "html": "${company_info.phone_num_1}"
-                    }
-                  ]
-                },
-                {
-                  "tag": "tr",
-                  "children": [{
-                      "tag": "td",
-                      "html": "Work Phone"
-                    },
-                    {
-                      "tag": "td",
-                      "colspan": "4",
-                      "html": "${company_info.phone_num_2}"
-                    }
-                  ]
-                },
-                {
-                  "tag": "tr",
-                  "children": [{
-                      "tag": "td",
-                      "html": "Fax Phone"
-                    },
-                    {
-                      "tag": "td",
-                      "colspan": "4",
-                      "html": "${company_info.fax_num}"
-                    }
-                  ]
-                },
-                {
-                  "tag": "tr",
-                  "children": [{
-                      "tag": "td",
-                      "html": "Address"
-                    },
-                    {
-                      "tag": "td",
-                      "colspan": "4",
-                      "html": "${company_info.address}"
-                    }
-                  ]
-                }
+                "tag": "td",
+                "html": "Company ID"
+              },
+              {
+                "tag": "td",
+                "colspan": "4",
+                "html": "${company_info.id}"
+              }
               ]
             },
             {
-              "tag": "tbody",
+              "tag": "tr",
               "children": [{
-                  "tag": "tr",
-                  "class": "success",
-                  "children": [{
-                    "tag": "th",
-                    "colspan": "5",
-                    "html": "Company Flows"
-                  }]
-                },
-                {
-                  "tag": "tr",
-                  "children": [{
-                      "tag": "th",
-                      "html": "Flow Name"
-                    },
-                    {
-                      "tag": "th",
-                      "html": "Flow Type"
-                    },
-                    {
-                      "tag": "th",
-                      "html": "Quantity"
-                    },
-                    {
-                      "tag": "th",
-                      "html": "Cost"
-                    },
-                    {
-                      "tag": "th",
-                      "html": "EP"
-                    }
-                  ]
-                },
-
-                {
-                  "tag": "tbody",
-                  "children": function() {
-                    return (json2html.transform(this.company_flows, company_flows_transform, {
-                      'events': true
-                    }));
-                  }
-                }
+                "tag": "td",
+                "html": "Company Info"
+              },
+              {
+                "tag": "td",
+                "colspan": "4",
+                "html": "<h4>${company_info.name}</h4>"
+              }
               ]
             },
             {
-              "tag": "tbody",
+              "tag": "tr",
               "children": [{
-                  "tag": "tr",
-                  "class": "success",
-                  "children": [{
-                    "tag": "th",
-                    "colspan": "5",
-                    "html": "Company Processes"
-                  }]
-                },
-                {
-                  "tag": "tr",
-                  "children": [{
-                      "tag": "th",
-                      "colspan": "3",
-                      "html": "Process Name"
-                    },
-                    {
-                      "tag": "th",
-                      "html": "Flow Name"
-                    },
-                    {
-                      "tag": "th",
-                      "html": "Flow Type"
-                    },
-                  ]
-                },
-
-                {
-                  "tag": "tbody",
-                  "children": function() {
-                    return (json2html.transform(this.company_prcss, company_process_transform, {
-                      'events': true
-                    }));
-                  }
-                }
+                "tag": "td",
+                "html": "E-mail"
+              },
+              {
+                "tag": "td",
+                "colspan": "4",
+                "html": "${company_info.email}"
+              }
               ]
             },
             {
-              "tag": "tbody",
+              "tag": "tr",
               "children": [{
-                  "tag": "tr",
-                  "class": "success",
-                  "children": [{
-                    "tag": "th",
-                    "colspan": "5",
-                    "html": "Company Equipment"
-                  }]
-                },
-                {
-                  "tag": "tr",
-                  "children": [{
-                      "tag": "th",
-                      "colspan": "3",
-                      "html": "Equipment Name"
-                    },
-                    {
-                      "tag": "th",
-                      "html": "Equipment Type Name"
-                    },
-                    {
-                      "tag": "th",
-                      "html": "Used Process"
-                    },
-                  ]
-                },
-
-                {
-                  "tag": "tbody",
-                  "children": function() {
-                    return (json2html.transform(this.company_equipment, company_eq_transform, {
-                      'events': true
-                    }));
-                  }
-                }
+                "tag": "td",
+                "html": "Phone"
+              },
+              {
+                "tag": "td",
+                "colspan": "4",
+                "html": "${company_info.phone_num_1}"
+              }
               ]
             },
             {
-              "tag": "tbody",
+              "tag": "tr",
               "children": [{
-                  "tag": "tr",
-                  "class": "success",
-                  "children": [{
-                    "tag": "th",
-                    "colspan": "5",
-                    "html": "Company Products"
-                  }]
-                },
-                {
-                  "tag": "tr",
-                  "children": [{
-                      "tag": "th",
-                      "colspan": "3",
-                      "html": "Product Name"
-                    },
-                    {
-                      "tag": "th",
-                      "html": "Period"
-                    },
-                    {
-                      "tag": "th",
-                      "html": "Cost"
-                    },
-                  ]
-                },
-
-                {
-                  "tag": "tbody",
-                  "children": function() {
-                    return (json2html.transform(this.company_product, company_prd_transform, {
-                      'events': true
-                    }));
-                  }
-                }
+                "tag": "td",
+                "html": "Work Phone"
+              },
+              {
+                "tag": "td",
+                "colspan": "4",
+                "html": "${company_info.phone_num_2}"
+              }
+              ]
+            },
+            {
+              "tag": "tr",
+              "children": [{
+                "tag": "td",
+                "html": "Fax Phone"
+              },
+              {
+                "tag": "td",
+                "colspan": "4",
+                "html": "${company_info.fax_num}"
+              }
+              ]
+            },
+            {
+              "tag": "tr",
+              "children": [{
+                "tag": "td",
+                "html": "Address"
+              },
+              {
+                "tag": "td",
+                "colspan": "4",
+                "html": "${company_info.address}"
+              }
               ]
             }
+            ]
+          },
+          {
+            "tag": "tbody",
+            "children": [{
+              "tag": "tr",
+              "class": "success",
+              "children": [{
+                "tag": "th",
+                "colspan": "5",
+                "html": "Company Flows"
+              }]
+            },
+            {
+              "tag": "tr",
+              "children": [{
+                "tag": "th",
+                "html": "Flow Name"
+              },
+              {
+                "tag": "th",
+                "html": "Flow Type"
+              },
+              {
+                "tag": "th",
+                "html": "Quantity"
+              },
+              {
+                "tag": "th",
+                "html": "Cost"
+              },
+              {
+                "tag": "th",
+                "html": "EP"
+              }
+              ]
+            },
+
+            {
+              "tag": "tbody",
+              "children": function () {
+                return (json2html.transform(this.company_flows, company_flows_transform, {
+                  'events': true
+                }));
+              }
+            }
+            ]
+          },
+          {
+            "tag": "tbody",
+            "children": [{
+              "tag": "tr",
+              "class": "success",
+              "children": [{
+                "tag": "th",
+                "colspan": "5",
+                "html": "Company Processes"
+              }]
+            },
+            {
+              "tag": "tr",
+              "children": [{
+                "tag": "th",
+                "colspan": "3",
+                "html": "Process Name"
+              },
+              {
+                "tag": "th",
+                "html": "Flow Name"
+              },
+              {
+                "tag": "th",
+                "html": "Flow Type"
+              },
+              ]
+            },
+
+            {
+              "tag": "tbody",
+              "children": function () {
+                return (json2html.transform(this.company_prcss, company_process_transform, {
+                  'events': true
+                }));
+              }
+            }
+            ]
+          },
+          {
+            "tag": "tbody",
+            "children": [{
+              "tag": "tr",
+              "class": "success",
+              "children": [{
+                "tag": "th",
+                "colspan": "5",
+                "html": "Company Equipment"
+              }]
+            },
+            {
+              "tag": "tr",
+              "children": [{
+                "tag": "th",
+                "colspan": "3",
+                "html": "Equipment Name"
+              },
+              {
+                "tag": "th",
+                "html": "Equipment Type Name"
+              },
+              {
+                "tag": "th",
+                "html": "Used Process"
+              },
+              ]
+            },
+
+            {
+              "tag": "tbody",
+              "children": function () {
+                return (json2html.transform(this.company_equipment, company_eq_transform, {
+                  'events': true
+                }));
+              }
+            }
+            ]
+          },
+          {
+            "tag": "tbody",
+            "children": [{
+              "tag": "tr",
+              "class": "success",
+              "children": [{
+                "tag": "th",
+                "colspan": "5",
+                "html": "Company Products"
+              }]
+            },
+            {
+              "tag": "tr",
+              "children": [{
+                "tag": "th",
+                "colspan": "3",
+                "html": "Product Name"
+              },
+              {
+                "tag": "th",
+                "html": "Period"
+              },
+              {
+                "tag": "th",
+                "html": "Cost"
+              },
+              ]
+            },
+
+            {
+              "tag": "tbody",
+              "children": function () {
+                return (json2html.transform(this.company_product, company_prd_transform, {
+                  'events': true
+                }));
+              }
+            }
+            ]
+          }
           ]
         };
 
-        $(document).off('click', '.add-flow-btn').on('click', '.add-flow-btn', function() {
+        $(document).off('click', '.add-flow-btn').on('click', '.add-flow-btn', function () {
           var companyInfo = {
             companyId: $("td:contains('Company ID')").next().text(),
             companyName: $("td:contains('Company Info')").next().text(),
@@ -479,7 +500,7 @@
           }
         });
 
-        $(document).on('click', '.remove-row-btn', function() {
+        $(document).on('click', '.remove-row-btn', function () {
           $(this).closest('tr').remove();
 
           // Update visibility of "No matches added yet" row and "Send to CP Scoping" row
@@ -495,55 +516,55 @@
         var company_flows_transform = {
           "tag": "tr",
           "children": [{
-              "tag": "td",
+            "tag": "td",
+            "children": [{
+              "tag": "div",
               "children": [{
-                "tag": "div",
-                "children": [{
-                    "tag": "a",
-                    "style": "display:block;margin-bottom: 10px;color: #00098b;background-color: #f0f0f0;border-radius: 4px;padding: 6px;",
-                    "href": "<?= base_url('nis'); ?>/${flow_id}",
-                    "html": "${flowname}"
-                  },
-                  {
-                    "tag": "button",
-                    "class": "btn btn-primary add-flow-btn btn-sm",
-                    "data-flow-id": "${flow_id}",
-                    "data-company-id": "${company_info.id}",
-                    "data-company-name": "${company_info.name}",
-                    "data-flow-name": "${flowname}",
-                    "data-flow-type": "${flowtype}", // Store flow type as a data attribute
-                    "html": "Add to Matches"
-                  }
-                ]
-              }]
-            },
-            {
-              "tag": "td",
-              "html": "${flowtype}"
-            },
-            {
-              "tag": "td",
-              "html": "${qntty} ${cost_unit}"
-            },
-            {
-              "tag": "td",
-              "html": "${cost} ${qntty_unit_name}"
-            },
-            {
-              "tag": "td",
-              "html": "${ep} EP"
-            }
+                "tag": "a",
+                "style": "display:block;margin-bottom: 10px;color: #00098b;background-color: #f0f0f0;border-radius: 4px;padding: 6px;",
+                "href": "<?= base_url('nis'); ?>/${flow_id}",
+                "html": "${flowname}"
+              },
+              {
+                "tag": "button",
+                "class": "btn btn-primary add-flow-btn btn-sm",
+                "data-flow-id": "${flow_id}",
+                "data-company-id": "${company_info.id}",
+                "data-company-name": "${company_info.name}",
+                "data-flow-name": "${flowname}",
+                "data-flow-type": "${flowtype}", // Store flow type as a data attribute
+                "html": "Add to Matches"
+              }
+              ]
+            }]
+          },
+          {
+            "tag": "td",
+            "html": "${flowtype}"
+          },
+          {
+            "tag": "td",
+            "html": "${qntty} ${cost_unit}"
+          },
+          {
+            "tag": "td",
+            "html": "${cost} ${qntty_unit_name}"
+          },
+          {
+            "tag": "td",
+            "html": "${ep} EP"
+          }
           ]
         };
 
         var selectedFrom = null;
         var selectedTo = null;
 
-        $(document).off('click', '.selectAsFrom').on('click', '.selectAsFrom', function() {
+        $(document).off('click', '.selectAsFrom').on('click', '.selectAsFrom', function () {
           selectedFrom = $(this).closest('tr');
         });
 
-        $(document).off('click', '.selectAsTo').on('click', '.selectAsTo', function() {
+        $(document).off('click', '.selectAsTo').on('click', '.selectAsTo', function () {
           selectedTo = $(this).closest('tr');
 
           if (selectedFrom) {
@@ -575,8 +596,8 @@
           }
         });
 
-        $(document).ready(function() {
-          $('#dataForm').submit(function(e) {
+        $(document).ready(function () {
+          $('#dataForm').submit(function (e) {
             e.preventDefault(); // Prevent the default form submit action
 
             // Remove old hidden inputs if they exist to avoid duplicate data
@@ -585,7 +606,7 @@
             var counter = 0; // Sayaç değerini sıfırlayarak başlat
 
             // Iterate over each row in the table to get the data and create hidden fields
-            $('#isScopingTable tbody tr').each(function() {
+            $('#isScopingTable tbody tr').each(function () {
               var fromId = $(this).find('td:eq(0)').text().trim();
               var toId = $(this).find('td:eq(2)').text().trim();
               var flowId = $(this).find('td:eq(4)').text().trim();
@@ -612,54 +633,54 @@
         var company_process_transform = {
           "tag": "tr",
           "children": [{
-              "tag": "td",
-              "colspan": "3",
-              "html": "${prcessname}"
-            },
-            {
-              "tag": "td",
-              "html": "${flowname}"
-            },
-            {
-              "tag": "td",
-              "html": "${flow_type_name}"
-            },
+            "tag": "td",
+            "colspan": "3",
+            "html": "${prcessname}"
+          },
+          {
+            "tag": "td",
+            "html": "${flowname}"
+          },
+          {
+            "tag": "td",
+            "html": "${flow_type_name}"
+          },
           ]
         };
 
         var company_eq_transform = {
           "tag": "tr",
           "children": [{
-              "tag": "td",
-              "colspan": "3",
-              "html": "${eqpmnt_name}"
-            },
-            {
-              "tag": "td",
-              "html": "${eqpmnt_type_name}"
-            },
-            {
-              "tag": "td",
-              "html": "${prcss_name}"
-            },
+            "tag": "td",
+            "colspan": "3",
+            "html": "${eqpmnt_name}"
+          },
+          {
+            "tag": "td",
+            "html": "${eqpmnt_type_name}"
+          },
+          {
+            "tag": "td",
+            "html": "${prcss_name}"
+          },
           ]
         };
 
         var company_prd_transform = {
           "tag": "tr",
           "children": [{
-              "tag": "td",
-              "colspan": "3",
-              "html": "${name}"
-            },
-            {
-              "tag": "td",
-              "html": "${tper}"
-            },
-            {
-              "tag": "td",
-              "html": "${ucost} ${ucostu}"
-            },
+            "tag": "td",
+            "colspan": "3",
+            "html": "${name}"
+          },
+          {
+            "tag": "td",
+            "html": "${tper}"
+          },
+          {
+            "tag": "td",
+            "html": "${ucost} ${ucostu}"
+          },
           ]
         };
         $('#info').json2html(data, transform, {

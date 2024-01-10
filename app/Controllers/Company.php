@@ -192,8 +192,6 @@ class Company extends BaseController {
 		$project_id = $session->get('project_id');
 
 		$data['flowlist'] = $flow_model->get_flowname_list();
-
-		
 		
 		if(!empty($flow_id)){
 			$data['cluster_name']['name'] = 'All Companies in selected flow';
@@ -203,8 +201,6 @@ class Company extends BaseController {
 			$data['cluster_name']['name'] = 'All Project Companies';
 			$data['companies'] = $company_model->get_project_companies($project_id);
 		}
-
-		//print_r($data);
 
 		echo view('template/header');
 		echo view('company/isscoping',$data);
