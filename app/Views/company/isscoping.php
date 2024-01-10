@@ -8,10 +8,16 @@
   <div style="padding:10px 20px;">
     <div>Select Flows to Filter. You can select multiple flows</div>
     <small>When flows selected, system will only show companies which have selected flows in its dataset.</small>
-    <select id="selectize-units" class="info select-block" name="selectedFlows" multiple >
+    <select id="selectize-units" class="info select-block" name="selectedFlows" multiple>
       <option value="" disabled selected>
         <?= lang("Validation.pleaseselect"); ?>
       </option>
+      <?php
+      // Sort the $flowlist array alphabetically based on the 'name' key
+      usort($flowlist, function ($a, $b) {
+        return strcmp($a['name'], $b['name']);
+      });
+      ?>
       <?php foreach ($flowlist as $flow): ?>
         <option value="<?= $flow['id']; ?>">
           <?= $flow['name']; ?>
@@ -120,14 +126,14 @@
         </tbody>
       </table>
       <?php
-        $prjct_id = null; // Initialize $prjct_id to a default value
-
+      $prjct_id = null; // Initialize $prjct_id to a default value
+      
       foreach ($companies as $cp):
         if (isset($cp['prj_id'])):
           $prjct_id = $cp['prj_id']; // Update $prjct_id when a valid 'prj_id' is found
         endif;
       endforeach;
-          ?>
+      ?>
       <form id="dataForm" action="/savenewisscoping/<?php echo $prjct_id; ?>" method="post">
         <?= csrf_field() ?>
         <!-- Hidden fields will be dynamically added here -->
