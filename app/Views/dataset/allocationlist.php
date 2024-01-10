@@ -12,6 +12,7 @@ else:
 		<th><?= lang("Validation.processname"); ?></th>
 		<th><?= lang("Validation.flowname"); ?></th>
 		<th><?= lang("Validation.flowtype"); ?></th>
+		<th><?= lang("Validation.kpidef"); ?></th>
 		<th><?= lang("Validation.manage"); ?></th>
 	</tr>
 <?php foreach ($allocationlar as $a): ?>
@@ -20,6 +21,7 @@ else:
 		<td><?= $a['prcss_name']; ?></td>
 		<td><?= $a['flow_name']; ?></td>
 		<td><?= $a['flow_type_name']; ?></td>
+		<td><?= $a['kpidef']; ?></td>
 		<td>
 		<a class="label label-info" href="<?= base_url('cpscoping/edit_allocation/'.$a['allocation_id']); ?>"><?= lang("Validation.editallocation"); ?></a>
 		<a class="label label-danger" href="<?= base_url('cpscoping/delete/'.$a['allocation_id'].'/'.$a['project_id'].'/'.$a['company_id']); ?>"><?= lang("Validation.deleteallocation"); ?></a></td>
