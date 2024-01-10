@@ -8,7 +8,7 @@
   <div style="padding:10px 20px;">
     <div>Select Flows to Filter. You can select multiple flows</div>
     <small>When flows selected, system will only show companies which have selected flows in its dataset.</small>
-    <select id="selectize-units" class="info select-block" name="selectedFlows" multiple>
+    <select id="selectize-units" class="info select-block" name="selectedFlows" multiple >
       <option value="" disabled selected>
         <?= lang("Validation.pleaseselect"); ?>
       </option>
@@ -81,7 +81,7 @@
       }
       //print_r($company_array);
       ?>
-      <div id="map" style="height: 450px;"></div>
+      <div id="map" style="height: 450px; z-index: -10;"></div>
       <h4>Selected potential flow matches</h4>
       <table id="addedFlowsTableId" class="table w-100 table-striped">
         <thead>

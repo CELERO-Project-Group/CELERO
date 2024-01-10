@@ -44,7 +44,6 @@ class Cost_benefit extends BaseController
         }
 
         $data['com_pro'] = $project_model->get_prj_companies(session()->project_id);
-        print_r($data['com_pro']);
 
         echo view('template/header');
         echo view('cost_benefit/list', $data);
