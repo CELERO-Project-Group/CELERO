@@ -28,6 +28,8 @@ class Cost_benefit extends BaseController
         $data['is']['to_company'] = $cpscoping_model->get_cost_benefit_info_is_to_company($cmpny_id, $prjct_id);
         $data['is']['from_company'] = $cpscoping_model->get_cost_benefit_info_is_from_company($cmpny_id, $prjct_id);
 
+        
+
         print_r($data['is']);
         echo view('template/header');
         echo view('cost_benefit/index', $data);

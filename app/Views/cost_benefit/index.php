@@ -44,9 +44,7 @@ $uri = service('uri');
                                             <?php $all_id = $a['is_id']; ?>
                                             <!-- type_id -> 1 for is_id link -->
                                             <?php $type_id = 1; ?>
-                                        <?php endif; ?>
-
-                               
+                                        <?php endif; ?>                               
 
                                    
                                             <!-- cp_or_is variable set based on available/empty $a['cp_id'] -->
@@ -74,9 +72,9 @@ $uri = service('uri');
                                                 <th colspan="9" style="font-size: 12px; text-align: left;">
                                                     <b>
                                                 <?php if (empty($a['cmpny_from_name'])) {
-                                                    echo $a['best'];
+                                                    echo $a['prcss_name'] . " - " . $a['flow_name'] . " - " . $a['flow_type_name'];
                                                 } else {
-                                                    echo $a['flow_name'] . " input IS potential from/to " . $a['cmpny_from_name'];
+                                                    echo $a['flow_name'] . " input IS potential from " . $a['cmpny_from_name'] . " to " ;
                                                 } ?>:
                                                     </b> Baseline</th>
                                                 <th colspan="20" style="font-size: 12px; border-left:2px solid grey; text-align: left;">Option</th>
