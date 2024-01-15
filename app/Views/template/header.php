@@ -263,7 +263,7 @@
           </ul> -->
         <?php endif ?>
       <?php else: ?>
-        <li><a href="#">
+        <li><a href= "login">
             <?= lang("Validation.analysisinfo2"); ?>
           </a></li>
       <?php endif ?>
