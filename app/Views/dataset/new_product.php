@@ -1,3 +1,4 @@
+<div class="row">
 <div class="col-md-4 borderli">
 	<p class="lead"><?= lang("Validation.addproduct"); ?></p>
 	<?= form_open_multipart('new_product/'.$companyID); ?>
@@ -80,3 +81,4 @@
 		<?php endforeach ?>
 	</table>
 </div>
+			</div>

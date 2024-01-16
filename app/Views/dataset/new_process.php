@@ -22,7 +22,7 @@
 		}
 	}
 </script>
-
+<div class="row">
 <div class="col-md-3 borderli">
 	<?= form_open_multipart('new_process/' . $companyID); ?>
 	<?= csrf_field() ?>
@@ -139,4 +139,5 @@
 			<?php $son = $attribute['prcessname']; ?>
 		<?php endforeach ?>
 	</table>
+</div>
 </div>

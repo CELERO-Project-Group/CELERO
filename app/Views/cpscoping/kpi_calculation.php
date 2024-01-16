@@ -99,6 +99,7 @@ $uri = service('uri');
 					<?= lang("Validation.searchdocument"); ?>
 				</b></p>
 			<?= form_open_multipart('search_result/' . $uri->getSegment(2) . '/' . $uri->getSegment(3)); ?>
+			<?= csrf_field(); ?>
 			<input style="margin-bottom:10px;" type="text" class="form-control" id="search" placeholder="" name="search">
 			</form>
 			<hr>
@@ -116,6 +117,7 @@ $uri = service('uri');
 				}
 				?>
 				<?= form_open_multipart('cpscoping/file_upload/' . $uri->getSegment('2') . '/' . $uri->getSegment('3')); ?>
+				<?= csrf_field(); ?>
 				<input type="file" name="docuFile" id="docuFile"> <br />
 				<input type="submit" class="btn btn-info btn-sm" value="<?= lang("Validation.savefile"); ?>">
 				</form>
@@ -189,7 +191,7 @@ $uri = service('uri');
 			<div class="modal-body">
 				<div id="alerts" style="margin-top: 20px;font-size: 13px;color: darkgrey;"></div>
 				<br>
-				<button type="button" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true" disabled>
+				<button type="button" id="saveButton" data-dismiss="modal" class="btn btn-info btn-block" aria-hidden="true" disabled>
 					<?= lang("Validation.saving"); ?>
 				</button>
 			</div>
@@ -200,7 +202,7 @@ $uri = service('uri');
 
 
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
 <script>
 
 	function formatDetail(value, row) {
@@ -217,6 +219,12 @@ $uri = service('uri');
 	}
 </script>
 <script type="text/javascript">
+	document.getElementById('saveButton').addEventListener('click', function () {
+
+        this.classList.remove('disabled');
+        window.location.href = "<?= base_url("kpi_calculation/". $uri->getSegment(2) . '/' . $uri->getSegment(3)) ?>";
+    });
+
 	var editIndex = undefined;
 	function endEditing() {
 		if (editIndex == undefined) { return true }
@@ -239,6 +247,41 @@ $uri = service('uri');
 			}
 		}
 	}
+
+	// 	async function accept() {
+	//     if (endEditing()) {
+	//         var rows = $('#dg').datagrid('getRows');
+	//         var kpi_insert = <?= json_encode(base_url('kpi_insert/')); ?>;
+	//         var prjct_id = <?= json_encode($uri->getSegment(2)); ?>;
+	//         var cmpny_id = <?= json_encode($uri->getSegment(3)); ?>;
+
+	//         $('#dg').datagrid('unselectAll');
+	//         rows.forEach(async function (row, i) {
+	//             var url = kpi_insert + '/' + prjct_id + '/' + cmpny_id + '/' + row['flow_id'] + '/' + row['flow_type_id'] + '/' + row['prcss_id'] + '/' + row['allocation_id'];
+	//             try {
+	//                 const response = await fetch(url, {
+	//                     method: "PUT", // or 'PUT'
+	//                     headers: {
+	//                         "Content-Type": "application/json",
+	//                     },
+	//                     body: JSON.stringify(row),
+	//                 });
+	// 				console.log(response);
+	//                 const result = await response.json();
+	//                 console.log("Success:", result);
+	//                 if (result.indexOf("red") >= 0) {
+	//                     $('#dg').datagrid('selectRow', i);
+	//                 } else {
+	//                     // If no error, assume the response is HTML and insert it
+	//                     insertInline(i + 1, result);
+	//                 }
+	//             } catch (error) {
+	//                 console.error("Error:", error);
+	//             }
+	//         });
+	//     }
+	// }
+
 	function accept() {
 		if (endEditing()) {
 			var rows = $('#dg').datagrid('getRows');
@@ -251,37 +294,49 @@ $uri = service('uri');
 			$("#myModalsave .modal-body button").text("Saving");
 			$("#alerts").fadeIn("fast");
 			$('#dg').datagrid('unselectAll');
+
 			$.each(rows, function (i, row) {
 				$('#dg').datagrid('endEdit', i);
-				/* var url = row.isNewRecord ? 'test.php?savetest=true' : 'test.php?updatetest=true'; */
 				var url = '../../kpi_insert/' + prjct_id + '/' + cmpny_id + '/' + row.flow_id + '/' + row.flow_type_id + '/' + row.prcss_id + '/' + row.allocation_id;
-				var request = $.ajax(url, {
+
+				console.log(row.allocation_id);
+				var csrfToken = $('meta[name="csrf_token"]').attr('content');
+
+				var data = {
+					myData: JSON.stringify(row),
+					csrf_test_name: csrfToken
+				};
+
+				var request = $.ajax({
+					url: url,
 					type: 'POST',
-					dataType: 'json',
-					data: row,
-					success: function (data, textStatus, jqXHR) {
+					data: data,
+					success: function (data, textStatus, xhr) {
 						insertInline(i + 1, data);
-						console.log(data);
-						//if the returned data is an error it contains color:red 
+
 						if (data.indexOf("red") >= 0) {
-							//marks the rows which are incomplete
 							$('#dg').datagrid('selectRow', i);
 						}
 					},
-					error: function (jqXHR, textStatus, errorThrown) {
-						console.log(textStatus, errorThrown);
+					error: function (xhr, textStatus, errorThrown) {
+						console.log('AJAX Error:', textStatus, errorThrown);
+						console.log('Response:', xhr.responseText);
 					},
 				});
-				promises.push(request);
+
+				promises.push(request); // Store the promise in the array
+			});
+
+			// Allow doing something after all requests in the loop are finished
+			$.when.apply(null, promises).done(function () {
+				$("#myModalsave .modal-body button").prop("disabled", false);
+				$("#myModalsave .modal-body button").text("Done");
+				// deneme();
 			});
 		}
-		//allows to do something after all requests in the loop are finished
-		$.when.apply(null, promises).done(function () {
-			$("#myModalsave .modal-body button").prop("disabled", false);
-			$("#myModalsave .modal-body button").text("Done");
-			deneme();
-		})
 	}
+
+
 
 
 	function reject() {
@@ -307,14 +362,14 @@ $uri = service('uri');
 			}
 		});
 		if (insertBefore) {
-			$("<div data-row=" + rownumber + ">Row " + rownumber + ": " + data + "</div)").insertBefore(insertBefore);
+			$("<div data-row=" + rownumber + ">Row " + rownumber + ": " + data + "</div>").insertBefore(insertBefore);
 		} else {
-			$("#alerts").append("<div data-row=" + rownumber + ">Row " + rownumber + ": " + data + "</div)");
+			$("#alerts").append("<div data-row=" + rownumber + ">Row " + rownumber + ": " + data + "</div>");
 		}
 	}
 
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	function deneme() {
 		var prjct_id = <?= $uri->getSegment(2); ?>;
 		var cmpny_id = <?= $uri->getSegment(3); ?>;
@@ -404,8 +459,8 @@ $uri = service('uri');
 			}
 		});
 	};
-</script>
-<script type="text/javascript">
+</script> --> 
+<!-- <script type="text/javascript">
 	google.load("visualization", "1", { packages: ["corechart"] });
 	google.setOnLoadCallback(deneme);
 </script>

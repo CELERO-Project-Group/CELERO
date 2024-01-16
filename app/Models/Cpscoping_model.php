@@ -329,13 +329,22 @@ class Cpscoping_model extends Model
         return $query->getResultArray();
 	}
 
+	// public function kpi_insert($kpi, $allocation_id)
+	// {
+	// 	$db = db_connect();
+	// 	$builder = $db->table('t_cp_allocation');
+	// 	$builder->where('id', $allocation_id);
+	// 	$builder->replace($kpi);
+	// }
+
 	public function kpi_insert($kpi, $allocation_id)
-	{
-		$db = db_connect();
-		$builder = $db->table('t_cp_allocation');
-		$builder->where('id', $allocation_id);
-		$builder->replace($kpi);
-	}
+{
+    $db = db_connect();
+    $builder = $db->table('t_cp_allocation');
+    $builder->where('id', $allocation_id);
+    $builder->update($kpi);
+}
+
 
 	public function can_consultant_prjct($user_id)
 	{

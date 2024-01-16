@@ -6,6 +6,8 @@
   <meta charset="utf-8">
   <title>CELERO (BETA)</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <meta name="csrf_token" content="<?= csrf_hash(); ?>">
   <!-- Loading Bootstrap -->
   <link href="/assets/bootstrap/css/bootstrap.css" rel="stylesheet">
 

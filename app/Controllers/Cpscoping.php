@@ -15,7 +15,7 @@ class Cpscoping extends BaseController {
 		$project_model = model(Project_model::class);
 		$user_model = model(User_model::class);
 		$cpscoping_model = model(Cpscoping_model::class);
-
+		
 		$c_user = $user_model->get_session_user();
 		if($cpscoping_model->can_consultant_prjct($c_user['id']) == false){
 			return redirect()->back();
@@ -723,47 +723,59 @@ class Cpscoping extends BaseController {
 		echo json_encode($data['kpi_values']);
 	}
 
-	public function kpi_insert($prjct_id,$cmpny_id,$flow_id,$flow_type_id,$prcss_id,$allocation_id){
-		$cpscoping_model = model(Cpscoping_model::class);
 
-		//$return = $_POST;
-		
-		//$flag= is_numeric($return['benchmark_kpi']);
-		$this->form_validation->set_error_delimiters("<span style='color:red; font-size:13px;'>"," Invalid row, please check...</span></br>");
+public function kpi_insert($prjct_id, $cmpny_id, $flow_id, $flow_type_id, $prcss_id, $allocation_id)
+{
+    $cpscoping_model = model(Cpscoping_model::class);
+    $validation = \Config\Services::validation();
 
-		$this->form_validation->set_rules('benchmark_kpi', 'Benchmark Kpi', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('best_practice', 'Best Practice', 'trim|xss_clean');
-		$this->form_validation->set_rules('description', 'Description', 'trim|xss_clean|max_length[500]');
+    $request = $this->request;
+    $data = $request->getPost();
+    $data = json_decode($data['myData'], true);
 
-		//$allocation_ids = $cpscoping_model->get_allocation_id_from_ids($cmpny_id,$prjct_id);
+    // Validate the data
+    $validation->setRules([
+        'benchmark_kpi' => 'required|trim',
+        'best_practice' => 'trim',
+        'option' => 'trim',
+        'description' => 'trim|max_length[500]',
+    ]);
 
-		if ($this->form_validation->run() !== FALSE){
-			$benchmark_kpi = $_POST['benchmark_kpi'];
-			$best_practice = $_POST['best_practice'];
-			$option = $_POST['option'];
-			$description = $_POST['description'];
-			if($option=="Option"){$option=1;}else{$option=0;}
-				
-			$query = $cpscoping_model->get_allocation_from_allocation_id($allocation_id);
-			if(!empty($query['flow_id'])){
-				if($query['flow_id'] == $flow_id && $query['flow_type_id'] == $flow_type_id && $query['prcss_id'] == $prcss_id){
-					$insert_array = array(
-					  'benchmark_kpi' => $benchmark_kpi,
-					  'best_practice' => $best_practice,
-					  'option' => $option,
-					  'description' => $description
-					);
-					$cpscoping_model->kpi_insert($insert_array,$allocation_id);
-				   	$return = $query['prcss_name']." ".$query['flow_name']." ".$query['flow_type_name']."'s new data has been saved to database.</br>";
-				}
-			}
-		}
-		else{
-			$return = validation_errors();
-		}
-		echo json_encode($return);
-	}
+    if ($validation->run($data)) {
+        // Data is valid, proceed with processing
+        $benchmark_kpi = $data['benchmark_kpi'];
+        $best_practice = $data['best_practice'];
+        $option = $data['option'];
+        $description = $data['description'];
 
+        if ($option == "Option") {
+            $option = 1;
+        } else {
+            $option = 0;
+        }
+
+        $query = $cpscoping_model->get_allocation_from_allocation_id($allocation_id);
+        if (!empty($query['flow_id']) && $query['flow_id'] == $flow_id && $query['flow_type_id'] == $flow_type_id && $query['prcss_id'] == $prcss_id) {
+            $insert_array = [
+                'benchmark_kpi' => $benchmark_kpi,
+                'best_practice' => $best_practice,
+                'option' => $option,
+                'description' => $description
+            ];
+
+            $cpscoping_model->kpi_insert($insert_array, $allocation_id);
+            $return = $query['prcss_name'] . " " . $query['flow_name'] . " " . $query['flow_type_name'] . "'s new data has been saved to the database.";
+        }
+    } else {
+        // Data is invalid, return validation errors
+        $return = $validation->getErrors();
+    }
+
+    echo json_encode($return);
+}
+
+
+	
 	//to delete allocation (if the has rights to edit/update the project)
 	public function delete_allocation($allocation_id,$project_id,$company_id){
 		$user_model = model(User_model::class);
@@ -793,7 +805,7 @@ class Cpscoping extends BaseController {
 		else{
 			$return = "<span style='color:red; font-size:13px;'>".validation_errors()."</span>";
 		}
-		echo json_encode($return);
+		return $this->response->setJSON($return);
 	}
 
 }

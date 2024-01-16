@@ -255,6 +255,7 @@ class Dataset extends BaseController {
 		$data['company_info'] = $company_model->get_company($companyID);
 		$data['validation'] = $this->validator;
 
+
 		echo view('template/header');
 		echo view('dataset/dataSetLeftSide',$data);
 		echo view('dataset/new_flow',$data);
