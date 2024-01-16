@@ -92,14 +92,17 @@ class User extends BaseController
 	}
 
 	public function deleteUserEp($flow_name, $ep_value)
-	{
-		$flow_model = model(Flow_model::class);
+{
+    $flow_model = model(Flow_model::class);
 
-		$userId = $this->session->id;
-		$flow_name = urldecode($flow_name);
-		$flow_model->delete_userep($flow_name, $ep_value, $userId);
-		redirect('datasetexcel', 'refresh');
-	}
+    $userId = session()->get('id');
+    $flow_name = urldecode($flow_name);
+
+    $flow_model->delete_userep($flow_name, $ep_value, $userId);
+
+    return redirect()->to('datasetexcel');
+}
+
 
 	// public function uploadExcel(){
 	// 	$userid = $this->session->id;
