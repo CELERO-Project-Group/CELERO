@@ -35,7 +35,7 @@
 		</label>
 		<i class="fa fa-info-circle" title="One process can contain multiple flows and one
 			flow can go through multiple processes."></i>
-		<select id="selectize" onchange="getProcessId()" name="process">
+		<select id="processname" onchange="getProcessId()" name="process">
 			<option value="">
 				<?= lang("Validation.pleaseselect"); ?>
 			</option>
