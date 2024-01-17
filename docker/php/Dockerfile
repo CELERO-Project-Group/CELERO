@@ -19,17 +19,9 @@ RUN rm -rf /var/lib/apt/lists/*
 
 
 
-# Composer
-RUN apt-get update && apt-get install -y \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer self-update --2
-# Install PhpSpreadsheet
-RUN composer require phpoffice/phpspreadsheet
+
 
 
 #COPY config/default-ssl.conf /etc/apache2/sites-enabled
