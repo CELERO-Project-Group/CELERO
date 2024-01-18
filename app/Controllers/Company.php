@@ -314,7 +314,6 @@ class Company extends BaseController
 			$data['nacecode']['code'] = "";
 		}
 
-		
 		$is_owner = $user_model->cmpny_is_owner($temp);
 
 		//kullanıcının company'i editleme hakkı varmı kontrolü
@@ -352,34 +351,40 @@ class Company extends BaseController
 		echo $results;
 	}
 
-	public function addUsertoCompany($term)
+	public function addUsertoCompany($cmpny_id)
 	{
 		$user_model = model(User_model::class);
 		$company_model = model(Company_model::class);
 		$session = session();
-		$validation = \Config\Services::validation();
+		// $validation = \Config\Services::validation();
 
 		$userId = $session->id;
 		$is_owner = $user_model->cmpny_is_owner($userId);
-		if (!$user_model->can_edit_company($userId, $term, $is_owner)) {
-			//redirect(base_url(),'refresh');
+		if (!$user_model->can_edit_company($userId, $cmpny_id, $is_owner)) {
+
 			return redirect()->to(base_url());
 		}
 
-		//$this->form_validation->set_rules('users','User','required|callback_check_companyuser['.$term.']');
-		if ($validation->run() !== FALSE) {
-			$user = array(
-				'user_id' => $this->request->getPost('users'),	 
-				'cmpny_id' => $term,
-				'is_contact' => 0,
-				'is_owner' => 0
-			);
-			$company_model->add_worker_to_company($user);
-		}
+		$selected_user = $this->request->getPost('users');
 
+		//$this->form_validation->set_rules('users','User','required|callback_check_companyuser['.$term.']');
+		//if ($validation->run() !== FALSE) {
+		$user = array(
+			'user_id' => $selected_user,	 
+			'cmpny_id' => $cmpny_id,
+			'is_contact' => 0,
+			'is_owner' => 0
+		);
+
+	
+		if (!$company_model->user_exists_in_company($user)) {
+		$company_model->add_worker_to_company($user);
+		}
+		//}
 
 		//redirect('company/'.$term, 'refresh');
-		return redirect()->to(site_url('company/' . $term));
+		return redirect()->to(site_url('company/' . $cmpny_id));
+		// return redirect()->to(site_url('www.google.com'));
 
 	}
 
@@ -401,7 +406,6 @@ class Company extends BaseController
 		$is_owner = $user_model->cmpny_is_owner($userId);
 
 		//TODO change the redirect to something like "you don't have the rights to do this!"
-		// currently only ADMINS are allowed to do this (User_model::is_admin)
 		if (!$user_model->can_edit_company($userId, $cmpny['cmpny_id'], $is_owner)) {
 			// redirect(base_url(),'refresh');
 			return redirect()->to(site_url('company/' . $cmpny_id));

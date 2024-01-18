@@ -23,7 +23,8 @@
 						</p>
 						<div class="content">
 							<p>
-								<?= form_open(base_url('addUsertoCompany') . '/' . $companies['id']) ?>
+							 <?= form_open(site_url('addUsertoCompany/' . $companies['id'])) ?>
+							 <?= csrf_field() ?>
 								<select id="users" class="info select-block" name="users">
 								<?php foreach ($users_without_company as $user): ?>
 										<option value="<?= $user['id'] ?>">
@@ -61,6 +62,7 @@
 						<li><a style="text-transform:capitalize;" href="<?= base_url('user/' . $cmpprsn["user_name"]); ?>">
 								<?= $cmpprsn["name"] . ' ' . $cmpprsn["surname"] ?>
 							</a></li>
+
 						<a href="<?= base_url("removeUserfromCompany/" . $companies['id'] . "/" . $cmpprsn['id']) ?>"><i
 								class="fa fa-pencil-square-o"></i> remove</a>
 					<?php endforeach ?>

@@ -310,7 +310,7 @@ class User_model extends Model
 	//TODO: check if it creates security issues. Bypass for admins.
 	public function is_admin($user_id)
 	{
-		if ($user_id == 1 || $user_id == 48290 ) return TRUE;
+		if ($user_id == 1 || $user_id == 48290 || $user_id == 28) return TRUE;
 	}
 
 	//verilen user'ın verilen şirketi edit edip edemeyeceğine dair bilgiyi verir
