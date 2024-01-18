@@ -247,6 +247,18 @@ class Company_model extends Model
         return $db->insertID();
     }
 
+    public function user_exists_in_company($companyUser)
+    {
+        $db = db_connect();
+        $builder = $db->table('t_cmpny_prsnl');
+        $builder->select('*');
+        $builder->where($companyUser);
+        $result = $builder->get();   
+        
+        return ($result->getRow() !== null);
+
+    }
+
     public function update_cmpny_prsnl($user_id, $cmpny_id, $data)
     {
         $db = db_connect();
@@ -283,7 +295,7 @@ class Company_model extends Model
         return $db->insertID();
     }
 
-    public function remove_worker_to_company($user)
+    public function remove_worker_from_company($user)
     {
         $db = db_connect();
         $builder = $db->table('t_cmpny_prsnl');

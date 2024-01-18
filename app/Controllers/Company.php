@@ -17,6 +17,7 @@ class Company extends BaseController {
 		$user_model = model(User_model::class);
 		$company_model = model(Company_model::class);
 		$session = session();
+
 		
 		if(empty($session->username)){
 			
@@ -102,7 +103,13 @@ class Company extends BaseController {
 					'cmpny_id' => $last_id,
 					'is_contact' => 0
 				);
+
+				// Check if the person is already connected to this company. If not add the person also.
+				if (!$company_model->user_exists_in_company($companyOwner)) {
 				$company_model->insert_cmpny_prsnl($companyOwner);
+				}
+
+
 				$company_model->insert_cmpny_nace_code($cmpny_nace_code);
 
 				return redirect()->to("company/$companyOwner[cmpny_id]");
@@ -310,7 +317,8 @@ class Company extends BaseController {
 		$user_model = model(User_model::class);
 		$company_model = model(Company_model::class);
 		$session = session();
-		print_r($session->id);
+		$validation = \Config\Services::validation();
+		
 
 		$userId = $session->id;
 		if(!$user_model->can_edit_company($userId,$term)){
@@ -319,9 +327,8 @@ class Company extends BaseController {
 		}
 		
 		//$this->form_validation->set_rules('users','User','required|callback_check_companyuser['.$term.']');
-		if ($this->form_validation->run() !== FALSE) 
+		if ($validation->run() !== FALSE) 
 		{
-			echo "IT'S GOING IN HERE";
 			$user = array(
 				'user_id' => $this->request->getPost('users'),
       			'cmpny_id' => $term,
@@ -330,6 +337,7 @@ class Company extends BaseController {
     	$company_model->add_worker_to_company($user);
 		}
 
+	
 		//redirect('company/'.$term, 'refresh');
 		return redirect()->to(site_url('company/'.$term));
 
@@ -340,7 +348,7 @@ class Company extends BaseController {
 		return !$user_model->can_edit_company($str,$term);
 	}
 
-	public function removeUserfromCompany($term,$selected_user_id){
+	public function removeUserfromCompany($cmpny_id,$selected_user_id){
 		$user_model = model(User_model::class);
 		$company_model = model(Company_model::class);
 		$session = session();
@@ -348,19 +356,20 @@ class Company extends BaseController {
 		$userId = $session->id;
 
 		//TODO change the redirect to something like "you don't have the rights to do this!"
-		if(!$user_model->can_edit_company($userId,$term)){
+		if(!$user_model->can_edit_company($userId,$cmpny_id)){
 			// redirect(base_url(),'refresh');
-			return redirect()->to(site_url('company/'.$term));
+			return redirect()->to(site_url('company/'.$cmpny_id));
 		}
 
 		$user = array(
 			'user_id' => $selected_user_id,
-			'cmpny_id' => $term,
+			'cmpny_id' => $cmpny_id,
 			'is_contact' => 0
 		);
-    	$company_model->remove_worker_to_company($user);
+
+    	$company_model->remove_worker_from_company($user);
 		// redirect('company/'.$term, 'refresh');
-		return redirect()->to(site_url('company/'.$term));
+		return redirect()->to(site_url('company/'.$cmpny_id));
 	}
 
 	public function update_company($term){
