@@ -253,8 +253,8 @@ class Company_model extends Model
         $builder = $db->table('t_cmpny_prsnl');
         $builder->select('*');
         $builder->where($companyUser);
-        $result = $builder->get();   
-        
+        $result = $builder->get();
+
         return ($result->getRow() !== null);
 
     }
@@ -303,7 +303,11 @@ class Company_model extends Model
         $builder->where('cmpny_id', $user['cmpny_id']);
         $builder->where('is_contact', '0');
         $builder->delete();
+
     }
+
+   
+
 
     public function is_in_nace($nace)
     {
@@ -408,7 +412,7 @@ class Company_model extends Model
                     $builder->where($column, $cmpny_id);
                     $builder->delete();
                 }
-            } 
+            }
         }
 
         //deletes the company from clusters table

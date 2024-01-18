@@ -283,6 +283,15 @@ class User_model extends Model
 		return $query->getRowArray();
 	}
 
+	public function cmpny_is_owner($user_id){
+		$db = db_connect();
+		$builder = $db->table('t_cmpny_prsnl');
+		$builder->select('is_owner');
+		$builder->where('user_id', $user_id);
+		$query = $builder->get();
+		return $query->getRowArray();
+	}
+
 	public function is_contact_by_userid($user_id, $company_id)
 	{
 		$db = db_connect();
@@ -301,13 +310,13 @@ class User_model extends Model
 	//TODO: check if it creates security issues. Bypass for admins.
 	public function is_admin($user_id)
 	{
-		if ($user_id == 1 || $user_id == 48290) return TRUE;
+		if ($user_id == 1 || $user_id == 48290 ) return TRUE;
 	}
 
 	//verilen user'ın verilen şirketi edit edip edemeyeceğine dair bilgiyi verir
-	public function can_edit_company($user_id, $company_id)
+	public function can_edit_company($user_id, $company_id, $is_owner)
 	{
-		if ($this->is_admin($user_id)) return TRUE;
+		if ($this->is_admin($user_id) || $is_owner == 1) return TRUE;
 		$consultant = $this->is_consultant_of_company_by_user_id($user_id, $company_id);
 		$contact = $this->is_contact_by_userid($user_id, $company_id);
 		return $consultant || $contact;

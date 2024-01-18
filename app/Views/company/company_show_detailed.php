@@ -23,7 +23,7 @@
 						</p>
 						<div class="content">
 							<p>
-								<?= form_open('addUsertoCompany/' . $companies['id']) ?>
+								<?= form_open(base_url('addUsertoCompany') . '/' . $companies['id']) ?>
 								<select id="users" class="info select-block" name="users">
 								<?php foreach ($users_without_company as $user): ?>
 										<option value="<?= $user['id'] ?>">
@@ -31,7 +31,7 @@
 										</option>
 									<?php endforeach ?>
 								</select>
-								<button type="submit" class="btn btn-prima	ry">Add Users</button>
+								<button type="submit" class="btn btn-primary">Add Users</button>
 								</form>
 
 							</p>
