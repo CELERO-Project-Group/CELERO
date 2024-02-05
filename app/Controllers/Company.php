@@ -299,12 +299,13 @@ class Company extends BaseController
 		$data['company_product'] = $product_model->get_product_list($term);
 
 		$data['companies'] = $company_model->get_company($term);
-		$config['center'] = $data['companies']['latitude'] . ',' . $data['companies']['longitude'];
-		$config['zoom'] = '15';
-		$config['places'] = TRUE;
-		$config['placesRadius'] = 20;
-		$marker = array();
-		$marker['position'] = $data['companies']['latitude'] . ',' . $data['companies']['longitude'];
+
+		// $config['center'] = $data['companies']['latitude'] . ',' . $data['companies']['longitude'];
+		// $config['zoom'] = '15';
+		// $config['places'] = TRUE;
+		// $config['placesRadius'] = 20;
+		// $marker = array();
+		// $marker['position'] = $data['companies']['latitude'] . ',' . $data['companies']['longitude'];
 
 		$data['nacecode'] = $company_model->get_nace_code($term);
 		$data['prjname'] = $company_model->get_company_proj($term);
@@ -370,15 +371,15 @@ class Company extends BaseController
 		//$this->form_validation->set_rules('users','User','required|callback_check_companyuser['.$term.']');
 		//if ($validation->run() !== FALSE) {
 		$user = array(
-			'user_id' => $selected_user,	 
+			'user_id' => $selected_user,
 			'cmpny_id' => $cmpny_id,
 			'is_contact' => 0,
 			'is_owner' => 0
 		);
 
-	
+
 		if (!$company_model->user_exists_in_company($user)) {
-		$company_model->add_worker_to_company($user);
+			$company_model->add_worker_to_company($user);
 		}
 		//}
 
@@ -389,7 +390,7 @@ class Company extends BaseController
 	}
 
 	function check_companyuser($str, $term)
-	{	
+	{
 		$user_model = model(User_model::class);
 		$is_owner = $user_model->cmpny_is_owner($str);
 		return !$user_model->can_edit_company($str, $term, $is_owner);
@@ -448,14 +449,50 @@ class Company extends BaseController
 
 		if (!empty($this->request->getPost())) {
 			if (
-				$this->validate([
-					'companyName' => 'required|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_cmpny.name,id,{id}]',
-					'naceCode' => 'required',
-					'companyDescription' => 'required|max_length[200]',
-					'email' => 'required|valid_email',
-					'workPhone' => 'required'
-				])
+				$this->validate(
+					[
+						'companyName' => [
+							'rules' => 'trim|required|alpha_numeric_space|min_length[5]|max_length[50]',
+							'label' => 'Company Name'
+						],
+
+						'naceCode' =>
+							[
+								'rules' => 'trim|required',
+								'label' => 'NACE Code'
+							],
+
+
+						'email' =>
+							['rules' => 'required|valid_email'],
+
+						'workPhone' =>
+							[
+								'rules' => 'required',
+								'label' => 'Work Phone'
+							],
+
+						'lat' =>
+							[
+								'rules' => 'required',
+								'errors' => [
+									'required' => 'Location is not selected on the map'
+								]
+							],
+
+						'companyDescription' =>
+							[
+								'rules' => 'required|trim|max_length[200]',
+								'label' => 'Company Description'
+							],
+
+					]
+				)
+
+
 			) {
+
+
 
 				$company_data = array(
 					'name' => mb_strtolower($this->request->getPost('companyName')),
