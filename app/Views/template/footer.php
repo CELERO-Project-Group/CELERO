@@ -18,7 +18,7 @@
 
     <script src="<?= base_url('assets/js/flatui-fileinput.js'); ?>"></script>
     <!-- The cost benefit page doesnt use the bootstrap select box features -->
-    <? if ($uri->getSegment(1) !="cost_benefit"): ?>
+    <?php if ($uri->getSegment(1) != "cost_benefit"): ?>
       <script src="<?= base_url('assets/js/bootstrap-select.js'); ?>"></script>
       <script src="<?= base_url('assets/js/application.js'); ?>"></script>
     <? endif; ?>

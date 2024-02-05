@@ -13,14 +13,14 @@
 
   <!-- Loading Flat UI -->
   <link href="/assets/css/flat-ui.css" rel="stylesheet">
-  <link href="/assets/css/custom.css" rel="stylesheet">
   <link href="/assets/css/selectize.css" rel="stylesheet">
   <link href="/assets/css/miller.css" rel="stylesheet">
-
+  
   <link href="/assets/css/easyui-tuna.css" rel="stylesheet">
-
-
+  
+  
   <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+  <link href="/assets/css/custom.css" rel="stylesheet">
 
   <!-- Map Library (Leaflet) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
