@@ -23,10 +23,10 @@
 						</p>
 						<div class="content">
 							<p>
-							 <?= form_open(site_url('addUsertoCompany/' . $companies['id'])) ?>
-							 <?= csrf_field() ?>
+								<?= form_open(site_url('addUsertoCompany/' . $companies['id'])) ?>
+								<?= csrf_field() ?>
 								<select id="users" class="info select-block" name="users">
-								<?php foreach ($users_without_company as $user): ?>
+									<?php foreach ($users_without_company as $user): ?>
 										<option value="<?= $user['id'] ?>">
 											<?= $user['name'] . ' ' . $user['surname'] ?>
 										</option>
@@ -107,14 +107,14 @@
 						<?= $companies['phone_num_2'] ?>
 					</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td>
 						<?= lang("Validation.faxnumber") ?>
 					</td>
 					<td>
 						<?= $companies['fax_num'] ?>
 					</td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td>
 						Nace Code
@@ -134,9 +134,37 @@
 					</td>
 				</tr>
 				<tr>
+					<td></td>
 					<td>
-						<?= lang("Validation.seeonmap") ?>
+					
+						<div id="map"></div>
+						<script type="text/javascript">
+							var latitude = <?=  $companies['latitude'] ?>;
+							var longitude = <?= $companies['longitude'] ?>
+
+							var map = L.map('map', {
+								center: [48.505, 11.59],
+								zoom: 3
+							});
+							map.fitWorld().zoomIn();
+
+							map.on('resize', function (e) {
+								map.fitWorld({ reset: true }).zoomIn();
+							});
+							mapLink =
+								'<a href="http://openstreetmap.org">OpenStreetMap</a>';
+							L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+								attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+							}).addTo(map);
+
+
+							L.marker = new L.marker([latitude, longitude])
+								.addTo(map);
+
+						</script>
+
 					</td>
+
 
 				</tr>
 			</table>
