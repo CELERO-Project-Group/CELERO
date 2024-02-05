@@ -14,6 +14,7 @@ use App\Models\Product_model;
 class Company extends BaseController
 {
 
+
 	public function new_company()
 	{
 		$user_model = model(User_model::class);
@@ -81,16 +82,38 @@ class Company extends BaseController
 					]
 				)
 			) {
+				// getting address directly from lat and long
+				// Replace with your actual latitude and longitude
+				$latitude = $this->request->getPost('lat');
+				$longitude = $this->request->getPost('long');
+				// Construct the URL
+				$url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" . $latitude . "&lon=" . $longitude;
+
+				// Add User-Agent header
+				$options = array(
+					'http' => array(
+						'header' => "User-Agent: MyApplication/1.0\r\n"
+					)
+				);
+				$context = stream_context_create($options);
+
+				// Fetch the address data
+				$response = file_get_contents($url, false, $context);
+				$address_data = json_decode($response, true);
+
+				// print_r($address_data['display_name']);
 
 				$data = array(
 					'name' => mb_strtolower($this->request->getPost('companyName')),
 					'phone_num_2' => $this->request->getPost('workPhone'),
 					'description' => substr($this->request->getPost('companyDescription'), 0, 199),
 					'email' => $this->request->getPost('email'),
-					'latitude' => $this->request->getPost('lat'),
-					'longitude' => $this->request->getPost('long'),
+					'latitude' => $latitude,
+					'longitude' => $longitude,
+					'address' => $address_data['display_name'],
 					'active' => '1'
 				);
+
 				$code = $this->request->getPost('naceCode');
 				$last_id = $company_model->insert_company($data);
 				$cmpny_data = array(
@@ -120,7 +143,6 @@ class Company extends BaseController
 						if ($user['user_id'] != $session->id) {
 							$company_model->add_worker_to_company($user);
 						}
-
 					}
 				}
 
@@ -139,7 +161,7 @@ class Company extends BaseController
 
 				$company_model->insert_cmpny_nace_code($cmpny_nace_code);
 
-				return redirect()->to("company/$companyOwner[cmpny_id]");
+				//return redirect()->to("company/$companyOwner[cmpny_id]");
 			}
 		}
 
@@ -491,16 +513,31 @@ class Company extends BaseController
 
 
 			) {
+				$latitude = $this->request->getPost('lat');
+				$longitude = $this->request->getPost('long');
 
+				$url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" . $latitude . "&lon=" . $longitude;
 
+				// Add User-Agent header
+				$options = array(
+					'http' => array(
+						'header' => "User-Agent: MyApplication/1.0\r\n"
+					)
+				);
+				$context = stream_context_create($options);
+
+				// Fetch the address data
+				$response = file_get_contents($url, false, $context);
+				$address_data = json_decode($response, true);
 
 				$company_data = array(
 					'name' => mb_strtolower($this->request->getPost('companyName')),
 					'phone_num_2' => $this->request->getPost('workPhone'),
 					'description' => substr($this->request->getPost('companyDescription'), 0, 199),
 					'email' => $this->request->getPost('email'),
-					'latitude' => $this->request->getPost('lat'),
-					'longitude' => $this->request->getPost('long'),
+					'latitude' => $latitude,
+					'longitude' => $longitude,
+					'address' => $address_data['display_name'],
 				);
 
 				$company_model->update_company($company_data, $term);
@@ -585,5 +622,7 @@ class Company extends BaseController
 			return redirect()->to(site_url());
 		}
 	}
+
+
 }
 ?>
