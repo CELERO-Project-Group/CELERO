@@ -59,8 +59,8 @@
 					</select>
 	 			</div>
 	 			<div class="form-group">
-	    			<label for="assignedContactperson"><?= lang("Validation.assigncontact"); ?></label>
-	    			<select  class="select-block" id="assignedContactperson" name="assignedContactperson">
+	    			<label for="assignContactPerson"><?= lang("Validation.assigncontact"); ?></label>
+	    			<select  class="select-block" id="assignContactPerson" name="assignContactPerson">
 	    			<?php foreach ($contactusers as $contacts): ?>
 	    			<?php foreach ($contacts as $contactuser): ?>
 							<option value="<?= $contactuser['id']; ?>"<?php if(in_array($contactuser['id'], $contactIDs)) echo 'selected';?>  ><?= $contactuser['name'].' '.$contactuser['surname'].' ('.$contactuser['cmpny_name'].')'; ?></option>

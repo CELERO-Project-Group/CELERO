@@ -276,22 +276,40 @@ class Project extends BaseController{
 			$contactIDs[] = $key['id'];
 		}
 		$data['contactIDs']=$contactIDs;
+
+
 		$contactusers = array();
 		foreach ($companyIDs as $cmpny_id) {
 			$contactusers[]= $user_model->get_company_users($cmpny_id);
 		}
-		
 		$data['contactusers']= $contactusers;
-
+		
 
 		if(!empty($this->request->getPost())){
-			if ($this->validate([
-				'projectName'  => 'trim|required|max_length[200]|is_unique[t_prj.name,id,{id}]',
-				'description'  => 'trim|required|max_length[200]',
-				'assignCompany' => 'required',
-				'assignConsultant' => 'required',
-				'assignContactPerson' => 'required'
-			]))
+			if ($this->validate(
+				[
+					'projectName' => [
+						'rules' => 'trim|required|max_length[200]|is_unique[t_prj.name,id,{id}]',
+						'label' => 'Project Name'
+					],
+					'description' => [
+						'rules' => 'trim|required|max_length[200]',
+						'label' => 'Description'
+					],
+					'assignCompany' => [
+						'rules' => 'required',
+						'label' => 'Assign Company'
+					],
+					'assignConsultant' => [
+						'rules' => 'required',
+						'label' => 'Assign Consultant'
+					],
+					'assignContactPerson' => [
+						'rules' => 'required',
+						'label' => 'Assign Contact Person'
+					]
+				]
+			))
 			{
 
 			date_default_timezone_set('UTC');
@@ -335,13 +353,11 @@ class Project extends BaseController{
 			$project_model->remove_contactuser_from_project($prjct_id);
 
 			$contactuser= $this->request->getPost('assignContactPerson');
+			
 			$prj_cntct_prsnl=array(
 				'prj_id' => $prjct_id,
 				'usr_id' => $contactuser
 			);
-
-			
-
 			$project_model->insert_project_contact_person($prj_cntct_prsnl);
 			
 			return redirect()->to('project/'.$prjct_id);
