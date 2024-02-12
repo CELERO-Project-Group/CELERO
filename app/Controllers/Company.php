@@ -622,7 +622,5 @@ class Company extends BaseController
 			return redirect()->to(site_url());
 		}
 	}
-
-
 }
 ?>

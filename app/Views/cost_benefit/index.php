@@ -980,224 +980,224 @@ $uri = service('uri');
 
                     function calculate(){
 
-                                                                                                               //OPEX old-1
-                                                                                                                $("#flow-opex-1-<?= $i; ?>").attr('value',($("#flow-specost-1-<?= $i; ?>").val()*$("#flow-value-1-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-1
+                        $("#flow-opex-1-<?= $i; ?>").attr('value',($("#flow-specost-1-<?= $i; ?>").val()*$("#flow-value-1-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //OPEX old-2
-                                                                                                                $("#flow-opex-1-2-<?= $i; ?>").val(($("#flow-specost-1-2-<?= $i; ?>").val()*$("#flow-value-1-2-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-2
+                        $("#flow-opex-1-2-<?= $i; ?>").val(($("#flow-specost-1-2-<?= $i; ?>").val()*$("#flow-value-1-2-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //OPEX old-3
-                                                                                                                $("#flow-opex-1-3-<?= $i; ?>").val(($("#flow-specost-1-3-<?= $i; ?>").val()*$("#flow-value-1-3-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-3
+                        $("#flow-opex-1-3-<?= $i; ?>").val(($("#flow-specost-1-3-<?= $i; ?>").val()*$("#flow-value-1-3-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //OPEX old-4
-                                                                                                                $("#flow-opex-1-4-<?= $i; ?>").val(($("#flow-specost-1-4-<?= $i; ?>").val()*$("#flow-value-1-4-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-4
+                        $("#flow-opex-1-4-<?= $i; ?>").val(($("#flow-specost-1-4-<?= $i; ?>").val()*$("#flow-value-1-4-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //OPEX old-5
-                                                                                                                $("#flow-opex-1-5-<?= $i; ?>").val(($("#flow-specost-1-5-<?= $i; ?>").val()*$("#flow-value-1-5-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-5
+                        $("#flow-opex-1-5-<?= $i; ?>").val(($("#flow-specost-1-5-<?= $i; ?>").val()*$("#flow-value-1-5-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //OPEX old-6
-                                                                                                                $("#flow-opex-1-6-<?= $i; ?>").val(($("#flow-specost-1-6-<?= $i; ?>").val()*$("#flow-value-1-6-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-6
+                        $("#flow-opex-1-6-<?= $i; ?>").val(($("#flow-specost-1-6-<?= $i; ?>").val()*$("#flow-value-1-6-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //sum-1
-                                                                                                                $("#sum-1-<?= $i; ?>").val((parseFloat($("#flow-opex-1-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-2-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-4-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-5-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-6-<?= $i; ?>").val())+parseFloat($("#maintan-1-<?= $i; ?>").val())).toFixed(2));
+                        //sum-1
+                        $("#sum-1-<?= $i; ?>").val((parseFloat($("#flow-opex-1-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-2-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-4-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-5-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-6-<?= $i; ?>").val())+parseFloat($("#maintan-1-<?= $i; ?>").val())).toFixed(2));
 
-                                                                                                                //flow eip-1
-                                                                                                                $("#flow-eip-1-<?= $i; ?>").val(($("#flow-eipunit-1-<?= $i; ?>").val()*$("#flow-value-1-<?= $i; ?>").val()).toFixed(4));
-                                                                                                                //flow eip-2
-                                                                                                                $("#flow-eip-1-2-<?= $i; ?>").val(($("#flow-eipunit-1-2-<?= $i; ?>").val()*$("#flow-value-1-2-<?= $i; ?>").val()).toFixed(4));
-                                                                                                                //flow eip-3
-                                                                                                                $("#flow-eip-1-3-<?= $i; ?>").val(($("#flow-eipunit-1-3-<?= $i; ?>").val()*$("#flow-value-1-3-<?= $i; ?>").val()).toFixed(4));
-                                                                                                                //flow eip-4
-                                                                                                                $("#flow-eip-1-4-<?= $i; ?>").val(($("#flow-eipunit-1-4-<?= $i; ?>").val()*$("#flow-value-1-4-<?= $i; ?>").val()).toFixed(4));
-                                                                                                                //flow eip-5
-                                                                                                                $("#flow-eip-1-5-<?= $i; ?>").val(($("#flow-eipunit-1-5-<?= $i; ?>").val()*$("#flow-value-1-5-<?= $i; ?>").val()).toFixed(4));
-                                                                                                                //flow eip-6
-                                                                                                                $("#flow-eip-1-6-<?= $i; ?>").val(($("#flow-eipunit-1-6-<?= $i; ?>").val()*$("#flow-value-1-6-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-1
+                        $("#flow-eip-1-<?= $i; ?>").val(($("#flow-eipunit-1-<?= $i; ?>").val()*$("#flow-value-1-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-2
+                        $("#flow-eip-1-2-<?= $i; ?>").val(($("#flow-eipunit-1-2-<?= $i; ?>").val()*$("#flow-value-1-2-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-3
+                        $("#flow-eip-1-3-<?= $i; ?>").val(($("#flow-eipunit-1-3-<?= $i; ?>").val()*$("#flow-value-1-3-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-4
+                        $("#flow-eip-1-4-<?= $i; ?>").val(($("#flow-eipunit-1-4-<?= $i; ?>").val()*$("#flow-value-1-4-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-5
+                        $("#flow-eip-1-5-<?= $i; ?>").val(($("#flow-eipunit-1-5-<?= $i; ?>").val()*$("#flow-value-1-5-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-6
+                        $("#flow-eip-1-6-<?= $i; ?>").val(($("#flow-eipunit-1-6-<?= $i; ?>").val()*$("#flow-value-1-6-<?= $i; ?>").val()).toFixed(4));
 
-                                                                                                                //sum-2
-                                                                                                                $("#sum-2-<?= $i; ?>").val((parseFloat($("#flow-eip-1-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-2-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-3-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-4-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-5-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-6-<?= $i; ?>").val())).toFixed(4));
+                        //sum-2
+                        $("#sum-2-<?= $i; ?>").val((parseFloat($("#flow-eip-1-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-2-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-3-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-4-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-5-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-6-<?= $i; ?>").val())).toFixed(4));
 
-                                                                                                                //annual-cost-1
-                                                                                                                $("#annual-cost-1-<?= $i; ?>").val((parseFloat($("#sum-1-<?= $i; ?>").val())+parseFloat($("#capexold-<?= $i; ?>").val())).toFixed(2));
+                        //annual-cost-1
+                        $("#annual-cost-1-<?= $i; ?>").val((parseFloat($("#sum-1-<?= $i; ?>").val())+parseFloat($("#capexold-<?= $i; ?>").val())).toFixed(2));
 
-                                                                                                                //Ann. costs old option calculation
-                                                                                                                //D3*(J3*(1+J3)^F3)/((1+J3)^F3-1)+E3
-                                                                                                                //capexold*(Discount*(1+Discount)^Lifetimeold)/(((1+Discount)^Lifetimeold)-1)+opexold
-                                                                                                                $("#capex-1-<?= $i; ?>").val((
-                                                                                                                    parseFloat($("#investment-<?= $i; ?>").val()*( 
-                                                                                                                        $("#disrate-<?= $i; ?>").val()/100 * 
-                                                                                                                            Math.pow(
-                                                                                                                                ((1)+parseFloat($("#disrate-<?= $i; ?>").val()/100)),$("#ltold-<?= $i; ?>").val()
-                                                                                                                            ))/(parseFloat(
-                                                                                                                            Math.pow(
-                                                                                                                                ((1)+parseFloat($("#disrate-<?= $i; ?>").val()/100)),$("#ltold-<?= $i; ?>").val()
-                                                                                                                            )
-                                                                                                                        )-(1))).toFixed(2))
-                                                                                                                );
+                        //Ann. costs old option calculation
+                        //D3*(J3*(1+J3)^F3)/((1+J3)^F3-1)+E3
+                        //capexold*(Discount*(1+Discount)^Lifetimeold)/(((1+Discount)^Lifetimeold)-1)+opexold
+                        $("#capex-1-<?= $i; ?>").val((
+                            parseFloat($("#investment-<?= $i; ?>").val()*( 
+                                $("#disrate-<?= $i; ?>").val()/100 * 
+                                    Math.pow(
+                                        ((1)+parseFloat($("#disrate-<?= $i; ?>").val()/100)),$("#ltold-<?= $i; ?>").val()
+                                    ))/(parseFloat(
+                                    Math.pow(
+                                        ((1)+parseFloat($("#disrate-<?= $i; ?>").val()/100)),$("#ltold-<?= $i; ?>").val()
+                                    )
+                                )-(1))).toFixed(2))
+                        );
 
-                                                                                                                if(isNaN($("#capex-1-<?= $i; ?>").val())){$("#capex-1-<?= $i; ?>").val("0");}
+                        if(isNaN($("#capex-1-<?= $i; ?>").val())){$("#capex-1-<?= $i; ?>").val("0");}
 
-                                                                                                                //OPEX old-2-1
-                                                                                                                $("#flow-opex-2-<?= $i; ?>").val(($("#flow-specost-2-<?= $i; ?>").val()*$("#flow-value-2-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-2-1
+                        $("#flow-opex-2-<?= $i; ?>").val(($("#flow-specost-2-<?= $i; ?>").val()*$("#flow-value-2-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //OPEX old-2-2
-                                                                                                                $("#flow-opex-2-2-<?= $i; ?>").val(($("#flow-specost-2-2-<?= $i; ?>").val()*$("#flow-value-2-2-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-2-2
+                        $("#flow-opex-2-2-<?= $i; ?>").val(($("#flow-specost-2-2-<?= $i; ?>").val()*$("#flow-value-2-2-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //OPEX old-2-3
-                                                                                                                $("#flow-opex-2-3-<?= $i; ?>").val(($("#flow-specost-2-3-<?= $i; ?>").val()*$("#flow-value-2-3-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-2-3
+                        $("#flow-opex-2-3-<?= $i; ?>").val(($("#flow-specost-2-3-<?= $i; ?>").val()*$("#flow-value-2-3-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //OPEX old-2-4
-                                                                                                                $("#flow-opex-2-4-<?= $i; ?>").val(($("#flow-specost-2-4-<?= $i; ?>").val()*$("#flow-value-2-4-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-2-4
+                        $("#flow-opex-2-4-<?= $i; ?>").val(($("#flow-specost-2-4-<?= $i; ?>").val()*$("#flow-value-2-4-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //OPEX old-2-5
-                                                                                                                $("#flow-opex-2-5-<?= $i; ?>").val(($("#flow-specost-2-5-<?= $i; ?>").val()*$("#flow-value-2-5-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-2-5
+                        $("#flow-opex-2-5-<?= $i; ?>").val(($("#flow-specost-2-5-<?= $i; ?>").val()*$("#flow-value-2-5-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //OPEX old-2-6
-                                                                                                                $("#flow-opex-2-6-<?= $i; ?>").val(($("#flow-specost-2-6-<?= $i; ?>").val()*$("#flow-value-2-6-<?= $i; ?>").val()).toFixed(2));
+                        //OPEX old-2-6
+                        $("#flow-opex-2-6-<?= $i; ?>").val(($("#flow-specost-2-6-<?= $i; ?>").val()*$("#flow-value-2-6-<?= $i; ?>").val()).toFixed(2));
 
-                                                                                                                //flow eip-2
-                                                                                                                $("#flow-eip-2-<?= $i; ?>").val(($("#flow-eipunit-2-<?= $i; ?>").val()*$("#flow-value-2-<?= $i; ?>").val()).toFixed(4));
-                                                                                                                //flow eip-2-2
-                                                                                                                $("#flow-eip-2-2-<?= $i; ?>").val(($("#flow-eipunit-2-2-<?= $i; ?>").val()*$("#flow-value-2-2-<?= $i; ?>").val()).toFixed(4));
-                                                                                                                //flow eip-2-3
-                                                                                                                $("#flow-eip-2-3-<?= $i; ?>").val(($("#flow-eipunit-2-3-<?= $i; ?>").val()*$("#flow-value-2-3-<?= $i; ?>").val()).toFixed(4));
-                                                                                                                //flow eip-2-4
-                                                                                                                $("#flow-eip-2-4-<?= $i; ?>").val(($("#flow-eipunit-2-4-<?= $i; ?>").val()*$("#flow-value-2-4-<?= $i; ?>").val()).toFixed(4));
-                                                                                                                //flow eip-2-5
-                                                                                                                $("#flow-eip-2-5-<?= $i; ?>").val(($("#flow-eipunit-2-5-<?= $i; ?>").val()*$("#flow-value-2-5-<?= $i; ?>").val()).toFixed(4));
-                                                                                                                //flow eip-2-6
-                                                                                                                $("#flow-eip-2-6-<?= $i; ?>").val(($("#flow-eipunit-2-6-<?= $i; ?>").val()*$("#flow-value-2-6-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-2
+                        $("#flow-eip-2-<?= $i; ?>").val(($("#flow-eipunit-2-<?= $i; ?>").val()*$("#flow-value-2-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-2-2
+                        $("#flow-eip-2-2-<?= $i; ?>").val(($("#flow-eipunit-2-2-<?= $i; ?>").val()*$("#flow-value-2-2-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-2-3
+                        $("#flow-eip-2-3-<?= $i; ?>").val(($("#flow-eipunit-2-3-<?= $i; ?>").val()*$("#flow-value-2-3-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-2-4
+                        $("#flow-eip-2-4-<?= $i; ?>").val(($("#flow-eipunit-2-4-<?= $i; ?>").val()*$("#flow-value-2-4-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-2-5
+                        $("#flow-eip-2-5-<?= $i; ?>").val(($("#flow-eipunit-2-5-<?= $i; ?>").val()*$("#flow-value-2-5-<?= $i; ?>").val()).toFixed(4));
+                        //flow eip-2-6
+                        $("#flow-eip-2-6-<?= $i; ?>").val(($("#flow-eipunit-2-6-<?= $i; ?>").val()*$("#flow-value-2-6-<?= $i; ?>").val()).toFixed(4));
 
-                                                                                                                 //sum-2
-                                                                                                                $("#sum-1-1-<?= $i; ?>").val((parseFloat($("#flow-opex-2-<?= $i; ?>").val())+parseFloat($("#flow-opex-2-2-<?= $i; ?>").val())+parseFloat($("#flow-opex-2-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-2-4-<?= $i; ?>").val())+parseFloat($("#flow-opex-2-5-<?= $i; ?>").val())+parseFloat($("#flow-opex-2-6-<?= $i; ?>").val())+parseFloat($("#maintan-1-2-<?= $i; ?>").val())).toFixed(2));
+                            //sum-2
+                        $("#sum-1-1-<?= $i; ?>").val((parseFloat($("#flow-opex-2-<?= $i; ?>").val())+parseFloat($("#flow-opex-2-2-<?= $i; ?>").val())+parseFloat($("#flow-opex-2-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-2-4-<?= $i; ?>").val())+parseFloat($("#flow-opex-2-5-<?= $i; ?>").val())+parseFloat($("#flow-opex-2-6-<?= $i; ?>").val())+parseFloat($("#maintan-1-2-<?= $i; ?>").val())).toFixed(2));
 
-                                                                                                                 //eip2-1
-                                                                                                                $("#sum-2-1-<?= $i; ?>").val((parseFloat($("#flow-eip-2-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-2-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-3-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-4-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-5-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-6-<?= $i; ?>").val())).toFixed(4));
+                            //eip2-1
+                        $("#sum-2-1-<?= $i; ?>").val((parseFloat($("#flow-eip-2-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-2-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-3-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-4-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-5-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-6-<?= $i; ?>").val())).toFixed(4));
 
-                                                                                                                //annual-cost-2
-                                                                                                                $("#annual-cost-2-<?= $i; ?>").val(parseFloat($("#sum-1-1-<?= $i; ?>").val())+parseFloat($("#capex-1-<?= $i; ?>").val()));
+                        //annual-cost-2
+                        $("#annual-cost-2-<?= $i; ?>").val(parseFloat($("#sum-1-1-<?= $i; ?>").val())+parseFloat($("#capex-1-<?= $i; ?>").val()));
 
-                                                                                                                //difference-1
-                                                                                                                $("#flow-value-3-<?= $i; ?>").val(parseFloat($("#flow-value-1-<?= $i; ?>").val())-parseFloat($("#flow-value-2-<?= $i; ?>").val()));
-                                                                                                                //difference-2
-                                                                                                                $("#flow-value-3-2-<?= $i; ?>").val(parseFloat($("#flow-value-1-2-<?= $i; ?>").val())-parseFloat($("#flow-value-2-2-<?= $i; ?>").val()));
-                                                                                                                //difference-3
-                                                                                                                $("#flow-value-3-3-<?= $i; ?>").val(parseFloat($("#flow-value-1-3-<?= $i; ?>").val())-parseFloat($("#flow-value-2-3-<?= $i; ?>").val()));                        
-                                                                                                                //difference-4
-                                                                                                                $("#flow-value-3-4-<?= $i; ?>").val(parseFloat($("#flow-value-1-4-<?= $i; ?>").val())-parseFloat($("#flow-value-2-4-<?= $i; ?>").val()));                        
-                                                                                                                //difference-5
-                                                                                                                $("#flow-value-3-5-<?= $i; ?>").val(parseFloat($("#flow-value-1-5-<?= $i; ?>").val())-parseFloat($("#flow-value-2-5-<?= $i; ?>").val()));                        
-                                                                                                                //difference-6
-                                                                                                                $("#flow-value-3-6-<?= $i; ?>").val(parseFloat($("#flow-value-1-6-<?= $i; ?>").val())-parseFloat($("#flow-value-2-6-<?= $i; ?>").val()));
-
-
-                                                                                                                //opex_dif-1
-                                                                                                                $("#flow-opex-3-<?= $i; ?>").val(parseFloat($("#flow-opex-1-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-<?= $i; ?>").val()));
-                                                                                                                //opex_dif-2
-                                                                                                                $("#flow-opex-3-2-<?= $i; ?>").val(parseFloat($("#flow-opex-1-2-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-2-<?= $i; ?>").val()));
-                                                                                                                //opex_dif-3
-                                                                                                                $("#flow-opex-3-3-<?= $i; ?>").val(parseFloat($("#flow-opex-1-3-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-3-<?= $i; ?>").val()));                        
-                                                                                                                //opex_dif-4
-                                                                                                                $("#flow-opex-3-4-<?= $i; ?>").val(parseFloat($("#flow-opex-1-4-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-4-<?= $i; ?>").val()));                        
-                                                                                                                //opex_dif-5
-                                                                                                                $("#flow-opex-3-5-<?= $i; ?>").val(parseFloat($("#flow-opex-1-5-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-5-<?= $i; ?>").val()));                        
-                                                                                                                //opex_dif-6
-                                                                                                                $("#flow-opex-3-6-<?= $i; ?>").val(parseFloat($("#flow-opex-1-6-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-6-<?= $i; ?>").val()));
-
-                                                                                                                //opex_dif-1
-                                                                                                                $("#ecoben-eip-1-<?= $i; ?>").val(parseFloat($("#flow-eip-1-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-<?= $i; ?>").val()));
-                                                                                                                //opex_dif-2
-                                                                                                                $("#ecoben-eip-1-2-<?= $i; ?>").val(parseFloat($("#flow-eip-1-2-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-2-<?= $i; ?>").val()));
-                                                                                                                //opex_dif-3
-                                                                                                                $("#ecoben-eip-1-3-<?= $i; ?>").val(parseFloat($("#flow-eip-1-3-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-3-<?= $i; ?>").val()));                        
-                                                                                                                //opex_dif-4
-                                                                                                                $("#ecoben-eip-1-4-<?= $i; ?>").val(parseFloat($("#flow-eip-1-4-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-4-<?= $i; ?>").val()));                        
-                                                                                                                //opex_dif-5
-                                                                                                                $("#ecoben-eip-1-5-<?= $i; ?>").val(parseFloat($("#flow-eip-1-5-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-5-<?= $i; ?>").val()));                        
-                                                                                                                //opex_dif-6
-                                                                                                                $("#ecoben-eip-1-6-<?= $i; ?>").val(parseFloat($("#flow-eip-1-6-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-6-<?= $i; ?>").val()));
-
-                                                                                                                //sum-3-1
-                                                                                                                $("#sum-3-1-<?= $i; ?>").val((parseFloat($("#flow-opex-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-2-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-4-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-5-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-6-<?= $i; ?>").val())).toFixed(2));
-
-                                                                                                                //sum-3-2
-                                                                                                                $("#sum-3-2-<?= $i; ?>").val((parseFloat($("#ecoben-eip-1-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-2-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-3-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-4-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-5-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-6-<?= $i; ?>").val())).toFixed(4));
-
-                                                                                                                //ecoben-1
-                                                                                                                $("#ecoben-1-<?= $i; ?>").val(parseFloat($("#annual-cost-2-<?= $i; ?>").val())-parseFloat($("#annual-cost-1-<?= $i; ?>").val()));
-
-                                                                                                                //marcos-1
-                                                                                                                $("#marcos-1-<?= $i; ?>").val((parseFloat($("#ecoben-1-<?= $i; ?>").val())/parseFloat($("#sum-3-2-<?= $i; ?>").val())).toFixed(2));
-
-                                                                                                                //payback-1
-                                                                                                                $("#payback-1-<?= $i; ?>").val(((parseFloat($("#ltold-<?= $i; ?>").val())*parseFloat($("#capex-1-<?= $i; ?>").val()))/(parseFloat($("#sum-1-<?= $i; ?>").val())-parseFloat($("#sum-1-1-<?= $i; ?>").val()))).toFixed(2));
-                                                                                                                //------------------------------
-
-                                                                                                                //OPEX OLD calculation
-                                                                                                                $("#opexold-<?= $i; ?>").val($("#oldcons-<?= $i; ?>").val()*$("#euunit-<?= $i; ?>").val());
-
-                                                                                                                //OPEX NEW calculation
-                                                                                                                $("#opexnew-<?= $i; ?>").val($("#newcons-<?= $i; ?>").val()*$("#euunit-<?= $i; ?>").val());
-
-                                                                                                                /*
-                                                                                                                console.log(
-                                                                                                                    Math.pow(
-                                                                                                                                ((1)+parseFloat($("#disrate-<?= $i; ?>").val()/100)),$("#ltold-<?= $i; ?>").val()
-                                                                                                                        )-(1)
-                                                                                                                );
-                                                                                                                console.log(parseFloat($("#disrate-<?= $i; ?>").val()/100));
-                                                                                                                console.log(parseFloat($("#ltold-<?= $i; ?>").val()));
-                                                                                                                */
-
-                                                                                                                //Ann. costs new option calculation
-                                                                                                                //D3*(J3*(1+J3)^F3)/((1+J3)^F3-1)+E3
-                                                                                                                //capexold*(Discount*(1+Discount)^Lifetimeold)/(((1+Discount)^Lifetimeold)-1)+opexold
-                                                                                                                /*$("#acnew-<?= $i; ?>").val( 
-                                                                                                                    parseFloat($("#capexnew-<?= $i; ?>").val()*( 
-                                                                                                                        $("#disrate-<?= $i; ?>").val()/100 * 
-                                                                                                                            Math.pow(
-                                                                                                                                ((1)+parseFloat($("#disrate-<?= $i; ?>").val()/100)),$("#ltnew-<?= $i; ?>").val()
-                                                                                                                            ))/(parseFloat(
-                                                                                                                            Math.pow(
-                                                                                                                                ((1)+parseFloat($("#disrate-<?= $i; ?>").val()/100)),$("#ltnew-<?= $i; ?>").val()
-                                                                                                                            )
-                                                                                                                        )-(1)))
-                                                                                                                    + parseFloat($("#opexnew-<?= $i; ?>").val())
-                                                                                                                );
-
-                                                                                                                //Ecological Benefit calculation
-                                                                                                                $("#ecoben-<?= $i; ?>").val(-$("#eipunit-<?= $i; ?>").val() * ($("#newcons-<?= $i; ?>").val()-$("#oldcons-<?= $i; ?>").val()));
-                        
-                                                                                                                //Economic cost-benefit calculation
-                                                                                                                $("#eco-<?= $i; ?>").val($("#acnew-<?= $i; ?>").val()-$("#acold-<?= $i; ?>").val());
+                        //difference-1
+                        $("#flow-value-3-<?= $i; ?>").val(parseFloat($("#flow-value-1-<?= $i; ?>").val())-parseFloat($("#flow-value-2-<?= $i; ?>").val()));
+                        //difference-2
+                        $("#flow-value-3-2-<?= $i; ?>").val(parseFloat($("#flow-value-1-2-<?= $i; ?>").val())-parseFloat($("#flow-value-2-2-<?= $i; ?>").val()));
+                        //difference-3
+                        $("#flow-value-3-3-<?= $i; ?>").val(parseFloat($("#flow-value-1-3-<?= $i; ?>").val())-parseFloat($("#flow-value-2-3-<?= $i; ?>").val()));                        
+                        //difference-4
+                        $("#flow-value-3-4-<?= $i; ?>").val(parseFloat($("#flow-value-1-4-<?= $i; ?>").val())-parseFloat($("#flow-value-2-4-<?= $i; ?>").val()));                        
+                        //difference-5
+                        $("#flow-value-3-5-<?= $i; ?>").val(parseFloat($("#flow-value-1-5-<?= $i; ?>").val())-parseFloat($("#flow-value-2-5-<?= $i; ?>").val()));                        
+                        //difference-6
+                        $("#flow-value-3-6-<?= $i; ?>").val(parseFloat($("#flow-value-1-6-<?= $i; ?>").val())-parseFloat($("#flow-value-2-6-<?= $i; ?>").val()));
 
 
-                                                                                                                //MArgianl-costs calculation
-                                                                                                                //=EĞER(W3>0,M3/W3*100,-M3/W3*100)
-                                                                                                                if($("#ecoben-<?= $i; ?>").val()>0){
-                                                                                                                    $("#marcos-<?= $i; ?>").val($("#eco-<?= $i; ?>").val()/$("#ecoben-<?= $i; ?>").val()*100);
-                                                                                                                    $("#marcos-<?= $i; ?>").val(toFixed($("#marcos-<?= $i; ?>").val(),2));
-                                                                                                                }
-                                                                                                                else{
-                                                                                                                    $("#marcos-<?= $i; ?>").val(-$("#eco-<?= $i; ?>").val()/$("#ecoben-<?= $i; ?>").val()*100);
-                                                                                                                    $("#marcos-<?= $i; ?>").val(toFixed($("#marcos-<?= $i; ?>").val(),2));
-                                                                                                                }*/
+                        //opex_dif-1
+                        $("#flow-opex-3-<?= $i; ?>").val(parseFloat($("#flow-opex-1-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-<?= $i; ?>").val()));
+                        //opex_dif-2
+                        $("#flow-opex-3-2-<?= $i; ?>").val(parseFloat($("#flow-opex-1-2-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-2-<?= $i; ?>").val()));
+                        //opex_dif-3
+                        $("#flow-opex-3-3-<?= $i; ?>").val(parseFloat($("#flow-opex-1-3-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-3-<?= $i; ?>").val()));                        
+                        //opex_dif-4
+                        $("#flow-opex-3-4-<?= $i; ?>").val(parseFloat($("#flow-opex-1-4-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-4-<?= $i; ?>").val()));                        
+                        //opex_dif-5
+                        $("#flow-opex-3-5-<?= $i; ?>").val(parseFloat($("#flow-opex-1-5-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-5-<?= $i; ?>").val()));                        
+                        //opex_dif-6
+                        $("#flow-opex-3-6-<?= $i; ?>").val(parseFloat($("#flow-opex-1-6-<?= $i; ?>").val())-parseFloat($("#flow-opex-2-6-<?= $i; ?>").val()));
 
-                                                                                                            }
+                        //opex_dif-1
+                        $("#ecoben-eip-1-<?= $i; ?>").val(parseFloat($("#flow-eip-1-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-<?= $i; ?>").val()));
+                        //opex_dif-2
+                        $("#ecoben-eip-1-2-<?= $i; ?>").val(parseFloat($("#flow-eip-1-2-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-2-<?= $i; ?>").val()));
+                        //opex_dif-3
+                        $("#ecoben-eip-1-3-<?= $i; ?>").val(parseFloat($("#flow-eip-1-3-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-3-<?= $i; ?>").val()));                        
+                        //opex_dif-4
+                        $("#ecoben-eip-1-4-<?= $i; ?>").val(parseFloat($("#flow-eip-1-4-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-4-<?= $i; ?>").val()));                        
+                        //opex_dif-5
+                        $("#ecoben-eip-1-5-<?= $i; ?>").val(parseFloat($("#flow-eip-1-5-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-5-<?= $i; ?>").val()));                        
+                        //opex_dif-6
+                        $("#ecoben-eip-1-6-<?= $i; ?>").val(parseFloat($("#flow-eip-1-6-<?= $i; ?>").val())-parseFloat($("#flow-eip-2-6-<?= $i; ?>").val()));
 
-                                                                                                            function toFixed ( number, precision ) {
-                                                                                                                var multiplier = Math.pow( 10, precision + 1 ),
-                                                                                                                    wholeNumber = Math.floor( number * multiplier );
-                                                                                                                return Math.round( wholeNumber / 10 ) * 10 / multiplier;
-                                                                                                            }
+                        //sum-3-1
+                        $("#sum-3-1-<?= $i; ?>").val((parseFloat($("#flow-opex-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-2-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-4-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-5-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-6-<?= $i; ?>").val())).toFixed(2));
+
+                        //sum-3-2
+                        $("#sum-3-2-<?= $i; ?>").val((parseFloat($("#ecoben-eip-1-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-2-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-3-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-4-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-5-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-6-<?= $i; ?>").val())).toFixed(4));
+
+                        //ecoben-1
+                        $("#ecoben-1-<?= $i; ?>").val(parseFloat($("#annual-cost-2-<?= $i; ?>").val())-parseFloat($("#annual-cost-1-<?= $i; ?>").val()));
+
+                        //marcos-1
+                        $("#marcos-1-<?= $i; ?>").val((parseFloat($("#ecoben-1-<?= $i; ?>").val())/parseFloat($("#sum-3-2-<?= $i; ?>").val())).toFixed(2));
+
+                        //payback-1
+                        $("#payback-1-<?= $i; ?>").val(((parseFloat($("#ltold-<?= $i; ?>").val())*parseFloat($("#capex-1-<?= $i; ?>").val()))/(parseFloat($("#sum-1-<?= $i; ?>").val())-parseFloat($("#sum-1-1-<?= $i; ?>").val()))).toFixed(2));
+                        //------------------------------
+
+                        //OPEX OLD calculation
+                        $("#opexold-<?= $i; ?>").val($("#oldcons-<?= $i; ?>").val()*$("#euunit-<?= $i; ?>").val());
+
+                        //OPEX NEW calculation
+                        $("#opexnew-<?= $i; ?>").val($("#newcons-<?= $i; ?>").val()*$("#euunit-<?= $i; ?>").val());
+
+                        /*
+                        console.log(
+                            Math.pow(
+                                        ((1)+parseFloat($("#disrate-<?= $i; ?>").val()/100)),$("#ltold-<?= $i; ?>").val()
+                                )-(1)
+                        );
+                        console.log(parseFloat($("#disrate-<?= $i; ?>").val()/100));
+                        console.log(parseFloat($("#ltold-<?= $i; ?>").val()));
+                        */
+
+                        //Ann. costs new option calculation
+                        //D3*(J3*(1+J3)^F3)/((1+J3)^F3-1)+E3
+                        //capexold*(Discount*(1+Discount)^Lifetimeold)/(((1+Discount)^Lifetimeold)-1)+opexold
+                        /*$("#acnew-<?= $i; ?>").val( 
+                            parseFloat($("#capexnew-<?= $i; ?>").val()*( 
+                                $("#disrate-<?= $i; ?>").val()/100 * 
+                                    Math.pow(
+                                        ((1)+parseFloat($("#disrate-<?= $i; ?>").val()/100)),$("#ltnew-<?= $i; ?>").val()
+                                    ))/(parseFloat(
+                                    Math.pow(
+                                        ((1)+parseFloat($("#disrate-<?= $i; ?>").val()/100)),$("#ltnew-<?= $i; ?>").val()
+                                    )
+                                )-(1)))
+                            + parseFloat($("#opexnew-<?= $i; ?>").val())
+                        );
+
+                        //Ecological Benefit calculation
+                        $("#ecoben-<?= $i; ?>").val(-$("#eipunit-<?= $i; ?>").val() * ($("#newcons-<?= $i; ?>").val()-$("#oldcons-<?= $i; ?>").val()));
+
+                        //Economic cost-benefit calculation
+                        $("#eco-<?= $i; ?>").val($("#acnew-<?= $i; ?>").val()-$("#acold-<?= $i; ?>").val());
 
 
-                                                                                                            $('#form-<?= $i; ?> input').change(calculate);
-                                                                                                         </script>
-                                                                                                        <?php $i++; ?>
-                                                                                                        <!-- </form> -->
-                                                                                                        <script type="text/javascript">	$( document ).ready(calculate);</script>
-                                                        <?php endforeach ?>
+                        //MArgianl-costs calculation
+                        //=EĞER(W3>0,M3/W3*100,-M3/W3*100)
+                        if($("#ecoben-<?= $i; ?>").val()>0){
+                            $("#marcos-<?= $i; ?>").val($("#eco-<?= $i; ?>").val()/$("#ecoben-<?= $i; ?>").val()*100);
+                            $("#marcos-<?= $i; ?>").val(toFixed($("#marcos-<?= $i; ?>").val(),2));
+                        }
+                        else{
+                            $("#marcos-<?= $i; ?>").val(-$("#eco-<?= $i; ?>").val()/$("#ecoben-<?= $i; ?>").val()*100);
+                            $("#marcos-<?= $i; ?>").val(toFixed($("#marcos-<?= $i; ?>").val(),2));
+                        }*/
+
+                    }
+
+                    function toFixed ( number, precision ) {
+                        var multiplier = Math.pow( 10, precision + 1 ),
+                            wholeNumber = Math.floor( number * multiplier );
+                        return Math.round( wholeNumber / 10 ) * 10 / multiplier;
+                    }
+
+
+                    $('#form-<?= $i; ?> input').change(calculate);
+                    </script>
+                <?php $i++; ?>
+                <!-- </form> -->
+                <script type="text/javascript">	$( document ).ready(calculate);</script>
+            <?php endforeach ?>
         <?php endif ?>
 </div>
 <div class="row">
@@ -1253,124 +1253,143 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
 <script type="text/javascript">
     setTimeout(function()
     {  
-        tuna_graph();
+        costBenefitGraph();
     }, 1000);
 
-    function tuna_graph(){
-    //console.log(list);
-    //Tuna Graph
-    var data = <?= json_encode($tuna_array); ?>;
-    var margin = {
-                "top": 10,
-                "right": 30,
-                "bottom": 350,
-                "left": 50
-            };
-    var width = $('#sag4').width()-80;
-    var height = 500;
-    // Set the scales
-  var x = d3.scale.linear()
-          .domain([0, d3.max(data, function(d) { return d.xmin+d.xmax; })])
-              .range([0,width]).nice();
+    function costBenefitGraph(){
+        var data = <?= json_encode($tuna_array); ?>;
+        console.log(data);
 
-  var y = d3.scale.linear()
-              .domain([d3.min(data, function(d) { return d.ymin-0.1; }), d3.max(data, function(d) { return d.ymax; })])
-              .range([height, 0]).nice();
+        //loop through the data and check if the values on the axis are the same and if asign slightly different values
+        for (var i = 0; i < data.length; i++)
+        {
+            if(data[i].ymin == data[i].ymax)
+            {
+                data[i].ymin = 0;
+                data[i].ymax = 0.0000000000000001;
+            }
+            if(data[i].xmin == data[i].xmax)
+            {
+                data[i].xmin = 0;
+                data[i].xmax = 0.000000000000001;
+            }
 
-  var xAxis = d3.svg.axis().scale(x).orient("bottom");
-  var yAxis = d3.svg.axis().scale(y).orient("left");
+        }
+       
+        var margin = {
+                    "top": 10,
+                    "right": 30,
+                    "bottom": 350,
+                    "left": 50
+                };
+        var width = $('#sag4').width()-80;
+        var height = 500;
 
-    // Create the SVG 'canvas'
-  var svg = d3.select("#rect-demo-ana").append("svg")
-          .attr("class", "chart")
-          .attr("mousewheel.zoom", null)
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom).append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.right + ")");
+        
+        
+        // Set the scales
+        var x = d3.scale.linear()
+            .domain([0, d3.max(data, function(d) { return d.xmin+d.xmax; })])
+            .range([0,width]).nice();
 
-  svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0,"+ y(0) +")")
-    .call(xAxis);
+        var y = d3.scale.linear()
+            .domain([d3.min(data, function(d) { return d.ymin-0.1; }), d3.max(data, function(d) { return d.ymax; })])
+            .range([height, 0]).nice();
 
-  svg.append("g")
-    .attr("class", "y axis")
-    .call(yAxis);
+        var xAxis = d3.svg.axis().scale(x).orient("bottom");
+        var yAxis = d3.svg.axis().scale(y).orient("left");
 
-  //x axis label
-    svg.append("text")
-        .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom - 305) + ")")
-        .style("text-anchor", "middle")
-        .text("<?= lang('ecologicalbenefit'); ?> (EP/a)");
+        // Create the SVG 'canvas'
+        var svg = d3.select("#rect-demo-ana").append("svg")
+            .attr("class", "chart")
+            .attr("mousewheel.zoom", null)
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom).append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.right + ")");
 
-    //y axis label
-    svg.append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left)
-        .attr("x", 0 - (height / 2))
-        .attr("dy", "1em")
-        .style("text-anchor", "middle")
-        .text("<?= lang('marginalcost'); ?> (<?= $allocation[0]['unit_cost']; ?>/EP)");
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0,"+ y(0) +")")
+            .call(xAxis);
 
-    svg.selectAll("rect").
-        data(data).
-        enter().
-        append("svg:rect").
-        attr("x", function(datum,index) { return x(datum.xmin); }).
-        attr("y", function(datum,index) { return y(datum.ymax); }).
-        attr("height", function(datum,index) { return y(datum.ymin)-y(datum.ymax)+(height*0.0001); }).
-        attr("width", function(datum, index) { return x(datum.xmax)+(width*0.0001); })
-        .attr("fill", function(d, i) { return d.color; })
-        .style("opacity", '0.5')
-        .on("mouseover", function(datum,index){return tooltip.style("visibility", "visible").html(datum.name);})
-        .on("mousemove", function(datum,index){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px").html(datum.name);})
-        .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+        //x axis label
+        svg.append("text")
+            .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom - 305) + ")")
+            .style("text-anchor", "middle")
+            .text("<?= lang('ecologicalbenefit'); ?> (EP/a)");
+
+        //y axis label
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin.left)
+            .attr("x", 0 - (height / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("<?= lang('marginalcost'); ?> (<?= $allocation[0]['unit_cost']; ?>/EP)");
+
+        svg.selectAll("rect")
+            .data(data)
+            .enter()
+            .append("svg:rect")
+            .attr("x", function(datum,index) { return x(datum.xmin); })
+            .attr("y", function(datum,index) { return y(datum.ymax); })
+            .attr("height", function(datum,index) { return y(datum.ymin)-y(datum.ymax)+(height*0.0001); })
+            .attr("width", function(datum, index) { return x(datum.xmax)+(width*0.0001); })
+            .attr("fill", function(d, i) { return d.color; })
+            .style("opacity", '0.8')
+            .on("mouseover", function(datum,index){return tooltip.style("visibility", "visible").html(datum.name);})
+            .on("mousemove", function(datum,index){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px").html(datum.name);})
+            .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 
         var tooltip = d3.select("body")
-        .append("div")
-        .style("position", "absolute")
-        .style("z-index", "10")
-        .style("visibility", "hidden")
-        .style("background-color", "white")
-        .style("padding", "10px")
-        .style("border", "1px solid #d0d0d0")
-        .style("border-radius", "2px")
-        .style("font-size", "12px")
-        .style("max-width", "200px")
-        .style("color", "#444");
+            .append("div")
+            .style("position", "absolute")
+            .style("z-index", "10")
+            .style("visibility", "hidden")
+            .style("background-color", "white")
+            .style("padding", "10px")
+            .style("border", "1px solid #d0d0d0")
+            .style("border-radius", "2px")
+            .style("font-size", "12px")
+            .style("max-width", "200px")
+            .style("color", "#444");
 
         // add legend   
         var legend = svg.append("g")
-      .attr("class", "legend")
-        //.attr("x", w - 65)
-        //.attr("y", 50)
-      .attr("height", 100)
-      .attr("width", 100)
-    .attr('transform', 'translate(-20,50)')    
+            .attr("class", "legend")
+                //.attr("x", w - 65)
+                //.attr("y", 50)
+            .attr("height", 100)
+            .attr("width", 100)
+            .attr('transform', 'translate(-20,50)')    
       
-    legend.selectAll('rect')
-      .data(data)
-      .enter()
-      .append("circle")
-      .attr("r", 7)
-      .attr("cx", 1)
-      .attr("cy", function(d, i){ return 555 + (i *  19);})
-          .style("fill", function(datum,index) { return datum.color; })
-             .style("opacity", '0.5')
+        legend.selectAll('rect')
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("r", 7)
+            .attr("cx", 1)
+            .attr("cy", function(d, i){ return 555 + (i *  19);})
+            .style("fill", function(datum,index) { return datum.color; })
+            .style("opacity", '0.8')
       
-    legend.selectAll('text')
-      .data(data)
-      .enter()
-      .append("text")
-        .style("font-size", "12px")
-      .attr("x", 16)
-    .attr("y", function(d, i){ return i *  19 + 559;})
-      .text(function(datum,index) { return datum.name; });
+        legend.selectAll('text')
+            .data(data)
+            .enter()
+            .append("text")
+            .style("font-size", "12px")
+            .attr("x", 16)
+            .attr("y", function(d, i){ return i *  19 + 559;})
+            .text(function(datum,index) { return datum.name; });
 
-      svg.call(
-          d3.behavior.zoom()
-          .x(x).y(y).on("zoom", zoom)
-          );
+        svg.call(
+            d3.behavior.zoom()
+            .x(x).y(y).on("zoom", zoom)
+            );
  
         function zoom() {
           svg.select(".x.axis").call(xAxis);
@@ -1382,115 +1401,115 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
 <?php $k = 1; ?>
 
 <?php foreach ($allocation as $b): ?>
-                                            <script type="text/javascript">
-                                                //insert the first (predefined) row if it has empty flow name or value. 
-                                                //Eg. if the user deletes this values they are reentered automatically
-                                                var flownamedef= "<?= $b['flow_name']; ?>";
-                                                var qntty_unit= "<?= $b['qntty_unit']; ?>";
-                                                <?php if (!empty($b['amount'])): ?>
-                                                                                            var amount= "<?= $b['amount']; ?>";
-                                                <?php endif ?>
-                                                var cost= "<?= $b['cost']; ?>";
-                                                <?php if (!empty($b['env_impact'])): ?>
-                                                                                            var env_impact= "<?= $b['env_impact']; ?>";
-                                                <?php endif ?>
+    <script type="text/javascript">
+        //insert the first (predefined) row if it has empty flow name or value. 
+        //Eg. if the user deletes this values they are reentered automatically
+        var flownamedef= "<?= $b['flow_name']; ?>";
+        var qntty_unit= "<?= $b['qntty_unit']; ?>";
+        <?php if (!empty($b['amount'])): ?>
+                                                    var amount= "<?= $b['amount']; ?>";
+        <?php endif ?>
+        var cost= "<?= $b['cost']; ?>";
+        <?php if (!empty($b['env_impact'])): ?>
+                                                    var env_impact= "<?= $b['env_impact']; ?>";
+        <?php endif ?>
 
-                                                var k= <?= $k; ?>;
-                                    
-                                    
-
-    
-                                                if(document.getElementById('flow-name-1-'+k).value=="" || document.getElementById('flow-value-1-'+k).value==""){
-                                                    document.getElementById('flow-name-1-'+k).value = flownamedef;
-                                                    document.getElementById('flow-unit-1-'+k).value = qntty_unit;
-                                                    document.getElementById('flow-value-1-'+k).value = amount;
-                                                    document.getElementById('flow-specost-1-'+k).value = cost/amount;
-                                                    document.getElementById('flow-eipunit-1-'+k).value = env_impact/amount;
-                                                }
-
-                                                //inserts the values on the option side if the value is empty
-                                                if(document.getElementById('flow-name-2-'+k).value=="" || document.getElementById('flow-value-2-'+k).value==""){
-                                                    document.getElementById('flow-name-2-'+k).value = flownamedef;
-                                                    document.getElementById('flow-unit-2-'+k).value = qntty_unit;
-                                                    document.getElementById('flow-value-2-'+k).value = amount;
-                                                    document.getElementById('flow-specost-2-'+k).value = cost/amount;
-                                                    document.getElementById('flow-eipunit-2-'+k).value = env_impact/amount;
-                                                }
-                                                // console.log(flownamedef);
-                                                // console.log("Cost: " + cost)
-                                                // console.log("Amount: " + amount)
-                                                // console.log("Sum: " + cost/amount);
-                                    
-                                            </script>
-
-                                            <script type="text/javascript">
-                                            function insertFlowRow(selectedObject) {
-                                                //gives the selected flow_id from the select dropdown
-                                                var selected_id = selectedObject.value;
-
-                                                //gets the unique "key" for this table row
-                                                var table_key = $(selectedObject).attr('id').slice(-5);
-                                                var form_num = $(selectedObject).attr('id').slice(-1);
-
-                                                //gets the cmpny flow array as json in JS
-                                                var flow_array = <?= json_encode($allocated_flows); ?>;
-
-                                                console.log("Not Defined:" + flow_array);
-
-                                                //loops through all flows and gets the one that is selected
-                                                for (flow in flow_array){
-                                                    if (flow_array[flow]['allocation_id'] == selected_id){
-                                                        //inserts the flow values in the row (baseline)
-                                                        $('#flow-name-'+table_key).val(flow_array[flow]['flow_name'] +" ("+ flow_array[flow]['flow_type_name']+")");
-                                                        $('#flow-value-'+table_key).val(flow_array[flow]['amount']);
-                                                        $('#flow-unit-'+table_key).val(flow_array[flow]['unit_amount']);
-                                                        // $('#flow-specost-'+table_key).val(flow_array[flow]['cost']/flow_array[flow]['amount']);
-                                                        // $('#flow-eipunit-'+table_key).val(flow_array[flow]['env_impact']/flow_array[flow]['amount']);
-                                                        $('#flow-specost-'+table_key).val(flow_array[flow]['cost']/flow_array[flow]['amount']);
-                                                        $('#flow-eipunit-'+table_key).val(flow_array[flow]['env_impact']/flow_array[flow]['amount']);
+        var k= <?= $k; ?>;
 
 
-                                                        if (confirm("Values will be inserted as baseline on the left. \nDo you want to use the same values as option on the right side aswell? Your are able to change them as you want.")) {
-                                                            //if confirmed same values used as option, inserts the flow values in the row 
-                                                            $('#flow-name-2'+table_key.slice(-4)).val(flow_array[flow]['flow_name'] +" ("+ flow_array[flow]['flow_type_name']+")");
-                                                            $('#flow-value-2'+table_key.slice(-4)).val(flow_array[flow]['amount']);
-                                                            $('#flow-unit-2'+table_key.slice(-4)).val(flow_array[flow]['unit_amount']);
-                                                            $('#flow-specost-2'+table_key.slice(-4)).val(flow_array[flow]['cost']/flow_array[flow]['amount']);
-                                                            $('#flow-eipunit-2'+table_key.slice(-4)).val(flow_array[flow]['env_impact']/flow_array[flow]['amount']);
 
-                                                            $('#flow-name-3'+table_key.slice(-4)).val(flow_array[flow]['flow_name'] +" ("+ flow_array[flow]['flow_type_name']+")");
-                                                             $('#flow-unit-3'+table_key.slice(-4)).val(flow_array[flow]['unit_amount']);
-                                                        } else {
-                                                            //empties the values on the option side
-                                                            $('#flow-name-2'+table_key.slice(-4)).val("");
-                                                            $('#flow-value-2'+table_key.slice(-4)).val("");
-                                                            $('#flow-unit-2'+table_key.slice(-4)).val("");
-                                                            $('#flow-specost-2'+table_key.slice(-4)).val("");
-                                                            $('#flow-eipunit-2'+table_key.slice(-4)).val("");
 
-                                                            $('#flow-name-3'+table_key.slice(-4)).val("");
+        if(document.getElementById('flow-name-1-'+k).value=="" || document.getElementById('flow-value-1-'+k).value==""){
+            document.getElementById('flow-name-1-'+k).value = flownamedef;
+            document.getElementById('flow-unit-1-'+k).value = qntty_unit;
+            document.getElementById('flow-value-1-'+k).value = amount;
+            document.getElementById('flow-specost-1-'+k).value = cost/amount;
+            document.getElementById('flow-eipunit-1-'+k).value = env_impact/amount;
+        }
 
-                                                        }
-                                                        //runs a change so that the values are calculated
-                                                        $('#form-'+form_num+' input').change();
-                                                        break;
-                                                    }
-                                                }
-                                            } 
+        //inserts the values on the option side if the value is empty
+        if(document.getElementById('flow-name-2-'+k).value=="" || document.getElementById('flow-value-2-'+k).value==""){
+            document.getElementById('flow-name-2-'+k).value = flownamedef;
+            document.getElementById('flow-unit-2-'+k).value = qntty_unit;
+            document.getElementById('flow-value-2-'+k).value = amount;
+            document.getElementById('flow-specost-2-'+k).value = cost/amount;
+            document.getElementById('flow-eipunit-2-'+k).value = env_impact/amount;
+        }
+        // console.log(flownamedef);
+        // console.log("Cost: " + cost)
+        // console.log("Amount: " + amount)
+        // console.log("Sum: " + cost/amount);
 
-                                            //tooltip unit column (option side)
-                                            $('.tooltip-unit').tooltip({
-                                                position: 'top',
-                                                content: '<span style="color:#fff"><?= lang("Validation.unit-ttip"); ?></span>',
-                                                onShow: function(){
-                                                    $(this).tooltip('tip').css({
-                                                        backgroundColor: '#999',
-                                                        borderColor: '#999'
-                                                    });
-                                                }
-                                            });
-                                            </script>
-                                            <?php $k = $k + 1; ?>
+    </script>
+
+    <script type="text/javascript">
+    function insertFlowRow(selectedObject) {
+        //gives the selected flow_id from the select dropdown
+        var selected_id = selectedObject.value;
+
+        //gets the unique "key" for this table row
+        var table_key = $(selectedObject).attr('id').slice(-5);
+        var form_num = $(selectedObject).attr('id').slice(-1);
+
+        //gets the cmpny flow array as json in JS
+        var flow_array = <?= json_encode($allocated_flows); ?>;
+
+        console.log("Not Defined:" + flow_array);
+
+        //loops through all flows and gets the one that is selected
+        for (flow in flow_array){
+            if (flow_array[flow]['allocation_id'] == selected_id){
+                //inserts the flow values in the row (baseline)
+                $('#flow-name-'+table_key).val(flow_array[flow]['flow_name'] +" ("+ flow_array[flow]['flow_type_name']+")");
+                $('#flow-value-'+table_key).val(flow_array[flow]['amount']);
+                $('#flow-unit-'+table_key).val(flow_array[flow]['unit_amount']);
+                // $('#flow-specost-'+table_key).val(flow_array[flow]['cost']/flow_array[flow]['amount']);
+                // $('#flow-eipunit-'+table_key).val(flow_array[flow]['env_impact']/flow_array[flow]['amount']);
+                $('#flow-specost-'+table_key).val(flow_array[flow]['cost']/flow_array[flow]['amount']);
+                $('#flow-eipunit-'+table_key).val(flow_array[flow]['env_impact']/flow_array[flow]['amount']);
+
+
+                if (confirm("Values will be inserted as baseline on the left. \nDo you want to use the same values as option on the right side aswell? Your are able to change them as you want.")) {
+                    //if confirmed same values used as option, inserts the flow values in the row 
+                    $('#flow-name-2'+table_key.slice(-4)).val(flow_array[flow]['flow_name'] +" ("+ flow_array[flow]['flow_type_name']+")");
+                    $('#flow-value-2'+table_key.slice(-4)).val(flow_array[flow]['amount']);
+                    $('#flow-unit-2'+table_key.slice(-4)).val(flow_array[flow]['unit_amount']);
+                    $('#flow-specost-2'+table_key.slice(-4)).val(flow_array[flow]['cost']/flow_array[flow]['amount']);
+                    $('#flow-eipunit-2'+table_key.slice(-4)).val(flow_array[flow]['env_impact']/flow_array[flow]['amount']);
+
+                    $('#flow-name-3'+table_key.slice(-4)).val(flow_array[flow]['flow_name'] +" ("+ flow_array[flow]['flow_type_name']+")");
+                        $('#flow-unit-3'+table_key.slice(-4)).val(flow_array[flow]['unit_amount']);
+                } else {
+                    //empties the values on the option side
+                    $('#flow-name-2'+table_key.slice(-4)).val("");
+                    $('#flow-value-2'+table_key.slice(-4)).val("");
+                    $('#flow-unit-2'+table_key.slice(-4)).val("");
+                    $('#flow-specost-2'+table_key.slice(-4)).val("");
+                    $('#flow-eipunit-2'+table_key.slice(-4)).val("");
+
+                    $('#flow-name-3'+table_key.slice(-4)).val("");
+
+                }
+                //runs a change so that the values are calculated
+                $('#form-'+form_num+' input').change();
+                break;
+            }
+        }
+    } 
+
+    //tooltip unit column (option side)
+    $('.tooltip-unit').tooltip({
+        position: 'top',
+        content: '<span style="color:#fff"><?= lang("Validation.unit-ttip"); ?></span>',
+        onShow: function(){
+            $(this).tooltip('tip').css({
+                backgroundColor: '#999',
+                borderColor: '#999'
+            });
+        }
+    });
+    </script>
+    <?php $k = $k + 1; ?>
 <?php endforeach ?>
 
 <!-- <script>
