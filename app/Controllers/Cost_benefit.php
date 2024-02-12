@@ -105,8 +105,10 @@ class Cost_benefit extends BaseController
     public function save($prjct_id, $cmpny_id, $id, $cp_or_is)
     {
         $cpscoping_model = model(Cpscoping_model::class);
+        $cost_benefit_model = model(Cost_benefit_model::class);
+        $session = session();
 
-        if ($cpscoping_model->can_consultant_prjct($this->session->id) == false) {
+        if ($cpscoping_model->can_consultant_prjct($session->id) == false) {
             return redirect()->to(site_url(''));
         }
 
@@ -252,7 +254,7 @@ class Cost_benefit extends BaseController
         }
 
         // Save data using the cost_benefit_model
-        $this->cost_benefit_model->set_cba($id, ...array_values($data));
+        $cost_benefit_model->set_cba($id, ...array_values($data));
 
         redirect('cost_benefit/' . $prjct_id . '/' . $cmpny_id);
     }
