@@ -889,7 +889,8 @@ $uri = service('uri');
                             </td>
                             <td class="tg-yw4l">
                                 <div class=""><input type="text" name="sum-3-2" id="sum-3-2-<?= $i; ?>"
-                                        value="<?= number_format((float) $a['sum-3-2'], 2, '.', "'"); ?>" class="form-control"
+                                        value="<?= number_format((float) $a['sum-3-2'], 2, '.', "'"); 
+                                        ?>" class="form-control"
                                         placeholder="sum-3-2"></div>
                             </td>
                         </tr>
@@ -1173,7 +1174,7 @@ $uri = service('uri');
 
 
                         //MArgianl-costs calculation
-                        //=EĞER(W3>0,M3/W3*100,-M3/W3*100)
+                        //(W3>0,M3/W3*100,-M3/W3*100)
                         if($("#ecoben-<?= $i; ?>").val()>0){
                             $("#marcos-<?= $i; ?>").val($("#eco-<?= $i; ?>").val()/$("#ecoben-<?= $i; ?>").val()*100);
                             $("#marcos-<?= $i; ?>").val(toFixed($("#marcos-<?= $i; ?>").val(),2));
@@ -1220,7 +1221,9 @@ usort($alloc, function ($a, $b) {
     return $a['marcos-1'] <=> $b['marcos-1'];
 });
 
-if (isset($a) && is_numeric($a['sum-3-2'])) {
+
+// if (isset($a) && is_numeric($a['sum-3-2'])) {
+if (isset($a)) {
     foreach ($alloc as $a) {
         if (empty($a['cmpny_from_name'])) {
             $tuna_array[$t]['name'] = $a['best'] . "-" . $a['prcss_name'];
@@ -1249,8 +1252,10 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
         $t++;
     }
 }
+
 ?>
 <script type="text/javascript">
+
     setTimeout(function()
     {  
         costBenefitGraph();
@@ -1266,12 +1271,12 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
             if(data[i].ymin == data[i].ymax)
             {
                 data[i].ymin = 0;
-                data[i].ymax = 0.0000000000000001;
+                data[i].ymax = 1.0000000000000001;
             }
             if(data[i].xmin == data[i].xmax)
             {
                 data[i].xmin = 0;
-                data[i].xmax = 0.000000000000001;
+                data[i].xmax = 1.000000000000001;
             }
 
         }
@@ -1419,7 +1424,7 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
 
 
 
-        if(document.getElementById('flow-name-1-'+k).value=="" || document.getElementById('flow-value-1-'+k).value==""){
+        if(document.getElementById('flow-name-1-'+k).value=="" || document.getElementById('flow-value-1-'+k).value==""){
             document.getElementById('flow-name-1-'+k).value = flownamedef;
             document.getElementById('flow-unit-1-'+k).value = qntty_unit;
             document.getElementById('flow-value-1-'+k).value = amount;
@@ -1428,7 +1433,7 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
         }
 
         //inserts the values on the option side if the value is empty
-        if(document.getElementById('flow-name-2-'+k).value=="" || document.getElementById('flow-value-2-'+k).value==""){
+        if(document.getElementById('flow-name-2-'+k).value=="" || document.getElementById('flow-value-2-'+k).value==""){
             document.getElementById('flow-name-2-'+k).value = flownamedef;
             document.getElementById('flow-unit-2-'+k).value = qntty_unit;
             document.getElementById('flow-value-2-'+k).value = amount;
@@ -1508,6 +1513,8 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
             });
         }
     });
+
+
     </script>
     <?php $k = $k + 1; ?>
 <?php endforeach ?>
