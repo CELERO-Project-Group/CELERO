@@ -114,8 +114,10 @@ $uri = service('uri');
                 <?php if (empty($a['capexold'])) {
                     $a['capexold'] = 0;
                 } ?>
-                <?php $attributes = array('id' => 'form-' . $i); ?>
-                <?= form_open('cba/save/' . $uri->getSegment(2) . '/' . $uri->getSegment(3) . '/' . $iid . '/' . $tip, $attributes); ?>
+                <?php $attributes = array('id' => 'form-' . $i); 
+                ?>
+                <?= form_open('cba/save/' . $uri->getSegment(2) . '/' . $uri->getSegment(3) . '/' . $iid . '/' . $tip, $attributes); ?> 
+                <?= csrf_field() ?>
                 <div style="overflow-x: auto;">
                     <table class="tg costtable">
                         <tr>
@@ -321,6 +323,7 @@ $uri = service('uri');
                                     <button type="submit" style="margin-top: 10px; width: 100px; text-align: center;"
                                         class="btn btn-info btn-block">
                                         <?= lang("Validation.save"); ?>
+                                        
                                     </button>
                                 <?php endif; ?> <!-- cp_or_is variable posted hidden -->
                                 <input type="hidden" name="cp_or_is" value="<?= $cp_or_is ?>">
@@ -975,7 +978,7 @@ $uri = service('uri');
 
                 <script type="text/javascript">
 
-                                                                                            function calculate(){
+                    function calculate(){
 
                                                                                                                //OPEX old-1
                                                                                                                 $("#flow-opex-1-<?= $i; ?>").attr('value',($("#flow-specost-1-<?= $i; ?>").val()*$("#flow-value-1-<?= $i; ?>").val()).toFixed(2));
@@ -1489,3 +1492,32 @@ if (isset($a) && is_numeric($a['sum-3-2'])) {
                                             </script>
                                             <?php $k = $k + 1; ?>
 <?php endforeach ?>
+
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the form element
+        var form = document.querySelector("#myForm");
+
+        // Add submit event listener to the form
+        form.addEventListener("submit", function(event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+
+            // Log the form data
+            console.log("Form submitted:");
+            var formData = new FormData(form);
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ": " + pair[1]);
+            }
+
+            // Optionally, you can submit the form using AJAX here
+            // Example:
+            // var xhr = new XMLHttpRequest();
+            // xhr.open(form.method, form.action);
+            // xhr.onload = function() {
+            //     console.log(xhr.responseText);
+            // };
+            // xhr.send(formData);
+        });
+    });
+</script> -->

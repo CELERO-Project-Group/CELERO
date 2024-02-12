@@ -6,6 +6,7 @@ use App\Models\Company_model;
 use App\Models\Cpscoping_model;
 use App\Models\Project_model;
 use App\Models\Cost_benefit_model;
+use App\Models\User_model;
 
 class Cost_benefit extends BaseController
 {
@@ -38,8 +39,9 @@ class Cost_benefit extends BaseController
     {
         $cpscoping_model = model(Cpscoping_model::class);
         $project_model = model(Project_model::class);
+        $session = session();
 
-        if ($cpscoping_model->can_consultant_prjct($this->session->id) == false) {
+        if ($cpscoping_model->can_consultant_prjct($session->id) == false) {
             return redirect()->to(site_url(''));
         }
 
@@ -256,7 +258,7 @@ class Cost_benefit extends BaseController
         // Save data using the cost_benefit_model
         $cost_benefit_model->set_cba($id, ...array_values($data));
 
-        redirect('cost_benefit/' . $prjct_id . '/' . $cmpny_id);
+        return redirect()->to(site_url('cost_benefit/'. $prjct_id .'/' . $cmpny_id));
     }
 
 }
