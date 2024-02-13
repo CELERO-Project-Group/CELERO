@@ -1263,23 +1263,57 @@ if (isset($a)) {
 
     function costBenefitGraph(){
         var data = <?= json_encode($tuna_array); ?>;
-        console.log(data);
+     
 
-        //loop through the data and check if the values on the axis are the same and if asign slightly different values
+        //loop through the data and check if the values on the axis are the same and if asign slightly different values to be able to see it on the graph
+        var arrayXMin = [];
+        var arrayYMin = [];
+        var arrayXMax = [];
+        var arrayYMax = [];
         for (var i = 0; i < data.length; i++)
-        {
+        {   
+            arrayXMin.push(data[i].xmin);
+            arrayXMax.push(data[i].xmax);
+            arrayYMin.push(data[i].ymin);
+            arrayYMax.push(data[i].ymax);
+        }
+        // remove duplicates
+        var arrXUniqueMin = [...new Set(arrayXMin)].sort();
+        var arrXUniqueMax = [...new Set(arrayXMax)].sort();
+        var arrYUniqueMin = [...new Set(arrayYMin)].sort();
+        var arrYUniqueMax = [...new Set(arrayYMax)].sort();
+
+        // return the smallest number
+        function sortGetSecondLast(arr){
+            const rmZero = [0];
+            const filteredArray = arr.filter((element) => !rmZero.includes(element));
+            console.log(filteredArray);
+            if (filteredArray.length >= 1)
+            {
+                return arr[0] / 10000;
+            }
+            else{
+                return 0.0001
+            }
+        };
+
+        for (var i = 0; i < data.length; i++)
+        {   
             if(data[i].ymin == data[i].ymax)
             {
-                data[i].ymin = 0;
-                data[i].ymax = 1.0000000000000001;
+                data[i].ymin = sortGetSecondLast(arrYUniqueMin);
+                data[i].ymax = sortGetSecondLast(arrYUniqueMax);
             }
             if(data[i].xmin == data[i].xmax)
             {
-                data[i].xmin = 0;
-                data[i].xmax = 1.000000000000001;
+                data[i].xmin = sortGetSecondLast(arrXUniqueMin);
+                data[i].xmax = sortGetSecondLast(arrXUniqueMax);
             }
 
         }
+        
+        console.log(sortGetSecondLast(arrXUniqueMax), sortGetSecondLast(arrXUniqueMin));
+        console.log(arrYUniqueMax, arrYUniqueMin)
        
         var margin = {
                     "top": 10,
@@ -1288,9 +1322,7 @@ if (isset($a)) {
                     "left": 50
                 };
         var width = $('#sag4').width()-80;
-        var height = 500;
-
-        
+        var height = 500;        
         
         // Set the scales
         var x = d3.scaleLinear()
@@ -1301,8 +1333,6 @@ if (isset($a)) {
             .domain([d3.min(data, function(d) { return d.ymin-0.1; }), d3.max(data, function(d) { return d.ymax; })])
             .range([height, 0]).nice();
 
-        // var xAxis = d3.svg.axis().scale(x).orient("bottom");
-        // var yAxis = d3.svg.axis().scale(y).orient("left");
         const xAxis = d3.axisBottom(x);
         const yAxis = d3.axisLeft(y);
                 
