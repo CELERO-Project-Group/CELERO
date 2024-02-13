@@ -1,7 +1,7 @@
 <?php
 $uri = service('uri');
 ?>
-<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
 <style type="text/css">
     .tg {
         border-collapse: collapse;
@@ -1293,17 +1293,19 @@ if (isset($a)) {
         
         
         // Set the scales
-        var x = d3.scale.linear()
+        var x = d3.scaleLinear()
             .domain([0, d3.max(data, function(d) { return d.xmin+d.xmax; })])
             .range([0,width]).nice();
 
-        var y = d3.scale.linear()
+        var y = d3.scaleLinear()
             .domain([d3.min(data, function(d) { return d.ymin-0.1; }), d3.max(data, function(d) { return d.ymax; })])
             .range([height, 0]).nice();
 
-        var xAxis = d3.svg.axis().scale(x).orient("bottom");
-        var yAxis = d3.svg.axis().scale(y).orient("left");
-
+        // var xAxis = d3.svg.axis().scale(x).orient("bottom");
+        // var yAxis = d3.svg.axis().scale(y).orient("left");
+        const xAxis = d3.axisBottom(x);
+        const yAxis = d3.axisLeft(y);
+                
         // Create the SVG 'canvas'
         var svg = d3.select("#rect-demo-ana").append("svg")
             .attr("class", "chart")
@@ -1339,16 +1341,39 @@ if (isset($a)) {
         svg.selectAll("rect")
             .data(data)
             .enter()
-            .append("svg:rect")
-            .attr("x", function(datum,index) { return x(datum.xmin); })
-            .attr("y", function(datum,index) { return y(datum.ymax); })
-            .attr("height", function(datum,index) { return y(datum.ymin)-y(datum.ymax)+(height*0.0001); })
-            .attr("width", function(datum, index) { return x(datum.xmax)+(width*0.0001); })
+            .append("rect")
+            .attr("x", function(datum, index) { return x(datum.xmin); })
+            .attr("y", function(datum, index) { return y(datum.ymax); })
+            .attr("height", function(datum, index) { return y(datum.ymin) - y(datum.ymax) + (height * 0.0001); })
+            .attr("width", function(datum, index) { return x(datum.xmax) + (width * 0.0001); })
             .attr("fill", function(d, i) { return d.color; })
             .style("opacity", '0.8')
-            .on("mouseover", function(datum,index){return tooltip.style("visibility", "visible").html(datum.name);})
-            .on("mousemove", function(datum,index){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px").html(datum.name);})
-            .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+            .on("mouseover", function(datum, index) {
+                tooltip.style("visibility", "visible").html(datum.name);
+                const currentColor = d3.select(this).attr("fill");
+                const adjustedColor = d3.color(currentColor).brighter(0.5);
+                d3.select(this)
+                    .attr("fill", adjustedColor);
+                svg.selectAll("rect")
+                    .filter(e => e !== datum)
+                    .attr("opacity", 0.2);
+                d3.select("#legend-" + datum.category)
+                    .attr("font-weight", "bold");
+            })
+            .on("mousemove", function(datum, index) {
+                tooltip.style("top", (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px").html(datum.name);
+            })
+            .on("mouseout", function(datum) {
+                tooltip.style("visibility", "hidden");
+                const originalColor = d3.select(this).attr("fill");
+                const adjustedColor = d3.color(originalColor).darker(0.5); // Reset to original color
+                d3.select(this)
+                    .attr("fill", adjustedColor);
+                svg.selectAll("rect")
+                    .attr("opacity", 1);
+                d3.select("#legend-" + datum.category)
+                    .attr("font-weight", "normal");
+            });
 
         var tooltip = d3.select("body")
             .append("div")
@@ -1370,17 +1395,38 @@ if (isset($a)) {
                 //.attr("y", 50)
             .attr("height", 100)
             .attr("width", 100)
-            .attr('transform', 'translate(-20,50)')    
+            .attr('transform', 'translate(-20,50)') 
       
-        legend.selectAll('rect')
+        legend.selectAll('circle')
             .data(data)
             .enter()
             .append("circle")
             .attr("r", 7)
             .attr("cx", 1)
-            .attr("cy", function(d, i){ return 555 + (i *  19);})
-            .style("fill", function(datum,index) { return datum.color; })
+            .attr("cy", function(d, i) { return 555 + (i * 19); })
+            .style("fill", function(datum) { return datum.color; })
             .style("opacity", '0.8')
+            .on("mouseover", function(datum) {
+                const currentColor = d3.select(this).style("fill");
+                const adjustedColor = d3.color(currentColor).brighter(0.5);
+                d3.select(this)
+                    .style("fill", adjustedColor);
+                const bars = svg.selectAll("rect").filter(function(d) { return d.name === datum.name; });
+                bars.style("opacity", 0.2);
+                d3.select("#legend-" + datum.name)
+                    .attr("font-weight", "bold");
+            })
+            .on("mouseout", function(datum) {
+                const originalColor = d3.select(this).style("fill");
+                const adjustedColor = d3.color(originalColor).darker(0.5);
+                d3.select(this)
+                    .style("fill", adjustedColor);
+                const bars = svg.selectAll("rect").filter(function(d) { return d.name === datum.name; });
+                bars.style("opacity", 0.8);
+                d3.select("#legend-" + datum.name)
+                    .attr("font-weight", "normal");
+    });
+
       
         legend.selectAll('text')
             .data(data)
@@ -1389,18 +1435,46 @@ if (isset($a)) {
             .style("font-size", "12px")
             .attr("x", 16)
             .attr("y", function(d, i){ return i *  19 + 559;})
-            .text(function(datum,index) { return datum.name; });
+            .text(function(datum,index) { return datum.name; })
+            .on("mouseover", function(datum) {
+                const currentColor = d3.select(this).style("fill");
+                const adjustedColor = d3.color(currentColor).brighter(0.5);
+                d3.select(this)
+                    .style("fill", adjustedColor);
+                const bars = svg.selectAll("rect").filter(function(d) { return d.name === datum.name; });
+                bars.style("opacity", 0.2);
+                d3.select("#legend-" + datum.name)
+                    .attr("font-weight", "bold");
+            })
+            .on("mouseout", function(datum) {
+                const originalColor = d3.select(this).style("fill");
+                const adjustedColor = d3.color(originalColor).darker(0.5);
+                d3.select(this)
+                    .style("fill", adjustedColor);
+                const bars = svg.selectAll("rect").filter(function(d) { return d.name === datum.name; });
+                bars.style("opacity", 0.8);
+                d3.select("#legend-" + datum.name)
+                    .attr("font-weight", "normal");
+    });
 
         svg.call(
-            d3.behavior.zoom()
-            .x(x).y(y).on("zoom", zoom)
-            );
- 
+        d3.zoom()
+            .on("zoom", zoom)
+        );
+
         function zoom() {
-          svg.select(".x.axis").call(xAxis);
-          svg.select(".y.axis").call(yAxis);
-          svg.selectAll('rect').attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-        }
+            // Get current transform
+            var transform = d3.event.transform;
+
+            // Update axes
+            svg.select(".x.axis").call(xAxis.scale(transform.rescaleX(x)));
+            svg.select(".y.axis").call(yAxis.scale(transform.rescaleY(y)));
+
+            // Update rectangles
+            svg.selectAll('rect')
+                .attr("transform", transform);
+    }
+
     }
 </script>
 <?php $k = 1; ?>
