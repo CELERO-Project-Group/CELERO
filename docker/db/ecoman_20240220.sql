@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.22 (Debian 11.22-0+deb10u1)
--- Dumped by pg_dump version 11.22 (Debian 11.22-0+deb10u1)
+-- Dumped from database version 13.14 (Debian 13.14-1.pgdg120+2)
+-- Dumped by pg_dump version 13.14 (Debian 13.14-1.pgdg120+2)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -51,7 +51,7 @@ COMMENT ON SCHEMA topology IS 'PostGIS Topology schema';
 
 
 --
--- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: 
+-- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
 --
 
 CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
@@ -2019,7 +2019,7 @@ ALTER FUNCTION public.trigger_flow_insert_func() OWNER TO postgres;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: industrial_zones_clusters; Type: TABLE; Schema: public; Owner: postgres
@@ -2731,7 +2731,7 @@ CREATE TABLE public.t_cmpny (
     phone_num_1 character varying(50),
     phone_num_2 character varying(50),
     fax_num character varying(50),
-    address character varying(100),
+    address character varying(255),
     description character varying(200),
     email character varying(150),
     postal_code character varying(50),
@@ -3276,7 +3276,8 @@ CREATE TABLE public.t_cmpny_prsnl (
     user_id integer NOT NULL,
     cmpny_id integer NOT NULL,
     is_contact smallint NOT NULL,
-    key_column bigint NOT NULL
+    key_column bigint NOT NULL,
+    is_owner integer
 );
 
 
@@ -6268,28 +6269,28 @@ COPY public.industrial_zones_role (id, name) FROM stdin;
 --
 
 COPY public.r_report_attributes (id, parent_id, attr_id, name, report_jasper_id, active, o_date, report_type) FROM stdin;
-1	0	1	Flows	1	1	2015-03-26 10:31:47.102+01	0
-2	0	2	Components	1	1	2015-03-26 10:31:47.102+01	0
-3	0	3	Processes	1	1	2015-03-26 10:31:47.102+01	0
-4	0	4	Equipments	1	1	2015-03-26 10:31:47.102+01	0
-5	0	5	Product	1	1	2015-03-26 10:31:47.102+01	0
-6	1	1	Flow Name	1	1	2015-03-26 10:37:48.72+01	0
-7	1	2	Flow Type	1	1	2015-03-26 10:37:48.72+01	0
-8	1	3	Flow Family Name	1	1	2015-03-26 10:37:48.72+01	0
-9	1	4	Quantity	1	1	2015-03-26 10:37:48.72+01	0
-10	1	5	Cost	1	1	2015-03-26 10:37:48.72+01	0
-11	1	6	EP	1	1	2015-03-26 10:37:48.72+01	0
-12	1	7	Chemical Formula	1	1	2015-03-26 10:37:48.72+01	0
-13	1	8	Availability	1	1	2015-03-26 10:37:48.72+01	0
-14	1	9	Concentration	1	1	2015-03-26 10:37:48.72+01	0
-15	1	10	Pression	1	1	2015-03-26 10:37:48.72+01	0
-16	1	11	PH	1	1	2015-03-26 10:37:48.72+01	0
-17	1	12	State	1	1	2015-03-26 10:37:48.72+01	0
-18	1	13	Quality	1	1	2015-03-26 10:37:48.72+01	0
-19	1	14	Output Location	1	1	2015-03-26 10:37:48.72+01	0
-20	1	15	Substitue Potential	1	1	2015-03-26 10:37:48.72+01	0
-21	1	16	Description	1	1	2015-03-26 10:37:48.72+01	0
-22	1	17	Comment	1	1	2015-03-26 10:37:48.72+01	0
+1	0	1	Flows	1	1	2015-03-26 09:31:47.102+00	0
+2	0	2	Components	1	1	2015-03-26 09:31:47.102+00	0
+3	0	3	Processes	1	1	2015-03-26 09:31:47.102+00	0
+4	0	4	Equipments	1	1	2015-03-26 09:31:47.102+00	0
+5	0	5	Product	1	1	2015-03-26 09:31:47.102+00	0
+6	1	1	Flow Name	1	1	2015-03-26 09:37:48.72+00	0
+7	1	2	Flow Type	1	1	2015-03-26 09:37:48.72+00	0
+8	1	3	Flow Family Name	1	1	2015-03-26 09:37:48.72+00	0
+9	1	4	Quantity	1	1	2015-03-26 09:37:48.72+00	0
+10	1	5	Cost	1	1	2015-03-26 09:37:48.72+00	0
+11	1	6	EP	1	1	2015-03-26 09:37:48.72+00	0
+12	1	7	Chemical Formula	1	1	2015-03-26 09:37:48.72+00	0
+13	1	8	Availability	1	1	2015-03-26 09:37:48.72+00	0
+14	1	9	Concentration	1	1	2015-03-26 09:37:48.72+00	0
+15	1	10	Pression	1	1	2015-03-26 09:37:48.72+00	0
+16	1	11	PH	1	1	2015-03-26 09:37:48.72+00	0
+17	1	12	State	1	1	2015-03-26 09:37:48.72+00	0
+18	1	13	Quality	1	1	2015-03-26 09:37:48.72+00	0
+19	1	14	Output Location	1	1	2015-03-26 09:37:48.72+00	0
+20	1	15	Substitue Potential	1	1	2015-03-26 09:37:48.72+00	0
+21	1	16	Description	1	1	2015-03-26 09:37:48.72+00	0
+22	1	17	Comment	1	1	2015-03-26 09:37:48.72+00	0
 \.
 
 
@@ -6541,42 +6542,42 @@ COPY public.r_report_used_attributes (id, attr_id, report_configurations_id) FRO
 --
 
 COPY public.r_report_used_configurations (id, project_id, user_id, report_jasper_id, report_type_id, r_date, report_name, company_id) FROM stdin;
-19	1	35	1	1	2015-04-02 12:17:38.909+02	dene22	9
+19	1	35	1	1	2015-04-02 10:17:38.909+00	dene22	9
 1	1	8	1	1	\N	test	-99
 2	1	8	1	1	\N	test2	-99
 10	1	8	1	1	\N	test4	-99
-11	1	8	1	1	2015-04-01 16:49:51.548+02	asdasdasd	-99
-13	1	8	1	1	2015-04-01 16:54:20.963+02	asdasdasd1	-99
-14	1	8	1	1	2015-04-02 08:58:12.087+02	ssss	-99
-15	1	8	1	1	2015-04-02 09:04:39.214+02	gg	-99
-44	1	35	0	1	2015-04-21 11:29:41.244+02	Test Report Paper Production 2	94
-21	1	8	1	1	2015-04-02 12:48:34.385+02	a	41
-25	1	8	0	1	2015-04-04 22:02:53.083+02	s	-1
-45	1	35	0	1	2015-04-21 13:00:27.284+02	test Report Paper Production 3	94
-46	1	35	0	1	2015-04-21 13:02:02.596+02	test Report Paper Production 4	94
-47	1	35	0	1	2015-04-21 13:02:27.46+02	test neu	94
-49	1	35	0	1	2015-04-29 14:15:05.333+02	Test Catherine 2	96
-48	1	35	0	1	2015-04-21 13:02:40.715+02	test neu 2	94
-40	1	8	0	1	2015-04-06 15:18:43.105+02	zz4	9
-50	1	35	0	1	2015-05-07 10:07:07.502+02	Test report paper production 5	94
-39	1	8	0	1	2015-04-06 11:43:53.693+02	test_06_04_6666_upd_testtt	41
-51	1	35	0	1	2015-05-07 10:08:06.832+02	test catherine 1	94
-22	1	8	0	1	2015-04-02 12:56:44.963+02	zz	9
-42	1	35	0	1	2015-04-06 16:42:25.855+02	test_zeynel_late_afternoon	9
-41	1	35	0	1	2015-04-06 15:19:10.061+02	zz3	9
-52	1	35	0	1	2015-05-07 16:28:33.747+02	test catherine 5	97
-53	1	8	0	1	2015-05-07 16:30:41.72+02	Test catherine 6	96
-43	1	35	0	1	2015-04-21 11:20:36.328+02	Test Report Paper Production 1	78
-54	1	8	0	1	2016-01-13 09:01:16.159+01	xyz	132
-55	1	8	0	1	2016-03-08 08:30:48.611+01	test_design	132
-56	1	8	0	1	2016-03-22 15:39:29.503+01	test report2	131
-57	1	28	0	1	2016-04-02 07:37:31.783+02	test Dirk	134
-58	1	28	0	1	2016-05-02 13:10:18.682+02	Machining company	3388
-59	1	48205	0	1	2016-05-17 17:54:04.018+02	Dirbtinis pluostas	3394
-60	1	8	0	1	2016-05-30 16:03:30.826+02	aaa	132
-61	1	8	0	1	2016-05-30 16:03:53.076+02	aaaz	132
-34	1	8	0	1	2015-04-06 11:35:12.832+02	Dizayn Makina Raporu	132
-62	1	48203	0	1	2016-07-30 19:02:23.022+02	h41	3383
+11	1	8	1	1	2015-04-01 14:49:51.548+00	asdasdasd	-99
+13	1	8	1	1	2015-04-01 14:54:20.963+00	asdasdasd1	-99
+14	1	8	1	1	2015-04-02 06:58:12.087+00	ssss	-99
+15	1	8	1	1	2015-04-02 07:04:39.214+00	gg	-99
+44	1	35	0	1	2015-04-21 09:29:41.244+00	Test Report Paper Production 2	94
+21	1	8	1	1	2015-04-02 10:48:34.385+00	a	41
+25	1	8	0	1	2015-04-04 20:02:53.083+00	s	-1
+45	1	35	0	1	2015-04-21 11:00:27.284+00	test Report Paper Production 3	94
+46	1	35	0	1	2015-04-21 11:02:02.596+00	test Report Paper Production 4	94
+47	1	35	0	1	2015-04-21 11:02:27.46+00	test neu	94
+49	1	35	0	1	2015-04-29 12:15:05.333+00	Test Catherine 2	96
+48	1	35	0	1	2015-04-21 11:02:40.715+00	test neu 2	94
+40	1	8	0	1	2015-04-06 13:18:43.105+00	zz4	9
+50	1	35	0	1	2015-05-07 08:07:07.502+00	Test report paper production 5	94
+39	1	8	0	1	2015-04-06 09:43:53.693+00	test_06_04_6666_upd_testtt	41
+51	1	35	0	1	2015-05-07 08:08:06.832+00	test catherine 1	94
+22	1	8	0	1	2015-04-02 10:56:44.963+00	zz	9
+42	1	35	0	1	2015-04-06 14:42:25.855+00	test_zeynel_late_afternoon	9
+41	1	35	0	1	2015-04-06 13:19:10.061+00	zz3	9
+52	1	35	0	1	2015-05-07 14:28:33.747+00	test catherine 5	97
+53	1	8	0	1	2015-05-07 14:30:41.72+00	Test catherine 6	96
+43	1	35	0	1	2015-04-21 09:20:36.328+00	Test Report Paper Production 1	78
+54	1	8	0	1	2016-01-13 08:01:16.159+00	xyz	132
+55	1	8	0	1	2016-03-08 07:30:48.611+00	test_design	132
+56	1	8	0	1	2016-03-22 14:39:29.503+00	test report2	131
+57	1	28	0	1	2016-04-02 05:37:31.783+00	test Dirk	134
+58	1	28	0	1	2016-05-02 11:10:18.682+00	Machining company	3388
+59	1	48205	0	1	2016-05-17 15:54:04.018+00	Dirbtinis pluostas	3394
+60	1	8	0	1	2016-05-30 14:03:30.826+00	aaa	132
+61	1	8	0	1	2016-05-30 14:03:53.076+00	aaaz	132
+34	1	8	0	1	2015-04-06 09:35:12.832+00	Dizayn Makina Raporu	132
+62	1	48203	0	1	2016-07-30 17:02:23.022+00	h41	3383
 \.
 
 
@@ -6861,6 +6862,7 @@ COPY public.t_cmpny (id, name, phone_num_1, phone_num_2, fax_num, address, descr
 3479	lislis toys	\N	0864213579	0864213579	Kiev	Wooden Toys Producer	v.popovych@recpc.org	\N	default.jpg	t	50.45235286523006	30.506085041486863	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0
 3491	gm├╝esli ag	\N	03112	03112	Gm├╝etlib├ñrg 1	Herstellung von Granola M├╝esli mit getrocknetem Gem├╝se aus der Region	nike.maglaras@students.fhnw.ch	NULL	default.jpg	t	47.34969697252021	8.491160273551941	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0
 3495	stainz	\N	0763374106		Pfeffingerring 120 4147 Aesch	coloring textiles	donna.karedan@students.fhnw.ch	NULL	default.jpg	t	47.475824926745624	7.588363250896113	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0
+3501	wood hood mood	\N	0788876227	\N	Fachhochschule Nordwestschweiz FHNW, 30, Hofackerstrasse, Freidorf, Muttenz, Bezirk Arlesheim, Basel-Landschaft, 4132, Schweiz/Suisse/Svizzera/Svizra	Wood makes hood that lights up the mood	fhnw@wood.ch	\N	\N	t	47.53477635901297	7.64202117919922	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	0	0
 \.
 
 
@@ -6919,19 +6921,19 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 185	61	14	10.00	10.00	10	1	\N	\N	\N	\N	\N				\N	2014-12-17 10:22:57.627	\N	\N	\N			t	0	0	0	1		\N	\N	\N	\N	TL	EP	1	\N	\N	\N
 657	3422	225	100000.00	50000.00	359419000	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2019-01-08 15:01:54.24146	\N	\N	\N	calf feeding	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 187	61	35	10.00	10.00	10	1	\N	\N	\N	\N	\N			aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa	\N	2014-12-17 10:30:46.46	\N	\N	\N			t	0	0	0	1		\N	\N	\N	\N	TL	EP	1	\N	\N	\N
-792	3447	262	697.49	722.86	837.542761899999959	2	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-03 10:34:10.619288	\N	\N	\N	plastic waste from hotel to incineration plant	\N	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+792	3447	262	697.49	722.86	837.5427619	2	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-03 10:34:10.619288	\N	\N	\N	plastic waste from hotel to incineration plant	\N	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 801	3448	266	1501875.00	0.00	62875600650	2	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-12 09:43:24.027619	\N	\N	\N	The nitrogen oxides (NOx) emissions from clinker production.	\N	t	\N	\N	\N	3		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-666	3423	66	20592.00	2340000.00	186169459.563057482	1	\N	\N	\N	\N	\N				\N	2019-01-22 09:55:26.404356	\N	\N	\N	Offset aluminium Al 99,9% printing plates: 1030 x 790 x 0.4 mm		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+666	3423	66	20592.00	2340000.00	186169459.56305748	1	\N	\N	\N	\N	\N				\N	2019-01-22 09:55:26.404356	\N	\N	\N	Offset aluminium Al 99,9% printing plates: 1030 x 790 x 0.4 mm		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 673	3423	66	20595.00	-23400.00	186169460	2	\N	\N	\N	\N	\N			23'400 units (0,88 kg/unit	\N	2019-01-29 09:19:18.936586	\N	\N	\N	Used offset aluminium Al 99,9% printing plates: 1030 x 790 x 0.4 mm		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-933	3459	290	242086.00	6268.00	4.37000000000000011	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 18:45:07.625626	\N	\N	\N	Abw├ñrme Verluste	\N	t	\N	\N	\N	3	\N	\N	\N	\N	\N	CHF	EP	6	\N	\N	\N
+933	3459	290	242086.00	6268.00	4.37	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 18:45:07.625626	\N	\N	\N	Abw├ñrme Verluste	\N	t	\N	\N	\N	3	\N	\N	\N	\N	\N	CHF	EP	6	\N	\N	\N
 685	3428	231	62600.00	106420.00	0	1	\N	\N	\N	\N	\N				\N	2019-04-01 15:24:17.660021	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 688	3428	233	10000000.00	5000000.00	0	1	\N	\N	\N	\N	\N				\N	2019-04-01 15:39:40.134538	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-709	3435	224	62600.00	106420.00	234.937799999999982	1	\N	\N	\N	\N	\N			costs incl. waste water	\N	2019-04-08 14:20:54.614845	\N	\N	\N	Water at tap		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+709	3435	224	62600.00	106420.00	234.93779999999998	1	\N	\N	\N	\N	\N			costs incl. waste water	\N	2019-04-08 14:20:54.614845	\N	\N	\N	Water at tap		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 736	3435	243	1350.00	5400000.00	3523.5	1	\N	\N	\N	\N	\N				\N	2019-04-08 15:43:18.90022	\N	\N	\N	Halades PE 15, chemical for cold sterlilisation		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 738	3438	241	300000.00	30000.00	1056600	1	\N	\N	\N	\N	\N				\N	2019-05-17 21:07:30.785877	\N	\N	\N	rawmilk for calve feeding		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	22	\N	\N	\N
-740	3443	238	62600.00	102000.00	8519.86000000000058	1	\N	\N	\N	\N	\N				\N	2019-05-20 08:59:21.415488	\N	\N	\N	District heat from waste incineration plant		t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
+740	3443	238	62600.00	102000.00	8519.86	1	\N	\N	\N	\N	\N				\N	2019-05-20 08:59:21.415488	\N	\N	\N	District heat from waste incineration plant		t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
 618	3417	99	1000.00	200000.00	23000000	2	\N	\N	\N	\N	\N				\N	2018-10-16 11:41:51.91526	\N	\N	\N	excess heat from processes		t	\N	\N	\N	3		\N	\N	\N	\N	CHF	EP	1	\N	\N	\N
-1005	3471	332	1802000.00	236000.00	919.019999999999982	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 07:47:38.842721	\N	\N	\N	Strom Gesamt	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
+1005	3471	332	1802000.00	236000.00	919.02	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 07:47:38.842721	\N	\N	\N	Strom Gesamt	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
 795	3448	264	70522000.00	7757463.00	1497427465	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-11 16:22:22.176357	\N	\N	\N	The EP from petroleum itself. Yearly 70'522 t petcoke is used for our clinker production. Petcoke price of 80CHF/t, additional costs for transport and grinding.	\N	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 754	3444	1	10000.00	20.00	4600	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-02-12 10:49:19.088762	\N	\N	\N	Fresh water for the beverage	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 807	3368	10	10000.00	2000.00	5000	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-07-13 13:38:05.956913	\N	\N	\N	awdaw	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
@@ -6939,178 +6941,178 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 832	3453	285	1213.00	61541.00	138828	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-08-19 12:23:33.660932	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	26	\N	\N	\N
 1016	3474	323	80000.00	0.00	0	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-05-05 16:01:07.271036	\N	\N	\N	RDF burning to produce energy	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	4	\N	\N	\N
 626	3419	216	1800000.00	2360000.00	917640000	1	\N	\N	\N	\N	\N	\N		\N	\N	2018-12-18 10:52:03.833679	\N	\N	\N	Electricity	\N	t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
-888	3457	291	906613.00	23500.00	15.5899999999999999	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:35:17.174922	\N	\N	\N	W├ñrmeerzeugung	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	6	\N	\N	\N
+888	3457	291	906613.00	23500.00	15.59	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:35:17.174922	\N	\N	\N	W├ñrmeerzeugung	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	6	\N	\N	\N
 890	3457	294	540.00	6885.00	0.5	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-12 08:32:14.130372	\N	\N	\N	5%	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-877	3460	293	38050.00	1000.00	131.810000000000002	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:12:01.417304	\N	\N	\N		\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-1021	3474	80	150521.00	0.00	0.0200000000000000004	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-05-05 16:07:50.045064	\N	\N	\N	Dust emission during petcoke burning	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-667	3423	226	767000.00	92040.00	177416682.574341327	1	\N	\N	\N	\N	\N				\N	2019-01-22 10:00:10.11871	\N	\N	\N	swiss electricity mix		t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
-668	3423	227	1000000.00	1000000.00	3528420536.86969995	1	\N	\N	\N	\N	\N				\N	2019-01-22 10:02:04.907122	\N	\N	\N	print paper		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-669	3424	66	6600.00	500000.00	59669698.5779030398	1	\N	\N	\N	\N	\N				\N	2019-01-22 10:16:54.641077	\N	\N	\N	Aluminum Al 99,9% plates: 1000 x 600 x 0.4 mm		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+877	3460	293	38050.00	1000.00	131.81	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:12:01.417304	\N	\N	\N		\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+1021	3474	80	150521.00	0.00	0.02	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-05-05 16:07:50.045064	\N	\N	\N	Dust emission during petcoke burning	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+667	3423	226	767000.00	92040.00	177416682.57434133	1	\N	\N	\N	\N	\N				\N	2019-01-22 10:00:10.11871	\N	\N	\N	swiss electricity mix		t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
+668	3423	227	1000000.00	1000000.00	3528420536.8697	1	\N	\N	\N	\N	\N				\N	2019-01-22 10:02:04.907122	\N	\N	\N	print paper		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+669	3424	66	6600.00	500000.00	59669698.57790304	1	\N	\N	\N	\N	\N				\N	2019-01-22 10:16:54.641077	\N	\N	\N	Aluminum Al 99,9% plates: 1000 x 600 x 0.4 mm		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 661	3423	133	20592.00	-23400.00	186169460	2	\N	\N	\N	\N	\N			23'400 units (0,88 kg/unit)	\N	2019-01-16 17:18:34.168166	\N	\N	\N	Used offset aluminium Al 99,9% printing plates: 1030 x 790 x 0.4 mm		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 783	3447	205	582000.00	14761.00	39400	1	\N	\N	\N	\N	\N	\N	District heating	\N	\N	2020-04-22 12:49:31.397859	\N	\N	\N	Heating oil	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	6	\N	\N	\N
 672	3423	228	30000.00	-1200.00	105852616	2	\N	\N	\N	\N	\N			Returns in paper manunfacturing	\N	2019-01-22 16:11:30.362271	\N	\N	\N	Ink free		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 710	3435	240	1800.00	236000.00	917.6400000000001	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:24:06.674659	\N	\N	\N	Industry electricity mix, mainly from coal and nuclear power plants		t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
-737	3441	243	1350.00	5400000.00	2.60999999999999988	1	\N	\N	\N	\N	\N				\N	2019-04-08 15:45:29.817051	\N	\N	\N	Halades PE 15, chemical for cold sterlilisation		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
-906	3462	276	1310.00	2531.00	0.550000000000000044	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-24 23:06:59.05716	\N	\N	\N	Wasser zum Brauprozess	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
-741	3443	224	62600.00	106420.00	234.93780000000001	1	\N	\N	\N	\N	\N				\N	2019-05-20 09:04:02.017934	\N	\N	\N	Water at tap, costs incl. waste water		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+737	3441	243	1350.00	5400000.00	2.61	1	\N	\N	\N	\N	\N				\N	2019-04-08 15:45:29.817051	\N	\N	\N	Halades PE 15, chemical for cold sterlilisation		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+906	3462	276	1310.00	2531.00	0.55	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-24 23:06:59.05716	\N	\N	\N	Wasser zum Brauprozess	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+741	3443	224	62600.00	106420.00	234.9378	1	\N	\N	\N	\N	\N				\N	2019-05-20 09:04:02.017934	\N	\N	\N	Water at tap, costs incl. waste water		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 746	3443	241	10000000.00	5000000.00	35220000	1	\N	\N	\N	\N	\N				\N	2019-05-20 09:16:03.90459	\N	\N	\N	Rawmilk from cow farms		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-919	3466	272	92000.00	27600.00	21.4800000000000004	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-30 10:10:29.711358	\N	\N	\N	Stromverbrauch von diesem 40 Personen Haushalt. Annahme 2300 kwh pro Person und Jahr kwh = 30Rp.	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
-739	3443	243	675.00	2700.00	7.12790999999999997	1	\N	\N	\N	\N	\N				\N	2019-05-18 15:24:02.750307	\N	\N	\N	Halades PE 15, chemical for cold sterlilisation		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+919	3466	272	92000.00	27600.00	21.48	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-30 10:10:29.711358	\N	\N	\N	Stromverbrauch von diesem 40 Personen Haushalt. Annahme 2300 kwh pro Person und Jahr kwh = 30Rp.	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
+739	3443	243	675.00	2700.00	7.12791	1	\N	\N	\N	\N	\N				\N	2019-05-18 15:24:02.750307	\N	\N	\N	Halades PE 15, chemical for cold sterlilisation		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 747	3443	225	580000.00	350000.00	0	2	\N	\N	\N	\N	\N				\N	2019-05-20 09:29:41.248846	\N	\N	\N	Rawmilk losses		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 755	3444	244	100000.00	4000.00	440000000	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-02-12 10:50:54.076974	\N	\N	\N	Hop for the beer	\N	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 787	3447	258	2842.00	4704.00	1305	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-24 09:21:35.076803	\N	\N	\N	total tap water	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 343	9	10	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2015-04-06 14:27:50.114	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 344	9	8	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2015-04-06 14:27:50.114	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-791	3447	261	13.00	877.00	1703.3900000000001	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-01 09:29:10.212299	\N	\N	\N	Production of R407C	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+791	3447	261	13.00	877.00	1703.39	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-01 09:29:10.212299	\N	\N	\N	Production of R407C	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 793	3447	263	13.00	0.00	10588.5	2	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-06 12:07:43.165854	\N	\N	\N	release refrigerant R407C into air	\N	t	\N	\N	\N	3		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 780	3446	225	579063.00	318500.00	2039459886	2	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-18 12:11:53.883879	\N	\N	\N		\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 760	3446	224	62559000.00	59500.00	23478393	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-14 11:59:56.315202	\N	\N	\N	water price: CHF 1.90/m^3\r\ntotal water amount per year for milk processing and sterilisation	\N	t	\N	\N	\N	2	Tap Water	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 934	3459	294	540.00	5000.00	0.5	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 18:52:57.250082	\N	\N	\N	Reinigungsmittel	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 796	3448	153	26526316.00	132631.00	26144964800	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-12 07:29:58.968586	\N	\N	\N	Residue Derived Fuel (RDF) is used to substitute petcoke fuel. 26526316 kg RDF/a is used.  At the end of pre- and co-processing the costs are 5 CHF/t plastic waste (RDF).	\N	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 808	3368	268	10000.00	2000.00	1234	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-07-13 14:21:58.439199	\N	\N	\N	awd	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	EP	1	\N	\N	\N
-1053	3486	351	4024.00	8000000.00	0.0200000000000000004	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-12-01 17:19:36.422908	\N	\N	\N		\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	4	\N	\N	\N
+1053	3486	351	4024.00	8000000.00	0.02	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-12-01 17:19:36.422908	\N	\N	\N		\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	4	\N	\N	\N
 833	3452	287	20000000.00	6000000.00	111852800000	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-08-21 14:20:04.941508	\N	\N	\N	cows have to eat too	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 834	3451	276	10000.00	3000.00	4600	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-08-28 07:14:18.39057	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-839	3460	272	50726.59	12994.00	11.8399999999999999	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:01:02.523217	\N	\N	\N		\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
-870	3461	290	905893.00	36236.00	16.3500000000000014	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:59:13.477846	\N	\N	\N	1.6 CHF/kg Erdgas\r\n1kg = ca. 40 MJ	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
-949	3463	306	30.00	200000.00	0.0299999999999999989	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-04-21 06:54:53.358133	\N	\N	\N	Nuclear fuel Type xy	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+839	3460	272	50726.59	12994.00	11.84	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:01:02.523217	\N	\N	\N		\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
+870	3461	290	905893.00	36236.00	16.35	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:59:13.477846	\N	\N	\N	1.6 CHF/kg Erdgas\r\n1kg = ca. 40 MJ	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
+949	3463	306	30.00	200000.00	0.03	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-04-21 06:54:53.358133	\N	\N	\N	Nuclear fuel Type xy	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 991	3476	57	2000000.00	20000.00	828	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-04-26 11:19:27.802865	\N	\N	\N	Cutoffs of wood	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-1006	3471	277	9407000.00	5170000.00	44306.9700000000012	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 07:49:49.663875	\N	\N	\N	Gesamt Raw Milk	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+1006	3471	277	9407000.00	5170000.00	44306.97	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 07:49:49.663875	\N	\N	\N	Gesamt Raw Milk	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 240	94	69	1270.00	12700.00	127000	2	\N	\N	\N	\N	\N				\N	2015-02-24 16:42:21.398	\N	\N	\N	Hot		t	\N	\N	\N	2		\N	\N	\N	\N	Euro	EP	1	\N	\N	\N
 1007	3471	333	62559000.00	1119000.00	259718	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-04-28 07:51:19.889662	\N	\N	\N	Total water input (impact of WW treatment already considered)	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 1017	3474	2	800.00	160000.00	0	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-05-05 16:02:31.268814	\N	\N	\N	Electricity input	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	9	\N	\N	\N
 636	3419	223	2731000.00	102000.00	371689100	1	\N	\N	\N	\N	\N	\N		\N	\N	2018-12-18 11:42:51.717975	\N	\N	\N	District heat (steam) from a waste incineration plant	\N	t	\N	\N	\N	3		\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
 656	3422	215	100000.00	50000.00	352200000	1	\N	\N	\N	\N	\N				\N	2019-01-08 07:35:46.128994	\N	\N	\N	Calf feeding		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP/kg	3	\N	\N	\N
 1030	3472	323	80000.00	1000.00	0	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-05-19 07:19:22.505317	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	4	\N	\N	\N
-670	3424	66	2247.00	-2247.00	20314820.1067497171	2	\N	\N	\N	\N	\N				\N	2019-01-22 10:19:40.654247	\N	\N	\N	aluminium waste		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-711	3441	224	62600.00	106420.00	0.00375299999999999983	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:24:18.713231	\N	\N	\N	water at tap		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+670	3424	66	2247.00	-2247.00	20314820.106749717	2	\N	\N	\N	\N	\N				\N	2019-01-22 10:19:40.654247	\N	\N	\N	aluminium waste		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+711	3441	224	62600.00	106420.00	0.003753	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:24:18.713231	\N	\N	\N	water at tap		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 732	3435	241	10000000.00	5000000.00	35220000	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:54:25.420947	\N	\N	\N	Rawmilk from cow farms		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 788	3447	259	2842.00	4605.00	10490	2	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-24 09:22:49.303363	\N	\N	\N	total waste water	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 742	3443	240	1800.00	236000.00	917.6400000000001	1	\N	\N	\N	\N	\N				\N	2019-05-20 09:05:45.94757	\N	\N	\N	Industry electricity mix, mainly from coal and nuclear power plants		t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
 748	3443	222	1000.00	3500.00	1583	1	\N	\N	\N	\N	\N				\N	2019-05-20 09:31:14.094026	\N	\N	\N	Sodium hydroxide for CIP cleaning		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 784	3447	230	494000.00	13711.00	2050	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-22 12:54:36.139835	\N	\N	\N		\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	6	\N	\N	\N
-750	3443	69	62600000.00	9390.00	27.9195999999999991	2	\N	\N	\N	\N	\N				\N	2019-05-20 09:35:45.739323	\N	\N	\N	Waste water with high organic load		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+750	3443	69	62600000.00	9390.00	27.9196	2	\N	\N	\N	\N	\N				\N	2019-05-20 09:35:45.739323	\N	\N	\N	Waste water with high organic load		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 756	3444	245	1000.00	2000.00	15000	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-02-12 10:52:36.93559	\N	\N	\N	brewers yeast	\N	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-1037	3491	345	160.00	2160.00	0.770000000000000018	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-12-01 11:36:36.455161	\N	\N	\N	Palm├Âl wird mir dem Zucker zusammen erw├ñrmt	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-1038	3491	346	280.00	224.00	0.28999999999999998	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 11:50:35.400877	\N	\N	\N	Zucker wird dem Palm├Âl zugegeben und gemeinsam zu homogenem Gemisch verarbeitet	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+1037	3491	345	160.00	2160.00	0.77	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-12-01 11:36:36.455161	\N	\N	\N	Palm├Âl wird mir dem Zucker zusammen erw├ñrmt	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+1038	3491	346	280.00	224.00	0.29	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 11:50:35.400877	\N	\N	\N	Zucker wird dem Palm├Âl zugegeben und gemeinsam zu homogenem Gemisch verarbeitet	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 771	3446	69	62559000.00	59500.00	27901314	2	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-15 15:12:03.58578	\N	\N	\N	All water goes to waste\r\nThe cost of the water and wastewater are split 50/50	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 761	3446	187	940.50	3291.75	5591273	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-14 12:28:47.372923	\N	\N	\N	price phosphoric acid: CHF 3.5/kg\r\nCIP cleaning	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 797	3448	265	594599.00	22341504.00	273515540000	2	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-12 07:55:49.869053	\N	\N	\N	The EP for CO2 emissions from producing 675000 t clinker annual. Cost for CO2 fee/tax of 96.- CHF / t CO2.	\N	t	\N	\N	\N	3		\N	\N	\N	\N	CHF	EP	4	\N	\N	\N
 802	3448	267	4860000.00	486000.00	10011600000	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-12 12:02:17.705624	\N	\N	\N	Ammonia used for SNCR NOx reduction technology. Ammonia cost 100 CHF/t.	\N	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 809	3447	269	10000.00	2000.00	186000000	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-07-17 14:06:30.164364	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	30	\N	\N	\N
-837	3451	288	1222.00	213123.00	0.0200000000000000004	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-24 17:26:17.820265	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	26	\N	\N	\N
-845	3455	291	905893.20	23454.13	15.5800000000000001	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:11:41.837133	\N	\N	\N		\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
-840	3455	272	50726.59	12994.00	11.8399999999999999	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:01:02.738114	\N	\N	\N		\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
-871	3460	290	242085.60	6267.70	4.37000000000000011	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:59:28.356195	\N	\N	\N	Abw├ñrme verluste	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
-878	3458	283	994.64	825.55	1.72999999999999998	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:13:17.438584	\N	\N	\N		\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
-891	3457	275	540.00	5262.00	0.689999999999999947	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-12 08:35:16.639332	\N	\N	\N	3%	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-907	3460	301	10000.00	1000.00	43.8599999999999994	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-25 07:46:46.165563	\N	\N	\N	test	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-922	3468	272	50727.00	12994.00	10.7799999999999994	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 08:51:36.767169	\N	\N	\N	Energiebedarf f├╝r die Brauerei	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
-937	3459	276	1310000.00	2513.00	0.599999999999999978	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 20:23:24.200301	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-992	3477	320	500000.00	1000.00	0.46000000000000002	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-26 11:36:31.147531	\N	\N	\N	General use, metal part cleaning	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-1018	3474	324	120000.00	800000.00	0.0299999999999999989	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-05-05 16:03:18.708562	\N	\N	\N	Petcoke transport	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	4	\N	\N	\N
-951	3458	306	100.00	58900.00	0.100000000000000006	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-22 04:36:49.451616	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+837	3451	288	1222.00	213123.00	0.02	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-24 17:26:17.820265	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	26	\N	\N	\N
+845	3455	291	905893.20	23454.13	15.58	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:11:41.837133	\N	\N	\N		\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
+840	3455	272	50726.59	12994.00	11.84	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:01:02.738114	\N	\N	\N		\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
+871	3460	290	242085.60	6267.70	4.37	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:59:28.356195	\N	\N	\N	Abw├ñrme verluste	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
+878	3458	283	994.64	825.55	1.73	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:13:17.438584	\N	\N	\N		\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+891	3457	275	540.00	5262.00	0.69	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-12 08:35:16.639332	\N	\N	\N	3%	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+907	3460	301	10000.00	1000.00	43.86	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-25 07:46:46.165563	\N	\N	\N	test	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+922	3468	272	50727.00	12994.00	10.78	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 08:51:36.767169	\N	\N	\N	Energiebedarf f├╝r die Brauerei	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
+937	3459	276	1310000.00	2513.00	0.6	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 20:23:24.200301	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+992	3477	320	500000.00	1000.00	0.46	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-26 11:36:31.147531	\N	\N	\N	General use, metal part cleaning	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+1018	3474	324	120000.00	800000.00	0.03	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-05-05 16:03:18.708562	\N	\N	\N	Petcoke transport	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	4	\N	\N	\N
+951	3458	306	100.00	58900.00	0.1	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-22 04:36:49.451616	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 1031	3474	343	1280000.00	38758400.00	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-05-19 08:16:50.581424	\N	\N	\N	Biogas	\N	t	\N	\N	\N	3	\N	\N	\N	\N	\N	CHF	EP	7	\N	\N	\N
 765	3446	249	2371000.00	102000.00	322693100	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-14 13:16:10.06858	\N	\N	\N	cost district heat: CHF 0.043/kWh\r\ntotal heat for CIP cleaning, pasteurising milk & hot sterilisation (steam)	\N	t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
 781	3446	206	940.50	3291.75	1488812	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-18 12:23:02.054245	\N	\N	\N	Price of sodium hydroxide is 3.50 CHF/kg	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-671	3424	226	300000.00	36000.00	69393748.073405996	1	\N	\N	\N	\N	\N				\N	2019-01-22 10:20:39.699799	\N	\N	\N	swiss electricity mix		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
-1033	3490	301	200.00	1000.00	0.880000000000000004	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-11-17 17:08:29.273142	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+671	3424	226	300000.00	36000.00	69393748.073406	1	\N	\N	\N	\N	\N				\N	2019-01-22 10:20:39.699799	\N	\N	\N	swiss electricity mix		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
+1033	3490	301	200.00	1000.00	0.88	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-11-17 17:08:29.273142	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 799	3448	80	7101.00	0.00	845019000	2	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-12 08:43:40.767712	\N	\N	\N	Dust emissions from the clinker production.	\N	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 689	3428	234	1000.00	3500.00	0	1	\N	\N	\N	\N	\N				\N	2019-04-01 15:44:26.989397	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-704	3439	222	1000.00	3500.00	1.58299999999999996	1	\N	\N	\N	\N	\N				\N	2019-04-01 16:28:03.626692	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+704	3439	222	1000.00	3500.00	1.583	1	\N	\N	\N	\N	\N				\N	2019-04-01 16:28:03.626692	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 706	3439	241	580000.00	0.00	0	2	\N	\N	\N	\N	\N				\N	2019-04-01 16:30:21.15577	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-712	3441	240	1800.00	236000.00	0.509800000000000031	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:27:25.067146	\N	\N	\N	ind.electicity mix, manly from coal and and nuclear power plants		t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
-716	3441	222	1000.00	3500.00	1.58299999999999996	1	\N	\N	\N	\N	\N			for CIP cleaning	\N	2019-04-08 14:34:18.536269	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-1039	3491	347	80.00	16.00	0.119999999999999996	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 11:56:54.397762	\N	\N	\N	Karotten werden zerkleinert, getrocknet und dem Hafergemenge zugegeben	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+712	3441	240	1800.00	236000.00	0.5098	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:27:25.067146	\N	\N	\N	ind.electicity mix, manly from coal and and nuclear power plants		t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
+716	3441	222	1000.00	3500.00	1.583	1	\N	\N	\N	\N	\N			for CIP cleaning	\N	2019-04-08 14:34:18.536269	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+1039	3491	347	80.00	16.00	0.12	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 11:56:54.397762	\N	\N	\N	Karotten werden zerkleinert, getrocknet und dem Hafergemenge zugegeben	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 814	3451	274	1000.00	3500.00	5384600	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-08-18 09:35:50.06597	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 752	3442	225	100000.00	50000.00	359419000	1	\N	\N	\N	\N	\N				\N	2019-05-20 09:47:48.639901	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 757	3444	99	5000.00	2000.00	90250	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-02-12 10:55:07.79982	\N	\N	\N		\N	t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	6	\N	\N	\N
 978	3478	318	2000000.00	146000.00	250	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:14:43.423084	\N	\N	\N	Heat Energy produced with natural gas	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	Euro	\N	8	\N	\N	\N
-844	3460	290	905893.20	23454.13	16.3500000000000014	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:11:38.928174	\N	\N	\N	Heizenergie	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
-981	3479	319	200000.00	50000.00	82.7999999999999972	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:21:24.279716	\N	\N	\N	Hardwood chips, cutoffs and sawdust	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
-854	3457	293	37680.00	7000.00	130.530000000000001	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:28:06.296237	\N	\N	\N	Malz und Hopfen f├╝r Brauprozess	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+844	3460	290	905893.20	23454.13	16.35	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:11:38.928174	\N	\N	\N	Heizenergie	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
+981	3479	319	200000.00	50000.00	82.8	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:21:24.279716	\N	\N	\N	Hardwood chips, cutoffs and sawdust	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
+854	3457	293	37680.00	7000.00	130.53	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:28:06.296237	\N	\N	\N	Malz und Hopfen f├╝r Brauprozess	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 993	3478	321	10000000.00	1000000.00	1240	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-26 12:40:01.408934	\N	\N	\N		\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
-866	3460	275	540.00	5000.00	0.689999999999999947	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:47:44.835983	\N	\N	\N	Reinigungsmittel	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+866	3460	275	540.00	5000.00	0.69	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:47:44.835983	\N	\N	\N	Reinigungsmittel	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 861	3458	294	540.00	6885.00	0.5	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:43:34.011198	\N	\N	\N		\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-859	3456	275	540.00	5262.00	0.689999999999999947	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:38:56.457281	\N	\N	\N	Aus Fallstudie Ueli. Annahme da nicht ver├ñndert wird	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+859	3456	275	540.00	5262.00	0.69	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:38:56.457281	\N	\N	\N	Aus Fallstudie Ueli. Annahme da nicht ver├ñndert wird	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 762	3446	215	9407000.00	5170000.00	33131454000	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-14 12:35:59.154482	\N	\N	\N	price raw milk: CHF 0.55/kg	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 884	3460	283	1076.60	2099.00	4	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:26:14.231657	\N	\N	\N	Abwasser	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
-892	3463	293	100000.00	1000000.00	346.399999999999977	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-12 09:37:56.366801	\N	\N	\N	Futter f├╝r die Schweine	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-897	3463	298	1000000.00	10000.00	3476.59999999999991	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-19 08:11:24.216747	\N	\N	\N	Feed	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-896	3455	298	38050.00	1900.00	66.0600000000000023	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-19 08:09:04.841565	\N	\N	\N	Treber	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+892	3463	293	100000.00	1000000.00	346.4	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-12 09:37:56.366801	\N	\N	\N	Futter f├╝r die Schweine	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+897	3463	298	1000000.00	10000.00	3476.6	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-19 08:11:24.216747	\N	\N	\N	Feed	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+896	3455	298	38050.00	1900.00	66.06	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-19 08:09:04.841565	\N	\N	\N	Treber	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 908	3458	298	38050.00	1900.00	66	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-25 08:57:46.415913	\N	\N	\N	Treber f├╝r Viehfutter	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-923	3468	291	906613.20	23500.00	15.5899999999999999	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 08:53:26.319757	\N	\N	\N	W├ñrme die f├╝r den Brauprozess ben├Âtigt werden	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
-1008	3472	334	937.00	2224.00	1.65999999999999992	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-04-28 08:34:31.696128	\N	\N	\N		\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-841	3456	272	55265.00	14181.00	11.8399999999999999	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:04:14.79664	\N	\N	\N	Elektrischer Strom f├╝r Betrieb, Beleuchtung und K├╝hlung des Brauprozesses	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
-938	3459	283	1077.00	2099.00	4.12999999999999989	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 20:24:12.80748	\N	\N	\N	Abwasser	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
-1019	3474	341	2508683.00	0.00	0.100000000000000006	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-05-05 16:04:05.311866	\N	\N	\N	NOx emitted during the petcoke burning	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-1034	3489	301	27985.00	259769.00	10.2400000000000002	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-11-17 17:11:46.226985	\N	\N	\N	Pislner Malz: 2335.-\r\n+\r\nNatur Hopfen: 25650.-	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-698	3435	238	2731.00	102000.00	371.689099999999996	1	\N	\N	\N	\N	\N				\N	2019-04-01 15:55:38.765127	\N	\N	\N	District heat from waste incineration plant		t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
+923	3468	291	906613.20	23500.00	15.59	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 08:53:26.319757	\N	\N	\N	W├ñrme die f├╝r den Brauprozess ben├Âtigt werden	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
+1008	3472	334	937.00	2224.00	1.66	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-04-28 08:34:31.696128	\N	\N	\N		\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+841	3456	272	55265.00	14181.00	11.84	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:04:14.79664	\N	\N	\N	Elektrischer Strom f├╝r Betrieb, Beleuchtung und K├╝hlung des Brauprozesses	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
+938	3459	283	1077.00	2099.00	4.13	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 20:24:12.80748	\N	\N	\N	Abwasser	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+1019	3474	341	2508683.00	0.00	0.1	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-05-05 16:04:05.311866	\N	\N	\N	NOx emitted during the petcoke burning	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+1034	3489	301	27985.00	259769.00	10.24	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-11-17 17:11:46.226985	\N	\N	\N	Pislner Malz: 2335.-\r\n+\r\nNatur Hopfen: 25650.-	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+698	3435	238	2731.00	102000.00	371.6891	1	\N	\N	\N	\N	\N				\N	2019-04-01 15:55:38.765127	\N	\N	\N	District heat from waste incineration plant		t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
 713	3428	215	10000000.00	5000000.00	35220000000	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:30:09.058792	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-717	3441	69	62600.00	0.00	27.9195999999999991	2	\N	\N	\N	\N	\N			no costs because is included	\N	2019-04-08 14:37:24.000937	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
-702	3439	241	10000000.00	5000000.00	3.5219999999999998	1	\N	\N	\N	\N	\N				\N	2019-04-01 16:26:26.334443	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+717	3441	69	62600.00	0.00	27.9196	2	\N	\N	\N	\N	\N			no costs because is included	\N	2019-04-08 14:37:24.000937	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+702	3439	241	10000000.00	5000000.00	3.522	1	\N	\N	\N	\N	\N				\N	2019-04-01 16:26:26.334443	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 744	3443	221	1000.00	3500.00	5945	1	\N	\N	\N	\N	\N				\N	2019-05-20 09:12:39.352029	\N	\N	\N	Phosphoric acid for CIP cleaning		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 751	3442	241	100000.00	50000.00	352200	1	\N	\N	\N	\N	\N				\N	2019-05-20 09:45:49.778225	\N	\N	\N	For feeding calves		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 758	3444	69	3000.00	2000.00	5000	2	\N	\N	\N	\N	\N	\N		\N	\N	2020-02-12 16:21:30.591598	\N	\N	\N		\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 826	3451	281	1800000.00	2360000.00	979704000	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-08-18 16:00:09.544199	\N	\N	\N	Keine Ahnung in welcher Form die Energie sein sollte, stimmt aber etwa in der Gr├Âssenordnung.	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
 825	3451	280	2731000.00	102000.00	370000000	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-08-18 15:57:45.20134	\N	\N	\N	Werte waren zuerst bezogen auf MJ. EP wurden im Editor angepasst.	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
 1040	3500	348	100000.00	300000.00	1000	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-12-01 16:18:23.759282	\N	\N	\N	Frischwasser ab Leitung	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	4	\N	\N	\N
-846	3456	290	905893.00	23454.00	16.3500000000000014	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:12:17.363966	\N	\N	\N	Erdgas mix CH. Preis aus Fallstudie Ueli	\N	t	\N	\N	\N	3	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
-842	3458	272	53007.00	12994.00	12.3699999999999992	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:07:06.16757	\N	\N	\N		\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
+846	3456	290	905893.00	23454.00	16.35	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:12:17.363966	\N	\N	\N	Erdgas mix CH. Preis aus Fallstudie Ueli	\N	t	\N	\N	\N	3	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
+842	3458	272	53007.00	12994.00	12.37	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:07:06.16757	\N	\N	\N		\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
 880	3461	294	540.00	810.00	0.5	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-05 08:20:29.197324	\N	\N	\N	1 kg ca 1.5 CHF	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-893	3444	297	78678.00	456.00	60.8999999999999986	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-12 16:29:01.408044	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
+893	3444	297	78678.00	456.00	60.9	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-12 16:29:01.408044	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
 898	3457	298	19200.00	1900.00	66.75	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-19 09:05:11.082015	\N	\N	\N	Treberkuchen Entsorgung; Abwasserfracht	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-920	3468	293	37680.00	7000.00	130.530000000000001	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 08:47:54.94946	\N	\N	\N	Malz und Hopfen f├╝r Brauprozess	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-924	3468	276	1310000.00	2531.00	0.599999999999999978	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 08:55:40.794623	\N	\N	\N	Wasser f├╝r den Brauprozess	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+920	3468	293	37680.00	7000.00	130.53	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 08:47:54.94946	\N	\N	\N	Malz und Hopfen f├╝r Brauprozess	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+924	3468	276	1310000.00	2531.00	0.6	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 08:55:40.794623	\N	\N	\N	Wasser f├╝r den Brauprozess	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 952	3422	224	1000000.00	3000.00	3.75	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-22 08:42:54.046965	\N	\N	\N	xxxx	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	22	\N	\N	\N
-1009	3471	335	5362.00	3753.00	28.3000000000000007	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 08:42:32.322848	\N	\N	\N	0,7 CHF / kg	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+1009	3471	335	5362.00	3753.00	28.3	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 08:42:32.322848	\N	\N	\N	0,7 CHF / kg	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 635	3419	222	1000.00	3500.00	1583000	1	\N	\N	\N	\N	\N	\N		\N	\N	2018-12-18 11:39:47.784191	\N	\N	\N	Alkaline cleaning chemical	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 803	3448	2	6338250.00	633825.00	1476812250	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-12 12:17:52.507649	\N	\N	\N	Additional electricity needed for the dust filter technology. Electricity cost of 0.1CHF/kWh	\N	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
 692	3428	236	62600.00	0.00	0	1	\N	\N	\N	\N	\N				\N	2019-04-01 15:46:08.489401	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 696	3425	215	300000.00	30000.00	0	2	\N	\N	\N	\N	\N				\N	2019-04-01 15:52:41.718673	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	22	\N	\N	\N
-715	3441	221	1000.00	3500.00	5.94500000000000028	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:33:08.349996	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+715	3441	221	1000.00	3500.00	5.945	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:33:08.349996	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 816	3451	275	1000.00	3500.00	1280600	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-08-18 09:38:57.227794	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 718	3431	223	2731.00	102000.00	136100	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:40:19.296601	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
-843	3458	290	905893.20	23454.13	16.3500000000000014	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:11:34.351603	\N	\N	\N		\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
-850	3460	276	1310000.00	2512.60	0.599999999999999978	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:16:43.898086	\N	\N	\N		\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+843	3458	290	905893.20	23454.13	16.35	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:11:34.351603	\N	\N	\N		\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
+850	3460	276	1310000.00	2512.60	0.6	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:16:43.898086	\N	\N	\N		\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 1020	3474	338	1332738.00	64169.92	0	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-05-05 16:05:17.241905	\N	\N	\N	NH3 input for the NOx reduction	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 858	3456	294	540.00	6885.00	0.5	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:38:07.339534	\N	\N	\N	Aus Fallstudie Ueli. Annahme da nicht ver├ñndert wird	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-875	135	283	10000.00	2000.00	38.3299999999999983	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 09:53:23.247221	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	20	\N	\N	\N
-883	3461	275	540.00	9180.00	0.689999999999999947	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-05 08:24:48.856476	\N	\N	\N	17 CHF/kg	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-882	3457	293	19200.00	0.00	66.5100000000000051	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:22:17.929557	\N	\N	\N	Treber/Malzkuchen Trockensubstanz	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-1035	3486	344	3684.00	5000000.00	132046.049999999988	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-11-17 17:17:04.969715	\N	\N	\N	Baumwolle	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	4	\N	\N	\N
-925	3468	276	451000.00	338.00	0.209999999999999992	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 08:56:59.100708	\N	\N	\N	Abwasser das beim Brauprozess entsteht	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-941	3456	298	19000.00	1.00	66.0600000000000023	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 21:50:03.999972	\N	\N	\N	Schweinefutter	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+875	135	283	10000.00	2000.00	38.33	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 09:53:23.247221	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	20	\N	\N	\N
+883	3461	275	540.00	9180.00	0.69	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-05 08:24:48.856476	\N	\N	\N	17 CHF/kg	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+882	3457	293	19200.00	0.00	66.51	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:22:17.929557	\N	\N	\N	Treber/Malzkuchen Trockensubstanz	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+1035	3486	344	3684.00	5000000.00	132046.05	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-11-17 17:17:04.969715	\N	\N	\N	Baumwolle	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	4	\N	\N	\N
+925	3468	276	451000.00	338.00	0.21	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 08:56:59.100708	\N	\N	\N	Abwasser das beim Brauprozess entsteht	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+941	3456	298	19000.00	1.00	66.06	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 21:50:03.999972	\N	\N	\N	Schweinefutter	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 1041	3486	276	637615.00	682248.00	0	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-12-01 16:33:28.915415	\N	\N	\N	Wasser	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 977	3481	314	35000000.00	75000000.00	379505	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:12:17.938433	\N	\N	\N	Aluminium, cast	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
-980	3479	319	1200000.00	300000.00	496.800000000000011	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:20:07.209289	\N	\N	\N	Hardwood Planks	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
-984	3480	314	20000.00	42000.00	216.860000000000014	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:27:54.526596	\N	\N	\N	Aluminium Sheets	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
-1010	3471	275	5362.00	1877.00	8.67999999999999972	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 08:47:53.888389	\N	\N	\N	0,35 chf/kg	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+980	3479	319	1200000.00	300000.00	496.8	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:20:07.209289	\N	\N	\N	Hardwood Planks	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
+984	3480	314	20000.00	42000.00	216.86	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:27:54.526596	\N	\N	\N	Aluminium Sheets	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
+1010	3471	275	5362.00	1877.00	8.68	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 08:47:53.888389	\N	\N	\N	0,35 chf/kg	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 584	3405	85	7723.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 09:50:42.109106	\N	\N	\N	Crap paper (input)		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 594	3409	98	2480633.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 10:15:50.462373	\N	\N	\N			t	\N	\N	\N	3		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 605	3412	24	12017.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 11:04:30.645007	\N	\N	\N	Apalit		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 613	3413	2	5836400.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 11:11:48.034027	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 684	3428	230	2731.00	102000.00	0	1	\N	\N	\N	\N	\N				\N	2019-04-01 15:23:30.961137	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
 694	3428	225	580000.00	0.00	0	2	\N	\N	\N	\N	\N				\N	2019-04-01 15:48:43.41131	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-719	3441	225	580000.00	0.00	3.5219999999999998	2	\N	\N	\N	\N	\N			incl. wastewater costs	\N	2019-04-08 14:40:40.102325	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+719	3441	225	580000.00	0.00	3.522	2	\N	\N	\N	\N	\N			incl. wastewater costs	\N	2019-04-08 14:40:40.102325	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 721	3431	231	62600.00	106420.00	3753	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:41:47.772863	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 804	3448	262	26526316.00	132631.00	26144964800	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-13 07:24:18.179993	\N	\N	\N		\N	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 823	3452	277	100000.00	50000.00	350000000	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-08-18 09:58:41.233622	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-1036	3489	276	2243000.00	224300.00	1.03000000000000003	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-11-17 17:20:47.837948	\N	\N	\N	Brauwasser	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+1036	3489	276	2243000.00	224300.00	1.03	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-11-17 17:20:47.837948	\N	\N	\N	Brauwasser	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 817	3451	276	62600000.00	58900.00	287960000	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-08-18 09:40:21.105015	\N	\N	\N	oder eigenes "Wasser" erstellen? EP wurden im Editor angepasst (+0).	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-885	3455	283	1043.00	2033.85	3.68000000000000016	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:27:00.347373	\N	\N	\N		\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
-1042	3495	344	36840000.00	22826.00	132.050000000000011	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-12-01 16:36:26.541804	\N	\N	\N		\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+885	3455	283	1043.00	2033.85	3.68	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:27:00.347373	\N	\N	\N		\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+1042	3495	344	36840000.00	22826.00	132.05	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-12-01 16:36:26.541804	\N	\N	\N		\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 1044	3495	349	243000.00	124000.00	536.75	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 16:40:38.766078	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-847	3457	276	1310.00	2531.00	0.110000000000000001	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:12:53.889826	\N	\N	\N	Wasserbedarf Brauererei	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+847	3457	276	1310.00	2531.00	0.11	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:12:53.889826	\N	\N	\N	Wasserbedarf Brauererei	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 901	3465	299	38050.00	3800.00	0	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-19 09:33:20.377026	\N	\N	\N	Schweinefutter von Brauerei 10 rp./kg	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-1046	3495	272	9000000.00	1000000.00	2100.86999999999989	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 16:46:12.505884	\N	\N	\N		\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
-917	3467	303	200000.00	10000.00	0.209999999999999992	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-28 10:37:19.030082	\N	\N	\N	Wasser f├╝r Bioreaktoren	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-1051	3500	353	46.00	80000.00	86.8499999999999943	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 17:01:13.732052	\N	\N	\N	Entsorgung des trebers ├╝ber Abwasser	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	4	\N	\N	\N
-942	3469	272	100000.00	0.30	23.3399999999999999	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 22:16:44.943412	\N	\N	\N	generierte elektrische Energie durch PV- Anlage auf dem Dach	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
+1046	3495	272	9000000.00	1000000.00	2100.87	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 16:46:12.505884	\N	\N	\N		\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
+917	3467	303	200000.00	10000.00	0.21	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-28 10:37:19.030082	\N	\N	\N	Wasser f├╝r Bioreaktoren	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+1051	3500	353	46.00	80000.00	86.85	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 17:01:13.732052	\N	\N	\N	Entsorgung des trebers ├╝ber Abwasser	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	4	\N	\N	\N
+942	3469	272	100000.00	0.30	23.34	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 22:16:44.943412	\N	\N	\N	generierte elektrische Energie durch PV- Anlage auf dem Dach	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
 915	3462	276	451000.00	338.00	0	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-28 09:51:03.269882	\N	\N	\N		\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-979	3479	316	55300.00	20000.00	629.149999999999977	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:18:43.450128	\N	\N	\N	Steel chromium	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
-986	3477	316	1454545.00	800000.00	16548.3600000000006	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:30:33.314111	\N	\N	\N	Steel Chromium	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
-805	3449	225	840.00	84.00	2958.48000000000002	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-14 15:21:38.632754	\N	\N	\N	Waste milk for calf feeding. 2 weeks, 6kg per calf, 10 calfs at the farm	\N	t	\N	\N	\N	2	Animal feed grade	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+979	3479	316	55300.00	20000.00	629.15	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:18:43.450128	\N	\N	\N	Steel chromium	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
+986	3477	316	1454545.00	800000.00	16548.36	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:30:33.314111	\N	\N	\N	Steel Chromium	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
+805	3449	225	840.00	84.00	2958.48	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-05-14 15:21:38.632754	\N	\N	\N	Waste milk for calf feeding. 2 weeks, 6kg per calf, 10 calfs at the farm	\N	t	\N	\N	\N	2	Animal feed grade	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 585	3405	2	1514000.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 09:51:41.813517	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 586	3405	1	3903.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 09:52:28.499928	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 591	3409	60	600002.00	1.00	0	2	\N	\N	\N	\N	\N				\N	2018-08-16 10:13:28.77457	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
@@ -7122,65 +7124,65 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 609	3412	127	17522.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 11:07:06.025407	\N	\N	\N	Kali		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 824	3452	278	100000.00	50000.00	350000000	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-08-18 09:59:02.559482	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 687	3428	2	1800.00	236000.00	0	1	\N	\N	\N	\N	\N				\N	2019-04-01 15:38:42.223213	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
-701	3439	240	1800.00	236000.00	0.509800000000000031	1	\N	\N	\N	\N	\N				\N	2019-04-01 16:03:24.012183	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
+701	3439	240	1800.00	236000.00	0.5098	1	\N	\N	\N	\N	\N				\N	2019-04-01 16:03:24.012183	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
 722	3435	221	1000.00	3500.00	5945	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:43:03.127748	\N	\N	\N	Phosphoric acid for CIP cleaning	H3PO4	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 821	3451	277	10000000.00	5000000.00	35000000000	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-08-18 09:56:33.390433	\N	\N	\N	Eigens erstellt (ohne "_") zu testzwecken.	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 725	3431	233	10000000.00	5000000.00	3522	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:45:00.689392	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 723	3431	242	1800.00	236000.00	509800	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:43:56.343747	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
 735	3431	229	1350.00	5400000.00	2610000	1	\N	\N	\N	\N	\N				\N	2019-04-08 15:42:31.370709	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
-848	3461	292	50726.00	13472.00	1.57000000000000006	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:16:17.135422	\N	\N	\N	Kosten: 50726 kWh x 26.56 Rp. (Strompreis Basel)	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
-857	3460	293	38050.00	38000.00	131.810000000000002	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:33:55.065268	\N	\N	\N	Hopfen, Malz und Hefe in einem	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-867	3455	275	540.00	5262.00	0.689999999999999947	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:49:33.770136	\N	\N	\N	975 pro kg 3%	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-886	3456	283	1075.00	0.00	4.12000000000000011	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-05 08:30:35.191598	\N	\N	\N	Bereits mit Tap Water-Geb├╝hr bezahlt. Von Flussdiagramm Ueli	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	20	\N	\N	\N
-905	3465	298	1000000.00	1000.00	3476.59999999999991	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-19 10:10:19.64679	\N	\N	\N	Schweinefutter	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-912	3462	293	37680.00	7000.00	130.530000000000001	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-28 09:30:00.620609	\N	\N	\N	"Malz" zum brauen	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-943	3462	290	906613.00	23500.00	16.3599999999999994	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 23:49:29.980556	\N	\N	\N	W├ñrmeenergie	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
+848	3461	292	50726.00	13472.00	1.57	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:16:17.135422	\N	\N	\N	Kosten: 50726 kWh x 26.56 Rp. (Strompreis Basel)	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
+857	3460	293	38050.00	38000.00	131.81	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:33:55.065268	\N	\N	\N	Hopfen, Malz und Hefe in einem	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+867	3455	275	540.00	5262.00	0.69	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:49:33.770136	\N	\N	\N	975 pro kg 3%	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+886	3456	283	1075.00	0.00	4.12	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-05 08:30:35.191598	\N	\N	\N	Bereits mit Tap Water-Geb├╝hr bezahlt. Von Flussdiagramm Ueli	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	20	\N	\N	\N
+905	3465	298	1000000.00	1000.00	3476.6	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-19 10:10:19.64679	\N	\N	\N	Schweinefutter	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+912	3462	293	37680.00	7000.00	130.53	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-28 09:30:00.620609	\N	\N	\N	"Malz" zum brauen	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+943	3462	290	906613.00	23500.00	16.36	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 23:49:29.980556	\N	\N	\N	W├ñrmeenergie	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
 1043	3486	349	243.00	124003.00	536.75	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-12-01 16:38:37.747579	\N	\N	\N	H2O2	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	4	\N	\N	\N
-985	3480	316	10000.00	5500.00	113.769999999999996	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:28:52.856021	\N	\N	\N	Steel Chromium Sheets	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
-989	3481	320	10000000.00	10000.00	9.19999999999999929	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-24 05:30:22.298954	\N	\N	\N	Process water consumption	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
-1047	3495	350	5530.00	31000.00	50.1700000000000017	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 16:50:02.95488	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+985	3480	316	10000.00	5500.00	113.77	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-23 14:28:52.856021	\N	\N	\N	Steel Chromium Sheets	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
+989	3481	320	10000000.00	10000.00	9.2	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-24 05:30:22.298954	\N	\N	\N	Process water consumption	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
+1047	3495	350	5530.00	31000.00	50.17	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 16:50:02.95488	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 587	3405	84	2680.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 09:53:10.002802	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 588	3408	2	1175800.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 10:09:13.915236	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 592	3409	2	6967591.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 10:14:40.88094	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 614	3413	1	261126.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 11:12:19.301495	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 690	3428	235	1000.00	3500.00	0	1	\N	\N	\N	\N	\N				\N	2019-04-01 15:45:19.00918	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-703	3439	221	1000.00	3500.00	5.94500000000000028	1	\N	\N	\N	\N	\N				\N	2019-04-01 16:27:25.591741	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-705	3439	69	62600.00	0.00	0.000445999999999999999	2	\N	\N	\N	\N	\N				\N	2019-04-01 16:29:06.906208	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
-727	3435	69	62600.00	0.00	27.9195999999999991	2	\N	\N	\N	\N	\N				\N	2019-04-08 14:46:57.384265	\N	\N	\N	costs included in 'water at tap'		t	\N	\N	\N	2	high organic load	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+703	3439	221	1000.00	3500.00	5.945	1	\N	\N	\N	\N	\N				\N	2019-04-01 16:27:25.591741	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+705	3439	69	62600.00	0.00	0.000446	2	\N	\N	\N	\N	\N				\N	2019-04-01 16:29:06.906208	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+727	3435	69	62600.00	0.00	27.9196	2	\N	\N	\N	\N	\N				\N	2019-04-08 14:46:57.384265	\N	\N	\N	costs included in 'water at tap'		t	\N	\N	\N	2	high organic load	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 726	3431	221	1000.00	3500.00	5945	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:46:33.104697	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-1045	3486	272	8943726.00	1073247.00	2087.73000000000002	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 16:43:20.535437	\N	\N	\N	Strom	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
+1045	3486	272	8943726.00	1073247.00	2087.73	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 16:43:20.535437	\N	\N	\N	Strom	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
 634	3419	221	1000.00	3500.00	5945000	1	\N	\N	\N	\N	\N	\N		\N	\N	2018-12-18 11:38:42.52275	\N	\N	\N	Acidic cleaning chemical	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 772	3446	2	1802000.00	236000.00	918659600	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-15 15:15:04.181475	\N	\N	\N	cost electricity: CHF 0.131/kWh\r\ntotal electricity for CIP cleaning, pasteurising milk & hot sterilisation	\N	t	\N	\N	\N	4		\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
 820	3451	279	62600000.00	58900.00	27560000	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-08-18 09:55:48.713949	\N	\N	\N	Eigens erstellt zu testzwecken. EP angepasst im Editor.	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-849	3458	276	1310000.00	6508.22	0.599999999999999978	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:16:40.945329	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+849	3458	276	1310000.00	6508.22	0.6	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:16:40.945329	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 868	3460	294	540.00	5000.00	0.5	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:51:11.510553	\N	\N	\N	Reinigungsmittel	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-889	3457	276	451.00	338.00	0.209999999999999992	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:46:59.180756	\N	\N	\N	Abwassser	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
-918	3455	304	64499.00	4440.00	11.5800000000000001	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-30 09:59:06.810488	\N	\N	\N	Photovoltaik Anlage auf Dach	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
-928	3460	298	19000.00	1000.00	66.0600000000000023	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 10:43:17.764126	\N	\N	\N	Treber	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-944	3464	305	40000.00	10000.00	139.199999999999989	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 23:52:16.42303	\N	\N	\N	Rohstoff f├╝r Riegel	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-913	3462	293	19200.00	1000.00	66.5100000000000051	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-28 09:48:52.035941	\N	\N	\N	Malzkuchen nach dem Brauen	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-999	3472	327	152088.00	11056.00	32.8500000000000014	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 07:31:50.294226	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
+889	3457	276	451.00	338.00	0.21	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-05 08:46:59.180756	\N	\N	\N	Abwassser	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+918	3455	304	64499.00	4440.00	11.58	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-30 09:59:06.810488	\N	\N	\N	Photovoltaik Anlage auf Dach	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
+928	3460	298	19000.00	1000.00	66.06	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 10:43:17.764126	\N	\N	\N	Treber	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+944	3464	305	40000.00	10000.00	139.2	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 23:52:16.42303	\N	\N	\N	Rohstoff f├╝r Riegel	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+913	3462	293	19200.00	1000.00	66.51	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-28 09:48:52.035941	\N	\N	\N	Malzkuchen nach dem Brauen	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+999	3472	327	152088.00	11056.00	32.85	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 07:31:50.294226	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
 589	3408	1	18288.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 10:09:49.903736	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 606	3412	129	15802.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 11:05:05.24634	\N	\N	\N	DAP		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 827	3451	282	333.00	3333.00	110889	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-08-19 09:50:51.278837	\N	\N	\N	Just messing around	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-700	3439	224	62600.00	106420.00	0.00375299999999999983	1	\N	\N	\N	\N	\N				\N	2019-04-01 16:01:50.418368	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
+700	3439	224	62600.00	106420.00	0.003753	1	\N	\N	\N	\N	\N				\N	2019-04-01 16:01:50.418368	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 1029	3474	264	180000.00	72985700.00	243000	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-05-07 13:12:25.862449	\N	\N	\N	Petecoke input incl emissions from burning	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	4	\N	\N	\N
-708	3441	238	2731.00	102000.00	0.136099999999999999	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:18:41.908433	\N	\N	\N			t	\N	\N	\N	3		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
+708	3441	238	2731.00	102000.00	0.1361	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:18:41.908433	\N	\N	\N			t	\N	\N	\N	3		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
 730	3435	241	580000.00	290000.00	2042760	2	\N	\N	\N	\N	\N				\N	2019-04-08 14:53:06.76729	\N	\N	\N	Rawmilk losses		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 728	3431	222	1000.00	3500.00	1583	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:47:10.679369	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-852	3461	276	238220.00	345.40	0.110000000000000001	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:23:07.579976	\N	\N	\N	Kosten: (238220 l x 1.45 CHF)/1000 \r\nEinheitspreis IWB Trinkwasser = 1.45 CHF/m3	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+852	3461	276	238220.00	345.40	0.11	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:23:07.579976	\N	\N	\N	Kosten: (238220 l x 1.45 CHF)/1000 \r\nEinheitspreis IWB Trinkwasser = 1.45 CHF/m3	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 773	3446	251	40.50	162.00	106705	1	\N	\N	\N	\N	\N	\N		\N	\N	2020-04-16 11:55:41.282625	\N	\N	\N	Chemical for cold sterilisation	\N	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-851	3456	276	1310000.00	6508.00	0.599999999999999978	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:17:42.824513	\N	\N	\N	Aus Fallstudie Ueli	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-862	3461	293	38080.00	38080.00	131.909999999999997	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:44:26.225308	\N	\N	\N	Kosten: angenommen 1 CHF pro kg	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-860	3455	293	38050.00	38050.00	131.810000000000002	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:42:54.694629	\N	\N	\N	1 CHF pro kg Hopfen, Malz und Hefe in einem	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-921	3468	293	19200.00	1000.00	66.5100000000000051	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 08:50:03.151562	\N	\N	\N	Treberkuchen vom Brauprozess (Entsorgungskosten wurden mit ~0.05 CHF pro Kg gerechnet)	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-929	3459	293	38050.00	38000.00	131.810000000000002	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 18:37:29.568115	\N	\N	\N	Hopfen, Malz, Hefe	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-945	3468	290	906613.00	23500.00	16.3599999999999994	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-02 00:48:29.906162	\N	\N	\N	F├╝r Brauprozesse und Heizung	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
-914	3462	272	50727.00	12994.00	10.7799999999999994	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-28 09:50:00.69376	\N	\N	\N	Stromverbrauch	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
+851	3456	276	1310000.00	6508.00	0.6	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:17:42.824513	\N	\N	\N	Aus Fallstudie Ueli	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+862	3461	293	38080.00	38080.00	131.91	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:44:26.225308	\N	\N	\N	Kosten: angenommen 1 CHF pro kg	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+860	3455	293	38050.00	38050.00	131.81	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:42:54.694629	\N	\N	\N	1 CHF pro kg Hopfen, Malz und Hefe in einem	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+921	3468	293	19200.00	1000.00	66.51	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 08:50:03.151562	\N	\N	\N	Treberkuchen vom Brauprozess (Entsorgungskosten wurden mit ~0.05 CHF pro Kg gerechnet)	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+929	3459	293	38050.00	38000.00	131.81	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 18:37:29.568115	\N	\N	\N	Hopfen, Malz, Hefe	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+945	3468	290	906613.00	23500.00	16.36	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-02 00:48:29.906162	\N	\N	\N	F├╝r Brauprozesse und Heizung	\N	t	\N	\N	\N	3	true	\N	\N	\N	\N	CHF	\N	6	\N	\N	\N
+914	3462	272	50727.00	12994.00	10.78	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-11-28 09:50:00.69376	\N	\N	\N	Stromverbrauch	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
 1000	3472	326	167779.00	12850.00	0.25	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-04-28 07:32:42.667426	\N	\N	\N		\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
 828	3453	282	333333.00	333333.00	110999889	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-08-19 12:18:21.774385	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-853	3455	276	1310000.00	2512.60	0.599999999999999978	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:23:31.556979	\N	\N	\N	Daten aus Pr├ñsentation. Kosten 1.46 pro m3 + 600 CHF Grundpreis	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-699	3439	238	2731.00	102000.00	0.136099999999999999	1	\N	\N	\N	\N	\N				\N	2019-04-01 15:58:25.915481	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
+853	3455	276	1310000.00	2512.60	0.6	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:23:31.556979	\N	\N	\N	Daten aus Pr├ñsentation. Kosten 1.46 pro m3 + 600 CHF Grundpreis	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+699	3439	238	2731.00	102000.00	0.1361	1	\N	\N	\N	\N	\N				\N	2019-04-01 15:58:25.915481	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	9	\N	\N	\N
 590	3409	60	62942.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 10:12:58.079259	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 595	3409	1	1200.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 10:16:18.26476	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 596	3410	2	6453.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 10:48:26.142996	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
@@ -7191,14 +7193,14 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 608	3412	126	14191.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 11:06:32.431988	\N	\N	\N	SA		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 610	3412	2	4292712.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 11:07:35.521051	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 612	3413	24	71601.00	1.00	0	2	\N	\N	\N	\N	\N				\N	2018-08-16 11:11:22.57536	\N	\N	\N	Milk (product)		t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-916	3467	293	19200.00	15000.00	66.5100000000000051	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-28 10:34:54.792654	\N	\N	\N	N├ñhrstoffzusatz f├╝r Bioreaktor	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-714	3441	241	10000000.00	5000000.00	3.5219999999999998	1	\N	\N	\N	\N	\N			raw milk from cow farms	\N	2019-04-08 14:31:06.91987	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+916	3467	293	19200.00	15000.00	66.51	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-11-28 10:34:54.792654	\N	\N	\N	N├ñhrstoffzusatz f├╝r Bioreaktor	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+714	3441	241	10000000.00	5000000.00	3.522	1	\N	\N	\N	\N	\N			raw milk from cow farms	\N	2019-04-08 14:31:06.91987	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 724	3435	222	1000.00	3500.00	1583	1	\N	\N	\N	\N	\N				\N	2019-04-08 14:44:37.039041	\N	\N	\N	Sodium hydroxide for CIP cleaning	NaOH	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-930	3459	293	38050.00	1000.00	131.810000000000002	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 18:38:25.850169	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-935	3459	305	19000.00	1000.00	66.1200000000000045	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 20:21:24.211779	\N	\N	\N	Treber	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-946	3468	305	19000.00	1000.00	66.1200000000000045	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-02 14:31:31.926599	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-1049	3495	352	2575.00	24000000.00	0.0100000000000000002	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 16:58:16.900771	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	4	\N	\N	\N
-1002	3472	329	2842.00	9307.00	11.0099999999999998	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 07:38:35.40766	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	20	\N	\N	\N
+930	3459	293	38050.00	1000.00	131.81	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 18:38:25.850169	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+935	3459	305	19000.00	1000.00	66.12	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 20:21:24.211779	\N	\N	\N	Treber	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+946	3468	305	19000.00	1000.00	66.12	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-02 14:31:31.926599	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+1049	3495	352	2575.00	24000000.00	0.01	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-12-01 16:58:16.900771	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	4	\N	\N	\N
+1002	3472	329	2842.00	9307.00	11.01	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 07:38:35.40766	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	20	\N	\N	\N
 1004	3472	331	167779.00	12850.00	37	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-04-28 07:43:47.640862	\N	\N	\N		\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
 652	3419	225	580000.00	320000.00	2084630200	2	\N	\N	\N	\N	\N	\N		\N	\N	2018-12-19 13:19:16.794716	\N	\N	\N	Losses in milk/water phase at process start /end and from production failures. Total about 6% of rawmilk input	\N	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
 611	3412	1	43243.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-08-16 11:08:01.820106	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
@@ -7265,10 +7267,10 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 615	3388	8	1000.00	1000.00	10000	2	\N	\N	\N	\N	\N				\N	2018-10-03 07:34:27.978452	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 616	3415	1	1000.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-10-11 14:15:45.148213	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 617	3414	1	900.00	1.00	0	2	\N	\N	\N	\N	\N				\N	2018-10-11 14:16:39.266009	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-863	3456	293	38050.00	38000.00	131.810000000000002	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:44:58.838501	\N	\N	\N	Hefe, Malz, und Hopfen aus Fallstudie Ueli	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-931	3459	272	50727.00	12994.00	11.8399999999999999	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 18:39:22.007684	\N	\N	\N		\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
-855	3457	272	46191.60	14000.00	10.7799999999999994	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:31:57.545657	\N	\N	\N	Strombezug f├╝r Brauerei	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
-947	3462	301	19000.00	1000.00	83.3299999999999983	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-02 18:51:03.323721	\N	\N	\N	Malzkuchenr├╝ckstand	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+863	3456	293	38050.00	38000.00	131.81	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:44:58.838501	\N	\N	\N	Hefe, Malz, und Hopfen aus Fallstudie Ueli	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+931	3459	272	50727.00	12994.00	11.84	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-01 18:39:22.007684	\N	\N	\N		\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
+855	3457	272	46191.60	14000.00	10.78	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:31:57.545657	\N	\N	\N	Strombezug f├╝r Brauerei	\N	t	\N	\N	\N	4	\N	\N	\N	\N	\N	CHF	EP	8	\N	\N	\N
+947	3462	301	19000.00	1000.00	83.33	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-12-02 18:51:03.323721	\N	\N	\N	Malzkuchenr├╝ckstand	\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 503	3383	1	20.00	40.00	200	1	\N	\N	\N	\N	\N				\N	2015-11-27 10:38:49.985	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 409	3359	66	24000.00	240000.00	1	1	\N	\N	\N	\N	\N				\N	2015-08-11 12:20:48.903	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	\N
 245	94	82	22984.00	229840.00	229840000	2	\N	\N	\N	\N	\N				\N	2015-02-24 16:51:53.793	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	Euro	EP	1	\N	\N	\N
@@ -7317,19 +7319,19 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 305	132	112	1000.00	3500.00	905	1	\N	\N	\N	\N	\N				\N	2015-03-26 11:29:56.096	\N	\N	\N	internally lubricated low friction polymers		t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	
 306	132	112	200.00	200.00	20	2	\N	\N	\N	\N	\N				\N	2015-03-26 11:31:19.215	\N	\N	\N	internally lubricated low friction polymers		t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	
 307	132	61	400.00	21600.00	2464	1	\N	\N	\N	\N	\N				\N	2015-03-26 11:32:03.531	\N	\N	\N			t	123	12	123	1		\N	\N	\N	\N	TL	EP	1	kg/m3	bar (Bar)	
-308	132	61	23.00	3672.00	2.29999999999999982	2	\N	\N	\N	\N	\N				\N	2015-03-26 11:33:01.892	\N	\N	\N			t	1	2	3	1		\N	\N	\N	\N	TL	EP	1	kg/m3	bar (Bar)	
+308	132	61	23.00	3672.00	2.3	2	\N	\N	\N	\N	\N				\N	2015-03-26 11:33:01.892	\N	\N	\N			t	1	2	3	1		\N	\N	\N	\N	TL	EP	1	kg/m3	bar (Bar)	
 310	132	60	2800.00	7700.00	280	2	\N	\N	\N	\N	\N				\N	2015-03-26 11:34:23.328	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	
-327	132	103	30750.00	16906.00	138.990000000000009	1	\N	\N	\N	\N	\N				\N	2015-03-27 07:48:55.633	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	TL	EP	1	\N	\N	
+327	132	103	30750.00	16906.00	138.99	1	\N	\N	\N	\N	\N				\N	2015-03-27 07:48:55.633	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	TL	EP	1	\N	\N	
 309	132	60	14000.00	30800.00	65660	1	\N	\N	\N	\N	\N				\N	2015-03-26 11:33:45.573	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	
-323	132	114	6.00	600.00	11.6400000000000006	1	\N	\N	\N	\N	\N				\N	2015-03-26 12:51:08.935	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	TL	EP	1	\N	\N	
+323	132	114	6.00	600.00	11.64	1	\N	\N	\N	\N	\N				\N	2015-03-26 12:51:08.935	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	TL	EP	1	\N	\N	
 304	132	66	2100.00	25200.00	1050	2	\N	\N	\N	\N	\N				\N	2015-03-26 11:28:16.136	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	
-314	132	1	1260.00	13104.00	0.100000000000000006	1	\N	\N	\N	\N	\N				\N	2015-03-26 11:39:17.663	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	TL	EP	1	\N	\N	
-318	132	104	12.00	780.00	21.7199999999999989	1	\N	\N	\N	\N	\N				\N	2015-03-26 11:46:16.757	\N	\N	\N	Packaging		t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	
+314	132	1	1260.00	13104.00	0.1	1	\N	\N	\N	\N	\N				\N	2015-03-26 11:39:17.663	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	TL	EP	1	\N	\N	
+318	132	104	12.00	780.00	21.72	1	\N	\N	\N	\N	\N				\N	2015-03-26 11:46:16.757	\N	\N	\N	Packaging		t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	
 313	132	98	12000.00	15000.00	28080	1	\N	\N	\N	\N	\N				\N	2015-03-26 11:38:42.925	\N	\N	\N			t	\N	\N	\N	3		\N	\N	\N	\N	TL	EP	1	\N	\N	
 321	132	108	1000.00	2500.00	323	2	\N	\N	\N	\N	\N				\N	2015-03-26 11:48:27.812	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	
 243	95	60	420000.00	546000.00	107000000	1	\N	\N	\N	\N	\N			Weights of the selled machines	\N	2015-02-24 16:47:47.049	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-411	3358	5	1.40	0.00	0.135000000000000009	1	\N	\N	\N	\N	\N			virtual input to balance reported output of copper waste, EP=Gpt UBP 2013	\N	2015-08-12 14:02:27.327	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-410	3358	4	0.80	0.00	0.0845000000000000057	1	\N	\N	\N	\N	\N			virtual input to balance reported output of brass waste, EP=Gpt UBP 2013	\N	2015-08-12 13:59:21.551	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+411	3358	5	1.40	0.00	0.135	1	\N	\N	\N	\N	\N			virtual input to balance reported output of copper waste, EP=Gpt UBP 2013	\N	2015-08-12 14:02:27.327	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+410	3358	4	0.80	0.00	0.0845	1	\N	\N	\N	\N	\N			virtual input to balance reported output of brass waste, EP=Gpt UBP 2013	\N	2015-08-12 13:59:21.551	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 203	68	66	21500000.00	0.00	0	1	\N	\N	\N	\N	\N				\N	2015-01-16 10:04:53.455	\N	\N	\N		Al	t	0	0	0	1		\N	\N	\N	\N	TL	EP	1	\N	\N	\N
 368	135	140	20000.00	12.00	100	2	\N	\N	\N	\N	\N				\N	2015-05-19 13:06:14.336	\N	\N	\N			t	\N	\N	\N	2	Hot water, around 60 degrees	\N	\N	\N	\N	Euro	EP	1	\N	\N	\N
 370	136	139	80000.00	4.00	100	1	10.10	1	2.00	1	\N	asdasdad 	dasdasd ddasd		dddasssssssssssss 3 	2015-05-19 13:13:03.556	\N	\N	\N			t	\N	\N	\N	1		11.50	1	14.30	1	Euro	EP	1	\N	\N	\N
@@ -7350,25 +7352,25 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 392	3358	148	1200.00	10000.00	0	1	\N	\N	\N	\N	\N				\N	2015-07-15 13:19:43.937	\N	\N	\N			f	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 371	136	137	6000000.00	250.00	100	1	20.10	1	3.00	1	\N	asdasdad 	dasdasd ddasd		dddasssssssssssss 3 	2015-05-19 13:13:47.864	\N	\N	\N		Cu	t	\N	\N	\N	1	Suffisante pour fonderie	21.50	1	24.30	1	Euro	EP	1	\N	\N	\N
 324	132	114	1.00	500.00	2.5	2	\N	\N	\N	\N	\N				\N	2015-03-26 12:52:32.224	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	TL	EP	1	\N	\N	
-398	3358	90	18.50	4100.00	0.00610999999999999998	2	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 13:57:11.004	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+398	3358	90	18.50	4100.00	0.00611	2	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 13:57:11.004	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 303	132	66	10500.00	126000.00	80850	1	\N	\N	\N	\N	\N				\N	2015-03-26 11:27:22.659	\N	\N	\N			t	12	\N	\N	1		\N	\N	\N	\N	TL	EP	1	%	\N	
-387	3358	146	83500.00	8400.00	0.394000000000000017	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 12:48:40.848	\N	\N	\N	Energieinhalt 36MJ/l, Dichte 840kg/m3		f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-390	3358	114	400.00	800.00	0.00101000000000000005	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 13:13:35.063	\N	\N	\N	Dichte (20 ┬░C) 0.810 = 810 g/l	nitro-cellulose combination thinner	f	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	Recycling
+387	3358	146	83500.00	8400.00	0.394	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 12:48:40.848	\N	\N	\N	Energieinhalt 36MJ/l, Dichte 840kg/m3		f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+390	3358	114	400.00	800.00	0.00101	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 13:13:35.063	\N	\N	\N	Dichte (20 ┬░C) 0.810 = 810 g/l	nitro-cellulose combination thinner	f	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	Recycling
 396	3358	150	20.00	8000.00	0	1	\N	\N	\N	\N	\N			pieces = rolls	\N	2015-07-15 13:41:04.383	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-397	3358	151	16.00	0.00	0.000754000000000000004	1	\N	\N	\N	\N	\N			price not alvaliable, EP =GPt UBP 2013	\N	2015-07-15 13:50:32.437	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+397	3358	151	16.00	0.00	0.000754	1	\N	\N	\N	\N	\N			price not alvaliable, EP =GPt UBP 2013	\N	2015-07-15 13:50:32.437	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 401	3358	57	30.00	2900.00	0	2	\N	\N	\N	\N	\N				\N	2015-07-15 14:02:07.321	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-395	3358	57	130.68	264000.00	0.0529000000000000026	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 13:38:55.383	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-388	3358	66	50.00	300000.00	1.98999999999999999	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 12:51:42.727	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+395	3358	57	130.68	264000.00	0.0529	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 13:38:55.383	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+388	3358	66	50.00	300000.00	1.99	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 12:51:42.727	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 403	3358	66	0.40	-350.00	0	2	\N	\N	\N	\N	\N				\N	2015-07-15 14:05:10.245	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 405	3358	4	0.80	-2190.00	0	2	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 14:08:55.046	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-394	3358	149	3840.00	15000.00	0.00730999999999999966	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 13:32:19.533	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+394	3358	149	3840.00	15000.00	0.00731	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 13:32:19.533	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 406	3358	5	1.40	-2000.00	0	2	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 14:10:27.106	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-386	3358	2	885545.00	123000.00	0.267000000000000015	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 12:42:35.707	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+386	3358	2	885545.00	123000.00	0.267	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 12:42:35.707	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 402	3358	153	0.20	0.00	0	2	\N	\N	\N	\N	\N			no costs, seperate collection	\N	2015-07-15 14:04:26.538	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 407	3358	151	16.00	2300.00	0	2	\N	\N	\N	\N	\N				\N	2015-07-15 14:11:30.402	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 389	3358	87	600.00	1500.00	0	1	\N	\N	\N	\N	\N				\N	2015-07-15 12:52:55.394	\N	\N	\N			f	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-399	3358	152	14.20	6300.00	0.0415000000000000022	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 13:58:50.388	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-393	3358	1	1095.00	9500.00	0.000558000000000000011	1	\N	\N	\N	\N	\N			for cooling, EP =GPt UBP 2013	\N	2015-07-15 13:20:36.714	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+399	3358	152	14.20	6300.00	0.0415	1	\N	\N	\N	\N	\N			EP =GPt UBP 2013	\N	2015-07-15 13:58:50.388	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+393	3358	1	1095.00	9500.00	0.000558	1	\N	\N	\N	\N	\N			for cooling, EP =GPt UBP 2013	\N	2015-07-15 13:20:36.714	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 404	3358	60	200.00	-27300.00	0	2	\N	\N	\N	\N	\N				\N	2015-07-15 14:05:50.263	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 372	136	66	6000000.00	250.00	100	1	30.10	1	3.00	1	\N	asdasdad 	dasdasd ddasd		dddasssssssssssss 3 	2015-05-19 13:14:39.664	\N	\N	\N		Al	t	\N	\N	\N	1	Suffisante pour fonderie	31.50	1	34.30	1	Euro	EP	1	\N	\N	\N
 373	136	141	2000000.00	30.00	100	1	40.10	1	4.00	1	\N	asdasdad 	dasdasd ddasd		dddasssssssssssss 3 	2015-05-19 13:16:17.771	\N	\N	\N			t	99	\N	\N	2	Contient des impuret├®s organiques	41.50	1	44.30	1	Euro	EP	1	%	\N	\N
@@ -7380,11 +7382,11 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 419	3362	159	200.00	200.00	20	2	\N	\N	\N	\N	\N				\N	2015-09-01 07:24:10.899	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	
 420	3362	160	70.00	1.00	20	2	\N	\N	\N	\N	\N				\N	2015-09-01 07:30:09.291	\N	\N	\N			t	\N	\N	\N	3		\N	\N	\N	\N	TL	EP	1	\N	\N	Waste
 421	3362	161	1000.00	1000.00	25	2	\N	\N	\N	\N	\N				\N	2015-09-01 07:31:28.633	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	Waste
-355	134	98	640000.00	70400.00	120.099999999999994	1	\N	\N	\N	\N	\N			UBP 2013, MPT, Gas Heating CH  EP = MPt. UBP, 45.8 UBP/MJ, Cost are estimated as no data was avaliabe (0.11 CHF/kWh according to http://www.energiezukunftschweiz.ch/5_-_WKK_Schweiz__Markus_Erb.pdf, Slide 9)	\N	2015-04-29 15:36:30.588	\N	\N	\N	Gas Heating		f	\N	\N	\N	3		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+355	134	98	640000.00	70400.00	120.1	1	\N	\N	\N	\N	\N			UBP 2013, MPT, Gas Heating CH  EP = MPt. UBP, 45.8 UBP/MJ, Cost are estimated as no data was avaliabe (0.11 CHF/kWh according to http://www.energiezukunftschweiz.ch/5_-_WKK_Schweiz__Markus_Erb.pdf, Slide 9)	\N	2015-04-29 15:36:30.588	\N	\N	\N	Gas Heating		f	\N	\N	\N	3		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 359	134	89	431.50	-26000.00	1600	2	\N	\N	\N	\N	\N			UBP 2013, MPT, dito Input, EP/ton. EP = MPt. UBP rough estimation (3.7 MPt/to), price  for waste paper 0.06Ôé¼/kg from internet	\N	2015-05-06 13:54:32.971	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-356	134	85	14381.00	9347650.00	22578.1699999999983	1	\N	\N	\N	\N	\N			UBP 2013, MPT, graphic paper 100% recycled (GLO). Costs in CHF, EP= kPt. UBP, 1.190 MPt /to, delivery by train, weight paper 50g/m2 --&gt;  287'620'000 m2	\N	2015-04-29 15:41:43.261	\N	\N	\N			f	\N	\N	\N	1	partly FSC zertified, all 95% recycling content	\N	\N	\N	\N	CHF	EP	1	\N	\N	
-383	134	69	3200.00	9600.00	13.5999999999999996	2	\N	\N	\N	\N	\N			UBP 2013, MPT, Wastewater average (CH), treatement of, capacitiy 1.6E8l/year.	\N	2015-06-04 09:24:25.817	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-382	134	1	3200.00	3200.00	0.0735999999999999988	1	\N	\N	\N	\N	\N			UBP 2013, MPT, water unspecified natural origin, CH.	\N	2015-06-04 09:15:37.75	\N	\N	\N		H20	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+356	134	85	14381.00	9347650.00	22578.17	1	\N	\N	\N	\N	\N			UBP 2013, MPT, graphic paper 100% recycled (GLO). Costs in CHF, EP= kPt. UBP, 1.190 MPt /to, delivery by train, weight paper 50g/m2 --&gt;  287'620'000 m2	\N	2015-04-29 15:41:43.261	\N	\N	\N			f	\N	\N	\N	1	partly FSC zertified, all 95% recycling content	\N	\N	\N	\N	CHF	EP	1	\N	\N	
+383	134	69	3200.00	9600.00	13.6	2	\N	\N	\N	\N	\N			UBP 2013, MPT, Wastewater average (CH), treatement of, capacitiy 1.6E8l/year.	\N	2015-06-04 09:24:25.817	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+382	134	1	3200.00	3200.00	0.0736	1	\N	\N	\N	\N	\N			UBP 2013, MPT, water unspecified natural origin, CH.	\N	2015-06-04 09:15:37.75	\N	\N	\N		H20	t	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 422	3362	162	1000.00	200.00	30	2	\N	\N	\N	\N	\N				\N	2015-09-01 07:32:43.698	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	Emission
 423	3362	163	500.00	500.00	100	1	\N	\N	\N	\N	\N				\N	2015-09-01 07:33:46.196	\N	\N	\N			t	\N	\N	\N	2		\N	\N	\N	\N	Euro	EP	1	\N	\N	
 424	3362	164	100.00	100.00	10	2	\N	\N	\N	\N	\N				\N	2015-09-01 07:34:59.794	\N	\N	\N	kanalizasyona geri veriliyor		t	\N	\N	\N	2		\N	\N	\N	\N	TL	EP	1	\N	\N	Recycling
@@ -7446,8 +7448,8 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 492	3365	187	100.00	0.00	0	1	\N	\N	\N	\N	\N			source: Les symbioses industrielles : une nouvelle strate╠ügie pour lÔÇÖame╠ülioration de lÔÇÖutilisation des ressources mate╠ürielles et e╠ünerge╠ütiques par les activite╠üs e╠üconomiques, 2011, Th├¿se de doctorat, Guillaume Massard"	\N	2015-09-07 14:53:44.792	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 476	3365	183	1.00	0.00	0	2	\N	\N	\N	\N	\N				\N	2015-09-04 08:58:00.659	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	Waste
 202	67	66	2400.00	0.00	0	2	\N	\N	\N	\N	\N				\N	2015-01-16 10:02:04.969	\N	\N	\N		Al	t	0	0	0	1		\N	\N	\N	\N	TL	EP	1	\N	\N	
-493	3358	60	200.00	0.00	0.857999999999999985	1	\N	\N	\N	\N	\N			virtual input to balance reported output of steel waste, EP=Gpt UBP 2013	\N	2015-09-09 13:59:18.532	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-494	3358	85	8660.00	0.00	0.0208999999999999984	1	\N	\N	\N	\N	\N			virtual input to balance reported output of paper waste, EP=Gpt UBP 2013	\N	2015-09-09 14:03:56.052	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+493	3358	60	200.00	0.00	0.858	1	\N	\N	\N	\N	\N			virtual input to balance reported output of steel waste, EP=Gpt UBP 2013	\N	2015-09-09 13:59:18.532	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+494	3358	85	8660.00	0.00	0.0209	1	\N	\N	\N	\N	\N			virtual input to balance reported output of paper waste, EP=Gpt UBP 2013	\N	2015-09-09 14:03:56.052	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 495	132	107	100.00	1500.00	590	2	\N	\N	\N	\N	\N				\N	2015-09-11 11:38:52.984	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	TL	EP	1	\N	\N	
 496	96	3	50.00	15000.00	0	2	\N	\N	\N	\N	\N			TEST	\N	2015-09-14 08:25:25.014	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 472	3366	182	100.00	0.00	0	2	\N	\N	\N	\N	\N			Source: "Synergies ├®nerg├®tiques dans la ZIPLO et la zone maraich├¿re de la plaine de l'Aire, projet Ecosite, Rapport d'├®tude juillet 2007, Enercore"	\N	2015-09-04 08:46:50.593	\N	\N	\N	Heat from cooling system &#40;25┬░C-35┬░C&#41;		t	\N	\N	\N	3		\N	\N	\N	\N	TL	EP	1	\N	\N	Waste
@@ -7459,11 +7461,11 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 501	3382	183	100.00	0.00	0	1	\N	\N	\N	\N	\N				\N	2015-09-28 08:54:52.028	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	Recycling
 504	3383	5	5000.00	1000.00	4000	1	\N	\N	\N	\N	\N				\N	2015-12-17 18:44:09.173	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 484	3372	185	200.00	0.00	0	1	\N	\N	\N	\N	\N			source: Les symbioses industrielles : une nouvelle strate╠ügie pour lÔÇÖame╠ülioration de lÔÇÖutilisation des ressources mate╠ürielles et e╠ünerge╠ütiques par les activite╠üs e╠üconomiques, 2011, Th├¿se de doctorat, Guillaume Massard"	\N	2015-09-04 12:54:56.705	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	Recycling
-510	3388	190	11000.00	5000.00	2.69499999999999984	2	\N	\N	\N	\N	\N			Environmental impact in MPt UBP:  Treatment with HCL and NaOH for dewatering to 30%. 1 L 0.000245 MPt	\N	2016-03-11 06:06:03.598	\N	\N	\N	90% water, 10% cutting fluid		t	10	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	%	\N	
+510	3388	190	11000.00	5000.00	2.695	2	\N	\N	\N	\N	\N			Environmental impact in MPt UBP:  Treatment with HCL and NaOH for dewatering to 30%. 1 L 0.000245 MPt	\N	2016-03-11 06:06:03.598	\N	\N	\N	90% water, 10% cutting fluid		t	10	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	%	\N	
 506	3383	189	10.00	10000.00	2000	1	\N	\N	\N	\N	\N				\N	2016-03-09 16:28:22.16	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	Recycling
-357	134	86	284.00	1000000.00	903.120000000000005	1	\N	\N	\N	\N	\N			UBP 2013, MPT, printing colour offset, 47.5% solvent at plant (RER). Cost in CHF, EP = MPt. UBP rough estimation (4.66 MPt/to)	\N	2015-04-29 15:57:47.521	\N	\N	\N	180 t colors , 104 t black purched in 2014		f	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-353	134	2	2900000.00	367720.00	88.7000000000000028	1	\N	\N	\N	\N	\N			UBP 2013, MPT, Electricity medium voltage CH, market for. Cost are actually in CHF, EP=MPt. UBP (UBP 2006: 88.74) for mix of different Hydropowerplants according to http://www.bfe.admin.ch/themen/00490/00491/ ( 47,4 % Laufwasserkraftwerken, 48,2 % Speicherkraftwerken, 4,4 % Pumpspeicherkraftwerken) --&gt; 30.6 UBP/kWh	\N	2015-04-29 15:16:04.418	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-509	3388	1	1095.00	4500.00	0.599999999999999978	1	\N	\N	\N	\N	\N			Environmental impact in MPt UBP: 1 m3 water = 0.000510 MPt	\N	2016-03-11 05:53:35.766	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+357	134	86	284.00	1000000.00	903.12	1	\N	\N	\N	\N	\N			UBP 2013, MPT, printing colour offset, 47.5% solvent at plant (RER). Cost in CHF, EP = MPt. UBP rough estimation (4.66 MPt/to)	\N	2015-04-29 15:57:47.521	\N	\N	\N	180 t colors , 104 t black purched in 2014		f	\N	\N	\N	2		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+353	134	2	2900000.00	367720.00	88.7	1	\N	\N	\N	\N	\N			UBP 2013, MPT, Electricity medium voltage CH, market for. Cost are actually in CHF, EP=MPt. UBP (UBP 2006: 88.74) for mix of different Hydropowerplants according to http://www.bfe.admin.ch/themen/00490/00491/ ( 47,4 % Laufwasserkraftwerken, 48,2 % Speicherkraftwerken, 4,4 % Pumpspeicherkraftwerken) --&gt; 30.6 UBP/kWh	\N	2015-04-29 15:16:04.418	\N	\N	\N			f	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+509	3388	1	1095.00	4500.00	0.6	1	\N	\N	\N	\N	\N			Environmental impact in MPt UBP: 1 m3 water = 0.000510 MPt	\N	2016-03-11 05:53:35.766	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 508	3388	103	1200.00	9960.00	2.496	1	\N	\N	\N	\N	\N			Environmental impact in MPt UBP: 1 L Lubrication oil = 0.00208 MPt	\N	2016-03-11 05:47:13.175	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 511	3389	191	1710.00	615600.00	0	1	\N	\N	\N	\N	\N	Product			\N	2016-03-11 13:21:43.946	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	Euro	EP	1	\N	\N	Waste
 512	3389	192	3395000.00	169750.00	0	1	\N	\N	\N	\N	\N	Product			\N	2016-03-11 14:09:09.323	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	Euro	EP	1	\N	\N	Recycling
@@ -7474,9 +7476,9 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 524	3390	200	15900.00	6900000.00	31800	1	\N	\N	\N	\N	\N			EP safety glass estimated 2 MPt/ton UBP 2013	\N	2016-05-16 20:00:03.882	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 538	3396	61	76.00	3630.00	0	1	\N	\N	\N	\N	\N				\N	2016-05-25 13:46:58.457	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	Euro	EP	1	\N	\N	
 526	3390	196	1500.00	0.00	1575	2	\N	\N	\N	\N	\N			EP flat glass 1.05 MPt/ton UBP	\N	2016-05-16 20:22:01.801	\N	\N	\N	Trimmed glass;  will be returned to float glass factory; No costs for company		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	Recycling
-360	134	133	38624.00	-35000.00	21.8000000000000007	2	\N	\N	\N	\N	\N			UBP 2013, MPT, price scrap alu  0.8Ôé¼/kg from internet, Aluminium scrap, post-consumer, prepared for melting {RER}| treatment of aluminium scrap, post-consumer, by collecting, sorting, cleaning, pressing 565 pt/kg	\N	2015-05-06 14:00:09.005	\N	\N	\N	Aluminium sheet 1mm thickness covered with a laquer	AlMg	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
+360	134	133	38624.00	-35000.00	21.8	2	\N	\N	\N	\N	\N			UBP 2013, MPT, price scrap alu  0.8Ôé¼/kg from internet, Aluminium scrap, post-consumer, prepared for melting {RER}| treatment of aluminium scrap, post-consumer, by collecting, sorting, cleaning, pressing 565 pt/kg	\N	2015-05-06 14:00:09.005	\N	\N	\N	Aluminium sheet 1mm thickness covered with a laquer	AlMg	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 583	3405	85	6523.00	1.00	0	2	\N	\N	\N	\N	\N				\N	2018-08-16 09:49:26.60373	\N	\N	\N	Kraft paper (products)		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
-358	134	132	38624.00	700000.00	610.294999999999959	1	\N	\N	\N	\N	\N	0	0	UBP 2013: 15.8 kPt/kg  Angaben in MP	\N	2015-05-06 13:05:14.558	\N	\N	\N	Electrochemically grained and anodized aluminum substrate. Supplier Kodak	AlMg3	t	\N	\N	\N	1	0	\N	\N	\N	\N	CHF	EP	1	\N	\N	
+358	134	132	38624.00	700000.00	610.295	1	\N	\N	\N	\N	\N	0	0	UBP 2013: 15.8 kPt/kg  Angaben in MP	\N	2015-05-06 13:05:14.558	\N	\N	\N	Electrochemically grained and anodized aluminum substrate. Supplier Kodak	AlMg3	t	\N	\N	\N	1	0	\N	\N	\N	\N	CHF	EP	1	\N	\N	
 525	3390	200	3000.00	0.00	6000	2	\N	\N	\N	\N	\N			EP safety glass estimated 2 MPt/ton UBP 2013	\N	2016-05-16 20:19:10.662	\N	\N	\N	Trimmed glass;  will be returned to float glass factory; No costs for company		t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	Recycling
 522	3390	199	40.00	12000.00	127	2	\N	\N	\N	\N	\N			EP not used ressource Polybutadien = 3.18 MPt/ton UBP 2013	\N	2016-05-16 12:20:30.283	\N	\N	\N	High waste volume due large variation of spacers in color and dimension and minimum lenght to operate production machine	Polybutadien	t	\N	\N	\N	1	T-profile of different lenghts	\N	\N	\N	\N	CHF	EP	1	\N	\N	
 523	3390	150	330.00	3300000.00	1000	1	\N	\N	\N	\N	\N			EP Polyvinylchloride, bulk polymerised = 2.96 MPt/t UBP 2013	\N	2016-05-16 13:30:29.964	\N	\N	\N	PVB foil for safety glass lamination	Polyvinyl butyral	t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
@@ -7540,16 +7542,16 @@ COPY public.t_cmpny_flow (id, cmpny_id, flow_id, qntty, cost, ep, flow_type_id, 
 624	3413	214	1.00	1.00	0	1	\N	\N	\N	\N	\N				\N	2018-10-22 12:00:57.678439	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	1	\N	\N	
 734	3431	236	62600.00	135200.00	446	2	\N	\N	\N	\N	\N				\N	2019-04-08 15:03:57.601099	\N	\N	\N			t	\N	\N	\N	1		\N	\N	\N	\N	CHF	EP	20	\N	\N	\N
 831	3453	6	700.00	80000.00	11900000	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-08-19 12:22:59.503698	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	2	\N	\N	\N
-856	3458	293	38050.00	7414.80	131.810000000000002	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:32:13.942937	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
-864	3458	275	540.00	5262.00	0.689999999999999947	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:45:44.343114	\N	\N	\N		\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-932	3459	290	905893.00	23454.00	16.3500000000000014	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 18:40:49.662751	\N	\N	\N	Heizenergie	\N	t	\N	\N	\N	3	\N	\N	\N	\N	\N	CHF	EP	6	\N	\N	\N
-936	3459	275	540.00	5000.00	0.689999999999999947	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 20:22:28.136315	\N	\N	\N	Reinigungsmittel	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-948	3467	301	40000.00	10000.00	84.2099999999999937	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-02 18:52:50.330045	\N	\N	\N	N├ñhrstoffquelle f├╝r Bioreaktor, Isolation von Inhaltsstoffen	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
-988	3478	320	10000000.00	10000.00	9.19999999999999929	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-24 05:07:33.74056	\N	\N	\N	Alkaline wastewater from concrete production /cleaning	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
-987	3477	316	150000.00	-800.00	1706.54999999999995	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-04-23 14:32:10.157828	\N	\N	\N	Cutoffs steel plates	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	Euro	EP	3	\N	\N	\N
-1003	3471	330	2371000.00	102000.00	323.170000000000016	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 07:43:27.850102	\N	\N	\N	Gesamt Fernw├ñrme Plant	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
-1050	3486	350	1.50	2500.00	3.62999999999999989	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-12-01 16:59:53.363437	\N	\N	\N	Waschmittel	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	4	\N	\N	\N
-1054	135	354	12.00	123123.00	0.0299999999999999989	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2022-09-07 17:18:47.364186	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+856	3458	293	38050.00	7414.80	131.81	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2020-10-29 08:32:13.942937	\N	\N	\N		\N	t	\N	\N	\N	1	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
+864	3458	275	540.00	5262.00	0.69	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-10-29 08:45:44.343114	\N	\N	\N		\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+932	3459	290	905893.00	23454.00	16.35	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 18:40:49.662751	\N	\N	\N	Heizenergie	\N	t	\N	\N	\N	3	\N	\N	\N	\N	\N	CHF	EP	6	\N	\N	\N
+936	3459	275	540.00	5000.00	0.69	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-01 20:22:28.136315	\N	\N	\N	Reinigungsmittel	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+948	3467	301	40000.00	10000.00	84.21	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2020-12-02 18:52:50.330045	\N	\N	\N	N├ñhrstoffquelle f├╝r Bioreaktor, Isolation von Inhaltsstoffen	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	CHF	EP	3	\N	\N	\N
+988	3478	320	10000000.00	10000.00	9.2	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-24 05:07:33.74056	\N	\N	\N	Alkaline wastewater from concrete production /cleaning	\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	Euro	\N	3	\N	\N	\N
+987	3477	316	150000.00	-800.00	1706.55	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-04-23 14:32:10.157828	\N	\N	\N	Cutoffs steel plates	\N	t	\N	\N	\N	1	\N	\N	\N	\N	\N	Euro	EP	3	\N	\N	\N
+1003	3471	330	2371000.00	102000.00	323.17	1	\N	\N	\N	\N	\N	\N	true	\N	\N	2021-04-28 07:43:27.850102	\N	\N	\N	Gesamt Fernw├ñrme Plant	\N	t	\N	\N	\N	4	true	\N	\N	\N	\N	CHF	\N	8	\N	\N	\N
+1050	3486	350	1.50	2500.00	3.63	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	2021-12-01 16:59:53.363437	\N	\N	\N	Waschmittel	\N	t	\N	\N	\N	2	\N	\N	\N	\N	\N	CHF	EP	4	\N	\N	\N
+1054	135	354	12.00	123123.00	0.03	2	\N	\N	\N	\N	\N	\N	true	\N	\N	2022-09-07 17:18:47.364186	\N	\N	\N		\N	t	\N	\N	\N	2	true	\N	\N	\N	\N	CHF	\N	3	\N	\N	\N
 \.
 
 
@@ -8267,6 +8269,7 @@ COPY public.t_cmpny_nace_code (cmpny_id, nace_code_id) FROM stdin;
 3500	84
 3495	90
 3496	84
+3501	33
 \.
 
 
@@ -8530,215 +8533,217 @@ COPY public.t_cmpny_production_details (id, cmpny_id, production_type_id, shift_
 -- Data for Name: t_cmpny_prsnl; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.t_cmpny_prsnl (user_id, cmpny_id, is_contact, key_column) FROM stdin;
-48228	3403	1	3376
-48228	3404	1	3377
-48230	3405	1	3378
-48230	3406	1	3379
-48230	3407	1	3380
-48230	3408	1	3381
-48230	3409	1	3382
-48230	3410	1	3383
-48230	3411	1	3384
-48230	3412	1	3385
-48230	3413	1	3386
-48230	3414	1	3387
-48230	3415	1	3388
-28	3416	1	3389
-28	3417	1	3390
-28	3418	1	3391
-28	3419	1	3392
-48230	3420	1	3393
-48230	3421	1	3394
-32	65	1	20
-32	66	1	21
-32	67	1	22
-28	3422	1	3395
-48230	3423	1	3396
-48230	3424	1	3397
-48232	3423	0	3400
-48232	135	0	3401
-48232	3416	0	3402
-48234	3423	0	3403
-48234	3424	0	3404
-48235	3425	1	3405
-48238	3426	1	3406
-48236	3427	1	3407
-48238	3429	1	3409
-48237	3430	1	3410
-48239	3432	1	3412
-48237	3433	1	3413
-48235	3434	1	3414
-48237	3436	1	3416
-48238	3436	0	3417
-48239	3437	1	3418
-48240	3439	1	3420
-48241	3440	1	3421
-48235	3434	0	3423
-48242	3442	1	3424
-48242	3443	1	3425
-48244	3444	1	3431
-48246	3446	1	3435
-48249	3447	1	3436
-48247	3446	0	3437
-48250	3447	0	3438
-48245	3448	1	3439
-48247	3446	0	3440
-28	3448	0	3443
-33	98	1	72
-33	99	1	73
-1	3356	1	3318
-1	3357	1	3319
-48251	3448	0	3444
-28	3447	0	3445
-32	3364	1	3326
-32	3365	1	3327
-32	3366	1	3328
-48259	3455	1	3452
-48260	3456	1	3453
-1	125	1	87
-48258	3457	1	3454
-32	3367	1	3329
-48263	3458	1	3455
-48257	3459	1	3456
-48262	3460	1	3457
-1	131	1	93
-48264	3461	1	3458
-48261	3462	1	3459
-35	134	1	96
-36	135	1	97
-36	136	1	98
-36	137	1	99
-36	138	1	100
-39	139	1	101
-32	3368	1	3330
-32	3369	1	3331
-32	3370	1	3332
-32	3371	1	3333
-32	3372	1	3334
-32	3373	1	3335
-32	3374	1	3336
-32	3375	1	3337
-32	3376	1	3338
-32	3378	1	3340
-32	3382	1	3344
-48259	3466	0	3470
-48259	3466	1	3471
-28	3388	1	3350
-48207	3389	1	3351
-28	3390	1	3352
-28	3467	0	3472
-48257	3467	0	3473
-35	3390	0	3355
-48258	3467	0	3474
-1	134	0	3357
-48261	3467	1	3475
-48205	3394	1	3359
-48205	3394	0	3360
-33	3388	0	3361
-33	3390	0	3362
-33	134	0	3363
-48216	3394	0	3364
-28	3471	0	3498
-48266	3471	1	3499
-28	3472	0	3500
-48270	3472	1	3501
-48271	3472	0	3502
-48267	3471	0	3510
-48265	3474	0	3511
-28	3474	0	3512
-48268	3474	1	3513
-48269	3474	0	3515
-28	3475	1	3517
-28	3476	0	3518
-48272	3476	0	3519
-48272	3476	1	3520
-28	3477	0	3521
-48272	3477	0	3522
-48272	3477	1	3523
-28	3478	0	3524
-48272	3478	0	3525
-48272	3478	1	3526
-28	3479	0	3527
-48272	3479	0	3528
-48272	3479	1	3529
-28	3480	0	3530
-48272	3480	0	3531
-48272	3480	1	3532
-28	3481	0	3533
-48272	3481	0	3534
-48272	3481	1	3535
-28	3483	0	3537
-48281	3483	1	3538
-48245	3474	0	3541
-28	3485	0	3542
-48292	3485	1	3543
-28	3486	0	3544
-48294	3486	0	3545
-48293	3486	1	3546
-48291	3486	0	3549
-48292	3486	0	3551
-48295	3486	0	3552
-28	3489	0	3553
-48294	3489	0	3554
-48291	3489	0	3555
-48291	3489	1	3556
-28	3490	0	3560
-48294	3490	0	3561
-48291	3490	0	3562
-48294	3490	1	3563
-48295	3489	0	3564
-48295	3491	0	3565
-48296	3491	1	3566
-28	3491	0	3570
-48296	3492	0	3571
-48295	3492	1	3572
-48297	3493	1	3574
-48298	3494	1	3575
-28	3495	0	3576
-48299	3495	1	3577
-28	3496	0	3578
-48300	3496	1	3579
-48301	3497	1	3581
-28	3498	0	3582
-48302	3498	1	3583
-48291	3495	0	3584
-48304	3500	0	3589
-48304	3500	1	3590
-48300	3500	0	3591
-28	3500	0	3592
-48297	3500	0	3593
-48298	3500	0	3594
-48302	3496	0	3595
-48291	3500	0	3596
-48298	3496	0	3597
-48297	3496	0	3598
-48299	3496	0	3599
-48294	3496	0	3600
-28	3492	0	3601
-48296	3496	0	3602
-48304	3496	0	3603
-48304	3492	0	3604
-48300	3493	0	3605
-48292	3496	0	3607
-28	3493	0	3608
-48300	3498	0	3609
-48298	3493	0	3610
-48304	3493	0	3611
-48295	3496	0	3612
-48292	3493	0	3613
-48298	3498	0	3614
-48294	3498	0	3616
-48297	3498	0	3617
-48293	3498	0	3618
-48291	3498	0	3619
-48303	3498	0	3620
-48295	3498	0	3621
-48292	3498	0	3622
-48304	3498	0	3623
-48299	3498	0	3624
-48294	3498	0	3625
-48296	3498	0	3626
+COPY public.t_cmpny_prsnl (user_id, cmpny_id, is_contact, key_column, is_owner) FROM stdin;
+48228	3403	1	3376	\N
+48228	3404	1	3377	\N
+48230	3405	1	3378	\N
+48230	3406	1	3379	\N
+48230	3407	1	3380	\N
+48230	3408	1	3381	\N
+48230	3409	1	3382	\N
+48230	3410	1	3383	\N
+48230	3411	1	3384	\N
+48230	3412	1	3385	\N
+48230	3413	1	3386	\N
+48230	3414	1	3387	\N
+48230	3415	1	3388	\N
+28	3416	1	3389	\N
+28	3417	1	3390	\N
+28	3418	1	3391	\N
+28	3419	1	3392	\N
+48230	3420	1	3393	\N
+48230	3421	1	3394	\N
+32	65	1	20	\N
+32	66	1	21	\N
+32	67	1	22	\N
+28	3422	1	3395	\N
+48230	3423	1	3396	\N
+48230	3424	1	3397	\N
+48232	3423	0	3400	\N
+48232	135	0	3401	\N
+48232	3416	0	3402	\N
+48234	3423	0	3403	\N
+48234	3424	0	3404	\N
+48235	3425	1	3405	\N
+48238	3426	1	3406	\N
+48236	3427	1	3407	\N
+48238	3429	1	3409	\N
+48237	3430	1	3410	\N
+48239	3432	1	3412	\N
+48237	3433	1	3413	\N
+48235	3434	1	3414	\N
+48237	3436	1	3416	\N
+48238	3436	0	3417	\N
+48239	3437	1	3418	\N
+48240	3439	1	3420	\N
+48241	3440	1	3421	\N
+48235	3434	0	3423	\N
+48242	3442	1	3424	\N
+48242	3443	1	3425	\N
+48244	3444	1	3431	\N
+48246	3446	1	3435	\N
+48249	3447	1	3436	\N
+48247	3446	0	3437	\N
+48250	3447	0	3438	\N
+48245	3448	1	3439	\N
+48247	3446	0	3440	\N
+28	3448	0	3443	\N
+33	98	1	72	\N
+33	99	1	73	\N
+1	3356	1	3318	\N
+1	3357	1	3319	\N
+48251	3448	0	3444	\N
+28	3447	0	3445	\N
+32	3364	1	3326	\N
+32	3365	1	3327	\N
+32	3366	1	3328	\N
+48259	3455	1	3452	\N
+48260	3456	1	3453	\N
+1	125	1	87	\N
+48258	3457	1	3454	\N
+32	3367	1	3329	\N
+48263	3458	1	3455	\N
+48257	3459	1	3456	\N
+48262	3460	1	3457	\N
+1	131	1	93	\N
+48264	3461	1	3458	\N
+48261	3462	1	3459	\N
+35	134	1	96	\N
+36	135	1	97	\N
+36	136	1	98	\N
+36	137	1	99	\N
+36	138	1	100	\N
+39	139	1	101	\N
+32	3368	1	3330	\N
+32	3369	1	3331	\N
+32	3370	1	3332	\N
+32	3371	1	3333	\N
+32	3372	1	3334	\N
+32	3373	1	3335	\N
+32	3374	1	3336	\N
+32	3375	1	3337	\N
+32	3376	1	3338	\N
+32	3378	1	3340	\N
+32	3382	1	3344	\N
+48259	3466	0	3470	\N
+48259	3466	1	3471	\N
+28	3388	1	3350	\N
+48207	3389	1	3351	\N
+28	3390	1	3352	\N
+28	3467	0	3472	\N
+48257	3467	0	3473	\N
+35	3390	0	3355	\N
+48258	3467	0	3474	\N
+1	134	0	3357	\N
+48261	3467	1	3475	\N
+48205	3394	1	3359	\N
+48205	3394	0	3360	\N
+33	3388	0	3361	\N
+33	3390	0	3362	\N
+33	134	0	3363	\N
+48216	3394	0	3364	\N
+28	3471	0	3498	\N
+48266	3471	1	3499	\N
+28	3472	0	3500	\N
+48270	3472	1	3501	\N
+48271	3472	0	3502	\N
+48267	3471	0	3510	\N
+48265	3474	0	3511	\N
+28	3474	0	3512	\N
+48268	3474	1	3513	\N
+48269	3474	0	3515	\N
+28	3475	1	3517	\N
+28	3476	0	3518	\N
+48272	3476	0	3519	\N
+48272	3476	1	3520	\N
+28	3477	0	3521	\N
+48272	3477	0	3522	\N
+48272	3477	1	3523	\N
+28	3478	0	3524	\N
+48272	3478	0	3525	\N
+48272	3478	1	3526	\N
+28	3479	0	3527	\N
+48272	3479	0	3528	\N
+48272	3479	1	3529	\N
+28	3480	0	3530	\N
+48272	3480	0	3531	\N
+48272	3480	1	3532	\N
+28	3481	0	3533	\N
+48272	3481	0	3534	\N
+48272	3481	1	3535	\N
+28	3483	0	3537	\N
+48281	3483	1	3538	\N
+48245	3474	0	3541	\N
+28	3485	0	3542	\N
+48292	3485	1	3543	\N
+28	3486	0	3544	\N
+48294	3486	0	3545	\N
+48293	3486	1	3546	\N
+48291	3486	0	3549	\N
+48292	3486	0	3551	\N
+48295	3486	0	3552	\N
+28	3489	0	3553	\N
+48294	3489	0	3554	\N
+48291	3489	0	3555	\N
+48291	3489	1	3556	\N
+28	3490	0	3560	\N
+48294	3490	0	3561	\N
+48291	3490	0	3562	\N
+48294	3490	1	3563	\N
+48295	3489	0	3564	\N
+48295	3491	0	3565	\N
+48296	3491	1	3566	\N
+28	3491	0	3570	\N
+48296	3492	0	3571	\N
+48295	3492	1	3572	\N
+48297	3493	1	3574	\N
+48298	3494	1	3575	\N
+28	3495	0	3576	\N
+48299	3495	1	3577	\N
+28	3496	0	3578	\N
+48300	3496	1	3579	\N
+48301	3497	1	3581	\N
+28	3498	0	3582	\N
+48302	3498	1	3583	\N
+48291	3495	0	3584	\N
+48304	3500	0	3589	\N
+48304	3500	1	3590	\N
+48300	3500	0	3591	\N
+28	3500	0	3592	\N
+48297	3500	0	3593	\N
+48298	3500	0	3594	\N
+48302	3496	0	3595	\N
+48291	3500	0	3596	\N
+48298	3496	0	3597	\N
+48297	3496	0	3598	\N
+48299	3496	0	3599	\N
+48294	3496	0	3600	\N
+28	3492	0	3601	\N
+48296	3496	0	3602	\N
+48304	3496	0	3603	\N
+48304	3492	0	3604	\N
+48300	3493	0	3605	\N
+48292	3496	0	3607	\N
+28	3493	0	3608	\N
+48300	3498	0	3609	\N
+48298	3493	0	3610	\N
+48304	3493	0	3611	\N
+48295	3496	0	3612	\N
+48292	3493	0	3613	\N
+48298	3498	0	3614	\N
+48294	3498	0	3616	\N
+48297	3498	0	3617	\N
+48293	3498	0	3618	\N
+48291	3498	0	3619	\N
+48303	3498	0	3620	\N
+48295	3498	0	3621	\N
+48292	3498	0	3622	\N
+48304	3498	0	3623	\N
+48299	3498	0	3624	\N
+48294	3498	0	3625	\N
+48296	3498	0	3626	\N
+48297	3501	0	3627	0
+28	3501	0	3628	1
 \.
 
 
@@ -8876,7 +8881,6 @@ COPY public.t_costbenefit_temp (cp_id, is_id, capexold, "flow-name-1", "flow-val
 99	\N	12.00	uranium	50002	kwh	0.21	10500.42	2	100004.0000	11742.00	5	50000	11	13528.52	test	test value	asda	1	NaN	21	NaN	NaN	asd	NaN	as	NaN	NaN	NaN	NaN	NaN	asda	123	mw	2	246.00	3	369.0000	test	test value	asd	1	NaN	2	NaN	asd	NaN	as	NaN	NaN	test	123	asd	2	246.00	3	369.0000	test	test value	ads	1	NaN	21	NaN	ad	NaN	sa	NaN	NaN	test	123	asd	2	246.00	4	492.0000	test	123	asd	2	246.00	3	369.0000	test	test value	asd	3	NaN	2	NaN	asd	NaN	as	NaN	NaN	test	123	asd	2	246.00	2	246.0000	test	test value	asd	4	NaN	2	NaN	sad	NaN	as	NaN	NaN	0	11730	101849	0	NaN	NaN	NaN	NaN	test	test value	asd	2	NaN	22	NaN	asdasd	NaN	as	NaN	NaN	22
 198	\N	0.00	paper_waste	30000.00	kg	-0.04	-1200.00	3.528	105840.0000	9998800.00	15	500000	3	41883.29	paper_waste	20000	kg	-0.04	-800.00	3.528	70560.0000	10031083	paper _waste	10000	kg	-400	32283	35280	0.92	65.44	paper	10000000	kg	1	10000000.00	0	0.0000	paper	9990000	kg	1	9990000.00	0	0.0000	paper	10000	kg	10000	0					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000		NaN		0	0	0	9998800	105840	0	9989200	70560	9600	35280					0.00		0.0000		NaN		0	0	40
 263	\N	0.00	test	1000	kWh	5.3	5300.00	450	450000.0000	5300.00	10	20000	12	3539.68	test	1200	kWh	12	14400.00	100000	120000000.0000	17939	test	-200	kWh	-9100	12639	-119550000	-0.00	-3.89					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000		NaN		0	0	0	5300	450000	0	14400	120000000	-9100	-119550000					0.00		0.0000		NaN		0	0	34
-189	\N	0.00	rawmilk	60000.00	kg	0.55	33000.00	3.522	211320.0000	42786.00	0	0	5	0	raw milk	30000	kg	0.55	16500.00	3.522	105660.0000	21680	raw milk	30000	kg	16500	-21106	105660	-0.18	0.00	water	941000	kg	0.0019	1787.90	0.00419	3942.7900	water	471000	kg	0.0019	894.90	0.004193	1974.9030	water	470000	kg	893	1968	electrcity	15000	kWh	0.131	1965.00	0.5098	7647.0000	electrcity	9300	kg	0.131	1218.30	0.5098	4741.1400	electrcity	5700	kWh	747	2906	MSWI heat	8000	kWh	0.0508	406.40	0.1361	1088.8000	Phosphoric acid	938	kg	3	2814.00	5.945	5576.4100	Phosphoric acid	469	kg	3	1407.00	5.945	2788.2050	Phosphoric acid	469	kg	1407	2788	Sodium  hydroxid	938	kg	3	2814.00	1.583	1484.8540	Sodium  hydroxid	469	kg	3	1407.00	1.583	742.4270	Sodium  hydroxid	469	kg	1407	742	0	42786	231057	0	21680	116585	21106	114472	MSWI heat	5000	kWh	0.0508	254.00	0.1361	680.5000	MSWI heat	3000	kWh	152	408	30
 193	\N	0.00	district_heat_mswi	150000.00	kWh	0.068	10200.00	0.1360	20400.0000	17427.00	15	50000	5	4817.11	district_heat_mswi	19909	kwh	0.068	1353.81	0.136	2707.6240	10708	district heat	130091	kWh	8847	-6719	17693	-0.05	6.26	water (Input)	2700000.00	kg	0.0019	5130.00	0.04196	113292.0000	water	1350000	kg	0.0019	2565.00	0.00419	5656.5000	water	1350000	kg	2565	107636	electricit	16011	kWh	0.131	2097.44	0.5098	8162.4078	electricity	2700	kWh	0.131	353.70	0.5098	1376.4600	electrcixity	13311	kWh	1744	6786		0		0	0.00	0	0.0000					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000		NaN		0	0	0	17427	141854	0	5891	10796	11536	131058	desinf_chemical	405	kg	4	1620.00	2.61	1057.0500	desinf_chemical	-405	kg	-1620	-1057	29
 261	\N	1200.00	test	1000	kWh	5.3	5300.00	450	450000.0000	6500.00	10	20000	12	3539.68	test	800	kWh	12	9600.00	100000	80000000.0000	13139	test	200	kWh	-4300	6639	-79550000	-0.00	-8.23					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000		NaN		0	0	0	5300	450000	0	9600	80000000	-4300	-79550000					0.00		0.0000		NaN		0	0	35
 223	\N	1200.00	test	1000	kWh	5.3	5300.00	450	450000.0000	6500.00	10	20000	12	3539.68	test	1000	kWh	12	12000.00	100000	100000000.0000	15539	test	0	kWh	-6700	9039	-99550000	-0.00	-5.28					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000		NaN		0	0	0	5300	450000	0	12000	100000000	-6700	-99550000					0.00		0.0000		NaN		0	0	36
@@ -9024,6 +9028,7 @@ COPY public.t_costbenefit_temp (cp_id, is_id, capexold, "flow-name-1", "flow-val
 485	\N	0.00	nichts	0	kg	0	0.00	0	0.0000	31762.50	15	16000	1	1153.98	Verdampfungsenergie	59396	kWh/a	0.043	2554.03	0.1363	8095.6748	3708.01	Verdampfungsenergie	-59396	kWh/a	-2554.03	-28054.489999999998	-8095.6748	-0.14	0.59	Milchverluste	57750	kg/a	0.55	31762.50	3.522	203395.5000	Milchverluste	0	kg/a	0.55	0.00	3.522	0.0000	Milchverluste	57750	kg/a	31762.5	203395.5					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000					0.00		0.0000	Verdampfungsenergie	NaN	kWh/a	0	0					0.00		0.0000					0.00		0.0000		NaN		0	0	0	31762.50	203395.5000	0	2554.03	8095.6748	29208.47	195299.8252					0.00		0.0000		NaN		0	0	174
 562	\N	0.00	Electricity CH medium Voltage	3000000.00	kWh	0.357749	1073247.00	0.00069591	2087.7300	1608247.00	25	200000	1	9081.35	Electricity CH medium Voltage	2000000.00	kWh	0.357749	715498.00	0.00069591	1391.8200	1152579.35	Electricity CH medium Voltage	1000000		357749	-455667.6499999999	695.9100000000001	-654.76	0.49	Tapwater	500000	t	1.07	535000.00	0.00000018	0.0900	Tapwater	400000	t	1.07	428000.00	0.00000018	0.0720	Tapwater	100000		107000	0.018000000000000002					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000		NaN		0	0	0	1608247.00	2087.8200	0	1143498.00	1391.8920	464749.00	695.9280					0.00		0.0000		NaN		0	0	178
 484	\N	0.00	Milchverluste	57750	kg/a	0.55	31762.50	3.522	203395.5000	31762.50	10	50000	0.001	5000.28	Milchverluste	11550	kg/a	0.55	6352.50	3.522	40679.1000	29832.78	Milchverluste	46200	kg/a	25410	-1929.7200000000012	162716.4	-0.01	7.22					0.00		0.0000					0.00		0.0000		NaN	kg/a	0	0					0.00		0.0000	Milchverkauf	46200	kg/a	0.4	18480.00	0	0.0000		NaN		-18480	0					0.00		0.0000					0.00		0.0000					0.00		0.0000		NaN		0	0					0.00		0.0000					0.00		0.0000		NaN		0	0	0	31762.50	203395.5000	0	24832.50	40679.1000	6930.00	162716.4000					0.00		0.0000		NaN		0	0	175
+189	\N	0.00	rawmilk	60'000.00	kg	0.55	33'000.00	3.522	NaN	NaN	0	0	5	0	raw milk	30'000	kg	0.55	NaN	3.522	NaN	NaN	raw milk	30	kg	NaN	NaN	NaN	NaN	NaN	water	941'000	kg	0.0019	NaN	20.00419	NaN	water	471'000	kg	0.0019	NaN	0.004193	NaN	water	470	kg	NaN	NaN	electrcity	15'000	kWh	0.131	NaN	0.5098	NaN	electrcity	9'300	kg	0.131	NaN	0.5098	NaN	electrcity	6	kWh	NaN	NaN	MSWI heat	8'000	kWh	0.0508	NaN	0.1361	NaN	Phosphoric acid	938	kg	3	2814.00	5.945	5576.4100	Phosphoric acid	469	kg	3	1407.00	5.945	2788.2050	Phosphoric acid	469	kg	1407	2788.205	Sodium  hydroxid	938	kg	3	2814.00	1.583	1484.8540	Sodium  hydroxid	469	kg	3	1407.00	1.583	742.4270	Sodium  hydroxid	469	kg	1407	742.427	0	NaN	NaN	0	NaN	NaN	NaN	NaN	MSWI heat	5'000	kWh	0.0508	NaN	0.1361	NaN	MSWI heat	3	kWh	NaN	NaN	30
 \.
 
 
@@ -9281,7 +9286,7 @@ COPY public.t_country (id, iso, name, printable_name, iso3, numcode) FROM stdin;
 COPY public.t_cp_allocation (id, prcss_id, flow_id, flow_type_id, amount, unit_amount, allocation_amount, cost, unit_cost, allocation_cost, env_impact, unit_env_impact, allocation_env_impact, reference, unit_reference, kpi, unit_kpi, kpi_error, benchmark_kpi, best_practice, capexold, ltold, capexnew, ltnew, newcons, disrate, marcos, ecoben, error_cost, error_amount, error_ep, option, nameofref, kpidef, opexold, opexnew, anncostold, anncostnew, ecocosben, unit1, oldtotalcons, oldtotalcost, oldtotalep, unit2, ecobenunit, marcosunit, description) FROM stdin;
 45	82	69	2	1000.00	kg	20.00	500.00	Euro	30.00	1000000.00	EP	30	1.000	year	1000	kg/year	10.00	1		200.00	300.00	400.00	50.00	15000.00	10.00	66.77	-19500.00	90	90	95	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 40	77	60	2	1000.00	kg	20.00	500.00	Euro	30.00	1000000.00	EP	30	1.000	year	1000	kg/year	10.00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	95	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-50	86	74	1	1000.00	kg	20.00	500.00	Euro	30.00	1000000.00	EP	30	1.000	year	1000	kg/year	10.00	0.400000000000000022		\N	\N	\N	\N	\N	\N	\N	\N	90	90	95	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+50	86	74	1	1000.00	kg	20.00	500.00	Euro	30.00	1000000.00	EP	30	1.000	year	1000	kg/year	10.00	0.4		\N	\N	\N	\N	\N	\N	\N	\N	90	90	95	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 56	102	5	1	1000.00	kg	20.00	500.00	Euro	30.00	1000000.00	EP	30	1.000	year	1000	kg/year	22.00	33	22	\N	\N	\N	\N	\N	\N	\N	\N	90	90	95	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 48	84	1	1	1000.00	kg	20.00	500.00	Euro	30.00	1000000.00	EP	30	1.000	year	1000	kg/year	20.00	1	option	\N	\N	\N	\N	\N	\N	\N	\N	90	90	95	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 49	83	5	1	1000.00	kg	20.00	500.00	Euro	30.00	1000000.00	EP	30	1.000	year	1000	kg/year	10.00	1	option 2	\N	\N	\N	\N	\N	\N	\N	\N	90	90	95	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
@@ -9297,74 +9302,74 @@ COPY public.t_cp_allocation (id, prcss_id, flow_id, flow_type_id, amount, unit_a
 67	90	60	1	10000.00	kg	50.00	20000.00	Euro	50.00	107000000.00	EP	50	2000.000	kg	5	kg/kg	\N	4	Change raw material size	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 104	98	90	1	150000.00	kg	100.00	5000.00	Euro	100.00	100000.00	EP	50	100000.000	kWh	2	kg/kWh	\N	10	stoind	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 105	97	89	1	100000.00	kg	100.00	150.00	Dolar	100.00	21.00	EP	100	140000.000	kg	1	kg/kg	\N	2	dfg	\N	\N	\N	\N	\N	\N	\N	\N	100	100	70	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-102	95	1	1	500.00	kg	30.00	440.00	Euro	30.00	4400.00	EP	30	91000.000	kg	0.00549000000000000009	kg/kg	\N	0.00100000000000000002	dlfkjgklfjg	\N	\N	\N	\N	\N	\N	\N	\N	60	60	60	1			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-106	97	86	1	65000.00	kg	100.00	650.00	Euro	100.00	30.00	EP	100	14000.000	kg	4.64285999999999976	kg/kg	\N	4		\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	sdfsdff		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+102	95	1	1	500.00	kg	30.00	440.00	Euro	30.00	4400.00	EP	30	91000.000	kg	0.00549	kg/kg	\N	0.001	dlfkjgklfjg	\N	\N	\N	\N	\N	\N	\N	\N	60	60	60	1			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+106	97	86	1	65000.00	kg	100.00	650.00	Euro	100.00	30.00	EP	100	14000.000	kg	4.64286	kg/kg	\N	4		\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	sdfsdff		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 107	92	84	1	26000.00	kg	80.00	26000.00	Euro	80.00	260.00	EP	80	200.000	kWh	130	kg/kWh	\N	130		\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 66	79	1	1	1000.00	Liter	70.00	1200.00	Euro	70.00	1000000.00	EP	70	1.000	year	1000	Liter/year	\N	1000	best practice 1	\N	\N	\N	\N	\N	\N	\N	\N	95	90	90	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 39	80	2	1	1000.00	KW	20.00	800.00	Euro	30.00	1000000.00	EP	30	1.000	year	1000	KW/year	100.00	1200	negative is good	20000.00	11.50	90000.00	4.50	10000.00	5.00	0.73	750000.00	90	90	95	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 58	88	1	1	1000.00	Liter	20.00	500.00	Euro	30.00	2000000.00	EP	30	1.000	year	1000	Liter/year	\N	500	Tuna Practice	20000.00	10.00	10000.00	4.50	20000.00	5.00	-0.18	1000000.00	90	90	95	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-75	96	85	2	100000.00	kg	100.00	10000000.00	Euro	100.00	100000.00	EP	100	126120.000	kg	0.792900000000000049	kg/kg	\N	2	ldkjfgklfdj	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	printed paper	paper / printed paper	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+75	96	85	2	100000.00	kg	100.00	10000000.00	Euro	100.00	100000.00	EP	100	126120.000	kg	0.7929	kg/kg	\N	2	ldkjfgklfdj	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	printed paper	paper / printed paper	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 125	150	24	1	10000.00	kg	100.00	-1000.00	Euro	100.00	1000000.00	EP	100	1000.000	kWh	10	kg/kWh	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	amount per electricty		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-84	113	60	2	2800.00	kg	100.00	7700.00	TL	100.00	280.00	EP	100	190595.000	%	0.0146899999999999999	kg/%	\N	2.10000000000000009	optimization / change of raw material size / convert to energy efficient CNCs	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-87	118	104	1	12.00	unit	100.00	780.00	TL	100.00	21.72	EP	100	5200.000	kg	0.00230999999999999999	unit/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-88	113	108	2	1000.00	kg	100.00	2500.00	TL	100.00	323.00	EP	100	20800.000	kg	0.0480799999999999977	kg/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-91	114	117	1	1.85	m┬│	100.00	16605.00	TL	100.00	1726.00	EP	100	1.000	year	1.84499999999999997	m┬│/year	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-90	119	114	2	1.00	kg	100.00	500.00	TL	100.00	2.50	EP	100	5000.000	kg	0.00020000000000000001	kg/kg	\N	0.00220000000000000013	buy a cleaner machine	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+84	113	60	2	2800.00	kg	100.00	7700.00	TL	100.00	280.00	EP	100	190595.000	%	0.01469	kg/%	\N	2.1	optimization / change of raw material size / convert to energy efficient CNCs	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+87	118	104	1	12.00	unit	100.00	780.00	TL	100.00	21.72	EP	100	5200.000	kg	0.00231	unit/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+88	113	108	2	1000.00	kg	100.00	2500.00	TL	100.00	323.00	EP	100	20800.000	kg	0.04808	kg/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+91	114	117	1	1.85	m┬│	100.00	16605.00	TL	100.00	1726.00	EP	100	1.000	year	1.845	m┬│/year	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+90	119	114	2	1.00	kg	100.00	500.00	TL	100.00	2.50	EP	100	5000.000	kg	0.0002	kg/kg	\N	0.0022	buy a cleaner machine	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 79	113	112	1	1000.00	kg	100.00	3500.00	TL	100.00	905.00	EP	100	200.000	kg	5	kg/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-92	113	103	1	30750.00	Liter	100.00	16906.00	TL	100.00	138.99	EP	100	5200.000	kg	5.91345999999999972	Liter/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-94	113	109	1	350.00	unit	100.00	180000.00	TL	100.00	462.00	EP	100	5200.000	kg	0.0673099999999999948	unit/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	90	100	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-97	116	105	1	13861.00	kWh	3.00	3327.00	TL	3.00	9331.00	EP	3	500.000	m┬▓	27.7220000000000013	kWh/m┬▓	\N	43	change to gas heating, use termostats for automatic control of temperature, keep windows closed, improve isolation of the windows	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-98	123	105	1	50825.00	kWh	11.00	12198.00	TL	11.00	34157.00	EP	11	4000.000	m┬▓	12.7062500000000007	kWh/m┬▓	\N	28	Use led systems	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+92	113	103	1	30750.00	Liter	100.00	16906.00	TL	100.00	138.99	EP	100	5200.000	kg	5.91346	Liter/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+94	113	109	1	350.00	unit	100.00	180000.00	TL	100.00	462.00	EP	100	5200.000	kg	0.06731	unit/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	90	100	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+97	116	105	1	13861.00	kWh	3.00	3327.00	TL	3.00	9331.00	EP	3	500.000	m┬▓	27.722	kWh/m┬▓	\N	43	change to gas heating, use termostats for automatic control of temperature, keep windows closed, improve isolation of the windows	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+98	123	105	1	50825.00	kWh	11.00	12198.00	TL	11.00	34157.00	EP	11	4000.000	m┬▓	12.70625	kWh/m┬▓	\N	28	Use led systems	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 99	122	105	1	18481.92	kWh	4.00	4435.00	TL	4.00	9008.00	EP	4	18481.920	kWh	1	kWh/kWh	\N	0.5	Closing the leaks, optimise the pressure/running time without load, use electric with frequency converters	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	1			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-100	119	105	1	4620.00	kWh	1.00	1109.00	TL	1.00	3021.00	EP	1	462048.000	kWh	0.0100000000000000002	kWh/kWh	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-118	119	69	2	326.00	m┬│	100.00	6000.00	TL	100.00	105.00	EP	100	1260.000	m┬│	0.258730000000000016	m┬│/m┬│	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-89	119	114	1	6.00	kg	100.00	600.00	TL	100.00	11.64	EP	100	5000.000	kg	0.00119999999999999989	kg/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-80	113	112	2	200.00	kg	90.00	200.00	TL	100.00	20.00	EP	100	200.000	kg	1	kg/kg	\N	0.900000000000000022	optimization / change of raw material size / convert to energy efficient CNCs	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+100	119	105	1	4620.00	kWh	1.00	1109.00	TL	1.00	3021.00	EP	1	462048.000	kWh	0.01	kWh/kWh	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+118	119	69	2	326.00	m┬│	100.00	6000.00	TL	100.00	105.00	EP	100	1260.000	m┬│	0.25873	m┬│/m┬│	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+89	119	114	1	6.00	kg	100.00	600.00	TL	100.00	11.64	EP	100	5000.000	kg	0.0012	kg/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+80	113	112	2	200.00	kg	90.00	200.00	TL	100.00	20.00	EP	100	200.000	kg	1	kg/kg	\N	0.9	optimization / change of raw material size / convert to energy efficient CNCs	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 83	113	60	1	14000.00	kg	100.00	30800.00	TL	100.00	65660.00	EP	100	2800.000	kg	5	kg/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-108	97	2	1	3000000.00	kWh	80.00	3000000.00	Euro	80.00	30.00	EP	80	15000000.000	kg	0.200000000000000011	kWh/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Tste		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+108	97	2	1	3000000.00	kWh	80.00	3000000.00	Euro	80.00	30.00	EP	80	15000000.000	kg	0.2	kWh/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Tste		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 115	108	4	1	45.00	%	12.00	6788888.00	Dolar	45.00	11.00	EP	11	333333333333333.000	Amper	0	%/Amper	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	23	23	11	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-101	94	1	1	1000.00	kg	70.00	1000.00	Euro	70.00	10000.00	EP	70	26000.000	kg	0.0384600000000000011	kg/kg	\N	0.0449999999999999983	ldfkjgklfgsddf	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	├Âsdkf├Âdslf	lsdjf/skdfh	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-120	140	146	1	83500.00	Liter	100.00	8400.00	Euro	100.00	0.08	EP	100	10721.000	m┬▓	7.7884500000000001	Liter/m┬▓	\N	4.29999999999999982		\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Heated area	Fuel oil / heated area	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+101	94	1	1	1000.00	kg	70.00	1000.00	Euro	70.00	10000.00	EP	70	26000.000	kg	0.03846	kg/kg	\N	0.045	ldfkjgklfgsddf	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	├Âsdkf├Âdslf	lsdjf/skdfh	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+120	140	146	1	83500.00	Liter	100.00	8400.00	Euro	100.00	0.08	EP	100	10721.000	m┬▓	7.78845	Liter/m┬▓	\N	4.3		\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Heated area	Fuel oil / heated area	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 126	153	2	1	8000.00	kWh	100.00	800.00	CHF	100.00	4000.00	EP	100	8000.000	m┬│	1	kWh/m┬│	\N	0.5	Improved compressed air	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	generated air volume		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 129	152	2	1	2000.00	kWh	100.00	200.00	CHF	100.00	1000.00	EP	100	20.000	year	100	kWh/year	\N	50	el savving by improved washing	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	pumping el for water	annual pumping energy	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 130	154	5	1	5000.00	kg	100.00	1000.00	CHF	100.00	1000.00	EP	100	400.000	pieces/year	12.5	kg/pieces/year	\N	14	vvvv	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	gggg		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-132	155	2	1	100.00	kWh	100.00	100.00	CHF	100.00	30.00	EP	100	10000000.000	pieces/year	1.00000000000000008e-05	kWh/pieces/year	\N	2.00000000000000016e-05	cccc	\N	\N	\N	\N	\N	\N	\N	\N	50	50	60	1	number of bottles		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-77	113	66	2	2100.00	kg	100.00	25200.00	TL	100.00	1050.00	EP	100	142080.000	kWh	0.0147799999999999997	kg/kWh	\N	2.79999999999999982	optimization / change of raw material size / convert to energy efficient CNCs	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	1			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+132	155	2	1	100.00	kWh	100.00	100.00	CHF	100.00	30.00	EP	100	10000000.000	pieces/year	1e-05	kWh/pieces/year	\N	2e-05	cccc	\N	\N	\N	\N	\N	\N	\N	\N	50	50	60	1	number of bottles		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+77	113	66	2	2100.00	kg	100.00	25200.00	TL	100.00	1050.00	EP	100	142080.000	kWh	0.01478	kg/kWh	\N	2.8	optimization / change of raw material size / convert to energy efficient CNCs	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	1			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 81	113	61	1	400.00	kg	100.00	21600.00	TL	100.00	2464.00	EP	100	100.000	kg	4	kg/kg	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-93	114	103	2	27675.00	Liter	100.00	10000.00	TL	100.00	125.00	EP	100	5123.000	kg	5.40211000000000041	Liter/kg	\N	0.0599999999999999978	minimize lubrication / dry cutting and minimum quantity lubrication	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-96	113	105	1	346536.00	kWh	75.00	83168.00	TL	75.00	232872.00	EP	75	5200.000	kg	66.6415400000000062	kWh/kg	\N	0.699999999999999956	optimization / size of raw materila changing / Energry efficient CNC	\N	\N	\N	\N	\N	\N	\N	\N	60	60	60	0			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-82	113	61	2	23.00	kg	100.00	3672.00	TL	100.00	2.30	EP	100	500.000	kg	0.0459999999999999992	kg/kg	\N	1	optimization / change of raw material size / convert to energy efficient CNCs	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+93	114	103	2	27675.00	Liter	100.00	10000.00	TL	100.00	125.00	EP	100	5123.000	kg	5.40211	Liter/kg	\N	0.06	minimize lubrication / dry cutting and minimum quantity lubrication	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+96	113	105	1	346536.00	kWh	75.00	83168.00	TL	75.00	232872.00	EP	75	5200.000	kg	66.64154	kWh/kg	\N	0.7	optimization / size of raw materila changing / Energry efficient CNC	\N	\N	\N	\N	\N	\N	\N	\N	60	60	60	0			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+82	113	61	2	23.00	kg	100.00	3672.00	TL	100.00	2.30	EP	100	500.000	kg	0.046	kg/kg	\N	1	optimization / change of raw material size / convert to energy efficient CNCs	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 140	160	66	1	12.00	1/seconed	12.00	12.00	Dollar	12.00	12.00	EP	12	2.000	1/seconed	6	1/seconed/1/seconed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	12	12	12	1	ee	w	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-85	113	107	2	100.00	m┬│	100.00	1500.00	TL	100.00	590.00	EP	100	1.000	year	100	m┬│/year	\N	91.1234500000000054		\N	\N	\N	\N	\N	\N	\N	\N	90	90	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+85	113	107	2	100.00	m┬│	100.00	1500.00	TL	100.00	590.00	EP	100	1.000	year	100	m┬│/year	\N	91.12345		\N	\N	\N	\N	\N	\N	\N	\N	90	90	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 117	113	66	1	10500.00	kg	100.00	126000.00	TL	100.00	80850.00	EP	100	4200.000	pieces/year	2.5	kg/pieces/year	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0		Aluminium/pieces	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 142	162	114	2	12.00	1/seconed	12.00	12.00	Dollar	12.00	12.00	EP	12	12.000	1/seconed	1	1/seconed/1/seconed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	12	12	12	1	ee	ww	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-119	119	1	1	1260.00	m┬│	100.00	13104.00	TL	100.00	0.10	EP	100	1700.000	m┬▓	0.74117999999999995	m┬│/m┬▓	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+119	119	1	1	1260.00	m┬│	100.00	13104.00	TL	100.00	0.10	EP	100	1700.000	m┬▓	0.74118	m┬│/m┬▓	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 141	122	105	1	12.00	1/seconed	12.00	12.00	Dollar	12.00	12.00	EP	12	2.000	1/seconed	6	1/seconed/1/seconed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	12	12	12	1	ee	w	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 143	161	66	2	12.00	1/seconed	12.00	12.00	Dollar	12.00	12.00	EP	12	12.000	1/seconed	1	1/seconed/1/seconed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	12	12	12	1	ee	ww	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-86	116	98	1	12000.00	m┬│	100.00	15000.00	TL	100.00	28080.00	EP	100	1200.000	m┬▓	10	m┬│/m┬▓	\N	4.29999999999999982	reuse of waste heat / improvement of the burner / low temperature heating system / condensing technology	\N	\N	\N	\N	\N	\N	\N	\N	100	100	50	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+86	116	98	1	12000.00	m┬│	100.00	15000.00	TL	100.00	28080.00	EP	100	1200.000	m┬▓	10	m┬│/m┬▓	\N	4.3	reuse of waste heat / improvement of the burner / low temperature heating system / condensing technology	\N	\N	\N	\N	\N	\N	\N	\N	100	100	50	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 121	141	105	1	1000.00	kWh	1.00	250.00	TL	1.00	654.00	EP	1	1000.000	kWh	1	kWh/kWh	\N	0.5	intergration of a heat exchanger in ventialtion	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 144	163	114	1	12.00	1/seconed	12.00	12.00	Dollar	12.00	12.00	EP	12	12.000	1/seconed	1	1/seconed/1/seconed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	12	12	12	1	ww	ee	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 145	122	66	1	12.00	1/seconed	12.00	12.00	Dollar	12.00	12.00	EP	12	12.000	1/seconed	1	1/seconed/1/seconed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	12	12	12	1	ww	ee	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 146	164	114	1	12.00	1/seconed	12.00	12.00	TL	12.00	12.00	EP	12	12.000	%	1	1/seconed/%	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	12	12	12	1	ee	er	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 147	165	66	1	12.00	1/seconed	12.00	12.00	TL	12.00	12.00	EP	12	12.000	%	1	1/seconed/%	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	12	12	12	1	ww	rt	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 148	166	103	1	12.00	1/seconed	12.00	12.00	TL	12.00	12.00	EP	12	12.000	1/seconed	1	1/seconed/1/seconed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	12	12	12	1	ee	rr	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-150	159	2	1	6900000.00	kWh	100.00	800000.00	CHF	100.00	1800000.00	EP	100	12181000.000	kg	0.566459999999999964	kWh/kg	\N	0.800000000000000044	Dummy Benchmark	\N	\N	\N	\N	\N	\N	\N	\N	95	95	90	0	Windows produced	electrcityper glass	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+150	159	2	1	6900000.00	kWh	100.00	800000.00	CHF	100.00	1800000.00	EP	100	12181000.000	kg	0.56646	kWh/kg	\N	0.8	Dummy Benchmark	\N	\N	\N	\N	\N	\N	\N	\N	95	95	90	0	Windows produced	electrcityper glass	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 151	168	132	1	38624.00	kg	100.00	700000.00	CHF	100.00	610.30	EP	100	38624.000	kg	1	kg/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	95	95	90	1	dummy		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-154	171	89	2	431.50	to (tons)	100.00	-26000.00	CHF	100.00	1600.00	EP	100	13950.000	to (tons)	0.0309299999999999992	to (tons)/to (tons)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	75	90	90	1	product	share wastepaper	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-161	128	86	1	284.00	to (tons)	100.00	1000000.00	CHF	100.00	903.12	EP	100	13950.000	to (tons)	0.0203599999999999996	to (tons)/to (tons)	\N	0.0200000000000000004	no	\N	\N	\N	\N	\N	\N	\N	\N	95	95	80	1	product	color per product	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+154	171	89	2	431.50	to (tons)	100.00	-26000.00	CHF	100.00	1600.00	EP	100	13950.000	to (tons)	0.03093	to (tons)/to (tons)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	75	90	90	1	product	share wastepaper	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+161	128	86	1	284.00	to (tons)	100.00	1000000.00	CHF	100.00	903.12	EP	100	13950.000	to (tons)	0.02036	to (tons)/to (tons)	\N	0.02	no	\N	\N	\N	\N	\N	\N	\N	\N	95	95	80	1	product	color per product	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 159	172	190	2	11000.00	kg	100.00	4500.00	CHF	100.00	2.70	EP	100	1.000	year	11000	kg/year	\N	3300	dewatering spent cutting fluid to 30%	\N	\N	\N	\N	\N	\N	\N	\N	80	95	80	1	year	Annual spent cutting fluid	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 139	158	2	1	885545.00	kWh	100.00	123000.00	CHF	100.00	246.00	EP	100	885545.000	year	1	kWh/year	\N	1	Eco electrcity St.Gallen	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	non renewable consumption per year	electrcity	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 112	135	133	2	38624.00	kg	100.00	-35000.00	CHF	100.00	21.80	EP	100	38624.000	kg	1	kg/kg	\N	1		\N	\N	\N	\N	\N	\N	\N	\N	50	95	50	1			\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 156	173	103	1	1200.00	Liter	100.00	9960.00	CHF	100.00	2.50	EP	100	1.000	year	1200	Liter/year	\N	392	High pressure jet-assisted machining	\N	\N	\N	\N	\N	\N	\N	\N	95	95	90	1	period	annual concentrated cutting fluid consumption	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-110	130	98	1	640000.00	kWh	100.00	70400.00	CHF	100.00	120.00	EP	100	9000.000	m┬▓	71.1111099999999965	kWh/m┬▓	\N	50	Disctrict heating	\N	\N	\N	\N	\N	\N	\N	\N	95	95	80	1	heated area	specific heating energy	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+110	130	98	1	640000.00	kWh	100.00	70400.00	CHF	100.00	120.00	EP	100	9000.000	m┬▓	71.11111	kWh/m┬▓	\N	50	Disctrict heating	\N	\N	\N	\N	\N	\N	\N	\N	95	95	80	1	heated area	specific heating energy	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 160	128	85	1	14381.00	to (tons)	100.00	9347650.00	CHF	100.00	22578.17	EP	100	1.000	year	14381	to (tons)/year	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	95	95	80	1	year	paper consumption	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 158	173	2	1	35000.00	kWh	5.00	4900.00	CHF	5.00	9.37	EP	5	1.000	year	35000	kWh/year	\N	35000	HPJ requires compressed air	\N	\N	\N	\N	\N	\N	\N	\N	50	50	50	0	year	estimated pump energy	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-152	128	2	1	2900000.00	kWh	100.00	367720.00	CHF	100.00	88.70	EP	100	13950.000	to (tons)	207.885300000000001	kWh/to (tons)	\N	670		\N	\N	\N	\N	\N	\N	\N	\N	90	90	80	0	product	electrcity cons. per product	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+152	128	2	1	2900000.00	kWh	100.00	367720.00	CHF	100.00	88.70	EP	100	13950.000	to (tons)	207.8853	kWh/to (tons)	\N	670		\N	\N	\N	\N	\N	\N	\N	\N	90	90	80	0	product	electrcity cons. per product	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 162	174	2	1	6900000.00	kWh	100.00	800000.00	CHF	100.00	2084.00	EP	100	12000.000	to (tons)	575	kWh/to (tons)	\N	600	dummy Benchmark	\N	\N	\N	\N	\N	\N	\N	\N	95	95	80	0	product	spec electricty consumption	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-179	192	196	2	1500.00	to (tons)	100.00	100.00	CHF	100.00	1575.00	EP	100	11044.000	to (tons)	0.135819999999999996	to (tons)/to (tons)	\N	0.100000000000000006	dummy	\N	\N	\N	\N	\N	\N	\N	\N	90	90	80	1	flatglass input	losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-180	192	200	2	3000.00	to (tons)	100.00	100.00	CHF	100.00	6000.00	EP	100	15900.000	to (tons)	0.188679999999999987	to (tons)/to (tons)	\N	0.119999999999999996	dummy	\N	\N	\N	\N	\N	\N	\N	\N	90	80	80	1	saftey glass input	losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-181	189	199	2	40.00	to (tons)	100.00	12000.00	CHF	100.00	127.00	EP	100	192.000	to (tons)	0.208329999999999987	to (tons)/to (tons)	\N	0.149999999999999994	dummy	\N	\N	\N	\N	\N	\N	\N	\N	80	80	60	1	spacer input	losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-182	194	8	1	17432.00	to (tons)	100.00	5000.00	Euro	100.00	38890792.00	EP	100	6226.000	to (tons)	2.79986999999999986	to (tons)/to (tons)	\N	2	capsulation of reactor	\N	\N	\N	\N	\N	\N	\N	\N	90	90	80	1	Acetate yarn	specific acetone consumption	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+179	192	196	2	1500.00	to (tons)	100.00	100.00	CHF	100.00	1575.00	EP	100	11044.000	to (tons)	0.13582	to (tons)/to (tons)	\N	0.1	dummy	\N	\N	\N	\N	\N	\N	\N	\N	90	90	80	1	flatglass input	losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+180	192	200	2	3000.00	to (tons)	100.00	100.00	CHF	100.00	6000.00	EP	100	15900.000	to (tons)	0.18868	to (tons)/to (tons)	\N	0.12	dummy	\N	\N	\N	\N	\N	\N	\N	\N	90	80	80	1	saftey glass input	losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+181	189	199	2	40.00	to (tons)	100.00	12000.00	CHF	100.00	127.00	EP	100	192.000	to (tons)	0.20833	to (tons)/to (tons)	\N	0.15	dummy	\N	\N	\N	\N	\N	\N	\N	\N	80	80	60	1	spacer input	losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+182	194	8	1	17432.00	to (tons)	100.00	5000.00	Euro	100.00	38890792.00	EP	100	6226.000	to (tons)	2.79987	to (tons)/to (tons)	\N	2	capsulation of reactor	\N	\N	\N	\N	\N	\N	\N	\N	90	90	80	1	Acetate yarn	specific acetone consumption	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 165	176	66	1	10500.00	kg	100.00	126000.00	TL	100.00	80850.00	EP	100	1.000	1/seconed	10500	kg/1/seconed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	1	1	s	w	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 166	177	66	1	10500.00	kg	100.00	126000.00	TL	100.00	80850.00	EP	100	1.000	1/seconed	10500	kg/1/seconed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	1	1	1		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 167	178	103	1	30750.00	Liter	100.00	16906.00	TL	100.00	138.99	EP	100	1.000	1/seconed	30750	Liter/1/seconed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	1	1	1	1	w	w	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
@@ -9378,175 +9383,174 @@ COPY public.t_cp_allocation (id, prcss_id, flow_id, flow_type_id, amount, unit_a
 175	184	103	2	55350.00	Liter	200.00	10000.00	TL	100.00	125.00	EP	100	1.000	bar	55350	Liter/bar	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	200	200	300	1	w	w	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 176	185	105	1	2772288.00	kWh	600.00	665346.00	TL	600.00	1813074.00	EP	600	1.000	degree	462048	kWh/degree	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	500	500	500	1	w	w	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 177	186	109	1	1750.00	unit	500.00	900000.00	TL	500.00	2310.00	EP	500	1.000	degree	1750	unit/degree	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	899	899	899	1	e	e	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-178	187	105	1	2772288.00	kWh	600.00	665346.00	TL	600.00	1813074.00	EP	600	34.000	Amper	81537.8823499999999	kWh/Amper	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	234	234	234	1	e	e	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-183	194	2	1	5187800.00	kWh	100.00	100000.00	Euro	100.00	581034.00	EP	100	6226.000	to (tons)	833.247669999999971	kWh/to (tons)	\N	1000	value	\N	\N	\N	\N	\N	\N	\N	\N	90	90	95	0	acetone yarn	specific electricity consumption for dissolving	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-157	173	1	1	11.00	m┬│	1.00	45.00	CHF	1.00	0.01	EP	1	1200.000	Liter	0.00916999999999999933	m┬│/Liter	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	90	90	80	0	cuttingfluid	Dilution cuttingfluid with water	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-202	256	238	1	327.72	MWh	12.00	12240.00	CHF	12.00	44.60	EP	12	1690000.000	l	0.00019000000000000001	MWh/l	\N	0.000100000000000000005	cold disinfection	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	volume	specific_heat	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-471	380	306	1	30.00	kg	100.00	200000.00	CHF	100.00	0.03	EP	100	10000.000	kWh	0.00300000000000000006	kg/kWh	\N	0	xxxxx	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	annual energy production	fuel/power	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	xxxx
-184	207	99	2	9600.00	GJ (Gigajoule)	80.00	50000.00	CHF	100.00	3000000.00	EP	100	8000.000	GJ (Gigajoule)	1.19999999999999996	GJ (Gigajoule)/GJ (Gigajoule)	\N	1.10000000000000009	this pasteurising	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	Test ref	test	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-187	208	1	1	5000000.00	Liter	100.00	33000.00	CHF	100.00	121111.00	EP	100	1.200	year	4166666.66667000018	Liter/year	\N	4000000	blobbad	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	year	estimated water usage	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-194	212	224	1	2700000.00	kg	4.31	2538.59	CHF	4.31	10133100.00	EP	4.29	10000000.000	kg	0.270000000000000018	kg/kg	\N	0.200000000000000011		\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	rawmilk	Water consumption CIP	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	See option cold sterilisation
-198	228	228	2	30000.00	kg	100.00	-1200.00	CHF	100.00	105852616.00	EP	100	1000000.000	kg	0.0299999999999999989	kg/kg	\N	0.0200000000000000004	Improved set up printing machine	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Paper	Paper losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	AWDAWDW\n\nWDAW\nD\nAW\nD\nAWD\nW
-334	290	267	1	4860000.00	kg	100.00	486000.00	CHF	100.00	10011600000.00	EP	100	901125.000	kg	5.39325999999999972	kg/kg	\N	5	Clinker production, 32% RDF, NOx treatment	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	NOx removed		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 3:\n67% petcoke and NOx reduction measures (no dust measures)
-351	299	273	1	2048250.00	MJ	75.00	76500.00	CHF	75.00	51431557.50	EP	75	25000000.000	kg	0.0819300000000000028	MJ/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-214	257	241	1	300000.00	l	100.00	30000.00	CHF	100.00	1056600.00	EP	100	1690000.000	l	0.177510000000000001	l/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	volume	specific_rawmilk_feeding	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-203	256	240	1	88.20	MWh	4.90	11564.00	CHF	4.90	44.96	EP	4.9	1690000.000	l	5.00000000000000024e-05	MWh/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	volume	specific_electricity	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-211	253	221	1	1000.00	kg	100.00	3500.00	CHF	100.00	5945.00	EP	100	1690000.000	l	0.00059000000000000003	kg/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	volume	specific_phosphor	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-209	253	240	1	1677.60	MWh	93.20	219952.00	CHF	93.20	855.24	EP	93.2	1690000.000	l	0.000989999999999999995	MWh/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	volume	specific_electricity	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-208	253	224	1	62600.00	m┬│	100.00	106420.00	CHF	100.00	234.94	EP	100	1690000.000	l	0.0370399999999999965	m┬│/l	\N	0.299999999999999989	test	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	volume	specific_water_use	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-212	253	222	1	1000.00	kg	100.00	3500.00	CHF	100.00	1583.00	EP	100	1690000.000	l	0.00059000000000000003	kg/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	volume	specific_sodiumhydroxide	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-210	253	241	1	9940000.00	kg	99.40	4970000.00	CHF	99.40	35008680.00	EP	99.4	1690000.000	l	5.88166000000000011	kg/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	volume	specific_rawmilk_use	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-207	253	238	1	355.03	MWh	13.00	13260.00	CHF	13.00	48.32	EP	13	1690000.000	l	0.000210000000000000009	MWh/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	volume	specific_heat	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-205	255	241	2	3480.00	kg	0.60	1740.00	CHF	0.60	12256.56	EP	0.6	1690000.000	l	0.0020600000000000002	kg/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	volume	specific_loss	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-206	255	240	1	34.20	MWh	1.90	4484.00	CHF	1.90	17.44	EP	1.9	1690000.000	l	2.00000000000000016e-05	MWh/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	volume	specific_electricity	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-353	301	272	1	54000.00	kWh	3.00	70800.00	CHF	3.00	12605220.00	EP	3	10000000.000	kg	0.00540000000000000029	kWh/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-213	253	69	2	62600.00	m┬│	100.00	0.00	CHF	100.00	27.92	EP	100	1690000.000	l	0.0370399999999999965	m┬│/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	volume	specific_wastewater	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-204	254	238	1	2048.25	MWh	75.00	76500.00	CHF	75.00	278.77	EP	75	1690000.000	l	0.00120999999999999992	MWh/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	volume	specific_heat	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-217	258	238	1	8274.00	kWh	0.60	309.00	CHF	0.60	51.12	EP	.6	1690000.000	kg	0.00489999999999999984	kWh/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-220	262	224	1	450.00	m┬│	0.72	765.00	CHF	0.72	234.94	EP	100	10000000.000	kg	5.00000000000000024e-05	m┬│/kg	\N	0.200000000000000011	cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-218	258	240	1	11362.00	kWh	0.60	424.00	CHF	0.60	917.64	EP	100	1690000.000	kg	0.00672000000000000028	kWh/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-219	258	224	1	964.00	m┬│	0.60	1639.00	CHF	0.60	234.94	EP	100	1690000.000	kg	0.000569999999999999977	m┬│/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-192	212	216	1	16020.00	kWh	0.89	21004.00	CHF	0.89	8166996.00	EP	0.89	10000000.000	kg	0.00160000000000000008	kWh/kg	\N	0.0200000000000000004		\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	Rawmilk	Electrcity consumption CIP	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	See option cold sterilization
-222	262	240	1	2700.00	kWh	150.00	101.00	CHF	0.04	917.64	EP	100	10000000.000	kg	0.000270000000000000003	kWh/kg	\N	0.00133000000000000002	cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-201	240	241	1	60000.00	kg	0.60	30000.00	CHF	0.60	0.02	EP	0.6	1690000.000	kg	0.0354999999999999968	kg/kg	\N	0.0149999999999999994	increase batch size to 20000l	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk	CIP milk losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-223	262	243	1	675.00	kg	100.00	2700.00	CHF	100.00	7.13	EP	100	10000000.000	kg	6.99999999999999939e-05	kg/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-308	281	205	1	302640.00	MJ	52.00	7675.72	CHF	52.00	20488.00	EP	52	2368.400	unit	127.782470000000004	MJ/unit	\N	55.8999999999999986	new shower head	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	no plan?		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	half of water consumption
-304	282	225	2	579063.00	kg	100.00	318500.00	CHF	100.00	202125.00	EP	100	9407000.000	kg	0.0553999999999999979	kg/kg	\N	0.0200000000000000004	Pushing milk	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	total raw milk 2017	pushing losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Reducing milk waste by using a plug\n(correct)
-310	286	261	1	13.00	kg	100.00	877.00	CHF	100.00	1703.39	EP	100	20.000	kg	0.650000000000000022	kg/kg	\N	0.100000000000000006	repair cooling unit	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	total amount of refrigerant	refrigerant loss	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	repair leakage of cooling unit
-232	265	241	1	120000.00	kg	1.20	60000.00	CHF	1.20	35220000.00	EP	100	1690000.000	kg	0.0710100000000000037	kg/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-233	265	224	1	964.00	m┬│	1.54	1639.00	CHF	1.54	234.94	EP	100	1690000.000	kg	0.000569999999999999977	m┬│/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-307	281	259	2	2273.60	m┬│	80.00	3684.00	CHF	80.00	8392.00	EP	80	2368.400	unit	0.95996999999999999	m┬│/unit	\N	0.419999999999999984	new shower head	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	average of shower head		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	half of water consumption
-221	262	238	1	16472.00	kWh	26.31	615.00	CHF	0.60	8519.86	EP	100	10000000.000	kg	0.00164999999999999999	kWh/kg	\N	0.0019	cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-215	258	241	1	60000.00	kg	0.60	30000.00	CHF	0.60	0.02	EP	.6	1690000.000	kg	0.0354999999999999968	kg/kg	\N	0.0149999999999999994	incresed bach size 20000l	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk	Milk losses (during CIP)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-228	264	238	1	126285.00	kWh	201.73	4717.00	CHF	4.62	8519.86	EP	100	10000000.000	kg	0.0126300000000000006	kWh/kg	\N	0.0019	hot sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-227	264	224	1	3488.00	m┬│	5.57	5929.00	CHF	5.57	234.94	EP	100	10000000.000	kg	0.000349999999999999996	m┬│/kg	\N	0.000100000000000000005	hot sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-229	264	240	1	6075.00	kWh	337.50	3720.00	CHF	1.58	917.64	EP	100	10000000.000	kg	0.000609999999999999974	kWh/kg	\N	9.00000000000000057e-05	hot sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-196	215	225	2	464000.00	kg	80.00	256000.00	CHF	80.00	1667704160.00	EP	80	10000000.000	kg	0.0463999999999999968	kg/kg	\N	0.0200000000000000004	Milk powder from milk/water phase	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	rawmilk	push losses in milk/water phase	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Milk/water phase of pushing milk at process start and end is dischared to waste water. It could be collected and reused to produce milk powder.
-230	265	238	1	11362.00	MWh	18.15	424.00	CHF	0.42	8519.86	EP	100	1690000.000	kg	0.00672000000000000028	MWh/kg	\N	0.00391999999999999987	2x	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-231	265	238	1	8274.00	MWh	13.22	309.00	CHF	0.30	8519.86	EP	100	1690000.000	kg	0.00489999999999999984	MWh/kg	\N	0.00391999999999999987	2x	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-234	243	238	1	2731.00	kWh	100.00	102000.00	CHF	100.00	0.14	EP	100	10000000.000	kg	0.000270000000000000003	kWh/kg	\N	0.0019	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-236	243	224	1	450.00	m┬│	0.72	765.00	CHF	0.72	0.00	EP	100	10000000.000	kg	5.00000000000000024e-05	m┬│/kg	\N	0.200000000000000011	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-235	243	240	1	2700.00	kWh	150.00	101.00	CHF	0.04	0.51	EP	100	10000000.000	kg	0.000270000000000000003	kWh/kg	\N	0.00133000000000000002	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-237	243	238	1	4000.00	MWh	146.47	102000.00	CHF	100.00	0.14	EP	100	1690000.000	MWh	0.00237000000000000014	MWh/MWh	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-238	239	230	1	2731.00	MWh	100.00	102000.00	CHF	100.00	0.00	EP	100	8000.000	kg	0.341370000000000007	MWh/kg	\N	0.800000000000000044	test	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	test		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+178	187	105	1	2772288.00	kWh	600.00	665346.00	TL	600.00	1813074.00	EP	600	34.000	Amper	81537.88235	kWh/Amper	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	234	234	234	1	e	e	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+183	194	2	1	5187800.00	kWh	100.00	100000.00	Euro	100.00	581034.00	EP	100	6226.000	to (tons)	833.24767	kWh/to (tons)	\N	1000	value	\N	\N	\N	\N	\N	\N	\N	\N	90	90	95	0	acetone yarn	specific electricity consumption for dissolving	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+157	173	1	1	11.00	m┬│	1.00	45.00	CHF	1.00	0.01	EP	1	1200.000	Liter	0.00917	m┬│/Liter	\N	0		\N	\N	\N	\N	\N	\N	\N	\N	90	90	80	0	cuttingfluid	Dilution cuttingfluid with water	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+202	256	238	1	327.72	MWh	12.00	12240.00	CHF	12.00	44.60	EP	12	1690000.000	l	0.00019	MWh/l	\N	0.0001	cold disinfection	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	volume	specific_heat	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+471	380	306	1	30.00	kg	100.00	200000.00	CHF	100.00	0.03	EP	100	10000.000	kWh	0.003	kg/kWh	\N	0	xxxxx	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	annual energy production	fuel/power	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	xxxx
+184	207	99	2	9600.00	GJ (Gigajoule)	80.00	50000.00	CHF	100.00	3000000.00	EP	100	8000.000	GJ (Gigajoule)	1.2	GJ (Gigajoule)/GJ (Gigajoule)	\N	1.1	this pasteurising	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	Test ref	test	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+187	208	1	1	5000000.00	Liter	100.00	33000.00	CHF	100.00	121111.00	EP	100	1.200	year	4166666.66667	Liter/year	\N	4000000	blobbad	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	year	estimated water usage	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+194	212	224	1	2700000.00	kg	4.31	2538.59	CHF	4.31	10133100.00	EP	4.29	10000000.000	kg	0.27	kg/kg	\N	0.2		\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	rawmilk	Water consumption CIP	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	See option cold sterilisation
+198	228	228	2	30000.00	kg	100.00	-1200.00	CHF	100.00	105852616.00	EP	100	1000000.000	kg	0.03	kg/kg	\N	0.02	Improved set up printing machine	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Paper	Paper losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	AWDAWDW\n\nWDAW\nD\nAW\nD\nAWD\nW
+334	290	267	1	4860000.00	kg	100.00	486000.00	CHF	100.00	10011600000.00	EP	100	901125.000	kg	5.39326	kg/kg	\N	5	Clinker production, 32% RDF, NOx treatment	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	NOx removed		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 3:\n67% petcoke and NOx reduction measures (no dust measures)
+351	299	273	1	2048250.00	MJ	75.00	76500.00	CHF	75.00	51431557.50	EP	75	25000000.000	kg	0.08193	MJ/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+214	257	241	1	300000.00	l	100.00	30000.00	CHF	100.00	1056600.00	EP	100	1690000.000	l	0.17751	l/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	volume	specific_rawmilk_feeding	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+203	256	240	1	88.20	MWh	4.90	11564.00	CHF	4.90	44.96	EP	4.9	1690000.000	l	5e-05	MWh/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	volume	specific_electricity	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+211	253	221	1	1000.00	kg	100.00	3500.00	CHF	100.00	5945.00	EP	100	1690000.000	l	0.00059	kg/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	volume	specific_phosphor	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+209	253	240	1	1677.60	MWh	93.20	219952.00	CHF	93.20	855.24	EP	93.2	1690000.000	l	0.00099	MWh/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	volume	specific_electricity	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+208	253	224	1	62600.00	m┬│	100.00	106420.00	CHF	100.00	234.94	EP	100	1690000.000	l	0.03704	m┬│/l	\N	0.3	test	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	volume	specific_water_use	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+212	253	222	1	1000.00	kg	100.00	3500.00	CHF	100.00	1583.00	EP	100	1690000.000	l	0.00059	kg/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	volume	specific_sodiumhydroxide	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+210	253	241	1	9940000.00	kg	99.40	4970000.00	CHF	99.40	35008680.00	EP	99.4	1690000.000	l	5.88166	kg/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	volume	specific_rawmilk_use	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+207	253	238	1	355.03	MWh	13.00	13260.00	CHF	13.00	48.32	EP	13	1690000.000	l	0.00021	MWh/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	volume	specific_heat	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+205	255	241	2	3480.00	kg	0.60	1740.00	CHF	0.60	12256.56	EP	0.6	1690000.000	l	0.00206	kg/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	volume	specific_loss	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+206	255	240	1	34.20	MWh	1.90	4484.00	CHF	1.90	17.44	EP	1.9	1690000.000	l	2e-05	MWh/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	volume	specific_electricity	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+353	301	272	1	54000.00	kWh	3.00	70800.00	CHF	3.00	12605220.00	EP	3	10000000.000	kg	0.0054	kWh/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+213	253	69	2	62600.00	m┬│	100.00	0.00	CHF	100.00	27.92	EP	100	1690000.000	l	0.03704	m┬│/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	volume	specific_wastewater	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+204	254	238	1	2048.25	MWh	75.00	76500.00	CHF	75.00	278.77	EP	75	1690000.000	l	0.00121	MWh/l	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	volume	specific_heat	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+217	258	238	1	8274.00	kWh	0.60	309.00	CHF	0.60	51.12	EP	.6	1690000.000	kg	0.0049	kWh/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+220	262	224	1	450.00	m┬│	0.72	765.00	CHF	0.72	234.94	EP	100	10000000.000	kg	5e-05	m┬│/kg	\N	0.2	cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+218	258	240	1	11362.00	kWh	0.60	424.00	CHF	0.60	917.64	EP	100	1690000.000	kg	0.00672	kWh/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+219	258	224	1	964.00	m┬│	0.60	1639.00	CHF	0.60	234.94	EP	100	1690000.000	kg	0.00057	m┬│/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+192	212	216	1	16020.00	kWh	0.89	21004.00	CHF	0.89	8166996.00	EP	0.89	10000000.000	kg	0.0016	kWh/kg	\N	0.02		\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	Rawmilk	Electrcity consumption CIP	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	See option cold sterilization
+222	262	240	1	2700.00	kWh	150.00	101.00	CHF	0.04	917.64	EP	100	10000000.000	kg	0.00027	kWh/kg	\N	0.00133	cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+201	240	241	1	60000.00	kg	0.60	30000.00	CHF	0.60	0.02	EP	0.6	1690000.000	kg	0.0355	kg/kg	\N	0.015	increase batch size to 20000l	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk	CIP milk losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+223	262	243	1	675.00	kg	100.00	2700.00	CHF	100.00	7.13	EP	100	10000000.000	kg	7e-05	kg/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+308	281	205	1	302640.00	MJ	52.00	7675.72	CHF	52.00	20488.00	EP	52	2368.400	unit	127.78247	MJ/unit	\N	55.9	new shower head	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	no plan?		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	half of water consumption
+304	282	225	2	579063.00	kg	100.00	318500.00	CHF	100.00	202125.00	EP	100	9407000.000	kg	0.0554	kg/kg	\N	0.02	Pushing milk	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	total raw milk 2017	pushing losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Reducing milk waste by using a plug\n(correct)
+310	286	261	1	13.00	kg	100.00	877.00	CHF	100.00	1703.39	EP	100	20.000	kg	0.65	kg/kg	\N	0.1	repair cooling unit	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	total amount of refrigerant	refrigerant loss	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	repair leakage of cooling unit
+232	265	241	1	120000.00	kg	1.20	60000.00	CHF	1.20	35220000.00	EP	100	1690000.000	kg	0.07101	kg/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+233	265	224	1	964.00	m┬│	1.54	1639.00	CHF	1.54	234.94	EP	100	1690000.000	kg	0.00057	m┬│/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+307	281	259	2	2273.60	m┬│	80.00	3684.00	CHF	80.00	8392.00	EP	80	2368.400	unit	0.95997	m┬│/unit	\N	0.42	new shower head	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	average of shower head		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	half of water consumption
+221	262	238	1	16472.00	kWh	26.31	615.00	CHF	0.60	8519.86	EP	100	10000000.000	kg	0.00165	kWh/kg	\N	0.0019	cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+215	258	241	1	60000.00	kg	0.60	30000.00	CHF	0.60	0.02	EP	.6	1690000.000	kg	0.0355	kg/kg	\N	0.015	incresed bach size 20000l	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk	Milk losses (during CIP)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+228	264	238	1	126285.00	kWh	201.73	4717.00	CHF	4.62	8519.86	EP	100	10000000.000	kg	0.01263	kWh/kg	\N	0.0019	hot sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+227	264	224	1	3488.00	m┬│	5.57	5929.00	CHF	5.57	234.94	EP	100	10000000.000	kg	0.00035	m┬│/kg	\N	0.0001	hot sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+229	264	240	1	6075.00	kWh	337.50	3720.00	CHF	1.58	917.64	EP	100	10000000.000	kg	0.00061	kWh/kg	\N	9e-05	hot sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+196	215	225	2	464000.00	kg	80.00	256000.00	CHF	80.00	1667704160.00	EP	80	10000000.000	kg	0.0464	kg/kg	\N	0.02	Milk powder from milk/water phase	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	rawmilk	push losses in milk/water phase	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Milk/water phase of pushing milk at process start and end is dischared to waste water. It could be collected and reused to produce milk powder.
+230	265	238	1	11362.00	MWh	18.15	424.00	CHF	0.42	8519.86	EP	100	1690000.000	kg	0.00672	MWh/kg	\N	0.00392	2x	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+231	265	238	1	8274.00	MWh	13.22	309.00	CHF	0.30	8519.86	EP	100	1690000.000	kg	0.0049	MWh/kg	\N	0.00392	2x	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	Cheese milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+234	243	238	1	2731.00	kWh	100.00	102000.00	CHF	100.00	0.14	EP	100	10000000.000	kg	0.00027	kWh/kg	\N	0.0019	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+236	243	224	1	450.00	m┬│	0.72	765.00	CHF	0.72	0.00	EP	100	10000000.000	kg	5e-05	m┬│/kg	\N	0.2	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+235	243	240	1	2700.00	kWh	150.00	101.00	CHF	0.04	0.51	EP	100	10000000.000	kg	0.00027	kWh/kg	\N	0.00133	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+237	243	238	1	4000.00	MWh	146.47	102000.00	CHF	100.00	0.14	EP	100	1690000.000	MWh	0.00237	MWh/MWh	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	rawmilk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+238	239	230	1	2731.00	MWh	100.00	102000.00	CHF	100.00	0.00	EP	100	8000.000	kg	0.34137	MWh/kg	\N	0.8	test	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	test		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 239	257	241	1	150000.00	l	50.00	3000.00	CHF	10.00	1056600.00	EP	100	800.000	kJ	187.5	l/kJ	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	test		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-197	227	226	1	76700.00	kWh	10.00	9204.00	CHF	10.00	17741668.26	EP	10	1598.000	m┬▓	47.9975000000000023	kWh/m┬▓	\N	23	L.E.D	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	area	specific_lighting	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Replace old lightbulbs with new LED lights
-193	212	223	1	150000.00	kWh	5.49	5599.80	CHF	5.49	20405731.59	EP	5.49	10000000.000	kg	0.0149999999999999994	kWh/kg	\N	0	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Rawmilk	Heat consumption CIP	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Process equipment and tanks must be sterilized with hot water @85┬░C. At cold sterilization by adding ~0.03% of an eco-friendly disinfection chemical to the cleaning water no heat is required, and the water consumption can be reduced.
-189	209	215	1	60000.00	kg	0.60	30000.00	CHF	0.60	211320000.00	EP	0.6	1650000.000	kg	0.0363600000000000034	kg/kg	\N	0.0100000000000000002	Increase batch size of cheese milk for pasteurization	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Cheese milk production	Cheese milk losses at pasteurizing and CIP	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Resource consumption of CIP after pasteurizing of cheese milk (and other milk) is equal for a batch size of 10'000 kg and 20'000 kg. At a batch sizes of 20'000 kg, Milk losses in water/milk phase (3.5% ) and resource consumption of pasteurizing / CIP can be reduced.
-469	375	272	1	50727.00	kWh	100.00	12994.00	CHF	100.00	10.78	EP	100	220.000	m┬│	230.577269999999999	kWh/m┬│	\N	200	PV-Anlage f├╝r Eigenstromproduktion	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Produzierte Menge Bier/ Jahr	Energieaufwand zum K├╝hlen/ Jahr	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Ein Teil des ben├Âtigten Stroms mittels PV-Anlage auf dem Dach erzeugen
+197	227	226	1	76700.00	kWh	10.00	9204.00	CHF	10.00	17741668.26	EP	10	1598.000	m┬▓	47.9975	kWh/m┬▓	\N	23	L.E.D	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	area	specific_lighting	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Replace old lightbulbs with new LED lights
+193	212	223	1	150000.00	kWh	5.49	5599.80	CHF	5.49	20405731.59	EP	5.49	10000000.000	kg	0.015	kWh/kg	\N	0	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Rawmilk	Heat consumption CIP	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Process equipment and tanks must be sterilized with hot water @85┬░C. At cold sterilization by adding ~0.03% of an eco-friendly disinfection chemical to the cleaning water no heat is required, and the water consumption can be reduced.
+469	375	272	1	50727.00	kWh	100.00	12994.00	CHF	100.00	10.78	EP	100	220.000	m┬│	230.57727	kWh/m┬│	\N	200	PV-Anlage f├╝r Eigenstromproduktion	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Produzierte Menge Bier/ Jahr	Energieaufwand zum K├╝hlen/ Jahr	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Ein Teil des ben├Âtigten Stroms mittels PV-Anlage auf dem Dach erzeugen
 476	386	320	1	500000.00	kg	100.00	1000.00	CHF	100.00	0.46	EP	100	2000.000	unit	250	kg/unit	\N	200	Reuse last rinse water	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Product	water cons per prod. unit product	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-472	381	307	1	200000.00	kg	100.00	100000.00	CHF	100.00	40.00	EP	100	160000.000	kg	1.25	kg/kg	\N	1.05000000000000004	Reduce Milk Loses	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Loss of 20%		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-240	267	1	1	6000.00	kg	60.00	12.00	CHF	60.00	2760.00	EP	60	5000.000	kg	1.19999999999999996	kg/kg	\N	1.30000000000000004	Water as ingredient	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	Beer		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-241	267	99	1	4000.00	MJ	80.00	1600.00	CHF	80.00	72200.00	EP	80	5000.000	kg	0.800000000000000044	MJ/kg	\N	1	Heat for brewing	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	Beer		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-297	281	258	1	2273664.00	l	100.00	5004.00	CHF	100.00	1043653.00	EP	100	2030.000	m┬▓	1120.03152999999998	l/m┬▓	\N	230	current state	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	xx		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-302	285	262	2	697.49	kg	100.00	722.86	CHF	100.00	837542.76	EP	100	2030.000	m┬▓	0.343590000000000007	kg/m┬▓	\N	0.100000000000000006	current state plastic	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	xx		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-298	281	259	2	2273664.00	l	100.00	3683.00	CHF	100.00	8391114.00	EP	100	2030.000	m┬▓	1120.03152999999998	l/m┬▓	\N	550		\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	xx		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-300	281	258	1	1136832.00	l	50.00	2502.00	CHF	50.00	521826.50	EP	50	40000.000	m┬▓	28.4207999999999998	l/m┬▓	\N	8	current state	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	yy	flowrate shower	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	water saving shower head
+472	381	307	1	200000.00	kg	100.00	100000.00	CHF	100.00	40.00	EP	100	160000.000	kg	1.25	kg/kg	\N	1.05	Reduce Milk Loses	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Loss of 20%		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+240	267	1	1	6000.00	kg	60.00	12.00	CHF	60.00	2760.00	EP	60	5000.000	kg	1.2	kg/kg	\N	1.3	Water as ingredient	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	Beer		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+241	267	99	1	4000.00	MJ	80.00	1600.00	CHF	80.00	72200.00	EP	80	5000.000	kg	0.8	MJ/kg	\N	1	Heat for brewing	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	Beer		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+297	281	258	1	2273664.00	l	100.00	5004.00	CHF	100.00	1043653.00	EP	100	2030.000	m┬▓	1120.03153	l/m┬▓	\N	230	current state	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	xx		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+302	285	262	2	697.49	kg	100.00	722.86	CHF	100.00	837542.76	EP	100	2030.000	m┬▓	0.34359	kg/m┬▓	\N	0.1	current state plastic	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	xx		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+298	281	259	2	2273664.00	l	100.00	3683.00	CHF	100.00	8391114.00	EP	100	2030.000	m┬▓	1120.03153	l/m┬▓	\N	550		\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	xx		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+300	281	258	1	1136832.00	l	50.00	2502.00	CHF	50.00	521826.50	EP	50	40000.000	m┬▓	28.4208	l/m┬▓	\N	8	current state	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	yy	flowrate shower	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	water saving shower head
 296	279	230	1	494000.00	MJ	100.00	13711.00	CHF	100.00	2050000.00	EP	100	2030.000	m┬▓	243.34975	MJ/m┬▓	\N	80		\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	xx		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-299	281	260	1	258699.00	MJ	100.00	7383.00	CHF	100.00	20614721.00	EP	100	2030.000	m┬▓	127.437929999999994	MJ/m┬▓	\N	60		\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	xx		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-294	279	205	1	582000.00	MJ	100.00	16900.00	CHF	100.00	39400000.00	EP	100	2030.000	m┬▓	286.699509999999975	MJ/m┬▓	\N	80	Current state	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	Hospital		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-335	288	80	2	7101.00	kg	100.00	0.00	CHF	100.00	845019000.00	EP	100	675000.000	t	0.0105199999999999998	kg/t	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-328	288	266	2	1501875.00	kg	100.00	0.00	CHF	100.00	62875600650.00	EP	100	675000.000	t	2.22500000000000009	kg/t	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-345	292	2	1	6338250.00	kWh	100.00	633825.00	CHF	100.00	1476812250.00	EP	100	7101.000	kg	892.585550000000012	kWh/kg	\N	800	Clinker production, 32% RDF, Dust filter	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	dust filtered		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 2:\n67% petcoke and dust reduction (ESP & fabric) measures (no Nox measures)
-468	378	272	1	1191.00	kWh	2.35	305.36	CHF	2.35	10.78	EP	100	238.220	m┬│	4.99957999999999991	kWh/m┬│	\N	1.44999999999999996	Stromeinsparung durch Einsatz Entionisierungsanlage	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Umkehrosmose	Energieaufwand / m3 entionisiertem Wasser	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Umkehrosmoseanlage durch Entioniserungsanlgae ersetzen
-314	270	225	2	57906.30	kg	10.00	31850.00	CHF	10.00	203945.99	EP	0.01	1650000.000	kg	0.0350900000000000031	kg/kg	\N	0.0100000000000000002	Increase cheese milk batch size	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	cheese milk processed 2018	pushing losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Reducing resource use by increasing cheese milk batch sizes thus reducing the number of CIP cleans required per kg milk processed.
-325	293	215	1	840.00	kg	8.40	84.00	CHF	8.40	2958480.00	EP	8.4	10000.000	kg	0.0840000000000000052	kg/kg	\N	0.100000000000000006	Calf feeding	\N	\N	\N	\N	\N	\N	\N	\N	30	30	30	1	total raw milk	feed milk per kg raw milk avaliable	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Using raw milk losses to feed calves in a cow farm
-341	288	266	2	1501875.00	kg	100.00	0.00	CHF	100.00	62875600650.00	EP	100	675000.000	t	2.22500000000000009	kg/t	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-342	288	80	2	7101.00	kg	100.00	0.00	CHF	100.00	845019000.00	EP	100	675000.000	t	0.0105199999999999998	kg/t	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+299	281	260	1	258699.00	MJ	100.00	7383.00	CHF	100.00	20614721.00	EP	100	2030.000	m┬▓	127.43793	MJ/m┬▓	\N	60		\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	xx		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+294	279	205	1	582000.00	MJ	100.00	16900.00	CHF	100.00	39400000.00	EP	100	2030.000	m┬▓	286.69951	MJ/m┬▓	\N	80	Current state	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	Hospital		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+335	288	80	2	7101.00	kg	100.00	0.00	CHF	100.00	845019000.00	EP	100	675000.000	t	0.01052	kg/t	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+328	288	266	2	1501875.00	kg	100.00	0.00	CHF	100.00	62875600650.00	EP	100	675000.000	t	2.225	kg/t	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+345	292	2	1	6338250.00	kWh	100.00	633825.00	CHF	100.00	1476812250.00	EP	100	7101.000	kg	892.58555	kWh/kg	\N	800	Clinker production, 32% RDF, Dust filter	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	dust filtered		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 2:\n67% petcoke and dust reduction (ESP & fabric) measures (no Nox measures)
+468	378	272	1	1191.00	kWh	2.35	305.36	CHF	2.35	10.78	EP	100	238.220	m┬│	4.99958	kWh/m┬│	\N	1.45	Stromeinsparung durch Einsatz Entionisierungsanlage	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Umkehrosmose	Energieaufwand / m3 entionisiertem Wasser	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Umkehrosmoseanlage durch Entioniserungsanlgae ersetzen
+314	270	225	2	57906.30	kg	10.00	31850.00	CHF	10.00	203945.99	EP	0.01	1650000.000	kg	0.03509	kg/kg	\N	0.01	Increase cheese milk batch size	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	cheese milk processed 2018	pushing losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Reducing resource use by increasing cheese milk batch sizes thus reducing the number of CIP cleans required per kg milk processed.
+325	293	215	1	840.00	kg	8.40	84.00	CHF	8.40	2958480.00	EP	8.4	10000.000	kg	0.084	kg/kg	\N	0.1	Calf feeding	\N	\N	\N	\N	\N	\N	\N	\N	30	30	30	1	total raw milk	feed milk per kg raw milk avaliable	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Using raw milk losses to feed calves in a cow farm
+341	288	266	2	1501875.00	kg	100.00	0.00	CHF	100.00	62875600650.00	EP	100	675000.000	t	2.225	kg/t	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+342	288	80	2	7101.00	kg	100.00	0.00	CHF	100.00	845019000.00	EP	100	675000.000	t	0.01052	kg/t	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 473	382	315	1	2000000.00	kWh	100.00	146000.00	Euro	100.00	0.02	EP	100	200000.000	m┬│	10	kWh/m┬│	\N	10	x	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Natural Gas	Natural Gas Energy Conversion	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	x
-338	295	2	1	600066.00	kWh	33.30	78588.00	CHF	33.30	305913646.80	EP	33.3	2351750.000	kg	0.00152999999999999989	kWh/kg	\N	0	Roller Door Closing	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	raw milk 2017 in the summer months	reduced cooling per kg of milk from shutting roller door	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Closing the external roller doors to reduce cooling
-331	288	264	1	70522000.00	kg	100.00	7757463.00	CHF	100.00	1497427465.00	EP	100	675000.000	t	104.477040000000002	kg/t	\N	71	Clinker production, 32% RDF, no filters	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 1:\n 67% petcoke, no dust and Nox reduction measures
-346	290	267	1	4860000.00	kg	100.00	486000.00	CHF	100.00	10011600000.00	EP	100	675000.000	t	7.20000000000000018	kg/t	\N	6.5	Clinker production, 32% RDF, NOx treatment	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 3:\n67% petcoke and NOx reduction measures (no dust measures)
-305	279	205	1	582000.00	MJ	100.00	14761.00	CHF	100.00	39400.00	EP	100	2030.000	m┬▓	286.699509999999975	MJ/m┬▓	\N	80	district heating	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	hotel area		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	improve environmental impact by substitute with district heating
-306	281	258	1	2273.60	m┬│	80.00	3763.20	CHF	80.00	1044.00	EP	80	2368.400	unit	0.95996999999999999	m┬│/unit	\N	0.419999999999999984	new shower head	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	average flow of shower head		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	half of water consumption
+338	295	2	1	600066.00	kWh	33.30	78588.00	CHF	33.30	305913646.80	EP	33.3	2351750.000	kg	0.00153	kWh/kg	\N	0	Roller Door Closing	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	raw milk 2017 in the summer months	reduced cooling per kg of milk from shutting roller door	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Closing the external roller doors to reduce cooling
+331	288	264	1	70522000.00	kg	100.00	7757463.00	CHF	100.00	1497427465.00	EP	100	675000.000	t	104.47704	kg/t	\N	71	Clinker production, 32% RDF, no filters	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 1:\n 67% petcoke, no dust and Nox reduction measures
+346	290	267	1	4860000.00	kg	100.00	486000.00	CHF	100.00	10011600000.00	EP	100	675000.000	t	7.2	kg/t	\N	6.5	Clinker production, 32% RDF, NOx treatment	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 3:\n67% petcoke and NOx reduction measures (no dust measures)
+305	279	205	1	582000.00	MJ	100.00	14761.00	CHF	100.00	39400.00	EP	100	2030.000	m┬▓	286.69951	MJ/m┬▓	\N	80	district heating	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	hotel area		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	improve environmental impact by substitute with district heating
+306	281	258	1	2273.60	m┬│	80.00	3763.20	CHF	80.00	1044.00	EP	80	2368.400	unit	0.95997	m┬│/unit	\N	0.42	new shower head	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	average flow of shower head		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	half of water consumption
 309	279	230	1	494000.00	MJ	100.00	13711.00	CHF	100.00	2050.00	EP	100	2030.000	m┬▓	243.34975	MJ/m┬▓	\N	80	district heating	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	hotel area		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	improve environmental impact by substitute with district heating
-311	286	263	2	13.00	kg	100.00	0.00	CHF	100.00	10588.50	EP	100	20.000	kg	0.650000000000000022	kg/kg	\N	0.100000000000000006	repair cooling unit	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	total amount of refrigerant	refrigerant loss	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	repair leakage of cooling unit
-333	292	2	1	6338250.00	kWh	100.00	633825.00	CHF	100.00	1476812250.00	EP	100	7101.000	kg	892.585550000000012	kWh/kg	\N	890	Clinker production, 32% RDF, Dust filter	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	dust filtered		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 2:\n67% petcoke and dust reduction (ESP & fabric) measures (no Nox measures)
-313	282	225	2	57906.30	kg	10.00	31850.00	CHF	10.00	203945988.60	EP	10	1650000.000	kg	0.0350900000000000031	kg/kg	\N	0.0100000000000000002	Pushing milk	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	cheese milk processed 2018	pushing losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Reducing milk losses by using a plug in CIP cleaning
-339	273	249	1	2371000.00	kWh	100.00	102000.00	CHF	100.00	322693100.00	EP	100	62559000.000	kg	0.0379000000000000031	kWh/kg	\N	0.0500000000000000028	Wastewater Heat Exchanger	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Waste water to produce heat	Waste water to produce heat	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	There is approximately 30 deg C lost in the wastewater. This could be recovered with a heat exchanger.
-326	276	249	1	150321.40	kWh	6.34	6466.80	CHF	6.34	20458742.54	EP	6.34	9407000.000	kg	0.0159800000000000011	kWh/kg	\N	0	Cold Sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	70	70	70	1	total raw milk processed 2017	Heat consumption for CIP	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Current cleaning involves sterilisation at 85┬░C. Chemicals could be added instead, reducing the heat, electricity and water consumption.
-352	301	273	1	136550.00	MJ	5.00	5100.00	CHF	5.00	3428770.50	EP	5	10000000.000	kg	0.0136600000000000003	MJ/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-363	302	280	1	136550.00	kWh	5.00	5100.00	CHF	5.00	18500000.00	EP	5	10000000.000	kg	0.0136600000000000003	kWh/kg	\N	0	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Insteat of 85┬░C:\nadding 0.03% of eco-friendly disinfection chemical -> no heat required & reduced Water consumption
-340	288	265	2	594599.00	t	100.00	22341504.00	CHF	100.00	273515540000.00	EP	100	675000.000	t	0.880889999999999951	t/t	\N	0.810000000000000053	Clinker production, 32% RDF, Dust filter & NOx treatment	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 4:\n 67% petcoke and dust and NOx reduction measures
-343	288	264	1	70522000.00	kg	100.00	7757463.00	CHF	100.00	1497427465.00	EP	100	675000.000	t	104.477040000000002	kg/t	\N	90	Clinker production, 32% RDF, no filters	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 1:\n 67% petcoke, no dust and Nox reduction measures
-329	288	265	2	594599.00	t	100.00	22341504.00	CHF	100.00	273515540000.00	EP	100	675000.000	t	0.880889999999999951	t/t	\N	0.849999999999999978	Clinker production, 32% RDF, Dust filter & NOx treatment	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 4:\n 67% petcoke and dust and NOx reduction measures
-364	302	276	1	3130000.00	kg	5.00	2945.00	CHF	5.00	14398000.00	EP	5	15000000.000	kg	0.208669999999999994	kg/kg	\N	0.0500000000000000028	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-366	300	278	2	464000.00	kg	80.00	256000.00	CHF	80.00	1624000000.00	EP	80	10000000.000	kg	0.0463999999999999968	kg/kg	\N	0.0200000000000000004	Milk powder	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Milk/water phase could be collected and reused to produce milk powder instead of discharging it to waste water
-358	302	281	1	18000.00	kWh	1.00	23600.00	CHF	1.00	9797040.00	EP	1	10000000.000	kg	0.00179999999999999995	kWh/kg	\N	0.0200000000000000004	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	Raw Milk	Electricity consumption CIP	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-396	302	276	1	50080000.00	kg	80.00	53010.00	CHF	90.00	230368000.00	EP	80	486246.000	unit	102.993139999999997	kg/unit	\N	200	&lt;fsay&lt;df	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	kgjkhtest		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	fh&lt;y&lt;fsd
-395	300	279	2	31300000.00	kg	50.00	23560.00	CHF	40.00	16536000.00	EP	60	465864.000	g	67.1869899999999944	kg/g	\N	50	gdsxdfbxcgfn	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	gdstest		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+311	286	263	2	13.00	kg	100.00	0.00	CHF	100.00	10588.50	EP	100	20.000	kg	0.65	kg/kg	\N	0.1	repair cooling unit	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	0	total amount of refrigerant	refrigerant loss	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	repair leakage of cooling unit
+333	292	2	1	6338250.00	kWh	100.00	633825.00	CHF	100.00	1476812250.00	EP	100	7101.000	kg	892.58555	kWh/kg	\N	890	Clinker production, 32% RDF, Dust filter	\N	\N	\N	\N	\N	\N	\N	\N	95	95	95	1	dust filtered		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 2:\n67% petcoke and dust reduction (ESP & fabric) measures (no Nox measures)
+313	282	225	2	57906.30	kg	10.00	31850.00	CHF	10.00	203945988.60	EP	10	1650000.000	kg	0.03509	kg/kg	\N	0.01	Pushing milk	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	cheese milk processed 2018	pushing losses	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Reducing milk losses by using a plug in CIP cleaning
+339	273	249	1	2371000.00	kWh	100.00	102000.00	CHF	100.00	322693100.00	EP	100	62559000.000	kg	0.0379	kWh/kg	\N	0.05	Wastewater Heat Exchanger	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Waste water to produce heat	Waste water to produce heat	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	There is approximately 30 deg C lost in the wastewater. This could be recovered with a heat exchanger.
+326	276	249	1	150321.40	kWh	6.34	6466.80	CHF	6.34	20458742.54	EP	6.34	9407000.000	kg	0.01598	kWh/kg	\N	0	Cold Sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	70	70	70	1	total raw milk processed 2017	Heat consumption for CIP	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Current cleaning involves sterilisation at 85┬░C. Chemicals could be added instead, reducing the heat, electricity and water consumption.
+352	301	273	1	136550.00	MJ	5.00	5100.00	CHF	5.00	3428770.50	EP	5	10000000.000	kg	0.01366	MJ/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+363	302	280	1	136550.00	kWh	5.00	5100.00	CHF	5.00	18500000.00	EP	5	10000000.000	kg	0.01366	kWh/kg	\N	0	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Insteat of 85┬░C:\nadding 0.03% of eco-friendly disinfection chemical -> no heat required & reduced Water consumption
+340	288	265	2	594599.00	t	100.00	22341504.00	CHF	100.00	273515540000.00	EP	100	675000.000	t	0.88089	t/t	\N	0.81	Clinker production, 32% RDF, Dust filter & NOx treatment	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 4:\n 67% petcoke and dust and NOx reduction measures
+343	288	264	1	70522000.00	kg	100.00	7757463.00	CHF	100.00	1497427465.00	EP	100	675000.000	t	104.47704	kg/t	\N	90	Clinker production, 32% RDF, no filters	\N	\N	\N	\N	\N	\N	\N	\N	99	99	99	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 1:\n 67% petcoke, no dust and Nox reduction measures
+329	288	265	2	594599.00	t	100.00	22341504.00	CHF	100.00	273515540000.00	EP	100	675000.000	t	0.88089	t/t	\N	0.85	Clinker production, 32% RDF, Dust filter & NOx treatment	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	tons clinker produced (annual)		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Co-processing scenario 4:\n 67% petcoke and dust and NOx reduction measures
+364	302	276	1	3130000.00	kg	5.00	2945.00	CHF	5.00	14398000.00	EP	5	15000000.000	kg	0.20867	kg/kg	\N	0.05	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+366	300	278	2	464000.00	kg	80.00	256000.00	CHF	80.00	1624000000.00	EP	80	10000000.000	kg	0.0464	kg/kg	\N	0.02	Milk powder	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Raw Milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Milk/water phase could be collected and reused to produce milk powder instead of discharging it to waste water
+358	302	281	1	18000.00	kWh	1.00	23600.00	CHF	1.00	9797040.00	EP	1	10000000.000	kg	0.0018	kWh/kg	\N	0.02	Cold sterilisation	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	Raw Milk	Electricity consumption CIP	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+396	302	276	1	50080000.00	kg	80.00	53010.00	CHF	90.00	230368000.00	EP	80	486246.000	unit	102.99314	kg/unit	\N	200	&lt;fsay&lt;df	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	kgjkhtest		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	fh&lt;y&lt;fsd
+395	300	279	2	31300000.00	kg	50.00	23560.00	CHF	40.00	16536000.00	EP	60	465864.000	g	67.18699	kg/g	\N	50	gdsxdfbxcgfn	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	gdstest		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
 474	384	320	2	10000000.00	kg	100.00	10000.00	Euro	100.00	9.20	EP	100	1000000.000	t	10	kg/t	\N	9	Recycle	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	concrete	wastewater / t concrete	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Recycle alkaline wastewater
-397	300	279	2	31300000.00	kg	50.00	29450.00	CHF	50.00	13780000.00	EP	50	74485646874.000	g	0.000420000000000000017	kg/g	\N	4	ngdgndf	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	z5erhtest		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	hjktf
-398	302	276	1	43820000.00	kg	70.00	41230.00	CHF	70.00	230368000.00	EP	80	877486.000	ha	71.3401700000000005	kg/ha	\N	90	gdsdgfdgh	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	pl├Âighztest		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	dkhd
+397	300	279	2	31300000.00	kg	50.00	29450.00	CHF	50.00	13780000.00	EP	50	74485646874.000	g	0.00042	kg/g	\N	4	ngdgndf	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	z5erhtest		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	hjktf
+398	302	276	1	43820000.00	kg	70.00	41230.00	CHF	70.00	230368000.00	EP	80	877486.000	ha	71.34017	kg/ha	\N	90	gdsdgfdgh	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	pl├Âighztest		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	dkhd
 375	307	287	1	19000000.00	kg	95.00	5700000.00	CHF	95.00	106260160000.00	EP	95	1000.000	kg	19000	kg/kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	per ton milk		\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-357	297	277	1	60000.00	kg	0.60	30000.00	CHF	0.60	210000000.00	EP	0.6	2000000.000	kg	0.0299999999999999989	kg/kg	\N	0.0100000000000000002	Increase batch Size	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Raw Milk	Milk loss at Pasteurization	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Resource consumption of CIP after pasteurizing is equal for a batch size of 10'000kg and 20'000kg (-> 3.5%)
-195	213	223	1	2005000.00	kWh	73.42	74888.40	CHF	73.42	272894137.22	EP	73.42	25000000.000	kg	0.0801999999999999935	kWh/kg	\N	0.0500000000000000028	Wastewater heat exhanger	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Hot process water	Process water heating	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Waste water temperature is ~ 30┬░C. With a waste water heat exchager energy cold be recovered to preheat process water.
-482	393	333	1	5317515.00	kg	8.50	95115.00	CHF	8.50	22076.03	EP	8.5	9407000.000	kg	0.56527000000000005	kg/kg	\N	0	Cold Desinfection Helades	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	raw milk	Kg Water/ kg Raw Milk	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-486	393	330	1	616460.00	kWh	26.00	26520.00	CHF	26.00	84.02	EP	26	9407000.000	kg	0.0655300000000000049	kWh/kg	\N	0.0400000000000000008	increase Batch size to 20000	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	raw milk	kWh Fernw├ñrme / kg raw milk	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-399	317	272	1	49700.00	kWh	97.98	12731.52	CHF	97.98	11.60	EP	97.98	220.000	m┬│	225.909089999999992	kWh/m┬│	\N	180	R├╝ckk├╝hlung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├ñlteenergie/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	R├╝ckk├╝hlung wird kurzgeschlossen da Abluft angesogen wird.
-406	325	272	1	7608.90	kWh	14.35	1864.64	CHF	14.35	1.78	EP	14.35	220.000	m┬│	34.5859099999999984	kWh/m┬│	\N	25	K├╝hlen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier/a	G├ñrung/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-427	321	293	2	38050.00	kg	100.00	0.00	CHF	100.00	131.81	EP	100	220.000	m┬│	172.954550000000012	kg/m┬│	\N	173	Treber	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Treber pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Treber f├ñllt als Abfall an
-426	342	293	1	37680.00	kg	100.00	7000.00	CHF	100.00	130.53	EP	100	219.000	m┬│	172.054789999999997	kg/m┬│	\N	157.300000000000011	Erh├Âhung der Maischetemperatur	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Eingesetztes Malz pro Produziertes Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wen die Maischetemperatur um 5┬░C auf 63┬░C erh├Âht wird, lassen sich bis zu 8% Malz einsparen
-411	331	276	1	445.40	kg	0.03	2.21	CHF	0.03	0.00	EP	0.034	220.000	m┬│	2.02455000000000007	kg/m┬│	\N	2		\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier pro Jahr	CIP-Reinigungswasser pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-408	333	290	1	117766.12	MJ	13.00	3049.04	CHF	13.00	2.13	EP	13.00	220.000	m┬│	535.300550000000044	MJ/m┬│	\N	208.800000000000011	W├ñrme f├╝r Bier	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier/a	Gas pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-419	335	283	2	1076.60	m┬│	100.00	2099.00	CHF	100.00	4.00	EP	100	220.000	m┬│	4.89364000000000043	m┬│/m┬│	\N	4.70000000000000018	keine	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier pro Jahr	Abwasser pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-407	326	272	1	9408.00	kWh	17.75	2306.43	CHF	17.75	2.19	EP	17.75	220.000	m┬│	42.7636400000000023	kWh/m┬│	\N	21.8099999999999987	K├╝hlraum	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier/a	Energieeinsparung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	K├╝hlraum ersetzen durch einen effizienteren
-428	344	272	1	31702.00	kWh	59.81	7771.71	CHF	59.81	7.40	EP	59.81	220.000	m┬│	144.099999999999994	kWh/m┬│	\N	128.330000000000013	Reifung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier/a	Reifung/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Verk├╝rzung der Reifezeit von 12 auf 10 Wochen
-401	315	272	1	51411.79	kWh	97.00	12604.16	CHF	97.00	11.98	EP	97.00	220.000	m┬│	233.68995000000001	kWh/m┬│	\N	180	R├╝ckk├╝hlung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├╝hlung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	R├╝ckk├╝hlung wird kurzgeschlossen, da Abluft angesaugt wird
-400	314	272	1	49700.00	kWh	97.98	12731.52	CHF	97.98	11.60	EP	97.98	220.000	m┬│	225.909089999999992	kWh/m┬│	\N	180	R├╝ckk├╝hlung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├ñltemenge/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	R├╝ckk├╝hlung wird kurzgeschlossen da Abluft angesaugt wird.
-417	333	276	1	1310000.00	kg	100.00	6508.22	CHF	100.00	0.60	EP	100	220.000	m┬│	5954.54544999999962	kg/m┬│	\N	3500	Wasser Pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier/a	Wasser/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-420	338	283	2	1043.00	m┬│	100.00	2033.85	CHF	100.00	3.68	EP	100	220.000	m┬│	4.7409100000000004	m┬│/m┬│	\N	4.70000000000000018	Keine	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier pro Jahr	Abwasser pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-423	327	290	1	905893.20	MJ	100.00	23454.13	CHF	100.00	16.35	EP	100	220.000	m┬│	4117.69635999999991	MJ/m┬│	\N	4000	Neuer Heizkessel	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	W├ñrme / Bier pro Jahr	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Alter Heizkessel wird durch neuen Heizkessel ersetzt. Wirkungsgrad von 90% auf 94%.
-415	335	276	1	1310000.00	kg	100.00	2512.60	CHF	100.00	0.60	EP	100	220.000	m┬│	5954.54544999999962	kg/m┬│	\N	5200	Manuelle Reinigung Brauraum	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Wasser / Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Brauraum wird mit Schlauch ohne D├╝se gereinigt. Annahmen pro Tag: 30 Minuten mit 40 L/min
-421	342	276	1	1310.00	t	100.00	2531.00	CHF	100.00	0.11	EP	100	218.000	t	6.00917000000000012	t/t	\N	4.70000000000000018		\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Hergestelltes Bier	Eingesetztes Wasser pro Produziertes Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-410	331	276	1	509980.00	m┬│	40.98	2530.52	CHF	40.98	0.00	EP	40.98	220.000	m┬│	2318.09090999999989	m┬│/m┬│	\N	579	Reinigungswasser Rest	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Manuelle Reinigung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Spard├╝sen an Schl├ñuchen zur manuellen Reinigung k├Ânnten den Verbrauch reduzieren. Wasserverbrauch: 23l/min ├á 1 h/d.\nReduktion: Annahme 75% Einsparung
-425	343	283	2	120.00	m┬│	12.06	99.56	CHF	12.06	1.73	EP	100	220.000	m┬│	0.54544999999999999	m┬│/m┬│	\N	0.400000000000000022	Wasser zum reinigen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier/a	Abwasser f├╝rs abspritzen/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wasserspard├╝se
-424	343	276	1	120000.00	kg	9.16	596.15	CHF	9.16	0.60	EP	100	220.000	m┬│	545.45455000000004	kg/m┬│	\N	400	Wasser zum reinigen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier/a	Wasser zum abspritzen/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wasserspard├╝se
-416	338	276	1	509980.00	kg	38.93	978.16	CHF	38.93	0.60	EP	100	220.000	m┬│	2318.09090999999989	kg/m┬│	\N	5200	Manuelle Reinigung Brauraum	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Wasser pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Brauereiraum wird mit Schlauch ohne D├╝se gereinigt. Wasserspard├╝se einf├╝gen. Pro Tag mindestens 30 min. mit 40 Liter pro Minuten
-429	323	291	1	905893.20	MJ	100.00	23454.13	CHF	100.00	15.58	EP	100	220.000	m┬│	4117.69635999999991	MJ/m┬│	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Gas pro Jahr	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-457	357	290	1	181322.60	MJ	20.00	4700.00	CHF	20.00	3.27	EP	20	220.000	m┬│	824.193639999999959	MJ/m┬│	\N	800	Verbesserte W├ñrmenutzung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Menge Bier/ Jahr	W├ñrmeenergie/ m3 Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Masnahmenpaket mit Isolation, W├ñrmetauscher, W├ñrmepumpen
-442	361	272	1	4494.41	kWh	8.86	1151.27	CHF	8.86	0.96	EP	8.86	220.000	m┬│	20.4291400000000003	kWh/m┬│	\N	20.4899999999999984	Ersatz Leuchtstoffr├Âhren 36W durch LED R├Âhren	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Ersatz der 36W Leuchtstoffr├Âhren durch LED R├Âhren und Installierung von Lichtsensoren zur Reduktion der Beleuchtungszeit.
+357	297	277	1	60000.00	kg	0.60	30000.00	CHF	0.60	210000000.00	EP	0.6	2000000.000	kg	0.03	kg/kg	\N	0.01	Increase batch Size	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Raw Milk	Milk loss at Pasteurization	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Resource consumption of CIP after pasteurizing is equal for a batch size of 10'000kg and 20'000kg (-> 3.5%)
+195	213	223	1	2005000.00	kWh	73.42	74888.40	CHF	73.42	272894137.22	EP	73.42	25000000.000	kg	0.0802	kWh/kg	\N	0.05	Wastewater heat exhanger	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	Hot process water	Process water heating	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Waste water temperature is ~ 30┬░C. With a waste water heat exchager energy cold be recovered to preheat process water.
+482	393	333	1	5317515.00	kg	8.50	95115.00	CHF	8.50	22076.03	EP	8.5	9407000.000	kg	0.56527	kg/kg	\N	0	Cold Desinfection Helades	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	raw milk	Kg Water/ kg Raw Milk	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+486	393	330	1	616460.00	kWh	26.00	26520.00	CHF	26.00	84.02	EP	26	9407000.000	kg	0.06553	kWh/kg	\N	0.04	increase Batch size to 20000	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	0	raw milk	kWh Fernw├ñrme / kg raw milk	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+399	317	272	1	49700.00	kWh	97.98	12731.52	CHF	97.98	11.60	EP	97.98	220.000	m┬│	225.90909	kWh/m┬│	\N	180	R├╝ckk├╝hlung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├ñlteenergie/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	R├╝ckk├╝hlung wird kurzgeschlossen da Abluft angesogen wird.
+406	325	272	1	7608.90	kWh	14.35	1864.64	CHF	14.35	1.78	EP	14.35	220.000	m┬│	34.58591	kWh/m┬│	\N	25	K├╝hlen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier/a	G├ñrung/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+427	321	293	2	38050.00	kg	100.00	0.00	CHF	100.00	131.81	EP	100	220.000	m┬│	172.95455	kg/m┬│	\N	173	Treber	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Treber pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Treber f├ñllt als Abfall an
+426	342	293	1	37680.00	kg	100.00	7000.00	CHF	100.00	130.53	EP	100	219.000	m┬│	172.05479	kg/m┬│	\N	157.3	Erh├Âhung der Maischetemperatur	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Eingesetztes Malz pro Produziertes Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wen die Maischetemperatur um 5┬░C auf 63┬░C erh├Âht wird, lassen sich bis zu 8% Malz einsparen
+411	331	276	1	445.40	kg	0.03	2.21	CHF	0.03	0.00	EP	0.034	220.000	m┬│	2.02455	kg/m┬│	\N	2		\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier pro Jahr	CIP-Reinigungswasser pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+408	333	290	1	117766.12	MJ	13.00	3049.04	CHF	13.00	2.13	EP	13.00	220.000	m┬│	535.30055	MJ/m┬│	\N	208.8	W├ñrme f├╝r Bier	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier/a	Gas pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+419	335	283	2	1076.60	m┬│	100.00	2099.00	CHF	100.00	4.00	EP	100	220.000	m┬│	4.89364	m┬│/m┬│	\N	4.7	keine	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier pro Jahr	Abwasser pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+407	326	272	1	9408.00	kWh	17.75	2306.43	CHF	17.75	2.19	EP	17.75	220.000	m┬│	42.76364	kWh/m┬│	\N	21.81	K├╝hlraum	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier/a	Energieeinsparung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	K├╝hlraum ersetzen durch einen effizienteren
+428	344	272	1	31702.00	kWh	59.81	7771.71	CHF	59.81	7.40	EP	59.81	220.000	m┬│	144.1	kWh/m┬│	\N	128.33	Reifung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier/a	Reifung/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Verk├╝rzung der Reifezeit von 12 auf 10 Wochen
+401	315	272	1	51411.79	kWh	97.00	12604.16	CHF	97.00	11.98	EP	97.00	220.000	m┬│	233.68995	kWh/m┬│	\N	180	R├╝ckk├╝hlung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├╝hlung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	R├╝ckk├╝hlung wird kurzgeschlossen, da Abluft angesaugt wird
+400	314	272	1	49700.00	kWh	97.98	12731.52	CHF	97.98	11.60	EP	97.98	220.000	m┬│	225.90909	kWh/m┬│	\N	180	R├╝ckk├╝hlung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├ñltemenge/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	R├╝ckk├╝hlung wird kurzgeschlossen da Abluft angesaugt wird.
+417	333	276	1	1310000.00	kg	100.00	6508.22	CHF	100.00	0.60	EP	100	220.000	m┬│	5954.54545	kg/m┬│	\N	3500	Wasser Pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier/a	Wasser/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+420	338	283	2	1043.00	m┬│	100.00	2033.85	CHF	100.00	3.68	EP	100	220.000	m┬│	4.74091	m┬│/m┬│	\N	4.7	Keine	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier pro Jahr	Abwasser pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+423	327	290	1	905893.20	MJ	100.00	23454.13	CHF	100.00	16.35	EP	100	220.000	m┬│	4117.69636	MJ/m┬│	\N	4000	Neuer Heizkessel	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	W├ñrme / Bier pro Jahr	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Alter Heizkessel wird durch neuen Heizkessel ersetzt. Wirkungsgrad von 90% auf 94%.
+415	335	276	1	1310000.00	kg	100.00	2512.60	CHF	100.00	0.60	EP	100	220.000	m┬│	5954.54545	kg/m┬│	\N	5200	Manuelle Reinigung Brauraum	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Wasser / Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Brauraum wird mit Schlauch ohne D├╝se gereinigt. Annahmen pro Tag: 30 Minuten mit 40 L/min
+421	342	276	1	1310.00	t	100.00	2531.00	CHF	100.00	0.11	EP	100	218.000	t	6.00917	t/t	\N	4.7		\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Hergestelltes Bier	Eingesetztes Wasser pro Produziertes Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+410	331	276	1	509980.00	m┬│	40.98	2530.52	CHF	40.98	0.00	EP	40.98	220.000	m┬│	2318.09091	m┬│/m┬│	\N	579	Reinigungswasser Rest	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Manuelle Reinigung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Spard├╝sen an Schl├ñuchen zur manuellen Reinigung k├Ânnten den Verbrauch reduzieren. Wasserverbrauch: 23l/min ├á 1 h/d.\nReduktion: Annahme 75% Einsparung
+425	343	283	2	120.00	m┬│	12.06	99.56	CHF	12.06	1.73	EP	100	220.000	m┬│	0.54545	m┬│/m┬│	\N	0.4	Wasser zum reinigen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Bier/a	Abwasser f├╝rs abspritzen/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wasserspard├╝se
+424	343	276	1	120000.00	kg	9.16	596.15	CHF	9.16	0.60	EP	100	220.000	m┬│	545.45455	kg/m┬│	\N	400	Wasser zum reinigen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier/a	Wasser zum abspritzen/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wasserspard├╝se
+416	338	276	1	509980.00	kg	38.93	978.16	CHF	38.93	0.60	EP	100	220.000	m┬│	2318.09091	kg/m┬│	\N	5200	Manuelle Reinigung Brauraum	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Wasser pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Brauereiraum wird mit Schlauch ohne D├╝se gereinigt. Wasserspard├╝se einf├╝gen. Pro Tag mindestens 30 min. mit 40 Liter pro Minuten
+429	323	291	1	905893.20	MJ	100.00	23454.13	CHF	100.00	15.58	EP	100	220.000	m┬│	4117.69636	MJ/m┬│	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Gas pro Jahr	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+457	357	290	1	181322.60	MJ	20.00	4700.00	CHF	20.00	3.27	EP	20	220.000	m┬│	824.19364	MJ/m┬│	\N	800	Verbesserte W├ñrmenutzung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Menge Bier/ Jahr	W├ñrmeenergie/ m3 Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Masnahmenpaket mit Isolation, W├ñrmetauscher, W├ñrmepumpen
+442	361	272	1	4494.41	kWh	8.86	1151.27	CHF	8.86	0.96	EP	8.86	220.000	m┬│	20.42914	kWh/m┬│	\N	20.49	Ersatz Leuchtstoffr├Âhren 36W durch LED R├Âhren	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Ersatz der 36W Leuchtstoffr├Âhren durch LED R├Âhren und Installierung von Lichtsensoren zur Reduktion der Beleuchtungszeit.
 432	346	215	1	100000.00	kg	100.00	50000.00	CHF	100.00	352200000.00	EP	100	1.000	unit	100000	kg/unit	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	year	no	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-433	314	272	1	49204.79	kWh	97.00	12604.18	CHF	97.00	11.84	EP	100	220.000	m┬│	223.658140000000003	kWh/m┬│	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├╝hlung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+433	314	272	1	49204.79	kWh	97.00	12604.18	CHF	97.00	11.84	EP	100	220.000	m┬│	223.65814	kWh/m┬│	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├╝hlung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 431	317	272	1	9118.00	kWh	17.97	2335.02	CHF	17.97	2.13	EP	17.97	16.000	m┬▓	569.875	kWh/m┬▓	\N	500	Abdichten	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Gek├╝hlte Raumfl├ñche	K├ñlteenergie/m^2 gek├╝hlt	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Spalt in T├╝re zum K├ñlteraum.
-434	317	272	1	50726.59	kWh	100.00	12994.00	CHF	100.00	11.84	EP	100	220.000	m┬│	230.575410000000005	kWh/m┬│	\N	180	PV-Anlage	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Stromverbrauch / Jahr	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Eigenproduktion von Strom mit PV-Anlage auf Dach.
-435	349	299	2	38050.00	kg	100.00	150.00	CHF	100.00	0.00	EP	100	220.000	m┬│	172.954550000000012	kg/m┬│	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Treberabfall Pro bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-436	351	300	2	38050.00	kg	100.00	0.00	CHF	100.00	0.00	EP	100	220.000	m┬│	172.954550000000012	kg/m┬│	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Malzkuchen pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
-448	363	272	1	50727.00	kWh	100.00	12994.00	CHF	100.00	10.78	EP	100	220.000	m┬│	230.577269999999999	kWh/m┬│	\N	200	PV-Anlage f├╝r Eigenstromproduktion	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Stromverbrauch / Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Bereitstellen eines gewissen teils des J├ñhrlich ben├Âtigten Stroms durch eine PV-Anlage auf dem Dach der Brauerei.
-460	373	272	1	3810.81	kWh	8.25	1155.00	CHF	8.25	0.89	EP	8.25	220.000	m┬│	17.3218600000000009	kWh/m┬│	\N	20	Ersatz der FL - durch LED Leuchtmittel	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch den Ersatz der herk├Âmmlichen Fl-Lampen durch LED kann elektrische Energie eingespart werden. 40Stk., CAPEX 25.- CHF pro Leuchmittel. Lebensdauer 15 Jahre
-485	393	277	1	329245.00	kg	3.50	180950.00	CHF	3.50	1550.74	EP	3.5	9407000.000	kg	0.0350000000000000033	kg/kg	\N	0	milk powder production	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	raw milk	Einfahrverluste(kg) / Raw milk(kg)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	use milk losses to produce milk powder
-451	365	272	1	4559.36	kWh	8.25	1169.93	CHF	8.25	0.98	EP	8.25	220.000	m┬│	20.7243600000000008	kWh/m┬│	\N	20	Ersatz der FL- durch LED- Lampen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch den Ersatz der herk├Âmmlichen FL-Lampen durch LED- Technologie kann elektrische Energie f├╝r die Beleuchtung eingespart werden. 40 Stk., Capex: 25.- pro Umbau Leuchte Lebensdauer: 15 a
-437	338	272	1	30339.57	kWh	59.81	7771.71	CHF	59.81	7.08	EP	59.81	220.000	m┬│	137.907139999999998	kWh/m┬│	\N	128.330000000000013	Reifung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Energie Reifung/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Verk├╝rzung der Reifezeit von 12 auf 10 Wochen.
-439	360	272	1	4492.80	kWh	8.86	1151.27	CHF	8.86	1.05	EP	8.86	220.000	m┬│	20.4218200000000003	kWh/m┬│	\N	20.3999999999999986	Ersatz Leuchtstoffr├Âhren 36W --&gt; LED	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Ersetzen der Leuchtstoffr├Âhren 36w durch LED R├Âhren 16w plus 5 lichtsensoren, Reduktion der Stunden um 1/2.
-438	338	272	1	32525.89	kWh	64.12	8331.75	CHF	64.12	7.59	EP	64.12	220.000	m┬│	147.844950000000011	kWh/m┬│	\N	89.5999999999999943	K├╝hlraum	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Energie K├╝hlraum pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Ersetzen K├╝hlraum
-446	363	272	1	49205.19	kWh	97.00	12604.18	CHF	97.00	10.46	EP	97	220.000	m┬│	223.659950000000009	kWh/m┬│	\N	185.5	Anpassung Ein- und Auslass der K├ñlteanlage	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├╝hlung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch Anpassung des Standorts des Einlasses der K├ñlteanlage kann die R├╝ckk├╝hlung der Anlage optimiert werden.
-450	318	272	1	32955.00	kWh	65.00	8446.10	CHF	65.00	7.69	EP	65	220.000	m┬│	149.795449999999988	kWh/m┬│	\N	125	Verk├╝rzung der Reifezeit	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Reifung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Verk├╝rzung der Reifezeit des Bieres von 12 auf 10 Wochen, in Anbetracht des Brauens einer anderen Biersorte, kann elektrische Energie eingespart werden. Energie -5280 kWh/a Lebensdauer 20 a,
-449	318	272	1	49179.00	kWh	97.00	12604.18	CHF	97.00	11.48	EP	97	220.000	m┬│	223.540909999999997	kWh/m┬│	\N	185	Einlass Luft f├╝r R├╝ckk├╝hlung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├╝hlung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Versetzung des Einlasses der Luft f├╝r die R├╝ckk├╝hlung kann diese effizienter genutzt werden.  Energie -8360 kWh/a , CAPEX: 1500 .-, Lebensdauer 20 a
-447	364	293	1	37680.00	kg	100.00	7000.00	CHF	100.00	130.53	EP	100	220.000	m┬│	171.272729999999996	kg/m┬│	\N	157	Erh├Âhung der Maischetemperatur um 5┬░C	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Eingesetztes Malz pro Produziertes Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wen die Maischetemperatur um 5┬░C auf 63┬░C erh├Âht wird, lassen sich bis zu 8% Malz einsparen
-453	366	272	1	4696.42	kWh	8.86	1151.27	CHF	8.86	1.10	EP	8.86	220.000	m┬│	21.3473599999999983	kWh/m┬│	\N	21	LED Beleuchtung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pr0 Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Auswechseln der FL R├Âhren durch LED
-443	333	298	2	38050.00	kg	100.00	1900.00	CHF	100.00	66.00	EP	100	220.000	m┬│	172.954550000000012	kg/m┬│	\N	172.949999999999989		\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier	Treber pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wird als Viehfutter abgegeben
-458	370	290	1	181322.60	MJ	20.00	4700.00	CHF	20.00	3.27	EP	20	220.000	m┬│	824.193639999999959	MJ/m┬│	\N	800	Verbesserte W├ñrmenutzung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Produzierte Biermenge/ Jahr	W├ñrmeenergie/ m3	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Verluste beim Dampfkessel und Rohren verringern, W├ñrmetauscher bei Sudpfanne ausbauen, W├ñrmepumpen installieren
-445	362	272	1	9408.00	kWh	18.55	2410.39	CHF	18.55	2.00	EP	18.55	220.000	m┬│	42.7636400000000023	kWh/m┬│	\N	21.8099999999999987	K├╝hlraum ersetzen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├╝hlenergie pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	K├╝hlraum wird durch einen moderneren und besser ged├ñmmten Ersetzt
-484	393	275	1	5362.00	kg	100.00	1877.00	CHF	100.00	8.68	EP	100	9407000.000	kg	0.000569999999999999977	kg/kg	\N	0	use raw milk to feed cows	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	raw milk	Kg SH/ kg Raw Milk	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-459	313	272	1	44805.85	kWh	97.00	13580.00	CHF	97.00	10.78	EP	100	220.000	m┬│	203.662949999999995	kWh/m┬│	\N	185	Einlass Luft f├╝r R├╝ckk├╝hlung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	K├╝hlung pro m3 Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Versetzung des Einlass der Luft  f├╝r die R├╝ckk├╝hlung kann diese effizienter genutzt werden. Energie -8360 kWh/a. CAPEX 1500.- Lebensdauer:  20 Jahre
-452	318	272	1	2763.25	kWh	5.00	709.05	CHF	5.00	0.59	EP	5	220.000	m┬│	12.5602300000000007	kWh/m┬│	\N	4	Sanierung des K├╝hlraumes	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Energie K├╝hlraum pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Sanierung der K├╝hlraumt├╝r kann K├╝hlenergie eingespart werden. Die bisherige T├╝r ist undicht und f├╝hrte zu Verlusten. 1/3 der urspr├╝nglichen Energie kann eingespart werden. Capex: 5'000.-  Lebensdauer: 20 a
-461	313	272	1	2309.58	kWh	5.00	700.00	CHF	5.00	0.54	EP	5	220.000	m┬│	10.4980899999999995	kWh/m┬│	\N	4	Sanierung des K├╝hlraums	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Energie K├╝hlraum pro bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Sanierung des K├╝hlraums kann K├╝hlenergie eingespart werden. Die bisherige T├╝r ist undicht und f├╝hrt zu Verlusten. Ein Drittel der bisherigen Energie kann eingespart werden. CAPEX 5000.- Lebensdauer 20 Jahre
-462	313	272	1	30024.54	kWh	65.00	9100.00	CHF	65.00	7.01	EP	65	220.000	m┬│	136.475179999999995	kWh/m┬│	\N	125	Verk├╝rzung der Reifzeit	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Reifung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Verk├╝rzung der Reifzeit von 12 Wochen auf 10 Wochen kann Energie eingespart werden. Energie -5280 kWh/a. Lebensdauer 50
-464	375	272	1	49205.19	kWh	97.00	12604.18	CHF	97.00	10.46	EP	97	220.000	m┬│	230.577269999999999	kWh/m┬│	\N	185.5	Anpassung Ein- und Auslass der K├ñlteanlage	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Energieaufwand zur K├╝hlung/ produziertem Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch Anpassung des Standorts des Einlasses der K├ñlteanlage kann die R├╝ckk├╝hlung der Anlage optimiert werden.
-463	374	293	1	37680.00	kg	100.00	7000.00	CHF	100.00	130.53	EP	100	220.000	m┬│	171.272729999999996	kg/m┬│	\N	157	Erh├Âhung der Maischetemperatur um 5┬░C	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Eingesetzte Malzmenge/ produziertem Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wen die Maischetemperatur um 5┬░C auf 63┬░C erh├Âht wird, lassen sich bis zu 8% Malz einsparen
-465	356	272	1	9408.00	kWh	18.55	2410.39	CHF	18.55	2.00	EP	18.55	220.000	m┬│	42.7636400000000023	kWh/m┬│	\N	21.8099999999999987	K├╝hlraum ersetzen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Hergestelltes Bier pro Jahr	K├╝hlenergie/ Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	K├╝hlraum wird durch einen moderneren und besser ged├ñmmten Ersetzt
-467	377	272	1	1191.00	kWh	2.35	305.00	CHF	2.35	10.78	EP	100	238.220	m┬│	4.99957999999999991	kWh/m┬│	\N	1.44999999999999996	Stromeinsparung durch Einsatz Deionisierungsanlage	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Umkehrosmose	ben├Âtigte kWh/m3 deionisiertes Wasser	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Umkehrosmosemaschine durch Deionisierungsanlage ersetzen
-466	376	272	1	4494.41	kWh	8.86	1151.27	CHF	8.86	0.96	EP	8.86	220.000	m┬│	20.4291400000000003	kWh/m┬│	\N	20.4899999999999984	Ersatz Leuchtstoffr├Âhren 36W durch LED R├Âhren	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Ersatz der 36W Leuchtstoffr├Âhren durch LED R├Âhren und Installierung von Lichtsensoren zur Reduktion der Beleuchtungszeit.
-478	388	322	1	220000.00	t	122.22	19800000.00	CHF	122.22	297000.00	EP	100	1200000.000	t	0.183329999999999993	t/t	\N	0.149999999999999994	Petcoke subsitution with RDF	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t clinker produced	t petcoke / t clinker	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Petcoke burning
-501	402	337	2	2508683.00	kg	100.00	0.00	CHF	100.00	0.98	EP	100	180000.000	t	13.9371299999999998	kg/t	\N	5.57000000000000028	NOx reduction	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	T petcoke consumption per year	kg NOx emitted per t petcoke	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	NSCR NOx with ammonia
-500	401	331	1	167779.00	kWh	100.00	12850.00	CHF	100.00	37.00	EP	100	2030.000	m┬▓	82.6497499999999974	kWh/m┬▓	\N	75	District heat	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Area hotel	Hotel heat usage per m┬▓	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Reduction of UBP not usage
-502	403	336	2	150521.00	kg	100.00	0.00	CHF	100.00	0.21	EP	100	180000.000	t	0.836230000000000029	kg/t	\N	0.280000000000000027	Dust reduction	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t petcoke consumption per year	kg dust emitted per t petcoke consumed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	ESP filter to reduce dust emissions
-513	407	80	2	150521.00	kg	100.00	0.00	CHF	100.00	0.02	EP	100	180000.000	t	0.836230000000000029	kg/t	\N	0.280000000000000027	Dust filter ESP	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t petcoke	kg dust emitted per t petcoke	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-483	393	335	1	5362.00	kg	100.00	3753.00	CHF	100.00	28.30	EP	100	9407000.000	kg	0.000569999999999999977	kg/kg	\N	0	Heat recovery	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	raw milk	Kg PpA/ kg Raw Milk	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-487	393	332	1	288320.00	kWh	16.00	37760.00	CHF	16.00	147.04	EP	16	9407000.000	kg	0.0306500000000000002	kWh/kg	\N	0	molchsystem	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	raw milk	kWh Strom / raw milk kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	negate milk losses through molchsystem
-514	406	341	2	2508683.00	kg	100.00	0.00	CHF	100.00	0.10	EP	100	180000.000	t	13.9371299999999998	kg/t	\N	5.57000000000000028	NOx reduction SNCR	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t petcoke	kg NOx emitted per t petcoke	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-560	443	80	2	150521.00	kg	100.00	0.00	CHF	100.00	0.02	EP	100	180000.000	t	0.836230000000000029	kg/t	\N	0.280000000000000027	Dust Fabric filter	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t petcoke	kg dust emitted per t petcoke burned	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
-561	444	343	1	1280000.00	GJ	100.00	38758400.00	CHF	100.00	0.00	EP	100	1197200.000	t	1.06916000000000011	GJ/t	\N	0.800000000000000044	Biogas use	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t petcoke	GJ Biogas / t clinker	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+434	317	272	1	50726.59	kWh	100.00	12994.00	CHF	100.00	11.84	EP	100	220.000	m┬│	230.57541	kWh/m┬│	\N	180	PV-Anlage	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Stromverbrauch / Jahr	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Eigenproduktion von Strom mit PV-Anlage auf Dach.
+435	349	299	2	38050.00	kg	100.00	150.00	CHF	100.00	0.00	EP	100	220.000	m┬│	172.95455	kg/m┬│	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Treberabfall Pro bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+436	351	300	2	38050.00	kg	100.00	0.00	CHF	100.00	0.00	EP	100	220.000	m┬│	172.95455	kg/m┬│	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Malzkuchen pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+448	363	272	1	50727.00	kWh	100.00	12994.00	CHF	100.00	10.78	EP	100	220.000	m┬│	230.57727	kWh/m┬│	\N	200	PV-Anlage f├╝r Eigenstromproduktion	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Stromverbrauch / Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Bereitstellen eines gewissen teils des J├ñhrlich ben├Âtigten Stroms durch eine PV-Anlage auf dem Dach der Brauerei.
+460	373	272	1	3810.81	kWh	8.25	1155.00	CHF	8.25	0.89	EP	8.25	220.000	m┬│	17.32186	kWh/m┬│	\N	20	Ersatz der FL - durch LED Leuchtmittel	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch den Ersatz der herk├Âmmlichen Fl-Lampen durch LED kann elektrische Energie eingespart werden. 40Stk., CAPEX 25.- CHF pro Leuchmittel. Lebensdauer 15 Jahre
+485	393	277	1	329245.00	kg	3.50	180950.00	CHF	3.50	1550.74	EP	3.5	9407000.000	kg	0.035	kg/kg	\N	0	milk powder production	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	raw milk	Einfahrverluste(kg) / Raw milk(kg)	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	use milk losses to produce milk powder
+451	365	272	1	4559.36	kWh	8.25	1169.93	CHF	8.25	0.98	EP	8.25	220.000	m┬│	20.72436	kWh/m┬│	\N	20	Ersatz der FL- durch LED- Lampen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch den Ersatz der herk├Âmmlichen FL-Lampen durch LED- Technologie kann elektrische Energie f├╝r die Beleuchtung eingespart werden. 40 Stk., Capex: 25.- pro Umbau Leuchte Lebensdauer: 15 a
+437	338	272	1	30339.57	kWh	59.81	7771.71	CHF	59.81	7.08	EP	59.81	220.000	m┬│	137.90714	kWh/m┬│	\N	128.33	Reifung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Energie Reifung/Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Verk├╝rzung der Reifezeit von 12 auf 10 Wochen.
+439	360	272	1	4492.80	kWh	8.86	1151.27	CHF	8.86	1.05	EP	8.86	220.000	m┬│	20.42182	kWh/m┬│	\N	20.4	Ersatz Leuchtstoffr├Âhren 36W --&gt; LED	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Ersetzen der Leuchtstoffr├Âhren 36w durch LED R├Âhren 16w plus 5 lichtsensoren, Reduktion der Stunden um 1/2.
+438	338	272	1	32525.89	kWh	64.12	8331.75	CHF	64.12	7.59	EP	64.12	220.000	m┬│	147.84495	kWh/m┬│	\N	89.6	K├╝hlraum	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Energie K├╝hlraum pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Ersetzen K├╝hlraum
+446	363	272	1	49205.19	kWh	97.00	12604.18	CHF	97.00	10.46	EP	97	220.000	m┬│	223.65995	kWh/m┬│	\N	185.5	Anpassung Ein- und Auslass der K├ñlteanlage	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├╝hlung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch Anpassung des Standorts des Einlasses der K├ñlteanlage kann die R├╝ckk├╝hlung der Anlage optimiert werden.
+450	318	272	1	32955.00	kWh	65.00	8446.10	CHF	65.00	7.69	EP	65	220.000	m┬│	149.79545	kWh/m┬│	\N	125	Verk├╝rzung der Reifezeit	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Reifung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Verk├╝rzung der Reifezeit des Bieres von 12 auf 10 Wochen, in Anbetracht des Brauens einer anderen Biersorte, kann elektrische Energie eingespart werden. Energie -5280 kWh/a Lebensdauer 20 a,
+449	318	272	1	49179.00	kWh	97.00	12604.18	CHF	97.00	11.48	EP	97	220.000	m┬│	223.54091	kWh/m┬│	\N	185	Einlass Luft f├╝r R├╝ckk├╝hlung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├╝hlung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Versetzung des Einlasses der Luft f├╝r die R├╝ckk├╝hlung kann diese effizienter genutzt werden.  Energie -8360 kWh/a , CAPEX: 1500 .-, Lebensdauer 20 a
+447	364	293	1	37680.00	kg	100.00	7000.00	CHF	100.00	130.53	EP	100	220.000	m┬│	171.27273	kg/m┬│	\N	157	Erh├Âhung der Maischetemperatur um 5┬░C	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Eingesetztes Malz pro Produziertes Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wen die Maischetemperatur um 5┬░C auf 63┬░C erh├Âht wird, lassen sich bis zu 8% Malz einsparen
+453	366	272	1	4696.42	kWh	8.86	1151.27	CHF	8.86	1.10	EP	8.86	220.000	m┬│	21.34736	kWh/m┬│	\N	21	LED Beleuchtung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pr0 Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Auswechseln der FL R├Âhren durch LED
+443	333	298	2	38050.00	kg	100.00	1900.00	CHF	100.00	66.00	EP	100	220.000	m┬│	172.95455	kg/m┬│	\N	172.95		\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier	Treber pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wird als Viehfutter abgegeben
+458	370	290	1	181322.60	MJ	20.00	4700.00	CHF	20.00	3.27	EP	20	220.000	m┬│	824.19364	MJ/m┬│	\N	800	Verbesserte W├ñrmenutzung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Produzierte Biermenge/ Jahr	W├ñrmeenergie/ m3	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Verluste beim Dampfkessel und Rohren verringern, W├ñrmetauscher bei Sudpfanne ausbauen, W├ñrmepumpen installieren
+445	362	272	1	9408.00	kWh	18.55	2410.39	CHF	18.55	2.00	EP	18.55	220.000	m┬│	42.76364	kWh/m┬│	\N	21.81	K├╝hlraum ersetzen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	K├╝hlenergie pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	K├╝hlraum wird durch einen moderneren und besser ged├ñmmten Ersetzt
+484	393	275	1	5362.00	kg	100.00	1877.00	CHF	100.00	8.68	EP	100	9407000.000	kg	0.00057	kg/kg	\N	0	use raw milk to feed cows	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	raw milk	Kg SH/ kg Raw Milk	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+459	313	272	1	44805.85	kWh	97.00	13580.00	CHF	97.00	10.78	EP	100	220.000	m┬│	203.66295	kWh/m┬│	\N	185	Einlass Luft f├╝r R├╝ckk├╝hlung	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	K├╝hlung pro m3 Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Versetzung des Einlass der Luft  f├╝r die R├╝ckk├╝hlung kann diese effizienter genutzt werden. Energie -8360 kWh/a. CAPEX 1500.- Lebensdauer:  20 Jahre
+452	318	272	1	2763.25	kWh	5.00	709.05	CHF	5.00	0.59	EP	5	220.000	m┬│	12.56023	kWh/m┬│	\N	4	Sanierung des K├╝hlraumes	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Bier pro Jahr	Energie K├╝hlraum pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Sanierung der K├╝hlraumt├╝r kann K├╝hlenergie eingespart werden. Die bisherige T├╝r ist undicht und f├╝hrte zu Verlusten. 1/3 der urspr├╝nglichen Energie kann eingespart werden. Capex: 5'000.-  Lebensdauer: 20 a
+461	313	272	1	2309.58	kWh	5.00	700.00	CHF	5.00	0.54	EP	5	220.000	m┬│	10.49809	kWh/m┬│	\N	4	Sanierung des K├╝hlraums	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Energie K├╝hlraum pro bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Sanierung des K├╝hlraums kann K├╝hlenergie eingespart werden. Die bisherige T├╝r ist undicht und f├╝hrt zu Verlusten. Ein Drittel der bisherigen Energie kann eingespart werden. CAPEX 5000.- Lebensdauer 20 Jahre
+462	313	272	1	30024.54	kWh	65.00	9100.00	CHF	65.00	7.01	EP	65	220.000	m┬│	136.47518	kWh/m┬│	\N	125	Verk├╝rzung der Reifzeit	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Reifung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch die Verk├╝rzung der Reifzeit von 12 Wochen auf 10 Wochen kann Energie eingespart werden. Energie -5280 kWh/a. Lebensdauer 50
+464	375	272	1	49205.19	kWh	97.00	12604.18	CHF	97.00	10.46	EP	97	220.000	m┬│	230.57727	kWh/m┬│	\N	185.5	Anpassung Ein- und Auslass der K├ñlteanlage	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Energieaufwand zur K├╝hlung/ produziertem Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Durch Anpassung des Standorts des Einlasses der K├ñlteanlage kann die R├╝ckk├╝hlung der Anlage optimiert werden.
+463	374	293	1	37680.00	kg	100.00	7000.00	CHF	100.00	130.53	EP	100	220.000	m┬│	171.27273	kg/m┬│	\N	157	Erh├Âhung der Maischetemperatur um 5┬░C	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Eingesetzte Malzmenge/ produziertem Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Wen die Maischetemperatur um 5┬░C auf 63┬░C erh├Âht wird, lassen sich bis zu 8% Malz einsparen
+465	356	272	1	9408.00	kWh	18.55	2410.39	CHF	18.55	2.00	EP	18.55	220.000	m┬│	42.76364	kWh/m┬│	\N	21.81	K├╝hlraum ersetzen	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	0	Hergestelltes Bier pro Jahr	K├╝hlenergie/ Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	K├╝hlraum wird durch einen moderneren und besser ged├ñmmten Ersetzt
+467	377	272	1	1191.00	kWh	2.35	305.00	CHF	2.35	10.78	EP	100	238.220	m┬│	4.99958	kWh/m┬│	\N	1.45	Stromeinsparung durch Einsatz Deionisierungsanlage	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Umkehrosmose	ben├Âtigte kWh/m3 deionisiertes Wasser	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Umkehrosmosemaschine durch Deionisierungsanlage ersetzen
+466	376	272	1	4494.41	kWh	8.86	1151.27	CHF	8.86	0.96	EP	8.86	220.000	m┬│	20.42914	kWh/m┬│	\N	20.49	Ersatz Leuchtstoffr├Âhren 36W durch LED R├Âhren	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Hergestelltes Bier pro Jahr	Beleuchtung pro Bier	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Ersatz der 36W Leuchtstoffr├Âhren durch LED R├Âhren und Installierung von Lichtsensoren zur Reduktion der Beleuchtungszeit.
+478	388	322	1	220000.00	t	122.22	19800000.00	CHF	122.22	297000.00	EP	100	1200000.000	t	0.18333	t/t	\N	0.15	Petcoke subsitution with RDF	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t clinker produced	t petcoke / t clinker	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Petcoke burning
+501	402	337	2	2508683.00	kg	100.00	0.00	CHF	100.00	0.98	EP	100	180000.000	t	13.93713	kg/t	\N	5.57	NOx reduction	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	T petcoke consumption per year	kg NOx emitted per t petcoke	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	NSCR NOx with ammonia
+500	401	331	1	167779.00	kWh	100.00	12850.00	CHF	100.00	37.00	EP	100	2030.000	m┬▓	82.64975	kWh/m┬▓	\N	75	District heat	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	Area hotel	Hotel heat usage per m┬▓	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Reduction of UBP not usage
+502	403	336	2	150521.00	kg	100.00	0.00	CHF	100.00	0.21	EP	100	180000.000	t	0.83623	kg/t	\N	0.28	Dust reduction	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t petcoke consumption per year	kg dust emitted per t petcoke consumed	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	ESP filter to reduce dust emissions
+513	407	80	2	150521.00	kg	100.00	0.00	CHF	100.00	0.02	EP	100	180000.000	t	0.83623	kg/t	\N	0.28	Dust filter ESP	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t petcoke	kg dust emitted per t petcoke	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+483	393	335	1	5362.00	kg	100.00	3753.00	CHF	100.00	28.30	EP	100	9407000.000	kg	0.00057	kg/kg	\N	0	Heat recovery	\N	\N	\N	\N	\N	\N	\N	\N	100	100	100	1	raw milk	Kg PpA/ kg Raw Milk	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+487	393	332	1	288320.00	kWh	16.00	37760.00	CHF	16.00	147.04	EP	16	9407000.000	kg	0.03065	kWh/kg	\N	0	molchsystem	\N	\N	\N	\N	\N	\N	\N	\N	90	90	90	1	raw milk	kWh Strom / raw milk kg	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	negate milk losses through molchsystem
+514	406	341	2	2508683.00	kg	100.00	0.00	CHF	100.00	0.10	EP	100	180000.000	t	13.93713	kg/t	\N	5.57	NOx reduction SNCR	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t petcoke	kg NOx emitted per t petcoke	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+560	443	80	2	150521.00	kg	100.00	0.00	CHF	100.00	0.02	EP	100	180000.000	t	0.83623	kg/t	\N	0.28	Dust Fabric filter	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t petcoke	kg dust emitted per t petcoke burned	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
+561	444	343	1	1280000.00	GJ	100.00	38758400.00	CHF	100.00	0.00	EP	100	1197200.000	t	1.06916	GJ/t	\N	0.8	Biogas use	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	t petcoke	GJ Biogas / t clinker	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	
 562	446	272	1	3000000.00	kWh	33.54	1073247.00	CHF	100.00	2087.73	EP	100	500000.000	t	6	kWh/t	\N	4	Optimierung UO	\N	\N	\N	\N	\N	\N	\N	\N	80	80	80	1	treated water	Umkehrosmose	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Optimierung der Umkehrosmose
 \.
 
@@ -9557,7 +9561,6 @@ COPY public.t_cp_allocation (id, prcss_id, flow_id, flow_type_id, amount, unit_a
 
 COPY public.t_cp_company_project (id, allocation_id, prjct_id, cmpny_id) FROM stdin;
 366	399	42102	3460
-182	189	42077	3419
 367	400	42096	3455
 368	401	42100	3458
 185	192	42077	3419
@@ -11974,7 +11977,6 @@ COPY public.t_is_prj_details (id, cmpny_from_id, cmpny_to_id, flow_id, from_quan
 158	135	66	66	1	100	\N	105	\N	\N	\N
 179	135	66	66	1	100	\N	111	187	44	1
 193	135	3374	66	1	100	\N	120	187	44	2
-189	135	3374	66	1	100	\N	116	187	44	1
 188	135	3375	66	1	100	\N	116	188	44	1
 191	135	3375	66	1	100	\N	119	188	44	1
 207	138	135	151	100	1	\N	124	151	\N	\N
@@ -16201,13 +16203,13 @@ COPY public.t_prdct (id, cmpny_id, name, quantities, ucost, ucostu, tper, qunit)
 39	3358	Sanding machine	13	0	Euro	Annually	pieces/year
 40	3362	somun	10000	0		Annually	pieces/year
 41	3362	civata	10000	0		Annually	pieces/year
-43	94	test1	29.0040000000000013	345	Euro	Daily	Amper
+43	94	test1	29.004	345	Euro	Daily	Amper
 32	132	aluminium parts	4200	0	Euro	Annually	pieces/year
 35	132	plastic parts	600	0	Euro	Annually	pieces/year
 44	3383	Table	400	50	CHF		pieces/year
 33	132	steel parts	5600	0	Euro	Annually	pieces/year
 34	132	titanium parts	300	0	Euro	Annually	pieces/year
-38	134	Newspaper	13950	0.100000000000000006	CHF	Annually	to (tons)
+38	134	Newspaper	13950	0.1	CHF	Annually	to (tons)
 46	3390	Saftey glass single	2855	0	CHF	Annually	to (tons)
 48	3390	Insulation glass	4160	0		Annually	to (tons)
 49	3390	Saftey glass multi	5166	0	CHF	Annually	to (tons)
@@ -16793,8 +16795,8 @@ COPY public.t_user_ep_values (user_id, ep_value, flow_name, primary_id, ep_q_uni
 28	2610	Sterilisation chemical	18	0
 28	2610	Sterilisation chemical	19	0
 28	2610	Sterilisation chemical	20	0
-28	4.1980000000000004	Water and Wastewater CH	21	0
-28	4.1980000000000004	Water and Wastewater CH	22	0
+28	4.198	Water and Wastewater CH	21	0
+28	4.198	Water and Wastewater CH	22	0
 28	3522	Raw milk	23	0
 28	5945	Phosphoric acid	24	0
 28	1583	Sodium hydroxide	25	0
@@ -16805,60 +16807,60 @@ COPY public.t_user_ep_values (user_id, ep_value, flow_name, primary_id, ep_q_uni
 28	1583	Sodium_hydroxide	30	0
 28	5945	Phosphoric_acid	31	0
 28	3522	Raw_milk	32	0
-28	509.800000000000011	Electricity_LV_RER	33	0
-28	4.1980000000000004	Water_and_Wastewater CH	34	0
+28	509.8	Electricity_LV_RER	33	0
+28	4.198	Water_and_Wastewater CH	34	0
 28	2610	Sterilisation_chemical	35	0
-28	4.1980000000000004	Water_and_Wastewater_CH	36	0
+28	4.198	Water_and_Wastewater_CH	36	0
 28	1583	Sodium hydroxide	37	0
 28	3522	raw_milk	38	0
 28	5945	phosphoric_acid	39	0
 28	1583	sodium_hydroxide	40	0
-28	136.099999999999994	district_heat_mswi	41	0
+28	136.1	district_heat_mswi	41	0
 28	2610	sterilisation_chemical	42	0
-28	4.1980000000000004	water_and_wastewater_ch	43	0
-28	509.800000000000011	electricity_lv_rer	44	0
-28	0.446000000000000008	wastewater	45	0
+28	4.198	water_and_wastewater_ch	43	0
+28	509.8	electricity_lv_rer	44	0
+28	0.446	wastewater	45	0
 28	2610	sterilisation_chemical	46	0
 28	1583	sodium_hydroxide	47	0
 28	5945	phosphoric_acid	48	0
 28	3522	rawmilk	49	0
-28	509.800000000000011	electricity_fossil	50	0
-28	3.75300000000000011	water	51	0
-28	136.099999999999994	heat_mswi	52	0
-28	3594.19000000000005	rawmilk_losses	53	0
-48230	3528.42053686969984	paper	55	0
-48230	231.312493578019996	electricity_ch	56	0
-48230	9040.86342089440041	aluminium	57	0
-48235	0.00375299999999999983	water	64	0
-48235	2.60999999999999988	sterilisation_chemical	65	0
-48235	0.000445999999999999999	wastewater	66	0
-48235	1.58299999999999996	sodium_hydroxide	67	0
-48235	5.94500000000000028	phosphoric_acid	68	0
-48235	3.5219999999999998	rawmilk	69	0
-48235	0.136099999999999999	heat_mswi	71	0
-48235	1.58299999999999996	sodium_hydroxide	72	0
-48240	2.60999999999999988	sterilisation_chemical	73	0
-48240	0.136099999999999999	heat_mswi	77	0
-48240	0.00375299999999999983	water	78	0
-48240	0.509800000000000031	electricity_fossil	79	0
-48240	3.5219999999999998	rawmilk	80	0
-48240	5.94500000000000028	phosphoric_acid	81	0
-48240	1.58299999999999996	sodium_hydroxide	82	0
-48240	0.000445999999999999999	wastewater	83	0
-48239	0.136099999999999999	heat_mswi	85	0
-48239	0.00375299999999999983	water	86	0
-48239	0.509800000000000031	electricity_fossil	87	0
-48239	3.5219999999999998	rawmilk	88	0
-48239	5.94500000000000028	phosphoric_acid	89	0
-48239	1.58299999999999996	sodium_hydroxide	90	0
-48239	0.000445999999999999999	wastewater	91	0
-48241	2.60999999999999988	sterilisation_chemical	92	0
-48241	0.136099999999999999	heat_mswi	93	0
-48241	0.00375299999999999983	water	94	0
-48241	0.000445999999999999999	wastewater	97	0
-48241	1.58299999999999996	sodium_hydroxide	98	0
-48241	5.94500000000000028	phosphoric_acid	99	0
-48241	3.5219999999999998	rawmilk	100	0
+28	509.8	electricity_fossil	50	0
+28	3.753	water	51	0
+28	136.1	heat_mswi	52	0
+28	3594.19	rawmilk_losses	53	0
+48230	3528.4205368697	paper	55	0
+48230	231.31249357802	electricity_ch	56	0
+48230	9040.8634208944	aluminium	57	0
+48235	0.003753	water	64	0
+48235	2.61	sterilisation_chemical	65	0
+48235	0.000446	wastewater	66	0
+48235	1.583	sodium_hydroxide	67	0
+48235	5.945	phosphoric_acid	68	0
+48235	3.522	rawmilk	69	0
+48235	0.1361	heat_mswi	71	0
+48235	1.583	sodium_hydroxide	72	0
+48240	2.61	sterilisation_chemical	73	0
+48240	0.1361	heat_mswi	77	0
+48240	0.003753	water	78	0
+48240	0.5098	electricity_fossil	79	0
+48240	3.522	rawmilk	80	0
+48240	5.945	phosphoric_acid	81	0
+48240	1.583	sodium_hydroxide	82	0
+48240	0.000446	wastewater	83	0
+48239	0.1361	heat_mswi	85	0
+48239	0.003753	water	86	0
+48239	0.5098	electricity_fossil	87	0
+48239	3.522	rawmilk	88	0
+48239	5.945	phosphoric_acid	89	0
+48239	1.583	sodium_hydroxide	90	0
+48239	0.000446	wastewater	91	0
+48241	2.61	sterilisation_chemical	92	0
+48241	0.1361	heat_mswi	93	0
+48241	0.003753	water	94	0
+48241	0.000446	wastewater	97	0
+48241	1.583	sodium_hydroxide	98	0
+48241	5.945	phosphoric_acid	99	0
+48241	3.522	rawmilk	100	0
 48235	1800	Industry electricity mix, mainly from coal and nuclear power plants	101	0
 48235	1800	Industry electricity mix, mainly from coal and nuclear power plants	102	0
 48235	2731	District heat from waste incineration plant	103	0
@@ -16869,7 +16871,7 @@ COPY public.t_user_ep_values (user_id, ep_value, flow_name, primary_id, ep_q_uni
 48235	10000000	Rawmilk from cow farms	108	0
 48235	1800	Industry electricity mix	109	0
 48235	1800	Industry_electricity_mix	110	0
-48239	2.60999999999999988	sterilisation_chemical	112	0
+48239	2.61	sterilisation_chemical	112	0
 48240	0	sterilisation_chemical	113	0
 48240	2731	heat_mswi	114	0
 48240	62600	water	115	0
@@ -16879,66 +16881,66 @@ COPY public.t_user_ep_values (user_id, ep_value, flow_name, primary_id, ep_q_uni
 48240	62600	wastewater	119	0
 48240	1000	phosphoric_acid	120	0
 48240	1800	electricity_fossil	121	0
-48242	0.00260999999999999991	sterilisation_chemical	122	0
+48242	0.00261	sterilisation_chemical	122	0
 48242	10	sample flow	123	0
-48242	0.136099999999999999	heat_mswi	124	0
-48242	0.00375299999999999983	water	125	0
-48242	0.509800000000000031	electricity_fossil	126	0
-48242	3.5219999999999998	rawmilk	127	0
-48242	5.94500000000000028	phosphoric_acid	128	0
-48242	1.58299999999999996	sodium_hydroxide	129	0
-48242	0.000445999999999999999	wastewater	130	0
-28	3.75300000000000011	water	131	22
+48242	0.1361	heat_mswi	124	0
+48242	0.003753	water	125	0
+48242	0.5098	electricity_fossil	126	0
+48242	3.522	rawmilk	127	0
+48242	5.945	phosphoric_acid	128	0
+48242	1.583	sodium_hydroxide	129	0
+48242	0.000446	wastewater	130	0
+28	3.753	water	131	22
 48246	10000	raw milk	132	3
-48246	5.70000000000000018	water	133	3
-48246	5.70000000000000018	acids	134	3
-48246	5.70000000000000018	base	135	3
+48246	5.7	water	133	3
+48246	5.7	acids	134	3
+48246	5.7	base	135	3
 48246	350	milk losses	136	3
 48246	288320	electricity	138	3
 48246	5428680	energy total	139	3
-48246	3.5219999999999998	raw_milk	141	3
-48246	1.58299999999999996	caustic_soda	142	3
-48246	0.136099999999999999	district_heat	143	8
-48246	0.509800000000000031	Electricity	144	8
-48246	5.94500000000000028	phosphoric acid	145	3
-48246	0.00375299999999999983	water	146	3
-48247	5.94500000000000028	phosphoric acid	153	3
+48246	3.522	raw_milk	141	3
+48246	1.583	caustic_soda	142	3
+48246	0.1361	district_heat	143	8
+48246	0.5098	Electricity	144	8
+48246	5.945	phosphoric acid	145	3
+48246	0.003753	water	146	3
+48247	5.945	phosphoric acid	153	3
 48247	2610	helades_pe_15	156	3
-48247	136.099999999999994	district_heat	157	8
-48247	3.75300000000000011	water	158	3
-48247	509.800000000000011	Electricity	159	8
+48247	136.1	district_heat	157	8
+48247	3.753	water	158	3
+48247	509.8	Electricity	159	8
 48247	3522	raw_milk	160	3
 48247	5945	phosphoric acid	161	3
 48247	1583	sodium hydroxide	162	3
-48247	0.446000000000000008	wastewater	163	3
+48247	0.446	wastewater	163	3
 28	3522	rawmilk	164	3
 48245	777	TEST	166	3
 48248	3500	Raw Milk	180	3
 48248	3500	Raw Milk Loss	181	3
-48248	0.599999999999999978	Waste Water	182	3
+48248	0.6	Waste Water	182	3
 48248	0	Acetone liquid	184	3
 48248	0	Acids organic	185	3
-48248	9040.35000000000036	Acetic acid	186	3
+48248	9040.35	Acetic acid	186	3
 48248	7982	Acetone liquid	187	22
 48248	9789456	Acids inorganic	188	3
 48248	31564	Acids organic	189	3
-28	3476.59999999999991	nutritive_biomass	195	3
-48258	3476.59999999999991	nutritivebiomass	196	3
-48260	0.00350000000000000007	Nutrition_swine	197	3
+28	3476.6	nutritive_biomass	195	3
+48258	3476.6	nutritivebiomass	196	3
+48260	0.0035	Nutrition_swine	197	3
 48260	0	Malt_cake	198	3
-48263	66.0600000000000023	nutritivebiomass	199	3
+48263	66.06	nutritivebiomass	199	3
 48257	3480	Nutritive Biomass	205	3
-48260	0.00350000000000000007	nutritivebiomass	206	3
+48260	0.0035	nutritivebiomass	206	3
 48266	200	Milk	208	3
 48268	1000	RDF	209	3
-48272	0.0381000000000000019	Heat, Hardwood	211	8
-48272	0.00809999999999999956	Heat, Natural Gas	212	8
-48272	0.0464999999999999997	Heat, Heavy Fuel Oil	213	8
-48272	0.0490000000000000019	Heat, Coal Coke	214	3
-48272	0.0490000000000000019	Heat, Coal Coke	215	8
-48272	0.00020000000000000001	Water	216	3
-48272	5.87640000000000029	Steel, chromium	218	3
-48272	0.39029999999999998	Steel, unalloyed	219	3
+48272	0.0381	Heat, Hardwood	211	8
+48272	0.0081	Heat, Natural Gas	212	8
+48272	0.0465	Heat, Heavy Fuel Oil	213	8
+48272	0.049	Heat, Coal Coke	214	3
+48272	0.049	Heat, Coal Coke	215	8
+48272	0.0002	Water	216	3
+48272	5.8764	Steel, chromium	218	3
+48272	0.3903	Steel, unalloyed	219	3
 48273	121	Heat Wood	224	8
 48273	125	Heat Gas	225	8
 48273	404	Heat Oil	226	8
@@ -16950,16 +16952,16 @@ COPY public.t_user_ep_values (user_id, ep_value, flow_name, primary_id, ep_q_uni
 48273	3537	Steel unalloyed	232	3
 48273	4	Wastewater	233	3
 48273	20	Clay	234	3
-28	0.92000000000000004	Water ukr	235	3
+28	0.92	Water ukr	235	3
 28	414	wood	236	3
 28	124	Heat natural gas	237	8
-48270	1.59000000000000008	District heating	245	8
+48270	1.59	District heating	245	8
 48270	235	Oil heating	246	8
 48270	216	Energy mix swiss	247	8
 48270	3630	Wastewater	250	20
 48270	245	Fresh water	251	20
 48266	2610	Halades PE 15	252	3
-48266	136.300000000000011	Fernw├ñrme	253	8
+48266	136.3	Fernw├ñrme	253	8
 48266	510	Strom	254	8
 48270	1770	Waste incineration plastic	255	3
 48266	5277	Phosphoric Acid	256	3
@@ -16972,23 +16974,23 @@ COPY public.t_user_ep_values (user_id, ep_value, flow_name, primary_id, ep_q_uni
 48270	354000	R407C	263	3
 48270	109	Transport Waste	264	3
 48270	459	Recycling of Plastic	268	3
-48269	0.00059000000000000003	RDF burning	273	4
-48269	0.247999999999999998	MSW transport	275	4
-48269	0.0221249999999999988	Electricity	276	9
-48269	0.00191000000000000002	Ammonia	278	3
-48269	0.140000000000000013	Dust	279	3
-48269	0.0389999999999999999	NOx	280	3
-48269	1.35000000000000009	Petcoke (1)	282	4
-48269	1.35000000000000009	Petcoke (2)	283	4
-48269	1.35000000000000009	Petcoke	286	4
+48269	0.00059	RDF burning	273	4
+48269	0.248	MSW transport	275	4
+48269	0.022125	Electricity	276	9
+48269	0.00191	Ammonia	278	3
+48269	0.14	Dust	279	3
+48269	0.039	NOx	280	3
+48269	1.35	Petcoke (1)	282	4
+48269	1.35	Petcoke (2)	283	4
+48269	1.35	Petcoke	286	4
 28	206100	petcoke	287	7
-48269	1.70999999999999989e-05	Biogas	288	7
+48269	1.71e-05	Biogas	288	7
 48299	10	Wasser	291	4
-28	0.0100000000000000002	Wasser	292	4
-48293	3.95999999999999996	Reaktivfarbstoff	293	4
-48299	3.95999999999999996	Farbstoff	294	4
+28	0.01	Wasser	292	4
+48293	3.96	Reaktivfarbstoff	293	4
+48299	3.96	Farbstoff	294	4
 28	1888000	Treber	296	4
-28	3.95999999999999996	Reaktivfarbstoff	299	4
+28	3.96	Reaktivfarbstoff	299	4
 1	111	test	300	2
 1	123132	asdasdas	301	3
 1	1	Lead	302	1
@@ -17275,7 +17277,7 @@ SELECT pg_catalog.setval('public.t_cmpny_grp_id_seq', 1, false);
 -- Name: t_cmpny_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.t_cmpny_id_seq', 3500, true);
+SELECT pg_catalog.setval('public.t_cmpny_id_seq', 3501, true);
 
 
 --
@@ -17303,7 +17305,7 @@ SELECT pg_catalog.setval('public.t_cmpny_prsnl_details_id_seq', 1, false);
 -- Name: t_cmpny_prsnl_key_column_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.t_cmpny_prsnl_key_column_seq', 3626, true);
+SELECT pg_catalog.setval('public.t_cmpny_prsnl_key_column_seq', 3628, true);
 
 
 --
@@ -19112,21 +19114,21 @@ CREATE RULE t_flow_update_rule AS
 -- Name: t_cmpny_flow trigger_company_flow_change; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
-CREATE TRIGGER trigger_company_flow_change AFTER INSERT OR DELETE OR UPDATE ON public.t_cmpny_flow FOR EACH ROW EXECUTE PROCEDURE public.trigger_company_flow_change();
+CREATE TRIGGER trigger_company_flow_change AFTER INSERT OR DELETE OR UPDATE ON public.t_cmpny_flow FOR EACH ROW EXECUTE FUNCTION public.trigger_company_flow_change();
 
 
 --
 -- Name: t_cmpny_flow trigger_company_flow_insert; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
-CREATE TRIGGER trigger_company_flow_insert AFTER INSERT OR DELETE OR UPDATE ON public.t_cmpny_flow FOR EACH ROW EXECUTE PROCEDURE public.trigger_company_flow_insert_func();
+CREATE TRIGGER trigger_company_flow_insert AFTER INSERT OR DELETE OR UPDATE ON public.t_cmpny_flow FOR EACH ROW EXECUTE FUNCTION public.trigger_company_flow_insert_func();
 
 
 --
 -- Name: t_flow trigger_flow_insert; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
-CREATE TRIGGER trigger_flow_insert AFTER INSERT OR DELETE OR UPDATE ON public.t_flow FOR EACH ROW EXECUTE PROCEDURE public.trigger_flow_insert_func();
+CREATE TRIGGER trigger_flow_insert AFTER INSERT OR DELETE OR UPDATE ON public.t_flow FOR EACH ROW EXECUTE FUNCTION public.trigger_flow_insert_func();
 
 
 --
