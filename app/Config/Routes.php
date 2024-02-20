@@ -172,6 +172,7 @@ $routes->add('search/(:any)', 'Search::search_pro/$1');
 $routes->add('deleteuserep/(:any)/(:any)', 'User::deleteUserEp/$1/$2');
 $routes->add('datasetexcel', 'User::dataFromExcel');
 $routes->add('uploadExcel', 'User::uploadExcel');
+$routes->match(['get', 'post'], 'uploadExcel', 'User::uploadExcel');
 $routes->add('flow_and_component', 'Dataset::flow_and_component');
 $routes->add('allocationlist/(:any)/(:any)', 'Cpscoping::allocationlist/$1/$2');
 $routes->add('new_flow/(:any)', 'Dataset::new_flow/$1');
