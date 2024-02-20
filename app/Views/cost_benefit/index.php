@@ -106,20 +106,32 @@ $uri = service('uri');
                     $tip = "is";
                     $cp_or_is = "is";
                 } ?>
+
+               
                 <!-- if no unit_cost is defined a "-" is placed!-->
                 <?php if (empty($a['unit_cost'])) {
                     $a['unit_cost'] = "-";
-                } ?>
+                }              
+                ?>
                 <!-- if no capexold is defined make it 0 (because its a numeric field in the DB, if empty = error!-->
                 <?php if (empty($a['capexold'])) {
                     $a['capexold'] = 0;
                 } ?>
+
+                <?php if (!empty($a['flow-name-1'])){
+                // print_r(number_format($a['flow-value-1'], 0, ".", "'"));
+                // $a['flow-value-1'] = number_format($a['flow-value-1'], 0, ".", "'");
+                 
+                }
+                ?>
+                 
+
                 <?php $attributes = array('id' => 'form-' . $i); 
                 ?>
                 <?= form_open('cba/save/' . $uri->getSegment(2) . '/' . $uri->getSegment(3) . '/' . $iid . '/' . $tip, $attributes); ?> 
                 <?= csrf_field() ?>
                 <div style="overflow-x: auto;">
-                    <table class="tg costtable">
+                    <table class="tg costtable" id="cost-benefit-table">
                         <tr>
                             <th colspan="9" style="font-size: 12px; text-align: left;">
                                 <b>
@@ -1238,11 +1250,14 @@ if (isset($a)) {
             $tuna_array[$t]['ymax'] = 0;
         }
 
+        if (is_int($a['sum-3-2'])){
         $toplameco += $a['sum-3-2'];
         $tuna_array[$t]['xmax'] = floatval($a['sum-3-2']);
 
         $eksieco = $toplameco - floatval($a['sum-3-2']);
         $tuna_array[$t]['xmin'] = $eksieco;
+        }
+
 
         if ($a['marcos-1'] > 0) {
             $tuna_array[$t]['ymin'] = "0";
@@ -1287,13 +1302,13 @@ if (isset($a)) {
         function sortGetSecondLast(arr){
             const rmZero = [0];
             const filteredArray = arr.filter((element) => !rmZero.includes(element));
-            console.log(filteredArray);
+            // console.log(filteredArray);
             if (filteredArray.length >= 1)
             {
-                return arr[0] / 10000;
+                return arr[0] / 1000;
             }
             else{
-                return 0.0001
+                return 0.001
             }
         };
 
@@ -1312,8 +1327,8 @@ if (isset($a)) {
 
         }
         
-        console.log(sortGetSecondLast(arrXUniqueMax), sortGetSecondLast(arrXUniqueMin));
-        console.log(arrYUniqueMax, arrYUniqueMin)
+        // console.log(sortGetSecondLast(arrXUniqueMax), sortGetSecondLast(arrXUniqueMin));
+        // console.log(arrYUniqueMax, arrYUniqueMin)
        
         var margin = {
                     "top": 10,
@@ -1617,6 +1632,38 @@ if (isset($a)) {
             });
         }
     });
+
+
+//     function numberWithSeperator(x) {   
+//     // Handle decimal point separators more precisely
+//     const parts = x.split('.');
+//     const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+//     const decimalPart = parts.length > 1 ? parts[1].replace(/'/g, "") : ""; // Remove redundant separators and ensure no separators after initial one
+
+//     // Add decimal point only if there's a decimal part
+//     return `${integerPart}${decimalPart ? '.' + decimalPart : ''}`;
+// }
+//     $(document).ready(function() {
+//     // Format preloaded input values
+//     $('#cost-benefit-table td input[type=text]').each(function() {
+//         const value = $(this).val();
+//         const formattedValue = numberWithSeperator(value);
+//         $(this).val(formattedValue);
+//     });
+
+//     // Bind input event listener to all input fields within the table cells
+//     $('#cost-benefit-table td input[type=text]').on('input', function() {    
+//         const value = $(this).val();
+
+//         if (!isNaN(value)) {
+//             const formattedValue = numberWithSeperator(value);
+
+//             // Update the input element's value directly to preserve input type (optional)
+//             $(this).val(formattedValue);
+//         }
+//     });
+// });
+        
 
 
     </script>
