@@ -16,11 +16,13 @@ RUN apt-get install -y libcurl4
 RUN apt-get purge -y --auto-remove libpq-dev 
 RUN apt-get clean 
 RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev
+RUN docker-php-ext-install gd
 
 
-
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN composer self-update --2
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+# RUN composer self-update --2
+RUN composer install
 
 
 
