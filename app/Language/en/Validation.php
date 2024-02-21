@@ -206,6 +206,7 @@ return [
     "allowedfiletypes"     => "Allowed are PDF and Word Documents up to 20MB",
     "searchdocument"       => "Search for Documents",
     "uploadeddocument"     => "Uploaded Documents",
+    "uploadexcel"          => "Upload Excel",
     "savefile"             => "Save file",
     "filename"             => "File name",
     "isoption"             => "Is option",

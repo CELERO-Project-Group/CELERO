@@ -25,73 +25,163 @@ class User extends BaseController
 		$flow_model = model(Flow_model::class);
 
 		$userid = $this->session->id;
-		$username = $this->session->username;
-		$excelcontents = [];
-
+		// $username = $this->session->username;
+		
+		// retrieve data from excel if in the same session a file was uploaded
+		$xlsArray = session()->get('xlsArray') ?? [];
+		
 		if (!empty($this->request->getPost())) {
-			if (
-				$this->validate([
-					'flowname' => 'trim|required',
-					'epvalue' => "required|trim|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]",
-					'epQuantityUnit' => 'required|trim'
-				])
-			) {
-				//formats number correctly
-				$quantity = str_replace(',', '.', $this->request->getPost('epvalue'));
-				$quantity = str_replace("'", '', $quantity);
+			$formId = $this->request->getPost('form_id');
 
-				$epArray = array(
-					'user_id' => $userid,
-					'flow_name' => $this->request->getPost('flowname'),
-					'ep_q_unit' => $this->request->getPost('epQuantityUnit'),
-					'ep_value' => $this->sifirla($quantity),
-				);
-				$flow_model->set_userep($epArray);
+			if ($formId === 'form1' || $formId === 'form2') {
 
-				/* include APPPATH . 'libraries/Excel.php';
-																if(file_exists('./assets/excels/'.$username.'.xlsx')){
-																	$inputFileName = './assets/excels/'.$username.'.xlsx';
-																}else{
-																	$inputFileName = './assets/excels/default.xlsx';
-																}
+				if (
+					$this->validate([
+						'flowname' => 'trim|required',
+						'epvalue' => "required|trim|regex_match[/^(\d+|\d{1,3}('\d{3})*)((\,|\.)\d+)?$/]",
+						'epQuantityUnit' => 'required|trim'
+					])
+				) {
+					//formats number correctly
+					$quantity = str_replace(',', '.', $this->request->getPost('epvalue'));
+					$quantity = str_replace("'", '', $quantity);
 
-																//  Read your Excel workbook
-																try {
-																	$inputFileType = PHPExcel_IOFactory::identify($inputFileName);
-																	$objReader = PHPExcel_IOFactory::createReader($inputFileType);
-																	$objPHPExcel = $objReader->load($inputFileName);
-																} catch(Exception $e) {
-																	die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
-																}
+					$epArray = array(
+						'user_id' => $userid,
+						'flow_name' => $this->request->getPost('flowname'),
+						'ep_q_unit' => $this->request->getPost('epQuantityUnit'),
+						'ep_value' => $this->sifirla($quantity),
+					);
+					$flow_model->set_userep($epArray);
 
-																//  Get worksheet dimensions
-																$sheet = $objPHPExcel->getSheet(0);
-																$highestRow = $sheet->getHighestRow();
-																$highestColumn = $sheet->getHighestColumn(); */
+					/* include APPPATH . 'libraries/Excel.php';
+																										   if(file_exists('./assets/excels/'.$username.'.xlsx')){
+																											   $inputFileName = './assets/excels/'.$username.'.xlsx';
+																										   }else{
+																											   $inputFileName = './assets/excels/default.xlsx';
+																										   }
 
-				//  Loop through each row (starts at 2, first is header line) of the worksheet in turn
-				/* for ($row = 2; $row <= $highestRow; $row++){
+																										   //  Read your Excel workbook
+																										   try {
+																											   $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+																											   $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+																											   $objPHPExcel = $objReader->load($inputFileName);
+																										   } catch(Exception $e) {
+																											   die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+																										   }
 
-																	//  Read a row of data into an array
-																	$rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
-																									NULL,
-																									TRUE,
-																									FALSE);
-																	//  Insert row data array into your database of choice here
-																	//print_r($rowData[0]);
-																	$[] = $rowData[0];
-																} */
-				//echo "------";
-				//print_r($);
+																										   //  Get worksheet dimensions
+																										   $sheet = $objPHPExcel->getSheet(0);
+																										   $highestRow = $sheet->getHighestRow();
+																										   $highestColumn = $sheet->getHighestColumn(); */
+
+					//  Loop through each row (starts at 2, first is header line) of the worksheet in turn
+					/* for ($row = 2; $row <= $highestRow; $row++){
+
+																											   //  Read a row of data into an array
+																											   $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
+																																			   NULL,
+																																			   TRUE,
+																																			   FALSE);
+																											   //  Insert row data array into your database of choice here
+																											   //print_r($rowData[0]);
+																											   $excelcontents[] = $rowData[0];
+																										   } */
+					//echo "------";
+					//print_r($);
+				}
+			} else {
+
+				# validation for import of excel file
+				$input = $this->validate([
+					'excelFile' => [
+						'rules' => 'uploaded[excelFile]|max_size[excelFile,100]|ext_in[excelFile,xlsx,xls]',
+						'label' => "Excel File"
+					]
+				]);
+
+				if ($file = $this->request->getFile('excelFile')) {
+
+					try {
+						// Validate file type
+						if ($file->getClientMimeType() !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+							throw new Exception('Invalid file format. Only Excel files (XLSX) are allowed.');
+						}
+
+						// Load the Excel file using PhpSpreadsheet
+						$reader = IOFactory::load($file);
+						$spreadsheet = $reader->getActiveSheet();
+
+						// Iterate through rows and cells
+						$data = [];
+						foreach ($spreadsheet->getRowIterator() as $row) {
+							$rowData = [];
+							foreach ($row->getCellIterator() as $cell) {
+								$value = $cell->getCalculatedValue();
+								if (!empty($value)) {
+									$rowData[] = $value;
+								}
+							}
+							if (!empty($rowData)) { // Check if row itself is not empty
+								$data[] = $rowData;
+							}
+						}
+
+						$data = array_slice($data, 1);
+
+						// $output = json_encode($data);
+						// echo "<script type='text/javascript'>console.log($output);</script>";
+
+						$count = 0;
+
+						foreach ($data as $row) {
+
+							$rowData = array(
+								'user_id' => $userid,
+								'flow_name' => $row[0],
+								'ep_q_unit' => $row[2],
+								'ep_value' => $row[1],
+								'ep_q_unit_id' => $row[3]
+							);
+
+							$xlsArray[] = $rowData;
+							$count++;
+						}
+
+						session()->set('xlsArray', $xlsArray);
+
+
+						$this->session->setFlashdata("message", $count . " rows successfully added.");
+						$this->session->setFlashdata('alert-class', 'alert-success');
+
+
+					} catch (Exception $e) {
+						// Handle exceptions gracefully, e.g., display error messages or log errors
+						$this->session->setFlashdata('error', $e->getMessage());
+
+					}
+
+				}
+
+
+
 			}
 		}
+
+
 		$data['validation'] = $this->validator;
-		$data['excelcontents'] = $excelcontents;
+		$data['excelcontents'] = $xlsArray;
 		$data['userepvalues'] = $flow_model->get_userep($userid);
 		$data['units'] = $flow_model->get_unit_list();
 		echo view('template/header');
 		echo view('dataset/excelcontents', $data);
 		echo view('template/footer');
+	}
+
+	public function clearList(){
+		session()->remove('xlsArray');
+
+		return redirect()->back()->with('success', 'List cleared successfully.');
 	}
 
 	public function deleteUserEp($flow_name, $ep_value)
@@ -163,9 +253,7 @@ class User extends BaseController
 	public function uploadExcel()
 	{
 
-		$flow_model = model(Flow_model::class);
 		$userid = $this->session->id;
-
 
 		$input = $this->validate([
 			'excelFile' => [
@@ -204,22 +292,24 @@ class User extends BaseController
 							$data[] = $rowData;
 						}
 					}
-					
+
 					$data = array_slice($data, 1);
 
 					// $output = json_encode($data);
-            		// echo "<script type='text/javascript'>console.log($output);</script>";
+					// echo "<script type='text/javascript'>console.log($output);</script>";
 
 					$count = 0;
+					$epArray = array();
 					foreach ($data as $row) {
-					
+
 						$epArray = array(
 							'user_id' => $userid,
 							'flow_name' => $row[0],
 							'ep_q_unit' => $row[3],
 							'ep_value' => $row[1]
 						);
-						$flow_model->set_userep($epArray);
+						// $flow_model->set_userep($epArray);
+
 						$count++;
 					}
 
@@ -227,19 +317,15 @@ class User extends BaseController
 					$this->session->setFlashdata('alert-class', 'alert-success');
 
 
-
-
 				} catch (Exception $e) {
 					// Handle exceptions gracefully, e.g., display error messages or log errors
 					$this->session->setFlashdata('error', $e->getMessage());
-					// ... (redirect to an error page or handle differently)
+
 				}
 
 			}
 
-			echo view('template/header');
-			echo view('dataset/uploadexcel');
-			echo view('template/footer');
+
 		}
 	}
 
