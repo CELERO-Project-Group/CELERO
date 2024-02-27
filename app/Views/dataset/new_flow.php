@@ -293,7 +293,7 @@
                         } ?>
                     </th>
                     <th>
-                        <?= lang("Validation.ep") . " UBP"; ?>
+                        <?= lang("Validation.ep"); ?>
                     </th>
                     <th>
                         <?= lang("Validation.state"); ?>
@@ -333,7 +333,8 @@
                             <?= number_format($flow['cost'], 0, "", "'"); ?>
                         </td>
                         <td align="right">
-                            <?= number_format($flow['ep'], 0, "", "'"); ?>
+                            <?="" // number_format($flow['ep'], 2, "E", "");?>
+                            <?= sprintf("%.2e", $flow['ep']) ?>
                         </td>
                         <td>
                             <?php if ($flow['state_id'] == "1") {

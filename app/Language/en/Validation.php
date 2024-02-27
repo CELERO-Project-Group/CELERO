@@ -237,6 +237,9 @@ return [
     "discountrate"         => "Discount rate",
     "option"               => "Option",
     "save"                 => "Save",
+    "specificimpact"       => "Specific Impact (UBP/Unit)",
+    "impactanually"        => "Impact / a  (MPt UBP/Unit)",
+   
 
     //ecotracking
     "ecoheading"           => "Please select the company for Eco Tracking info",
@@ -458,5 +461,6 @@ return [
     "consultantinfo" => 'Write consultant info',
     "nis" => 'New Is Scoping',
     "wrongPassword" => 'Given user info is wrong. Check your password.',
+
 
 ];

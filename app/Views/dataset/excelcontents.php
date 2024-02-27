@@ -77,7 +77,6 @@
 									<?php endforeach ?>
 								</select>
 
-
 							</div>
 						</td>
 						<td style="width:70px; vertical-align:center; text-align: center;">
@@ -93,7 +92,7 @@
 			</div>
 			<table class="table table-sm">
 				<th>Name</th>
-				<th>EP Value (UBP/x)</th>
+				<th>UBP Value (UBP/x)</th>
 				<th>Unit (x)</th>
 				<th>Add <i class="fa fa-info-circle"
 						title="Click here to save the UBP-Data you want (This will make them appear on the right side)"></i>
