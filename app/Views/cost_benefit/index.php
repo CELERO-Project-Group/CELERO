@@ -1254,13 +1254,13 @@ if (isset($a)) {
             $tuna_array[$t]['ymax'] = 0;
         }
 
-        if (is_int($a['sum-3-2'])){
+        // if (is_int($a['sum-3-2'])){
         $toplameco += $a['sum-3-2'];
         $tuna_array[$t]['xmax'] = floatval($a['sum-3-2']);
 
         $eksieco = $toplameco - floatval($a['sum-3-2']);
         $tuna_array[$t]['xmin'] = $eksieco;
-        }
+        // }
 
 
         if ($a['marcos-1'] > 0) {
