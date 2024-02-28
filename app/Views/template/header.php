@@ -55,6 +55,7 @@
     <a class="navbar-brand" href="<?= base_url(); ?>" style="color:white;">CELERO</a>
     <form class="navbar-form navbar-right" action="<?= base_url('search'); ?>" method="post" role="search"
       style="display: table;">
+      <?= csrf_field(); ?>
       <div class="form-group">
         <div class="input-group" style="display:block;">
           <input name="term" class="form-control" id="navbarInput-01" type="search"

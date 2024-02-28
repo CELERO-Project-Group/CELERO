@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Search_model;
+
 class Search extends BaseController {
 
 	public function search_pro($term = FALSE){
