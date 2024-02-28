@@ -144,7 +144,7 @@ $uri = service('uri');
                             </th>
                             <th class="th-yw4l" bgcolor="#fefefc" colspan="2">Annual energy and material flows</th>
                             <th class="th-yw4l" bgcolor="#fefefc">Unit</th>
-                            <th class="th-yw4l" bgcolor="#fefefc">Specific costs (<?= $a['unit_cost']; ?>/unit)
+                            <th class="th-yw4l" bgcolor="#fefefc">Specific costs (<?= $a['unit_cost']; ?>/Unit)
                             </th>
                             <th class="th-yw4l" bgcolor="#fefefc">OPEX (
                                 <?= $a['unit_cost']; ?>)
@@ -163,13 +163,13 @@ $uri = service('uri');
                                 <?= $a['unit_cost']; ?>/a)
                             </th>
                             <th class="th-yw4l" bgcolor="#fdfdff" colspan="2">Annual energy and material flows</th>
-                            <th class="th-yw4l" bgcolor="#fdfdff">unit
+                            <th class="th-yw4l" bgcolor="#fdfdff">Unit
                                 <label class="tooltip-unit" data-toggle="tooltip">
                                     <i style="color:red;" class="fa fa-question-circle"></i>
                                 </label>
                             </th>
                             <th class="th-yw4l" bgcolor="#fdfdff">Specific costs (
-                                <?= $a['unit_cost']; ?>/unit)
+                                <?= $a['unit_cost']; ?>/Unit)
                             </th>
                             <th class="th-yw4l" bgcolor="#fdfdff">OPEX (<?= $a['unit_cost']; ?>)
                             </th>
@@ -189,7 +189,7 @@ $uri = service('uri');
                             </th>
                             <th class="th-yw4l" bgcolor="#fdfdff">Ecological Benefit (EP)</th>
                             <th class="th-yw4l" bgcolor="#fdfdff">Marginal costs (
-                                <?= $a['unit_cost']; ?>/EP)
+                                <?= $a['unit_cost']; ?>/UBP)
                             </th>
                             <th class="th-yw4l" bgcolor="#fdfdff">Payback time (a)</th>
                             <th class="th-yw4l" style=" text-align: center;">Save</th>
@@ -1015,7 +1015,7 @@ $uri = service('uri');
                         $("#flow-opex-1-6-<?= $i; ?>").val(($("#flow-specost-1-6-<?= $i; ?>").val()*$("#flow-value-1-6-<?= $i; ?>").val()).toFixed(2));
 
                         //sum-1
-                        $("#sum-1-<?= $i; ?>").val((parseFloat($("#flow-opex-1-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-2-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-4-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-5-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-6-<?= $i; ?>").val())+parseFloat($("#maintan-1-<?= $i; ?>").val())).toExponential(2));
+                        $("#sum-1-<?= $i; ?>").val((parseFloat($("#flow-opex-1-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-2-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-4-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-5-<?= $i; ?>").val())+parseFloat($("#flow-opex-1-6-<?= $i; ?>").val())+parseFloat($("#maintan-1-<?= $i; ?>").val())).toFixed(2));
 
                      
                         //flow eip-1
@@ -1032,7 +1032,7 @@ $uri = service('uri');
                         formatEipValue("flow-eip-1-6-<?= $i; ?>",$("#flow-eipunit-1-6-<?= $i; ?>").val(), $("#flow-value-1-6-<?= $i; ?>").val());
 
                         //sum-2     
-                        $("#sum-2-<?= $i; ?>").val((parseFloat($("#flow-eip-1-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-2-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-3-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-4-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-5-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-6-<?= $i; ?>").val())).toExponential(3));
+                        $("#sum-2-<?= $i; ?>").val((parseFloat($("#flow-eip-1-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-2-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-3-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-4-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-5-<?= $i; ?>").val())+parseFloat($("#flow-eip-1-6-<?= $i; ?>").val())).toFixed(2));
 
                         //annual-cost-1
                         $("#annual-cost-1-<?= $i; ?>").val((parseFloat($("#sum-1-<?= $i; ?>").val())+parseFloat($("#capexold-<?= $i; ?>").val())).toFixed(2));
@@ -1092,7 +1092,7 @@ $uri = service('uri');
                         $("#sum-2-1-<?= $i; ?>").val((parseFloat($("#flow-eip-2-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-2-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-3-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-4-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-5-<?= $i; ?>").val())+parseFloat($("#flow-eip-2-6-<?= $i; ?>").val())).toFixed(3));
 
                         //annual-cost-2
-                        $("#annual-cost-2-<?= $i; ?>").val(parseFloat($("#sum-1-1-<?= $i; ?>").val())+parseFloat($("#capex-1-<?= $i; ?>").val()));
+                        $("#annual-cost-2-<?= $i; ?>").val(parseFloat($("#sum-1-1-<?= $i; ?>").val())+parseFloat($("#capex-1-<?= $i; ?>").val()).toFixed(2));
 
                         //difference-1
                         $("#flow-value-3-<?= $i; ?>").val(parseFloat($("#flow-value-1-<?= $i; ?>").val())-parseFloat($("#flow-value-2-<?= $i; ?>").val()));
@@ -1138,7 +1138,7 @@ $uri = service('uri');
                         $("#sum-3-1-<?= $i; ?>").val((parseFloat($("#flow-opex-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-2-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-3-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-4-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-5-<?= $i; ?>").val())+parseFloat($("#flow-opex-3-6-<?= $i; ?>").val())).toFixed(2));
 
                         //sum-3-2
-                        $("#sum-3-2-<?= $i; ?>").val((parseFloat($("#ecoben-eip-1-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-2-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-3-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-4-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-5-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-6-<?= $i; ?>").val())).toFixed(4));
+                        $("#sum-3-2-<?= $i; ?>").val((parseFloat($("#ecoben-eip-1-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-2-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-3-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-4-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-5-<?= $i; ?>").val())+parseFloat($("#ecoben-eip-1-6-<?= $i; ?>").val())).toFixed(2));
 
                         //ecoben-1
                         $("#ecoben-1-<?= $i; ?>").val(parseFloat($("#annual-cost-2-<?= $i; ?>").val())-parseFloat($("#annual-cost-1-<?= $i; ?>").val()));
