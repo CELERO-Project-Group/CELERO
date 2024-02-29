@@ -37,6 +37,7 @@ $routes->setAutoRoute(true);
 
 
 // ADMIN
+$routes->add('admin/', 'Admin::index');
 $routes->add('admin/newFlow', 'Admin::newFlow');
 $routes->add('admin/newProcess', 'Admin::newProcess');
 $routes->add('admin/newEquipment', 'Admin::newEquipment');

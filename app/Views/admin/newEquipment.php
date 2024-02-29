@@ -143,69 +143,6 @@
     
 </script>
 
-<!-- topbar starts -->
-	<div class="navbar">
-		<div class="navbar-inner">
-			<div class="container-fluid">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<a class="brand" href=""> <img style="height: 60px;width: 164px;" alt="CELERO logo" src="../assets/images/anasayfa.png" /> <span>CELERO</span></a>
-				
-				<!-- theme selector starts -->
-				<div class="btn-group pull-right theme-container" >
-                                        <ul class="nav navbar-nav navbar-right">
-                                            <li><a href='<?php echo base_url('language/switch/turkish'); ?>' style="padding-right: 0px; border-right: 0px;border-left: 0px; "><img src="<?php echo base_url('assets/images/Turkey.png'); ?>"></a></li>
-                                            <li><a href='<?php echo base_url('language/switch/english'); ?>' style="border-right: 0px;border-left: 0px;"><img src="<?php echo base_url('assets/images/United-States.png'); ?>"></a></li>
-                                        </ul>
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="icon-tint"></i><span class="hidden-phone"><?php echo lang("Validation.changeskin"); ?> </span>
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu" id="themes"> 
-						<li><a data-value="classic" href="#"><i class="icon-blank"></i>Classic</a></li>
-						<li><a data-value="cerulean" href="#"><i class="icon-blank"></i>Cerulean</a></li>
-						<li><a data-value="cyborg" href="#"><i class="icon-blank"></i>Cyborg</a></li>
-					 	<li><a data-value="redy" href="#"><i class="icon-blank"></i>Redy</a></li>
-						<li><a data-value="journal" href="#"><i class="icon-blank"></i>Journal</a></li>
-						<li><a data-value="simplex" href="#"><i class="icon-blank"></i>Simplex</a></li>
-						<li><a data-value="slate" href="#"><i class="icon-blank"></i>Slate</a></li>
-						<li><a data-value="spacelab" href="#"><i class="icon-blank"></i>Spacelab</a></li>
-						<li><a data-value="united" href="#"><i class="icon-blank"></i>United</a></li>
-					</ul>
-				</div>
-				<!-- theme selector ends -->
-				
-				<!-- user dropdown starts -->
-				<div class="btn-group pull-right" >
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="icon-user"></i><span class="hidden-phone"> <?php echo $userName;  ?></span>
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="#"><?php echo lang("Validation.myprofile"); ?></a></li>
-						<li class="divider"></li>
-						<li><a href="../logout"><?php echo lang("Validation.logout"); ?></a></li>
-					</ul>
-				</div>
-				<!-- user dropdown ends -->
-				
-				<div class="top-nav nav-collapse">
-					<ul class="nav">
-						<li><a href="../../ecoman"><?php echo lang("Validation.mainpage"); ?></a></li>
-						<li>
-							<!--<form class="navbar-search pull-left">-->
-								<input placeholder="<?php echo lang("Validation.search"); ?>" class="search-query span2" name="query" type="text">
-							<!--</form>-->
-						</li>
-					</ul>
-				</div><!--/.nav-collapse -->
-			</div>
-		</div>
-	</div>
-	<!-- topbar ends -->
 		<div class="container-fluid">
 		<div class="row-fluid">
 				

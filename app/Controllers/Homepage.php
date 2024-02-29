@@ -8,6 +8,10 @@ class Homepage extends BaseController {
 		// TODO: we need to find a better way.
 		$data['username'] =  $this->session->username;
 		$data['role_id'] =  $this->session->role_id;
+
+
+		// var_dump($_SESSION);
+
 		//phpinfo();
 		echo view('template/header',$data);
 		echo view('homepage/index',$data);

@@ -66,10 +66,5 @@
 	<script src="<?= base_url('assets/admin/jquery.history.js'); ?>"></script>
 	<!-- application script for Charisma demo -->
 	<script src="<?= base_url('assets/admin/charisma.js'); ?>"></script>
-        <script language="JavaScript" type="text/javascript" src="<?= base_url('assets/is/jquery.easyui.min.js'); ?>"></script>
-        <?php if($language == 'turkish') { ?>
-            <script type="text/javascript" src="<?= base_url('assets/is/locale/easyui-lang-tr.js'); ?>"></script>
-      <?php }  ?>
-
-    </body>
+</body>
 </html>

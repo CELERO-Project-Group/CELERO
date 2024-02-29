@@ -19,7 +19,9 @@
   <link href="/assets/css/easyui-tuna.css" rel="stylesheet">
   
   
-  <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/fontawesome6/css/all.css">
+  <link rel="stylesheet" href="assets/fontawesome6/css/v4-shims.css">
+
   <link href="/assets/css/custom.css" rel="stylesheet">
 
   <!-- Map Library (Leaflet) -->
@@ -71,16 +73,16 @@
         </a></li>
       <!-- <li class="navtus" data-rel="companies"><a id="l2" href="#" ><i class="fa fa-building-o"></i> <?= lang("Validation.companies"); ?></a></li>
         <li class="navtus" data-rel="projects"><a id="l3" href="#" ><i class="fa fa-globe"></i> <?= lang("Validation.projects"); ?></a></li> -->
-      <li class="navtus" data-rel="analysis"><a id="l4" href="#"><i class="fa fa-recycle"></i>
+      <li class="navtus" data-rel="analysis"><a id="l4" href="#"><i class="fas fa-recycle"></i>
           <?= lang("Validation.services"); ?>
         </a></li>
-      <li class="navtus" data-rel="cases"><a id="l3" href="#"><i class="fa fa-book"></i>
+      <li class="navtus" data-rel="cases"><a id="l3" href="#"><i class="fas fa-book"></i>
           <?= lang("Validation.cases"); ?>
         </a></li>
-      <li class="navtus" data-rel="profiles"><a id="l1" href="#"><i class="fa fa-group"></i>
+      <li class="navtus" data-rel="profiles"><a id="l1" href="#"><i class="fas fa-users"></i>
           <?= lang("Validation.account"); ?>
         </a></li>
-      <li data-rel="help"><a id="l6" href="<?= base_url('help'); ?>"><i class="fa fa-question-circle"></i>
+      <li data-rel="help"><a id="l6" href="<?= base_url('help'); ?>"><i class="fas fa-question-circle"></i>
           <?= lang("Validation.help"); ?>
         </a></li>
     </ul>
@@ -126,6 +128,12 @@
         $tmp = session()->username;
 
         ?>
+        <!-- Button to change to the admin page -->
+        <?php if (session()->role_id == 3): ?>
+          <li class="head-li"><a href="<?= base_url('admin/newFlow'); ?>"><i class="fa-solid fa-user-tie"></i>
+              <?= lang("Validation.adminpage"); ?>
+            </a></li>
+        <?php endif ?>
         <li class="head-li"><a href="<?= base_url('user/' . $tmp); ?>"
             style="text-transform: capitalize; padding: 15px 1px 15px 21px"><i class="fa fa-user"></i>
             <?= $tmp; ?>
@@ -139,7 +147,7 @@
               class="fa fa-building-o"></i>
             <?= lang("Validation.mycompanies"); ?>
           </a></li>
-        <?php if (session()->role_id == 1): ?>
+        <?php if (session()->role_id == 1 || session()->role_id == 3): ?>
           <li class="head-li"><a href="<?= base_url('companies'); ?>"><i class="fa fa-building-o"></i>
               <?= lang("Validation.allcompanies"); ?>
             </a></li>
@@ -148,11 +156,10 @@
               class="fa fa-globe"></i>
             <?= lang("Validation.myprojects"); ?>
           </a></li>
-        <?php if (session()->role_id == 1): ?>
+        <?php if (session()->role_id == 1 || session()->role_id == 3): ?>
           <li class="head-li"><a href="<?= base_url('projects'); ?>"><i class="fa fa-globe"></i>
               <?= lang("Validation.allprojects"); ?>
             </a></li>
-
         <?php endif ?>
         <li class="head-li">
           <div class="dropdown">
@@ -171,6 +178,8 @@
             </ul>
           </div>
         </li>
+        
+
         <li class="pull-right"><a href="<?= base_url('logout'); ?>"><i class="fa fa-sign-out"></i>
             <?= lang("Validation.logout"); ?>
           </a></li>
