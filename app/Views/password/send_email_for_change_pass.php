@@ -1,9 +1,9 @@
 		<div class="container">
 
-			<?php if(validation_errors() != NULL ): ?>
+		<?php if (session()->has('errors')): ?>
 			    <div class="alert">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
-			    	<p><?= validation_errors(); ?></p>
+			    	<p><?php echo \Config\Services::validation()->listErrors(); ?></p>
 			    </div>
 		 	<?php endif ?>
 

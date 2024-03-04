@@ -8,10 +8,25 @@ class Password extends BaseController {
 	public function send_email_for_change_pass(){
 		$password_model = model(Password_model::class);
 
-		$this->form_validation->set_rules('old_pass', 'Old Password', 'trim|xss_clean|required');
-		$this->form_validation->set_rules('new_pass', 'New Password', 'trim|xss_clean|required|callback_password_check');
-		$this->form_validation->set_rules('new_pass_again', 'New Password(Again)', 'trim|xss_clean|required');
-		if ($this->form_validation->run() !== FALSE){
+		$validation = \Config\Services::validation();
+
+		$this->validate([
+			'old_pass' => [
+				'rules' => 'trim|required',
+				'label' => 'Old Password'
+			],
+			'new_pass' => [
+				'rules' => 'trim|required|callback_password_check',
+				'label' => 'New Password'
+			],
+			'new_pass_again' => [
+				'rules' => 'trim|required',
+				'label' => 'New Password (Again)'
+			]
+			
+		]);
+
+		if ($validation->withRequest($this->request)->run() !== FALSE) {
 			$userId = $this->session->id;
 			$pass = md5($this->request->getPost('old_pass'));
 			if($password_model->do_similar_pass($userId,$pass)){
