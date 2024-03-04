@@ -37,7 +37,6 @@ $routes->setAutoRoute(true);
 
 
 // OLD ADMIN
-$routes->add('admin/', 'Admin::index');
 $routes->add('admin/newFlow', 'Admin::newFlow');
 $routes->add('admin/newProcess', 'Admin::newProcess');
 $routes->add('admin/newEquipment', 'Admin::newEquipment');
@@ -72,7 +71,7 @@ $routes->add('createreport', 'Reporting::create');
 
 
 // New Admin Pages
-$routes->add('admin/', 'Admin::index');
+$routes->add('admin', 'Admin::index');
 
 
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\Password_model;
 
 class Password extends BaseController {
 
@@ -83,10 +84,16 @@ class Password extends BaseController {
 
 	public function new_password_email(){
 		$password_model = model(Password_model::class);
+		$validation = \Config\Services::validation();
 
-		$this->form_validation->set_rules('email', 'E-mail', 'trim|xss_clean|required');
+		$this->validate([
+			'email' => [
+				'rules' => 'trim|required',
+				'label' => 'E-mail'
+			],
+		]);
 
-		if ($this->form_validation->run() !== FALSE){
+		if ($validation->withRequest($this->request)->run() !== FALSE) {
 
 			$email = $this->request->getPost('email');
 

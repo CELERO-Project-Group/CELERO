@@ -130,7 +130,7 @@
         ?>
         <!-- Button to change to the admin page -->
         <?php if (session()->role_id == 3): ?>
-          <li class="head-li"><a href="<?= base_url('admin/newFlow'); ?>"><i class="fa-solid fa-user-tie"></i>
+          <li class="head-li"><a href="<?= base_url('admin'); ?>"><i class="fa-solid fa-user-tie"></i>
               <?= lang("Validation.adminpage"); ?>
             </a></li>
         <?php endif ?>

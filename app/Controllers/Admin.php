@@ -7,9 +7,6 @@ class Admin extends BaseController
 
         public function index()
         {
-                // $data['userName'] =  $this->session->username;
-                // $data['role_id'] =  $this->session->role_id;
-
                 echo view('template/header');
                 echo view('admin/admintools');
                 echo view('template/footer');

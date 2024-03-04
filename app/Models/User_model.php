@@ -55,7 +55,52 @@ class User_model extends Model
 		$query = $builder->get();
 		return $query->getResultArray();
 	}
+	public function get_visitors()
+	{
+		$db = db_connect();
+		$builder = $db->table('t_user');
+		$builder->select('t_user.id as id,t_user.user_name as user_name,t_user.name as name,t_user.surname as surname,t_user.description as description');
+		$builder->join('t_role', 't_role.id = t_user.role_id');
+		$builder->where('t_role.short_code', 'VST');
+		$builder->orderBy("name", "asc");
+		$query = $builder->get();
+		return $query->getResultArray();
+	}
+	public function get_admin()
+	{
+		$db = db_connect();
+		$builder = $db->table('t_user');
+		$builder->select('t_user.id as id,t_user.user_name as user_name,t_user.name as name,t_user.surname as surname,t_user.description as description');
+		$builder->join('t_role', 't_role.id = t_user.role_id');
+		$builder->where('t_role.short_code', 'ADM');
+		$builder->orderBy("name", "asc");
+		$query = $builder->get();
+		return $query->getResultArray();
+	}
+	public function get_departmentmanager()
+	{
+		$db = db_connect();
+		$builder = $db->table('t_user');
+		$builder->select('t_user.id as id,t_user.user_name as user_name,t_user.name as name,t_user.surname as surname,t_user.description as description');
+		$builder->join('t_role', 't_role.id = t_user.role_id');
+		$builder->where('t_role.short_code', 'DM');
+		$builder->orderBy("name", "asc");
+		$query = $builder->get();
+		return $query->getResultArray();
+	}
+	public function get_departmentworker()
+	{
+		$db = db_connect();
+		$builder = $db->table('t_user');
+		$builder->select('t_user.id as id,t_user.user_name as user_name,t_user.name as name,t_user.surname as surname,t_user.description as description');
+		$builder->join('t_role', 't_role.id = t_user.role_id');
+		$builder->where('t_role.short_code', 'D├ç');
+		$builder->orderBy("name", "asc");
+		$query = $builder->get();
+		return $query->getResultArray();
+	}
 
+	
 	public function get_company_users($cmpny_id)
 	{
 		$db = db_connect();

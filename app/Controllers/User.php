@@ -507,11 +507,16 @@ class User extends BaseController
 	public function show_all_users()
 	{
 		$user_model = model(User_model::class);
-
-		if (!empty($this->session->username)) {
+		
+		// if not admin redirect to main page
+		if ($this->session->role_id != 3) {
 			return redirect()->to(site_url());
 		}
-		$data['users'] = $user_model->get_consultants();
+		$data['consultant'] = $user_model->get_consultants();
+		$data['visitors'] = $user_model->get_visitors();
+		$data['admin'] = $user_model->get_admin();
+		$data['departmentmanager'] = $user_model->get_departmentmanager();
+		$data['departmentworker'] = $user_model->get_departmentworker();
 		echo view('template/header');
 		echo view('user/show_all_users', $data);
 		echo view('template/footer');
