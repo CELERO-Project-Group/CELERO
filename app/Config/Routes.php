@@ -36,7 +36,7 @@ $routes->setAutoRoute(true);
 //$routes->add('language/switch/(:any)', 'langswitch/switchLanguage/$1');
 
 
-// ADMIN
+// OLD ADMIN
 $routes->add('admin/', 'Admin::index');
 $routes->add('admin/newFlow', 'Admin::newFlow');
 $routes->add('admin/newProcess', 'Admin::newProcess');
@@ -69,6 +69,12 @@ $routes->add('admin/employees', 'Admin::employees');
 $routes->add('admin/zoneEmployees', 'Admin::zoneEmployees');
 $routes->add('admin/zoneCompanies', 'Admin::zoneCompanies');
 $routes->add('createreport', 'Reporting::create'); 
+
+
+// New Admin Pages
+$routes->add('admin/', 'Admin::index');
+
+
 
 //IS scoping
 $routes->add('isscoping/(:any)', 'Company::isSelectionWithFlow/$1');

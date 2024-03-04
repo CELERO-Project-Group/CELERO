@@ -10,9 +10,9 @@ class Admin extends BaseController
                 // $data['userName'] =  $this->session->username;
                 // $data['role_id'] =  $this->session->role_id;
 
-                // echo view('template/header_admin',$data);
-                // echo view('admin/index');
-                // echo view('template/footer_admin');
+                echo view('template/header');
+                echo view('admin/admintools');
+                echo view('template/footer');
         }
 
         public function report()
