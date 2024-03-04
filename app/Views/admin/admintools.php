@@ -22,7 +22,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-md-6">
-            <a href="<?= base_url('users'); ?>">
+            <a href="<?= base_url('#'); ?>">
                 <div class="thumbnail">
                     <div class="caption">
                         <h4>UBP Management</h4>
@@ -44,10 +44,19 @@
 
     <div class="row">
         <div class="col-sm-6 col-md-6">
-            <a href="<?= base_url('users'); ?>">
+            <a href="<?= base_url('#'); ?>">
                 <div class="thumbnail">
                     <div class="caption">
                         <h4>Process Management</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <a href="<?= base_url('adminrequests'); ?>">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h4>Requests</h4>
                     </div>
                 </div>
             </a>
