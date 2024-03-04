@@ -176,6 +176,8 @@ class Password extends BaseController {
 	// sends mail to user. We need to change this settings.
 	public function sendMail($data)
 	{
+		$email = \Config\Services::email();
+		
 		$config = Array(
 		  'protocol' => 'smtp',
 		  'smtp_host' => 'ssl://smtp.googlemail.com',

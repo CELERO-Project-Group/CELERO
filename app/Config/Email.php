@@ -48,7 +48,6 @@ class Email extends BaseConfig
      * @var string
      */
     public $SMTPHost;
-
     /**
      * SMTP Username
      *

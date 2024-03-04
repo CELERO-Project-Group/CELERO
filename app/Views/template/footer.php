@@ -1,10 +1,6 @@
 </div>
 <div class="clearfix"></div>
-<div class="footer">© 2013-2023 CELERO - This site is optimized for <a href="https://www.google.com/chrome/"> Chrome
-  </a>
-  <div class="footer-right">
-    Language
-  </div>
+<div class="footer">© 2013-2023 CELERO</a>
 </div>
 <?php $uri = current_url(true);
 if (
