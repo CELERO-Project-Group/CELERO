@@ -205,13 +205,13 @@ class User_model extends Model
 		$builder = $db->table('t_cnsltnt');
 		$builder->insert($data);
 
-		// T_USER array
-		$data = array(
-			'role_id' => '1',
-			'id' => $id
+		 // T_USER array for updating
+		 $dataUser = array(
+			'role_id' => '1' 
 		);
 		$builder = $db->table('t_user');
-		$builder->update($data);
+		$builder->where('id', $id); 
+		$builder->update($dataUser);
 	}
 
 	public function is_user_consultant($id)

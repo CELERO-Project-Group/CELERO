@@ -496,9 +496,13 @@ class User extends BaseController
 
 		$userid = $this->session->id;
 		$username = $this->session->username;
-		if (empty($tmp) || $user_model->is_user_consultant($userid)) {
-			return redirect()->to(site_url());
+		if ($user_model->is_user_consultant($userid)) {
+			echo "Hello World!";
+			//return redirect()->to(site_url());
 		} else {
+
+			// currently every user who is applying to be consultant will be instantly consultant without approval of admin
+			// TODO: Make a post to admin as a consultant request at "/admin/requests"
 			$user_model->make_user_consultant($userid, $username);
 			return redirect()->to(site_url('user/' . $username));
 		}
