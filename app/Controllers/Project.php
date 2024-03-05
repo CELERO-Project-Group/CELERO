@@ -17,8 +17,8 @@ class Project extends BaseController{
 		$userId = $this->session->id;
 		$is_consultant = $user_model->is_user_consultant($userId);
 		if(!$is_consultant){
-			$this->session->set_flashdata('project_error', '<i class="fa fa-exclamation-circle"></i> Sorry, you dont have permission to open this project.');
-			redirect('project', 'refresh');
+			$this->session->setFlashdata('project_error', '<i class="fa fa-exclamation-circle"></i> Sorry, you dont have permission to open this project.');
+			redirect()->to(site_url('project'));
 		}
 
 		if(!empty($this->request->getPost())){
@@ -36,6 +36,7 @@ class Project extends BaseController{
 			}
 		}
 		$data['projects'] = $project_model->get_consultant_projects($userId);
+		$data['validation'] = $this->validator;
 		echo view('template/header');
 		echo view('project/open_project',$data);
 		echo view('template/footer');
