@@ -19,21 +19,21 @@
 	 				<label for="datepicker-01"><?= lang("Validation.startdate"); ?></label>
 	    			<div class="input-group">
 				    	<span class="input-group-btn">
-				      		<button class="btn" type="button" style="height: 38px; border: 1px solid;"><span class="fui-calendar"></span></button>
+				      		<button id="datebtn" class="btn" type="button" style="height: 38px; border: 1px solid;"><span class="fui-calendar"></span></button>
 				    	</span>
 				    	<input type="text" class="form-control" value="<?= set_value('datepicker',$projects['start_date']); ?>" id="datepicker-01" name="datepicker" />
 				  	</div>
 	 			</div>
-	 			<div class="form-group">
-	    			<label for="status"><?= lang("Validation.status"); ?></label>
+	 			<!-- <div class="form-group">
+	    			<label for="status"><?php // lang("Validation.status"); ?></label>
 	    			<div>
 		    			<select id="status" class="info select-block" name="status">
-		  					<?php foreach ($project_status as $status): ?>
-								<option value="<?= $status['id']; ?>" <?php if($status['id']==$projects['status_id'])  echo 'selected';  ?> > <?= $status['name']; ?></option>
-							<?php endforeach ?>
+		  					<?php // foreach ($project_status as $status): ?>
+								<option value="<?php // $status['id']; ?>" <?php //if($status['id']==$projects['status_id'])  echo 'selected';  ?> > <?php // $status['name']; ?></option>
+							<?php // endforeach ?>
 						</select>
 					</div>
-	 			</div>
+	 			</div> -->
 	 			<div class="form-group">
 	    			<label for="description"><?= lang("Validation.description"); ?></label>
 	    			<textarea class="form-control" rows="3" name="description" id="description" placeholder="Description" value=""><?= set_value('description',$projects['description']); ?></textarea>
@@ -81,23 +81,27 @@
 	</form>
 
 </div>
-	<script type="text/javascript">
-    // Datepicker on projects
-    // jQuery UI Datepicker JS init
-    var datepickerSelector = '#datepicker-01';
-    $(datepickerSelector).datepicker({
-      showOtherMonths: true,
-      selectOtherMonths: true,
-      dateFormat: "yy-mm-dd",
-      yearRange: '-1:+1'
-    }).prev('.btn').on('click', function (e) {
-      e && e.preventDefault();
-      $(datepickerSelector).focus();
-    });
+<script type="text/javascript">
+	// Datepicker on projects
+	// jQuery UI Datepicker JS init
+	var datepickerSelector = '#datepicker-01';
+	// Initialize datepicker
+	$(datepickerSelector).datepicker({
+		showOtherMonths: true,
+		selectOtherMonths: true,
+		dateFormat: "yy-mm-dd",
+		yearRange: '-1:+1'
+	});
+	// Attach click event listener with debugging statement
+	$('#datebtn').on('click', function (e) {
+		console.log('Button clicked!'); // Check if function is called on click
+		e.preventDefault();
+		$(datepickerSelector).focus(); // Focus on datepicker
+	});
 
-    // Now let's align datepicker with the prepend button
-    $(datepickerSelector).datepicker('widget').css({'margin-left': -$(datepickerSelector).prev('.btn').outerWidth()});
-  </script>
+	// Now let's align datepicker with the prepend button
+	$(datepickerSelector).datepicker('widget').css({ 'margin-left': -$(datepickerSelector).prev('#datebtn').outerWidth() });
+</script>
 
   <script type="text/javascript">
   $(document).ready(function () {

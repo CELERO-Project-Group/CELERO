@@ -117,14 +117,14 @@ $company_ids = rtrim($company_ids, ',');
 						<?= $projects['start_date']; ?>
 					</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td>
-						<?= lang("Validation.status"); ?>
+						<?php // lang("Validation.status"); ?>
 					</td>
 					<td>
-						<?= $status['name']; ?>
+						<?php // $status['name']; ?>
 					</td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td>
 						<?= lang("Validation.description"); ?>

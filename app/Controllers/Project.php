@@ -63,7 +63,7 @@ class Project extends BaseController{
 		$userId = $this->session->id;
 		$data['companies']=$company_model->get_my_companies($userId);
 		$data['consultants']=$user_model->get_consultants();
-		$data['project_status']=$project_model->get_active_project_status();
+		// $data['project_status']=$project_model->get_active_project_status();
 
 		if(!empty($this->request->getPost())){
 			if ($this->validate([
@@ -88,7 +88,7 @@ class Project extends BaseController{
 				'name'=>$this->request->getPost('projectName'),
 				'description'=>$this->request->getPost('description'),
 				'start_date'=>date('Y-m-d', strtotime(str_replace('-', '/', $this->request->getPost('datepicker')))), // mysql icin format�n� ayarlad�k
-				'status_id'=>$this->request->getPost('status'),
+				'status_id'=>1, //TODO: remove the column status from database won't need it anymore
 				'active'=>1, //default active:1 olarak kaydediyoruz.
 				);
 				
@@ -209,13 +209,13 @@ class Project extends BaseController{
 		if(!$is_consultant_of_project && !$is_contactperson_of_project){
 			//Cillop gibi çalışan bir error kodu.
 			//show_error('Sorry, you dont have permission to access this project information.');
-			$this->session->set_flashdata('project_error', '<i class="fa fa-exclamation-circle"></i> Sorry, you dont have permission to access this project information.');
-			redirect('projects','refresh');
+			$this->session->setFlashdata('project_error', '<i class="fa fa-exclamation-circle"></i> Sorry, you dont have permission to access this project information.');
+			redirect()->to(site_url('projects'));
 		}
 
     	$data['prj_id'] = $prj_id;
 		$data['projects'] = $project_model->get_project($prj_id);
-		$data['status'] = $project_model->get_status($prj_id);
+		// $data['status'] = $project_model->get_status($prj_id);
 		$data['constant'] = $project_model->get_prj_consaltnt($prj_id);
 		$data['companies'] = $project_model->get_prj_companies($prj_id);
 		$data['contact'] = $project_model->get_prj_cntct_prsnl($prj_id);
@@ -248,7 +248,7 @@ class Project extends BaseController{
 		$data['projects'] = $project_model->get_project($prjct_id);
 		$data['companies'] = $company_model->get_companies();
 		$data['consultants'] = $user_model->get_consultants();
-		$data['project_status'] = $project_model->get_active_project_status();
+		// $data['project_status'] = $project_model->get_active_project_status();
 		$data['assignedCompanies'] = $project_model->get_prj_companies($prjct_id);
 		$data['assignedConsultant'] = $project_model->get_prj_consaltnt($prjct_id);
 		$data['assignedContactperson'] = $project_model->get_prj_cntct_prsnl($prjct_id);
@@ -320,7 +320,7 @@ class Project extends BaseController{
 				'name'=>$this->request->getPost('projectName'),
 				'description'=>$this->request->getPost('description'),
 				'start_date'=>date('Y-m-d', strtotime(str_replace('-', '/', $this->request->getPost('datepicker')))), // mysql icin formatını ayarladık
-				'status_id'=>$this->request->getPost('status'),
+				'status_id'=>"1", //TODO: need to remove status related from database
 				'active'=>1 //default active:1 olarak kaydediyoruz.
 			);
 			$project_model->update_project($project);

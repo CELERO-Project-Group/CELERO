@@ -41,21 +41,21 @@
 				</div>
 			</div>
 
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label for="status">
-					<?= lang("Validation.status"); ?>
+					<?php //lang("Validation.status"); ?>
 				</label>
 				<i class="fa fa-info-circle" title="Give your Projects a status to keep track of them."></i>
 				<div>
 					<select id="status" class="info select-block" name="status">
-						<?php foreach ($project_status as $status): ?>
-							<option value="<?= $status['id']; ?>">
-								<?= $status['name']; ?>
+						<?php //foreach ($project_status as $status): ?>
+							<option value="<?php //$status['id']; ?>">
+								<?php //$status['name']; ?>
 							</option>
-						<?php endforeach ?>
+						<?php //endforeach ?>
 					</select>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="form-group">
 				<label for="description">
@@ -129,15 +129,6 @@
 	// Datepicker on projects
 	// jQuery UI Datepicker JS init
 	var datepickerSelector = '#datepicker-01';
-	//   $(datepickerSelector).datepicker({
-	//     showOtherMonths: true,
-	//     selectOtherMonths: true,
-	//     dateFormat: "yy-mm-dd",
-	//     yearRange: '-1:+1'
-	//   }).prev('#datebtn').on('click', function (e) {
-	//     e && e.preventDefault();
-	//     $(datepickerSelector).focus();
-	//   });
 	// Initialize datepicker
 	$(datepickerSelector).datepicker({
 		showOtherMonths: true,
@@ -145,7 +136,6 @@
 		dateFormat: "yy-mm-dd",
 		yearRange: '-1:+1'
 	});
-
 	// Attach click event listener with debugging statement
 	$('#datebtn').on('click', function (e) {
 		console.log('Button clicked!'); // Check if function is called on click
