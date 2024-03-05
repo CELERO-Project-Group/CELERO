@@ -100,7 +100,7 @@ class User_model extends Model
 		return $query->getResultArray();
 	}
 
-	
+
 	public function get_company_users($cmpny_id)
 	{
 		$db = db_connect();
@@ -183,12 +183,23 @@ class User_model extends Model
 		return $query->getResultArray();
 	}
 
-	public function update_user($update)
+	// public function update_user($update)
+	// {
+	// 	$db = db_connect();
+	// 	$builder = $db->table('t_user');
+	// 	$builder->replace($update);
+	// }
+
+	public function update_user($updateData, $user_id)
 	{
 		$db = db_connect();
 		$builder = $db->table('t_user');
-		$builder->replace($update);
+	  
+		$builder->set($updateData);
+		$builder->where('id', $user_id);
+		$builder->update();
 	}
+
 
 	public function make_user_consultant($id, $username = FALSE)
 	{
@@ -205,12 +216,12 @@ class User_model extends Model
 		$builder = $db->table('t_cnsltnt');
 		$builder->insert($data);
 
-		 // T_USER array for updating
-		 $dataUser = array(
-			'role_id' => '1' 
+		// T_USER array for updating
+		$dataUser = array(
+			'role_id' => '1'
 		);
 		$builder = $db->table('t_user');
-		$builder->where('id', $id); 
+		$builder->where('id', $id);
 		$builder->update($dataUser);
 	}
 
@@ -328,7 +339,8 @@ class User_model extends Model
 		return $query->getRowArray();
 	}
 
-	public function cmpny_is_owner($user_id){
+	public function cmpny_is_owner($user_id)
+	{
 		$db = db_connect();
 		$builder = $db->table('t_cmpny_prsnl');
 		$builder->select('is_owner');
@@ -355,13 +367,15 @@ class User_model extends Model
 	//TODO: check if it creates security issues. Bypass for admins.
 	public function is_admin($user_id)
 	{
-		if ($user_id == 1 || $user_id == 48290 || $user_id == 28) return TRUE;
+		if ($user_id == 1 || $user_id == 48290 || $user_id == 28)
+			return TRUE;
 	}
 
 	//verilen user'ın verilen şirketi edit edip edemeyeceğine dair bilgiyi verir
 	public function can_edit_company($user_id, $company_id, $is_owner)
 	{
-		if ($this->is_admin($user_id) || $is_owner == 1) return TRUE;
+		if ($this->is_admin($user_id) || $is_owner == 1)
+			return TRUE;
 		$consultant = $this->is_consultant_of_company_by_user_id($user_id, $company_id);
 		$contact = $this->is_contact_by_userid($user_id, $company_id);
 		return $consultant || $contact;

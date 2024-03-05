@@ -26,10 +26,10 @@ class User extends BaseController
 
 		$userid = $this->session->id;
 		// $username = $this->session->username;
-		
+
 		// retrieve data from excel if in the same session a file was uploaded
 		$xlsArray = session()->get('xlsArray') ?? [];
-		
+
 		if (!empty($this->request->getPost())) {
 			$formId = $this->request->getPost('form_id');
 
@@ -55,38 +55,38 @@ class User extends BaseController
 					$flow_model->set_userep($epArray);
 
 					/* include APPPATH . 'libraries/Excel.php';
-																										   if(file_exists('./assets/excels/'.$username.'.xlsx')){
-																											   $inputFileName = './assets/excels/'.$username.'.xlsx';
-																										   }else{
-																											   $inputFileName = './assets/excels/default.xlsx';
-																										   }
+																																						if(file_exists('./assets/excels/'.$username.'.xlsx')){
+																																							$inputFileName = './assets/excels/'.$username.'.xlsx';
+																																						}else{
+																																							$inputFileName = './assets/excels/default.xlsx';
+																																						}
 
-																										   //  Read your Excel workbook
-																										   try {
-																											   $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
-																											   $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-																											   $objPHPExcel = $objReader->load($inputFileName);
-																										   } catch(Exception $e) {
-																											   die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
-																										   }
+																																						//  Read your Excel workbook
+																																						try {
+																																							$inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+																																							$objReader = PHPExcel_IOFactory::createReader($inputFileType);
+																																							$objPHPExcel = $objReader->load($inputFileName);
+																																						} catch(Exception $e) {
+																																							die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+																																						}
 
-																										   //  Get worksheet dimensions
-																										   $sheet = $objPHPExcel->getSheet(0);
-																										   $highestRow = $sheet->getHighestRow();
-																										   $highestColumn = $sheet->getHighestColumn(); */
+																																						//  Get worksheet dimensions
+																																						$sheet = $objPHPExcel->getSheet(0);
+																																						$highestRow = $sheet->getHighestRow();
+																																						$highestColumn = $sheet->getHighestColumn(); */
 
 					//  Loop through each row (starts at 2, first is header line) of the worksheet in turn
 					/* for ($row = 2; $row <= $highestRow; $row++){
 
-																											   //  Read a row of data into an array
-																											   $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
-																																			   NULL,
-																																			   TRUE,
-																																			   FALSE);
-																											   //  Insert row data array into your database of choice here
-																											   //print_r($rowData[0]);
-																											   $excelcontents[] = $rowData[0];
-																										   } */
+																																							//  Read a row of data into an array
+																																							$rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
+																																															NULL,
+																																															TRUE,
+																																															FALSE);
+																																							//  Insert row data array into your database of choice here
+																																							//print_r($rowData[0]);
+																																							$excelcontents[] = $rowData[0];
+																																						} */
 					//echo "------";
 					//print_r($);
 				}
@@ -178,7 +178,8 @@ class User extends BaseController
 		echo view('template/footer');
 	}
 
-	public function clearList(){
+	public function clearList()
+	{
 		session()->remove('xlsArray');
 
 		return redirect()->back()->with('success', 'List cleared successfully.');
@@ -372,7 +373,7 @@ class User extends BaseController
 
 	function string_control($str)
 	{
-		return (!preg_match("/^([-a-üöçşığz A-ÜÖÇŞİĞZ_ ])+$/i", $str)) ? FALSE : TRUE;
+		return(!preg_match("/^([-a-üöçşığz A-ÜÖÇŞİĞZ_ ])+$/i", $str)) ? FALSE : TRUE;
 	}
 	//bu kod telefon numaralarına - boşluk ve _ koymaya yarar
 	function alpha_dash_space($str_in = '')
@@ -435,6 +436,7 @@ class User extends BaseController
 		$data['userInfo'] = $user_model->get_userinfo_by_username($username);
 		$data['projectsAsWorker'] = $user_model->get_worker_projects_from_userid($data['userInfo']['id']);
 		$data['projectsAsConsultant'] = $user_model->get_consultant_projects_from_userid($data['userInfo']['id']);
+
 		echo view('template/header');
 		echo view('user/profile', $data);
 		echo view('template/footer');
@@ -446,49 +448,91 @@ class User extends BaseController
 		return redirect()->to(site_url());
 	}
 
-	public function user_profile_update()
+	public function user_profile_update($username)
 	{
 		$user_model = model(User_model::class);
 
-		$data = $user_model->get_session_user();
+		// $data = $user_model->get_session_user();
+		$data['userInfo'] = $user_model->get_userinfo_by_username($username);
 
 		if (empty($this->session->username)) {
 			return redirect()->to(site_url());
 		}
-		$username = $this->session->username;
+		// $username = $this->session->username;
 
 		if (!empty($this->request->getPost())) {
-			if (
-				$this->validate([
-					'username' => 'trim|required|mb_strtolower|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_user.user_name,id,{id}]',
-					'name' => 'required|trim|max_length[50]',
-					'surname' => 'required|trim|max_length[50]',
-					'email' => 'required|trim|valid_email|max_length[100]|mb_strtolower|is_unique[t_user.email,id,{id}]',
-				])
-			) {
-				$update = array(
-					'id' => $data['id'],
-					'name' => $this->request->getPost('name'),
-					'surname' => $this->request->getPost('surname'),
-					'email' => $this->request->getPost('email'),
-					'user_name' => $this->request->getPost('username'),
-				);
-				$user_model->update_user($update);
+			$updateData = [];
+			$isChanged = false;
 
-				$session_array = array(
-					'id' => $data['id'],
-					'username' => $this->request->getPost('username'),
-					'email' => $this->request->getPost('email')
-				);
-				$this->session->set($session_array);
+			// Check username change and update data/flag
+			if ($this->request->getPost('username') !== $data['userInfo']['user_name']) {
+				$updateData['user_name'] = $this->request->getPost('username');
+				$isChanged = true;
 			}
+
+			// Check email change and update data/flag
+			if ($this->request->getPost('name') !== $data['userInfo']['name']) {
+				$updateData['name'] = $this->request->getPost('name');
+				$isChanged = true;
+			}
+
+			// Check email change and update data/flag
+			if ($this->request->getPost('surname') !== $data['userInfo']['surname']) {
+				$updateData['surname'] = $this->request->getPost('surname');
+				$isChanged = true;
+			}
+
+			// Check email change and update data/flag
+			if ($this->request->getPost('email') !== $data['userInfo']['email']) {
+				$updateData['email'] = $this->request->getPost('email');
+				$isChanged = true;
+			}
+
+			if ($isChanged) {
+
+				$validationRules = [];
+				foreach ($updateData as $field => $value) {
+					switch ($field) {
+						case 'username':
+							$validationRules['username'] = 'trim|required|mb_strtolower|alpha_numeric|min_length[5]|max_length[50]|is_unique[t_user.user_name,id,{id}]';
+							break;
+						case 'email':
+							$validationRules['email'] = 'required|trim|valid_email|max_length[100]|mb_strtolower|is_unique[t_user.email,id,{id}]';
+							break;
+						// Add similar cases for other fields (name, surname, etc.)
+						case 'name':
+							$validationRules['name'] = 'required|trim|max_length[50]';
+							break;
+						case 'surname':
+							$validationRules['surname'] = 'required|trim|max_length[50]';
+							break;
+					}
+				}
+
+				if ($this->validate($validationRules)) {
+					// Update user data with $updateData array
+					$user_model->update_user($updateData, $data['userInfo']['id']);
+				}
+				else {
+					$data['validation'] = $this->validator;
+				}
+			
+				// 	$session_array = array(
+				// 		'id' => $data['id'],
+				// 		'username' => $this->request->getPost('username'),
+				// 		'email' => $this->request->getPost('email')
+				// 	);
+				// 	$this->session->set($session_array);
+			}
+			return redirect()->to(site_url('user/' . $username));
 		}
 
 		$data['validation'] = $this->validator;
 		echo view('template/header');
-		echo view('user/profile_update', $data);
+		echo view('user/profile_edit', $data);
 		echo view('template/footer');
 	}
+
 
 	public function become_consultant()
 	{
@@ -511,7 +555,7 @@ class User extends BaseController
 	public function show_all_users()
 	{
 		$user_model = model(User_model::class);
-		
+
 		// if not admin redirect to main page
 		if ($this->session->role_id != 3) {
 			return redirect()->to(site_url());

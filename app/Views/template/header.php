@@ -141,11 +141,11 @@
         <!-- <li class="head-li"><a href="<?= base_url('datasetexcel'); ?>"><i class="fa fa-globe"></i> Import UBP values</a>
         </li> -->
         <li class="head-li"><a href="<?= base_url('mycompanies'); ?>" style="padding: 15px 1px 15px 21px"><i
-              class="fa fa-building-o"></i>
+              class="fa fa-building"></i>
             <?= lang("Validation.mycompanies"); ?>
           </a></li>
         <?php if (session()->role_id == 1): ?>
-          <li class="head-li"><a href="<?= base_url('companies'); ?>"><i class="fa fa-building-o"></i>
+          <li class="head-li"><a href="<?= base_url('companies'); ?>"><i class="fa fa-building"></i>
               <?= lang("Validation.allcompanies"); ?>
             </a></li>
         <?php endif ?>

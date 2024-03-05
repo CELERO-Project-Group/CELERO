@@ -140,7 +140,7 @@ $routes->add('new_password/(:any)', 'Password::new_password/$1');
 $routes->add('cluster', 'Cluster::cluster_to_match_company');
 
 $routes->add('become_consultant', 'User::become_consultant');
-$routes->add('profile_update', 'User::user_profile_update');
+$routes->add('profile_update/(:any)', 'User::user_profile_update/$1');
 $routes->add('user/(:any)', 'User::user_profile/$1');
 $routes->add('users', 'User::show_all_users');
 $routes->add('register', 'User::user_register');

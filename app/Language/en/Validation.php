@@ -88,6 +88,7 @@ return [
     "nacecode"             => "NACE Code",
     "selectnace"           => "Select a NACE Code",
     "selectlevel4nace"     => "Select a level 4 NACE Code",
+    "selectlevelprocess"   => "Select a Process level",
     "epcalc"               => "Calculate your annual environmental impact",
     "epbutton"             => "Environmental Impact Calculator",
     "selectflowsforep"     => "Select your flow to calculate the environmental impact",

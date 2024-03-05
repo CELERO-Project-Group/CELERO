@@ -4,7 +4,7 @@
 			
 			<div style="margin-top: 10px;">
 				<?php  if($userInfo['id']==session()->id): ?>
-		  		<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url("profile_update"); ?>"><?= lang("Validation.updateprofile"); ?></a>
+		  		<a class="btn btn-inverse btn-block "style="margin-bottom: 10px;" href="<?= base_url("profile_update/". $userInfo['user_name']); ?>"><?= lang("Validation.updateprofile"); ?></a>
 		  		<a class="btn btn-inverse btn-block" style="margin-bottom: 10px;" href="<?= base_url('send_email_for_change_pass'); ?>" style="text-transform: capitalize;"><?= lang("Validation.changepassword"); ?></a>
 		  	<?php endif ?>
 		  	<?php if(($userInfo['role_id']=='2') && session()->id == $userInfo['id']): ?>
@@ -13,6 +13,9 @@
 		  	<?php if($userInfo['role_id']=="1"): ?>
 		  		<div class="btn btn-success btn-block consultant" title="Consultants have full access to all functionalities of the Platform." data-placement='bottom' style="cursor: default;"><?= lang("Validation.thisisconsultant"); ?></div>
 		  	<?php endif ?>
+			<?php if(session()->role_id == 3 && $userInfo['id']!=session()->id): ?>
+				<a class="btn btn-inverse btn-block "style="margin-bottom: 10px;" href="<?= base_url("profile_update/". $userInfo['user_name']); ?>"><?= lang("Validation.updateprofile"); ?></a>
+			<?php endif ?>
 		  </div>
 		</div>
 		<div class="col-md-8">
