@@ -166,7 +166,7 @@ return [
     "allocated"            => "Allocated",
     "costunit"             => "Cost unit",
     "environmentalimpact"  => "Environmental impact",
-    "ep"                   => "MPt UBP",
+    "ep"                   => "EP (MPt UBP)",
     "kpi"                  => "KPI",
     "kpiunit"              => "KPI unit",
     "reference"            => "Reference",

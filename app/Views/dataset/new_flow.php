@@ -289,7 +289,7 @@
                         if (empty($company_flows)) {
                             echo lang("Validation.cost");
                         } else {
-                            echo lang("Validation.cost") . " " . $company_flows[0]['cost_unit'];
+                            echo lang("Validation.cost") . " " . "(".$company_flows[0]['cost_unit'].")";
                         } ?>
                     </th>
                     <th>
