@@ -264,15 +264,16 @@ class Cpscoping extends BaseController {
 	public function edit_allocation($allocation_id){
 		$user_model = model(User_model::class);
 		$flow_model = model(Flow_model::class);
-
 		$cpscoping_model = model(Cpscoping_model::class);
+
+		$userId = $this->session->id;
+		$is_owner = $user_model->cmpny_is_owner($userId);
 		$data['unit_list'] = $flow_model->get_unit_list();
 		$data['allocation'] = $cpscoping_model->get_allocation_from_allocation_id($allocation_id);
 		// check if allocation is not set or deleted
 		if(empty($data['allocation'])) { redirect(site_url()); }
 		//check if user has permission to edit
-		$userId = $this->session->id;
-		$permission= $user_model->can_edit_company($userId,$data['allocation']['cmpny_id']);
+		$permission= $user_model->can_edit_company($userId,$data['allocation']['cmpny_id'],$is_owner);
 		if($permission==FALSE){redirect(site_url());}
 
 

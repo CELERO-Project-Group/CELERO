@@ -356,15 +356,17 @@ if ($validation != NULL)
 					</label>
 
 
-					<select name="unit_cost" id="unit_cost" class="btn-group select select-block">
+					<!-- <select name="unit_cost" id="unit_cost" class="btn-group select select-block">
 						<option value="">
-							<?= lang("Validation.pleaseselect"); ?>
+							<?php // lang("Validation.pleaseselect"); ?>
 						</option>
-						<option value="Euro" <?= set_select('unit_cost', 'Euro'); ?>>Euro</option>
-						<option value="Dollar" <?= set_select('unit_cost', 'Dolar'); ?>>Dollar</option>
-						<option value="TL" <?= set_select('unit_cost', 'TL'); ?>>TL</option>
-						<option value="CHF" <?= set_select('unit_cost', 'CHF'); ?>>CHF</option>
-					</select>
+						<option value="Euro" <?php // set_select('unit_cost', 'Euro'); ?>>Euro</option>
+						<option value="Dollar" <?php // set_select('unit_cost', 'Dolar'); ?>>Dollar</option>
+						<option value="TL" <?php // set_select('unit_cost', 'TL'); ?>>TL</option>
+						<option value="CHF" <?php // set_select('unit_cost', 'CHF'); ?>>CHF</option>
+					</select> -->
+					<input class="form-control" id="unit_cost" placeholder="CHF" value="CHF"
+							name="unit_cost" readonly>
 
 				</div>
 				<div class="col-md-4 col-space">
@@ -566,9 +568,11 @@ if ($validation != NULL)
 			dataType: 'json',
 			url: '<?= base_url('cpscoping/full_get'); ?>/' + flow_name + '/' + flow_type_name + '/' + cmpny_id + '/' + prcss_name,
 			success: function (data) {
+		
 				document.getElementById('amount').value = data.qntty;
 				document.getElementById('cost').value = data.cost;
-				document.getElementById('env_impact').value = data.ep;
+				document.getElementById('env_impact').value = parseFloat(data.ep).toExponential(2);
+				// console.log(parseFloat(data.ep).toExponential(2));
 
 				document.getElementById('allocation_amount').value = "100";
 				document.getElementById('allocation_cost').value = "100";
@@ -625,7 +629,7 @@ if ($validation != NULL)
 					}
 					else {
 						var oran5 = $('#allocation_env_impact').val() / old_ee;
-						$('#env_impact').val((old_ee2 * oran5).toFixed(2));
+						$('#env_impact').val((old_ee2 * oran5).toExponential(2));
 					}
 				});
 

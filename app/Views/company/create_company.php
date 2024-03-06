@@ -7,7 +7,7 @@
 		echo $validation->listErrors();
 	?>
 
-	<form action="newcompany" method="post">
+	<form action="newcompany" method="post" autocomplete="off">
 		<?= csrf_field() ?>
 		<div class="row">
 			<div class="col-md-8">

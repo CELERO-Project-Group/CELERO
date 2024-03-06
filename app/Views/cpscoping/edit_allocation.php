@@ -12,10 +12,15 @@
 		var flow_type_id = "<?= $allocation['flow_type_id']; ?>";
 		var cmpny_id = "<?= $allocation['cmpny_id']; ?>";
 
+		var csrfToken = $('meta[name="csrf_token"]').attr('content');
+
 		//get other allocation data for a selected flow and flow type
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
+			headers: {
+    		'X-CSRF-TOKEN': csrfToken
+  				},
 			url: '<?= base_url('cpscoping/allocated_table'); ?>/' + flow_id + '/' + flow_type_id + '/' + cmpny_id + '/' + process_id + '/' + project_id,
 			success: function (data) {
 				var vPool = "";
@@ -27,7 +32,18 @@
 				}
 				$("#aallocated").html(vPool);
 				//console.log(data);
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				if (jqXHR.status === 403) {
+					// Handle 403 error (e.g., display message)
+					console.error('Access denied (403)');
+					console.log('Response:', jqXHR.responseText);
+				} else {
+					// Handle other errors
+					console.error('AJAX error: ' + textStatus + ' - ' + errorThrown);
+				}
 			}
+
 		});
 	}
 </script>
@@ -66,17 +82,17 @@ if ($validation != NULL)
 		<hr>
 		<div class="form-group clearfix row">
 			<div class="col-md-4">
-			<label class="control-label tooltip-amo" data-toggle="tooltip">
-				<?= lang("Validation.amount"); ?> <i style="color:red;" class="fa fa-question-circle"></i>
-			</label>
+				<label class="control-label tooltip-amo" data-toggle="tooltip">
+					<?= lang("Validation.amount"); ?> <i style="color:red;" class="fa fa-question-circle"></i>
+				</label>
 				<input type="text" class="form-control" value="<?= set_value('amount', $allocation['amount']); ?>"
 					id="amount" placeholder="<?= lang("Validation.number"); ?>" name="amount">
 			</div>
 
 			<div class="col-md-4">
-			<label class="control-label">
-				<?= lang("Validation.amountunit"); ?>
-			</label>
+				<label class="control-label">
+					<?= lang("Validation.amountunit"); ?>
+				</label>
 				<select name="unit_amount" id="unit_amount" class="btn-group select select-block">
 					<option value="">
 						<?= lang("Validation.pleaseselect"); ?>
@@ -94,9 +110,9 @@ if ($validation != NULL)
 			</div>
 
 			<div class="col-md-4">
-			<label class="control-label tooltip-allo" data-toggle="tooltip">
-				<?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i>
-			</label>
+				<label class="control-label tooltip-allo" data-toggle="tooltip">
+					<?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i>
+				</label>
 				<input type="text" class="form-control"
 					value="<?= set_value('allocation_amount', $allocation['allocation_amount']); ?>"
 					id="allocation_amount" placeholder="<?= lang("Validation.percentage"); ?>" name="allocation_amount">
@@ -105,46 +121,47 @@ if ($validation != NULL)
 		<hr>
 		<div class="form-group clearfix row">
 			<div class="col-md-4">
-			<label class="control-label">
-				<?= lang("Validation.cost"); ?>
-			</label>
+				<label class="control-label">
+					<?= lang("Validation.cost"); ?>
+				</label>
 				<input type="text" class="form-control" value="<?= set_value('cost', $allocation['cost']); ?>" id="cost"
 					placeholder="<?= lang("Validation.number"); ?>" name="cost">
 			</div>
 			<div class="col-md-4">
-			<label class="control-label">
-				<?= lang("Validation.costunit"); ?>
-			</label>
-				<select name="unit_cost" id="unit_cost" class="btn-group select select-block">
+				<label class="control-label">
+					<?= lang("Validation.costunit"); ?>
+				</label>
+				<!-- <select name="unit_cost" id="unit_cost" class="btn-group select select-block">
 					<option value="">
-						<?= lang("Validation.pleaseselect"); ?>
+						<?php // lang("Validation.pleaseselect");  ?>
 					</option>
-					<?php $edeger = FALSE; ?>
-					<?php $ddeger = FALSE; ?>
-					<?php $tdeger = FALSE; ?>
-					<?php $cdeger = FALSE; ?>
-					<?php if ($allocation['unit_cost'] == "Euro") {
-						$edeger = TRUE;
-					} ?>
-					<?php if ($allocation['unit_cost'] == "Dollar") {
-						$ddeger = TRUE;
-					} ?>
-					<?php if ($allocation['unit_cost'] == "TL") {
-						$tdeger = TRUE;
-					} ?>
-					<?php if ($allocation['unit_cost'] == "CHF") {
-						$cdeger = TRUE;
-					} ?>
-					<option value="Euro" <?= set_select('unit_cost', 'Euro', $edeger); ?>>Euro</option>
-					<option value="Dollar" <?= set_select('unit_cost', 'Dollar', $ddeger); ?>>Dollar</option>
-					<option value="TL" <?= set_select('unit_cost', 'TL', $tdeger); ?>>TL</option>
-					<option value="CHF" <?= set_select('unit_cost', 'CHF', $cdeger); ?>>CHF</option>
-				</select>
+					<?php // $edeger = FALSE;  ?>
+					<?php // $ddeger = FALSE;  ?>
+					<?php // $tdeger = FALSE;  ?>
+					<?php // $cdeger = FALSE;  ?>
+					<?php // if ($allocation['unit_cost'] == "Euro") {
+					//$edeger = TRUE;
+					//}  ?>
+					<?php //if ($allocation['unit_cost'] == "Dollar") {
+					//$ddeger = TRUE;
+					//}  ?>
+					<?php // if ($allocation['unit_cost'] == "TL") {
+					//$tdeger = TRUE;
+					//}  ?>
+					<?php // if ($allocation['unit_cost'] == "CHF") {
+					//$cdeger = TRUE;
+					//}  ?>
+					<option value="Euro" <?php // set_select('unit_cost', 'Euro', $edeger);  ?>>Euro</option>
+					<option value="Dollar" <?php // set_select('unit_cost', 'Dollar', $ddeger);  ?>>Dollar</option>
+					<option value="TL" <?php // set_select('unit_cost', 'TL', $tdeger);  ?>>TL</option>
+					<option value="CHF" <?php // set_select('unit_cost', 'CHF', $cdeger);  ?>>CHF</option>
+				</select> -->
+				<input class="form-control" id="unit_cost" placeholder="CHF" value="CHF" name="unit_cost" readonly>
 			</div>
 			<div class="col-md-4">
-			<label class="control-label tooltip-allo" data-toggle="tooltip">
-				<?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i>
-			</label>
+				<label class="control-label tooltip-allo" data-toggle="tooltip">
+					<?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i>
+				</label>
 				<input type="text" class="form-control"
 					value="<?= set_value('allocation_cost', $allocation['allocation_cost']); ?>" id="allocation_cost"
 					placeholder="<?= lang("Validation.percentage"); ?>" name="allocation_cost">
@@ -153,21 +170,21 @@ if ($validation != NULL)
 		<hr>
 		<div class="form-group clearfix row">
 			<div class="col-md-4">
-			<label class="control-label">
-				<?= lang("Validation.environmentalimpact"); ?>
-			</label>
+				<label class="control-label">
+					<?= lang("Validation.environmentalimpact"); ?>
+				</label>
 				<input type="text" class="form-control"
-					value="<?= set_value('env_impact', $allocation['env_impact']); ?>" id="env_impact"
+					value="<?= set_value('env_impact', sprintf("%.2e", $allocation['env_impact'])); ?>" id="env_impact"
 					placeholder="<?= lang("Validation.number"); ?>" name="env_impact">
-				</div>
-				<div class="col-md-4">
-			<label class="control-label">EP</label>
+			</div>
+			<div class="col-md-4">
+				<label class="control-label">EP</label>
 				<input class="form-control" id="unit_env_impact" value="EP" name="unit_env_impact" readonly>
 			</div>
 			<div class="col-md-4">
-			<label class="control-label tooltip-allo" data-toggle="tooltip">
-				<?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i>
-			</label>
+				<label class="control-label tooltip-allo" data-toggle="tooltip">
+					<?= lang("Validation.allocation"); ?> (%) <i style="color:red;" class="fa fa-question-circle"></i>
+				</label>
 				<input type="text" class="form-control"
 					value="<?= set_value('allocation_env_impact', $allocation['allocation_env_impact']); ?>"
 					id="allocation_env_impact" placeholder="<?= lang("Validation.percentage"); ?>"
@@ -235,8 +252,8 @@ if ($validation != NULL)
 			<button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i>
 				<?= lang("Validation.savedata"); ?>
 			</button>
-			<a href="<?= base_url('cpscoping'); ?>"
-				class="btn btn-default" style="float: right;"><i class="fa fa-ban"></i>
+			<a href="<?= base_url('cpscoping'); ?>" class="btn btn-default" style="float: right;"><i
+					class="fa fa-ban"></i>
 				<?= lang("Validation.cancel"); ?>
 			</a>
 		</div>
@@ -323,14 +340,22 @@ if ($validation != NULL)
 		var flow_type_name = "<?= $allocation['flow_type_id']; ?>";
 		var flow_name = "<?= $allocation['flow_id']; ?>";
 
-		console.log(prcss_name, flow_type_name, flow_name);
+		// console.log(prcss_name, flow_type_name, flow_name);
+
+		var csrfToken = $('meta[name="csrf_token"]').attr('content');
+
 
 		//get other allocation data for a selected flow and flow type
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
+			headers: {
+    		'X-CSRF-TOKEN': csrfToken},
 			url: '<?= base_url('cpscoping/full_get'); ?>/' + flow_name + '/' + flow_type_name + '/' + cmpny_id + '/' + prcss_name,
 			success: function (data) {
+				
+
+
 				var old_aa = $('#allocation_amount').val();
 				var old_aa2 = $('#amount').val();
 
@@ -379,7 +404,7 @@ if ($validation != NULL)
 					}
 					else {
 						var oran5 = $('#allocation_env_impact').val() / old_ee;
-						$('#env_impact').val((old_ee2 * oran5).toFixed(2));
+						$('#env_impact').val((old_ee2 * oran5).toExponential(2));
 					}
 				});
 
@@ -387,6 +412,16 @@ if ($validation != NULL)
 					var oran6 = $('#env_impact').val() / old_ee2;
 					$('#allocation_env_impact').val((old_ee * oran6).toFixed(2));
 				});
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				if (jqXHR.status === 403) {
+					// Handle 403 error (e.g., display message)
+					console.error('Access denied (403)');
+					console.log('Response:', jqXHR.responseText);
+				} else {
+					// Handle other errors
+					console.error('AJAX error: ' + textStatus + ' - ' + errorThrown);
+				}
 			}
 		});
 	});
