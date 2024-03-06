@@ -22,7 +22,8 @@
 		    	<button type="button" data-toggle="modal" data-target="#myModalNACE" class="btn btn-block btn-primary" id="nacecode-button"><?= lang("Validation.selectnace"); ?></button><br>
 	    		<div class="row">
 		    		<div class="col-md-12">
-		    			<input type="text" class="form-control" placeholder="NACE Code" id="naceCode" name="naceCode" style="color:#333333;" value="<?= set_value('naceCode',$nace_code['code']); ?>" readonly/>
+		    			<input type="text" class="form-control" placeholder="NACE Code" id="naceCode" name="naceCode" style="color:#333333;" value="<?= set_value('naceCode',$nacecode['code'] . " - " .$nacecode['name']); ?>" readonly/>
+						<input type="hidden" class="form-control" id="naceId" value="<?= set_value("naceId",$nacecode['code']) ?>" name="naceId"/>
 		    		</div>
 		    	</div>
 
@@ -40,7 +41,7 @@
  			</div>
 			<!-- <div class="form-group">
     			<label for="cellPhone">Cell Phone</label>
-    			<input type="text" class="form-control" id="cellPhone" placeholder="Cell Phone" value="<?= set_value('cellPhone',$companies['phone_num_1']); ?>" name="cellPhone">
+    			<input type="text" class="form-control" id="cellPhone" placeholder="Cell Phone" value="<?php // set_value('cellPhone',$companies['phone_num_1']); ?>" name="cellPhone">
  			</div>  -->
  			<div class="form-group">
     			<label for="workPhone"><?= lang("Validation.workphone"); ?></label>

@@ -35,7 +35,7 @@ class Company extends BaseController
 							'label' => 'Company Name'
 						],
 
-						'naceCode' =>
+						'naceId' =>
 							[
 								'rules' => 'trim|required',
 								'label' => 'NACE Code'
@@ -114,12 +114,16 @@ class Company extends BaseController
 					'active' => '1'
 				);
 
-				$code = $this->request->getPost('naceCode');
+				$code = $this->request->getPost('naceId');
 				$last_id = $company_model->insert_company($data);
 				$cmpny_data = array(
 					'cmpny_id' => $last_id,
 					'description' => substr($data['description'], 0, 199)
 				);
+
+				
+				// $output = json_encode($code);
+				// echo "<script type='text/javascript'>console.log($output);</script>";
 
 				$nace_code_id = $company_model->search_nace_code($code);
 
@@ -161,7 +165,7 @@ class Company extends BaseController
 
 				$company_model->insert_cmpny_nace_code($cmpny_nace_code);
 
-				//return redirect()->to("company/$companyOwner[cmpny_id]");
+				return redirect()->to("company/$companyOwner[cmpny_id]");
 			}
 		}
 
@@ -461,7 +465,7 @@ class Company extends BaseController
 		}
 
 		$data['companies'] = $company_model->get_company($term);
-		$data['nace_code'] = $company_model->get_nace_code($term);
+		$data['nacecode'] = $company_model->get_nace_code($term);
 		$data['all_nace_codes'] = $company_model->get_all_nace_codes();
 
 		if (empty($data['nace_code'])) {
@@ -478,7 +482,7 @@ class Company extends BaseController
 							'label' => 'Company Name'
 						],
 
-						'naceCode' =>
+						'naceId' =>
 							[
 								'rules' => 'trim|required',
 								'label' => 'NACE Code'
@@ -542,7 +546,7 @@ class Company extends BaseController
 
 				$company_model->update_company($company_data, $term);
 
-				$code = $this->request->getPost('naceCode');
+				$code = $this->request->getPost('naceId');
 				$nace_code_id = $company_model->search_nace_code($code);
 				$cmpny_nace_code = array(
 					'cmpny_id' => $data['companies']['id'],

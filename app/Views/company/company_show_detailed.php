@@ -120,8 +120,8 @@
 						Nace Code
 					</td>
 					<td>
-						<?php
-						echo $nacecode['code'] . " - " . $nacecode['name']
+						<?=
+						 $nacecode['code'] . " - " . $nacecode['name']
 							?>
 					</td>
 				</tr>

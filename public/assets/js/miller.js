@@ -255,9 +255,15 @@ function miller_column_nace(){
                     $millerCol.millerColumn("addCol", newcategory);
                 } else {
                     var nacecode = "";
-                    nacecode = level1 + "." + data.itemId;
+                    var naceId = "";
+                    nacecode = level1 + "." + data.itemName;
+                    naceId = level1 + "." + data.itemId;
+                    // console.log(data.itemName);
+                    console.log(naceId);
                     $("input#naceCode").val(nacecode);
+                    $("input#naceId").val(naceId);
                     $("input#naceCode").css({'background-color': '#bdffa9'});
+                    $("input#naceId").css({'background-color': '#bdffa9'});
                 }
             });
         },

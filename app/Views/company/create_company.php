@@ -7,7 +7,7 @@
 		echo $validation->listErrors();
 	?>
 
-	<form action="newcompany" method="post" autocomplete="off">
+	<form action="newcompany" method="post">
 		<?= csrf_field() ?>
 		<div class="row">
 			<div class="col-md-8">
@@ -34,7 +34,8 @@
 						<div class="col-md-12">
 							<input type="text" class="form-control" placeholder="NACE Code" id="naceCode"
 								name="naceCode" style="color:#333333;" value="<?= set_value('naceCode'); ?>" readonly />
-						</div>
+							<input type="hidden" class="form-control" id="naceId" value="<?= set_value("naceId") ?>" name="naceId"/>
+							</div>
 					</div>
 				</div>
 				<div class="form-group">
