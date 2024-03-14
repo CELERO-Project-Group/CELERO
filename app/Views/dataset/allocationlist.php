@@ -1,8 +1,12 @@
 <div class="col-md-12">
-<?php 
-if(empty($allocationlar)):
- echo "You need to open a project that includes this company to list allocations.";
-else:
+<?php
+if(empty($allocationlar) && isset(session()->project_id)):
+?>
+<p class="lead pull-left"><?= lang("Validation.cpheading3"); ?></p>
+<div class="pull-right"><a href="<?= base_url('cpscoping/'.session()->project_id.'/'.$companyID.'/allocation'); ?>/" class="btn btn-info" id="cpscopinga"><?= lang("Validation.createallocation"); ?></a>
+</div>
+<?php
+elseif (!empty($allocationlar)):
 ?>
 <p class="lead pull-left"><?= lang("Validation.cpheading2"); ?></p>
 <div class="pull-right"><a href="<?= base_url('cpscoping/'.session()->project_id.'/'.$companyID.'/allocation'); ?>/" class="btn btn-info" id="cpscopinga"><?= lang("Validation.createallocation"); ?></a>
@@ -28,5 +32,9 @@ else:
 	</tr>   
 <?php endforeach ?>
 </table>
+<?php 
+else: 
+	echo "You need to open a project that includes this company to list allocations.";
+?>
 <?php endif ?>
 </div>
