@@ -61,6 +61,7 @@ $company_ids = rtrim($company_ids, ',');
 						</p>
 						<div class="content">
 							<?= form_open('addConsultantToProject/' . $projects['id']); ?>
+							<?= csrf_field(); ?>
 							<select id="users" class="info select-block" name="users">
 								<?php foreach ($allconsultants as $users): ?>
 									<option value="<?= $users['id']; ?>">

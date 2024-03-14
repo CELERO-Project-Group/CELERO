@@ -402,24 +402,27 @@ class Project extends BaseController{
 	public function addConsultantToProject($term){
 	
 		$project_model = model(Project_model::class);
-		$session = session();
-		$user_id = $this->$session->id;
+		$user_id = $this->session->id;
 		if(!$project_model->can_update_project_information($user_id,$term)){
 	
 			return redirect()->to(base_url());
 		}
 
-		$this->form_validation->set_rules('users','User','required|callback_check_consultant['.$term.']');
-		if ($this->form_validation->run() !== FALSE)
-		{	
+		if (
+			$this->validate([
+				'users' => [
+					'rules' => 'required'
+				]
+			])
+			) {
 			$prj_cnsltnt=array(
-				'prj_id' => $term,
-				'cnsltnt_id' => $this->request->getPost('users'),
-				'active' => 1
-				);
+						'prj_id' => $term,
+						'cnsltnt_id' => $this->request->getPost('users'),
+						'active' => 1
+						);
 			$project_model->insert_project_consultant($prj_cnsltnt);
+			return redirect()->to('project/'. $term);
 		}
-		return redirect()->to('project/'.$term);
 	}
 
 	function check_consultant($str,$term) {
