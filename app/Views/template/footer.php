@@ -12,16 +12,14 @@ if (
   and $uri->getSegment(1) != "isscenarios"
   and $uri->getSegment(1) != "isscenariosCns"
   and $uri->getSegment(1) != "isScopingAutoPrjBaseMDFTest"
-  and $uri->getSegment(1) != "isScopingAutoPrjBaseMDF"
-):
-  ?>
+  and $uri->getSegment(1) != "isScopingAutoPrjBaseMDF"): ?>
 
   <script src="<?= base_url('assets/js/flatui-fileinput.js'); ?>"></script>
   <!-- The cost benefit page doesnt use the bootstrap select box features -->
   <?php if ($uri->getSegment(1) != "cost_benefit"): ?>
     <script src="<?= base_url('assets/js/bootstrap-select.js'); ?>"></script>
     <script src="<?= base_url('assets/js/application.js'); ?>"></script>
-  <? endif; ?>
+  <?php endif; ?>
   <script src="<?= base_url('assets/js/bootstrap-switch.js'); ?>"></script>
   <script src="<?= base_url('assets/js/flatui-checkbox.js'); ?>"></script>
   <script src="<?= base_url('assets/js/flatui-radio.js'); ?>"></script>
@@ -170,7 +168,7 @@ if(data.length > 0){
 
 }
 </script>
-*/?>
+*/ ?>
 
 </body>
 

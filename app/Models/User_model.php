@@ -375,7 +375,7 @@ class User_model extends Model
 	public function can_edit_company($user_id, $company_id, $is_owner)
 	{
 		if ($this->is_admin($user_id) || $is_owner == 1)
-			return TRUE;
+			{return TRUE;}
 		$consultant = $this->is_consultant_of_company_by_user_id($user_id, $company_id);
 		$contact = $this->is_contact_by_userid($user_id, $company_id);
 		return $consultant || $contact;

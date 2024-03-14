@@ -12,15 +12,10 @@
 		var flow_type_id = "<?= $allocation['flow_type_id']; ?>";
 		var cmpny_id = "<?= $allocation['cmpny_id']; ?>";
 
-		var csrfToken = $('meta[name="csrf_token"]').attr('content');
-
 		//get other allocation data for a selected flow and flow type
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			dataType: 'json',
-			headers: {
-    		'X-CSRF-TOKEN': csrfToken
-  				},
 			url: '<?= base_url('cpscoping/allocated_table'); ?>/' + flow_id + '/' + flow_type_id + '/' + cmpny_id + '/' + process_id + '/' + project_id,
 			success: function (data) {
 				var vPool = "";
@@ -53,7 +48,6 @@ if ($validation != NULL)
 ?>
 <?= form_open_multipart('cpscoping/edit_allocation/' . $allocation['allocation_id']); ?>
 <?= csrf_field() ?>
-
 <div class="row">
 	<div class="col-md-3">
 		<div>
@@ -133,28 +127,28 @@ if ($validation != NULL)
 				</label>
 				<!-- <select name="unit_cost" id="unit_cost" class="btn-group select select-block">
 					<option value="">
-						<?php // lang("Validation.pleaseselect");  ?>
+						<?php // lang("Validation.pleaseselect");   ?>
 					</option>
-					<?php // $edeger = FALSE;  ?>
-					<?php // $ddeger = FALSE;  ?>
-					<?php // $tdeger = FALSE;  ?>
-					<?php // $cdeger = FALSE;  ?>
+					<?php // $edeger = FALSE;   ?>
+					<?php // $ddeger = FALSE;   ?>
+					<?php // $tdeger = FALSE;   ?>
+					<?php // $cdeger = FALSE;   ?>
 					<?php // if ($allocation['unit_cost'] == "Euro") {
 					//$edeger = TRUE;
-					//}  ?>
+					//}   ?>
 					<?php //if ($allocation['unit_cost'] == "Dollar") {
 					//$ddeger = TRUE;
-					//}  ?>
+					//}   ?>
 					<?php // if ($allocation['unit_cost'] == "TL") {
 					//$tdeger = TRUE;
-					//}  ?>
+					//}   ?>
 					<?php // if ($allocation['unit_cost'] == "CHF") {
 					//$cdeger = TRUE;
-					//}  ?>
-					<option value="Euro" <?php // set_select('unit_cost', 'Euro', $edeger);  ?>>Euro</option>
-					<option value="Dollar" <?php // set_select('unit_cost', 'Dollar', $ddeger);  ?>>Dollar</option>
-					<option value="TL" <?php // set_select('unit_cost', 'TL', $tdeger);  ?>>TL</option>
-					<option value="CHF" <?php // set_select('unit_cost', 'CHF', $cdeger);  ?>>CHF</option>
+					//}   ?>
+					<option value="Euro" <?php // set_select('unit_cost', 'Euro', $edeger);   ?>>Euro</option>
+					<option value="Dollar" <?php // set_select('unit_cost', 'Dollar', $ddeger);   ?>>Dollar</option>
+					<option value="TL" <?php // set_select('unit_cost', 'TL', $tdeger);   ?>>TL</option>
+					<option value="CHF" <?php // set_select('unit_cost', 'CHF', $cdeger);   ?>>CHF</option>
 				</select> -->
 				<input class="form-control" id="unit_cost" placeholder="CHF" value="CHF" name="unit_cost" readonly>
 			</div>
@@ -257,9 +251,9 @@ if ($validation != NULL)
 				<?= lang("Validation.cancel"); ?>
 			</a>
 		</div>
-		<div style="margin-top:30px;">
-			<?= lang("Validation.alloheading5"); ?>
-		</div>
+		<!-- <div style="margin-top:30px;">
+			<?php // lang("Validation.alloheading5");  ?>
+		</div> -->
 		<hr>
 		<div id="aallocated" class="row">
 			<!-- 				<span id="aprocess"></span>
@@ -342,18 +336,13 @@ if ($validation != NULL)
 
 		// console.log(prcss_name, flow_type_name, flow_name);
 
-		var csrfToken = $('meta[name="csrf_token"]').attr('content');
-
-
 		//get other allocation data for a selected flow and flow type
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			dataType: 'json',
-			headers: {
-    		'X-CSRF-TOKEN': csrfToken},
 			url: '<?= base_url('cpscoping/full_get'); ?>/' + flow_name + '/' + flow_type_name + '/' + cmpny_id + '/' + prcss_name,
 			success: function (data) {
-				
+
 
 
 				var old_aa = $('#allocation_amount').val();
