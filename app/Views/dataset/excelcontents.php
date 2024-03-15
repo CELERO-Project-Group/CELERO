@@ -10,7 +10,7 @@
 <div class="row">
 	<div class="col-md-12" style="margin-bottom: 10px;">
 		<!-- TODO: change the direction of the href (it is not dynamic currently) -->
-		<a href="javascript:void(0);" onclick="window.location.href='<?= base_url('new_flow/3419'); ?>' "
+		<a href="javascript:void(0);" onclick="history.go(-1)"
 			class="btn btn-inverse btn-sm" id="cpscopinga">
 			<?= lang("Validation.goback"); ?>
 		</a>
