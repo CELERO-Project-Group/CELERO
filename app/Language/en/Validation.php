@@ -128,7 +128,7 @@ return [
 
     "cpheading"            => "Cleaner Production Potentials Identification",
     "cpheading2"           => "View and Edit Allocated Cleaner Production Potentials Identifications",
-    "cpheading3"           => "No allocation currently available. Please create new allocations",
+    "cpheading3"           => "No allocations currently available. Please create new allocations",
     "companiesunder"       => "Companies under",
     "createallocation"     => "Create allocation",
     "datasetmanagement"    => "Dataset management",

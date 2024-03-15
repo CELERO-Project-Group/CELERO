@@ -69,6 +69,11 @@ $uri = service('uri');
         </a>
     </div>
 </div>
+<?php if(empty($allocation)): ?>
+<p class="lead pull-left"><?= lang("Validation.cpheading3"); ?></p>
+<div class="pull-right"><a href="<?= base_url('cpscoping/'.session()->project_id.'/'.$uri->getSegment(3).'/allocation'); ?>" class="btn btn-info" id="cpscopinga"><?= lang("Validation.createallocation"); ?></a>
+</div>
+<?php elseif(!empty($allocation)): ?>
 <div class="row">
     <div class="col-md-12">
         <div class="lead">
@@ -78,7 +83,7 @@ $uri = service('uri');
         <p>
             <?= lang("Validation.cbaheading"); ?>
         </p>
-        <?php if (!empty($allocation)): ?>
+        <?php //if (!empty($allocation)): ?>
             <?php $i = 1; ?>
             <?php foreach ($allocation as $a): ?>
                 <?php if (isset($a['allocation_id'])): ?>
@@ -906,13 +911,15 @@ $uri = service('uri');
                 </form>
 
             <?php endforeach ?>
-        <?php else: ?>
+        <!-- <?php //else: ?>
             No Cost - Benefit option active, check the <a href="<?= base_url('cpscoping'); ?>">allocations and KPI
                 calculation page </a> (comment is mandatory and "Is option" needs to be set)
-        <?php endif; ?>
+        <?php // endif; ?> -->
         <hr>
     </div>
+   
 </div>
+
 <script>
     $(document).ready(function () {                                   
         $('.delete-btn').on('click', function () {
@@ -1273,6 +1280,8 @@ if (isset($a)) {
 }
 
 ?>
+
+
 <script type="text/javascript">
 
     setTimeout(function()
@@ -1702,3 +1711,4 @@ if (isset($a)) {
         });
     });
 </script> -->
+<?php endif; ?>
