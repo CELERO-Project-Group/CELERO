@@ -200,15 +200,29 @@ $uri = service('uri');
 	</div>
 </div>
 
-
-
 <!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
 <script>
 
-	function formatDetail(value, row) {
-		var href = '/cpscoping/edit_allocation/' + value;
-		return '<a class="label label-info" href="' + href + '"><?= lang("Validation.edit"); ?></a>';
-	}
+	// function formatDetail(value) {
+	// 	var editHref = '/cpscoping/edit_allocation/' + value;
+	// 	var deleteHref ='/cpscoping/delete/' + value + '/' + '<?= $uri->getSegment(2) ?>' + '/' + '<?= $uri->getSegment(3) ?>' 
+	// 	return '<a class="label label-info" href="' + editHref + '"><?= lang("Validation.edit"); ?></a>'
+	// 			'<a class="label label-danger" href="' + deleteHref + '"><?= lang("Validation.deleteallocation"); ?></a>' ;
+	// }
+
+	function formatDetail(value) {
+		var editHref = '/cpscoping/edit_allocation/' + value;
+		var deleteHref = '/cpscoping/delete/' + value + '/<?= $uri->getSegment(2) ?>/' + '<?= $uri->getSegment(3) ?>';
+
+		// Build the output string with both links
+		var output = '<a class="label label-info" href="' + editHref + '"><?= lang("Validation.edit"); ?></a> ';
+		output += '<a class="label label-danger" href="' + deleteHref + '" onclick="return confirm(\'Are you sure you want to delete the allocation?\')"><?= lang("Validation.delete"); ?></a>';
+
+
+    return output;
+}
+
+
 
 	function formatOption(val, row) {
 		if (val == "Option") {
