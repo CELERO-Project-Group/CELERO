@@ -11,11 +11,11 @@ RUN apt-get update \
 RUN mkdir -p /docker-entrypoint-initdb.d
 
 # Copy the SQL dump file into the container
-COPY ecoman_20240219.sql /docker-entrypoint-initdb.d/
+COPY ecoman_20240220.sql /docker-entrypoint-initdb.d/
 
 # Set appropriate permissions to the SQL dump file
-RUN chown postgres:postgres /docker-entrypoint-initdb.d/ecoman_20240219.sql
-RUN chmod 755 /docker-entrypoint-initdb.d/ecoman_20240219.sql
+RUN chown postgres:postgres /docker-entrypoint-initdb.d/ecoman_20240220.sql
+RUN chmod 755 /docker-entrypoint-initdb.d/ecoman_20240220.sql
 
 #To Import the SQL dump to postgres you need to execute the follong command in the "celerodb" docker container: 
 #psql -U postgres -d ecoman_20240219 < docker-entrypoint-initdb.d/ecoman_20240219.sql

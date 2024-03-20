@@ -12,6 +12,8 @@ services:
     volumes:
       - C:/Users/ma1079898/Desktop/CELERO:/var/www/html
       - ./apache_log:/var/log/apache2
+    #restart: always
+
 
   celerodb:  
     build:
@@ -26,7 +28,7 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - celero-data:/var/lib/postgresql/data
-    
+    #restart: always
 
   pgadmin:
     image: dpage/pgadmin4
@@ -39,6 +41,7 @@ services:
       - 8001:8001
     depends_on:
       - celerodb
+    restart: always
 
 volumes:
   celero-data:

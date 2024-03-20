@@ -22,7 +22,7 @@ RUN docker-php-ext-install gd
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 # RUN composer self-update --2
-RUN composer install
+#RUN composer install
 
 
 
