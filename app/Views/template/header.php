@@ -20,7 +20,7 @@
   
   
   <link rel="stylesheet" href="/assets/fontawesome6/css/all.css">
-  <link rel="stylesheet" href="assets/fontawesome6/css/v4-shims.css">
+  <!-- <link rel="stylesheet" href="assets/fontawesome6/css/v4-shims.min.css"> -->
 
   <link href="/assets/css/custom.css" rel="stylesheet">
 
