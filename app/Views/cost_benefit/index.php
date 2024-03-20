@@ -138,15 +138,27 @@ $uri = service('uri');
                     <table class="tg costtable" id="cost-benefit-table">
                         <tr>
                             <th colspan="9" style="font-size: 12px; text-align: left;">
+                            Baseline: 
                                 <b>
-                                    <?php if (empty($a['cmpny_from_name'])) {
-                                        echo $a['prcss_name'] . " - " . $a['flow_name'] . " - " . $a['flow_type_name'];
+                                <?php if (empty($a['cmpny_from_name'])) {
+                                       // echo $a['prcss_name'] . " - " . $a['flow_name'] . " - " . $a['flow_type_name'];
+                                        echo $a['prcss_name'];
                                     } else {
-                                        echo $a['flow_name'] . " input IS potential from " . $a['cmpny_from_name'] . " to ";
-                                    } ?>:
-                                </b> Baseline
+                                        echo "Input IS potential from " . $a['cmpny_from_name'];
+                                    }
+                                     ?>                                    
+                                </b> 
                             </th>
-                            <th colspan="20" style="font-size: 12px; border-left:2px solid grey; text-align: left;">Option</th>
+                            <th colspan="20" style="font-size: 12px; border-left:2px solid grey; text-align: left;">
+                            Option:
+                            <b>
+                            <?php if (empty($a['cmpny_from_name'])) {
+                                echo  $a['best'];
+                            } else {
+                                echo $a['flow_name'] . " input IS potential from" . $a['cmpny_from_name'];
+                            } ?>
+                            </b>
+                            </th>
                         </tr>
                         <tr>
                             <th class="th-yw4l" bgcolor="#fefefc">CAPEX (<?= $a['unit_cost']; ?>/a)
@@ -961,7 +973,7 @@ $uri = service('uri');
                                 echo "<small style='font-size:11px; color:#999; '>" . $a['prcss_name'] . " - " . $a['flow_name'] . " - " . $a['flow_type_name'] . "</small>";
 
                             } else {
-                                echo $a['flow_name'] . " input IS potential from/to " . $a['cmpny_from_name'];
+                                echo $a['flow_name'] . " input IS potential from " . $a['cmpny_from_name'];
                             } ?>
                         </td>
                         <td style="text-align: right;">
@@ -1372,53 +1384,54 @@ if (isset($a)) {
     function costBenefitGraph(){
         var data = <?= json_encode($tuna_array); ?>;
      
+        console.log(data);
 
         //loop through the data and check if the values on the axis are the same and if asign slightly different values to be able to see it on the graph
-        var arrayXMin = [];
-        var arrayYMin = [];
-        var arrayXMax = [];
-        var arrayYMax = [];
-        for (var i = 0; i < data.length; i++)
-        {   
-            arrayXMin.push(data[i].xmin);
-            arrayXMax.push(data[i].xmax);
-            arrayYMin.push(data[i].ymin);
-            arrayYMax.push(data[i].ymax);
-        }
-        // remove duplicates
-        var arrXUniqueMin = [...new Set(arrayXMin)].sort();
-        var arrXUniqueMax = [...new Set(arrayXMax)].sort();
-        var arrYUniqueMin = [...new Set(arrayYMin)].sort();
-        var arrYUniqueMax = [...new Set(arrayYMax)].sort();
+        // var arrayXMin = [];
+        // var arrayYMin = [];
+        // var arrayXMax = [];
+        // var arrayYMax = [];
+        // for (var i = 0; i < data.length; i++)
+        // {   
+        //     arrayXMin.push(data[i].xmin);
+        //     arrayXMax.push(data[i].xmax);
+        //     arrayYMin.push(data[i].ymin);
+        //     arrayYMax.push(data[i].ymax);
+        // }
+        // // remove duplicates
+        // var arrXUniqueMin = [...new Set(arrayXMin)].sort();
+        // var arrXUniqueMax = [...new Set(arrayXMax)].sort();
+        // var arrYUniqueMin = [...new Set(arrayYMin)].sort();
+        // var arrYUniqueMax = [...new Set(arrayYMax)].sort();
 
-        // return the smallest number
-        function sortGetSecondLast(arr){
-            const rmZero = [0];
-            const filteredArray = arr.filter((element) => !rmZero.includes(element));
-            // console.log(filteredArray);
-            if (filteredArray.length >= 1)
-            {
-                return arr[0] / 1000;
-            }
-            else{
-                return 0.001
-            }
-        };
+        // // return the smallest number
+        // function sortGetSecondLast(arr){
+        //     const rmZero = [0];
+        //     const filteredArray = arr.filter((element) => !rmZero.includes(element));
+        //     // console.log(filteredArray);
+        //     if (filteredArray.length >= 1)
+        //     {
+        //         return arr[0] ;
+        //     }
+        //     else{
+        //         return 10
+        //     }
+        // };
 
-        for (var i = 0; i < data.length; i++)
-        {   
-            if(data[i].ymin == data[i].ymax)
-            {
-                data[i].ymin = sortGetSecondLast(arrYUniqueMin);
-                data[i].ymax = sortGetSecondLast(arrYUniqueMax);
-            }
-            if(data[i].xmin == data[i].xmax)
-            {
-                data[i].xmin = sortGetSecondLast(arrXUniqueMin);
-                data[i].xmax = sortGetSecondLast(arrXUniqueMax);
-            }
+        // for (var i = 0; i < data.length; i++)
+        // {   
+        //     if(data[i].ymin == data[i].ymax)
+        //     {
+        //         data[i].ymin = sortGetSecondLast(arrYUniqueMin);
+        //         data[i].ymax = sortGetSecondLast(arrYUniqueMax);
+        //     }
+        //     if(data[i].xmin == data[i].xmax)
+        //     {
+        //         data[i].xmin = sortGetSecondLast(arrXUniqueMin);
+        //         data[i].xmax = sortGetSecondLast(arrXUniqueMax);
+        //     }
 
-        }
+        // }
         
         // console.log(sortGetSecondLast(arrXUniqueMax), sortGetSecondLast(arrXUniqueMin));
         // console.log(arrYUniqueMax, arrYUniqueMin)
@@ -1482,8 +1495,8 @@ if (isset($a)) {
             .append("rect")
             .attr("x", function(datum, index) { return x(datum.xmin); })
             .attr("y", function(datum, index) { return y(datum.ymax); })
-            .attr("height", function(datum, index) { return y(datum.ymin) - y(datum.ymax) + (height * 0.0001); })
-            .attr("width", function(datum, index) { return x(datum.xmax) + (width * 0.0001); })
+            .attr("height", function(datum, index) { return y(datum.ymin) - y(datum.ymax) + (height * 0.000001); })
+            .attr("width", function(datum, index) { return x(datum.xmax) + (width * 0.000001); })
             .attr("fill", function(d, i) { return d.color; })
             .style("opacity", '0.8')
             .on("mouseover", function(datum, index) {
@@ -1549,7 +1562,7 @@ if (isset($a)) {
                 const adjustedColor = d3.color(currentColor).brighter(0.5);
                 d3.select(this)
                     .style("fill", adjustedColor);
-                const bars = svg.selectAll("rect").filter(function(d) { return d.name === datum.name; });
+                const bars = svg.selectAll("rect").filter(function(d) { return d.name  === datum.name; });
                 bars.style("opacity", 0.2);
                 d3.select("#legend-" + datum.name)
                     .attr("font-weight", "bold");
