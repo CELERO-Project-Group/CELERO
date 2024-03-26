@@ -154,8 +154,10 @@ $uri = service('uri');
                             <b>
                             <?php if (empty($a['cmpny_from_name'])) {
                                 echo  $a['best'];
+                                echo "<br>";
+                                echo $a['is_description'];
                             } else {
-                                echo $a['flow_name'] . " input IS potential from" . $a['cmpny_from_name'];
+                                echo $a['flow_name'] . " input IS potential from " . $a['cmpny_from_name'];
                             } ?>
                             </b>
                             </th>

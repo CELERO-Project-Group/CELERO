@@ -129,6 +129,7 @@ class Cpscoping_model extends Model
 		t_flow.name as flow_name,
 		t_flow_type.name as flow_type_name,
 		t_cp_allocation.best_practice as best,
+		t_cp_allocation.description as is_description,
 		t_cp_allocation.marcos as marcos
 		');
 		$builder->join('t_cp_allocation', 't_cp_allocation.id = t_cp_company_project.allocation_id', 'left');
