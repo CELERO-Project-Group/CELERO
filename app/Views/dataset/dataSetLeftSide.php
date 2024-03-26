@@ -28,7 +28,6 @@
 		<div class="pull-left"><b><a href="<?= base_url('company/'.$company_info['id']); ?>"><?= $company_info['name']; ?></a> <?= lang("Validation.datasetservices"); ?></b></div>
 		<div class="pull-right">
 		<span class="label label-default"><b><?= lang("Validation.email"); ?>:</b> <?= $company_info['email']; ?></span>
-		<span class="label label-default"><b><?= lang("Validation.cellphone"); ?>:</b> <?= $company_info['phone_num_1']; ?></span>
 		</div>
 	</div>
 	<div>

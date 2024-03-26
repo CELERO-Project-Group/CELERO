@@ -90,7 +90,7 @@ return [
     "selectlevel4nace"     => "Select a level 4 NACE Code",
     "selectlevelprocess"   => "Select a Process level",
     "epcalc"               => "Calculate your annual environmental impact",
-    "epbutton"             => "Environmental Impact Calculator",
+    "epbutton"             => "Create new Flow",
     "selectflowsforep"     => "Select your flow to calculate the environmental impact",
     "coordinates"          => "Coordinates",
     "address"              => "Address",
@@ -143,7 +143,7 @@ return [
     "manage"               => "Manage",
     "editallocation"       => "Edit allocation",
     "deleteallocation"     => "Delete allocation",
-    "importubp"            => "Import UBP values",
+    "importubp"            => "Create/Import UBP Values for Flows",
 
     "pleaseselect"         => "Please select",
     "alloheading1"         => "Please select a process then a flow to allocate (mandatory)",
