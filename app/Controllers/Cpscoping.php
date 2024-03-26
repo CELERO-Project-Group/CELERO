@@ -819,9 +819,6 @@ class Cpscoping extends BaseController
 		$project_model = model(Project_model::class);
 		$cpscoping_model = model(Cpscoping_model::class);
 
-		$session = session();
-		$previousUrl = $session->getFlashdata('previousUrl');
-
 		$c_user = $user_model->get_session_user();
 		if ($project_model->can_update_project_information($c_user['id'], $project_id) == false) {
 			return redirect()->to(site_url());
