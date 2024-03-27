@@ -739,12 +739,14 @@ class Cpscoping extends BaseController
 		$cpscoping_model = model(Cpscoping_model::class);
 		$data['cp_files'] = $cpscoping_model->get_cp_scoping_files($prjct_id, $cmpny_id);
 		$allocation_ids = $cpscoping_model->get_allocation_id_from_ids($cmpny_id, $prjct_id);
+		
 
 		foreach ($allocation_ids as $a => $key) {
 
 			$data['kpi_values'][$a] = $cpscoping_model->get_allocation_from_allocation_id($key['allocation_id']);
 
-			$data['kpi_values'][$a]['allocation_name'] = $data['kpi_values'][$a]['prcss_name'] . " - " . $data['kpi_values'][$a]['flow_name'] . " - " . $data['kpi_values'][$a]['flow_type_name'];
+			// $data['kpi_values'][$a]['allocation_name'] = $data['kpi_values'][$a]['prcss_name'] . " - " . $data['kpi_values'][$a]['flow_name'] . " - " . $data['kpi_values'][$a]['flow_type_name'];
+			$data['kpi_values'][$a]['allocation_name'] = $data['kpi_values'][$a]['prcss_name'];
 
 			if (!isset($data['kpi_values'][$a]['option'])) {
 				$data['kpi_values'][$a]['option'] = 0;
@@ -755,6 +757,7 @@ class Cpscoping extends BaseController
 				$data['kpi_values'][$a]['option'] = "Not An Option";
 			}
 		}
+
 		header("Content-Type: application/json", true);
 		echo json_encode($data['kpi_values']);
 	}

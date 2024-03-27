@@ -33,7 +33,11 @@ class Cpscoping_model extends Model
 	{
 		$db = db_connect();
 		$builder = $db->table('t_cp_allocation');
-		$builder->select('t_cp_allocation.id as allocation_id, t_cp_allocation.prcss_id as prcss_id,t_prcss.name as prcss_name, t_flow.name as flow_name, t_flow_type.name as flow_type_name,amount,unit_amount,allocation_amount,error_amount,cost,unit_cost,allocation_cost,error_cost,env_impact,unit_env_impact,allocation_env_impact,error_ep,t_cp_allocation.flow_id as flow_id,t_prcss.id as prcss_id2,t_cp_allocation.flow_type_id as flow_type_id, kpi, unit_kpi, kpi_error, benchmark_kpi,nameofref,kpidef, best_practice, reference, unit_reference, t_cmpny_prcss.cmpny_id, t_cp_allocation.option, t_cp_allocation.description');
+		$builder->select('t_cp_allocation.id as allocation_id, t_cp_allocation.prcss_id as prcss_id,t_prcss.name as prcss_name, t_flow.name as flow_name,
+		 t_flow_type.name as flow_type_name,amount,unit_amount,allocation_amount,error_amount,cost,unit_cost,allocation_cost,error_cost,env_impact,
+		 unit_env_impact,allocation_env_impact,error_ep,t_cp_allocation.flow_id as flow_id,t_prcss.id as prcss_id2,t_cp_allocation.flow_type_id as flow_type_id,
+		  kpi, unit_kpi, kpi_error, benchmark_kpi,nameofref,kpidef, best_practice, reference, unit_reference, t_cmpny_prcss.cmpny_id, t_cp_allocation.option,
+		   t_cp_allocation.description, t_cmpny_prcss.comment');
 		$builder->join('t_flow', 't_flow.id = t_cp_allocation.flow_id');
 		$builder->join('t_flow_type', 't_flow_type.id = t_cp_allocation.flow_type_id');
 		$builder->join('t_cmpny_prcss', 't_cmpny_prcss.id = t_cp_allocation.prcss_id');
@@ -130,7 +134,8 @@ class Cpscoping_model extends Model
 		t_flow_type.name as flow_type_name,
 		t_cp_allocation.best_practice as best,
 		t_cp_allocation.description as is_description,
-		t_cp_allocation.marcos as marcos
+		t_cp_allocation.marcos as marcos,
+		t_cmpny_prcss.comment
 		');
 		$builder->join('t_cp_allocation', 't_cp_allocation.id = t_cp_company_project.allocation_id', 'left');
 		$builder->join('t_flow', 't_flow.id = t_cp_allocation.flow_id');

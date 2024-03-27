@@ -143,6 +143,8 @@ $uri = service('uri');
                                 <?php if (empty($a['cmpny_from_name'])) {
                                        // echo $a['prcss_name'] . " - " . $a['flow_name'] . " - " . $a['flow_type_name'];
                                         echo $a['prcss_name'];
+                                        echo "<br>";
+                                        echo $a['comment'];
                                     } else {
                                         echo "Input IS potential from " . $a['cmpny_from_name'];
                                     }

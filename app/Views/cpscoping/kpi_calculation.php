@@ -33,6 +33,8 @@ $uri = service('uri');
 						<th data-options="field:'allocation_name',align:'left',width:200">
 							<?= lang("Validation.allocation"); ?>
 						</th>
+						<th data-options="field:'comment', align:'left',width:200">
+							<?= lang("Validation.comments"); ?>
 						<th data-options="field:'flow_name',align:'center',width:110">Flow</th>
 						<th data-options="field:'flow_type_name',align:'center',width:80">Flow Type</th>
 						<th data-options="field:'kpi',align:'right',width:100">KPI</th>
@@ -200,7 +202,7 @@ $uri = service('uri');
 	</div>
 </div>
 
-<!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script> 
 <script>
 
 	// function formatDetail(value) {
@@ -345,7 +347,7 @@ $uri = service('uri');
 			$.when.apply(null, promises).done(function () {
 				$("#myModalsave .modal-body button").prop("disabled", false);
 				$("#myModalsave .modal-body button").text("Done");
-				// deneme();
+				deneme();
 			});
 		}
 	}
@@ -383,7 +385,7 @@ $uri = service('uri');
 	}
 
 </script>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	function deneme() {
 		var prjct_id = <?= $uri->getSegment(2); ?>;
 		var cmpny_id = <?= $uri->getSegment(3); ?>;
@@ -419,7 +421,7 @@ $uri = service('uri');
 
 					//console.log(kpi2);
 					var data = new google.visualization.DataTable();
-					//console.log(data);
+					// console.log(data);
 					var newData = new Array(index);
 					for (var i = 0; i < index + 1; i++) {
 						newData[i] = new Array(4);
@@ -473,8 +475,8 @@ $uri = service('uri');
 			}
 		});
 	};
-</script> --> 
-<!-- <script type="text/javascript">
+</script> 
+<script type="text/javascript">
 	google.load("visualization", "1", { packages: ["corechart"] });
 	google.setOnLoadCallback(deneme);
 </script>
