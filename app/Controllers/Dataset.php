@@ -18,46 +18,47 @@ class Dataset extends BaseController {
 		else return $data;
 	}
 
-	public function new_product($companyID)
-	{
-		$product_model = model(Product_model::class);
-		$flow_model = model(Flow_model::class);
-		$company_model = model(Company_model::class);
+	// Don't need this Page for now
+	// public function new_product($companyID)
+	// {
+	// 	$product_model = model(Product_model::class);
+	// 	$flow_model = model(Flow_model::class);
+	// 	$company_model = model(Company_model::class);
 
-		if(!empty($this->request->getPost())){
-			if ($this->validate([
-				'product'=>  'trim|required',
-				'quantities'=>  'trim|numeric',
-				'ucost'=> 'trim|numeric',
-				'ucostu'=>'trim',
-				'qunit'=> 'trim',
-				'tper'=> 'trim'
-			]))
-			{
-				$productArray = array(
-						'cmpny_id' => $companyID,
-						'name' => $this->request->getPost('product'),
-						'quantities' => $this->sifirla($this->request->getPost('quantities')),
-						'ucost' => $this->sifirla($this->request->getPost('ucost')),
-						'ucostu' => $this->request->getPost('ucostu'),
-						'qunit' => $this->request->getPost('qunit'),
-						'tper' => $this->request->getPost('tper'),
-					);
-				$product_model->set_product($productArray);
-			}
-		}
+	// 	if(!empty($this->request->getPost())){
+	// 		if ($this->validate([
+	// 			'product'=>  'trim|required',
+	// 			'quantities'=>  'trim|numeric',
+	// 			'ucost'=> 'trim|numeric',
+	// 			'ucostu'=>'trim',
+	// 			'qunit'=> 'trim',
+	// 			'tper'=> 'trim'
+	// 		]))
+	// 		{
+	// 			$productArray = array(
+	// 					'cmpny_id' => $companyID,
+	// 					'name' => $this->request->getPost('product'),
+	// 					'quantities' => $this->sifirla($this->request->getPost('quantities')),
+	// 					'ucost' => $this->sifirla($this->request->getPost('ucost')),
+	// 					'ucostu' => $this->request->getPost('ucostu'),
+	// 					'qunit' => $this->request->getPost('qunit'),
+	// 					'tper' => $this->request->getPost('tper'),
+	// 				);
+	// 			$product_model->set_product($productArray);
+	// 		}
+	// 	}
 
-		$data['validation'] = $this->validator;
-		$data['product'] = $product_model->get_product_list($companyID);
-		$data['companyID'] = $companyID;
-		$data['company_info'] = $company_model->get_company($companyID);
-		$data['units'] = $flow_model->get_unit_list();
+	// 	$data['validation'] = $this->validator;
+	// 	$data['product'] = $product_model->get_product_list($companyID);
+	// 	$data['companyID'] = $companyID;
+	// 	$data['company_info'] = $company_model->get_company($companyID);
+	// 	$data['units'] = $flow_model->get_unit_list();
 
-		echo view('template/header');
-		echo view('dataset/dataSetLeftSide',$data);
-		echo view('dataset/new_product',$data);
-		echo view('template/footer');
-	}
+	// 	echo view('template/header');
+	// 	echo view('dataset/dataSetLeftSide',$data);
+	// 	echo view('dataset/new_product',$data);
+	// 	echo view('template/footer');
+	// }
 
 	public function edit_product($companyID,$product_id)
 	{

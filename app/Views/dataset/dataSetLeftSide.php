@@ -36,7 +36,7 @@
 			<!-- Component is not longer needed TODO: still need to clean up the code related to this)-->
 			<!-- <li <?php if ($uri->getSegment(1) == "new_component"){ echo "class='btn-inverse'"; } ?>><a class="" href="<?= base_url('new_component/'.$companyID); ?>"><span +><?= lang("Validation.component"); ?></span></a></li> -->
 			<li <?php if ($uri->getSegment(1) == "new_process"){ echo "class='btn-inverse'"; } ?>><a class="" href="<?= base_url('new_process/'.$companyID); ?>"><?= lang("Validation.process"); ?></a></li>
-			<li <?php if ($uri->getSegment(1) == "new_product"){ echo "class='btn-inverse'"; } ?>><a class="" href="<?= base_url('new_product/'.$companyID); ?>"><?= lang("Validation.product"); ?></a></li>
+			<!-- <li <?php if ($uri->getSegment(1) == "new_product"){ echo "class='btn-inverse'"; } ?>><a class="" href="<?= base_url('new_product/'.$companyID); ?>"><?= lang("Validation.product"); ?></a></li> -->
 			<li <?php if ($uri->getSegment(1) == "allocationlist"){ echo "class='btn-inverse'"; } ?>><a class="" href="<?= base_url('allocationlist/'.$project_id.'/'.$companyID); ?>"><?= lang("Validation.allocation"); ?></a></li>
 			<!--link to the equipment page moved to the last position and is ".not-active" atm 
 			<li <?php if ($uri->getSegment(1) == "new_equipment"){ echo "class='btn-inverse'"; } ?>><a class="not-active" title="Not available yet"><?= lang("Validation.equipment"); ?></a></li> -->
