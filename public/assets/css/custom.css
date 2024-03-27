@@ -235,20 +235,10 @@ label {
 }
 
 .form-control {
-    min-width: 100px;
+    min-width: 80px;
 }
 
-.costtable table,
-th,
-td {
-    border: 2px solid #f0f0f0;
-    padding: 3px 10px;
-}
 
-.costtable input {
-    border: none !important;
-    margin: -5px -10px;
-}
 
 /*d3.js styling*/
 

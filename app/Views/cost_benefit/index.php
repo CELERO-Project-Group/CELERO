@@ -3,10 +3,10 @@ $uri = service('uri');
 ?>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <style type="text/css">
-    .tg {
+     .tg {
         border-collapse: collapse;
         border-spacing: 0;
-    }
+    } 
 
     .tg td {
         font-family: Arial, sans-serif;
@@ -14,22 +14,21 @@ $uri = service('uri');
         padding: 5px 5px;
         border-style: solid;
         border-width: 1px;
-        overflow: hidden;
+        overflow: hidden; 
         word-break: normal;
         color: #999;
-    }
-
+    } 
+    
     .tg th {
         font-family: Arial, sans-serif;
-        text-align: right;
+        text-align: center;
         font-size: 11px;
-        padding: 5px 5px;
         border-style: solid;
         border-width: 1px;
-        overflow: hidden;
+        overflow: hidden; 
         word-break: normal;
         color: #000;
-        font-weight: normal
+        font-weight: normal;
     }
 
     .tg .th-yw4l {
@@ -58,6 +57,19 @@ $uri = service('uri');
         overflow: visible;
         position: relative;
     }
+
+    .costtable table,
+    th,
+    td {
+        border: 2px solid #f0f0f0;
+        padding: 3px ;
+    }
+
+    .costtable input {
+        border: none !important;
+        margin: -5px -15px;
+    }
+
 </style>
 
 <script type="text/javascript">
@@ -134,7 +146,7 @@ $uri = service('uri');
                 ?>
                 <?= form_open('cba/save/' . $uri->getSegment(2) . '/' . $uri->getSegment(3) . '/' . $iid . '/' . $tip, $attributes); ?> 
                 <?= csrf_field() ?>
-                <div style="overflow-x: auto;">
+                <div  style="overflow-x: auto;" >
                     <table class="tg costtable" id="cost-benefit-table">
                         <tr>
                             <th colspan="9" style="font-size: 12px; text-align: left;">
@@ -151,7 +163,7 @@ $uri = service('uri');
                                      ?>                                    
                                 </b> 
                             </th>
-                            <th colspan="20" style="font-size: 12px; border-left:2px solid grey; text-align: left;">
+                            <th colspan="21" style="font-size: 12px; border-left:2px solid grey; text-align: left;">
                             Option:
                             <b>
                             <?php if (empty($a['cmpny_from_name'])) {
@@ -189,9 +201,6 @@ $uri = service('uri');
                             </th>
                             <th class="th-yw4l" bgcolor="#fdfdff" colspan="2">Annual energy and material flows</th>
                             <th class="th-yw4l" bgcolor="#fdfdff">Unit
-                                <label class="tooltip-unit" data-toggle="tooltip">
-                                    <i style="color:red;" class="fa fa-question-circle"></i>
-                                </label>
                             </th>
                             <th class="th-yw4l" bgcolor="#fdfdff">Specific costs (<?= $a['unit_cost']; ?>/Unit)
                             </th>
@@ -213,13 +222,12 @@ $uri = service('uri');
                             <th class="th-yw4l" bgcolor="#fdfdff">Marginal costs (<?= $a['unit_cost']; ?>/UBP)
                             </th>
                             <th class="th-yw4l" bgcolor="#fdfdff">Payback time (a)</th>
-                            <th class="th-yw4l" style=" text-align: center;">Save</th>
-                            <th class="th-yw4l" style=" text-align: center;">Delete</th>
+                            <th class="th-yw4l" style=" text-align: center;">Manage</th>
                         </tr>
                         <tr>
                             <td class="tg-yw4l" rowspan="7">
                                 <div class="  "><input type="text" name="capexold" id="capexold-<?= $i; ?>"
-                                        class="form-control  " value="<?= $a['capexold']; ?>"
+                                        class="form-control" value="<?= $a['capexold']; ?>"
                                         placeholder="You should fill this field."></div>
                             </td>
                             <td class="tg-yw4l">
@@ -345,16 +353,6 @@ $uri = service('uri');
                             </td>
                             <td class="tg-yw4l" rowspan="7" style="vertical-align: middle;">
                                 <?php if (session()->role_id == '1'): ?>
-                                    <button type="submit" style="margin-top: 10px; width: 100px; text-align: center;"
-                                        class="btn btn-info btn-block">
-                                        <?= lang("Validation.save"); ?>
-                                        
-                                    </button>
-                                <?php endif; ?> <!-- cp_or_is variable posted hidden -->
-                                <input type="hidden" name="cp_or_is" value="<?= $cp_or_is ?>">
-                            </td>
-                            <td class="tg-yw4l" rowspan="7" style="vertical-align: middle;">
-                                <?php if (session()->role_id == '1'): ?>
                                     <a style="margin-top: 10px; width: 100px; text-align: center;"
                                         class="btn btn-danger btn-block delete-btn"
                                         href="<?= base_url("delete_allocation_table/" . $prjct_id . '/' . $cmpny_id . '/' . $type_id . '/' . $all_id); ?>"
@@ -362,7 +360,12 @@ $uri = service('uri');
                                             class="fa fa-trash"></i>
                                         <?= lang("Validation.delete"); ?>
                                     </a>
-                                <?php endif ?>
+                                    <button type="submit" style="margin-top: 10px; width: 100px; text-align: center;"
+                                        class="btn btn-info btn-block">
+                                        <?= lang("Validation.save"); ?>
+                                    </button>
+                                <?php endif; ?> <!-- cp_or_is variable posted hidden -->
+                                <input type="hidden" name="cp_or_is" value="<?= $cp_or_is ?>">
                             </td>
                         </tr>
                         <tr>
